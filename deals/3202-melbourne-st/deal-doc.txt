@@ -10,9 +10,15 @@
   "sqft": 1700,
   "lotSize": "8,782 sqft",
   "yearBuilt": 1949,
-  "garage": null,
-  "coeDate": "April 8, 2026",
+  "garage": "Detached garage",
+  "coeDate": "",
   "askingPrice": 160000,
   "arv": 265000,
-  "estRepairs": 35
+  "estRepairs": 35,
+  "realtorName": "",
+  "realtorPhone": "",
+  "ddEndDate": "",
+  "emdDueDate": "",
+  "acceptedDate": "",
+  "notes": ""
 }
