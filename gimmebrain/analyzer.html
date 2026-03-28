@@ -204,13 +204,15 @@
   .filler-pill.med .fp-count{color:var(--gold);}
   .filler-none{font-size:0.8rem;color:var(--green);font-weight:600;}
 
-  /* KB ACTION BUTTONS */
-  .kb-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
-  .kb-btn{padding:10px;font-size:0.75rem;font-weight:700;text-transform:uppercase;border:1px solid;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;}
-  .kb-btn-worked{background:var(--green-bg);border-color:var(--green-border);color:var(--green);}
-  .kb-btn-worked:hover{background:rgba(34,197,94,0.2);}
-  .kb-btn-flag{background:var(--red-bg);border-color:var(--red-border);color:var(--red);}
-  .kb-btn-flag:hover{background:rgba(239,68,68,0.15);}
+  /* CUSTOM KNOWLEDGE BOX */
+  .custom-kb-box{margin-top:20px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);}
+  .custom-kb-box h3{font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--orange);margin-bottom:10px;}
+  .custom-kb-textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Inter',sans-serif;font-size:0.85rem;color:var(--cream);line-height:1.6;outline:none;resize:vertical;min-height:80px;transition:border-color 0.2s;}
+  .custom-kb-textarea:focus{border-color:var(--orange);}
+  .custom-kb-textarea::placeholder{color:var(--dim);}
+  .custom-kb-submit{margin-top:10px;width:100%;padding:12px;font-size:0.8rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;background:linear-gradient(135deg,#FF5C1A,#FF3D00);border:none;border-radius:var(--radius-sm);color:#fff;cursor:pointer;transition:all 0.2s;}
+  .custom-kb-submit:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(255,92,26,0.3);}
+  .custom-kb-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none;}
 
   /* RIGHT SIDEBAR */
   .sidebar{position:sticky;top:80px;display:flex;flex-direction:column;gap:16px;}
@@ -451,7 +453,7 @@ COMPANY: Cash buyer partnering with realtors for off-market residential acquisit
 Markets: Reno NV, Las Vegas NV, Houston TX
 Entities: Nevada = Good Results LLC (signer: Gayden Rosales). Texas = Good Results TX LLC (signer: Gayden Rosales).
 
-TEAM: Gayden Rosales (Owner), Joe Kruse (Owner/comps), Dan VanMatre (Agent), Kayden Rogers (Agent), Anthony Cruz (Agent), Frank Ladaga (Agent — newest, has not made calls yet)
+TEAM: Gayden Rosales (Owner), Joe Kruse (Owner/comps), Dan VanMatre (Agent), Kayden Rogers (Agent), Anthony Cruz (Agent), Frank Ladaga (Agent)
 
 BUY BOX: Year built 1960s–early 2000s, ~2,000 sqft (1,500–2,500), subdivision-style neighborhoods, any condition, cash close 2–3 weeks. Avoid: custom/unique homes, rural, commercial, recently renovated.
 
@@ -568,13 +570,15 @@ NEGATIVE PATTERNS (flag on any call type): asking "are you still a realtor?" on 
 
 POSITIVE PATTERNS (praise on any call type): states name clearly, references prior conversation with specific detail, delivers buy box on every call where appropriate, differentiates from other investors, runs comps live, floats verbal number before contract, sets specific follow-up, asks "on market or off market?", tells realtor to save number, uses the realtor's name, acknowledges something specific about their market or situation
 
-FRANK LADAGA NOTES: Frank is brand new, has not made any calls yet. Score his early calls with emphasis on fundamentals only. Praise any correct structural execution. Frame coaching as building habits.
+FRANK LADAGA NOTES: Frank now has 5 analyzed calls with an average score of 31.4/100. He is still in early training and struggling with fundamentals. Continue scoring with emphasis on basics: stating his name, delivering the buy box, avoiding forbidden language, and setting a next step. His low average suggests he needs focused coaching on call structure and confidence. Praise any correct structural execution. Flag core issues (forbidden language, no buy box, no next step) and frame coaching as building habits. As more calls come in, track whether his scores trend upward week over week.
 
 GAYDEN ROSALES NOTES: Flag any instances of talking over realtor, interrupting mid-sentence, or speaking for extended stretches without letting realtor respond. This is a priority coaching point even on otherwise excellent calls.
 
 ANTHONY CRUZ NOTES: Flag "are you still a realtor?" opener. Flag any call without verbal buy box. Flag "keep me posted" or no specific follow-up. Flag when realtor says they have properties and Anthony doesn't ask about a specific property.
 
-DAN VANMATRE NOTES: Flag any call where buy box is deferred entirely to email without verbal delivery. Flag any mention of "just moved here", "just got here", "took time off", "took a break". Flag any call ending without specific follow-up timeline.
+DAN VANMATRE NOTES: Flag any call where buy box is deferred entirely to email without verbal delivery. Flag any mention of "just moved here", "just got here", "took time off", "took a break". Flag any call ending without specific follow-up timeline. Dan's conversational instincts, listening skills, and rapport building are genuine strengths — praise those.
+
+KAYDEN ROGERS NOTES: Kayden has 18 positive and 33 negative KB patterns — the highest ratio of negatives among agents. May need 1-on-1 coaching focus. Track improvement week over week.
 
 SCORING HONESTY: If a call is genuinely excellent, say so. Do not fabricate weaknesses. Only flag things that would meaningfully change the outcome. On calls where buy box delivery is less relevant (retrade, post-deal, contract walkthrough), do not penalize for not delivering it — score it N/A or note that it wasn't the purpose of the call.
 
@@ -638,6 +642,38 @@ RESPONSE FORMAT: Return ONLY valid JSON, no markdown, no backticks:
   "recommended_script_moment": "The single most impactful moment where a specific script line would have improved the call. Provide the exact words the agent should have said.",
   "extracted_knowledge": ["Any real estate market insights, seller situations, neighborhood dynamics, pricing patterns, title/financing issues, or deal structures that came up in this call that would help future calls. Extract only genuinely useful field knowledge — omit generic advice. Examples: 'Sellers in Henderson NV are holding firm above 80% ARV right now', 'This realtor mentioned their office does a lot of probate in 77084 zip', 'Agents in Summerlin are seeing 60-day escrows as standard'. Empty array if nothing notable was surfaced."]
 }
+
+WEEKLY LEARNINGS FROM CALL DATA (updated 2026-03-27 — Cycle 2):
+
+PERFORMANCE SNAPSHOT:
+- Dan VanMatre: 1 call, avg 89.0/100 — Top performer. Strong buy box delivery, excellent conversation flow, positions well as low-maintenance partner.
+- Gayden Rosales: 6 calls, avg 69.2/100 — Solid but flagged for tone issues in non-realtor calls.
+- Franklin Ladaga: 5 calls, avg 31.4/100 — In early training, struggling with fundamentals.
+- Anthony Cruz: 2 calls, avg 30.6/100 — Mixed results. 30 positive and 19 negative KB patterns.
+
+TOP POSITIVE PATTERNS ACROSS ALL AGENTS:
+1. Strong buy box delivery with specific criteria (year range, sq ft, subdivision style)
+2. Letting the realtor talk and building rapport through active listening
+3. Clear commission structure discussion when it comes up naturally
+4. Positioning as low-maintenance, long-term relationship
+5. Setting concrete next steps (text with buy box, follow-up call)
+6. Adapting when realtor reveals they're also an investor
+7. Handling "I thought you were spam" with composure
+
+TOP NEGATIVE PATTERNS TO COACH AGAINST:
+1. Hostile or unprofessional language in any call context
+2. Confusion about who the agent is or what they want (poor opener)
+3. Not delivering the buy box verbally on the call
+4. Deferring buy box to email instead of stating it live
+5. Missing next step — call ends without clear action item
+6. Over-talking and not letting the realtor share
+
+AGENT-SPECIFIC INSIGHTS FROM CALL DATA:
+- Dan VanMatre: 1 call scored 89. Lets realtors talk, delivers buy box with specifics, discusses commission naturally. Low negative count (2).
+- Anthony Cruz: 30 positive but 19 negative patterns. Initial confusion on calls. Needs tighter call structure. Strengths: builds good rapport once past the opener.
+- Kayden Rogers: 18 positive, 33 negative — highest ratio of negatives. May need 1-on-1 coaching focus.
+- Gayden Rosales: 6 calls, all negative KB entries relate to a single title officer incident. In realtor calls, performs well. Flag: tone management.
+- Franklin Ladaga: 5 calls, 31.4 avg, no KB pattern entries yet. Focus: stating name, delivering buy box, setting next steps.
 `;
 
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
@@ -718,30 +754,42 @@ function updateKnowledgeBase(result) {
   updateKBStatus();
 }
 
-function manualAddToKB(sentiment, report) {
-  if (!report) return;
-  const engagement = report.realtor_engagement || {};
-  if (sentiment === 'positive') {
-    const items = [
-      ...(report.what_worked || []).map(w => `[${report.agent_name} — ${report.call_type || 'call'} — manually flagged]: ${w}`),
-      ...(engagement.positive_moments || []).map(m => `[${report.agent_name} — ${report.call_type || 'call'} — realtor responded well to]: ${m}`)
-    ];
-    if (items.length === 0) { alert('No positive items found on this report to add.'); return; }
-    const existing = JSON.parse(localStorage.getItem('gr_kb_positive') || '[]');
-    localStorage.setItem('gr_kb_positive', JSON.stringify([...items, ...existing].slice(0, 60)));
-    if (APPS_SCRIPT_URL) pushKBToRemote(report.id + '_manual_pos', report.agent_name, report.overall_score, report.call_type, items, 'positive');
-    alert(`Added ${items.length} positive example${items.length !== 1 ? 's' : ''} to the shared KB.`);
-  } else {
-    const items = (engagement.resistance_moments || []).map(m =>
-      `[${report.agent_name} — ${report.call_type || 'call'} — manually flagged]: ${m}`
-    );
-    if (items.length === 0) { alert('No resistance moments found on this report to flag.'); return; }
-    const existing = JSON.parse(localStorage.getItem('gr_kb_negative') || '[]');
-    localStorage.setItem('gr_kb_negative', JSON.stringify([...items, ...existing].slice(0, 60)));
-    if (APPS_SCRIPT_URL) pushKBToRemote(report.id + '_manual_neg', report.agent_name, report.overall_score, report.call_type, items, 'negative');
-    alert(`Flagged ${items.length} negative pattern${items.length !== 1 ? 's' : ''} to the shared KB.`);
+async function submitCustomKnowledge(report) {
+  const input = document.getElementById('customKBInput');
+  const btn = document.getElementById('customKBBtn');
+  const text = (input ? input.value.trim() : '');
+  if (!text) { alert('Type something first.'); return; }
+  if (!APPS_SCRIPT_URL) { alert('No Apps Script URL configured.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  const agent = report ? report.agent_name || '' : '';
+  const callDate = report ? (report.call_date || report.timestamp || '') : '';
+  const callType = report ? (report.call_type || '') : '';
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'addKnowledge',
+        agent: agent,
+        call_date: callDate,
+        call_type: callType,
+        items: [text]
+      })
+    });
+    input.value = '';
+    btn.textContent = 'Saved!';
+    setTimeout(() => { btn.textContent = 'do not touch!'; btn.disabled = false; }, 2000);
+  } catch(e) {
+    console.warn('Custom KB push failed:', e);
+    btn.textContent = 'do not touch!';
+    btn.disabled = false;
+    alert('Failed to save — check console.');
   }
-  updateKBStatus();
 }
 
 async function pushKBToRemote(callId, agent, score, callType, examples, sentiment) {
@@ -1251,7 +1299,7 @@ function renderDetail(r) {
     html += `</div>`;
   }
 
-  // === SCRIPT MOMENT — THE STAR ===
+  // === ScRIPT MOMENT — THE STAR ===
   if (r.recommended_script_moment) {
     html += `<div class="script-moment-box">
       <div class="script-moment-label">💡 THE COACHING MOMENT</div>
@@ -1294,10 +1342,11 @@ function renderDetail(r) {
     html += `</div>`;
   }
 
-  // === KB ACTION BUTTONS ===
-  html += `<div class="kb-buttons">
-    <button class="kb-btn kb-btn-worked" onclick="manualAddToKB('positive', selectedReport)">✓ Add to KB — This Worked</button>
-    <button class="kb-btn kb-btn-flag" onclick="manualAddToKB('negative', selectedReport)">✗ Flag to KB — Didn't Land</button>
+  // === CUSTOM KNOWLEDGE INPUT ===
+  html += `<div class="custom-kb-box">
+    <h3>Custom Knowledge</h3>
+    <textarea class="custom-kb-textarea" id="customKBInput" placeholder="Type any coaching notes, patterns, or insights from this call..."></textarea>
+    <button class="custom-kb-submit" id="customKBBtn" onclick="submitCustomKnowledge(selectedReport)">do not touch!</button>
   </div>`;
 
   document.getElementById('detailContent').innerHTML = html;
