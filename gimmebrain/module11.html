@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Due Diligence Deep Dive — Good Results Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<script>const SHEET_ID='1T-5pNnoQjRyS_Uu3ESFgzASRiG9xFHN7AkAl-o57J-c';</script>
+<style>
+:root{
+  --black:#0D0F14; --surface:#11141A; --surface2:#161B24; --surface3:#0A0C10;
+  --white:#F0F4FF; --cream:#C8D4E4; --muted:#8A95A8; --dim:#555A66;
+  --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.04);
+  --orange:#FF5C1A; --orange-glow:rgba(255,92,26,0.15); --orange-border:rgba(255,92,26,0.25);
+  --green:#22C55E; --green-bg:rgba(34,197,94,0.1); --green-border:#22C55E;
+  --red:#EF4444; --red-bg:rgba(239,68,68,0.08); --red-border:#EF4444;
+  --radius:8px; --radius-sm:5px; --radius-lg:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;}
+#rpbar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:linear-gradient(90deg,#FF5C1A,#FF8A50,#FF5C1A);background-size:200% 100%;animation:rpShimmer 2.5s linear infinite;transition:width .06s linear;box-shadow:0 0 10px rgba(255,92,26,.55);}
+@keyframes rpShimmer{from{background-position:0%}to{background-position:200%}}
+.header{padding:14px 44px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,.97);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;}
+.logo{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);font-weight:700;}
+.header-right{display:flex;align-items:center;gap:20px;}
+.streak-pill{display:flex;align-items:center;gap:5px;background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:20px;padding:4px 12px;font-size:.72rem;font-weight:700;color:var(--orange);}
+.streak-fire{animation:fireFlicker 1.1s ease-in-out infinite alternate;}
+@keyframes fireFlicker{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.15) rotate(3deg)}}
+.back-link{font-size:.78rem;color:var(--dim);text-decoration:none;transition:color .2s;}
+.back-link:hover{color:var(--orange);}
+.hero{padding:56px 44px 40px;border-bottom:1px solid var(--border);max-width:900px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--orange-glow);border:1px solid var(--orange-border);color:var(--orange);font-size:.67rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 13px;border-radius:3px;margin-bottom:18px;}
+.hero h1{font-size:2.5rem;font-weight:800;line-height:1.1;color:var(--white);margin-bottom:12px;}
+.hero h1 span{color:var(--orange);}
+.hero p{font-size:.97rem;color:var(--muted);line-height:1.7;max-width:560px;}
+.meta-bar{display:flex;gap:40px;padding:20px 44px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.meta-item{display:flex;flex-direction:column;gap:2px;}
+.meta-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);font-weight:700;}
+.meta-val{font-size:.84rem;color:var(--muted);font-weight:500;}
+.body-wrap{display:grid;grid-template-columns:1fr 176px;gap:0;align-items:start;max-width:1060px;margin:0 auto;}
+.content-col{padding:52px 44px;border-right:1px solid var(--border);}
+.nav-col{padding:32px 24px;position:sticky;top:80px;}
+.snav{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;}
+.snav h4{font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.snav-item{display:block;padding:7px 10px;border-radius:4px;font-size:.76rem;color:var(--dim);cursor:pointer;transition:all .18s;border-left:2px solid transparent;line-height:1.35;margin-bottom:2px;}
+.snav-item:hover{color:var(--cream);background:rgba(255,255,255,.04);}
+.snav-item.active{color:var(--orange);border-left-color:var(--orange);background:var(--orange-glow);}
+.section{margin-bottom:52px;}
+.section-num{font-size:.6rem;font-weight:800;letter-spacing:.18em;color:var(--orange);text-transform:uppercase;margin-bottom:6px;}
+.section h2{font-size:1.3rem;font-weight:700;color:var(--cream);margin-bottom:14px;line-height:1.3;}
+.section p{font-size:.93rem;color:var(--muted);line-height:1.78;margin-bottom:13px;}
+.section p:last-of-type{margin-bottom:0;}
+.section strong{color:var(--cream);font-weight:600;}
+.script-block{background:var(--surface3);border:1px solid var(--orange-border);border-left:3px solid var(--orange);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;margin:18px 0;position:relative;}
+.script-label{font-size:.6rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;}
+.script-text{font-size:.9rem;color:#C8D4E4;line-height:1.72;font-style:italic;}
+.copy-btn{position:absolute;top:13px;right:13px;background:var(--orange-glow);border:1px solid var(--orange-border);color:var(--orange);font-size:.67rem;font-weight:700;letter-spacing:.08em;padding:4px 11px;border-radius:var(--radius-sm);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;}
+.copy-btn:hover{background:var(--orange);color:#fff;}
+.copy-btn.copied{background:#22C55E;border-color:#22C55E;color:#fff;}
+.callout{background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:var(--radius);padding:18px 22px;margin:18px 0;}
+.callout-label{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:7px;}
+.callout p{font-size:.9rem;color:#C8D4E4;line-height:1.68;margin:0;}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:17px 20px;}
+.card h4{font-size:.8rem;font-weight:700;color:var(--cream);margin-bottom:5px;}
+.card p{font-size:.8rem;color:var(--dim);line-height:1.55;margin:0;}
+.card.orange-tint{border-color:var(--orange-border);background:var(--orange-glow);}
+.card.orange-tint h4{color:var(--orange);}
+.data-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.85rem;}
+.data-table th{text-align:left;padding:9px 14px;font-size:.63rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:var(--surface);border-bottom:1px solid var(--border);}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border2);color:var(--muted);vertical-align:top;line-height:1.55;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,.02);}
+.data-table td strong{color:var(--cream);font-weight:600;}
+.td-badge{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:3px;}
+.badge-green{background:var(--green-bg);color:#86EFAC;}
+.badge-red{background:var(--red-bg);color:#FCA5A5;}
+.badge-orange{background:var(--orange-glow);color:var(--orange);}
+.step-list{display:flex;flex-direction:column;gap:8px;margin:16px 0;}
+.step{display:flex;gap:13px;align-items:flex-start;padding:13px 16px;background:rgba(255,255,255,.02);border:1px solid var(--border2);border-radius:var(--radius);}
+.step-num{font-size:.68rem;font-weight:900;color:var(--orange);min-width:18px;padding-top:1px;flex-shrink:0;}
+.step p{font-size:.88rem;color:var(--muted);line-height:1.55;margin:0;}
+.step p strong{color:var(--cream);}
+.deepdive{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:9px;}
+.dd-header{padding:14px 18px;background:var(--surface);display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background .18s;user-select:none;}
+.dd-header:hover{background:var(--surface2);}
+.dd-header-left{display:flex;align-items:center;gap:9px;}
+.dd-icon{width:20px;height:20px;background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--orange);font-weight:900;flex-shrink:0;}
+.dd-title{font-size:.87rem;font-weight:600;color:var(--cream);}
+.dd-sub{font-size:.7rem;color:var(--dim);margin-left:8px;}
+.dd-arrow{font-size:.68rem;color:var(--dim);transition:transform .22s;}
+.deepdive.open .dd-arrow{transform:rotate(180deg);}
+.dd-body{max-height:0;overflow:hidden;transition:max-height .32s ease;background:var(--surface3);}
+.deepdive.open .dd-body{max-height:800px;}
+.dd-inner{padding:18px 22px;}
+.dd-inner p{font-size:.87rem;color:var(--muted);line-height:1.72;margin-bottom:10px;}
+.dd-inner p:last-child{margin-bottom:0;}
+.dd-inner strong{color:var(--cream);}
+.kcheck{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 26px;margin:24px 0;transition:border-color .25s;}
+.kcheck.answered-correct{border-color:var(--green-border);}
+.kcheck.answered-wrong{border-color:var(--red-border);}
+.kc-header{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
+.kc-icon{width:26px;height:26px;background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:900;color:var(--orange);flex-shrink:0;}
+.kc-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);}
+.kc-question{font-size:.95rem;font-weight:600;color:var(--cream);margin-bottom:14px;line-height:1.45;}
+.kc-options{display:flex;flex-direction:column;gap:7px;}
+.kc-opt{display:flex;align-items:center;gap:11px;padding:10px 15px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);cursor:pointer;transition:all .18s;font-size:.88rem;color:var(--muted);}
+.kc-opt:hover{background:rgba(255,255,255,.06);color:var(--cream);}
+.kc-opt.opt-correct{background:var(--green-bg);border-color:var(--green-border);color:#86EFAC;pointer-events:none;}
+.kc-opt.opt-wrong{background:var(--red-bg);border-color:var(--red-border);color:#FCA5A5;pointer-events:none;}
+.kc-opt.opt-disabled{pointer-events:none;opacity:.55;}
+.kc-letter{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:800;color:var(--dim);flex-shrink:0;}
+.kc-feedback{margin-top:12px;padding:11px 15px;border-radius:var(--radius);font-size:.84rem;line-height:1.55;display:none;}
+.kc-feedback.show{display:block;}
+.kc-feedback.fb-correct{background:var(--green-bg);color:#86EFAC;}
+.kc-feedback.fb-wrong{background:var(--red-bg);color:#FCA5A5;}
+.quiz-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-top:56px;}
+.quiz-section h3{font-size:1.05rem;font-weight:700;color:var(--cream);margin-bottom:4px;}
+.quiz-section p{font-size:.84rem;color:var(--dim);margin-bottom:20px;}
+#quiz-area{display:flex;flex-direction:column;gap:10px;}
+.quiz-q{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;}
+.quiz-q-text{font-size:.93rem;font-weight:600;color:var(--cream);margin-bottom:12px;line-height:1.4;}
+.quiz-q-opts{display:flex;flex-direction:column;gap:6px;}
+.quiz-opt{display:flex;align-items:center;gap:10px;padding:9px 13px;border:1px solid rgba(255,255,255,.07);border-radius:5px;background:rgba(255,255,255,.02);cursor:pointer;transition:all .18s;font-size:.86rem;color:var(--muted);}
+.quiz-opt:hover{background:rgba(255,255,255,.05);color:var(--cream);}
+.quiz-opt.correct{background:var(--green-bg);border-color:var(--green-border);color:#86EFAC;pointer-events:none;}
+.quiz-opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:#FCA5A5;pointer-events:none;}
+.quiz-opt.disabled{pointer-events:none;opacity:.4;}
+.quiz-opt-letter{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--dim);flex-shrink:0;}
+.quiz-score-bar{margin-top:20px;padding:18px 22px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);display:none;align-items:center;justify-content:space-between;}
+.score-text{font-size:1rem;font-weight:700;color:var(--cream);}
+.score-sub{font-size:.78rem;color:var(--dim);margin-top:2px;}
+.submit-quiz-btn{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .2s;}
+.submit-quiz-btn:hover{opacity:.88;}
+.submit-quiz-btn:disabled{opacity:.4;pointer-events:none;}
+.bottom-nav{border-top:1px solid var(--border);padding:18px 44px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,.97);}
+.bn-prev,.bn-next{display:flex;align-items:center;gap:7px;font-size:.82rem;color:var(--dim);text-decoration:none;padding:9px 18px;border:1px solid var(--border);border-radius:var(--radius-sm);transition:all .2s;}
+.bn-prev:hover,.bn-next:hover{border-color:var(--orange-border);color:var(--orange);}
+.bn-module-info{text-align:center;}
+.bn-num{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+.bn-title{font-size:.84rem;color:var(--muted);}
+@media(max-width:768px){.header{padding:12px 20px;}.hero{padding:36px 20px 28px;}.meta-bar{padding:14px 20px;gap:20px;}.body-wrap{grid-template-columns:1fr;}.content-col{padding:32px 20px;}.nav-col{display:none;}.card-grid{grid-template-columns:1fr;}.bottom-nav{padding:14px 20px;}}
+</style>
+</head>
+<body>
+<div id="rpbar"></div>
+<div class="header">
+  <div class="logo">Good Results // Training</div>
+  <div class="header-right">
+    <div class="streak-pill"><span class="streak-fire">🔥</span> <span id="streak-count">—</span></div>
+    <a href="/gimmebrain/hub" class="back-link">← Hub</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Good Results Training · Module 11 of 12</div>
+  <h1>Due Diligence <span>Deep Dive</span></h1>
+  <p>Master the inspection and verification period between contract and closing. Learn the timeline, repair cost framework, communication scripts, and how to make clear decisions — all while protecting your reputation with realtors.</p>
+</div>
+
+<div class="meta-bar">
+  <div class="meta-item">
+    <div class="meta-label">Track</div>
+    <div class="meta-val">Good Results Training</div>
+  </div>
+  <div class="meta-item">
+    <div class="meta-label">Read Time</div>
+    <div class="meta-val">~20 min</div>
+  </div>
+  <div class="meta-item">
+    <div class="meta-label">Markets</div>
+    <div class="meta-val">NV · TX</div>
+  </div>
+</div>
+
+<div class="body-wrap">
+<div class="content-col">
+
+<!-- SECTION 1 -->
+<div class="section" data-section="s1">
+  <div class="section-num">Section 1</div>
+  <h2>What Due Diligence Is and Why It Matters</h2>
+  <p>Due Diligence (DD) is the inspection and verification period between contract and closing. Its purpose: verify the property matches your investment thesis — NOT to manufacture price reductions. Never use DD as a routine price-chipping tool. Realtors talk. A reputation for always coming back with a "surprise" makes you radioactive.</p>
+  <p>DD is your chance to validate the deal. If the numbers don't work or you discover something material, you have the contractual right to walk away cleanly. Use it that way — not as a negotiation tactic.</p>
+
+  <div class="callout">
+    <div class="callout-label">Critical Rule</div>
+    <p>DD is NOT a negotiation tactic. Realtors have been burned by buyers who use DD to chip price. Don't be that buyer. Good Results' competitive advantage is being the buyer who does what they say.</p>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section" data-section="s2">
+  <div class="section-num">Section 2</div>
+  <h2>The DD Timeline (7-Day Example)</h2>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Day</th>
+        <th>Activity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Day 1</strong></td>
+        <td>Contract accepted. EMD sent to escrow. Title search ordered. General inspection scheduled.</td>
+      </tr>
+      <tr>
+        <td><strong>Days 1–3</strong></td>
+        <td>General home inspection (structure, roof, HVAC, electrical, plumbing)</td>
+      </tr>
+      <tr>
+        <td><strong>Days 2–5</strong></td>
+        <td>Specialty inspections if needed (roof engineer, HVAC specialist, structural, mold, environmental)</td>
+      </tr>
+      <tr>
+        <td><strong>Days 3–7</strong></td>
+        <td>Title commitment received. Payoff letters requested. Contractor repair estimates gathered.</td>
+      </tr>
+      <tr>
+        <td><strong>Day 7–8</strong></td>
+        <td>Internal decision point: proceed, request credit, or terminate. Realtor gets clear answer.</td>
+      </tr>
+      <tr>
+        <td><strong>After DD</strong></td>
+        <td>Move to closing. Earnest money becomes non-refundable (in Nevada/Texas terms).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>This timeline works for most deals. Complex deals (major repairs, title issues, environmental concerns) may need extension — ask Gayden.</p>
+
+  <div class="kcheck" id="kc1">
+    <div class="kc-header">
+      <div class="kc-icon">✓</div>
+      <div class="kc-label">Knowledge Check</div>
+    </div>
+    <div class="kc-question">A contractor finds the HVAC is very old and needs replacement. This was already in your estimate. What do you do?</div>
+    <div class="kc-options">
+      <div class="kc-opt" onclick="checkInline(this,'kc1',true,'Correct. It was already factored in — proceed as-is. Asking for a credit over something you already estimated signals weakness.')">
+        <div class="kc-letter">A</div>
+        Proceed as-is — it was already factored in your estimate
+      </div>
+      <div class="kc-opt" onclick="checkInline(this,'kc1',false,'Incorrect. If you already estimated HVAC replacement, don\'t use DD to chip price.')">
+        <div class="kc-letter">B</div>
+        Ask for a price reduction or credit
+      </div>
+      <div class="kc-opt" onclick="checkInline(this,'kc1',false,'Incorrect. This is a normal finding. Walking away signals you don\'t have your numbers right.')">
+        <div class="kc-letter">C</div>
+        Walk away from the deal
+      </div>
+    </div>
+    <div class="kc-feedback" id="kc1-fb"></div>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section" data-section="s3">
+  <div class="section-num">Section 3</div>
+  <h2>Repair Cost Framework & Decision Matrix</h2>
+  <p>Use this framework to decide: proceed, request credit, or walk.</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Repair Cost</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>&lt; $5,000</strong></td>
+        <td><span class="td-badge badge-green">Proceed</span> Not worth jeopardizing relationship</td>
+      </tr>
+      <tr>
+        <td><strong>$5,000–$20,000</strong></td>
+        <td><span class="td-badge badge-orange">Discuss</span> Talk with Gayden. May request credit or proceed.</td>
+      </tr>
+      <tr>
+        <td><strong>&gt; $20,000 or structural</strong></td>
+        <td><span class="td-badge badge-red">Escalate</span> Call Gayden immediately. Walk or renegotiate.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Specific findings guide:</strong> Cosmetic (paint, flooring) = proceed. HVAC replacement = already estimated, proceed. Roof work = already estimated, proceed. Foundation issues = call Gayden immediately. Mold, termites, structural damage = call Gayden. Unpermitted additions = escalate to Gayden (title/escrow issue).</p>
+
+  <div class="script-block">
+    <div class="script-label">Script — Setting Expectations at Contract</div>
+    <button class="copy-btn" onclick="copyScript('script1',this)">Copy</button>
+    <div class="script-text" id="script1">"I'll have an answer for you by [Day 7]. If I find anything significant, I'll let you know immediately. I won't leave you hanging."</div>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section" data-section="s4">
+  <div class="section-num">Section 4</div>
+  <h2>Communicating With the Realtor</h2>
+  <p>The realtor is your communication window. Set expectations at contract signing. Then maintain momentum.</p>
+
+  <div class="step-list">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div><p><strong>If Terminating:</strong> "The inspection findings don't align with our investment criteria. We're walking away cleanly."</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div><p><strong>If Proceeding:</strong> "Inspection came back fine. We're moving forward as planned. What's the update on [next closing step]?"</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div><p><strong>If Still Deciding:</strong> "Hey, still working through the inspection findings — will have a clear answer for you by tomorrow morning."</p></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Golden Rule</div>
+    <p>NEVER GHOST. Not for a day, not for half a day. A realtor who doesn't hear from you for 48 hours assumes the deal is dying. Keep them updated.</p>
+  </div>
+
+  <div class="kcheck" id="kc2">
+    <div class="kc-header">
+      <div class="kc-icon">✓</div>
+      <div class="kc-label">Knowledge Check</div>
+    </div>
+    <div class="kc-question">It's Day 6 of DD. Your contractor hasn't sent you the repair estimate yet. The realtor is waiting for your decision. What do you do?</div>
+    <div class="kc-options">
+      <div class="kc-opt" onclick="checkInline(this,'kc2',true,'Correct. Communication keeps the realtor engaged and shows professionalism. You\'ll have a decision tomorrow — but you need to tell them NOW.')">
+        <div class="kc-letter">A</div>
+        Text the realtor: "Still working through findings, will have answer by tomorrow morning"
+      </div>
+      <div class="kc-opt" onclick="checkInline(this,'kc2',false,'Incorrect. Waiting until Day 7 is ghosting. The realtor needs to hear from you now.')">
+        <div class="kc-letter">B</div>
+        Wait until Day 7 to contact the realtor
+      </div>
+      <div class="kc-opt" onclick="checkInline(this,'kc2',false,'Incorrect. You can\'t extend DD without discussing with Gayden first and getting realtor approval.')">
+        <div class="kc-letter">C</div>
+        Ask the realtor for a DD extension
+      </div>
+    </div>
+    <div class="kc-feedback" id="kc2-fb"></div>
+  </div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section" data-section="s5">
+  <div class="section-num">Section 5</div>
+  <h2>DD in Nevada vs. Texas</h2>
+  <p>Different states, different rules. Know which state you're operating in.</p>
+
+  <div class="card-grid">
+    <div class="card orange-tint">
+      <h4>Nevada (RPA)</h4>
+      <p><strong>Due Diligence Period:</strong> Free cancellation right during DD period. $0 option fee. Just give notice before deadline.</p>
+    </div>
+    <div class="card">
+      <h4>Texas (TREC)</h4>
+      <p><strong>Option Period:</strong> Costs $1.00 but buyer has unrestricted right to terminate. Option fee + EMD both due within 3 calendar days of acceptance.</p>
+    </div>
+  </div>
+
+  <p><strong>Critical Texas note:</strong> Missing the 3-day deadline for option fee + EMD means the seller can terminate contract. Don't let your escrow officer miss this.</p>
+
+  <div class="deepdive" id="dd1">
+    <div class="dd-header" onclick="toggleDD('dd1')">
+      <div class="dd-header-left">
+        <div class="dd-icon">+</div>
+        <div class="dd-title">Why do realtors hate buyers who use DD to chip price?</div>
+        <div class="dd-sub">The psychology and reputation damage</div>
+      </div>
+      <div class="dd-arrow">▼</div>
+    </div>
+    <div class="dd-body">
+      <div class="dd-inner">
+        <p>Every realtor has a client who accepted a lower offer, then got nickel-and-dimed during DD. "Oh, inspector found issues, we need $15K reduction." It's a bait-and-switch that destroys trust.</p>
+        <p>The moment a realtor sees a pattern of you using DD as a negotiation tactic, they stop sending you deals. You become "that buyer." And in a relationship business, reputation is everything.</p>
+        <p>Good Results' competitive advantage is being the buyer who does what they say. Your offer is your word. Stand behind it.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="deepdive" id="dd2">
+    <div class="dd-header" onclick="toggleDD('dd2')">
+      <div class="dd-header-left">
+        <div class="dd-icon">+</div>
+        <div class="dd-title">Foundation issues — what they mean and what to do</div>
+        <div class="dd-sub">Why you can't assess alone</div>
+      </div>
+      <div class="dd-body">
+      <div class="dd-inner">
+        <p>Foundation problems range from minor settling (hairline cracks that are cosmetic) to structural failure (house is sinking, water is getting in). You can't assess them without a structural engineer.</p>
+        <p>Cost range: minor crack fill = $3K. Pier and beam or full underpinning = $50K+. That's a massive spread. Don't make a unilateral decision. Call Gayden immediately.</p>
+        <p>Gayden has relationships with foundation contractors and knows which issues are deal-killers vs. solvable. You don't. Let him decide.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ SECTION -->
+<div class="quiz-section">
+  <h3>Module Quiz</h3>
+  <p id="quiz-status">Loading quiz...</p>
+  <div id="quiz-area"></div>
+  <div class="quiz-score-bar" id="score-bar">
+    <div>
+      <div class="score-text" id="score-text">— / — correct</div>
+      <div class="score-sub" id="score-sub">Questions remaining</div>
+    </div>
+    <button id="submit-btn" class="submit-quiz-btn" onclick="submitScore()" disabled>Submit Score</button>
+  </div>
+</div>
+
+</div>
+
+<!-- SIDEBAR NAV -->
+<div class="nav-col">
+  <div class="snav">
+    <h4>Sections</h4>
+    <div id="snav-links"></div>
+  </div>
+</div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <a href="module10.html" class="bn-prev">← Previous</a>
+  <div class="bn-module-info">
+    <div class="bn-num">Module 11 of 12</div>
+    <div class="bn-title">Due Diligence Deep Dive</div>
+  </div>
+  <a href="module12.html" class="bn-next">Next →</a>
+</div>
+
+<script>
+const MODULE_NUM = 11;
+const MODULE_TITLE = 'Due Diligence Deep Dive';
+const QUIZ_POOL = [
+  {q:"What is the primary purpose of the Due Diligence period?",opts:[{t:"To verify the property matches your investment thesis.",correct:true},{t:"To negotiate a lower purchase price.",correct:false},{t:"To delay closing as long as possible.",correct:false}],explanation:"DD is for validation, not price-chipping. Use it to confirm the deal aligns with your numbers."},
+  {q:"You find that HVAC replacement (already estimated) is needed. What do you do?",opts:[{t:"Proceed as-is — it was already factored in.",correct:true},{t:"Request a credit from the seller.",correct:false},{t:"Walk away from the deal.",correct:false}],explanation:"If you already estimated it, don't use DD to renegotiate. Proceed cleanly."},
+  {q:"A contractor estimate comes back at $12,000. How do you handle it?",opts:[{t:"Walk away immediately.",correct:false},{t:"Discuss with Gayden — may proceed or request credit.",correct:true},{t:"Always request a credit from the seller.",correct:false}],explanation:"$5K–$20K is the discussion zone. Reach out to Gayden for guidance."},
+  {q:"It's Day 6. You're still waiting for final contractor estimates. The realtor is waiting. What do you do?",opts:[{t:"Contact the realtor: 'Still working on findings, will have answer by tomorrow.'",correct:true},{t:"Wait until Day 7 to contact the realtor.",correct:false},{t:"Tell the realtor you need a DD extension.",correct:false}],explanation:"Communication prevents ghosting. Update the realtor immediately, even if you don't have the final answer yet."},
+  {q:"In Nevada, what does the 'free DD period' cost the buyer?",opts:[{t:"$0 — free cancellation right with proper notice.",correct:true},{t:"$1.00 option fee.",correct:false},{t:"2% of earnest money.",correct:false}],explanation:"Nevada RPA = no fee. Texas TREC = $1.00. Know your state rules."},
+  {q:"In Texas, when must the option fee be paid?",opts:[{t:"Within 3 calendar days of contract acceptance.",correct:true},{t:"On or before closing.",correct:false},{t:"Any time before DD expires.",correct:false}],explanation:"Texas is strict: option fee + EMD must clear within 3 days. Miss it = seller can terminate."},
+  {q:"You discover foundation issues. What's your next move?",opts:[{t:"Call a general contractor to assess.",correct:false},{t:"Call Gayden immediately — don't assess alone.",correct:true},{t:"Automatically walk away.",correct:false}],explanation:"Foundation = complexity. Gayden has relationships and knows cost ranges ($3K–$50K+). Let him decide."},
+  {q:"What does it mean to 'ghost' a realtor during DD?",opts:[{t:"Not communicating for 48+ hours without update.",correct:true},{t:"Asking for a DD extension.",correct:false},{t:"Requesting a professional inspection.",correct:false}],explanation:"Ghosting = silence. Realtors assume the deal is dying. Keep them updated daily, even with 'still deciding.'"},
+  {q:"A realtor seems skeptical about your DD process. What script do you use?",opts:[{t:"'I'll have an answer for you by [Day 7]. I won't leave you hanging.'",correct:true},{t:"'This is none of your business.'",correct:false},{t:"'I'll do whatever I want during DD.'",correct:false}],explanation:"Set expectations upfront. Confidence + communication = trust."},
+  {q:"Cosmetic issues (paint, flooring) are discovered. What's your action?",opts:[{t:"Proceed as-is — cosmetic issues don't affect deal economics.",correct:true},{t:"Request a credit for cosmetic repairs.",correct:false},{t:"Walk away.",correct:false}],explanation:"Cosmetic = factored in. Don't use DD to renegotiate painted walls."},
+  {q:"True or false: DD is a negotiation tactic.",opts:[{t:"False — DD is validation, not a negotiation tool.",correct:true},{t:"True — smart buyers use DD to chip price.",correct:false}],explanation:"DD is validation. Using it to renegotiate destroys your reputation with realtors."},
+  {q:"A roof engineer finds damage. You estimated $8K for roof work. What do you do?",opts:[{t:"Proceed as-is — it was already estimated.",correct:true},{t:"Request a credit because the estimate was higher.",correct:false},{t:"Walk away because roof work is risky.",correct:false}],explanation:"You already factored roof repair in. Proceed confidently."},
+  {q:"Title commitment reveals an unpermitted addition. What's your move?",opts:[{t:"Ignore it — it's not a major issue.",correct:false},{t:"Escalate to Gayden immediately — it's a title/escrow issue.",correct:true},{t:"Proceed anyway.",correct:false}],explanation:"Unpermitted work = title problem. Gayden needs to coordinate with escrow and title."},
+  {q:"DD period is 7 days. On Day 5, you're still reviewing findings. What do you tell the realtor?",opts:[{t:"'Still working through the inspection findings — will have a clear answer for you by Day 6.'",correct:true},{t:"Nothing — wait until Day 7.",correct:false},{t:"'We're terminating the contract.'",correct:false}],explanation:"Keep the realtor informed. Never leave them guessing."},
+  {q:"A repair costs $25,000. What's your framework?",opts:[{t:"Proceed without question.",correct:false},{t:"Automatically terminate.",correct:false},{t:"Escalate to Gayden — he decides walk or renegotiate.",correct:true}],explanation:"$20K+ = Gayden decides. This is above the solo threshold."},
+  {q:"What's the difference between Nevada RPA and Texas TREC DD periods?",opts:[{t:"Nevada = free, Texas = $1.00 option fee + 3-day deadline.",correct:true},{t:"Nevada = $1.00, Texas = free.",correct:false},{t:"They're the same in both states.",correct:false}],explanation:"Nevada is simpler (free). Texas requires $1 fee within 3 days or deal dies."},
+  {q:"You find mold in the crawlspace. What's your action?",opts:[{t:"Proceed — minor mold isn't a big deal.",correct:false},{t:"Call Gayden immediately — mold is a major issue.",correct:true},{t:"Ask the seller to remediate.",correct:false}],explanation:"Mold = escalate. It's a material, expensive finding. Gayden decides next steps."},
+  {q:"Minor repairs (< $5K) are discovered. Your action is:",opts:[{t:"Proceed — not worth jeopardizing the relationship.",correct:true},{t:"Request a credit from the seller.",correct:false},{t:"Walk away.",correct:false}],explanation:"Small surprises are normal. Proceed. Protecting the realtor relationship is more valuable."},
+  {q:"Why should you NEVER use DD as a routine price-chipping tool?",opts:[{t:"Because realtors talk and your reputation suffers.",correct:true},{t:"Because it's illegal.",correct:false},{t:"Because sellers always refuse.",correct:false}],explanation:"One reputation-damaging pattern and realtors stop sending you deals. You become 'that buyer.'"},
+  {q:"On Day 7, you're ready to move forward. What do you tell the realtor?",opts:[{t:"'Inspection came back fine. We're moving forward as planned. What's the update on [next closing step]?'",correct:true},{t:"'We need to renegotiate the price.'",correct:false},{t:"'We're terminating the contract.'",correct:false}],explanation:"Positive momentum. Reaffirm commitment and move closing forward."},
+  {q:"Electrical issues are found. You estimated $6K for electrical work. What's your decision?",opts:[{t:"Proceed — it's already estimated.",correct:true},{t:"Request a credit because you want to be safe.",correct:false},{t:"Terminate the contract.",correct:false}],explanation:"Estimated = proceed. Don't renegotiate on issues you already budgeted for."},
+  {q:"A foundation specialist reports minor settling with hairline cracks. Cost estimate: $4K. Your action:",opts:[{t:"Proceed — minor settling is common and already estimated likely.",correct:true},{t:"Request a major credit.",correct:false},{t:"Walk away immediately.",correct:false}],explanation:"Minor cracks ≠ structural failure. Proceed. Get a structural engineer only if unsure."},
+  {q:"You discover an unpermitted room addition. Market impact is uncertain. What do you do?",opts:[{t:"Escalate to Gayden and escrow immediately.",correct:true},{t:"Proceed anyway — it's just cosmetic.",correct:false},{t:"Request a minimal credit.",correct:false}],explanation:"Unpermitted = title issue. This needs professional coordination. Escalate to Gayden and escrow."},
+  {q:"What's the most important communication principle during DD?",opts:[{t:"Never ghost — keep the realtor updated daily if possible.",correct:true},{t:"Only communicate when you have bad news.",correct:false},{t:"Wait until the last day to give your decision.",correct:false}],explanation:"Daily communication (even 'still deciding') > silence. Silence = deal dying to the realtor."},
+  {q:"A repair costs $50,000. You estimated $12K. What's your framework?",opts:[{t:"Proceed anyway — deals are risky.",correct:false},{t:"Walk away immediately.",correct:false},{t:"Escalate to Gayden immediately — deal economics have changed materially.",correct:true}],explanation:"$50K vs. $12K estimate = material change. Gayden decides if deal still works."}
+];
+
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('rpbar').style.width=(window.scrollY/h*100)+'%';
+});
+(function buildNav(){
+  const sections=document.querySelectorAll('[data-section]');
+  const nav=document.getElementById('snav-links');
+  if(!nav||!sections.length)return;
+  sections.forEach(s=>{
+    const h2=s.querySelector('h2');
+    if(!h2)return;
+    const a=document.createElement('div');
+    a.className='snav-item';
+    a.textContent=h2.textContent;
+    a.onclick=()=>s.scrollIntoView({behavior:'smooth',block:'start'});
+    a.dataset.sec=s.dataset.section;
+    nav.appendChild(a);
+  });
+  window.addEventListener('scroll',()=>{
+    let active=null;
+    sections.forEach(s=>{if(s.getBoundingClientRect().top<180)active=s.dataset.section;});
+    nav.querySelectorAll('.snav-item').forEach(a=>a.classList.toggle('active',a.dataset.sec===active));
+  },{passive:true});
+})();
+function copyScript(id,btn){
+  const text=document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✓ Copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
+  });
+}
+function toggleDD(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
+  el.querySelector('.dd-icon').textContent=el.classList.contains('open')?'−':'+';
+}
+function checkInline(opt,cardId,correct,explanation){
+  const card=document.getElementById(cardId);
+  if(card.classList.contains('answered-correct')||card.classList.contains('answered-wrong'))return;
+  card.classList.add(correct?'answered-correct':'answered-wrong');
+  card.querySelectorAll('.kc-opt').forEach(o=>{
+    if(o===opt){o.classList.add(correct?'opt-correct':'opt-wrong');}
+    else{
+      const oc=o.getAttribute('onclick');
+      if(!correct&&oc&&oc.includes(',true,'))o.classList.add('opt-correct');
+      else o.classList.add('opt-disabled');
+    }
+  });
+  const fb=document.getElementById(cardId+'-fb');
+  fb.textContent=(correct?'✓ ':'✗ ')+explanation;
+  fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');
+}
+(function loadStreak(){
+  const streak=parseInt(localStorage.getItem('gr_streak')||'0');
+  const el=document.getElementById('streak-count');
+  if(el)el.textContent=streak>0?streak+'-day streak':'Start your streak';
+})();
+let quizQuestions=[], userAnswers={}, quizDone=false;
+(function initQuiz(){
+  const area=document.getElementById('quiz-area');
+  const status=document.getElementById('quiz-status');
+  if(!QUIZ_POOL||!QUIZ_POOL.length){if(status)status.textContent='No questions loaded yet.';return;}
+  const shuffled=[...QUIZ_POOL].sort(()=>Math.random()-.5);
+  quizQuestions=shuffled.slice(0,Math.min(10,shuffled.length));
+  if(status)status.textContent=`${quizQuestions.length} questions · Pick the best answer for each.`;
+  quizQuestions.forEach((q,qi)=>{
+    const opts=q.opts.map((o,oi)=>`<div class="quiz-opt" id="qo-${qi}-${oi}" onclick="answerQuiz(${qi},${oi})"><div class="quiz-opt-letter">${String.fromCharCode(65+oi)}</div>${o.t}</div>`).join('');
+    area.innerHTML+=`<div class="quiz-q" id="qq-${qi}"><div class="quiz-q-text">${qi+1}. ${q.q}</div><div class="quiz-q-opts" id="qopts-${qi}">${opts}</div><div class="kc-feedback" id="qfb-${qi}"></div></div>`;
+  });
+  const sb=document.getElementById('score-bar');
+  if(sb)sb.style.display='flex';
+})();
+function answerQuiz(qi,oi){
+  if(userAnswers[qi]!==undefined)return;
+  userAnswers[qi]=oi;
+  const q=quizQuestions[qi];
+  const correct=q.opts[oi].correct;
+  q.opts.forEach((_,i)=>{
+    const el=document.getElementById(`qo-${qi}-${i}`);
+    if(!el)return;
+    if(i===oi)el.classList.add(correct?'correct':'wrong');
+    else if(q.opts[i].correct)el.classList.add('correct');
+    else el.classList.add('disabled');
+  });
+  const fb=document.getElementById(`qfb-${qi}`);
+  if(fb){fb.textContent=(correct?'✓ ':'✗ ')+q.explanation;fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');}
+  updateScore();
+}
+function updateScore(){
+  const answered=Object.keys(userAnswers).length;
+  const total=quizQuestions.length;
+  const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi].opts[oi].correct).length;
+  const pct=total?Math.round(correct/total*100):0;
+  const st=document.getElementById('score-text');
+  const ss=document.getElementById('score-sub');
+  const btn=document.getElementById('submit-btn');
+  if(st)st.textContent=`${correct} / ${total} correct  (${pct}%)`;
+  if(ss)ss.textContent=answered<total?`${total-answered} questions remaining`:'Quiz complete — submit your score!';
+  if(btn)btn.disabled=answered<total;
+  quizDone=answered>=total;
+}
+function submitScore(){
+  if(!quizDone)return;
+  const answered=Object.keys(userAnswers).length;
+  const total=quizQuestions.length;
+  const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi].opts[oi].correct).length;
+  const pct=Math.round(correct/total*100);
+  const agent=sessionStorage.getItem('gr_agent')||'Unknown';
+  const xp=Math.round(pct*1.2);
+  const url=`https://script.google.com/macros/s/AKfycbzqnJAm0YbW8X0rIqGdpnrFgHgizfV4lJW7LJcO4X7MmkFBkJWL3sKfhAI2NqMiMuze/exec`;
+  const body={action:'moduleComplete',agent,module:MODULE_NUM,moduleTitle:MODULE_TITLE,score:pct,xp,correct,total,date:new Date().toISOString()};
+  fetch(url,{method:'POST',body:JSON.stringify(body)})
+    .then(()=>{
+      const btn=document.getElementById('submit-btn');
+      if(btn){btn.textContent='✓ Score Saved!';btn.style.background='#22C55E';btn.disabled=true;}
+      const today=new Date().toDateString();
+      const lastDay=localStorage.getItem('gr_streak_day');
+      let streak=parseInt(localStorage.getItem('gr_streak')||'0');
+      if(lastDay!==today){
+        const yesterday=new Date(Date.now()-86400000).toDateString();
+        streak=lastDay===yesterday?streak+1:1;
+        localStorage.setItem('gr_streak',streak);
+        localStorage.setItem('gr_streak_day',today);
+        const sc=document.getElementById('streak-count');
+        if(sc)sc.textContent=streak+'-day streak';
+      }
+    })
+    .catch(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='Retry';btn.disabled=false;}});
+}
+</script>
+</body>
+</html>
