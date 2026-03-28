@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Analyzer — Good Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0D0F14;
+            --surface: #11141A;
+            --surface2: #161B24;
+            --surface3: #1C2030;
+            --white: #F0F4FF;
+            --cream: #C8D4E4;
+            --muted: #8A95A8;
+            --orange: #FF5C1A;
+            --green: #22C55E;
+            --red: #EF4444;
+            --gold: #F0B429;
+            --blue: #3B82F6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--orange), var(--blue));
+            animation: progress 2.5s ease-in-out infinite;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        @keyframes progress {
+            0% { width: 0; opacity: 0.8; }
+            50% { width: 80%; opacity: 1; }
+            100% { width: 100%; opacity: 0.6; }
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: var(--surface);
+            border-bottom: 1px solid var(--surface3);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            margin-top: 3px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--orange);
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--orange);
+            border-radius: 50%;
+        }
+
+        .header-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--cream);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--green);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--orange), var(--gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--black);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        /* Main layout */
+        .container {
+            display: flex;
+            gap: 0;
+            margin-top: 0;
+            min-height: calc(100vh - 60px);
+        }
+
+        /* Sidebar left */
+        .sidebar-left {
+            width: 260px;
+            background-color: var(--surface);
+            border-right: 1px solid var(--surface3);
+            padding: 24px 16px;
+            position: sticky;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+
+        .sidebar-left::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar-left::-webkit-scrollbar-track {
+            background: var(--surface2);
+        }
+
+        .sidebar-left::-webkit-scrollbar-thumb {
+            background: var(--surface3);
+            border-radius: 3px;
+        }
+
+        .sidebar-card {
+            background-color: var(--surface2);
+            border: 1px solid var(--surface3);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .sidebar-card-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--surface3);
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        .stat-secondary {
+            font-size: 10px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        /* Leaderboard */
+        .leaderboard-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 10px;
+            background-color: var(--surface3);
+            border-radius: 6px;
+            align-items: center;
+        }
+
+        .leaderboard-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .leaderboard-rank {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--orange);
+            min-width: 20px;
+        }
+
+        .leaderboard-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--white);
+            flex: 1;
+        }
+
+        .leaderboard-sparkline {
+            width: 40px;
+            height: 20px;
+            background: linear-gradient(90deg, var(--orange) 0%, var(--gold) 100%);
+            border-radius: 3px;
+            opacity: 0.6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .leaderboard-sparkline::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+        }
+
+        /* Recent reports */
+        .recent-item {
+            font-size: 11px;
+            padding: 8px;
+            background-color: var(--surface3);
+            border-radius: 4px;
+            margin-bottom: 8px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .recent-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .recent-name {
+            font-weight: 600;
+            color: var(--white);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .recent-meta {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .main-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .main-content::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+
+        .main-content::-webkit-scrollbar-thumb {
+            background: var(--surface3);
+            border-radius: 3px;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--surface2);
+            border: 1px solid var(--surface3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        /* Input section */
+        .input-section textarea {
+            width: 100%;
+            background-color: var(--surface3);
+            border: 1px solid var(--surface3);
+            border-radius: 6px;
+            padding: 12px;
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+        }
+
+        .input-section textarea:focus {
+            outline: none;
+            border-color: var(--orange);
+            background-color: rgba(255, 92, 26, 0.05);
+        }
+
+        .input-section textarea::placeholder {
+            color: var(--muted);
+        }
+
+        .input-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--cream);
+        }
+
+        .toggle {
+            width: 40px;
+            height: 20px;
+            background-color: var(--surface3);
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .toggle.active {
+            background-color: var(--green);
+        }
+
+        .toggle-switch {
+            width: 16px;
+            height: 16px;
+            background-color: var(--white);
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: left 0.3s;
+        }
+
+        .toggle.active .toggle-switch {
+            left: 22px;
+        }
+
+        .analyze-btn {
+            background: linear-gradient(135deg, var(--orange), #FF7A3D);
+            color: var(--white);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(255, 92, 26, 0.25);
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 92, 26, 0.35);
+        }
+
+        .analyze-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Report card */
+        .report-card {
+            background-color: var(--surface2);
+            border: 1px solid var(--surface3);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .report-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            border-bottom: 1px solid var(--surface3);
+        }
+
+        .report-color-stripe {
+            width: 4px;
+            height: 60px;
+            background-color: var(--gold);
+            border-radius: 2px;
+            margin: -20px 0 -20px -20px;
+        }
+
+        .report-info {
+            flex: 1;
+        }
+
+        .report-agent {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .report-meta {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .report-score {
+            text-align: right;
+        }
+
+        .report-score-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .report-score-label {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .report-body {
+            padding: 20px;
+        }
+
+        .feedback-section {
+            margin-bottom: 20px;
+        }
+
+        .feedback-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .feedback-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .criterion {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            background-color: var(--surface3);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .criterion:last-child {
+            margin-bottom: 0;
+        }
+
+        .criterion-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+
+        .criterion-icon.strong {
+            background-color: rgba(34, 197, 94, 0.2);
+            color: var(--green);
+        }
+
+        .criterion-icon.weak {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--red);
+        }
+
+        .criterion-icon.good {
+            background-color: rgba(240, 180, 41, 0.2);
+            color: var(--gold);
+        }
+
+        .criterion-text {
+            flex: 1;
+        }
+
+        .criterion-name {
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .criterion-detail {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .feedback-item {
+            padding: 12px;
+            background-color: var(--surface3);
+            border-left: 3px solid var(--orange);
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: var(--cream);
+            line-height: 1.5;
+        }
+
+        .feedback-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Right sidebar */
+        .sidebar-right {
+            width: 240px;
+            background-color: var(--surface);
+            border-left: 1px solid var(--surface3);
+            padding: 24px 16px;
+            position: sticky;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+
+        .sidebar-right::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar-right::-webkit-scrollbar-track {
+            background: var(--surface2);
+        }
+
+        .sidebar-right::-webkit-scrollbar-thumb {
+            background: var(--surface3);
+            border-radius: 3px;
+        }
+
+        /* Scoring guide */
+        .scoring-guide-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: var(--surface2);
+            border-radius: 4px;
+            align-items: flex-start;
+            font-size: 11px;
+        }
+
+        .scoring-guide-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .guide-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .guide-dot.openings {
+            background-color: var(--blue);
+        }
+
+        .guide-dot.listening {
+            background-color: var(--green);
+        }
+
+        .guide-dot.questions {
+            background-color: var(--gold);
+        }
+
+        .guide-dot.objections {
+            background-color: var(--orange);
+        }
+
+        .guide-dot.pipeline {
+            background-color: var(--red);
+        }
+
+        .guide-dot.close {
+            background-color: var(--cream);
+        }
+
+        .guide-dot.tone {
+            background-color: var(--muted);
+        }
+
+        .guide-text {
+            color: var(--cream);
+            line-height: 1.3;
+        }
+
+        /* Team insights */
+        .insight-item {
+            padding: 10px;
+            background-color: var(--surface3);
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .insight-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .insight-agent {
+            font-weight: 600;
+            color: var(--white);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .insight-detail {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .insight-detail.positive {
+            color: var(--green);
+        }
+
+        .insight-detail.warning {
+            color: var(--orange);
+        }
+
+        /* Field knowledge */
+        .field-item {
+            padding: 10px;
+            background-color: var(--surface3);
+            border-left: 3px solid var(--blue);
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+
+        .field-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .field-topic {
+            font-weight: 600;
+            color: var(--white);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .field-meta {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* Mockup banner */
+        .mockup-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(255, 92, 26, 0.95);
+            color: var(--white);
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            z-index: 50;
+            box-shadow: 0 4px 16px rgba(255, 92, 26, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .sidebar-right {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar-left {
+                width: 100%;
+                position: static;
+                height: auto;
+            }
+
+            .main-content {
+                padding: 16px;
+            }
+
+            .header-center {
+                display: none;
+            }
+
+            .status-pill {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress bar -->
+    <div class="progress-bar"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <div class="logo-dot"></div>
+            Good Results
+        </div>
+        <div class="header-center">Call Analyzer</div>
+        <div class="header-right">
+            <div class="status-pill">
+                <div class="status-dot"></div>
+                KB Active
+            </div>
+            <div class="user-avatar">GR</div>
+        </div>
+    </header>
+
+    <!-- Main layout -->
+    <div class="container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar-left">
+            <!-- Quick Stats -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-title">Quick Stats</div>
+                <div class="stat-row">
+                    <div>
+                        <div class="stat-label">Total Analyzed</div>
+                        <div class="stat-value">47</div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div>
+                        <div class="stat-label">Avg Score</div>
+                        <div class="stat-value">74</div>
+                        <div class="stat-secondary">/ 100</div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div>
+                        <div class="stat-label">This Week</div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-secondary">calls</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-title">Leaderboard</div>
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank">1</div>
+                    <div class="leaderboard-name">Marcus</div>
+                    <div class="leaderboard-sparkline"></div>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank">2</div>
+                    <div class="leaderboard-name">Sarah</div>
+                    <div class="leaderboard-sparkline"></div>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank">3</div>
+                    <div class="leaderboard-name">Dan</div>
+                    <div class="leaderboard-sparkline"></div>
+                </div>
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank">4</div>
+                    <div class="leaderboard-name">Jessica</div>
+                    <div class="leaderboard-sparkline"></div>
+                </div>
+            </div>
+
+            <!-- KB Health -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-title">KB Health</div>
+                <div class="stat-row">
+                    <div>
+                        <div class="stat-label">Positive Patterns</div>
+                        <div class="stat-value" style="color: var(--green);">18</div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div>
+                        <div class="stat-label">Negative Patterns</div>
+                        <div class="stat-value" style="color: var(--red);">7</div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div>
+                        <div class="stat-label">Field Insights</div>
+                        <div class="stat-value" style="color: var(--blue);">34</div>
+                    </div>
+                </div>
+                <div style="font-size: 10px; color: var(--muted); margin-top: 8px; text-align: center;">
+                    Last synced 2 hrs ago
+                </div>
+            </div>
+
+            <!-- Recent -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-title">Recent</div>
+                <div class="recent-item">
+                    <span class="recent-name">Anthony</span>
+                    <span class="recent-meta">71 • 14 min ago</span>
+                </div>
+                <div class="recent-item" style="border-left-color: var(--green);">
+                    <span class="recent-name">Marcus</span>
+                    <span class="recent-meta">88 • 1 hr ago</span>
+                </div>
+                <div class="recent-item" style="border-left-color: var(--red);">
+                    <span class="recent-name">Paul</span>
+                    <span class="recent-meta">62 • 3 hrs ago</span>
+                </div>
+                <div class="recent-item">
+                    <span class="recent-name">Sarah</span>
+                    <span class="recent-meta">81 • 5 hrs ago</span>
+                </div>
+                <div class="recent-item">
+                    <span class="recent-name">Dan</span>
+                    <span class="recent-meta">77 • 1 day ago</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <div class="card input-section">
+                <div class="card-header">New Analysis</div>
+                <textarea placeholder="Paste call transcript, notes, or upload audio..."></textarea>
+                <div class="input-controls">
+                    <div class="toggle-group">
+                        <span>Include coaching notes</span>
+                        <div class="toggle active">
+                            <div class="toggle-switch"></div>
+                        </div>
+                    </div>
+                    <button class="analyze-btn">Analyze Call</button>
+                </div>
+            </div>
+
+            <!-- Report -->
+            <div class="report-card">
+                <div class="report-header">
+                    <div class="report-color-stripe"></div>
+                    <div class="report-info">
+                        <div class="report-agent">Dan Miller</div>
+                        <div class="report-meta">Commercial Property • 22 min duration • Mar 26, 2:15 PM</div>
+                    </div>
+                    <div class="report-score">
+                        <div class="report-score-value">77</div>
+                        <div class="report-score-label">Score</div>
+                    </div>
+                </div>
+
+                <div class="report-body">
+                    <!-- Scores -->
+                    <div class="feedback-section">
+                        <div class="feedback-label">Scoring Breakdown</div>
+                        <div class="criterion">
+                            <div class="criterion-icon good">📋</div>
+                            <div class="criterion-text">
+                                <div class="criterion-name">Opening & Rapport</div>
+                                <div class="criterion-detail">Good initial tone, could strengthen with personal connection (78/100)</div>
+                            </div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-icon strong">👂</div>
+                            <div class="criterion-text">
+                                <div class="criterion-name">Active Listening</div>
+                                <div class="criterion-detail">Excellent acknowledgment of client concerns (84/100)</div>
+                            </div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-icon good">❓</div>
+                            <div class="criterion-text">
+                                <div class="criterion-name">Discovery Questions</div>
+                                <div class="criterion-detail">Solid core questions, missed some follow-ups (76/100)</div>
+                            </div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-icon weak">🚫</div>
+                            <div class="criterion-text">
+                                <div class="criterion-name">Objection Handling</div>
+                                <div class="criterion-detail">Defensive tone when challenged on pricing (68/100)</div>
+                            </div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-icon good">📍</div>
+                            <div class="criterion-text">
+                                <div class="criterion-name">Pipeline Progression</div>
+                                <div class="criterion-detail">Clear next steps, timeline established (80/100)</div>
+                            </div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-icon weak">🎯</div>
+                            <div class="criterion-text">
+                                <div class="criterion-name">Close Attempt</div>
+                                <div class="criterion-detail">Weak closing, left deal momentum on table (65/100)</div>
+                            </div>
+                        </div>
+                        <div class="criterion">
+                            <div class="criterion-icon strong">🎙️</div>
+                            <div class="criterion-text">
+                                <div class="criterion-name">Tone & Energy</div>
+                                <div class="criterion-detail">Professional demeanor throughout (83/100)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coaching Feedback -->
+                    <div class="feedback-section">
+                        <div class="feedback-label">Coaching Feedback</div>
+                        <div class="feedback-item">
+                            ⭐ <strong>Strength:</strong> Dan's listening skills were exceptional—he let the client fully articulate their concerns before jumping to solutions. This builds trust.
+                        </div>
+                        <div class="feedback-item">
+                            🎯 <strong>Focus Area:</strong> Objection handling needs work. When the client pushed back on pricing, Dan got defensive instead of exploring the underlying concern. Practice reframing objections as opportunities.
+                        </div>
+                        <div class="feedback-item">
+                            💡 <strong>Next Step:</strong> Work on closing techniques. The deal momentum was strong halfway through but died out. Try trial closes earlier and create urgency around timeline.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar-right">
+            <!-- Scoring Guide -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-title">Scoring Criteria</div>
+                <div class="scoring-guide-item">
+                    <div class="guide-dot openings"></div>
+                    <div class="guide-text">Opening & Rapport building</div>
+                </div>
+                <div class="scoring-guide-item">
+                    <div class="guide-dot listening"></div>
+                    <div class="guide-text">Active listening & understanding</div>
+                </div>
+                <div class="scoring-guide-item">
+                    <div class="guide-dot questions"></div>
+                    <div class="guide-text">Discovery questions & depth</div>
+                </div>
+                <div class="scoring-guide-item">
+                    <div class="guide-dot objections"></div>
+                    <div class="guide-text">Objection handling</div>
+                </div>
+                <div class="scoring-guide-item">
+                    <div class="guide-dot pipeline"></div>
+                    <div class="guide-text">Pipeline progression clarity</div>
+                </div>
+                <div class="scoring-guide-item">
+                    <div class="guide-dot close"></div>
+                    <div class="guide-text">Close attempt & commitment</div>
+                </div>
+                <div class="scoring-guide-item">
+                    <div class="guide-dot tone"></div>
+                    <div class="guide-text">Professional tone & energy</div>
+                </div>
+            </div>
+
+            <!-- Team Insights -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-title">Team Insights</div>
+                <div class="insight-item">
+                    <span class="insight-agent">Marcus</span>
+                    <span class="insight-detail positive">↑ 12 pts this week</span>
+                </div>
+                <div class="insight-item">
+                    <span class="insight-agent">Sarah</span>
+                    <span class="insight-detail">Consistent 80+</span>
+                </div>
+                <div class="insight-item">
+                    <span class="insight-agent">Anthony</span>
+                    <span class="insight-detail warning">Needs pipeline work</span>
+                </div>
+                <div class="insight-item">
+                    <span class="insight-agent">Paul</span>
+                    <span class="insight-detail warning">Focus on closes</span>
+                </div>
+            </div>
+
+            <!-- Field Knowledge -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-title">Latest Field Insights</div>
+                <div class="field-item">
+                    <span class="field-topic">Tax implications</span>
+                    <span class="field-meta">3 mentions • Mar 25</span>
+                </div>
+                <div class="field-item">
+                    <span class="field-topic">1031 exchanges</span>
+                    <span class="field-meta">5 mentions • Mar 24</span>
+                </div>
+                <div class="field-item">
+                    <span class="field-topic">Market timing</span>
+                    <span class="field-meta">2 mentions • Mar 23</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Mockup Banner -->
+    <div class="mockup-banner">MOCKUP C — Coaching Dashboard</div>
+</body>
+</html>
