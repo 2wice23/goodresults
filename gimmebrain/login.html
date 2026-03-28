@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Results — Internal Access</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+:root{
+  --black:#0D0F14;--surface:#11141A;--surface2:#161B24;--surface3:#0A0C10;
+  --white:#F0F4FF;--cream:#C8D4E4;--muted:#8A95A8;--dim:#555A66;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.04);
+  --orange:#FF5C1A;--orange-glow:rgba(255,92,26,0.12);--orange-border:rgba(255,92,26,0.25);
+  --green:#22C55E;--green-bg:rgba(34,197,94,0.08);--green-border:rgba(34,197,94,0.3);
+  --red:#EF4444;--red-bg:rgba(239,68,68,0.08);
+  --radius:8px;--radius-sm:5px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;}
+body{
+  background:var(--black);color:var(--white);
+  font-family:'Inter',sans-serif;font-weight:400;
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,92,26,0.08) 0%, transparent 60%),
+    repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,0.015) 60px,rgba(255,255,255,0.015) 61px),
+    repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,0.015) 60px,rgba(255,255,255,0.015) 61px);
+}
+
+/* ── Layout ── */
+.lock-wrap{text-align:center;max-width:400px;width:100%;padding:0 24px;}
+
+/* ── Logo ── */
+.logo-mark{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-bottom:32px;
+}
+.logo-icon{
+  width:40px;height:40px;
+  background:var(--orange-glow);border:1px solid var(--orange-border);
+  border-radius:6px;display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;font-weight:900;color:var(--orange);letter-spacing:.05em;
+}
+.logo-text-wrap{text-align:left;}
+.logo-name{font-size:.85rem;font-weight:800;color:var(--white);letter-spacing:.04em;}
+.logo-sub{font-size:.62rem;color:var(--dim);font-weight:500;margin-top:1px;}
+
+/* ── Lock eyebrow ── */
+.lock-eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--orange-glow);border:1px solid var(--orange-border);
+  color:var(--orange);font-size:.62rem;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:4px 12px;border-radius:3px;margin-bottom:14px;
+}
+.dot-pulse{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--orange);animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+.lock-title{font-size:1.6rem;font-weight:800;color:var(--white);margin-bottom:6px;letter-spacing:-.01em;}
+.lock-sub{font-size:.84rem;color:var(--muted);margin-bottom:36px;line-height:1.6;}
+
+/* ── Panels ── */
+.panel{display:none;}
+.panel.active{display:block;}
+
+/* Sign-in box */
+.login-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:32px 28px;margin-bottom:14px;
+}
+.login-label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;}
+.g-btn-wrap{display:flex;justify-content:center;}
+
+/* Checking box */
+.status-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:36px 28px;margin-bottom:14px;text-align:center;
+}
+.spinner{
+  width:24px;height:24px;border:2px solid rgba(255,92,26,.18);
+  border-top-color:var(--orange);border-radius:50%;
+  animation:spin .7s linear infinite;margin:0 auto 16px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.status-title{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:6px;}
+.status-sub{font-size:.72rem;color:var(--muted);letter-spacing:.02em;}
+
+/* Request box */
+.request-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px;margin-bottom:14px;text-align:left;
+}
+.request-who{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border);}
+.request-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--orange-glow);border:1px solid var(--orange-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.82rem;font-weight:800;color:var(--orange);flex-shrink:0;
+}
+.request-name{font-size:.9rem;font-weight:600;color:var(--cream);}
+.request-email{font-size:.68rem;color:var(--muted);margin-top:2px;}
+.request-msg{font-size:.87rem;color:var(--muted);line-height:1.68;margin-bottom:20px;}
+.request-msg strong{color:var(--cream);font-weight:600;}
+
+.req-btn{
+  width:100%;background:var(--orange);color:#fff;border:none;
+  border-radius:var(--radius-sm);padding:13px 24px;
+  font-size:.82rem;font-weight:800;letter-spacing:.04em;cursor:pointer;
+  font-family:'Inter',sans-serif;transition:opacity .18s;
+}
+.req-btn:hover{opacity:.88;}
+.req-btn:disabled{opacity:.4;cursor:default;}
+
+.switch-link{
+  font-size:.68rem;color:var(--dim);margin-top:12px;
+  cursor:pointer;transition:color .18s;text-align:center;
+}
+.switch-link:hover{color:var(--muted);}
+
+/* Success / pending */
+.success-box{
+  background:var(--surface);border:1px solid var(--orange-border);
+  border-radius:var(--radius);padding:36px 28px;margin-bottom:14px;text-align:center;
+}
+.success-icon{font-size:2rem;margin-bottom:14px;}
+
+/* Approved */
+.approved-box{
+  background:var(--surface);border:1px solid var(--green-border);
+  border-radius:var(--radius);padding:36px 28px;margin-bottom:14px;text-align:center;
+}
+.approved-check{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--green-bg);border:1px solid var(--green-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;color:var(--green);margin:0 auto 14px;
+}
+
+/* Error */
+.error-msg{
+  font-size:.68rem;color:var(--red);
+  padding:10px 14px;background:var(--red-bg);
+  border:1px solid rgba(239,68,68,.2);border-radius:4px;
+  margin-top:12px;display:none;
+}
+.error-msg.show{display:block;}
+
+.footer-note{font-size:.62rem;color:var(--dim);letter-spacing:.02em;}
+</style>
+</head>
+<body>
+
+<div class="lock-wrap">
+
+  <div class="logo-mark">
+    <div class="logo-icon">GR</div>
+    <div class="logo-text-wrap">
+      <div class="logo-name">Good Results</div>
+      <div class="logo-sub">Internal Operations Portal</div>
+    </div>
+  </div>
+
+  <div class="lock-eyebrow"><div class="dot-pulse"></div>System Online</div>
+  <h1 class="lock-title">Team Access</h1>
+  <p class="lock-sub">Sign in with your Google account to enter the portal. @goodresults.org accounts have automatic access.</p>
+
+  <!-- STATE: sign-in -->
+  <div class="panel active" id="panel-signin">
+    <div class="login-box">
+      <div class="login-label">Sign in with Google to continue</div>
+      <div class="g-btn-wrap">
+        <div id="g_id_onload"
+          data-client_id="1098345883036-a7hfmtac784tcitd6vrfr16mpnl4c0qv.apps.googleusercontent.com"
+          data-callback="handleCredential"
+          data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+          data-type="standard"
+          data-size="large"
+          data-theme="filled_black"
+          data-text="sign_in_with"
+          data-shape="rectangular"
+          data-logo_alignment="left">
+        </div>
+      </div>
+      <div class="error-msg" id="error-signin"></div>
+    </div>
+    <div class="footer-note">@goodresults.org accounts get in automatically</div>
+  </div>
+
+  <!-- STATE: checking access -->
+  <div class="panel" id="panel-checking">
+    <div class="status-box">
+      <div class="spinner"></div>
+      <div class="status-title">Verifying Access</div>
+      <div class="status-sub" id="checking-email">Checking your account...</div>
+    </div>
+  </div>
+
+  <!-- STATE: approved — redirecting -->
+  <div class="panel" id="panel-approved">
+    <div class="approved-box">
+      <div class="approved-check">✓</div>
+      <div class="status-title">Access Granted</div>
+      <div class="status-sub" style="color:var(--green);margin-top:4px;">Redirecting you now...</div>
+    </div>
+  </div>
+
+  <!-- STATE: request access -->
+  <div class="panel" id="panel-request">
+    <div class="request-box">
+      <div class="request-who">
+        <div class="request-avatar" id="req-avatar">?</div>
+        <div>
+          <div class="request-name" id="req-name">—</div>
+          <div class="request-email" id="req-email">—</div>
+        </div>
+      </div>
+      <p class="request-msg">Your account doesn't have access yet. Click below to send a request to <strong>Gayden</strong> — he'll get a Slack notification and can approve you with one click.</p>
+      <button class="req-btn" id="req-btn" onclick="submitRequest()">Request Access</button>
+      <div class="error-msg" id="error-request"></div>
+    </div>
+    <div class="switch-link" onclick="switchAccount()">← Use a different account</div>
+  </div>
+
+  <!-- STATE: request sent -->
+  <div class="panel" id="panel-sent">
+    <div class="success-box">
+      <div class="success-icon">📨</div>
+      <div class="status-title">Request Sent</div>
+      <div class="status-sub" style="margin-top:6px;line-height:1.7;">Gayden has been notified via Slack.<br>Once approved, sign in again and you're in.</div>
+    </div>
+    <div class="switch-link" style="margin-top:14px;" onclick="switchAccount()">← Try a different account</div>
+  </div>
+
+  <!-- STATE: already pending -->
+  <div class="panel" id="panel-pending">
+    <div class="success-box">
+      <div class="success-icon">⏳</div>
+      <div class="status-title">Request Pending</div>
+      <div class="status-sub" style="margin-top:6px;line-height:1.7;">Your request is already in the queue.<br>Gayden will approve it shortly — check back soon.</div>
+    </div>
+    <div class="switch-link" style="margin-top:14px;" onclick="switchAccount()">← Use a different account</div>
+  </div>
+
+</div><!-- /lock-wrap -->
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
+const ALLOWED_DOMAIN = 'goodresults.org';
+const APPROVED_EMAILS = [
+  'dylan@infocushomebuyers.com',
+];
+
+let _pendingEmail = '';
+let _pendingName = '';
+let _pendingToken = null;
+
+if (sessionStorage.getItem('gr_authed') === '1') {
+  doRedirect();
+}
+
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+}
+
+function showError(panelId, msg) {
+  const el = document.getElementById('error-' + panelId);
+  if (el) { el.textContent = msg; el.classList.add('show'); }
+}
+
+function doRedirect() {
+  const redirect = sessionStorage.getItem('gr_redirect') || '/gimmebrain/';
+  sessionStorage.removeItem('gr_redirect');
+  window.location.href = redirect;
+}
+
+async function handleCredential(response) {
+  const token = response.credential;
+  const payload = JSON.parse(atob(token.split('.')[1]));
+  const email = (payload.email || '').toLowerCase();
+  const name = payload.name || '';
+  const domain = email.split('@')[1] || '';
+
+  _pendingEmail = email;
+  _pendingName = name;
+  _pendingToken = token;
+
+  if (domain === ALLOWED_DOMAIN || APPROVED_EMAILS.includes(email)) {
+    grantAccess(email, name, payload);
+    return;
+  }
+
+  showPanel('checking');
+  document.getElementById('checking-email').textContent = email;
+
+  try {
+    const res = await fetch(SCRIPT_URL + '?action=checkAccess&email=' + encodeURIComponent(email));
+    const data = await res.json();
+
+    if (data.allowed) {
+      grantAccess(email, name, payload);
+    } else {
+      const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2) || '?';
+      document.getElementById('req-avatar').textContent = initials;
+      document.getElementById('req-name').textContent = name || email;
+      document.getElementById('req-email').textContent = email;
+      showPanel('request');
+    }
+  } catch(err) {
+    showPanel('signin');
+    showError('signin', 'Could not verify access. Check your connection and try again.');
+  }
+}
+
+function grantAccess(email, name, payload) {
+  showPanel('approved');
+  sessionStorage.setItem('gr_authed', '1');
+  sessionStorage.setItem('gr_email', email);
+  sessionStorage.setItem('gr_name', name);
+  const firstName = (name || email).split(' ')[0];
+  sessionStorage.setItem('gr_agent', firstName);
+  setTimeout(doRedirect, 800);
+}
+
+async function submitRequest() {
+  const btn = document.getElementById('req-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  try {
+    const res = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'requestAccess', email: _pendingEmail, name: _pendingName })
+    });
+    const data = await res.json();
+
+    if (data.status === 'approved') {
+      grantAccess(_pendingEmail, _pendingName, {});
+    } else if (data.status === 'pending') {
+      showPanel('pending');
+    } else {
+      showPanel('sent');
+    }
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = 'Request Access';
+    showError('request', 'Failed to send request. Check your connection and try again.');
+  }
+}
+
+function switchAccount() {
+  _pendingEmail = '';
+  _pendingName = '';
+  google.accounts.id.disableAutoSelect();
+  showPanel('signin');
+}
+</script>
+
+</body>
+</html>
