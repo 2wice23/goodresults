@@ -6,9 +6,9 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+  const ANTHROPIC_API_KEY = process.env.AnthropicAPI;
   if (!ANTHROPIC_API_KEY) {
-    return { statusCode: 500, body: JSON.stringify({ error: 'ANTHROPIC_API_KEY not configured in Netlify env vars' }) };
+    return { statusCode: 500, body: JSON.stringify({ error: 'AnthropicAPI not configured in Netlify env vars' }) };
   }
 
   try {
