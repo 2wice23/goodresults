@@ -8,9 +8,9 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  const CLOSE_API_KEY = process.env.CLOSE_API_KEY;
+  const CLOSE_API_KEY = process.env.CloseAPI;
   if (!CLOSE_API_KEY) {
-    return { statusCode: 500, body: JSON.stringify({ error: 'CLOSE_API_KEY not configured in Netlify env vars' }) };
+    return { statusCode: 500, body: JSON.stringify({ error: 'CloseAPI not configured in Netlify env vars' }) };
   }
 
   try {
