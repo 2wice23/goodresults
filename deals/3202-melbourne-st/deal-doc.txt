@@ -1,0 +1,18 @@
+{
+  "dealId": "0320265",
+  "market": "on",
+  "address": "3202 Melbourne St",
+  "city": "Houston",
+  "state": "TX",
+  "zip": "77026",
+  "beds": 4,
+  "baths": 2,
+  "sqft": 1700,
+  "lotSize": "8,782 sqft",
+  "yearBuilt": 1949,
+  "garage": null,
+  "coeDate": "April 8, 2026",
+  "askingPrice": 157000,
+  "arv": 265000,
+  "estRepairs": 59500
+}
