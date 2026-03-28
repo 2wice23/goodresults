@@ -8,9 +8,9 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+  const GITHUB_TOKEN = process.env.GitHubToken;
   if (!GITHUB_TOKEN) {
-    return { statusCode: 500, body: JSON.stringify({ error: 'GITHUB_TOKEN not configured in Netlify env vars' }) };
+    return { statusCode: 500, body: JSON.stringify({ error: 'GitHubToken not configured in Netlify env vars' }) };
   }
 
   try {
