@@ -40,6 +40,7 @@ var SHEET_KB_NEGATIVE   = 'KB_Negative';
 var SHEET_KB_ADDITIONS  = 'KB_Additions';
 var SHEET_CALL_REPORTS  = 'CallReports';
 var SHEET_TRAINING      = 'TrainingScores';
+var SHEET_MODULE_UPDATES = 'Module_Updates';
 
 
 // ============================================================
@@ -123,6 +124,11 @@ function doPost(e) {
 
     if (action === 'modulecomplete') {
       saveModuleScore_(body);
+      return jsonResponse_({ status: 'ok' });
+    }
+
+    if (action === 'addmoduleupdate') {
+      addModuleUpdate_(body);
       return jsonResponse_({ status: 'ok' });
     }
 
@@ -609,6 +615,26 @@ function addKnowledge_(body) {
     body.call_date || '',
     body.call_type || '',
     JSON.stringify(items)
+  ]);
+}
+
+
+/**
+ * Saves a module update/correction submitted from a training module page.
+ * Goes to the Module_Updates sheet tab for daily review.
+ */
+function addModuleUpdate_(body) {
+  var sheet = getOrCreateSheet_(SHEET_MODULE_UPDATES, [
+    'timestamp', 'module_num', 'module_title', 'agent', 'update', 'status'
+  ]);
+
+  sheet.appendRow([
+    body.date || new Date().toISOString(),
+    body.module || '',
+    body.moduleTitle || '',
+    body.agent || '',
+    body.update || '',
+    'pending'
   ]);
 }
 
