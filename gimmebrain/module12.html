@@ -144,7 +144,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .bn-num{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
 .bn-title{font-size:.84rem;color:var(--muted);}
 @media(max-width:768px){.header{padding:12px 20px;}.hero{padding:36px 20px 28px;}.meta-bar{padding:14px 20px;gap:20px;}.body-wrap{grid-template-columns:1fr;}.content-col{padding:32px 20px;}.nav-col{display:none;}.card-grid{grid-template-columns:1fr;}.bottom-nav{padding:14px 20px;}}
-</style>
+.module-update-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-top:32px;}.module-update-box h3{font-size:.95rem;font-weight:700;color:var(--cream);margin-bottom:4px;}.module-update-box p{font-size:.78rem;color:var(--dim);margin-bottom:14px;}.module-update-textarea{width:100%;min-height:100px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--cream);font-family:'Inter',sans-serif;font-size:.88rem;padding:14px;resize:vertical;line-height:1.6;}.module-update-textarea:focus{outline:none;border-color:var(--orange-border);}.module-update-textarea::placeholder{color:var(--dim);}.module-update-submit{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:10px;letter-spacing:.04em;}.module-update-submit:hover{opacity:.88;}.module-update-submit:disabled{opacity:.4;pointer-events:none;}</style>
 </head>
 <body>
 <div id="rpbar"></div>
@@ -402,6 +402,13 @@ Long DOM: "What are they willing to take? Let's run the numbers."</div>
 
 </div>
 
+    <div class="module-update-box">
+      <h3>Update This Module</h3>
+      <p>Drop corrections, new info, or notes below. These go to the update queue and get reviewed before going live.</p>
+      <textarea class="module-update-textarea" id="moduleUpdateInput" placeholder="Type any updates, corrections, or new information for this module..."></textarea>
+      <button class="module-update-submit" id="moduleUpdateBtn" onclick="submitModuleUpdate()">do not touch!</button>
+    </div>
+
 <!-- SIDEBAR NAV -->
 <div class="nav-col">
   <div class="snav">
@@ -449,7 +456,7 @@ const QUIZ_POOL = [
   {q:"What's the distressed deal pitch in one sentence?",opts:[{t:"Cash buyer, as-is, 10–21 day close, we handle the complexity.",correct:true},{t:"We'll buy your property sight unseen.",correct:false},{t:"We offer the best price in the market.",correct:false}],explanation:"That's the pitch. Certainty + speed + simplicity. Every distressed seller hears those words."},
   {q:"An estate sale has deferred maintenance AND unpermitted additions. Complexity level?",opts:[{t:"Low — both are routine.",correct:false},{t:"High — escalate to Gayden.",correct:true},{t:"Medium — you can handle it solo.",correct:false}],explanation:"Unpermitted work is title issue (Gayden). Complex estate + major issues = escalate."},
   {q:"True or false: You should communicate daily during a distressed deal.",opts:[{t:"True — realtors need updates to stay engaged.",correct:true},{t:"False — weekly updates are fine.",correct:false}],explanation:"In distressed deals, communication = trust. Daily touches keep momentum alive."},
-  {q:"A tax foreclosure has 30 days until sale. What's your timeline pitch?",opts:[{t:"We need 60 days for inspections.",correct:false},{t:"We can close in 20 days, no problem.",correct:true},{t:"We'll try our best but can't promise 30 days.",correct:false}],explanation:"Confidence. Speed. That's your value proposition. "20 days" signals you can win."},
+  {q:"A tax foreclosure has 30 days until sale. What's your timeline pitch?",opts:[{t:"We need 60 days for inspections.",correct:false},{t:"We can close in 20 days, no problem.",correct:true},{t:"We'll try our best but can't promise 30 days.",correct:false}],explanation:"Confidence. Speed. That is your value proposition. 20 days signals you can win."},
   {q:"Why is honesty about being an investor critical in distressed deals?",opts:[{t:"Because distressed sellers respect transparency more than owner-occupant cover stories.",correct:true},{t:"Because it lowers your offer price expectations.",correct:false},{t:"Because it's required by law.",correct:false}],explanation:"Distressed sellers know the score. They respect investors who are honest about making money."}
 ];
 
@@ -510,78 +517,15 @@ function checkInline(opt,cardId,correct,explanation){
   const el=document.getElementById('streak-count');
   if(el)el.textContent=streak>0?streak+'-day streak':'Start your streak';
 })();
-let quizQuestions=[], userAnswers={}, quizDone=false;
-(function initQuiz(){
-  const area=document.getElementById('quiz-area');
-  const status=document.getElementById('quiz-status');
-  if(!QUIZ_POOL||!QUIZ_POOL.length){if(status)status.textContent='No questions loaded yet.';return;}
-  const shuffled=[...QUIZ_POOL].sort(()=>Math.random()-.5);
-  quizQuestions=shuffled.slice(0,Math.min(10,shuffled.length));
-  if(status)status.textContent=`${quizQuestions.length} questions · Pick the best answer for each.`;
-  quizQuestions.forEach((q,qi)=>{
-    const opts=q.opts.map((o,oi)=>`<div class="quiz-opt" id="qo-${qi}-${oi}" onclick="answerQuiz(${qi},${oi})"><div class="quiz-opt-letter">${String.fromCharCode(65+oi)}</div>${o.t}</div>`).join('');
-    area.innerHTML+=`<div class="quiz-q" id="qq-${qi}"><div class="quiz-q-text">${qi+1}. ${q.q}</div><div class="quiz-q-opts" id="qopts-${qi}">${opts}</div><div class="kc-feedback" id="qfb-${qi}"></div></div>`;
-  });
-  const sb=document.getElementById('score-bar');
-  if(sb)sb.style.display='flex';
-})();
-function answerQuiz(qi,oi){
-  if(userAnswers[qi]!==undefined)return;
-  userAnswers[qi]=oi;
-  const q=quizQuestions[qi];
-  const correct=q.opts[oi].correct;
-  q.opts.forEach((_,i)=>{
-    const el=document.getElementById(`qo-${qi}-${i}`);
-    if(!el)return;
-    if(i===oi)el.classList.add(correct?'correct':'wrong');
-    else if(q.opts[i].correct)el.classList.add('correct');
-    else el.classList.add('disabled');
-  });
-  const fb=document.getElementById(`qfb-${qi}`);
-  if(fb){fb.textContent=(correct?'✓ ':'✗ ')+q.explanation;fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');}
-  updateScore();
-}
-function updateScore(){
-  const answered=Object.keys(userAnswers).length;
-  const total=quizQuestions.length;
-  const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi].opts[oi].correct).length;
-  const pct=total?Math.round(correct/total*100):0;
-  const st=document.getElementById('score-text');
-  const ss=document.getElementById('score-sub');
-  const btn=document.getElementById('submit-btn');
-  if(st)st.textContent=`${correct} / ${total} correct  (${pct}%)`;
-  if(ss)ss.textContent=answered<total?`${total-answered} questions remaining`:'Quiz complete — submit your score!';
-  if(btn)btn.disabled=answered<total;
-  quizDone=answered>=total;
-}
-function submitScore(){
-  if(!quizDone)return;
-  const answered=Object.keys(userAnswers).length;
-  const total=quizQuestions.length;
-  const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi].opts[oi].correct).length;
-  const pct=Math.round(correct/total*100);
-  const agent=sessionStorage.getItem('gr_agent')||'Unknown';
-  const xp=Math.round(pct*1.2);
-  const url=`https://script.google.com/macros/s/AKfycbzqnJAm0YbW8X0rIqGdpnrFgHgizfV4lJW7LJcO4X7MmkFBkJWL3sKfhAI2NqMiMuze/exec`;
-  const body={action:'moduleComplete',agent,module:MODULE_NUM,moduleTitle:MODULE_TITLE,score:pct,xp,correct,total,date:new Date().toISOString()};
-  fetch(url,{method:'POST',body:JSON.stringify(body)})
-    .then(()=>{
-      const btn=document.getElementById('submit-btn');
-      if(btn){btn.textContent='✓ Score Saved!';btn.style.background='#22C55E';btn.disabled=true;}
-      const today=new Date().toDateString();
-      const lastDay=localStorage.getItem('gr_streak_day');
-      let streak=parseInt(localStorage.getItem('gr_streak')||'0');
-      if(lastDay!==today){
-        const yesterday=new Date(Date.now()-86400000).toDateString();
-        streak=lastDay===yesterday?streak+1:1;
-        localStorage.setItem('gr_streak',streak);
-        localStorage.setItem('gr_streak_day',today);
-        const sc=document.getElementById('streak-count');
-        if(sc)sc.textContent=streak+'-day streak';
-      }
-    })
-    .catch(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='Retry';btn.disabled=false;}});
-}
+const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
+let quizQuestions=[],userAnswers={},quizDone=false,masteredIndices=[];
+async function loadMasteredAndInit(){const agent=sessionStorage.getItem('gr_agent')||'';if(agent){try{const res=await fetch(APPS_SCRIPT_URL+`?action=getModuleProgress&agent=${encodeURIComponent(agent)}&module=${MODULE_NUM}`);const data=await res.json();masteredIndices=data.mastered||[];}catch(e){}}initQuiz();}
+function initQuiz(){const area=document.getElementById('quiz-area');const status=document.getElementById('quiz-status');if(!QUIZ_POOL||!QUIZ_POOL.length){if(status)status.textContent='No questions loaded yet.';return;}const indexed=QUIZ_POOL.map((q,i)=>Object.assign({poolIdx:i},q));const shuffled=[...indexed].sort(()=>Math.random()-.5);quizQuestions=shuffled.slice(0,Math.min(10,shuffled.length));if(status)status.textContent=`${quizQuestions.length} questions · Pick the best answer for each.`;quizQuestions.forEach((q,qi)=>{const isMastered=masteredIndices.includes(q.poolIdx);const opts=q.opts.map((o,oi)=>`<div class="quiz-opt${isMastered&&o.correct?' correct':isMastered?' disabled':''}" id="qo-${qi}-${oi}" onclick="${isMastered?'':'answerQuiz('+qi+','+oi+')'}"${isMastered?' style="pointer-events:none"':''}><div class="quiz-opt-letter">${String.fromCharCode(65+oi)}</div>${o.t}</div>`).join('');area.innerHTML+=`<div class="quiz-q" id="qq-${qi}">${isMastered?'<div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">✓ Already mastered</div>':''}<div class="quiz-q-text">${qi+1}. ${q.q}</div><div class="quiz-q-opts" id="qopts-${qi}">${opts}</div><div class="kc-feedback" id="qfb-${qi}"></div></div>`;if(isMastered){const correctOi=q.opts.findIndex(o=>o.correct);if(correctOi>=0)userAnswers[qi]=correctOi;}});const sb=document.getElementById('score-bar');if(sb)sb.style.display='flex';updateScore();}
+function answerQuiz(qi,oi){if(userAnswers[qi]!==undefined)return;userAnswers[qi]=oi;const q=quizQuestions[qi];const correct=q.opts[oi].correct;q.opts.forEach((_,i)=>{const el=document.getElementById(`qo-${qi}-${i}`);if(!el)return;if(i===oi)el.classList.add(correct?'correct':'wrong');else if(q.opts[i].correct)el.classList.add('correct');else el.classList.add('disabled');});const fb=document.getElementById(`qfb-${qi}`);if(fb){fb.textContent=(correct?'✓ ':'✗ ')+q.explanation;fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');}updateScore();}
+function updateScore(){const answered=Object.keys(userAnswers).length;const total=quizQuestions.length;const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).length;const pct=total?Math.round(correct/total*100):0;const st=document.getElementById('score-text');const ss=document.getElementById('score-sub');const btn=document.getElementById('submit-btn');if(st)st.textContent=`${correct} / ${total} correct  (${pct}%)`;if(ss)ss.textContent=answered<total?`${total-answered} questions remaining`:'Quiz complete — submit your score!';if(btn)btn.disabled=answered<total;quizDone=answered>=total;}
+function submitScore(){if(!quizDone)return;const total=quizQuestions.length;const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).length;const pct=Math.round(correct/total*100);const agent=sessionStorage.getItem('gr_agent')||'Unknown';const email=sessionStorage.getItem('gr_email')||'';const xp=Math.round(pct*1.2);const correctPoolIndices=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).map(([qi])=>quizQuestions[qi].poolIdx);const allMastered=[...new Set([...masteredIndices,...correctPoolIndices])];const body={action:'moduleComplete',agent,email,module:MODULE_NUM,moduleTitle:MODULE_TITLE,score:pct,xp,correct,total,poolSize:QUIZ_POOL.length,correctIndices:allMastered,date:new Date().toISOString()};fetch(APPS_SCRIPT_URL,{method:'POST',body:JSON.stringify(body)}).then(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='✓ Score Saved!';btn.style.background='#22C55E';btn.disabled=true;}masteredIndices=allMastered;const today=new Date().toDateString();const lastDay=localStorage.getItem('gr_streak_day');let streak=parseInt(localStorage.getItem('gr_streak')||'0');if(lastDay!==today){const yesterday=new Date(Date.now()-86400000).toDateString();streak=lastDay===yesterday?streak+1:1;localStorage.setItem('gr_streak',streak);localStorage.setItem('gr_streak_day',today);const sc=document.getElementById('streak-count');if(sc)sc.textContent=streak+'-day streak';}}).catch(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='Retry';btn.disabled=false;}});}
+function submitModuleUpdate(){const txt=document.getElementById('moduleUpdateInput').value.trim();if(!txt){alert('Type something first.');return;}const btn=document.getElementById('moduleUpdateBtn');btn.disabled=true;btn.textContent='Sending...';const agent=sessionStorage.getItem('gr_agent')||'Unknown';const payload={action:'addModuleUpdate',module:MODULE_NUM,moduleTitle:MODULE_TITLE,agent:agent,update:txt,date:new Date().toISOString()};fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(()=>{btn.textContent='✓ Sent!';btn.style.background='#22C55E';document.getElementById('moduleUpdateInput').value='';setTimeout(()=>{btn.textContent='do not touch!';btn.style.background='';btn.disabled=false;},3000);}).catch(()=>{btn.textContent='Retry';btn.disabled=false;});}
+loadMasteredAndInit();
 </script>
 </body>
 </html>

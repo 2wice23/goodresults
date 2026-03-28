@@ -144,7 +144,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .bn-num{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
 .bn-title{font-size:.84rem;color:var(--muted);}
 @media(max-width:768px){.header{padding:12px 20px;}.hero{padding:36px 20px 28px;}.meta-bar{padding:14px 20px;gap:20px;}.body-wrap{grid-template-columns:1fr;}.content-col{padding:32px 20px;}.nav-col{display:none;}.card-grid{grid-template-columns:1fr;}.bottom-nav{padding:14px 20px;}}
-</style>
+.module-update-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-top:32px;}.module-update-box h3{font-size:.95rem;font-weight:700;color:var(--cream);margin-bottom:4px;}.module-update-box p{font-size:.78rem;color:var(--dim);margin-bottom:14px;}.module-update-textarea{width:100%;min-height:100px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--cream);font-family:'Inter',sans-serif;font-size:.88rem;padding:14px;resize:vertical;line-height:1.6;}.module-update-textarea:focus{outline:none;border-color:var(--orange-border);}.module-update-textarea::placeholder{color:var(--dim);}.module-update-submit{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:10px;letter-spacing:.04em;}.module-update-submit:hover{opacity:.88;}.module-update-submit:disabled{opacity:.4;pointer-events:none;}</style>
 </head>
 <body>
 <div id="rpbar"></div>
@@ -152,7 +152,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
   <div class="logo">Good Results // Training</div>
   <div class="header-right">
     <div class="streak-pill"><span class="streak-fire">🔥</span> <span id="streak-count">—</span></div>
-    <a href="/gimmebrain/hub" class="back-link">← Hub</a>
+    <a href="/gimmebrain/" class="back-link">← Hub</a>
   </div>
 </div>
 
@@ -360,11 +360,11 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
     </div>
     <div class="card">
       <h4>Texas (TREC)</h4>
-      <p><strong>Option Period:</strong> Costs $1.00 but buyer has unrestricted right to terminate. Option fee + EMD both due within 3 calendar days of acceptance.</p>
+      <p><strong>Option Period:</strong> Costs $1.00 but buyer has unrestricted right to terminate. Option fee + EMD both due at end of option/DD period (NOT 3 calendar days from acceptance).</p>
     </div>
   </div>
 
-  <p><strong>Critical Texas note:</strong> Missing the 3-day deadline for option fee + EMD means the seller can terminate contract. Don't let your escrow officer miss this.</p>
+  <p><strong>Critical Texas note:</strong> Missing the option/DD period deadline for option fee + EMD means the seller can terminate contract. Don't let your escrow officer miss this.</p>
 
   <div class="deepdive" id="dd1">
     <div class="dd-header" onclick="toggleDD('dd1')">
@@ -417,6 +417,13 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 
 </div>
 
+    <div class="module-update-box">
+      <h3>Update This Module</h3>
+      <p>Drop corrections, new info, or notes below. These go to the update queue and get reviewed before going live.</p>
+      <textarea class="module-update-textarea" id="moduleUpdateInput" placeholder="Type any updates, corrections, or new information for this module..."></textarea>
+      <button class="module-update-submit" id="moduleUpdateBtn" onclick="submitModuleUpdate()">do not touch!</button>
+    </div>
+
 <!-- SIDEBAR NAV -->
 <div class="nav-col">
   <div class="snav">
@@ -446,7 +453,7 @@ const QUIZ_POOL = [
   {q:"A contractor estimate comes back at $12,000. How do you handle it?",opts:[{t:"Walk away immediately.",correct:false},{t:"Discuss with Gayden — may proceed or request credit.",correct:true},{t:"Always request a credit from the seller.",correct:false}],explanation:"$5K–$20K is the discussion zone. Reach out to Gayden for guidance."},
   {q:"It's Day 6. You're still waiting for final contractor estimates. The realtor is waiting. What do you do?",opts:[{t:"Contact the realtor: 'Still working on findings, will have answer by tomorrow.'",correct:true},{t:"Wait until Day 7 to contact the realtor.",correct:false},{t:"Tell the realtor you need a DD extension.",correct:false}],explanation:"Communication prevents ghosting. Update the realtor immediately, even if you don't have the final answer yet."},
   {q:"In Nevada, what does the 'free DD period' cost the buyer?",opts:[{t:"$0 — free cancellation right with proper notice.",correct:true},{t:"$1.00 option fee.",correct:false},{t:"2% of earnest money.",correct:false}],explanation:"Nevada RPA = no fee. Texas TREC = $1.00. Know your state rules."},
-  {q:"In Texas, when must the option fee be paid?",opts:[{t:"Within 3 calendar days of contract acceptance.",correct:true},{t:"On or before closing.",correct:false},{t:"Any time before DD expires.",correct:false}],explanation:"Texas is strict: option fee + EMD must clear within 3 days. Miss it = seller can terminate."},
+  {q:"In Texas, when must the option fee be paid?",opts:[{t:"Within 3 calendar days of contract acceptance.",correct:false},{t:"At end of DD/option period (days 7-10).",correct:true},{t:"On or before closing.",correct:false}],explanation:"Option fee + EMD due at end of option/DD period (typically days 7-10), not within 3 days. Miss it = seller can terminate."},
   {q:"You discover foundation issues. What's your next move?",opts:[{t:"Call a general contractor to assess.",correct:false},{t:"Call Gayden immediately — don't assess alone.",correct:true},{t:"Automatically walk away.",correct:false}],explanation:"Foundation = complexity. Gayden has relationships and knows cost ranges ($3K–$50K+). Let him decide."},
   {q:"What does it mean to 'ghost' a realtor during DD?",opts:[{t:"Not communicating for 48+ hours without update.",correct:true},{t:"Asking for a DD extension.",correct:false},{t:"Requesting a professional inspection.",correct:false}],explanation:"Ghosting = silence. Realtors assume the deal is dying. Keep them updated daily, even with 'still deciding.'"},
   {q:"A realtor seems skeptical about your DD process. What script do you use?",opts:[{t:"'I'll have an answer for you by [Day 7]. I won't leave you hanging.'",correct:true},{t:"'This is none of your business.'",correct:false},{t:"'I'll do whatever I want during DD.'",correct:false}],explanation:"Set expectations upfront. Confidence + communication = trust."},
@@ -456,7 +463,7 @@ const QUIZ_POOL = [
   {q:"Title commitment reveals an unpermitted addition. What's your move?",opts:[{t:"Ignore it — it's not a major issue.",correct:false},{t:"Escalate to Gayden immediately — it's a title/escrow issue.",correct:true},{t:"Proceed anyway.",correct:false}],explanation:"Unpermitted work = title problem. Gayden needs to coordinate with escrow and title."},
   {q:"DD period is 7 days. On Day 5, you're still reviewing findings. What do you tell the realtor?",opts:[{t:"'Still working through the inspection findings — will have a clear answer for you by Day 6.'",correct:true},{t:"Nothing — wait until Day 7.",correct:false},{t:"'We're terminating the contract.'",correct:false}],explanation:"Keep the realtor informed. Never leave them guessing."},
   {q:"A repair costs $25,000. What's your framework?",opts:[{t:"Proceed without question.",correct:false},{t:"Automatically terminate.",correct:false},{t:"Escalate to Gayden — he decides walk or renegotiate.",correct:true}],explanation:"$20K+ = Gayden decides. This is above the solo threshold."},
-  {q:"What's the difference between Nevada RPA and Texas TREC DD periods?",opts:[{t:"Nevada = free, Texas = $1.00 option fee + 3-day deadline.",correct:true},{t:"Nevada = $1.00, Texas = free.",correct:false},{t:"They're the same in both states.",correct:false}],explanation:"Nevada is simpler (free). Texas requires $1 fee within 3 days or deal dies."},
+  {q:"What\u0027s the difference between Nevada RPA and Texas TREC DD periods?",opts:[{t:"Nevada = free, Texas = $1.00 option fee due at end of DD/option period.",correct:true},{t:"Nevada = $1.00, Texas = free.",correct:false},{t:"They\u0027re the same in both states.",correct:false}],explanation:"Nevada is simpler (free). Texas requires $1 fee due at end of option/DD period (days 7-10) or deal dies."},
   {q:"You find mold in the crawlspace. What's your action?",opts:[{t:"Proceed — minor mold isn't a big deal.",correct:false},{t:"Call Gayden immediately — mold is a major issue.",correct:true},{t:"Ask the seller to remediate.",correct:false}],explanation:"Mold = escalate. It's a material, expensive finding. Gayden decides next steps."},
   {q:"Minor repairs (< $5K) are discovered. Your action is:",opts:[{t:"Proceed — not worth jeopardizing the relationship.",correct:true},{t:"Request a credit from the seller.",correct:false},{t:"Walk away.",correct:false}],explanation:"Small surprises are normal. Proceed. Protecting the realtor relationship is more valuable."},
   {q:"Why should you NEVER use DD as a routine price-chipping tool?",opts:[{t:"Because realtors talk and your reputation suffers.",correct:true},{t:"Because it's illegal.",correct:false},{t:"Because sellers always refuse.",correct:false}],explanation:"One reputation-damaging pattern and realtors stop sending you deals. You become 'that buyer.'"},
@@ -525,78 +532,15 @@ function checkInline(opt,cardId,correct,explanation){
   const el=document.getElementById('streak-count');
   if(el)el.textContent=streak>0?streak+'-day streak':'Start your streak';
 })();
-let quizQuestions=[], userAnswers={}, quizDone=false;
-(function initQuiz(){
-  const area=document.getElementById('quiz-area');
-  const status=document.getElementById('quiz-status');
-  if(!QUIZ_POOL||!QUIZ_POOL.length){if(status)status.textContent='No questions loaded yet.';return;}
-  const shuffled=[...QUIZ_POOL].sort(()=>Math.random()-.5);
-  quizQuestions=shuffled.slice(0,Math.min(10,shuffled.length));
-  if(status)status.textContent=`${quizQuestions.length} questions · Pick the best answer for each.`;
-  quizQuestions.forEach((q,qi)=>{
-    const opts=q.opts.map((o,oi)=>`<div class="quiz-opt" id="qo-${qi}-${oi}" onclick="answerQuiz(${qi},${oi})"><div class="quiz-opt-letter">${String.fromCharCode(65+oi)}</div>${o.t}</div>`).join('');
-    area.innerHTML+=`<div class="quiz-q" id="qq-${qi}"><div class="quiz-q-text">${qi+1}. ${q.q}</div><div class="quiz-q-opts" id="qopts-${qi}">${opts}</div><div class="kc-feedback" id="qfb-${qi}"></div></div>`;
-  });
-  const sb=document.getElementById('score-bar');
-  if(sb)sb.style.display='flex';
-})();
-function answerQuiz(qi,oi){
-  if(userAnswers[qi]!==undefined)return;
-  userAnswers[qi]=oi;
-  const q=quizQuestions[qi];
-  const correct=q.opts[oi].correct;
-  q.opts.forEach((_,i)=>{
-    const el=document.getElementById(`qo-${qi}-${i}`);
-    if(!el)return;
-    if(i===oi)el.classList.add(correct?'correct':'wrong');
-    else if(q.opts[i].correct)el.classList.add('correct');
-    else el.classList.add('disabled');
-  });
-  const fb=document.getElementById(`qfb-${qi}`);
-  if(fb){fb.textContent=(correct?'✓ ':'✗ ')+q.explanation;fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');}
-  updateScore();
-}
-function updateScore(){
-  const answered=Object.keys(userAnswers).length;
-  const total=quizQuestions.length;
-  const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi].opts[oi].correct).length;
-  const pct=total?Math.round(correct/total*100):0;
-  const st=document.getElementById('score-text');
-  const ss=document.getElementById('score-sub');
-  const btn=document.getElementById('submit-btn');
-  if(st)st.textContent=`${correct} / ${total} correct  (${pct}%)`;
-  if(ss)ss.textContent=answered<total?`${total-answered} questions remaining`:'Quiz complete — submit your score!';
-  if(btn)btn.disabled=answered<total;
-  quizDone=answered>=total;
-}
-function submitScore(){
-  if(!quizDone)return;
-  const answered=Object.keys(userAnswers).length;
-  const total=quizQuestions.length;
-  const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi].opts[oi].correct).length;
-  const pct=Math.round(correct/total*100);
-  const agent=sessionStorage.getItem('gr_agent')||'Unknown';
-  const xp=Math.round(pct*1.2);
-  const url=`https://script.google.com/macros/s/AKfycbzqnJAm0YbW8X0rIqGdpnrFgHgizfV4lJW7LJcO4X7MmkFBkJWL3sKfhAI2NqMiMuze/exec`;
-  const body={action:'moduleComplete',agent,module:MODULE_NUM,moduleTitle:MODULE_TITLE,score:pct,xp,correct,total,date:new Date().toISOString()};
-  fetch(url,{method:'POST',body:JSON.stringify(body)})
-    .then(()=>{
-      const btn=document.getElementById('submit-btn');
-      if(btn){btn.textContent='✓ Score Saved!';btn.style.background='#22C55E';btn.disabled=true;}
-      const today=new Date().toDateString();
-      const lastDay=localStorage.getItem('gr_streak_day');
-      let streak=parseInt(localStorage.getItem('gr_streak')||'0');
-      if(lastDay!==today){
-        const yesterday=new Date(Date.now()-86400000).toDateString();
-        streak=lastDay===yesterday?streak+1:1;
-        localStorage.setItem('gr_streak',streak);
-        localStorage.setItem('gr_streak_day',today);
-        const sc=document.getElementById('streak-count');
-        if(sc)sc.textContent=streak+'-day streak';
-      }
-    })
-    .catch(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='Retry';btn.disabled=false;}});
-}
+const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
+let quizQuestions=[],userAnswers={},quizDone=false,masteredIndices=[];
+async function loadMasteredAndInit(){const agent=sessionStorage.getItem('gr_agent')||'';if(agent){try{const res=await fetch(APPS_SCRIPT_URL+`?action=getModuleProgress&agent=${encodeURIComponent(agent)}&module=${MODULE_NUM}`);const data=await res.json();masteredIndices=data.mastered||[];}catch(e){}}initQuiz();}
+function initQuiz(){const area=document.getElementById('quiz-area');const status=document.getElementById('quiz-status');if(!QUIZ_POOL||!QUIZ_POOL.length){if(status)status.textContent='No questions loaded yet.';return;}const indexed=QUIZ_POOL.map((q,i)=>Object.assign({poolIdx:i},q));const shuffled=[...indexed].sort(()=>Math.random()-.5);quizQuestions=shuffled.slice(0,Math.min(10,shuffled.length));if(status)status.textContent=`${quizQuestions.length} questions · Pick the best answer for each.`;quizQuestions.forEach((q,qi)=>{const isMastered=masteredIndices.includes(q.poolIdx);const opts=q.opts.map((o,oi)=>`<div class="quiz-opt${isMastered&&o.correct?' correct':isMastered?' disabled':''}" id="qo-${qi}-${oi}" onclick="${isMastered?'':'answerQuiz('+qi+','+oi+')'}"${isMastered?' style="pointer-events:none"':''}><div class="quiz-opt-letter">${String.fromCharCode(65+oi)}</div>${o.t}</div>`).join('');area.innerHTML+=`<div class="quiz-q" id="qq-${qi}">${isMastered?'<div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">✓ Already mastered</div>':''}<div class="quiz-q-text">${qi+1}. ${q.q}</div><div class="quiz-q-opts" id="qopts-${qi}">${opts}</div><div class="kc-feedback" id="qfb-${qi}"></div></div>`;if(isMastered){const correctOi=q.opts.findIndex(o=>o.correct);if(correctOi>=0)userAnswers[qi]=correctOi;}});const sb=document.getElementById('score-bar');if(sb)sb.style.display='flex';updateScore();}
+function answerQuiz(qi,oi){if(userAnswers[qi]!==undefined)return;userAnswers[qi]=oi;const q=quizQuestions[qi];const correct=q.opts[oi].correct;q.opts.forEach((_,i)=>{const el=document.getElementById(`qo-${qi}-${i}`);if(!el)return;if(i===oi)el.classList.add(correct?'correct':'wrong');else if(q.opts[i].correct)el.classList.add('correct');else el.classList.add('disabled');});const fb=document.getElementById(`qfb-${qi}`);if(fb){fb.textContent=(correct?'✓ ':'✗ ')+q.explanation;fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');}updateScore();}
+function updateScore(){const answered=Object.keys(userAnswers).length;const total=quizQuestions.length;const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).length;const pct=total?Math.round(correct/total*100):0;const st=document.getElementById('score-text');const ss=document.getElementById('score-sub');const btn=document.getElementById('submit-btn');if(st)st.textContent=`${correct} / ${total} correct  (${pct}%)`;if(ss)ss.textContent=answered<total?`${total-answered} questions remaining`:'Quiz complete — submit your score!';if(btn)btn.disabled=answered<total;quizDone=answered>=total;}
+function submitScore(){if(!quizDone)return;const total=quizQuestions.length;const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).length;const pct=Math.round(correct/total*100);const agent=sessionStorage.getItem('gr_agent')||'Unknown';const email=sessionStorage.getItem('gr_email')||'';const xp=Math.round(pct*1.2);const correctPoolIndices=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).map(([qi])=>quizQuestions[qi].poolIdx);const allMastered=[...new Set([...masteredIndices,...correctPoolIndices])];const body={action:'moduleComplete',agent,email,module:MODULE_NUM,moduleTitle:MODULE_TITLE,score:pct,xp,correct,total,poolSize:QUIZ_POOL.length,correctIndices:allMastered,date:new Date().toISOString()};fetch(APPS_SCRIPT_URL,{method:'POST',body:JSON.stringify(body)}).then(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='✓ Score Saved!';btn.style.background='#22C55E';btn.disabled=true;}masteredIndices=allMastered;const today=new Date().toDateString();const lastDay=localStorage.getItem('gr_streak_day');let streak=parseInt(localStorage.getItem('gr_streak')||'0');if(lastDay!==today){const yesterday=new Date(Date.now()-86400000).toDateString();streak=lastDay===yesterday?streak+1:1;localStorage.setItem('gr_streak',streak);localStorage.setItem('gr_streak_day',today);const sc=document.getElementById('streak-count');if(sc)sc.textContent=streak+'-day streak';}}).catch(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='Retry';btn.disabled=false;}});}
+function submitModuleUpdate(){const txt=document.getElementById('moduleUpdateInput').value.trim();if(!txt){alert('Type something first.');return;}const btn=document.getElementById('moduleUpdateBtn');btn.disabled=true;btn.textContent='Sending...';const agent=sessionStorage.getItem('gr_agent')||'Unknown';const payload={action:'addModuleUpdate',module:MODULE_NUM,moduleTitle:MODULE_TITLE,agent:agent,update:txt,date:new Date().toISOString()};fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(()=>{btn.textContent='✓ Sent!';btn.style.background='#22C55E';document.getElementById('moduleUpdateInput').value='';setTimeout(()=>{btn.textContent='do not touch!';btn.style.background='';btn.disabled=false;},3000);}).catch(()=>{btn.textContent='Retry';btn.disabled=false;});}
+loadMasteredAndInit();
 </script>
 </body>
 </html>
