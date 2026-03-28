@@ -1,0 +1,1480 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deal Processor — Good Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+  :root{
+    --black:#0D0F14;--surface:#11141A;--surface2:#161B24;--surface3:#0A0C10;
+    --white:#F0F4FF;--cream:#C8D4E4;--muted:#8A95A8;--dim:#555A66;
+    --border:rgba(255,255,255,0.07);--orange:#FF5C1A;--orange-glow:rgba(255,92,26,0.15);
+    --orange-border:rgba(255,92,26,0.25);--green:#22C55E;--green-bg:rgba(34,197,94,0.1);
+    --red:#EF4444;--red-bg:rgba(239,68,68,0.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{font-size:17px;}
+  body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden;}
+
+  .header{padding:18px 44px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,0.95);backdrop-filter:blur(14px);position:sticky;top:0;z-index:100;}
+  .logo{font-family:'Inter',sans-serif;font-size:0.72rem;color:var(--orange);letter-spacing:0.1em;text-transform:uppercase;font-weight:800;}
+  .header-right{font-family:'Inter',sans-serif;font-size:0.75rem;font-weight:500;color:var(--muted);letter-spacing:0.08em;text-decoration:none;transition:color 0.15s;}
+  .header-right:hover{color:var(--orange);}
+
+  .hero{max-width:1080px;margin:0 auto;padding:56px 44px 36px;}
+  .eyebrow{font-family:'Inter',sans-serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-weight:600;}
+  .hero h1{font-family:'Inter',sans-serif;font-size:clamp(1.5rem,3vw,2.4rem);line-height:1.15;margin-bottom:12px;font-weight:800;letter-spacing:0.04em;}
+  .hero h1 em{font-style:normal;color:var(--orange);font-weight:900;}
+  .hero-sub{font-size:0.92rem;color:var(--cream);line-height:1.7;max-width:560px;font-weight:400;}
+  .divider{border:none;border-top:1px solid var(--border);margin:0 44px;}
+
+  /* APP LAYOUT */
+  .app{max-width:1080px;margin:0 auto;padding:36px 44px 100px;display:grid;grid-template-columns:320px 1fr;gap:28px;align-items:start;}
+  @media(max-width:860px){.app{grid-template-columns:1fr;}}
+
+  /* LEFT PANEL */
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;position:sticky;top:90px;}
+  .panel-hdr{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:var(--orange-glow);}
+  .panel-hdr h2{font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--white);font-weight:700;letter-spacing:0.05em;}
+  .panel-body{padding:20px;}
+
+  /* UPLOAD ZONE */
+  .upload-zone{border:1.5px dashed var(--orange);border-radius:5px;padding:28px 16px;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--surface2);margin-bottom:16px;position:relative;}
+  .upload-zone:hover,.upload-zone.drag-over{border-color:var(--orange);background:var(--orange-glow);}
+  .upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+  .upload-icon{font-size:1.6rem;margin-bottom:8px;}
+  .upload-label{font-family:'Inter',sans-serif;font-size:0.65rem;color:var(--muted);letter-spacing:0.08em;line-height:1.6;font-weight:400;}
+  .upload-label span{color:var(--orange);font-weight:600;}
+  .file-selected{font-family:'Inter',sans-serif;font-size:0.65rem;color:var(--green);text-align:center;padding:8px;background:var(--green-bg);border:1px solid rgba(34,197,94,0.3);border-radius:3px;margin-bottom:16px;display:none;word-break:break-all;line-height:1.5;font-weight:500;}
+
+  .analyze-btn{width:100%;padding:13px;background:var(--orange);color:var(--white);border:none;border-radius:3px;font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.07em;cursor:pointer;transition:all 0.2s;text-transform:uppercase;}
+  .analyze-btn:hover{background:var(--orange);box-shadow:0 0 16px var(--orange-glow);}
+  .analyze-btn:disabled{opacity:0.35;cursor:not-allowed;box-shadow:none;}
+
+  .status-line{font-family:'Inter',sans-serif;font-size:0.62rem;color:var(--muted);text-align:center;padding:10px 0 0;letter-spacing:0.05em;min-height:22px;font-weight:500;}
+  .status-line.active{color:var(--green);}
+  .status-line.error{color:var(--red);}
+
+  .panel-divider{border:none;border-top:1px solid var(--border);margin:18px 0;}
+
+  /* CLOSE CRM PUSH */
+  .close-btn{width:100%;padding:11px;background:rgba(99,102,241,0.1);color:#818CF8;border:1px solid rgba(99,102,241,0.3);border-radius:3px;font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.07em;cursor:pointer;text-transform:uppercase;display:none;align-items:center;justify-content:center;gap:8px;font-weight:600;transition:all 0.2s;margin-top:8px;}
+  .close-btn:hover{background:rgba(99,102,241,0.2);border-color:#818CF8;}
+  .close-btn:disabled{opacity:0.5;cursor:not-allowed;}
+
+  /* PRINT BTN */
+  .print-btn{width:100%;padding:11px;background:var(--orange-glow);color:var(--orange);border:1px solid var(--orange-border);border-radius:3px;font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.07em;cursor:pointer;text-transform:uppercase;transition:all 0.2s;display:none;font-weight:600;}
+  .print-btn:hover{background:rgba(255,92,26,0.2);border-color:var(--orange);}
+  .print-btn:disabled{opacity:0.5;cursor:not-allowed;}
+
+  /* RIGHT PANEL — OUTPUT */
+  .output-panel{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;min-height:480px;}
+  .output-hdr{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--orange-glow);}
+  .output-hdr-left{display:flex;align-items:center;gap:10px;}
+  .output-hdr h2{font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--white);font-weight:700;letter-spacing:0.05em;}
+  .output-badge{font-family:'Inter',sans-serif;font-size:0.55rem;padding:2px 8px;border-radius:2px;border:1px solid;letter-spacing:0.08em;font-weight:600;}
+  .badge-ready{color:var(--green);border-color:rgba(34,197,94,0.3);background:var(--green-bg);}
+  .badge-empty{color:var(--dim);border-color:var(--dim);}
+
+  .output-empty{padding:60px 40px;text-align:center;}
+  .output-empty-icon{font-size:2rem;margin-bottom:16px;opacity:0.3;}
+  .output-empty-text{font-family:'Inter',sans-serif;font-size:0.65rem;color:var(--dim);letter-spacing:0.1em;line-height:1.8;font-weight:400;}
+
+  /* DEAL SHEET */
+  #dealSheet{display:none;padding:32px 36px;}
+
+  .ds-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+  .ds-brand{font-family:'Inter',sans-serif;font-size:0.7rem;color:var(--orange);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;font-weight:800;}
+  .ds-address{font-family:'Inter',sans-serif;font-size:1.1rem;color:var(--white);font-weight:900;letter-spacing:0.02em;line-height:1.2;}
+  .ds-meta{text-align:right;}
+  .ds-entity{font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--orange);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;}
+  .ds-date{font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--muted);letter-spacing:0.06em;margin-top:4px;font-weight:400;}
+
+  .ds-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .ds-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  .ds-grid-full{margin-bottom:14px;}
+
+  .ds-block{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px 16px;}
+  .ds-block-title{font-family:'Inter',sans-serif;font-size:0.56rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;display:flex;align-items:center;gap:8px;font-weight:700;}
+  .ds-block-title::after{content:'';flex:1;height:1px;background:var(--border);}
+  .ds-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.03);}
+  .ds-row:last-child{border-bottom:none;}
+  .ds-label{font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--muted);letter-spacing:0.06em;font-weight:500;}
+  .ds-val{font-size:0.88rem;color:var(--white);font-weight:500;text-align:right;max-width:60%;}
+  .ds-val.highlight{color:var(--orange);font-weight:600;}
+  .ds-val.green{color:var(--green);font-weight:600;}
+  .ds-val.na{color:var(--dim);font-size:0.75rem;font-weight:400;}
+
+  .ds-condition-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+  .ds-cond-item{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:10px 8px;text-align:center;}
+  .ds-cond-label{font-family:'Inter',sans-serif;font-size:0.52rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;font-weight:600;}
+  .ds-cond-val{font-size:0.8rem;color:var(--cream);line-height:1.3;font-weight:400;}
+
+  .ds-notes-block{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px 16px;margin-bottom:14px;}
+  .ds-notes-block .ds-block-title{font-family:'Inter',sans-serif;font-size:0.56rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .ds-notes-block .ds-block-title::after{content:'';flex:1;height:1px;background:var(--border);}
+  .ds-notes-area{width:100%;min-height:140px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:12px 14px;color:var(--cream);font-family:'Inter',sans-serif;font-size:0.85rem;line-height:1.7;resize:vertical;outline:none;transition:border-color 0.2s;}
+  .ds-notes-area:focus{border-color:var(--orange-border);}
+  .ds-notes-area::placeholder{color:var(--dim);}
+
+  .ds-footer{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+  .ds-footer-note{font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--dim);letter-spacing:0.06em;font-weight:400;}
+
+  /* BACK LINK */
+  .back-link{display:block;text-align:center;padding:28px 0 0;font-family:'Inter',sans-serif;font-size:0.62rem;color:var(--muted);letter-spacing:0.08em;text-decoration:none;transition:color 0.15s;font-weight:500;}
+  .back-link:hover{color:var(--orange);}
+
+  /* PRINT STYLES */
+  @media print {
+    body{background:#fff !important;color:#111 !important;}
+    .header,.hero,.divider,.panel,.back-link,.output-hdr{display:none !important;}
+    .app{display:block;padding:0;max-width:100%;}
+    .output-panel{border:none;background:#fff;}
+    #dealSheet{display:block !important;padding:20px;}
+    .ds-brand{color:#d95f20 !important;}
+    .ds-address{color:#111 !important;}
+    .ds-entity,.ds-date{color:#555 !important;}
+    .ds-block{background:#f9f9f9 !important;border-color:#ddd !important;}
+    .ds-block-title{color:#d95f20 !important;}
+    .ds-label{color:#777 !important;}
+    .ds-val{color:#111 !important;}
+    .ds-val.highlight{color:#d95f20 !important;}
+    .ds-val.green{color:#22a84f !important;}
+    .ds-val.na{color:#aaa !important;}
+    .ds-cond-item{background:#f5f5f5 !important;border-color:#ddd !important;}
+    .ds-cond-label{color:#999 !important;}
+    .ds-cond-val{color:#222 !important;}
+    .ds-footer-note{color:#aaa !important;}
+    .ds-header{border-bottom-color:#ddd !important;}
+    .ds-footer{border-top-color:#ddd !important;}
+    .ds-row{border-bottom-color:#eee !important;}
+    .ds-notes-block{background:#f9f9f9 !important;border-color:#ddd !important;}
+    .ds-notes-area{background:#fff !important;color:#111 !important;border-color:#ddd !important;}
+  }
+
+  /* EDITABLE FIELDS */
+  .ds-val, .ds-cond-val { cursor: pointer; }
+  .ds-val:hover, .ds-cond-val:hover { background: var(--orange-glow); border-radius: 3px; padding: 1px 4px; margin: -1px -4px; }
+  .ds-edit-input { background: var(--surface); border: 1px solid var(--orange-border); border-radius: 3px; color: var(--white); font-family: 'Inter', sans-serif; font-size: inherit; padding: 2px 6px; width: 100%; outline: none; }
+
+  /* DEAL PAGE INPUTS */
+  .dp-section{margin-top:4px;}
+  .dp-section-title{font-family:'Inter',sans-serif;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;font-weight:700;}
+  .dp-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .dp-label{font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--muted);letter-spacing:0.04em;min-width:90px;font-weight:500;}
+  .dp-input{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:7px 10px;color:var(--white);font-family:'Inter',sans-serif;font-size:0.75rem;outline:none;transition:border-color 0.2s;}
+  .dp-input:focus{border-color:var(--orange-border);}
+  .dp-input::placeholder{color:var(--dim);}
+  .dp-toggle{display:flex;gap:0;border-radius:3px;overflow:hidden;flex:1;}
+  .dp-toggle-btn{flex:1;padding:7px 0;text-align:center;font-family:'Inter',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.06em;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--muted);transition:all 0.15s;}
+  .dp-toggle-btn.active-off{background:var(--orange);color:var(--white);border-color:var(--orange);}
+  .dp-toggle-btn.active-on{background:var(--green);color:var(--white);border-color:var(--green);}
+
+  /* PHOTO UPLOAD ZONE */
+  .photo-upload-section{display:none;margin-top:4px;}
+  .photo-upload-title{font-family:'Inter',sans-serif;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:#A855F7;margin-bottom:10px;font-weight:700;}
+  .photo-drop{border:1.5px dashed rgba(168,85,247,0.4);border-radius:5px;padding:20px 12px;text-align:center;cursor:pointer;transition:all 0.2s;background:rgba(168,85,247,0.04);margin-bottom:10px;position:relative;}
+  .photo-drop:hover,.photo-drop.drag-over{border-color:#A855F7;background:rgba(168,85,247,0.1);}
+  .photo-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+  .photo-drop-icon{font-size:1.3rem;margin-bottom:6px;}
+  .photo-drop-label{font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--muted);line-height:1.5;font-weight:400;}
+  .photo-drop-label span{color:#A855F7;font-weight:600;}
+  .photo-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
+  .photo-thumb{position:relative;border-radius:4px;overflow:hidden;aspect-ratio:1;background:var(--surface2);border:1px solid var(--border);}
+  .photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .photo-thumb-remove{position:absolute;top:2px;right:2px;width:18px;height:18px;background:rgba(0,0,0,0.7);color:#fff;border:none;border-radius:50%;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;opacity:0;transition:opacity 0.15s;}
+  .photo-thumb:hover .photo-thumb-remove{opacity:1;}
+  .photo-count-label{font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--muted);text-align:center;margin-bottom:6px;font-weight:500;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">Good Results // Deal Processor</div>
+  <a href="/gimmebrain/" class="header-right">← Hub</a>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">All-in-One Deal Tool</div>
+  <h1>Deal <em>Processor</em></h1>
+  <p class="hero-sub">Upload a signed contract PDF. Extracts deal fields, builds the deal sheet, pushes to Close CRM + GitHub, and creates a live deal page with photos at goodresults.org/deals/.</p>
+</section>
+
+<hr class="divider">
+
+<div class="app">
+
+  <!-- LEFT: CONTROLS -->
+  <div>
+    <div class="panel">
+      <div class="panel-hdr"><span>📄</span><h2>Upload Contract</h2></div>
+      <div class="panel-body">
+
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="pdfInput" accept=".pdf" onchange="handleFile(this.files[0])">
+          <div class="upload-icon">⬆</div>
+          <div class="upload-label">Drop PDF here or <span>click to browse</span><br>RPA (Nevada) · TREC (Texas)</div>
+        </div>
+
+        <div class="file-selected" id="fileSelected"></div>
+
+        <button class="analyze-btn" id="analyzeBtn" onclick="runExtraction()" disabled>
+          Extract Deal Data
+        </button>
+        <div class="status-line" id="statusLine"></div>
+
+        <div class="panel-divider"></div>
+
+        <!-- DEAL PAGE FIELDS (from deal-generator) -->
+        <div class="dp-section" id="dpSection" style="display:none;">
+          <div class="dp-section-title">Deal Page Fields</div>
+          <div class="dp-row">
+            <span class="dp-label">Deal #</span>
+            <input class="dp-input" id="dpDealNum" type="text" placeholder="e.g. 8" style="max-width:50px;" oninput="updateDealId()">
+            <input class="dp-input" id="dpDealId" type="text" readonly style="flex:2;color:var(--dim);">
+          </div>
+          <div class="dp-row">
+            <span class="dp-label">Asking Price</span>
+            <input class="dp-input" id="dpAsking" type="text" placeholder="$175,000">
+          </div>
+          <div class="dp-row">
+            <span class="dp-label">ARV</span>
+            <input class="dp-input" id="dpARV" type="text" placeholder="$250,000">
+          </div>
+          <div class="dp-row">
+            <span class="dp-label">Est. Repairs</span>
+            <input class="dp-input" id="dpRepairs" type="text" placeholder="$35,000">
+          </div>
+          <div class="dp-row">
+            <span class="dp-label">On Market?</span>
+            <div class="dp-toggle">
+              <div class="dp-toggle-btn active-off" id="btnOff" onclick="setMarketToggle('off')">OFF</div>
+              <div class="dp-toggle-btn" id="btnOn" onclick="setMarketToggle('on')">ON</div>
+            </div>
+          </div>
+          <div class="panel-divider"></div>
+        </div>
+
+        <button class="print-btn" id="printBtn" onclick="window.print()">
+          🖨 Print / Save as PDF
+        </button>
+        <div id="printBtnSpacer" style="display:none;height:10px;"></div>
+
+        <button class="print-btn" id="jsonBtn" onclick="downloadDealPageJson()" style="display:none;margin-top:8px;color:var(--orange);border-color:var(--orange-border);background:var(--orange-glow);">
+          ⬇ Download deal-doc.txt
+        </button>
+        <div id="jsonBtnSpacer" style="display:none;height:6px;"></div>
+
+        <button class="print-btn" id="githubBtn" onclick="pushToGitHub()" style="display:none;margin-top:8px;background:rgba(34,197,94,0.1);color:var(--green);border-color:rgba(34,197,94,0.3);">
+          ⬆ Push to GitHub
+        </button>
+        <div class="status-line" id="githubStatus" style="min-height:18px;"></div>
+
+        <button class="close-btn" id="closeBtn" onclick="pushToClose()">
+          ⬆ Push to Close CRM
+        </button>
+        <div class="status-line" id="closeStatus" style="min-height:18px;"></div>
+
+        <!-- PHOTO UPLOAD FOR DEAL PAGE -->
+        <div class="photo-upload-section" id="photoUploadSection">
+          <div class="photo-upload-title">Deal Page Photos</div>
+          <div class="photo-drop" id="photoDrop">
+            <input type="file" id="photoInput" accept="image/*" multiple onchange="handlePhotos(this.files)">
+            <div class="photo-drop-icon">📸</div>
+            <div class="photo-drop-label">Drop photos here or <span>click to browse</span><br>Any format — JPG, PNG, WebP, etc.</div>
+          </div>
+          <div class="photo-count-label" id="photoCountLabel" style="display:none;"></div>
+          <div class="photo-thumbs" id="photoThumbs"></div>
+          <div class="panel-divider"></div>
+        </div>
+
+        <button class="print-btn" id="dealPageBtn" onclick="createDealPage()" style="display:none;margin-top:8px;background:rgba(168,85,247,0.1);color:#A855F7;border-color:rgba(168,85,247,0.3);">
+          🌐 Create Deal Page
+        </button>
+        <div class="status-line" id="dealPageStatus" style="min-height:18px;"></div>
+
+      </div>
+    </div>
+
+    <a href="/backdoor" class="back-link">⌂ &nbsp; Back to Hub</a>
+  </div>
+
+  <!-- RIGHT: OUTPUT -->
+  <div class="output-panel">
+    <div class="output-hdr">
+      <div class="output-hdr-left">
+        <span>📋</span>
+        <h2>Deal Sheet</h2>
+      </div>
+      <span class="output-badge badge-empty" id="outputBadge">AWAITING INPUT</span>
+    </div>
+
+    <div class="output-empty" id="outputEmpty">
+      <div class="output-empty-icon">📄</div>
+      <div class="output-empty-text">
+        Upload a signed contract PDF<br>
+        and hit Extract Deal Data<br><br>
+        The deal sheet will appear here
+      </div>
+    </div>
+
+    <!-- DEAL SHEET (rendered after extraction) -->
+    <div id="dealSheet">
+
+      <div class="ds-header">
+        <div>
+          <div class="ds-brand">Good Results Home Buyers — Deal Basics</div>
+          <div class="ds-address" id="dsAddress">—</div>
+        </div>
+        <div class="ds-meta">
+          <div class="ds-entity" id="dsEntity">—</div>
+          <div class="ds-date" id="dsCreatedDate">—</div>
+        </div>
+      </div>
+
+      <!-- CONTRACT + PRICING (labels match Close CRM custom fields) -->
+      <div class="ds-grid">
+        <div class="ds-block">
+          <div class="ds-block-title">Contract</div>
+          <div class="ds-row"><span class="ds-label">Current Contract Price</span><span class="ds-val highlight" id="dsCurrentContractPrice">—</span></div>
+          <div class="ds-row"><span class="ds-label">Wholesale Price</span><span class="ds-val highlight" id="dsWholesalePrice">—</span></div>
+          <div class="ds-row"><span class="ds-label">Official Offer Price</span><span class="ds-val" id="dsOfficialOfferPrice">—</span></div>
+          <div class="ds-row"><span class="ds-label">ASK</span><span class="ds-val" id="dsASK">—</span></div>
+          <div class="ds-row"><span class="ds-label">ARV</span><span class="ds-val" id="dsARV">—</span></div>
+          <div class="ds-row"><span class="ds-label">MAO</span><span class="ds-val" id="dsMAO">—</span></div>
+          <div class="ds-row"><span class="ds-label">Closing Costs</span><span class="ds-val" id="dsClosingCosts">—</span></div>
+          <div class="ds-row"><span class="ds-label">On Market?</span><span class="ds-val" id="dsOnMarket">—</span></div>
+          <div class="ds-row"><span class="ds-label">Seller(s)</span><span class="ds-val" id="dsSeller">—</span></div>
+        </div>
+        <div class="ds-block">
+          <div class="ds-block-title">Key Dates</div>
+          <div class="ds-row"><span class="ds-label">Accepted Date</span><span class="ds-val highlight" id="dsAcceptedDate">—</span></div>
+          <div class="ds-row"><span class="ds-label">COE Date</span><span class="ds-val highlight" id="dsCOE">—</span></div>
+          <div class="ds-row"><span class="ds-label">DD End Date</span><span class="ds-val highlight" id="dsDDEnd">—</span></div>
+          <div class="ds-row"><span class="ds-label">EMD Amount</span><span class="ds-val" id="dsEMDAmount">—</span></div>
+          <div class="ds-row"><span class="ds-label">EMD Due Date</span><span class="ds-val" id="dsEMDDue">—</span></div>
+        </div>
+      </div>
+
+      <!-- PROPERTY + AGENT -->
+      <div class="ds-grid">
+        <div class="ds-block">
+          <div class="ds-block-title">Property</div>
+          <div class="ds-row"><span class="ds-label">Type</span><span class="ds-val" id="dsPropType">—</span></div>
+          <div class="ds-row"><span class="ds-label">Beds / Baths</span><span class="ds-val" id="dsBedsAndBaths">—</span></div>
+          <div class="ds-row"><span class="ds-label">Sqft</span><span class="ds-val" id="dsSqft">—</span></div>
+          <div class="ds-row"><span class="ds-label">Lot Size</span><span class="ds-val" id="dsLotSize">—</span></div>
+          <div class="ds-row"><span class="ds-label">Year Built</span><span class="ds-val" id="dsYearBuilt">—</span></div>
+          <div class="ds-row"><span class="ds-label">Garage</span><span class="ds-val" id="dsGarage">—</span></div>
+          <div class="ds-row"><span class="ds-label">Pool</span><span class="ds-val" id="dsPool">—</span></div>
+          <div class="ds-row"><span class="ds-label">Solar</span><span class="ds-val" id="dsSolar">—</span></div>
+        </div>
+        <div class="ds-block">
+          <div class="ds-block-title">Agent / Realtor</div>
+          <div class="ds-row"><span class="ds-label">Name</span><span class="ds-val" id="dsAgentName">—</span></div>
+          <div class="ds-row"><span class="ds-label">Phone</span><span class="ds-val" id="dsAgentPhone">—</span></div>
+          <div class="ds-row"><span class="ds-label">Email</span><span class="ds-val" id="dsAgentEmail">—</span></div>
+          <div class="ds-row"><span class="ds-label">Brokerage</span><span class="ds-val" id="dsAgentBrokerage">—</span></div>
+        </div>
+      </div>
+
+      <!-- SOLAR DETAIL (shown only if solar) -->
+      <div class="ds-grid-full" id="solarBlock" style="display:none;">
+        <div class="ds-block">
+          <div class="ds-block-title">Solar Details</div>
+          <div class="ds-grid" style="margin:0;">
+            <div class="ds-row"><span class="ds-label">Loan Balance</span><span class="ds-val" id="dsSolarBalance">—</span></div>
+            <div class="ds-row"><span class="ds-label">Remaining Term</span><span class="ds-val" id="dsSolarTerm">—</span></div>
+            <div class="ds-row"><span class="ds-label">Total Payoff</span><span class="ds-val highlight" id="dsSolarPayoff">—</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONDITION -->
+      <div class="ds-grid-full">
+        <div class="ds-block">
+          <div class="ds-block-title">Condition Notes</div>
+          <div class="ds-condition-grid">
+            <div class="ds-cond-item"><div class="ds-cond-label">HVAC</div><div class="ds-cond-val" id="dsHVAC">—</div></div>
+            <div class="ds-cond-item"><div class="ds-cond-label">Roof</div><div class="ds-cond-val" id="dsRoof">—</div></div>
+            <div class="ds-cond-item"><div class="ds-cond-label">Foundation</div><div class="ds-cond-val" id="dsFoundation">—</div></div>
+            <div class="ds-cond-item"><div class="ds-cond-label">Plumbing</div><div class="ds-cond-val" id="dsPlumbing">—</div></div>
+            <div class="ds-cond-item"><div class="ds-cond-label">Electrical</div><div class="ds-cond-val" id="dsElectrical">—</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NOTES -->
+      <div class="ds-grid-full">
+        <div class="ds-notes-block">
+          <div class="ds-block-title">Notes</div>
+          <textarea class="ds-notes-area" id="dsNotes" placeholder="Add deal notes here — repairs needed, seller situation, negotiation context, anything relevant..."></textarea>
+        </div>
+      </div>
+
+      <div class="ds-footer">
+        <div class="ds-footer-note" id="dsMarket">—</div>
+        <div class="ds-footer-note">Good Results Home Buyers — Internal Deal Sheet</div>
+      </div>
+
+    </div><!-- end #dealSheet -->
+  </div><!-- end output-panel -->
+
+</div><!-- end app -->
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+const ANTHROPIC_KEY = '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';
+const RENTCAST_KEY  = 'c1bce705542d453f869d9eb4a12d1e2d';
+const CLOSE_PIPELINE = 'pipe_1P0GjK0TFer4Yw2rbArK0u'; // Properties pipeline
+const CLOSE_PROXY    = '/.netlify/functions/close-proxy'; // Server-side proxy (API key lives there)
+
+// Close CRM opportunity custom fields — FULL MAP (all 14 fields)
+const CF = {
+  address:              'cf_NdiIYfY11hv4MI2EccVt1UBe7hc3UcrPFVJn44F9AuT',
+  ask:                  'cf_vjCMz4xV8VVONcfII1tqKNbrw4WhRCU80PmVBYdHvdv',
+  arv:                  'cf_I31MKYiLvGaKZIifqfVQxkjMjhpkrImNP1q7DQOQxUZ',
+  mao:                  'cf_BKzKEuNx4uGjjJpV78goMM7Duovz630H3Hse3z4mjZC',
+  onMarket:             'cf_deI0gLpduQLEzquwHGcsaOcwJfxsLmDOszUCkP7r2yU',
+  closingCosts:         'cf_I382twtiVhhsQ57v5x0ZoQ65zESufG7qM6FOQvoTbFp',
+  officialOfferPrice:   'cf_geYAfr1h8XVC3x0bzMIEf0Aj6580oaFQ39wdLAJ2Gqe',
+  emdAmount:            'cf_SOdFoDCrSlKj3uJlxR1Yv0vP1LrlyGatZVmtgDOqIcj',
+  coeDate:              'cf_0maXpCwRBInrLrsfyJOPVZPDTTipRetz10WGJz2ptDO',
+  acceptedDate:         'cf_EVnxq4atDCF6u1Ohl13HCad8mAGiK4RijRqhBJrZNzg',
+  ddEndDate:            'cf_dYuh3zK6om5wx7DazAPdoknMZI1083pJ9Xfon6vdmYf',
+  emdDueDate:           'cf_v7RDgaN83GrYYyUPjwry71a2COpLSEhM0Dn7Lbs4Vn7',
+  currentContractPrice: 'cf_lnzdav3LInFjRAbyUATuFShueu7pIaFebA988JE8H91',
+  wholesalePrice:       'cf_MDzK5zNGLLLUE9yYYWqubvC3hFzDeKA8m4ta6p8OPhx'
+};
+
+// ============================================================
+// PDF.JS SETUP
+// ============================================================
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+// ============================================================
+// STATE
+// ============================================================
+let currentFile = null;
+window.dealData = null;
+
+// ============================================================
+// FILE HANDLING
+// ============================================================
+function handleFile(file) {
+  if (!file || file.type !== 'application/pdf') {
+    setStatus('Please select a valid PDF file.', 'error');
+    return;
+  }
+  currentFile = file;
+  const sel = document.getElementById('fileSelected');
+  sel.textContent = '✓ ' + file.name;
+  sel.style.display = 'block';
+  document.getElementById('analyzeBtn').disabled = false;
+  setStatus('Ready — hit Extract Deal Data', 'active');
+}
+
+// Drag and drop
+const zone = document.getElementById('uploadZone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) handleFile(file);
+});
+
+// ============================================================
+// PDF TEXT EXTRACTION
+// ============================================================
+async function extractPDFText(file) {
+  const arrayBuffer = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+  let text = '';
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    text += content.items.map(item => item.str).join(' ') + '\n';
+  }
+  return text;
+}
+
+// ============================================================
+// MAIN EXTRACTION
+// ============================================================
+async function runExtraction() {
+  if (!currentFile) return;
+
+  const btn = document.getElementById('analyzeBtn');
+  btn.disabled = true;
+  setStatus('Reading PDF...', 'active');
+
+  let contractText = '';
+  try {
+    contractText = await extractPDFText(currentFile);
+  } catch (err) {
+    setStatus('Could not read PDF — try copy-pasting the text manually.', 'error');
+    btn.disabled = false;
+    return;
+  }
+
+  if (contractText.trim().length < 200) {
+    setStatus('PDF appears to be a scanned image — text extraction unavailable.', 'error');
+    btn.disabled = false;
+    return;
+  }
+
+  setStatus('Sending to AI for extraction...', 'active');
+
+  const prompt = `You are a real estate contract analyst specializing in both Nevada RPA and Texas TREC contracts. Extract all available deal information from the contract text below and return it as a single valid JSON object. Use null for any field you cannot find. Do not include any explanation or text outside the JSON.
+
+IMPORTANT FIELD GUIDANCE:
+- executedDate: The date all parties signed — look for "Effective Date," "Date of Acceptance," or the latest signature date. Return as MM/DD/YYYY.
+- coeDate: The closing date. In TREC look for "Closing Date" (paragraph 9 or financing section). In RPA look for "Close of Escrow." Return as MM/DD/YYYY.
+- ddDays: THE NUMBER OF DAYS in the due diligence / option period — return as an integer only (e.g. 10). In TREC look for "Option Period" — it will say something like "X days after the Effective Date." In RPA look for "Investigation Period" or "Due Diligence Period" — it will say "X days." Extract just the number.
+- emdDays: THE NUMBER OF DAYS after the Effective Date that earnest money is due — return as an integer only. In TREC look in the Earnest Money paragraph (paragraph 5) for "within ___ days." In RPA look for "within ___ days of acceptance." Extract just the number.
+- emdAmount: The earnest money / option fee deposit amount.
+- sellerNames: All seller names. In estate situations include the executor name too.
+- onMarket: Whether the property was listed on MLS. Look for MLS number, listing agent, or "listed" references. If buyer's agent and seller's agent are different companies, likely on-market.
+- property beds/baths/sqft/lotSize/yearBuilt/garage: These are often NOT in the contract body — check any attached addenda, property description sections, or MLS data references. Use null if truly not present.
+- condition fields: Condition info is rarely in a purchase contract. Use null unless explicitly mentioned.
+- agent: Look for buyer's agent AND seller's/listing agent sections. Prefer the listing/seller's agent details since that's who Good Results works with.
+
+Return this exact structure:
+{
+  "property": {
+    "address": "full street address",
+    "city": "city name",
+    "state": "state abbreviation",
+    "zip": "zip code",
+    "type": "SFR / Condo / Townhouse / etc",
+    "beds": "number or null",
+    "baths": "number or null",
+    "sqft": "number or null",
+    "lotSize": "e.g. 6,500 sqft or 0.25 acres or null",
+    "yearBuilt": "year or null",
+    "garage": "e.g. 2-car attached / none or null",
+    "pool": "Yes / No — and condition if mentioned",
+    "solar": "Yes / No"
+  },
+  "solar": {
+    "loanBalance": "dollar amount or null",
+    "remainingTerm": "e.g. 18 years or null",
+    "totalPayoff": "dollar amount or null"
+  },
+  "contract": {
+    "price": "dollar amount with $ sign",
+    "executedDate": "MM/DD/YYYY",
+    "coeDate": "MM/DD/YYYY",
+    "ddDays": "integer number of days in option/DD period, or null",
+    "emdDays": "integer number of days after effective date EMD is due, or null",
+    "emdAmount": "dollar amount with $ sign",
+    "sellerNames": "full name(s)",
+    "buyerEntity": "exact buyer entity name from contract",
+    "market": "Las Vegas / Reno / Houston",
+    "onMarket": "Yes / No / Unknown"
+  },
+  "agent": {
+    "name": "full name",
+    "phone": "phone number",
+    "email": "email address or null",
+    "brokerage": "brokerage name"
+  },
+  "condition": {
+    "hvac": "condition description or null",
+    "roof": "condition description or null",
+    "foundation": "condition description or null",
+    "plumbing": "condition description or null",
+    "electrical": "condition description or null"
+  }
+}
+
+CONTRACT TEXT:
+${contractText.substring(0, 50000)}`;
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-opus-4-6',
+        max_tokens: 4000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json();
+      throw new Error(err.error?.message || resp.status);
+    }
+
+    const data = await resp.json();
+    const raw = data.content[0].text.trim();
+
+    // Strip any markdown code blocks if present
+    const jsonStr = raw.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim();
+    const deal = JSON.parse(jsonStr);
+
+    // Calculate DD end date and EMD due date from raw day counts + executed date
+    // (more reliable than asking Claude to do date math)
+    function addDaysToDate(dateStr, days) {
+      if (!dateStr || days == null) return null;
+      const m = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if (!m) return null;
+      const d = new Date(parseInt(m[3]), parseInt(m[1]) - 1, parseInt(m[2]));
+      d.setDate(d.getDate() + parseInt(days));
+      return (d.getMonth()+1).toString().padStart(2,'0') + '/' +
+             d.getDate().toString().padStart(2,'0') + '/' +
+             d.getFullYear();
+    }
+    const c = deal.contract || {};
+    if (c.executedDate) {
+      if (c.ddDays  != null) c.ddEndDate  = addDaysToDate(c.executedDate, c.ddDays)  || c.ddEndDate;
+      if (c.emdDays != null) c.emdDueDate = addDaysToDate(c.executedDate, c.emdDays) || c.emdDueDate;
+    }
+
+    window.dealData = deal;
+    renderDealSheet(deal);
+    setStatus('Extraction complete ✓ — looking up property specs...', 'active');
+
+    // Step 2: Pull property specs from Redfin
+    if (deal.property?.address) {
+      try {
+        const propData = await fetchFromRedfin(
+          deal.property.address,
+          deal.property.city,
+          deal.property.state,
+          deal.property.zip
+        );
+        // Merge into dealData
+        deal.property = { ...deal.property, ...propData };
+        window.dealData = deal;
+        // Update rendered fields
+        set('dsBedsAndBaths', (propData.beds && propData.baths) ? propData.beds + ' bed / ' + propData.baths + ' bath' : null);
+        set('dsSqft', propData.sqft ? propData.sqft + ' sqft' : null);
+        set('dsLotSize', propData.lotSize);
+        set('dsYearBuilt', propData.yearBuilt);
+        set('dsGarage', propData.garage);
+        setStatus('Done ✓ Contract + property data loaded', 'active');
+      } catch (e) {
+        setStatus('Contract extracted ✓ — Redfin lookup failed, fill property specs manually', 'error');
+      }
+    } else {
+      setStatus('Extraction complete ✓', 'active');
+    }
+
+  } catch (err) {
+    setStatus('Error: ' + err.message, 'error');
+    btn.disabled = false;
+  }
+}
+
+// ============================================================
+// RENTCAST PROPERTY LOOKUP
+// ============================================================
+async function fetchFromRedfin(address, city, state, zip) {
+  if (!RENTCAST_KEY) throw new Error('No Rentcast key — add RENTCAST_KEY to the config');
+
+  const params = new URLSearchParams({
+    address: address || '',
+    city:    city    || '',
+    state:   state   || '',
+    zipCode: zip     || ''
+  });
+
+  const resp = await fetch('https://api.rentcast.io/v1/properties?' + params.toString(), {
+    headers: {
+      'Accept':    'application/json',
+      'X-Api-Key': RENTCAST_KEY
+    }
+  });
+
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({}));
+    throw new Error('Rentcast error: ' + (err.message || resp.status));
+  }
+
+  const data = await resp.json();
+  // Rentcast returns an array; take the first match
+  const p = Array.isArray(data) ? data[0] : data;
+  if (!p) throw new Error('Property not found in Rentcast');
+
+  const beds      = p.bedrooms    != null ? String(p.bedrooms)    : null;
+  const baths     = p.bathrooms   != null ? String(p.bathrooms)   : null;
+  const sqft      = p.squareFootage ? Number(p.squareFootage).toLocaleString() : null;
+  const yearBuilt = p.yearBuilt   != null ? String(p.yearBuilt)   : null;
+  const lotVal    = p.lotSize;
+  const lotSize   = lotVal ? Number(lotVal).toLocaleString() + ' sqft' : null;
+  const garage    = p.garage      ? p.garage                         : null;
+
+  return { beds, baths, sqft, yearBuilt, lotSize, garage };
+}
+
+// ============================================================
+// RENDER DEAL SHEET
+// ============================================================
+function renderDealSheet(d) {
+  const p = d.property || {};
+  const c = d.contract || {};
+  const a = d.agent || {};
+  const cond = d.condition || {};
+  const sol = d.solar || {};
+
+  const fullAddress = [p.address, p.city, p.state, p.zip].filter(Boolean).join(', ');
+  set('dsAddress', fullAddress || '—');
+
+  // Entity / market
+  const entity = c.buyerEntity || (c.market === 'Houston' ? 'Good Results TX LLC' : 'Good Results LLC');
+  set('dsEntity', entity);
+  set('dsMarket', c.market ? 'Market: ' + c.market : '—');
+  set('dsCreatedDate', 'Generated: ' + new Date().toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}));
+
+  // Set page title so Print → Save as PDF uses the address as filename
+  const shortAddress = [p.address].filter(Boolean).join('').trim();
+  document.title = shortAddress ? shortAddress + ' - Deal Details' : 'Deal Details';
+
+  // Contract — labels match Close CRM custom fields exactly
+  set('dsCurrentContractPrice', c.price, 'highlight');
+  set('dsWholesalePrice', null, 'highlight'); // filled manually
+  set('dsOfficialOfferPrice', null);          // filled manually
+  set('dsASK', null);                         // filled manually
+  set('dsARV', null);                         // filled manually
+  set('dsMAO', null);                         // filled manually
+  set('dsClosingCosts', null);                // filled manually
+  set('dsOnMarket', c.onMarket);
+  set('dsSeller', c.sellerNames);
+  set('dsAcceptedDate', c.executedDate, 'highlight');
+  set('dsCOE', c.coeDate, 'highlight');
+  set('dsDDEnd', c.ddEndDate ? c.ddEndDate + (c.ddDays ? '  (' + c.ddDays + ' days)' : '') : null, 'highlight');
+  set('dsEMDAmount', c.emdAmount);
+  set('dsEMDDue', c.emdDueDate ? c.emdDueDate + (c.emdDays ? '  (' + c.emdDays + ' days)' : '') : null);
+
+  // Property
+  set('dsPropType', p.type);
+  set('dsBedsAndBaths', (p.beds && p.baths) ? p.beds + ' bed / ' + p.baths + ' bath' : null);
+  set('dsSqft', p.sqft ? p.sqft + ' sqft' : null);
+  set('dsLotSize', p.lotSize);
+  set('dsYearBuilt', p.yearBuilt);
+  set('dsGarage', p.garage);
+  set('dsPool', p.pool);
+  set('dsSolar', p.solar);
+
+  // Solar block
+  if (p.solar && p.solar.toLowerCase().startsWith('yes')) {
+    document.getElementById('solarBlock').style.display = 'block';
+    set('dsSolarBalance', sol.loanBalance);
+    set('dsSolarTerm', sol.remainingTerm);
+    set('dsSolarPayoff', sol.totalPayoff, 'highlight');
+  }
+
+  // Agent
+  set('dsAgentName', a.name);
+  set('dsAgentPhone', a.phone);
+  set('dsAgentEmail', a.email);
+  set('dsAgentBrokerage', a.brokerage);
+
+  // Condition
+  set('dsHVAC', cond.hvac);
+  set('dsRoof', cond.roof);
+  set('dsFoundation', cond.foundation);
+  set('dsPlumbing', cond.plumbing);
+  set('dsElectrical', cond.electrical);
+
+  // Show sheet, hide empty state
+  document.getElementById('outputEmpty').style.display = 'none';
+  document.getElementById('dealSheet').style.display = 'block';
+  document.getElementById('outputBadge').textContent = 'READY';
+  document.getElementById('outputBadge').className = 'output-badge badge-ready';
+
+  // Show deal page input section + all action buttons
+  document.getElementById('dpSection').style.display = 'block';
+  const pb = document.getElementById('printBtn');
+  pb.style.display = 'block';
+  document.getElementById('printBtnSpacer').style.display = 'block';
+  document.getElementById('jsonBtn').style.display = 'block';
+  document.getElementById('jsonBtnSpacer').style.display = 'block';
+  document.getElementById('githubBtn').style.display = 'block';
+  document.getElementById('closeBtn').style.display = 'flex';
+  document.getElementById('dealPageBtn').style.display = 'block';
+  document.getElementById('photoUploadSection').style.display = 'block';
+
+  // Sync on-market from extraction to toggle
+  if (c.onMarket && c.onMarket.toLowerCase() === 'yes') setMarketToggle('on');
+
+  // Make all values editable
+  makeEditable();
+}
+
+function set(id, val, extraClass) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (!val || val === 'null' || val === 'Unknown') {
+    el.textContent = 'N/A';
+    el.className = 'ds-val na';
+  } else {
+    el.textContent = val;
+    el.className = 'ds-val' + (extraClass ? ' ' + extraClass : '');
+  }
+}
+
+function setStatus(msg, type) {
+  const el = document.getElementById('statusLine');
+  el.textContent = msg;
+  el.className = 'status-line' + (type ? ' ' + type : '');
+}
+
+// ============================================================
+// DEAL PAGE FIELDS (merged from deal-generator)
+// ============================================================
+let marketToggle = 'off';
+
+function updateDealId() {
+  const now = new Date();
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const yyyy = now.getFullYear();
+  const n = document.getElementById('dpDealNum').value || '1';
+  document.getElementById('dpDealId').value = mm + yyyy + n;
+}
+
+function setMarketToggle(val) {
+  marketToggle = val;
+  const off = document.getElementById('btnOff');
+  const on = document.getElementById('btnOn');
+  off.className = 'dp-toggle-btn' + (val === 'off' ? ' active-off' : '');
+  on.className = 'dp-toggle-btn' + (val === 'on' ? ' active-on' : '');
+  // Also sync the On Market field in the deal sheet
+  const el = document.getElementById('dsOnMarket');
+  if (el && (el.textContent === 'N/A' || el.textContent === '—')) {
+    el.textContent = val === 'on' ? 'Yes' : 'No';
+    el.className = 'ds-val';
+  }
+}
+
+// Sync deal page inputs → deal sheet ASK/ARV fields on blur
+['dpAsking','dpARV'].forEach(id => {
+  document.getElementById(id)?.addEventListener('blur', function() {
+    const target = id === 'dpAsking' ? 'dsASK' : 'dsARV';
+    const el = document.getElementById(target);
+    if (el && this.value.trim() && (el.textContent === 'N/A' || el.textContent === '—')) {
+      el.textContent = this.value.trim();
+      el.className = 'ds-val';
+    }
+  });
+});
+
+// Initialize deal ID on load
+updateDealId();
+
+// Updated downloadDealJson to include deal-generator fields
+function downloadDealPageJson() {
+  const d = window.dealData;
+  if (!d) return;
+  const p = d.property || {};
+
+  function parseDollar(str) {
+    if (!str) return null;
+    const n = Number(str.replace(/[^0-9.]/g, ''));
+    return isNaN(n) || n === 0 ? null : n;
+  }
+
+  function fmtDate(s) {
+    if (!s) return null;
+    const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (!m) return s;
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    return months[parseInt(m[1],10)-1] + ' ' + parseInt(m[2],10) + ', ' + m[3];
+  }
+
+  function getVal(id) {
+    const el = document.getElementById(id);
+    if (!el) return null;
+    const t = el.textContent.trim();
+    return (t === 'N/A' || t === '—' || t === '') ? null : t;
+  }
+
+  const asking  = parseDollar(document.getElementById('dpAsking')?.value);
+  const arv     = parseDollar(document.getElementById('dpARV')?.value);
+  const repairs = parseDollar(document.getElementById('dpRepairs')?.value);
+  const profit  = (arv && repairs && asking) ? arv - repairs - asking : null;
+
+  const dealData = {
+    dealId:          document.getElementById('dpDealId')?.value || '',
+    market:          marketToggle,
+    address:         p.address || null,
+    city:            p.city || null,
+    state:           p.state || null,
+    zip:             p.zip || null,
+    beds:            p.beds ? Number(p.beds) : null,
+    baths:           p.baths ? Number(p.baths) : null,
+    sqft:            p.sqft ? Number(String(p.sqft).replace(/,/g,'')) : null,
+    lotSize:         p.lotSize || null,
+    yearBuilt:       p.yearBuilt ? Number(p.yearBuilt) : null,
+    garage:          p.garage || null,
+    coeDate:         fmtDate(getVal('dsCOE')) || null,
+    askingPrice:     asking,
+    arv:             arv,
+    estRepairs:      repairs,
+    profitPotential: profit
+  };
+
+  const blob = new Blob([JSON.stringify(dealData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'deal-doc.txt'; a.click();
+}
+
+// ============================================================
+// MAKE DEAL SHEET EDITABLE
+// ============================================================
+function makeEditable() {
+  document.querySelectorAll('#dealSheet .ds-val, #dealSheet .ds-cond-val').forEach(el => {
+    el.addEventListener('click', function() {
+      if (this.querySelector('input')) return;
+      const current = this.textContent === 'N/A' || this.textContent === '—' ? '' : this.textContent;
+      const origClass = this.className;
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = current;
+      input.className = 'ds-edit-input';
+      this.textContent = '';
+      this.appendChild(input);
+      input.focus();
+      input.select();
+      const save = () => {
+        const val = input.value.trim();
+        this.className = origClass;
+        if (!val) {
+          this.textContent = 'N/A';
+          this.className = origClass.replace(/highlight|green/g, '').trim() + ' na';
+        } else {
+          this.textContent = val;
+        }
+      };
+      input.addEventListener('blur', save);
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') input.blur(); });
+    });
+  });
+}
+
+// ============================================================
+// PUSH TO GITHUB
+// ============================================================
+const GITHUB_TOKEN = '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';
+const GITHUB_REPO = '2wice23/goodresults';
+
+async function pushToGitHub() {
+  const btn = document.getElementById('githubBtn');
+  const status = document.getElementById('githubStatus');
+  btn.disabled = true;
+  status.textContent = 'Pushing to GitHub...';
+  status.className = 'status-line active';
+
+  try {
+    const d = window.dealData;
+    if (!d) throw new Error('No deal data to push');
+    const p = d.property || {};
+    const c = d.contract || {};
+    const a = d.agent || {};
+    const cond = d.condition || {};
+    const sol = d.solar || {};
+
+    // Build filename from address: "123 Main St" → "123-main-st.txt"
+    const streetAddr = p.address || 'unknown-address';
+    const slug = streetAddr.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const filePath = 'deals/' + slug + '.txt';
+
+    // Collect ALL current values from the rendered deal sheet (so edits are captured)
+    function getVal(id) {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const t = el.textContent.trim();
+      return (t === 'N/A' || t === '—' || t === '') ? null : t;
+    }
+
+    const dealContent = [
+      '═══════════════════════════════════════════════',
+      '  GOOD RESULTS HOME BUYERS — DEAL FILE',
+      '═══════════════════════════════════════════════',
+      '',
+      'Address:                  ' + (getVal('dsAddress') || '—'),
+      'Generated:                ' + new Date().toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}),
+      '',
+      '── CONTRACT & PRICING (Close CRM Fields) ─────',
+      'Current Contract Price:   ' + (getVal('dsCurrentContractPrice') || '—'),
+      'Wholesale Price:          ' + (getVal('dsWholesalePrice') || '—'),
+      'Official Offer Price:     ' + (getVal('dsOfficialOfferPrice') || '—'),
+      'ASK:                      ' + (getVal('dsASK') || '—'),
+      'ARV:                      ' + (getVal('dsARV') || '—'),
+      'MAO:                      ' + (getVal('dsMAO') || '—'),
+      'Closing Costs:            ' + (getVal('dsClosingCosts') || '—'),
+      'On Market?:               ' + (getVal('dsOnMarket') || '—'),
+      'Seller(s):                ' + (getVal('dsSeller') || '—'),
+      '',
+      '── KEY DATES (Close CRM Fields) ──────────────',
+      'Accepted Date:            ' + (getVal('dsAcceptedDate') || '—'),
+      'COE Date:                 ' + (getVal('dsCOE') || '—'),
+      'DD End Date:              ' + (getVal('dsDDEnd') || '—'),
+      'EMD Amount:               ' + (getVal('dsEMDAmount') || '—'),
+      'EMD Due Date:             ' + (getVal('dsEMDDue') || '—'),
+      '',
+      '── PROPERTY ──────────────────────────────────',
+      'Type:                     ' + (getVal('dsPropType') || '—'),
+      'Beds / Baths:             ' + (getVal('dsBedsAndBaths') || '—'),
+      'Sqft:                     ' + (getVal('dsSqft') || '—'),
+      'Lot Size:                 ' + (getVal('dsLotSize') || '—'),
+      'Year Built:               ' + (getVal('dsYearBuilt') || '—'),
+      'Garage:                   ' + (getVal('dsGarage') || '—'),
+      'Pool:                     ' + (getVal('dsPool') || '—'),
+      'Solar:                    ' + (getVal('dsSolar') || '—'),
+      '',
+      '── AGENT / REALTOR ───────────────────────────',
+      'Name:                     ' + (getVal('dsAgentName') || '—'),
+      'Phone:                    ' + (getVal('dsAgentPhone') || '—'),
+      'Email:                    ' + (getVal('dsAgentEmail') || '—'),
+      'Brokerage:                ' + (getVal('dsAgentBrokerage') || '—'),
+      '',
+      '── CONDITION NOTES ───────────────────────────',
+      'HVAC:                     ' + (getVal('dsHVAC') || '—'),
+      'Roof:                     ' + (getVal('dsRoof') || '—'),
+      'Foundation:               ' + (getVal('dsFoundation') || '—'),
+      'Plumbing:                 ' + (getVal('dsPlumbing') || '—'),
+      'Electrical:               ' + (getVal('dsElectrical') || '—'),
+      '',
+      '── NOTES ─────────────────────────────────────',
+      (document.getElementById('dsNotes')?.value.trim() || '(none)'),
+      '',
+      '═══════════════════════════════════════════════',
+    ].join('\n');
+
+    // Check if file already exists (to get SHA for update)
+    let sha = null;
+    try {
+      const checkResp = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + filePath, {
+        headers: { 'Accept': 'application/vnd.github.v3+json', 'Authorization': 'Bearer ' + GITHUB_TOKEN }
+      });
+      if (checkResp.ok) {
+        const existing = await checkResp.json();
+        sha = existing.sha;
+      }
+    } catch(e) {}
+
+    // Create or update the file
+    const body = {
+      message: 'Deal: ' + streetAddr + ' (' + new Date().toLocaleDateString() + ')',
+      content: btoa(unescape(encodeURIComponent(dealContent)))
+    };
+    if (sha) body.sha = sha;
+
+    const putResp = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + filePath, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/vnd.github.v3+json',
+        'Authorization': 'Bearer ' + GITHUB_TOKEN,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    if (!putResp.ok) {
+      const err = await putResp.json();
+      throw new Error(err.message || putResp.status);
+    }
+
+    btn.textContent = '✓ Pushed to GitHub';
+    btn.style.background = 'rgba(34,197,94,0.2)';
+    status.textContent = 'Saved to deals/' + slug + '.txt';
+    status.className = 'status-line active';
+
+  } catch(err) {
+    status.textContent = 'Error: ' + err.message;
+    status.className = 'status-line error';
+    btn.disabled = false;
+  }
+}
+// ============================================================
+// PUSH TO CLOSE CRM (via Netlify proxy — avoids CORS)
+// ============================================================
+
+// Helper: call Close API through the Netlify serverless proxy
+async function closeAPI(path, method, body) {
+  const resp = await fetch(CLOSE_PROXY, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ path, method: method || 'GET', body: body || null })
+  });
+  const text = await resp.text();
+  // If we get HTML back, the Netlify function isn't deployed yet
+  if (text.startsWith('<!') || text.startsWith('<html')) {
+    throw new Error('Close proxy not deployed — redeploy site to Netlify with the netlify.toml and netlify/functions/ folder');
+  }
+  let data;
+  try { data = JSON.parse(text); } catch(e) { throw new Error('Invalid response from proxy: ' + text.substring(0, 100)); }
+  if (!resp.ok || data.error) {
+    throw new Error(data.error || (data['field-errors'] ? JSON.stringify(data['field-errors']) : 'Close API error ' + resp.status));
+  }
+  return data;
+}
+
+async function pushToClose() {
+  const btn = document.getElementById('closeBtn');
+  const status = document.getElementById('closeStatus');
+  btn.disabled = true;
+  status.textContent = 'Searching Close CRM...';
+  status.className = 'status-line active';
+
+  try {
+    // Read current rendered values (captures inline edits)
+    function getVal(id) {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const t = el.textContent.trim();
+      return (t === 'N/A' || t === '—' || t === '') ? null : t;
+    }
+
+    // Strip $ and commas → cents for Close value field
+    function toCents(str) {
+      if (!str) return null;
+      const num = parseFloat(str.replace(/[$,]/g, ''));
+      return isNaN(num) ? null : Math.round(num * 100);
+    }
+
+    // MM/DD/YYYY → YYYY-MM-DD for Close date fields
+    function toISO(str) {
+      if (!str) return null;
+      const clean = str.replace(/\s*\(.*?\)\s*$/, '').trim();
+      const m = clean.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if (!m) return null;
+      return m[3] + '-' + m[1].padStart(2,'0') + '-' + m[2].padStart(2,'0');
+    }
+
+    const address = getVal('dsAddress');
+    if (!address) throw new Error('No address found in deal sheet');
+
+    const streetAddr = (window.dealData?.property?.address || address.split(',')[0]).trim();
+
+    // Step 1: Search leads by address
+    status.textContent = 'Searching for lead by address...';
+    const searchData = await closeAPI(
+      '/lead/?query=' + encodeURIComponent(streetAddr) + '&_fields=id,display_name,opportunities&_limit=5',
+      'GET'
+    );
+    const leads = searchData.data || [];
+
+    if (leads.length === 0) throw new Error('No lead found matching "' + streetAddr + '"');
+
+    // Step 2: Find opportunity in Properties pipeline
+    let targetOpp = null;
+    let matchedLead = null;
+
+    for (const lead of leads) {
+      const opps = lead.opportunities || [];
+      const pipelineOpp = opps.find(o => o.pipeline_id === CLOSE_PIPELINE);
+      if (pipelineOpp) {
+        targetOpp = pipelineOpp;
+        matchedLead = lead;
+        break;
+      }
+      if (!targetOpp && opps.length > 0) {
+        targetOpp = opps[0];
+        matchedLead = lead;
+      }
+    }
+
+    if (!targetOpp) throw new Error('No opportunity found on lead "' + leads[0].display_name + '"');
+
+    status.textContent = 'Found opp on "' + matchedLead.display_name + '" — updating...';
+
+    // Step 3: Build update payload — each value goes to its own Close custom field
+    const updatePayload = {};
+
+    // Helper: set custom field only if value exists
+    function setCF(cfKey, val) { if (val) updatePayload['custom.' + CF[cfKey]] = val; }
+
+    // All 14 custom fields mapped to deal sheet element IDs
+    setCF('address',              getVal('dsAddress'));
+    setCF('currentContractPrice', getVal('dsCurrentContractPrice'));
+    setCF('wholesalePrice',       getVal('dsWholesalePrice'));
+    setCF('officialOfferPrice',   getVal('dsOfficialOfferPrice'));
+    setCF('ask',                  getVal('dsASK'));
+    setCF('arv',                  getVal('dsARV'));
+    setCF('mao',                  getVal('dsMAO'));
+    setCF('closingCosts',         getVal('dsClosingCosts'));
+    setCF('onMarket',             getVal('dsOnMarket'));
+    setCF('acceptedDate',         getVal('dsAcceptedDate'));
+    setCF('coeDate',              getVal('dsCOE'));
+    setCF('ddEndDate',            getVal('dsDDEnd'));
+    setCF('emdAmount',            getVal('dsEMDAmount'));
+    setCF('emdDueDate',           getVal('dsEMDDue'));
+
+    // Standard opportunity fields
+    const price = getVal('dsCurrentContractPrice');
+    const valueCents = toCents(price);
+    if (valueCents) updatePayload.value = valueCents;
+
+    const coe = getVal('dsCOE');
+    if (coe) updatePayload.date_won = toISO(coe);
+
+    // Note: just address + user notes (all structured data goes to custom fields now)
+    const noteLines = [streetAddr];
+    const userNotes = document.getElementById('dsNotes')?.value.trim();
+    if (userNotes) { noteLines.push(''); noteLines.push(userNotes); }
+    // Add property details to note since they don't have Close fields
+    noteLines.push('');
+    noteLines.push([getVal('dsPropType'), getVal('dsBedsAndBaths'), getVal('dsSqft')].filter(Boolean).join(' | '));
+    noteLines.push(['Year: ' + (getVal('dsYearBuilt') || '—'), 'Lot: ' + (getVal('dsLotSize') || '—')].join(' | '));
+    noteLines.push(['Pool: ' + (getVal('dsPool') || '—'), 'Solar: ' + (getVal('dsSolar') || '—'), 'Garage: ' + (getVal('dsGarage') || '—')].join(' | '));
+    const agentName = getVal('dsAgentName');
+    if (agentName) noteLines.push('Agent: ' + agentName + ' | ' + (getVal('dsAgentPhone') || '—'));
+    updatePayload.note = noteLines.join('\n');
+
+    // Step 4: PUT to update the opportunity via proxy
+    await closeAPI('/opportunity/' + targetOpp.id + '/', 'PUT', updatePayload);
+
+    btn.textContent = '✓ Pushed to Close';
+    btn.style.background = 'rgba(99,102,241,0.25)';
+    status.textContent = 'Updated opp on "' + matchedLead.display_name + '"';
+    status.className = 'status-line active';
+
+  } catch(err) {
+    status.textContent = 'Error: ' + err.message;
+    status.className = 'status-line error';
+    btn.disabled = false;
+  }
+}
+// ============================================================
+// PHOTO UPLOADS FOR DEAL PAGE
+// ============================================================
+const dealPhotos = []; // Array of { name, dataUrl, base64, type }
+
+function handlePhotos(fileList) {
+  Array.from(fileList).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      // Extract base64 content (strip "data:image/jpeg;base64," prefix)
+      const base64 = dataUrl.split(',')[1];
+      // Generate a clean filename: pad to 2 digits based on order
+      const ext = file.name.split('.').pop().toLowerCase();
+      const num = String(dealPhotos.length + 1).padStart(2, '0');
+      const safeName = num + '.' + ext;
+      dealPhotos.push({ name: safeName, originalName: file.name, dataUrl, base64, type: file.type });
+      renderPhotoThumbs();
+    };
+    reader.readAsDataURL(file);
+  });
+  // Reset the input so same files can be re-added
+  document.getElementById('photoInput').value = '';
+}
+
+function removePhoto(idx) {
+  dealPhotos.splice(idx, 1);
+  // Re-number remaining photos
+  dealPhotos.forEach((p, i) => {
+    const ext = p.originalName.split('.').pop().toLowerCase();
+    p.name = String(i + 1).padStart(2, '0') + '.' + ext;
+  });
+  renderPhotoThumbs();
+}
+
+function renderPhotoThumbs() {
+  const container = document.getElementById('photoThumbs');
+  const countLabel = document.getElementById('photoCountLabel');
+  if (!dealPhotos.length) {
+    container.innerHTML = '';
+    countLabel.style.display = 'none';
+    return;
+  }
+  countLabel.style.display = 'block';
+  countLabel.textContent = dealPhotos.length + ' photo' + (dealPhotos.length !== 1 ? 's' : '') + ' ready to upload';
+  container.innerHTML = dealPhotos.map((p, i) =>
+    '<div class="photo-thumb">' +
+      '<img src="' + p.dataUrl + '" alt="' + p.name + '">' +
+      '<button class="photo-thumb-remove" onclick="removePhoto(' + i + ')">&#x2715;</button>' +
+    '</div>'
+  ).join('');
+}
+
+// Drag & drop support for photo zone
+(function() {
+  const drop = document.getElementById('photoDrop');
+  if (!drop) return;
+  ['dragenter','dragover'].forEach(evt => {
+    drop.addEventListener(evt, function(e) { e.preventDefault(); drop.classList.add('drag-over'); });
+  });
+  ['dragleave','drop'].forEach(evt => {
+    drop.addEventListener(evt, function(e) { e.preventDefault(); drop.classList.remove('drag-over'); });
+  });
+  drop.addEventListener('drop', function(e) {
+    if (e.dataTransfer.files.length) handlePhotos(e.dataTransfer.files);
+  });
+})();
+
+// ============================================================
+// CREATE DEAL PAGE (pushes index.html + deal-doc.txt + photos to GitHub)
+// ============================================================
+async function createDealPage() {
+  const btn = document.getElementById('dealPageBtn');
+  const status = document.getElementById('dealPageStatus');
+  btn.disabled = true;
+  status.textContent = 'Creating deal page...';
+  status.className = 'status-line active';
+
+  try {
+    const d = window.dealData;
+    if (!d) throw new Error('No deal data — extract a contract first');
+    const p = d.property || {};
+
+    // Build slug from address
+    const streetAddr = p.address || 'unknown-address';
+    const slug = streetAddr.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+    // Helper to parse dollar strings to numbers
+    function parseDollar(str) {
+      if (!str) return null;
+      const n = Number(str.replace(/[^0-9.]/g, ''));
+      return isNaN(n) || n === 0 ? null : n;
+    }
+
+    function fmtDate(s) {
+      if (!s) return null;
+      const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if (!m) return s;
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      return months[parseInt(m[1],10)-1] + ' ' + parseInt(m[2],10) + ', ' + m[3];
+    }
+
+    function getVal(id) {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const t = el.textContent.trim();
+      return (t === 'N/A' || t === '—' || t === '') ? null : t;
+    }
+
+    const asking  = parseDollar(document.getElementById('dpAsking')?.value);
+    const arv     = parseDollar(document.getElementById('dpARV')?.value);
+    const repairs = parseDollar(document.getElementById('dpRepairs')?.value);
+
+    // Build deal-doc.txt JSON
+    const dealJson = {
+      dealId:       document.getElementById('dpDealId')?.value || '',
+      market:       marketToggle,
+      address:      p.address || null,
+      city:         p.city || null,
+      state:        p.state || null,
+      zip:          p.zip || null,
+      beds:         p.beds ? Number(p.beds) : null,
+      baths:        p.baths ? Number(p.baths) : null,
+      sqft:         p.sqft ? Number(String(p.sqft).replace(/,/g,'')) : null,
+      lotSize:      p.lotSize || null,
+      yearBuilt:    p.yearBuilt ? Number(p.yearBuilt) : null,
+      garage:       p.garage || null,
+      coeDate:      fmtDate(getVal('dsCOE')) || null,
+      askingPrice:  asking,
+      arv:          arv,
+      estRepairs:   repairs
+    };
+
+    status.textContent = 'Fetching template...';
+
+    // Step 1: Fetch template from the live site (same origin), fallback to GitHub API
+    let templateContent;
+    try {
+      const siteResp = await fetch('/deals/_template.html');
+      if (!siteResp.ok) throw new Error('site fetch failed');
+      const tplText = await siteResp.text();
+      templateContent = btoa(unescape(encodeURIComponent(tplText)));
+    } catch(e) {
+      const tplResp = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/deals/_template.html', {
+        headers: { 'Accept': 'application/vnd.github.v3+json', 'Authorization': 'Bearer ' + GITHUB_TOKEN }
+      });
+      if (!tplResp.ok) throw new Error('Could not fetch template: ' + tplResp.status);
+      const tplData = await tplResp.json();
+      templateContent = tplData.content.replace(/\n/g, '');
+    }
+
+    // Helper: push or update a file on GitHub
+    async function pushFile(filePath, contentBase64, commitMsg) {
+      let sha = null;
+      try {
+        const check = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + filePath, {
+          headers: { 'Accept': 'application/vnd.github.v3+json', 'Authorization': 'Bearer ' + GITHUB_TOKEN }
+        });
+        if (check.ok) { const existing = await check.json(); sha = existing.sha; }
+      } catch(e) {}
+
+      const body = { message: commitMsg, content: contentBase64 };
+      if (sha) body.sha = sha;
+
+      const resp = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + filePath, {
+        method: 'PUT',
+        headers: { 'Accept': 'application/vnd.github.v3+json', 'Authorization': 'Bearer ' + GITHUB_TOKEN, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      if (!resp.ok) {
+        const err = await resp.json();
+        throw new Error(err.message || resp.status);
+      }
+      return resp;
+    }
+
+    // Step 2: Push index.html (the template) into deals/{slug}/
+    status.textContent = 'Pushing deal page template...';
+    await pushFile(
+      'deals/' + slug + '/index.html',
+      templateContent,
+      'Deal page: ' + streetAddr + ' (template)'
+    );
+
+    // Step 3: Push deal-doc.txt (the JSON data) into deals/{slug}/
+    status.textContent = 'Pushing deal data...';
+    const jsonB64 = btoa(unescape(encodeURIComponent(JSON.stringify(dealJson, null, 2))));
+    await pushFile(
+      'deals/' + slug + '/deal-doc.txt',
+      jsonB64,
+      'Deal page: ' + streetAddr + ' (data)'
+    );
+
+    // Step 4: Push photos (if any) into deals/{slug}/
+    if (dealPhotos.length) {
+      for (let i = 0; i < dealPhotos.length; i++) {
+        const photo = dealPhotos[i];
+        status.textContent = 'Uploading photo ' + (i + 1) + ' of ' + dealPhotos.length + '...';
+        await pushFile(
+          'deals/' + slug + '/' + photo.name,
+          photo.base64,
+          'Deal page: ' + streetAddr + ' (photo ' + photo.name + ')'
+        );
+      }
+    }
+
+    // Done!
+    const liveUrl = 'https://www.goodresults.org/deals/' + slug + '/';
+    btn.innerHTML = '&#x2713; Deal Page Created';
+    btn.style.background = 'rgba(168,85,247,0.2)';
+    const photoNote = dealPhotos.length ? ' &middot; ' + dealPhotos.length + ' photos' : '';
+    status.innerHTML = '<a href="' + liveUrl + '" target="_blank" style="color:var(--green);text-decoration:underline;">' + liveUrl + '</a>' + photoNote;
+    status.className = 'status-line active';
+
+  } catch(err) {
+    status.textContent = 'Error: ' + err.message;
+    status.className = 'status-line error';
+    btn.disabled = false;
+  }
+}
+</script>
+
+</body>
+</html>
