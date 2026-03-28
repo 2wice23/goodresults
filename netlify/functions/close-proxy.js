@@ -33,7 +33,7 @@ exports.handler = async (event) => {
     };
 
     const fetchOpts = { method: fetchMethod, headers };
-    if (body && (fetchMethod === 'PUT' || fetchMethod === 'POST')) {
+    if (body && (fetchMethod === 'PUT' || fetchMethod === 'POST' || fetchMethod === 'PATCH')) {
       fetchOpts.body = JSON.stringify(body);
     }
 
