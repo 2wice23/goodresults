@@ -160,13 +160,13 @@ footer p{font-size:12px;color:rgba(255,255,255,.3);}
   <div class="cta-inner">
     <div class="cta-text">
       <h2>Interested in <span class="accent">This Deal</span>?</h2>
-      <p>Reach out to Gayden directly &mdash; no middlemen, no runaround. Cash offers, fast closes.</p>
+      <p>We appreciate our partners and friends extensively &mdash; please reach out to whoever sent you this deal first. If they don't respond, contact us directly.</p>
       <div class="cta-contact">
-        <a href="tel:+14153198261">&#x1F4DE; (415) 319-8261</a>
-        <a href="mailto:gayden@goodresults.org">&#x2709; gayden@goodresults.org</a>
+        <a id="ctaPhone" href="tel:+12819905932">&#x1F4DE; (281) 990-5932</a>
+        <a href="mailto:contracts@goodresults.org">&#x2709; contracts@goodresults.org</a>
       </div>
     </div>
-    <a href="mailto:gayden@goodresults.org?subject=Deal%20Inquiry" class="cta-btn">Email Gayden &rarr;</a>
+    <a href="mailto:contracts@goodresults.org?subject=Deal%20Inquiry" class="cta-btn">Email Us &rarr;</a>
   </div>
 </div>
 
@@ -207,6 +207,20 @@ function renderDeal(d) {
   el('heroTitle').textContent = heroTitle;
   if (fullAddr) { el('heroAddress').textContent = fullAddr; el('heroAddress').style.display = 'block'; }
   el('heroTagline').style.display = 'block';
+
+  // Set phone number based on deal location
+  var city = (d.city || '').toLowerCase().trim();
+  var state = (d.state || '').toUpperCase().trim();
+  var phone, phoneFormatted;
+  if (state === 'NV' && (city === 'las vegas' || city === 'north las vegas' || city === 'henderson' || city === 'boulder city' || city === 'mesquite' || city === 'pahrump')) {
+    phone = '+17029356091'; phoneFormatted = '(702) 935-6091';
+  } else if (state === 'NV') {
+    phone = '+17753149975'; phoneFormatted = '(775) 314-9975';
+  } else {
+    phone = '+12819905932'; phoneFormatted = '(281) 990-5932';
+  }
+  var ctaPhone = el('ctaPhone');
+  if (ctaPhone) { ctaPhone.href = 'tel:' + phone; ctaPhone.innerHTML = '\uD83D\uDCDE ' + phoneFormatted; }
 
   // Numbers bar
   var cards = [];
