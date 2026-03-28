@@ -34,7 +34,7 @@ Pool:                     No
 Solar:                    No
 
 ── AGENT / REALTOR ───────────────────────────
-Name:                     —
+Name:                     javier gallard
 Phone:                    —
 Email:                    jag0211@gmail.com
 Brokerage:                —
