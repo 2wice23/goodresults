@@ -29,12 +29,12 @@ Beds / Baths:             4 bed / 2 bath
 Sqft:                     1,700 sqft
 Lot Size:                 8,782 sqft
 Year Built:               1949
-Garage:                   Yes
+Garage:                   —
 Pool:                     No
 Solar:                    No
 
 ── AGENT / REALTOR ───────────────────────────
-Name:                     javier gallardo
+Name:                     —
 Phone:                    —
 Email:                    jag0211@gmail.com
 Brokerage:                —
@@ -47,6 +47,6 @@ Plumbing:                 —
 Electrical:               —
 
 ── NOTES ─────────────────────────────────────
-testies 123 tesies 123
+(none)
 
 ═══════════════════════════════════════════════
