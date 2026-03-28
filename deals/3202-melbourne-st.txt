@@ -2,18 +2,18 @@
   GOOD RESULTS HOME BUYERS — DEAL FILE
 ═══════════════════════════════════════════════
 
-Address:                  3202 Melbourne St, Houston, TX, 77026
+Address:                  123 main st
 Generated:                Mar 28, 2026
 
 ── CONTRACT & PRICING (Close CRM Fields) ─────
 Current Contract Price:   $157,000
-Wholesale Price:          160,000
-Official Offer Price:     157,000
-ASK:                      157,000
-ARV:                      265,000
-MAO:                      157,000
-Closing Costs:            Buyer to cover all traditional closing costs
-On Market?:               Yes
+Wholesale Price:          160000
+Official Offer Price:     —
+ASK:                      —
+ARV:                      —
+MAO:                      —
+Closing Costs:            —
+On Market?:               —
 Seller(s):                Golden Door Real Estate, Inc.
 
 ── KEY DATES (Close CRM Fields) ──────────────
@@ -34,19 +34,19 @@ Pool:                     No
 Solar:                    No
 
 ── AGENT / REALTOR ───────────────────────────
-Name:                     Javier Gallardo
-Phone:                    +18326432490
+Name:                     joe mama
+Phone:                    —
 Email:                    jag0211@gmail.com
 Brokerage:                —
 
 ── CONDITION NOTES ───────────────────────────
-HVAC:                     Needs replacement
-Roof:                     12 years old
+HVAC:                     —
+Roof:                     —
 Foundation:               —
 Plumbing:                 —
 Electrical:               —
 
 ── NOTES ─────────────────────────────────────
-Primarily cosmetic updates needed
+(none)
 
 ═══════════════════════════════════════════════
