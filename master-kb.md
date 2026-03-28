@@ -159,12 +159,12 @@ Every realtor should hear this within the first 30 seconds of a call.
 
 These signal to realtors that we're trying to pass the contract without closing. They will refuse to work with us.
 
-\#\#\# EXCEPTION — "Fix and flip" on calls ONLY:  
-\*\*"Fix and flip" CAN be said on phone calls occasionally as conversational language.\*\*  
-\- Example: "I'm looking for properties that are good fix and flip candidates."  
-\- But it should NOT be the basis of your pitch or cold opener  
-\- Acceptable because it's natural speech, not positioning language  
-\- Never use in SMS or email
+\#\#\# EXCEPTION — "Fix and flip" OK everywhere except first cold SMS:
+\*\*"Fix and flip" is OK to use conversationally on calls and warm follow-up SMS.\*\*
+\- Use it naturally in conversation
+\- NOT the basis of your pitch or cold opener
+\- Acceptable because it's natural speech, not positioning language
+\- Exception: DO NOT use in the first cold SMS text (initial outreach to new realtors)
 
 \#\#\# NEVER Use in SMS (OK to say on calls only):  
 \- "Cash buyer"  
@@ -1570,7 +1570,7 @@ Both the option fee AND earnest money are due at end of the option/DD period (no
 
 \[SOURCE: Call Analyzer KB SECTION 4, SECTION 5\]
 
-\#\#\# Scoring Categories (1-10 scale):
+\#\#\# Scoring Categories (1-100 scale):
 
 \*\*1. OPENER QUALITY\*\*  
 \- Did agent clearly state their own name?  
@@ -1662,7 +1662,7 @@ Both the option fee AND earnest money are due at end of the option/DD period (no
 
 \#\#\# Agent-Specific Coaching Flags
 
-\*\*Frank Ladaga — Frank is brand new and has not made any calls yet.\*\* Score his early calls with an emphasis on fundamentals: did he state his name, deliver the buy box, avoid forbidden language, and set a next step? Do not expect advanced techniques like live comps, objection reframing, or deal-level negotiation yet. Praise any correct structural execution — even basic stuff done right matters at this stage. Flag the same core issues as any other agent (forbidden language, no buy box, no next step) but frame coaching as building habits, not correcting bad ones. As transcripts come in, this section will be updated with Frank-specific patterns.
+\*\*Frank Ladaga — Frank now has 5 analyzed calls with an average score of 31.4/100. He is still in early training and struggling with fundamentals.\*\* Score his early calls with an emphasis on fundamentals: did he state his name, deliver the buy box, avoid forbidden language, and set a next step? Do not expect advanced techniques like live comps, objection reframing, or deal-level negotiation yet. Praise any correct structural execution — even basic stuff done right matters at this stage. Flag the same core issues as any other agent (forbidden language, no buy box, no next step) but frame coaching as building habits, not correcting bad ones. As transcripts come in, this section will be updated with Frank-specific patterns.
 
 \*\*Gayden Rosales — Flag any instances where Gayden talks over the realtor, interrupts mid-sentence, or speaks for extended stretches without letting the realtor respond.\*\* Gayden's natural energy and knowledge can lead to over-talking. If the transcript shows him cutting in before the realtor finishes a thought, flag it directly. This is a priority coaching point for him and should be called out even on otherwise excellent calls. Score it under CONVERSATION QUALITY.
 

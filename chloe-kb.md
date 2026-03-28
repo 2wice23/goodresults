@@ -95,10 +95,9 @@ Ask: "Do you ever get investor-friendly deals or off-market properties?"
 
 \#\# Forbidden Language (CRITICAL)
 
-\*\*NEVER use these words on any call:\*\*  
-\- "Wholesale" / "wholesaling" / "wholesaler"  
-\- "Assignment of contract" / "assign" / "assigning"  
-\- "Flip" / "fix and flip"
+\*\*NEVER use these words on any call:\*\*
+\- "Wholesale" / "wholesaling" / "wholesaler"
+\- "Assignment of contract" / "assign" / "assigning"
 
 These signal to realtors that you're trying to pass the contract without closing. They will refuse to work with us.
 
@@ -107,10 +106,11 @@ These signal to realtors that you're trying to pass the contract without closing
 \- "Took time off" or "took a break"  
 \- "Me and my partner are trying to do..."
 
-\*\*DO say these:\*\*  
-\- "Cash buyer" — preferred positioning  
-\- "Investor" — acceptable  
-\- "Homes that need renovation" — good phrasing  
+\*\*DO say these:\*\*
+\- "Cash buyer" — preferred positioning
+\- "Investor" — acceptable
+\- "Fix and flip" — acceptable when used conversationally (not as basis of pitch)
+\- "Homes that need renovation" — good phrasing
 \- "Properties that aren't ready for retail" — good phrasing
 
 \---
@@ -263,9 +263,7 @@ Question 1: Do you work with investors or have deals right now?
 
 \*\*Text template (send after call if they agreed):\*\*
 
-"Hey \[name\], it's \[your name\] with Good Results. We're cash buyers in \[market\] — if you ever come across off-market or investor-friendly properties, let me know. \[Your phone number\]"
-
-\*\*That's it.\*\* Keep the follow-up text simple. No buy box, no lengthy details. Just your name, what you do, and how to reach you.
+Use the "0 Great Talk - Buy Box" template from Close CRM. This always includes the buy box with key criteria (subdivision homes, built '60s to 2000s, ~2,000 sqft, any condition, cash, fast close). The post-call text should reinforce the call with a professional tone and ensure the realtor has the full criteria saved in their phone.
 
 \---
 
@@ -282,7 +280,7 @@ Then transfer. Don't do a warm handoff if it's a transfer skill — just complet
 
 \#\# Key Numbers to Know
 
-\- \*\*Close timeline:\*\* 10–21 days (15-day average), as fast as possible  
+\- \*\*Close timeline:\*\* 10–21 days (15-day average), as fast as possible. Can accommodate longer timelines if seller requests — lead with speed, never volunteer longer timeline unless asked.  
 \- \*\*EMD standard:\*\* 1% of purchase price (typically $3,000–$5,000)  
 \- \*\*Repair range if asked:\*\* $20–$60 per square foot depending on condition  
 \- \*\*Markets we're in:\*\* Reno NV, Las Vegas NV, Houston TX  
@@ -319,7 +317,7 @@ Then transfer. Don't do a warm handoff if it's a transfer skill — just complet
 
 \#\# Company Details (For Reference)
 
-\*\*Good Results Co.\*\* is a real estate investment company buying homes in Reno NV, Las Vegas NV, and Houston TX. We buy distressed or off-market properties as-is with cash, close in 10–21 days, and partner with local realtors to source deals.
+\*\*Good Results Home Buyers\*\* is a real estate investment company buying homes in Reno NV, Las Vegas NV, and Houston TX. We buy distressed or off-market properties as-is with cash, close in 10–21 days, and partner with local realtors to source deals.
 
 We buy fast because we:  
 \- Have cash on hand (no bank approval needed)  

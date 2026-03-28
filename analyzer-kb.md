@@ -50,7 +50,7 @@ ACCEPTABLE LANGUAGE:
 
 # **\==================================== SECTION 4: SCORING CRITERIA**
 
-Score each category 1-10:
+Score each category 1-100:
 
 1. OPENER QUALITY Did the agent clearly state their own name? (This is important Ã¢ÂÂ the agent must say their name.) Mentioning the company name is NOT required and should NOT affect the score. Did they provide context for calling? Did they reference a prior conversation specifically (not vaguely)? Did they AVOID asking "are you still a realtor?"  
 2. BUY BOX DELIVERY Did the agent deliver the buy box verbally on the call? Key elements: subdivision homes, '60s to 2000s, \~2,000 sqft, any condition, cash, fast close. Commission is NOT a required element of the buy box delivery Ã¢ÂÂ see category 6\. Deferring to email alone \= low score. Not delivering at all \= very low score.  
@@ -78,13 +78,13 @@ ADDITIONAL SCORING CONTEXT:
 
 # **\==================================== SECTION 5: GRADING SCALE**
 
-* A: 8+ average across all scored categories. Call is a model for training.  
-* B+: 7-7.9 average. Strong call with minor improvements needed.  
-* B: 6-6.9 average. Solid fundamentals, clear areas to tighten.  
-* B-: 5.5-5.9 average. Decent effort but missing key elements.  
-* C+: 4.5-5.4 average. Significant gaps in structure or execution.  
-* C: 3.5-4.4 average. Major coaching needed.  
-* C-: Below 3.5. Fundamental rework required.
+* A: 80+ average across all scored categories. Call is a model for training.  
+* B+: 70-79 average. Strong call with minor improvements needed.  
+* B: 60-69 average. Solid fundamentals, clear areas to tighten.  
+* B-: 55-59 average. Decent effort but missing key elements.  
+* C+: 45-54 average. Significant gaps in structure or execution.  
+* C: 35-44 average. Major coaching needed.  
+* C-: Below 35. Fundamental rework required.
 
 # **\==================================== SECTION 6: CALL TYPES**
 
@@ -106,7 +106,7 @@ ESTABLISHED RELATIONSHIP CHECK-IN Ã¢ÂÂ Periodic outreach to a realtor yo
 
 NEGATIVE PATTERNS (flag these):
 
-* Asking "are you still a realtor?" Ã¢ÂÂ wastes time, confuses people, triggers suspicion  
+* Asking "are you still a realtor?" as a cold opener — wastes time, triggers suspicion. Can be used occasionally mid-call as provocation.
 * Using "wholesale," "wholesaler," or "assignment of contract"  
 * Saying "just moved here" or "just got here" Ã¢ÂÂ undermines credibility  
 * Saying "took time off" or "took a break from real estate" Ã¢ÂÂ undermines credibility  

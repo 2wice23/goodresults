@@ -86,7 +86,7 @@ WHAT CHANGED THIS CYCLE (2026-03-26 — Cycle 1): No content changes this cycle.
 
 \#\# COMPANY OVERVIEW
 
-\*\*Good Results Home Buyers\*\* is a cash buyer that acquires distressed single-family homes as-is, renovates them through our construction arm, and resells to retail buyers. We operate in Nevada (Reno, Las Vegas) and Texas (Houston). We buy fast (10–21 days, 15-day average), close with certainty, and build long-term relationships with realtors.
+\*\*Good Results Home Buyers\*\* is a cash buyer that acquires distressed single-family homes as-is. Post-acquisition strategy depends on the deal — could be renovation and flip, group home conversion, or other strategies. Rental holds only happen when a property doesn't sell on the open market quickly enough — never the plan going in. We operate in Nevada (Reno, Las Vegas) and Texas (Houston). We buy fast (10–21 days, 15-day average), close with certainty, and build long-term relationships with realtors.
 
 \*\*Legal Entities:\*\*  
 \- \*\*Nevada:\*\* Good Results LLC (signer: Gayden Rosales, Managing Member)  
@@ -131,18 +131,22 @@ Every realtor should hear this within the first 30 seconds of a call.
 \- Nevada: Reno/Sparks metro, Las Vegas/Henderson metro  
 \- Texas: Houston metro
 
-\*\*Standard Closing Timeline:\*\* 10–21 days from contract signing (15-day average). Pitch it honestly to realtors — "as fast as possible, usually 10 to 21 days."
+\*\*Standard Closing Timeline:\*\* 10–21 days from contract signing (15-day average). Pitch it honestly to realtors — "as fast as possible, usually 10 to 21 days." We CAN close on longer timelines if the seller requests it — simply accommodate. Most sellers want to close as fast as possible, so lead with speed. Never volunteer a longer timeline unless the seller brings it up.
 
 \---
 
 \#\# FORBIDDEN LANGUAGE (CRITICAL)
 
-\*\*NEVER use in ANY communication — calls, SMS, email, text:\*\*  
-\- "Wholesale" / "wholesaling" / "wholesaler"  
-\- "Assignment of contract" / "assign" / "assigning"  
-\- "Flip" / "fix and flip"
+\*\*NEVER use in ANY communication — calls, SMS, email, text:\*\*
+\- "Wholesale" / "wholesaling" / "wholesaler"
+\- "Assignment of contract" / "assign" / "assigning"
 
 These signal to realtors that we're trying to pass the contract without closing. They will refuse to work with us.
+
+\*\*EXCEPTION — "Fix and flip" is acceptable:\*\*
+\- OK to use conversationally on calls and warm follow-up SMS
+\- NOT the basis of your pitch or cold opener
+\- Never use in first cold outreach text to new realtors
 
 \*\*NEVER use in SMS (OK to say on calls only):\*\*  
 \- "Cash buyer"  
@@ -150,11 +154,12 @@ These signal to realtors that we're trying to pass the contract without closing.
 
 These words in text form are red flags. SMS should open pathways to calls. Calls get deals.
 
-\*\*Acceptable language on calls:\*\*  
-\- "Cash buyer" — preferred positioning  
-\- "Investor" — acceptable  
-\- "Homes that need renovation" — good phrasing  
-\- "Properties that aren't ready for retail" — good phrasing  
+\*\*Acceptable language on calls:\*\*
+\- "Cash buyer" — preferred positioning
+\- "Investor" — acceptable
+\- "Fix and flip" — acceptable when used conversationally (not as basis of pitch)
+\- "Homes that need renovation" — good phrasing
+\- "Properties that aren't ready for retail" — good phrasing
 \- "We go through about 60 homes a year between Nevada and Texas" — builds credibility
 
 \*\*NEVER mention commission to realtors proactively.\*\* Don't bring it up. If they ask, confirm they can still earn theirs — but don't lead with it.
@@ -360,7 +365,7 @@ This is the \#1 skill. Realtors who feel understood bring repeat deals.
 
 | Objection | Response |  
 |-----------|----------|  
-| "I need you to walk the property first" | "I'm not a contractor. I pay someone to hang pictures at my house. My contractors charge $600–800 a day. I need to be in contract before I can send contractors. If we agree on price, I get you a 5–7 day DD and my guys will be there next day." |  
+| "I need you to walk the property first" | See "The Walkthrough Objection" section below for full canonical script and shorter version. |  
 | "My seller wants a higher price" | "I totally get it. I hope they get it. Let me know if it doesn't work out — I'll be here." |  
 | "I only work with owner-occupants" | Acknowledge, get permission to reach out if they get something investor-friendly, and move on. |  
 | "What's your offer based on?" | Share your reasoning (ARV, repair estimate, market data). Never share MAO. |  
@@ -375,7 +380,7 @@ If they say no and won't budge — don't write the contract. Save everyone's tim
 \#\#\# CRITICAL — Scoring Patterns on Calls (From Call Analyzer)
 
 \*\*Negative patterns (flag these):\*\*  
-\- Asking "are you still a realtor?" — wastes time, confuses people, triggers suspicion  
+\- Asking "are you still a realtor?" as a cold opener — wastes time, triggers suspicion. Can be used occasionally mid-call as provocation.  
 \- Using "wholesale," "wholesaler," "assign," or "flip/fix and flip"  
 \- Saying "just moved here" or "just got here" — undermines credibility  
 \- Saying "took time off" or "took a break" — undermines credibility  
@@ -451,8 +456,10 @@ The option fee is a valid, legal amount. Some realtors push back. Stay calm.
 
 If a seller absolutely won't accept $1 and won't budge on assignment language, escalate to Gayden.
 
-\#\#\# The Walkthrough Objection (Full Script)  
+\#\#\# The Walkthrough Objection (Full Script — CANONICAL)
 \> "I'm not a contractor. I barely own a hammer. Me walking through the property doesn't tell me anything useful. My contractors charge $600–800 a day. In order to send my contractor, I need to be in contract first — otherwise I'm spending a thousand bucks on inspections to find out we can't even agree on a price. That doesn't make sense at the volume I operate. Give me a 5-day DD and my contractor is there tomorrow morning."
+
+A shorter version works too depending on how much explanation the realtor needs: "I pay someone to hang pictures at my house. My contractors charge $600–800/day. Need to be in contract first. 5-day DD, guys there next day."
 
 \#\#\# Due Diligence / Inspection  
 When asked about inspections during DD:  
