@@ -1,0 +1,47 @@
+═══════════════════════════════════════════════
+  GOOD RESULTS HOME BUYERS — DEAL FILE
+═══════════════════════════════════════════════
+
+Address:          3202 Melbourne St, Houston, TX, 77026
+Generated:        Mar 28, 2026
+
+── CONTRACT ──────────────────────────────────
+Purchase Price:   $157,000
+Wholesale Price:  —
+Executed Date:    03/27/2026
+Seller(s):        Golden Door Real Estate, Inc.
+On Market:        —
+
+── KEY DATES ─────────────────────────────────
+COE Date:         04/08/2026
+DD End Date:      04/03/2026  (7 days)
+EMD Amount:       $3,000
+EMD Due Date:     03/30/2026  (3 days)
+
+── PROPERTY ──────────────────────────────────
+Type:             SFR
+Beds / Baths:     4 bed / 2 bath
+Sqft:             1,700 sqft
+Lot Size:         8,782 sqft
+Year Built:       1949
+Garage:           —
+Pool:             No
+Solar:            No
+
+── AGENT / REALTOR ───────────────────────────
+Name:             —
+Phone:            —
+Email:            jag0211@gmail.com
+Brokerage:        —
+
+── CONDITION NOTES ───────────────────────────
+HVAC:             —
+Roof:             —
+Foundation:       —
+Plumbing:         —
+Electrical:       —
+
+── NOTES ─────────────────────────────────────
+(none)
+
+═══════════════════════════════════════════════
