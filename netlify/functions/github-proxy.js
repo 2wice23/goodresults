@@ -31,7 +31,7 @@ exports.handler = async (event) => {
     };
 
     const fetchOpts = { method: fetchMethod, headers };
-    if (body && (fetchMethod === 'PUT' || fetchMethod === 'POST' || fetchMethod === 'PATCH')) {
+    if (body && (fetchMethod === 'PUT' || fetchMethod === 'POST' || fetchMethod === 'PATCH' || fetchMethod === 'DELETE')) {
       fetchOpts.body = JSON.stringify(body);
       headers['Content-Type'] = 'application/json';
     }
