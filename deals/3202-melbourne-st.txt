@@ -7,13 +7,13 @@ Generated:                Mar 28, 2026
 
 ── CONTRACT & PRICING (Close CRM Fields) ─────
 Current Contract Price:   $157,000
-Wholesale Price:          —
+Wholesale Price:          160000
 Official Offer Price:     —
 ASK:                      160000
 ARV:                      265000
 MAO:                      —
 Closing Costs:            —
-On Market?:               —
+On Market?:               Yes
 Seller(s):                Golden Door Real Estate, Inc.
 
 ── KEY DATES (Close CRM Fields) ──────────────
@@ -29,12 +29,12 @@ Beds / Baths:             4 bed / 2 bath
 Sqft:                     1,700 sqft
 Lot Size:                 8,782 sqft
 Year Built:               1949
-Garage:                   —
+Garage:                   Detached
 Pool:                     No
 Solar:                    No
 
 ── AGENT / REALTOR ───────────────────────────
-Name:                     javier gallard
+Name:                     Javier Gallardo
 Phone:                    —
 Email:                    jag0211@gmail.com
 Brokerage:                —
