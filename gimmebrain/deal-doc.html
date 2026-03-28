@@ -1208,12 +1208,12 @@ async function pushToClose() {
     setCF('arv',                  getVal('dsARV'));
     setCF('mao',                  getVal('dsMAO'));
     setCF('closingCosts',         getVal('dsClosingCosts'));
-    setCF('onMarket',             getVal('dsOnMarket'));
-    setCF('acceptedDate',         getVal('dsAcceptedDate'));
-    setCF('coeDate',              getVal('dsCOE'));
-    setCF('ddEndDate',            getVal('dsDDEnd'));
+    setCF('onMarket',             toISO(getVal('dsOnMarket')));
+    setCF('acceptedDate',         toISO(getVal('dsAcceptedDate')));
+    setCF('coeDate',              toISO(getVal('dsCOE')));
+    setCF('ddEndDate',            toISO(getVal('dsDDEnd')));
     setCF('emdAmount',            getVal('dsEMDAmount'));
-    setCF('emdDueDate',           getVal('dsEMDDue'));
+    setCF('emdDueDate',           toISO(getVal('dsEMDDue')));
 
     // Standard opportunity fields
     const price = getVal('dsCurrentContractPrice');
