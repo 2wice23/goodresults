@@ -25,11 +25,11 @@
 
 // ── CONFIG ──────────────────────────────────────────────────
 
-var SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
-// ↑ Call Analyzer webhook
+var SLACK_WEBHOOK_URL = 'STORED_IN_NETLIFY_ENV_VARS';
+// ↑ Webhook for #the-group-chat — actual URL in Netlify env: SLACK_WEBHOOK_URL
 
-var SLACK_TRAINING_WEBHOOK = 'https://hooks.slack.com/services/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';
-// ↑ Webhook for #the-group-chat — training leaderboard updates
+var SLACK_TRAINING_WEBHOOK = 'STORED_IN_NETLIFY_ENV_VARS';
+// ↑ Webhook for #hack-the-planet — actual URL in Netlify env: SLACK_TRAINING_WEBHOOK
 
 var TIMEZONE = 'America/Chicago';  // CDT — change if needed
 
