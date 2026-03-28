@@ -1,6 +1,6 @@
 {
-  "dealId": "0320265",
-  "market": "on",
+  "dealId": "0320261",
+  "market": "off",
   "address": "3202 Melbourne St",
   "city": "Houston",
   "state": "TX",
@@ -12,7 +12,7 @@
   "yearBuilt": 1949,
   "garage": null,
   "coeDate": "April 8, 2026",
-  "askingPrice": 157000,
-  "arv": 265000,
-  "estRepairs": 59500
+  "askingPrice": null,
+  "arv": null,
+  "estRepairs": null
 }
