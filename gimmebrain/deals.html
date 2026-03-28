@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deal Dashboard — Good Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0D0F14;--surface:#11141A;--surface2:#161B24;--surface3:#0A0C10;
+  --white:#F0F4FF;--cream:#C8D4E4;--muted:#8A95A8;--dim:#555A66;
+  --border:rgba(255,255,255,0.07);--orange:#FF5C1A;--orange-glow:rgba(255,92,26,0.15);
+  --orange-border:rgba(255,92,26,0.25);--green:#22C55E;--green-bg:rgba(34,197,94,0.1);
+  --red:#EF4444;--red-bg:rgba(239,68,68,0.08);--yellow:#F59E0B;--yellow-bg:rgba(245,158,11,0.08);
+  --purple:#A855F7;--purple-bg:rgba(168,85,247,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden;}
+
+/* HEADER */
+.header{padding:14px 44px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,0.95);backdrop-filter:blur(14px);position:sticky;top:0;z-index:100;}
+.logo{font-size:0.72rem;color:var(--orange);letter-spacing:0.1em;text-transform:uppercase;font-weight:800;}
+.header-right{display:flex;align-items:center;gap:16px;}
+.header-link{font-size:0.72rem;font-weight:500;color:var(--muted);letter-spacing:0.06em;text-decoration:none;transition:color 0.15s;}
+.header-link:hover{color:var(--orange);}
+
+/* HERO */
+.hero{max-width:1100px;margin:0 auto;padding:48px 44px 32px;}
+.eyebrow{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);margin-bottom:14px;font-weight:600;}
+.hero h1{font-size:clamp(1.4rem,3vw,2.2rem);font-weight:800;letter-spacing:0.03em;margin-bottom:10px;}
+.hero h1 em{font-style:normal;color:var(--orange);font-weight:900;}
+.hero-sub{font-size:0.88rem;color:var(--cream);max-width:520px;font-weight:400;line-height:1.6;}
+
+/* STATS BAR */
+.stats-bar{max-width:1100px;margin:0 auto;padding:0 44px 32px;display:flex;gap:12px;flex-wrap:wrap;}
+.stat-pill{display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:0.68rem;font-weight:600;letter-spacing:0.03em;}
+.stat-pill .num{color:var(--orange);font-weight:800;}
+.stat-pill.green .num{color:var(--green);}
+.stat-pill.yellow .num{color:var(--yellow);}
+.stat-pill.red .num{color:var(--red);}
+
+/* FILTERS */
+.filters{max-width:1100px;margin:0 auto;padding:0 44px 20px;display:flex;gap:8px;flex-wrap:wrap;}
+.filter-btn{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 14px;font-family:'Inter',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.15s;}
+.filter-btn:hover{border-color:var(--orange-border);color:var(--cream);}
+.filter-btn.active{background:var(--orange-glow);border-color:var(--orange-border);color:var(--orange);}
+
+/* DEAL GRID */
+.deal-grid{max-width:1100px;margin:0 auto;padding:0 44px 80px;display:grid;grid-template-columns:1fr;gap:10px;}
+
+/* DEAL CARD */
+.deal-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:all 0.2s;cursor:pointer;}
+.deal-card:hover{border-color:var(--orange-border);background:var(--surface2);}
+
+.card-top{display:grid;grid-template-columns:80px 1fr auto;gap:16px;padding:16px 20px;align-items:center;}
+.card-thumb{width:80px;height:60px;border-radius:4px;overflow:hidden;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:1.2rem;}
+.card-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+
+.card-main{min-width:0;}
+.card-address{font-size:0.88rem;font-weight:700;color:var(--white);letter-spacing:0.01em;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.card-location{font-size:0.62rem;color:var(--muted);font-weight:500;letter-spacing:0.03em;}
+
+.card-numbers{display:flex;gap:20px;align-items:center;flex-shrink:0;}
+.card-num{text-align:right;}
+.card-num-label{font-size:0.52rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);margin-bottom:2px;}
+.card-num-val{font-size:0.95rem;font-weight:700;color:var(--cream);}
+.card-num-val.orange{color:var(--orange);}
+.card-num-val.green{color:var(--green);}
+
+.card-badges{display:flex;gap:6px;align-items:center;margin-left:16px;}
+.card-badge{font-size:0.5rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:10px;}
+.badge-off{background:rgba(255,92,26,0.12);color:var(--orange);border:1px solid var(--orange-border);}
+.badge-on{background:var(--green-bg);color:var(--green);border:1px solid var(--green);}
+.card-expand-icon{color:var(--dim);font-size:0.7rem;margin-left:8px;transition:transform 0.2s;}
+.deal-card.open .card-expand-icon{transform:rotate(180deg);}
+
+/* EXPANDED DETAIL */
+.card-detail{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
+.deal-card.open .card-detail{max-height:600px;}
+.card-detail-inner{padding:0 20px 20px;border-top:1px solid var(--border);margin-top:0;padding-top:16px;}
+
+.detail-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+
+.detail-section{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px 14px;}
+.detail-section-title{font-size:0.52rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;font-weight:700;display:flex;align-items:center;gap:6px;}
+.detail-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.detail-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.03);}
+.detail-row:last-child{border-bottom:none;}
+.detail-key{font-size:0.6rem;color:var(--muted);font-weight:500;}
+.detail-val{font-size:0.78rem;color:var(--cream);font-weight:600;text-align:right;}
+.detail-val.hi{color:var(--orange);}
+.detail-val.green{color:var(--green);}
+.detail-val.urgent{color:var(--red);font-weight:700;}
+.detail-val.warn{color:var(--yellow);font-weight:700;}
+
+.card-actions{display:flex;gap:8px;margin-top:12px;}
+.card-action-btn{padding:7px 14px;border-radius:3px;font-family:'Inter',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;transition:all 0.15s;cursor:pointer;border:1px solid;}
+.btn-view{background:var(--orange-glow);color:var(--orange);border-color:var(--orange-border);}
+.btn-view:hover{background:rgba(255,92,26,0.2);}
+.btn-process{background:rgba(168,85,247,0.08);color:var(--purple);border-color:rgba(168,85,247,0.25);}
+.btn-process:hover{background:rgba(168,85,247,0.15);}
+
+/* LOADING */
+.loading{text-align:center;padding:60px 40px;color:var(--dim);font-size:0.7rem;letter-spacing:0.1em;}
+.loading-spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--orange);border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:12px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* EMPTY */
+.empty-state{text-align:center;padding:80px 40px;color:var(--dim);}
+.empty-icon{font-size:2rem;margin-bottom:12px;opacity:0.3;}
+.empty-text{font-size:0.7rem;letter-spacing:0.08em;line-height:1.8;}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .hero{padding:32px 20px 24px;}
+  .stats-bar,.filters,.deal-grid{padding-left:20px;padding-right:20px;}
+  .card-top{grid-template-columns:60px 1fr;gap:12px;}
+  .card-numbers{display:none;}
+  .card-badges{margin-left:0;}
+  .detail-grid{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .header{padding:14px 20px;}
+  .detail-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">Good Results // Deal Dashboard</div>
+  <div class="header-right">
+    <a href="/gimmebrain/deal-doc" class="header-link">Deal Processor</a>
+    <a href="/gimmebrain/" class="header-link">&larr; Hub</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">All Deals &mdash; Live from GitHub</div>
+  <h1>Deal <em>Dashboard</em></h1>
+  <p class="hero-sub">Every deal page on the site, pulled live. Click a card to expand dates, property details, and quick links.</p>
+</section>
+
+<div class="stats-bar" id="statsBar"></div>
+<div class="filters" id="filters">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="off">Off-Market</button>
+  <button class="filter-btn" data-filter="on">On-Market</button>
+</div>
+
+<div class="deal-grid" id="dealGrid">
+  <div class="loading"><div class="loading-spinner"></div><br>Loading deals from GitHub&hellip;</div>
+</div>
+
+<script>
+const GITHUB_REPO = '2wice23/goodresults';
+const SITE_BASE = 'https://www.goodresults.org';
+let allDeals = [];
+let currentFilter = 'all';
+
+function fmt$(n) {
+  if (n == null) return '—';
+  return '$' + Number(n).toLocaleString();
+}
+
+function daysUntil(dateStr) {
+  if (!dateStr) return null;
+  const d = new Date(dateStr);
+  if (isNaN(d)) return null;
+  const now = new Date();
+  now.setHours(0,0,0,0);
+  d.setHours(0,0,0,0);
+  return Math.round((d - now) / 86400000);
+}
+
+function dateClass(days) {
+  if (days === null) return '';
+  if (days < 0) return 'dim';
+  if (days <= 3) return 'urgent';
+  if (days <= 7) return 'warn';
+  return '';
+}
+
+function dateLabel(days) {
+  if (days === null) return '';
+  if (days < 0) return Math.abs(days) + 'd ago';
+  if (days === 0) return 'TODAY';
+  if (days === 1) return 'Tomorrow';
+  return days + 'd';
+}
+
+// Discover deal folders via GitHub API
+async function loadDeals() {
+  const grid = document.getElementById('dealGrid');
+  try {
+    // List all items in deals/
+    const resp = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/deals');
+    if (!resp.ok) throw new Error('GitHub API ' + resp.status);
+    const items = await resp.json();
+
+    // Filter to directories only (skip _template.html and flat .txt files)
+    const folders = items.filter(function(i) { return i.type === 'dir'; });
+    if (!folders.length) {
+      grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No deal pages found yet.<br>Use the Deal Processor to create one.</div></div>';
+      return;
+    }
+
+    // Fetch deal-doc.txt from each folder in parallel
+    const promises = folders.map(function(folder) {
+      return fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name + '/deal-doc.txt')
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(file) {
+          if (!file || !file.content) return null;
+          try {
+            const json = JSON.parse(atob(file.content.replace(/\n/g, '')));
+            json._slug = folder.name;
+            // Also check for a thumbnail
+            return fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name)
+              .then(function(r2) { return r2.ok ? r2.json() : []; })
+              .then(function(files) {
+                var imgs = files.filter(function(f) { return /\.(jpe?g|png|webp|gif)$/i.test(f.name); });
+                imgs.sort(function(a,b) { return a.name.localeCompare(b.name, undefined, {numeric:true}); });
+                json._thumb = imgs.length ? SITE_BASE + '/deals/' + folder.name + '/' + imgs[0].name : null;
+                json._photoCount = imgs.length;
+                return json;
+              });
+          } catch(e) { return null; }
+        })
+        .catch(function() { return null; });
+    });
+
+    const results = await Promise.all(promises);
+    allDeals = results.filter(Boolean);
+
+    // Sort: deals with upcoming dates first, then by asking price desc
+    allDeals.sort(function(a, b) {
+      var da = daysUntil(a.coeDate);
+      var db = daysUntil(b.coeDate);
+      if (da !== null && db !== null) return da - db;
+      if (da !== null) return -1;
+      if (db !== null) return 1;
+      return (b.askingPrice || 0) - (a.askingPrice || 0);
+    });
+
+    renderStats();
+    renderDeals();
+
+  } catch(err) {
+    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><div class="empty-text">Error loading deals: ' + err.message + '</div></div>';
+  }
+}
+
+function renderStats() {
+  var total = allDeals.length;
+  var offMarket = allDeals.filter(function(d) { return d.market !== 'on'; }).length;
+  var onMarket = total - offMarket;
+  var totalValue = allDeals.reduce(function(sum, d) { return sum + (d.askingPrice || 0); }, 0);
+  var urgentDates = allDeals.filter(function(d) {
+    var days = daysUntil(d.coeDate);
+    return days !== null && days >= 0 && days <= 7;
+  }).length;
+
+  var html = '';
+  html += '<div class="stat-pill"><span class="num">' + total + '</span> Total Deals</div>';
+  html += '<div class="stat-pill"><span class="num">' + offMarket + '</span> Off-Market</div>';
+  html += '<div class="stat-pill green"><span class="num">' + onMarket + '</span> On-Market</div>';
+  html += '<div class="stat-pill"><span class="num">' + fmt$(totalValue) + '</span> Pipeline Value</div>';
+  if (urgentDates > 0) {
+    html += '<div class="stat-pill red"><span class="num">' + urgentDates + '</span> Closing in 7 Days</div>';
+  }
+  document.getElementById('statsBar').innerHTML = html;
+}
+
+function renderDeals() {
+  var grid = document.getElementById('dealGrid');
+  var filtered = allDeals;
+  if (currentFilter === 'off') filtered = allDeals.filter(function(d) { return d.market !== 'on'; });
+  if (currentFilter === 'on') filtered = allDeals.filter(function(d) { return d.market === 'on'; });
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-text">No deals match this filter.</div></div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(function(d, i) {
+    var profit = (d.arv && d.estRepairs && d.askingPrice) ? d.arv - d.estRepairs - d.askingPrice : null;
+    var fullAddr = [d.address, d.city, d.state].filter(Boolean).join(', ');
+    var coeDays = daysUntil(d.coeDate);
+    var liveUrl = SITE_BASE + '/deals/' + d._slug + '/';
+
+    // Thumbnail
+    var thumbHtml = d._thumb
+      ? '<img src="' + d._thumb + '" alt="">'
+      : '🏠';
+
+    // Date urgency badges
+    var coeBadge = '';
+    if (coeDays !== null && coeDays >= 0 && coeDays <= 7) {
+      coeBadge = ' <span style="font-size:0.5rem;color:var(--red);font-weight:700;">COE ' + dateLabel(coeDays) + '</span>';
+    }
+
+    return '<div class="deal-card" onclick="toggleCard(this)" data-index="' + i + '">' +
+      '<div class="card-top">' +
+        '<div class="card-thumb">' + thumbHtml + '</div>' +
+        '<div class="card-main">' +
+          '<div class="card-address">' + (d.address || d._slug) + coeBadge + '</div>' +
+          '<div class="card-location">' + ([d.city, d.state, d.zip].filter(Boolean).join(', ') || '—') + '</div>' +
+        '</div>' +
+        '<div class="card-numbers">' +
+          '<div class="card-num"><div class="card-num-label">Ask</div><div class="card-num-val orange">' + fmt$(d.askingPrice) + '</div></div>' +
+          '<div class="card-num"><div class="card-num-label">ARV</div><div class="card-num-val">' + fmt$(d.arv) + '</div></div>' +
+          (profit !== null ? '<div class="card-num"><div class="card-num-label">Gross Profit</div><div class="card-num-val green">' + fmt$(profit) + '</div></div>' : '') +
+          '<div class="card-badges">' +
+            '<span class="card-badge ' + (d.market === 'on' ? 'badge-on' : 'badge-off') + '">' + (d.market === 'on' ? 'Active' : 'Off-Market') + '</span>' +
+          '</div>' +
+          '<span class="card-expand-icon">▾</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="card-detail"><div class="card-detail-inner">' +
+        '<div class="detail-grid">' +
+          // DATES
+          '<div class="detail-section">' +
+            '<div class="detail-section-title">Key Dates</div>' +
+            dateRow('COE Date', d.coeDate, coeDays) +
+            (d.ddEndDate ? dateRow('DD End', d.ddEndDate, daysUntil(d.ddEndDate)) : '') +
+            (d.emdDueDate ? dateRow('EMD Due', d.emdDueDate, daysUntil(d.emdDueDate)) : '') +
+            (d.acceptedDate ? '<div class="detail-row"><span class="detail-key">Accepted</span><span class="detail-val">' + d.acceptedDate + '</span></div>' : '') +
+          '</div>' +
+          // MONEY
+          '<div class="detail-section">' +
+            '<div class="detail-section-title">Financials</div>' +
+            '<div class="detail-row"><span class="detail-key">Asking Price</span><span class="detail-val hi">' + fmt$(d.askingPrice) + '</span></div>' +
+            '<div class="detail-row"><span class="detail-key">ARV</span><span class="detail-val">' + fmt$(d.arv) + '</span></div>' +
+            '<div class="detail-row"><span class="detail-key">Est. Repairs ($/sf)</span><span class="detail-val">' + fmt$(d.estRepairs) + '</span></div>' +
+            (profit !== null ? '<div class="detail-row"><span class="detail-key">Gross Profit</span><span class="detail-val green">' + fmt$(profit) + '</span></div>' : '') +
+          '</div>' +
+          // PROPERTY
+          '<div class="detail-section">' +
+            '<div class="detail-section-title">Property</div>' +
+            (d.beds ? '<div class="detail-row"><span class="detail-key">Beds</span><span class="detail-val">' + d.beds + '</span></div>' : '') +
+            (d.baths ? '<div class="detail-row"><span class="detail-key">Baths</span><span class="detail-val">' + d.baths + '</span></div>' : '') +
+            (d.sqft ? '<div class="detail-row"><span class="detail-key">Sqft</span><span class="detail-val">' + Number(d.sqft).toLocaleString() + '</span></div>' : '') +
+            (d.lotSize ? '<div class="detail-row"><span class="detail-key">Lot</span><span class="detail-val">' + d.lotSize + '</span></div>' : '') +
+            (d.yearBuilt ? '<div class="detail-row"><span class="detail-key">Year Built</span><span class="detail-val">' + d.yearBuilt + '</span></div>' : '') +
+            (d.garage ? '<div class="detail-row"><span class="detail-key">Garage</span><span class="detail-val">' + d.garage + '</span></div>' : '') +
+            (d._photoCount ? '<div class="detail-row"><span class="detail-key">Photos</span><span class="detail-val">' + d._photoCount + '</span></div>' : '') +
+          '</div>' +
+        '</div>' +
+        '<div class="card-actions">' +
+          '<a href="' + liveUrl + '" target="_blank" class="card-action-btn btn-view" onclick="event.stopPropagation()">View Deal Page &rarr;</a>' +
+          '<a href="/gimmebrain/deal-doc" class="card-action-btn btn-process" onclick="event.stopPropagation()">Open in Processor</a>' +
+        '</div>' +
+      '</div></div>' +
+    '</div>';
+  }).join('');
+}
+
+function dateRow(label, dateStr, days) {
+  var cls = dateClass(days);
+  var badge = days !== null ? ' <span style="font-size:0.5rem;opacity:0.7;">(' + dateLabel(days) + ')</span>' : '';
+  return '<div class="detail-row"><span class="detail-key">' + label + '</span><span class="detail-val ' + cls + '">' + (dateStr || '—') + badge + '</span></div>';
+}
+
+function toggleCard(card) {
+  card.classList.toggle('open');
+}
+
+// Filters
+document.getElementById('filters').addEventListener('click', function(e) {
+  if (!e.target.classList.contains('filter-btn')) return;
+  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  e.target.classList.add('active');
+  currentFilter = e.target.dataset.filter;
+  renderDeals();
+});
+
+// Boot
+loadDeals();
+</script>
+</body>
+</html>
