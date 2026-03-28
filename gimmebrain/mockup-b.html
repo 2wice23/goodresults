@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Analyzer v3 — Mission Control Mockup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #080A0F;
+            --surface: #0C0E15;
+            --surface2: #12151E;
+            --white: #F0F4FF;
+            --cream: #C8D4E4;
+            --muted: #8A95A8;
+            --orange: #FF5C1A;
+            --orange-dim: rgba(255, 92, 26, 0.15);
+            --green: #22C55E;
+            --red: #EF4444;
+            --gold: #F0B429;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Mockup Banner */
+        .mockup-banner {
+            background: linear-gradient(90deg, var(--orange) 0%, rgba(255, 92, 26, 0.6) 100%);
+            padding: 12px 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid rgba(255, 92, 26, 0.3);
+        }
+
+        /* Progress Bar */
+        .progress-bar-wrapper {
+            height: 3px;
+            background: var(--surface2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--orange) 0%, #FF7C3A 50%, var(--orange) 100%);
+            width: 40%;
+            animation: shimmer 2s infinite;
+            box-shadow: 0 0 20px rgba(255, 92, 26, 0.8);
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 92, 26, 0.2);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        .badge-pill {
+            background: rgba(255, 92, 26, 0.2);
+            border: 1px solid var(--orange);
+            color: var(--orange);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            display: inline-block;
+            box-shadow: 0 0 10px var(--green);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .hero-heading {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--cream);
+            margin-bottom: 8px;
+        }
+
+        .hero-description {
+            font-size: 15px;
+            color: var(--muted);
+        }
+
+        /* Input Card */
+        .input-card {
+            background: var(--surface2);
+            border: 1px solid rgba(255, 92, 26, 0.15);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .input-card:hover {
+            border-color: rgba(255, 92, 26, 0.3);
+            box-shadow: 0 0 30px rgba(255, 92, 26, 0.1);
+        }
+
+        .textarea-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .textarea-container {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            background: rgba(12, 14, 21, 0.5);
+            border: 1px solid rgba(255, 92, 26, 0.1);
+            border-radius: 8px;
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            padding: 16px;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        textarea::placeholder {
+            color: rgba(200, 212, 228, 0.3);
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--orange);
+            background: rgba(12, 14, 21, 0.8);
+        }
+
+        /* Input Controls */
+        .input-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .toggle-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .toggle {
+            width: 44px;
+            height: 24px;
+            background: rgba(255, 92, 26, 0.2);
+            border: 1px solid var(--orange);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle.active {
+            background: var(--orange);
+        }
+
+        .toggle-knob {
+            width: 20px;
+            height: 20px;
+            background: var(--surface2);
+            border-radius: 10px;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle.active .toggle-knob {
+            left: 22px;
+        }
+
+        .analyze-btn {
+            background: var(--orange);
+            color: var(--black);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 92, 26, 0.3);
+        }
+
+        .analyze-btn:hover {
+            box-shadow: 0 0 40px rgba(255, 92, 26, 0.6), inset 0 0 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .status-line {
+            font-size: 12px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot-small {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.6);
+        }
+
+        /* Results Section */
+        .results-section {
+            margin-bottom: 50px;
+        }
+
+        .results-tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 92, 26, 0.15);
+            padding-bottom: 16px;
+        }
+
+        .tab {
+            padding: 8px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--muted);
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            color: var(--orange);
+            border-bottom-color: var(--orange);
+        }
+
+        /* Latest Report */
+        .report-card {
+            background: var(--surface2);
+            border: 1px solid rgba(255, 92, 26, 0.15);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 92, 26, 0.1);
+        }
+
+        .report-meta {
+            display: flex;
+            gap: 24px;
+            flex: 1;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .meta-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .score-display {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .score-number {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .score-number.excellent {
+            color: var(--green);
+            text-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+        }
+
+        .score-number.good {
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(240, 180, 41, 0.5);
+        }
+
+        .score-number.needs-work {
+            color: var(--red);
+            text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+        }
+
+        .score-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+        }
+
+        /* Score Breakdown */
+        .score-breakdown {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .score-row {
+            display: grid;
+            grid-template-columns: 180px 1fr 60px;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .score-row-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--cream);
+        }
+
+        .score-bar-container {
+            background: rgba(255, 92, 26, 0.1);
+            height: 24px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 92, 26, 0.15);
+        }
+
+        .score-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--orange) 0%, #FF7C3A 100%);
+            border-radius: 6px;
+            transition: all 0.6s ease;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 92, 26, 0.3);
+        }
+
+        .score-bar.green-bar {
+            background: linear-gradient(90deg, var(--green) 0%, #34D399 100%);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(34, 197, 94, 0.3);
+        }
+
+        .score-bar.gold-bar {
+            background: linear-gradient(90deg, var(--gold) 0%, #FCD34D 100%);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(240, 180, 41, 0.3);
+        }
+
+        .score-row-value {
+            text-align: right;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        /* Insights Grid */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .insight-box {
+            background: rgba(255, 92, 26, 0.08);
+            border-left: 4px solid var(--orange);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .insight-box.positive {
+            background: rgba(34, 197, 94, 0.08);
+            border-left-color: var(--green);
+        }
+
+        .insight-box h3 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-item {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .insight-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .insight-item::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--orange);
+            font-weight: 700;
+        }
+
+        .insight-item.positive::before {
+            color: var(--green);
+        }
+
+        /* Language Flags */
+        .language-flags {
+            background: rgba(239, 68, 68, 0.08);
+            border-left: 4px solid var(--red);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .language-flags h3 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .flag-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .flag-pill {
+            background: var(--red);
+            color: var(--black);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Callout Box */
+        .callout-box {
+            border-left: 4px solid var(--orange);
+            background: rgba(255, 92, 26, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .callout-box h3 {
+            font-size: 12px;
+            color: var(--orange);
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .callout-content {
+            font-size: 14px;
+            color: var(--cream);
+            line-height: 1.6;
+        }
+
+        /* Engagement Section */
+        .engagement-section {
+            background: rgba(255, 92, 26, 0.08);
+            border: 1px solid rgba(255, 92, 26, 0.15);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .engagement-header {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .engagement-score {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .engagement-score-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .engagement-moments {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            font-size: 12px;
+        }
+
+        .moment {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            color: var(--muted);
+        }
+
+        .moment strong {
+            color: var(--white);
+        }
+
+        /* Previous Reports Grid */
+        .previous-reports {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .report-card-compact {
+            background: var(--surface2);
+            border: 1px solid rgba(255, 92, 26, 0.15);
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .report-card-compact:hover {
+            border-color: rgba(255, 92, 26, 0.3);
+            box-shadow: 0 0 20px rgba(255, 92, 26, 0.1);
+        }
+
+        .report-card-compact h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .report-card-compact p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .report-card-compact .score {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        /* Leaderboard Section */
+        .leaderboard-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .leaderboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .leaderboard-card {
+            background: var(--surface2);
+            border: 1px solid rgba(255, 92, 26, 0.15);
+            border-radius: 8px;
+            padding: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .leaderboard-card:hover {
+            border-color: rgba(255, 92, 26, 0.3);
+            box-shadow: 0 0 20px rgba(255, 92, 26, 0.1);
+        }
+
+        .leaderboard-rank {
+            display: inline-block;
+            background: var(--orange);
+            color: var(--black);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .leaderboard-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .leaderboard-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .leaderboard-stats strong {
+            color: var(--cream);
+        }
+
+        .leaderboard-bar-container {
+            background: rgba(255, 92, 26, 0.1);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .leaderboard-bar {
+            height: 100%;
+            background: var(--orange);
+            border-radius: 4px;
+        }
+
+        /* Call Type Pill */
+        .call-type-pill {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .call-type-pill.cold {
+            background: rgba(255, 92, 26, 0.2);
+            color: var(--orange);
+        }
+
+        .call-type-pill.deal {
+            background: rgba(240, 180, 41, 0.2);
+            color: var(--gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .insights-grid,
+            .previous-reports {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .header-right {
+                align-self: flex-end;
+            }
+
+            .hero-heading {
+                font-size: 36px;
+            }
+
+            .score-row {
+                grid-template-columns: 120px 1fr 50px;
+            }
+
+            .report-meta {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .score-display {
+                align-items: flex-start;
+                margin-top: 20px;
+                padding-top: 20px;
+                border-top: 1px solid rgba(255, 92, 26, 0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mockup-banner">
+        MOCKUP B — Mission Control
+    </div>
+
+    <div class="progress-bar-wrapper">
+        <div class="progress-bar"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="header-title">Good Results</div>
+                <div class="badge-pill">Call Analyzer v3</div>
+            </div>
+            <div class="header-right">
+                <span class="status-dot"></span>
+                KB status active
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1 class="hero-heading">Analyze. Score. Improve.</h1>
+            <p class="hero-subtitle">AI-powered call coaching using the GR playbook</p>
+            <p class="hero-description">Every call scored 0–100. Real-time insights drive better conversations.</p>
+        </div>
+
+        <!-- Input Card -->
+        <div class="input-card">
+            <label class="textarea-label">Paste Transcript or Summary</label>
+            <div class="textarea-container">
+                <textarea placeholder="Paste the call transcript or a summary here. Include agent name, realtor name, and call type if available."></textarea>
+            </div>
+
+            <div class="input-controls">
+                <div class="toggle-wrapper">
+                    <span>Show Leaderboard</span>
+                    <div class="toggle active">
+                        <div class="toggle-knob"></div>
+                    </div>
+                </div>
+                <button class="analyze-btn">Analyze Call</button>
+            </div>
+
+            <div class="status-line">
+                <span class="status-dot-small"></span>
+                Ready to analyze
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section">
+            <div class="results-tabs">
+                <div class="tab active">Latest Report</div>
+                <div class="tab">History</div>
+                <div class="tab">Trends</div>
+            </div>
+
+            <!-- Latest Report Card -->
+            <div class="report-card">
+                <div class="report-header">
+                    <div class="report-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Agent</span>
+                            <span class="meta-value">Marcus Johnson</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Realtor</span>
+                            <span class="meta-value">Sarah Chen</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Call Type</span>
+                            <span class="meta-value">
+                                <span class="call-type-pill cold">COLD OPEN</span>
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Duration</span>
+                            <span class="meta-value">18 min 42 sec</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Date</span>
+                            <span class="meta-value">Mar 26, 2026</span>
+                        </div>
+                    </div>
+                    <div class="score-display">
+                        <div class="score-number excellent">87</div>
+                        <span class="score-label">Overall Score</span>
+                    </div>
+                </div>
+
+                <!-- Score Breakdown -->
+                <div class="score-breakdown">
+                    <div class="score-row">
+                        <span class="score-row-label">Opening Hook</span>
+                        <div class="score-bar-container">
+                            <div class="score-bar green-bar" style="width: 92%;"></div>
+                        </div>
+                        <span class="score-row-value">92</span>
+                    </div>
+                    <div class="score-row">
+                        <span class="score-row-label">Discovery Questions</span>
+                        <div class="score-bar-container">
+                            <div class="score-bar" style="width: 85%;"></div>
+                        </div>
+                        <span class="score-row-value">85</span>
+                    </div>
+                    <div class="score-row">
+                        <span class="score-row-label">Objection Handling</span>
+                        <div class="score-bar-container">
+                            <div class="score-bar gold-bar" style="width: 78%;"></div>
+                        </div>
+                        <span class="score-row-value">78</span>
+                    </div>
+                    <div class="score-row">
+                        <span class="score-row-label">Close Attempt</span>
+                        <div class="score-bar-container">
+                            <div class="score-bar" style="width: 88%;"></div>
+                        </div>
+                        <span class="score-row-value">88</span>
+                    </div>
+                    <div class="score-row">
+                        <span class="score-row-label">Realtor Engagement</span>
+                        <div class="score-bar-container">
+                            <div class="score-bar green-bar" style="width: 81%;"></div>
+                        </div>
+                        <span class="score-row-value">81</span>
+                    </div>
+                </div>
+
+                <!-- Insights Grid -->
+                <div class="insights-grid">
+                    <div class="insight-box positive">
+                        <h3>What Worked</h3>
+                        <ul class="insight-list">
+                            <li class="insight-item positive">Strong opening that established credibility</li>
+                            <li class="insight-item positive">Great rapport-building with realtor early on</li>
+                            <li class="insight-item positive">Used realtor's objections as leverage points</li>
+                        </ul>
+                    </div>
+                    <div class="insight-box">
+                        <h3>What to Tighten</h3>
+                        <ul class="insight-list">
+                            <li class="insight-item">Spent too long on initial discovery phase</li>
+                            <li class="insight-item">One missed follow-up question about timeline</li>
+                            <li class="insight-item">Close could have been more assumptive</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Language Flags -->
+                <div class="language-flags">
+                    <h3>Language Flags</h3>
+                    <div class="flag-pills">
+                        <span class="flag-pill">Verbal tick: "um" (12x)</span>
+                        <span class="flag-pill">Filler word: "like" (8x)</span>
+                    </div>
+                </div>
+
+                <!-- Recommended Script Moment -->
+                <div class="callout-box">
+                    <h3>Recommended Script Moment</h3>
+                    <div class="callout-content">
+                        <strong>When realtor said:</strong> "I'm not sure we have the bandwidth right now."<br><br>
+                        <strong>Better response:</strong> "That's exactly why we work so well with agents at your level. We handle the coordination so you stay focused on listings. Can we explore how that works?"
+                    </div>
+                </div>
+
+                <!-- Engagement Section -->
+                <div class="engagement-section">
+                    <div class="engagement-header">Realtor Engagement Moments</div>
+                    <div class="engagement-score">
+                        <span>Positive Moments: <strong>7</strong></span>
+                        <span>Resistance Moments: <strong>2</strong></span>
+                        <span class="engagement-score-value">81</span>
+                    </div>
+                    <div class="engagement-moments">
+                        <div class="moment">
+                            <strong>Moment 1:</strong> Laughed at your joke (0:43)</div>
+                        <div class="moment">
+                            <strong>Moment 2:</strong> Asked clarifying question (2:15)</div>
+                        <div class="moment">
+                            <strong>Moment 3:</strong> Said "that makes sense" (5:22)</div>
+                        <div class="moment">
+                            <strong>Resistance 1:</strong> Hesitated on commitment (8:10)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Previous Reports -->
+            <div style="margin-top: 40px;">
+                <h2 class="section-title">Previous Reports</h2>
+                <div class="previous-reports">
+                    <div class="report-card-compact">
+                        <h4>Marcus Johnson</h4>
+                        <p>Sarah Chen • COLD OPEN • Mar 24, 2026</p>
+                        <div class="score">82</div>
+                    </div>
+                    <div class="report-card-compact">
+                        <h4>Marcus Johnson</h4>
+                        <p>David Rodriguez • DEAL DISCUSSION • Mar 23, 2026</p>
+                        <div class="score">91</div>
+                    </div>
+                    <div class="report-card-compact">
+                        <h4>Emily Torres</h4>
+                        <p>Jessica Wong • COLD OPEN • Mar 22, 2026</p>
+                        <div class="score">76</div>
+                    </div>
+                    <div class="report-card-compact">
+                        <h4>Marcus Johnson</h4>
+                        <p>Michael Park • NEGOTIATION • Mar 20, 2026</p>
+                        <div class="score">88</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Section -->
+        <div class="leaderboard-section">
+            <h2 class="section-title">Team Leaderboard — This Week</h2>
+            <div class="leaderboard-cards">
+                <div class="leaderboard-card">
+                    <div class="leaderboard-rank">1</div>
+                    <div class="leaderboard-name">Marcus Johnson</div>
+                    <div class="leaderboard-stats">
+                        <span><strong>12</strong> calls</span>
+                        <span><strong>88.3</strong> avg</span>
+                    </div>
+                    <div class="leaderboard-bar-container">
+                        <div class="leaderboard-bar" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+                <div class="leaderboard-card">
+                    <div class="leaderboard-rank" style="background: var(--gold); color: var(--black);">2</div>
+                    <div class="leaderboard-name">Sarah Okonkwo</div>
+                    <div class="leaderboard-stats">
+                        <span><strong>10</strong> calls</span>
+                        <span><strong>84.7</strong> avg</span>
+                    </div>
+                    <div class="leaderboard-bar-container">
+                        <div class="leaderboard-bar" style="width: 96%; background: var(--gold);"></div>
+                    </div>
+                </div>
+
+                <div class="leaderboard-card">
+                    <div class="leaderboard-rank" style="background: #B0B0B0; color: var(--black);">3</div>
+                    <div class="leaderboard-name">Emily Torres</div>
+                    <div class="leaderboard-stats">
+                        <span><strong>11</strong> calls</span>
+                        <span><strong>81.2</strong> avg</span>
+                    </div>
+                    <div class="leaderboard-bar-container">
+                        <div class="leaderboard-bar" style="width: 92%; background: #B0B0B0;"></div>
+                    </div>
+                </div>
+
+                <div class="leaderboard-card">
+                    <div class="leaderboard-rank" style="background: rgba(240, 180, 41, 0.6); color: var(--black);">4</div>
+                    <div class="leaderboard-name">James Mitchell</div>
+                    <div class="leaderboard-stats">
+                        <span><strong>9</strong> calls</span>
+                        <span><strong>77.8</strong> avg</span>
+                    </div>
+                    <div class="leaderboard-bar-container">
+                        <div class="leaderboard-bar" style="width: 88%; background: rgba(240, 180, 41, 0.8);"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
