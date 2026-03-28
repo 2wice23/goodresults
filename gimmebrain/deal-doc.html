@@ -430,7 +430,7 @@
 // ============================================================
 // CONFIG
 // ============================================================
-const ANTHROPIC_KEY = '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';
+const ANTHROPIC_PROXY = '/.netlify/functions/anthropic-proxy';
 const RENTCAST_KEY  = 'c1bce705542d453f869d9eb4a12d1e2d';
 const CLOSE_PIPELINE = 'pipe_1P0GjK0TFer4Yw2rbArK0u'; // Properties pipeline
 const CLOSE_PROXY    = '/.netlify/functions/close-proxy'; // Server-side proxy (API key lives there)
@@ -600,14 +600,9 @@ CONTRACT TEXT:
 ${contractText.substring(0, 50000)}`;
 
   try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    const resp = await fetch(ANTHROPIC_PROXY, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-opus-4-6',
         max_tokens: 4000,
@@ -969,10 +964,27 @@ function makeEditable() {
 }
 
 // ============================================================
-// PUSH TO GITHUB
+// PUSH TO GITHUB (via Netlify proxy — token stored server-side)
 // ============================================================
-const GITHUB_TOKEN = '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';
 const GITHUB_REPO = '2wice23/goodresults';
+
+// All GitHub API calls go through our Netlify function so the PAT never lives in browser code
+async function githubAPI(repoPath, method, body) {
+  const resp = await fetch('/.netlify/functions/github-proxy', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      path: '/repos/' + GITHUB_REPO + '/contents/' + repoPath,
+      method: method || 'GET',
+      body: body || undefined
+    })
+  });
+  const data = await resp.json();
+  if (!resp.ok && resp.status !== 404) {
+    throw new Error(data.message || 'GitHub API error ' + resp.status);
+  }
+  return { ok: resp.ok, status: resp.status, data: data };
+}
 
 async function pushToGitHub() {
   const btn = document.getElementById('githubBtn');
@@ -1061,35 +1073,20 @@ async function pushToGitHub() {
     // Check if file already exists (to get SHA for update)
     let sha = null;
     try {
-      const checkResp = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + filePath, {
-        headers: { 'Accept': 'application/vnd.github.v3+json', 'Authorization': 'Bearer ' + GITHUB_TOKEN }
-      });
-      if (checkResp.ok) {
-        const existing = await checkResp.json();
-        sha = existing.sha;
-      }
+      const checkResult = await githubAPI(filePath, 'GET');
+      if (checkResult.ok) sha = checkResult.data.sha;
     } catch(e) {}
 
     // Create or update the file
-    const body = {
+    const pushBody = {
       message: 'Deal: ' + streetAddr + ' (' + new Date().toLocaleDateString() + ')',
       content: btoa(unescape(encodeURIComponent(dealContent)))
     };
-    if (sha) body.sha = sha;
+    if (sha) pushBody.sha = sha;
 
-    const putResp = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + filePath, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'Authorization': 'Bearer ' + GITHUB_TOKEN,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    });
-
-    if (!putResp.ok) {
-      const err = await putResp.json();
-      throw new Error(err.message || putResp.status);
+    const putResult = await githubAPI(filePath, 'PUT', pushBody);
+    if (!putResult.ok) {
+      throw new Error(putResult.data.message || 'Push failed');
     }
 
     btn.textContent = '✓ Pushed to GitHub';
@@ -1397,37 +1394,27 @@ async function createDealPage() {
       const tplText = await siteResp.text();
       templateContent = btoa(unescape(encodeURIComponent(tplText)));
     } catch(e) {
-      const tplResp = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/deals/_template.html', {
-        headers: { 'Accept': 'application/vnd.github.v3+json', 'Authorization': 'Bearer ' + GITHUB_TOKEN }
-      });
-      if (!tplResp.ok) throw new Error('Could not fetch template: ' + tplResp.status);
-      const tplData = await tplResp.json();
-      templateContent = tplData.content.replace(/\n/g, '');
+      const tplResult = await githubAPI('deals/_template.html', 'GET');
+      if (!tplResult.ok) throw new Error('Could not fetch template: ' + tplResult.status);
+      templateContent = tplResult.data.content.replace(/\n/g, '');
     }
 
-    // Helper: push or update a file on GitHub
+    // Helper: push or update a file on GitHub (via proxy)
     async function pushFile(filePath, contentBase64, commitMsg) {
       let sha = null;
       try {
-        const check = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + filePath, {
-          headers: { 'Accept': 'application/vnd.github.v3+json', 'Authorization': 'Bearer ' + GITHUB_TOKEN }
-        });
-        if (check.ok) { const existing = await check.json(); sha = existing.sha; }
+        const checkResult = await githubAPI(filePath, 'GET');
+        if (checkResult.ok) sha = checkResult.data.sha;
       } catch(e) {}
 
       const body = { message: commitMsg, content: contentBase64 };
       if (sha) body.sha = sha;
 
-      const resp = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + filePath, {
-        method: 'PUT',
-        headers: { 'Accept': 'application/vnd.github.v3+json', 'Authorization': 'Bearer ' + GITHUB_TOKEN, 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-      if (!resp.ok) {
-        const err = await resp.json();
-        throw new Error(err.message || resp.status);
+      const putResult = await githubAPI(filePath, 'PUT', body);
+      if (!putResult.ok) {
+        throw new Error(putResult.data.message || 'Push failed');
       }
-      return resp;
+      return putResult;
     }
 
     // Step 2: Push index.html (the template) into deals/{slug}/
