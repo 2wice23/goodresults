@@ -360,7 +360,8 @@ function renderDeals() {
   }
 
   grid.innerHTML = filtered.map((d, i) => {
-    const profit = (d.arv && d.estRepairs && d.askingPrice) ? d.arv - d.estRepairs - d.askingPrice : null;
+    const totalRepairs = (d.estRepairs && d.sqft) ? d.estRepairs * d.sqft : null;
+    const profit = (d.arv && totalRepairs != null && d.askingPrice) ? d.arv - totalRepairs - d.askingPrice : null;
     const coeDays = daysUntil(d.coeDate);
     const liveUrl = SITE_BASE + '/deals/' + d._slug + '/';
     const thumbHtml = d._thumb ? '<img src="' + d._thumb + '" alt="">' : '🏠';
@@ -420,7 +421,8 @@ function renderDeals() {
             '<div class="detail-section-title">Financials</div>' +
             field('askingPrice', 'Asking Price', d.askingPrice, 'money') +
             field('arv', 'ARV', d.arv, 'money') +
-            field('estRepairs', 'Est. Repairs', d.estRepairs, 'money') +
+            field('estRepairs', 'Repairs $/sqft', d.estRepairs) +
+            (totalRepairs != null ? '<div class="detail-row"><span class="detail-key">Total Repairs (' + d.estRepairs + ' × ' + Number(d.sqft).toLocaleString() + ')</span><span class="detail-val hi">' + fmt$(totalRepairs) + '</span></div>' : '') +
             (profit !== null ? '<div class="detail-row"><span class="detail-key">Gross Profit</span><span class="detail-val green">' + fmt$(profit) + '</span></div>' : '') +
           '</div>' +
           // PROPERTY
@@ -431,7 +433,6 @@ function renderDeals() {
             field('sqft', 'Sqft', d.sqft) +
             field('lotSize', 'Lot', d.lotSize) +
             field('yearBuilt', 'Year Built', d.yearBuilt) +
-            field('garage', 'Garage', d.garage) +
           '</div>' +
           // NOTES
           '<div class="detail-section" style="grid-column:span 2;">' +
