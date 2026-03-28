@@ -212,7 +212,7 @@ function renderDeal(d) {
   if (d.askingPrice != null) cards.push('<div class="num-card num-asking"><div class="num-label">Asking Price</div><div class="num-val">' + fmt$(d.askingPrice) + '</div></div>');
   if (d.arv != null) cards.push('<div class="num-card"><div class="num-label">ARV</div><div class="num-val">' + fmt$(d.arv) + '</div></div>');
   if (d.estRepairs != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs ($/sf)</div><div class="num-val">' + fmt$(d.estRepairs) + '</div></div>');
-  if (profit != null) cards.push('<div class="num-card num-profit"><div class="num-label">Profit Potential (Before Holding)</div><div class="num-val">' + fmt$(profit) + '</div></div>');
+  if (profit != null) cards.push('<div class="num-card num-profit"><div class="num-label">Gross Profit (Before Holding Costs)</div><div class="num-val">' + fmt$(profit) + '</div></div>');
   if (cards.length) { el('numbersSection').style.display = 'block'; el('numbersInner').innerHTML = cards.join(''); }
 
   // Detail cards
