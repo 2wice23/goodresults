@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GR Hub — Good Results Home Buyers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0D0F14;--surface:#11141A;--surface2:#161B24;--surface3:#0A0C10;
+  --white:#F0F4FF;--cream:#C8D4E4;--muted:#8A95A8;--dim:#555A66;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.04);
+  --orange:#FF5C1A;--orange-glow:rgba(255,92,26,0.12);--orange-border:rgba(255,92,26,0.25);
+  --green:#22C55E;--green-bg:rgba(34,197,94,0.08);--green-border:rgba(34,197,94,0.25);
+  --red:#EF4444;--gold:#F59E0B;--silver:#9CA3AF;--bronze:#CD7F32;
+  --radius:8px;--radius-sm:5px;--radius-lg:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
+
+/* Top progress bar */
+#rpbar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:linear-gradient(90deg,#FF5C1A,#FF8A50,#FF5C1A);background-size:200% 100%;animation:rpShimmer 2.5s linear infinite;transition:width .06s linear;box-shadow:0 0 10px rgba(255,92,26,.55);}
+@keyframes rpShimmer{from{background-position:0%}to{background-position:200%}}
+
+/* Background texture */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;background:
+  radial-gradient(ellipse 80% 45% at 50% -10%, rgba(255,92,26,0.07) 0%, transparent 55%),
+  repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px),
+  repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px);
+  z-index:0;}
+body>*{position:relative;z-index:1;}
+
+/* ─────────────── HEADER ─────────────── */
+.header{
+  padding:14px 44px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(13,15,20,.97);backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:100;
+}
+.logo-mark{display:flex;align-items:center;gap:10px;}
+.logo-icon{
+  width:30px;height:30px;background:var(--orange-glow);
+  border:1px solid var(--orange-border);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;font-weight:900;color:var(--orange);
+}
+.logo-name{font-size:.8rem;font-weight:800;color:var(--white);letter-spacing:.04em;}
+.logo-sub{font-size:.58rem;color:var(--dim);font-weight:500;}
+.header-right{display:flex;align-items:center;gap:16px;}
+.streak-pill{
+  display:flex;align-items:center;gap:5px;
+  background:var(--orange-glow);border:1px solid var(--orange-border);
+  border-radius:20px;padding:4px 12px;
+  font-size:.72rem;font-weight:700;color:var(--orange);
+}
+.streak-fire{animation:fireFlicker 1.1s ease-in-out infinite alternate;}
+@keyframes fireFlicker{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.15) rotate(3deg)}}
+.user-chip{
+  display:flex;align-items:center;gap:7px;
+  font-size:.78rem;color:var(--muted);font-weight:500;
+}
+.user-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);}
+.logout-link{font-size:.72rem;color:var(--dim);text-decoration:none;transition:color .2s;}
+.logout-link:hover{color:var(--orange);}
+
+/* ─────────────── HERO ─────────────── */
+.hero{
+  padding:52px 44px 40px;
+  border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:1fr auto;gap:48px;
+  align-items:center;max-width:1160px;margin:0 auto;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--orange-glow);border:1px solid var(--orange-border);
+  color:var(--orange);font-size:.62rem;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;
+  padding:4px 12px;border-radius:3px;margin-bottom:16px;
+}
+.hero h1{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;line-height:1.1;margin-bottom:10px;letter-spacing:-.02em;}
+.hero h1 span{color:var(--orange);}
+.hero-sub{font-size:.95rem;color:var(--muted);line-height:1.72;max-width:480px;}
+.hero-stats{display:flex;flex-direction:column;gap:8px;min-width:150px;}
+.stat-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;padding:14px 20px;text-align:center;
+}
+.stat-num{font-size:2rem;font-weight:900;color:var(--orange);line-height:1;}
+.stat-lbl{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:3px;}
+
+/* ─────────────── MAIN ─────────────── */
+.main{max-width:1160px;margin:0 auto;padding:52px 44px 100px;}
+
+.sec-label{
+  display:flex;align-items:center;gap:14px;
+  font-size:.62rem;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:20px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.badge{font-size:.58rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:2px;border:1px solid;white-space:nowrap;}
+.badge-live{color:var(--green);border-color:var(--green-border);background:var(--green-bg);}
+.badge-soon{color:var(--gold);border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.05);}
+.badge-planned{color:var(--dim);border-color:rgba(85,90,102,.3);}
+
+/* ─────────────── MOTIVATION BANNER ─────────────── */
+.motivation-wrap{margin-bottom:28px;}
+.motivation-card{
+  background:var(--surface);border:1px solid var(--orange-border);
+  border-left:3px solid var(--orange);border-radius:var(--radius);
+  padding:18px 22px;display:flex;align-items:center;gap:14px;
+}
+.motivation-icon{font-size:1.4rem;flex-shrink:0;}
+.motivation-text{font-size:.92rem;color:var(--cream);font-weight:500;line-height:1.5;}
+.motivation-text strong{color:var(--white);font-weight:700;}
+.motivation-sub{font-size:.72rem;color:var(--muted);margin-top:3px;}
+
+/* ─────────────── LEADERBOARD ─────────────── */
+.lb-wrap{margin-bottom:56px;}
+.lb-board{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;
+}
+.lb-header-row{
+  padding:16px 24px;border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:52px 1fr 220px 90px;gap:16px;
+  align-items:center;
+}
+.lb-col-label{font-size:.58rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);}
+
+.lb-row{
+  display:grid;grid-template-columns:52px 1fr 220px 90px;gap:16px;
+  padding:20px 24px;border-bottom:1px solid var(--border2);align-items:center;
+  transition:background .18s;
+}
+.lb-row:last-child{border-bottom:none;}
+.lb-row:hover{background:rgba(255,255,255,.02);}
+.lb-row.is-me{background:rgba(255,92,26,0.04)!important;border-left:2px solid var(--orange);}
+
+/* Rank badge */
+.lb-rank{text-align:center;}
+.lb-rank-num{font-size:1.5rem;font-weight:900;line-height:1;}
+.lb-rank-num.gold{color:var(--gold);text-shadow:0 0 20px rgba(245,158,11,.5);}
+.lb-rank-num.silver{color:var(--silver);}
+.lb-rank-num.bronze{color:var(--bronze);}
+.lb-rank-num.other{color:var(--dim);}
+.lb-rank-crown{font-size:.75rem;margin-top:1px;display:block;}
+
+/* Name + bar column */
+.lb-main{}
+.lb-name-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.lb-name{font-size:.95rem;font-weight:700;color:var(--white);}
+.lb-you-tag{
+  font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--orange-glow);border:1px solid var(--orange-border);
+  color:var(--orange);padding:2px 7px;border-radius:2px;
+}
+.lb-bar-track{
+  height:6px;background:rgba(255,255,255,.05);
+  border-radius:99px;overflow:hidden;margin-bottom:6px;
+}
+.lb-bar-fill{
+  height:100%;border-radius:99px;
+  transition:width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.lb-bar-fill.high{background:linear-gradient(90deg,#22C55E,#4ADE80);}
+.lb-bar-fill.mid{background:linear-gradient(90deg,#FF5C1A,#FF8A50);}
+.lb-bar-fill.low{background:linear-gradient(90deg,#EF4444,#F87171);}
+.lb-bar-fill.zero{background:var(--dim);}
+.lb-stats-row{font-size:.68rem;color:var(--dim);}
+
+/* Modules dots column */
+.lb-dots{display:flex;flex-wrap:wrap;gap:3px;}
+.lb-dot{
+  width:20px;height:20px;border-radius:3px;border:1px solid;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.48rem;font-weight:800;cursor:default;
+  transition:transform .12s;
+}
+.lb-dot:hover{transform:scale(1.15);}
+.lb-dot.done{background:var(--green-bg);border-color:var(--green-border);color:var(--green);}
+.lb-dot.prog{background:var(--orange-glow);border-color:var(--orange-border);color:var(--orange);}
+.lb-dot.none{background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.07);color:var(--dim);}
+
+/* Pct column */
+.lb-pct-col{text-align:right;}
+.lb-pct{font-size:1.4rem;font-weight:900;line-height:1;}
+.lb-pct.high{color:var(--green);}
+.lb-pct.mid{color:var(--orange);}
+.lb-pct.low{color:var(--red);}
+.lb-pct.zero{color:var(--dim);}
+.lb-qs{font-size:.62rem;color:var(--dim);margin-top:3px;}
+
+/* Empty state */
+.lb-empty{padding:48px 24px;text-align:center;}
+.lb-empty-icon{font-size:2rem;margin-bottom:12px;}
+.lb-empty-title{font-size:1rem;font-weight:700;color:var(--cream);margin-bottom:6px;}
+.lb-empty-sub{font-size:.84rem;color:var(--muted);line-height:1.65;}
+.lb-loading{padding:40px 24px;text-align:center;font-size:.72rem;color:var(--dim);letter-spacing:.06em;}
+
+/* ─────────────── MODULE CARDS ─────────────── */
+.modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:56px;}
+.mod-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;overflow:hidden;text-decoration:none;color:inherit;
+  transition:all .2s;display:flex;flex-direction:column;position:relative;
+}
+.mod-card:hover{border-color:var(--orange-border);transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 16px rgba(255,92,26,.06);}
+.mod-card.done{border-color:rgba(34,197,94,.2);}
+.mod-card.in-prog{border-color:rgba(255,92,26,.2);}
+.mod-top{padding:16px 18px 10px;display:flex;justify-content:space-between;align-items:flex-start;}
+.mod-num{font-size:1.3rem;font-weight:900;color:rgba(255,92,26,.5);line-height:1;}
+.mod-badge-live{font-size:.52rem;font-weight:800;letter-spacing:.1em;color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);padding:2px 7px;border-radius:2px;}
+.mod-badge-done{font-size:.52rem;font-weight:800;letter-spacing:.1em;color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);padding:2px 7px;border-radius:2px;}
+.mod-badge-prog{font-size:.52rem;font-weight:800;letter-spacing:.1em;color:var(--orange);background:var(--orange-glow);border:1px solid var(--orange-border);padding:2px 7px;border-radius:2px;}
+.mod-title{font-size:.78rem;font-weight:700;color:var(--white);letter-spacing:.02em;padding:0 18px 7px;line-height:1.3;}
+.mod-desc{font-size:.84rem;color:var(--muted);line-height:1.65;padding:0 18px 14px;flex:1;}
+.mod-foot{padding:10px 18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.mod-time{font-size:.58rem;color:var(--dim);}
+.mod-score{font-size:.58rem;color:var(--orange);}
+.mod-arr{color:var(--orange);font-size:.75rem;opacity:.4;transition:opacity .15s;}
+.mod-card:hover .mod-arr{opacity:1;}
+
+/* ─────────────── TOOLS ─────────────── */
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:56px;}
+.tool-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;padding:22px 24px;text-decoration:none;color:inherit;
+  transition:all .18s;display:flex;gap:16px;align-items:flex-start;
+}
+.tool-card.live:hover{border-color:var(--orange-border);background:var(--surface2);transform:translateY(-1px);}
+.tool-card.locked{opacity:.5;cursor:default;}
+.tool-icon{
+  width:40px;height:40px;border-radius:5px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:1px solid;
+}
+.ti-green{background:var(--green-bg);border-color:var(--green-border);}
+.ti-gold{background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.22);}
+.ti-blue{background:rgba(59,130,246,.07);border-color:rgba(59,130,246,.22);}
+.ti-purple{background:rgba(139,92,246,.07);border-color:rgba(139,92,246,.2);}
+.tool-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.tool-name{font-size:.82rem;font-weight:700;color:var(--white);}
+.tool-desc{font-size:.87rem;color:var(--cream);line-height:1.7;}
+.tool-desc.dim{color:var(--muted);}
+
+/* ─────────────── QUICK REF ─────────────── */
+.ref-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.ref-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:20px;}
+.ref-title{font-size:.58rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;}
+.ref-row{margin-bottom:10px;}
+.ref-market{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:2px;}
+.ref-market.blue{color:#60A5FA;}
+.ref-market.gold{color:var(--gold);}
+.ref-val{font-size:.88rem;color:var(--cream);line-height:1.5;}
+.ref-sub{font-size:.74rem;color:var(--muted);margin-top:1px;}
+.ref-item{font-size:.87rem;color:var(--cream);line-height:1.65;margin-bottom:4px;}
+.ref-item.dim{color:var(--muted);}
+.ref-warn{font-size:.8rem;color:rgba(239,68,68,.85);line-height:1.55;margin-top:10px;}
+
+/* ─────────────── FOOTER ─────────────── */
+.footer{
+  max-width:1160px;margin:0 auto;padding:0 44px 52px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--border);padding-top:22px;
+}
+.ft{font-size:.62rem;color:var(--dim);}
+
+/* ─────────────── FADE IN ─────────────── */
+.fade-in{opacity:0;transform:translateY(8px);transition:opacity .38s ease,transform .38s ease;}
+.fade-in.visible{opacity:1;transform:none;}
+
+/* ─────────────── RESPONSIVE ─────────────── */
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr;gap:28px;padding:40px 24px 32px;}
+  .hero-stats{flex-direction:row;}
+  .main{padding:40px 24px 80px;}
+  .modules-grid{grid-template-columns:1fr 1fr;}
+  .tools-grid{grid-template-columns:1fr;}
+  .ref-grid{grid-template-columns:1fr;}
+  .lb-header-row,.lb-row{grid-template-columns:48px 1fr;gap:12px;}
+  .lb-header-row .lb-col-dots,.lb-header-row .lb-col-pct,.lb-row .lb-dots,.lb-row .lb-pct-col{display:none;}
+}
+@media(max-width:560px){
+  .header{padding:12px 20px;}
+  .hero h1{font-size:1.75rem;}
+  .modules-grid{grid-template-columns:1fr;}
+  .hero-stats{display:none;}
+}
+</style>
+</head>
+<body>
+<div id="rpbar"></div>
+
+<header class="header">
+  <div class="logo-mark">
+    <div class="logo-icon">GR</div>
+    <div>
+      <div class="logo-name">Good Results // Hub</div>
+      <div class="logo-sub">Internal Operations</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="streak-pill"><span class="streak-fire">🔥</span><span id="streak-count">—</span></div>
+    <div class="user-chip"><div class="user-dot"></div><span id="user-display">—</span></div>
+    <a href="/gimmebrain/login.html" class="logout-link" onclick="sessionStorage.clear()">Logout →</a>
+  </div>
+</header>
+
+<section class="hero fade-in">
+  <div>
+    <div class="hero-eyebrow">Back End Hub</div>
+    <h1 id="hero-greeting">Your tools.<br><span>One place.</span></h1>
+    <p class="hero-sub" id="hero-sub">Training modules, deal tools, and team resources — everything Good Results needs to run at full speed.</p>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-box"><div class="stat-num">12</div><div class="stat-lbl">Modules Live</div></div>
+    <div class="stat-box"><div class="stat-num">3</div><div class="stat-lbl">Tools Live</div></div>
+    <div class="stat-box"><div class="stat-num">2</div><div class="stat-lbl">Markets</div></div>
+  </div>
+</section>
+
+<main class="main">
+
+  <!-- ── LEADERBOARD ── -->
+  <div class="sec-label fade-in">Training Leaderboard <span class="badge badge-live">● Live</span></div>
+
+  <div class="lb-wrap fade-in">
+    <!-- Motivation banner -->
+    <div class="motivation-wrap" id="motivation-wrap" style="display:none;">
+      <div class="motivation-card">
+        <div class="motivation-icon" id="motive-icon">💪</div>
+        <div>
+          <div class="motivation-text" id="motive-text">Loading your progress...</div>
+          <div class="motivation-sub" id="motive-sub"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Board -->
+    <div class="lb-board">
+      <div class="lb-header-row">
+        <div class="lb-col-label">Rank</div>
+        <div class="lb-col-label">Agent</div>
+        <div class="lb-col-label lb-col-dots">Modules</div>
+        <div class="lb-col-label lb-col-pct" style="text-align:right;">Progress</div>
+      </div>
+      <div id="lb-body">
+        <div class="lb-loading">Loading leaderboard...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MODULES ── -->
+  <div class="sec-label fade-in">Training Modules <span class="badge badge-live">● 12 Live</span></div>
+  <div class="modules-grid fade-in" id="modules-grid">
+
+    <a href="/gimmebrain/module1" class="mod-card" data-mod="1">
+      <div class="mod-top"><div class="mod-num">01</div><span class="mod-badge-live">● LIVE</span></div>
+      <div class="mod-title">Pipeline &amp; CRM</div>
+      <div class="mod-desc">Close CRM workflow, lead vs contact vs opportunity, lead statuses, task management, and smart views.</div>
+      <div class="mod-foot"><span class="mod-time">~15 min · quiz</span><span class="mod-arr">→</span></div>
+    </a>
+
+    <a href="/gimmebrain/module2" class="mod-card" data-mod="2">
+      <div class="mod-top"><div class="mod-num">02</div><span class="mod-badge-live">● LIVE</span></div>
+      <div class="mod-title">Realtor Outreach &amp; Calls</div>
+      <div class="mod-desc">Cold calling scripts, buy box pitch, building realtor relationships, voicemail strategy.</div>
+      <div class="mod-foot"><span class="mod-time">~20 min · quiz</span><span class="mod-arr">→</span></div>
+    </a>
+
+    <a href="/gimmebrain/module3" class="mod-card" data-mod="3">
+      <div class="mod-top"><div class="mod-num">03</div><span class="mod-badge-live">● LIVE</span></div>
+      <div class="mod-title">The Offer Process</div>
+      <div class="mod-desc">How to float a verbal, write and send offers, handle objections, and move to signed contract.</div>
+      <div class="mod-foot"><span class="mod-time">~15 min · quiz</span><span class="mod-arr">→</span></div>
+    </a>
+
+    <a href="/gimmebrain/module4" class="mod-card" data-mod="4">
+      <div class="mod-top"><div class="mod-num">04</div><span class="mod-badge-live">● LIVE</span></div>
+      <div class="mod-title">Post-Contract SOP</div>
+      <div class="mod-desc">The 7-step checklist after going under contract — Drive folder, Deal Basics doc, and escrow kickoff.</div>
+      <div class="mod-foot"><span class="mod-time">~10 min · quiz</span><span class="mod-arr">→</span></div>
+    </a>
+
+    <a href="/gimmebrain/module5" class="mod-card" data-mod="5">
+      <div class="mod-top"><div class="mod-num">05</div><span class="mod-badge-live">● LIVE</span></div>
+      <div class="mod-title">SMS Playbook</div>
+      <div class="mod-desc">Cold SMS, post-call follow-up SMS, deal-stage messaging, the 9-step workflow cadence.</div>
+      <div class="mod-foot"><span class="mod-time">~15 min · quiz</span><span class="mod-arr">→</span></div>
+    </a>
+
+    <a href="/gimmebrain/module6" class="mod-card" data-mod="6">
+      <div class="mod-top"><div class="mod-num">06</div><span class="mod-badge-live">● LIVE</span></div>
+      <div class="mod-title">Buy Box, Markets &amp; Company</div>
+      <div class="mod-desc">Who we are, what we buy in NV and TX, market specifics, entities, and realtor FAQ answers.</div>
+      <div class="mod-foot"><span class="mod-time">~10 min · quiz</span><span class="mod-arr">→</span></div>
+    </a>
+
+    <a href="/gimmebrain/module7" class="mod-card" data-mod="7">
+      <div class="mod-top"><div class="mod-num">07</div><span class="mod-badge-live">● LIVE</span></div>
+      <div class="mod-title">Comps &amp; Deal Analysis</div>
+      <div class="mod-desc">How to run a soft comp on Zillow in 3 minutes, ARV formulas by market (NV 69%, TX 75%).</div>
+      <div class="mod-foot"><span class="mod-time">~15 min · quiz</span><span class="mod-arr">→</span></div>
+    </a>
+
+    <a href="/gimmebrain/module8" class="mod-card" data-mod="8">
+      <div class="mod-top"><div class="mod-num">08</div><span class="mod-badge-live">● LIVE</span></div>
+      <div class="mod-title">Closing, Title &amp; Escrow</div>
+      <div class="mod-desc">What happens between signed contract and closing day — title searches, liens, and escrow mechanics.</div>
+      <div class="mod-foot"><span class="mod-time">~20 min · quiz</span><span class="mod-arr">→</span></div>
+    </a>
+
+    <a href="/gimmebrain/module9" class="mod-card" data-mod="9">
+      <div class="mod-top"><div class="mod-num">09</div><span class="mod-badge-live">● LIVE</span></div>
+      <div class="mod-title">Nevada RPA vs Texas TREC</div>
+      <div class="mod-desc">Side-by-side contract comparison — DD periods, option fee rules, and assignment clause strategy.</div>
+      <div class="mod-foot"><span class="mod-time">~15 min · quiz</span><span class="mod-arr">→</span></div>
+    </a>
+
+    <a href="/gimmebrain/module10" class="mod-card" data-mod="10">
+      <div class="mod-top"><div class="mod-num">10</div><span class="mod-badge-live">● LIVE</span></div>
+      <div class="mod-title">Financing Types</div>
+      <div class="mod-desc">Why we always say cash, the internal funding stack, hard money mechanics, and the manufactured home warning.</div>
+      <div class="mod-foot"><span class="mod-time">~15 min · quiz</span><span class="mod-arr">→</span></div>
+    </a>
+
+    <a href="/gimmebrain/module11" class="mod-card" data-mod="11">
+      <div class="mod-top"><div class="mod-num">11</div><span class="mod-badge-live">● LIVE</span></div>
+      <div class="mod-title">Due Diligence Deep Dive</div>
+      <div class="mod-desc">DD timeline day by day, repair cost decision framework, walk vs proceed vs negotiate.</div>
+      <div class="mod-foot"><span class="mod-time">~20 min · quiz</span><span class="mod-arr">→</span></div>
+    </a>
+
+    <a href="/gimmebrain/module12" class="mod-card" data-mod="12">
+      <div class="mod-top"><div class="mod-num">12</div><span class="mod-badge-live">● LIVE</span></div>
+      <div class="mod-title">Foreclosures &amp; Distressed Deals</div>
+      <div class="mod-desc">Distressed situation types, motivation signals, quick-response playbook, and lifetime realtor trust.</div>
+      <div class="mod-foot"><span class="mod-time">~20 min · quiz</span><span class="mod-arr">→</span></div>
+    </a>
+
+  </div>
+
+  <!-- ── TEAM TOOLS ── -->
+  <div class="sec-label fade-in">Team Tools <span class="badge badge-live">● 3 Live</span></div>
+  <div class="tools-grid fade-in">
+
+    <a href="/gimmebrain/analyzer" class="tool-card live">
+      <div class="tool-icon ti-green">🎙</div>
+      <div class="tool-body">
+        <div class="tool-head"><div class="tool-name">Call Analyzer</div><span class="badge badge-live">● LIVE</span></div>
+        <div class="tool-desc">Paste any call transcript. AI scores it across 7 criteria using the GR playbook — flags forbidden language, missed opportunities, and gives you the exact script that would've changed the call.</div>
+      </div>
+    </a>
+
+    <a href="/gimmebrain/deal-doc" class="tool-card live">
+      <div class="tool-icon ti-gold">📋</div>
+      <div class="tool-body">
+        <div class="tool-head"><div class="tool-name">Deal Document Creator</div><span class="badge badge-live">● LIVE</span></div>
+        <div class="tool-desc">Upload a signed contract PDF. AI extracts all deal details and generates a clean 1-page deal sheet — contract terms, key dates, property info, agent details, and condition notes.</div>
+      </div>
+    </a>
+
+    <a href="/gimmebrain/deal-generator" class="tool-card live">
+      <div class="tool-icon ti-gold">🔥</div>
+      <div class="tool-body">
+        <div class="tool-head"><div class="tool-name">Deal Page Generator</div><span class="badge badge-live">● LIVE</span></div>
+        <div class="tool-desc">Upload the contract PDF + all deal photos. AI pulls the property data, you enter your numbers, and it builds a clean investor-ready deal page you can drop straight on Netlify.</div>
+      </div>
+    </a>
+
+    <div class="tool-card locked">
+      <div class="tool-icon ti-blue">📊</div>
+      <div class="tool-body">
+        <div class="tool-head"><div class="tool-name">Deal Dashboard</div><span class="badge badge-planned">Planned</span></div>
+        <div class="tool-desc dim">Live view of all active deals across all three markets — pipeline status, key dates, EMD deadlines, and disposition progress.</div>
+      </div>
+    </div>
+
+    <div class="tool-card locked">
+      <div class="tool-icon ti-purple">✉️</div>
+      <div class="tool-body">
+        <div class="tool-head"><div class="tool-name">Offer Terms Builder</div><span class="badge badge-planned">Planned</span></div>
+        <div class="tool-desc dim">Input deal details and get a pre-filled offer terms email draft — correct entity, escrow contact, and template for the right market, every time.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── QUICK REFERENCE ── -->
+  <div class="sec-label fade-in">Quick Reference</div>
+  <div class="ref-grid fade-in">
+
+    <div class="ref-card">
+      <div class="ref-title">Escrow Contacts</div>
+      <div class="ref-row">
+        <div class="ref-market">Las Vegas, NV</div>
+        <div class="ref-val">Jenine Meno</div>
+        <div class="ref-sub">Landmark Title</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-market blue">Reno, NV</div>
+        <div class="ref-val">Amy Kromberg</div>
+        <div class="ref-sub">Core Title</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-market gold">Houston, TX</div>
+        <div class="ref-val">Aaron Krominga</div>
+        <div class="ref-sub">Spartan Title — aaronk@spartantitle.com</div>
+      </div>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-title">Buy Box at a Glance</div>
+      <div class="ref-item">📅 Built: 1960s – early 2000s</div>
+      <div class="ref-item">📐 Size: ~2,000 sqft (1,500–2,500)</div>
+      <div class="ref-item">🏘 Type: Subdivision-style neighborhoods</div>
+      <div class="ref-item">🔨 Condition: Any condition — as-is</div>
+      <div class="ref-item">💵 Close: Cash, 20–30 days</div>
+      <div class="ref-item dim">✗ No custom / rural / commercial / recently renovated</div>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-title">Legal Entities</div>
+      <div class="ref-row">
+        <div class="ref-market blue">Nevada — LV &amp; Reno</div>
+        <div class="ref-val">Good Results LLC</div>
+        <div class="ref-sub">Signer: Gayden Rosales, Managing Member</div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-market gold">Texas — Houston</div>
+        <div class="ref-val">Good Results TX LLC</div>
+        <div class="ref-sub">Signer: Gayden Rosales, Managing Member</div>
+      </div>
+      <div class="ref-warn">⚠️ Never say: "wholesale," "wholesaler," or "assignment of contract"</div>
+    </div>
+
+  </div>
+
+</main>
+
+<hr style="border:none;border-top:1px solid var(--border);margin:0 44px;">
+<footer class="footer fade-in">
+  <div style="display:flex;align-items:center;gap:16px;">
+    <span style="font-size:.72rem;font-weight:800;color:var(--orange);letter-spacing:.04em;">GOOD RESULTS</span>
+    <span class="ft">Internal Use Only — Not for Distribution</span>
+  </div>
+  <span class="ft">Just Like Us — Always Under Construction</span>
+</footer>
+
+<script>
+// ── Scroll bar ──
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  if (h > 0) document.getElementById('rpbar').style.width = (window.scrollY / h * 100) + '%';
+}, {passive: true});
+
+// ── Fade-in observer ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((x, i) => {
+    if (x.isIntersecting) {
+      setTimeout(() => x.target.classList.add('visible'), i * 60);
+      obs.unobserve(x.target);
+    }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// ── Session info ──
+const agentName  = sessionStorage.getItem('gr_agent') || '';
+const fullName   = sessionStorage.getItem('gr_name') || agentName;
+const userEl     = document.getElementById('user-display');
+if (userEl) userEl.textContent = fullName || 'Team Member';
+
+// ── Streak ──
+(function() {
+  const streak = parseInt(localStorage.getItem('gr_streak') || '0');
+  const el = document.getElementById('streak-count');
+  if (el) el.textContent = streak > 0 ? streak + '-day streak' : 'Start your streak';
+})();
+
+// ── Hero greeting ──
+(function() {
+  const hero = document.getElementById('hero-greeting');
+  if (agentName && hero) {
+    const hour = new Date().getHours();
+    const greet = hour < 12 ? 'Morning' : hour < 17 ? 'What\'s up' : 'Evening';
+    hero.innerHTML = `${greet}, <span>${agentName}.</span>`;
+  }
+})();
+
+// ── Data & Leaderboard ──
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
+
+const MODULE_TITLES = {
+  1:'Pipeline & CRM', 2:'Realtor Outreach', 3:'The Offer Process',
+  4:'Post-Contract SOP', 5:'SMS Playbook', 6:'Buy Box & Markets',
+  7:'Comps & Analysis', 8:'Closing & Escrow', 9:'NV vs TX Contracts',
+  10:'Financing Types', 11:'Due Diligence', 12:'Foreclosures'
+};
+
+function getMotivation(myData, allData, rank) {
+  if (!myData) {
+    const others = allData.filter(a => a.name.toLowerCase() !== agentName.toLowerCase());
+    if (others.length > 0) {
+      return {
+        icon: '🚀',
+        text: `<strong>Your teammates are already on the board.</strong> Hit Module 1 and get in the game.`,
+        sub: `Every question you answer correctly is permanently banked — you never lose progress.`
+      };
+    }
+    return {
+      icon: '🎯',
+      text: `<strong>No scores yet — yours will be first.</strong> Finish a module quiz to get on the board.`,
+      sub: `The goal: answer every question in every module correctly. You earn it back each session.`
+    };
+  }
+
+  const total   = myData.totalMastered;
+  const poss    = myData.totalPossible;
+  const mods    = myData.modulesStarted;
+  const pct     = poss > 0 ? Math.round(total / poss * 100) : 0;
+
+  if (rank === 1 && pct === 100) {
+    return { icon: '🏆', text: `<strong>You're fully certified, ${agentName}.</strong> Every question. Every module. You know this playbook cold.`, sub: `That's the whole thing — congratulations.` };
+  }
+  if (rank === 1) {
+    const left = poss - total;
+    return { icon: '🔥', text: `<strong>You're running the board, ${agentName}.</strong> ${left} more questions to lock in your certification.`, sub: `You're ahead of the team — don't let them catch up.` };
+  }
+
+  const leader = allData[0];
+  const gap    = (leader.totalMastered || 0) - total;
+  if (gap <= 5 && gap > 0) {
+    return { icon: '💥', text: `<strong>You're ${gap} question${gap > 1 ? 's' : ''} from first place.</strong> This is a sprint finish, ${agentName}.`, sub: `Get back into a module and close the gap.` };
+  }
+  if (mods === 0) {
+    return { icon: '🚀', text: `<strong>Time to get started, ${agentName}.</strong> Your team is already moving.`, sub: `Open any module, read through it, and take the quiz. Every correct answer is saved permanently.` };
+  }
+  return {
+    icon: '💪',
+    text: `<strong>${total} questions mastered, ${agentName}.</strong> ${poss - total} more to go across all 12 modules.`,
+    sub: `Correct answers carry over — you only need to re-answer questions you've gotten wrong.`
+  };
+}
+
+function renderLeaderboard(rawData) {
+  const lbBody    = document.getElementById('lb-body');
+  const motiWrap  = document.getElementById('motivation-wrap');
+  const motiIcon  = document.getElementById('motive-icon');
+  const motiText  = document.getElementById('motive-text');
+  const motiSub   = document.getElementById('motive-sub');
+
+  if (!rawData || !rawData.length) {
+    lbBody.innerHTML = `
+      <div class="lb-empty">
+        <div class="lb-empty-icon">🎯</div>
+        <div class="lb-empty-title">No scores yet — be the first.</div>
+        <div class="lb-empty-sub">Complete a module quiz to start tracking progress. Every correct answer is permanently banked — you only re-answer questions you got wrong.</div>
+      </div>`;
+
+    // Still show motivation for the logged-in user
+    const motive = getMotivation(null, [], 0);
+    motiWrap.style.display = 'block';
+    motiIcon.textContent = motive.icon;
+    motiText.innerHTML = motive.text;
+    motiSub.textContent = motive.sub;
+    return;
+  }
+
+  // Compute stats per agent
+  const agents = rawData.map(a => {
+    let totalMastered = 0, totalPossible = 0, modulesStarted = 0, modulesFullyDone = 0;
+    for (let m = 1; m <= 12; m++) {
+      const mod = a.modules[m] || a.modules[String(m)];
+      if (mod) {
+        modulesStarted++;
+        totalMastered += (mod.mastered || []).length;
+        if (mod.pool_size > 0) {
+          totalPossible += mod.pool_size;
+          if ((mod.mastered || []).length >= mod.pool_size) modulesFullyDone++;
+        }
+      }
+    }
+    return {
+      name: a.name,
+      email: a.email || '',
+      modules: a.modules,
+      totalMastered,
+      totalPossible,
+      modulesStarted,
+      modulesFullyDone
+    };
+  });
+
+  // Sort by totalMastered desc, then modulesStarted
+  agents.sort((a, b) => b.totalMastered - a.totalMastered || b.modulesStarted - a.modulesStarted);
+
+  // Find current user's data and rank
+  const myIdx   = agents.findIndex(a => a.name.toLowerCase() === agentName.toLowerCase());
+  const myData  = myIdx >= 0 ? agents[myIdx] : null;
+  const myRank  = myIdx + 1;
+
+  // Show motivation
+  const motive = getMotivation(myData, agents, myRank);
+  motiWrap.style.display = 'block';
+  motiIcon.textContent = motive.icon;
+  motiText.innerHTML = motive.text;
+  motiSub.textContent = motive.sub;
+
+  // Also update hero sub with personalized text
+  if (myData) {
+    const heroSub = document.getElementById('hero-sub');
+    if (heroSub) {
+      heroSub.textContent = `${myData.totalMastered} questions mastered · ${myData.modulesStarted}/12 modules started · Rank #${myRank} of ${agents.length}`;
+    }
+  }
+
+  // Render rows
+  const rankClass = (i) => i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : 'other';
+  const rankEmoji = (i) => i === 0 ? '👑' : '';
+
+  let html = '';
+  agents.forEach((a, i) => {
+    const isMe  = a.name.toLowerCase() === agentName.toLowerCase();
+    const pct   = a.totalPossible > 0 ? Math.round(a.totalMastered / a.totalPossible * 100) : 0;
+    const pctClass = pct >= 80 ? 'high' : pct >= 40 ? 'mid' : pct > 0 ? 'low' : 'zero';
+    const barClass = pctClass;
+
+    // Module dots
+    let dots = '';
+    for (let m = 1; m <= 12; m++) {
+      const mod = a.modules[m] || a.modules[String(m)];
+      let cls = 'none', title = `Module ${m}: ${MODULE_TITLES[m]} — Not started`;
+      if (mod) {
+        const masteredCount = (mod.mastered || []).length;
+        const poolSize = mod.pool_size || 0;
+        if (poolSize > 0 && masteredCount >= poolSize) {
+          cls = 'done';
+          title = `Module ${m}: ${MODULE_TITLES[m]} — Fully mastered! (${masteredCount}/${poolSize})`;
+        } else {
+          cls = 'prog';
+          title = `Module ${m}: ${MODULE_TITLES[m]} — ${masteredCount}${poolSize > 0 ? '/' + poolSize : ''} questions mastered`;
+        }
+      }
+      dots += `<div class="lb-dot ${cls}" title="${title}">${m}</div>`;
+    }
+
+    const statsText = a.totalPossible > 0
+      ? `${a.totalMastered}/${a.totalPossible} questions · ${a.modulesFullyDone}/${a.modulesStarted} modules mastered`
+      : `${a.modulesStarted} module${a.modulesStarted !== 1 ? 's' : ''} started`;
+
+    html += `
+      <div class="lb-row${isMe ? ' is-me' : ''}">
+        <div class="lb-rank">
+          <div class="lb-rank-num ${rankClass(i)}">#${i + 1}</div>
+          <span class="lb-rank-crown">${rankEmoji(i)}</span>
+        </div>
+        <div class="lb-main">
+          <div class="lb-name-row">
+            <span class="lb-name">${a.name}</span>
+            ${isMe ? '<span class="lb-you-tag">YOU</span>' : ''}
+          </div>
+          <div class="lb-bar-track">
+            <div class="lb-bar-fill ${barClass}" style="width:0%" data-target="${pct}"></div>
+          </div>
+          <div class="lb-stats-row">${statsText}</div>
+        </div>
+        <div class="lb-dots">${dots}</div>
+        <div class="lb-pct-col">
+          <div class="lb-pct ${pctClass}">${pct > 0 ? pct + '%' : '—'}</div>
+          <div class="lb-qs">${a.totalMastered} Qs</div>
+        </div>
+      </div>`;
+  });
+
+  lbBody.innerHTML = html;
+
+  // Animate bars in
+  setTimeout(() => {
+    document.querySelectorAll('.lb-bar-fill[data-target]').forEach(bar => {
+      bar.style.width = bar.dataset.target + '%';
+    });
+  }, 100);
+
+  // Update module cards for current user
+  if (myData) {
+    document.querySelectorAll('.mod-card[data-mod]').forEach(card => {
+      const modNum = card.getAttribute('data-mod');
+      const mod = myData.modules[modNum] || myData.modules[parseInt(modNum)];
+      if (!mod) return;
+
+      const masteredCount = (mod.mastered || []).length;
+      const poolSize = mod.pool_size || 0;
+      const badge = card.querySelector('[class^="mod-badge"]');
+
+      if (poolSize > 0 && masteredCount >= poolSize) {
+        if (badge) { badge.className = 'mod-badge-done'; badge.textContent = '✓ Mastered'; }
+        card.classList.add('done');
+      } else if (masteredCount > 0) {
+        if (badge) { badge.className = 'mod-badge-prog'; badge.textContent = masteredCount + (poolSize > 0 ? '/' + poolSize : '') + ' Qs'; }
+        card.classList.add('in-prog');
+      }
+    });
+  }
+}
+
+async function loadProgress() {
+  try {
+    const res  = await fetch(APPS_SCRIPT_URL + '?action=gettrainingprogress');
+    const data = await res.json();
+    renderLeaderboard(Array.isArray(data) ? data : []);
+  } catch(e) {
+    document.getElementById('lb-body').innerHTML = `
+      <div class="lb-empty">
+        <div class="lb-empty-icon">📡</div>
+        <div class="lb-empty-title">Couldn't load leaderboard</div>
+        <div class="lb-empty-sub">Check your connection — scores are still tracked when you submit a module quiz.</div>
+      </div>`;
+  }
+}
+
+loadProgress();
+</script>
+</body>
+</html>
