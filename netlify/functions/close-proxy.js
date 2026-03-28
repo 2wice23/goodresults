@@ -1,13 +1,16 @@
 // Netlify serverless function — proxies requests to Close CRM API
-// This avoids CORS issues (Close API doesn't allow browser-origin requests)
+// Keys are stored in Netlify Environment Variables, never in source code
 
-const CLOSE_API_KEY = 'api_6T6bDNyIxa6cyQpLki4WUc.0kYjWH5q6PRy01Rak4jHf8';
-const CLOSE_BASE   = 'https://api.close.com/api/v1';
+const CLOSE_BASE = 'https://api.close.com/api/v1';
 
 exports.handler = async (event) => {
-  // Only allow POST
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
+  }
+
+  const CLOSE_API_KEY = process.env.CLOSE_API_KEY;
+  if (!CLOSE_API_KEY) {
+    return { statusCode: 500, body: JSON.stringify({ error: 'CLOSE_API_KEY not configured in Netlify env vars' }) };
   }
 
   try {
