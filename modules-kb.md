@@ -1,3 +1,81 @@
+# MODULES KB — Technical Reference & Project Guide
+
+> **Purpose:** This KB is the single source of truth for the Good Results training modules project. A dedicated Claude project uses ONLY this KB + the site folder to build, maintain, and improve the training modules. Keep this header up to date.
+
+---
+
+## How To Use This KB
+- Read this entire file at the start of every session
+- This KB contains: curriculum content, company context, objection handling, FAQ, and technical reference
+- When you learn something new or make changes, propose updates back to this KB
+- Each module will eventually get its own dedicated KB (e.g., module1-kb.md, module2-kb.md, etc.)
+
+## GitHub Access
+- **Repo:** 2wice23/goodresults (main branch)
+- **This file:** modules-kb.md
+- **Auth:** Use the GitHub PAT stored in your project memory (ask Gayden if not available)
+- **Read:** GET https://api.github.com/repos/2wice23/goodresults/contents/modules-kb.md with Bearer token
+- **Write:** PUT same URL with {message, content: btoa(newContent), sha: currentSha}
+- **Raw read:** https://raw.githubusercontent.com/2wice23/goodresults/main/modules-kb.md
+
+## Weekly KB Cycle
+- **Saturday 9 AM CT:** Analyzer project pulls Google Sheet data → writes to analyzer-kb.md
+- **Sunday 9 AM CT:** Master KB project reads all KBs → merges into master-kb.md → redistributes updates back to individual KBs
+- **Monday 9 AM CT:** Individual projects read their updated KBs → rebuild as needed
+- **This project** should read modules-kb.md on Monday mornings and update module files accordingly
+
+## Site Architecture
+- **Hosting:** Netlify at goodresults.org (Gayden deploys manually)
+- **Stack:** Static HTML, vanilla JS, CSS — no build tools, no frameworks
+- **All module files live in:** /gimmebrain/ folder
+
+## Key Files
+| File | Purpose |
+|------|---------|
+| index.html | Login page + dashboard (terminal/hacker aesthetic) |
+| module1.html | Module 1: Introduction & Company Overview |
+| module2.html | Module 2: (in progress) |
+| analyzer.html | Call Analyzer tool (separate project — do NOT modify) |
+| styles.css | Shared styles |
+
+## Design System — Modules
+- **Colors:** Dark navy background (#0D0F14), Orange accent (#FF5C1A), white text
+- **Font:** Inter (Google Fonts)
+- **Layout:** Sidebar nav + main content area, responsive
+- **Components:** Cards with orange left-border, progress tracking, interactive quizzes
+- **Pattern:** Each module is a single self-contained HTML file with embedded CSS/JS
+
+## Design System — Login/Dashboard (index.html)
+- **Aesthetic:** Terminal/hacker theme
+- **Fonts:** Exo 2 + Orbitron (Google Fonts)
+- **Accent:** Gold (#FFD700)
+- **Note:** Different design language than modules — this is intentional
+
+## Google Sheet Integration
+- Backend: Google Apps Script (Web App deployment)
+- The Apps Script handles GET/POST for call data, scoring, leaderboard
+- Apps Script URL is stored in analyzer.html (line 643) — modules may need their own endpoints
+
+## Working Preferences (from Gayden)
+- Do NOT paste code for Gayden to insert — make all changes directly to files
+- Avoid Chrome extension usage when API/CLI alternatives exist
+- Gayden handles Netlify deploys manually — just update the files
+- Ask Gayden to paste tokens/IDs into chat rather than navigating to find them
+
+## Project Scope
+- **Own:** All module HTML files, module curriculum content, module quizzes/interactions
+- **Do NOT touch:** analyzer.html, analyzer-kb.md, login authentication logic
+- **Coordinate with:** Master KB project (Sunday merges), Analyzer project (separate)
+
+## Other KBs in the Repo
+- analyzer-kb.md — Call analyzer (separate project)
+- master-kb.md — Master knowledge base (separate project)
+- chloe-kb.md — Chloe assistant
+- close-kb/ — Close CRM related
+- sms-kb.md — SMS workflows
+
+---
+
 WHAT CHANGED THIS CYCLE (2026-03-26 — Cycle 1): No content changes this cycle. Synced with Master KB.  
 \# Good Results — Curriculum Knowledge Base  
 \*\*Version:\*\* 2.2 — Final comprehensive rewrite with all 68 corrections applied (March 2026\)  
