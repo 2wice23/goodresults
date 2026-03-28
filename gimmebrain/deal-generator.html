@@ -231,7 +231,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 </div>
 
 <script>
-const ANTHROPIC_KEY = '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';
+const ANTHROPIC_PROXY = '/.netlify/functions/anthropic-proxy';
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
 let currentPDF = null;
@@ -339,14 +339,9 @@ Fields:
 Contract text:
 ${text.slice(0, 14000)}`;
 
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    const resp = await fetch(ANTHROPIC_PROXY, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 800, messages: [{ role: 'user', content: prompt }] })
     });
     const result = await resp.json();
