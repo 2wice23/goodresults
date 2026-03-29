@@ -76,9 +76,9 @@
 
 ---
 
-WHAT CHANGED THIS CYCLE (2026-03-26 — Cycle 1): No content changes this cycle. Synced with Master KB.  
-\# Good Results — Curriculum Knowledge Base  
-\*\*Version:\*\* 2.2 — Final comprehensive rewrite with all 68 corrections applied (March 2026\)  
+WHAT CHANGED THIS CYCLE (2026-03-29 — Cycle 2): DD task corrected (Joe handles dispo, not Gayden). Deal Page Creator tool documented. Module quiz pools expanded (M1: 21 Qs, M2: 23 Qs). Photo request escalation added. Agents-send-terms/realtors-write-contracts distinction. Disapproved deal handling expanded. Call Analyzer usage guidance for new agents. Workflow approval clarification. Academy landing page documented.
+\# Good Results — Curriculum Knowledge Base
+\*\*Version:\*\* 2.3 — Weekly sync with Slack knowledge and module expansions (March 29, 2026\)  
 \*\*Source of truth for:\*\* All training modules. When modules and this KB conflict, this KB wins.  
 \*\*How to update:\*\* Tell Claude what changed and ask it to update this file. Claude rebuilds modules from here.
 
@@ -228,7 +228,7 @@ Opportunities enter here automatically after "Approved" status. This is where ag
 \- \*\*Tworking It (Active)\*\* — Deal cannot happen immediately. A workflow fires: Day 6 sends automated SMS asking for updates, Day 7 creates a follow-up task. Agent continues following up every 1–3 weeks until ready to submit an offer or the deal dies. If an offer is rejected, opportunity returns here.  
 \- \*\*Send Terms (Active)\*\* — Agent is ready to submit an offer. Before moving here, complete ALL required custom fields. Moving here triggers: (1) pre-filled offer email draft using correct market template, (2) SMS to realtor confirming terms sent, (3) next-day follow-up task.  
 \- \*\*Offer Out (Active)\*\* — Signed contract sent back. Gayden or Joe moves opportunity here after signing. Automated SMS confirms completion, 24-hour follow-up task created.  
-\- \*\*Due Diligence Period (Won)\*\* — Offer was accepted. Deal is locked. Automatic task created for Gayden. Agent proceeds to Post-Contract SOP. Disposition begins immediately.  
+\- \*\*Due Diligence Period (Won)\*\* — Offer was accepted. Deal is locked. Automatic task created for Joe (he handles dispo). Agent proceeds to Post-Contract SOP. Disposition begins immediately.  
 \- \*\*A$$igned (Won)\*\* — Deal successfully assigned to end buyer.  
 \- \*\*Chicken Dinner (Won)\*\* — Deal fully closed and paid.  
 \- \*\*Dead (Lost)\*\* — Opportunity fell through. Reason documented.  
@@ -539,7 +539,7 @@ Inside the main Drive folder, create a Google Doc titled \*\*Deal Basics – \[P
 \*\*Step 6: Move Opportunity to Due Diligence Period\*\*  
 Once the contract is signed and accepted, update the opportunity status in Close CRM to \*\*Due Diligence Period\*\*.
 
-\*\*NOTE:\*\* Due Diligence Period is a Won status. Moving here signals the deal is locked and disposition begins. A task is automatically created for Gayden.
+\*\*NOTE:\*\* Due Diligence Period is a Won status. Moving here signals the deal is locked and disposition begins. A task is automatically created for Joe (he handles dispo).
 
 \*\*Step 7: Document Access Information in Notes\*\*  
 In the Notes section of the opportunity in Close CRM, clearly document:  
@@ -561,7 +561,7 @@ Before you are done, confirm every item:
 \- ✓ Access information and property condition clearly documented in Notes
 
 \#\#\# What Happens Next (Awareness Only)  
-Moving to Due Diligence Period triggers a task for Gayden. The disposition process begins immediately. You are encouraged to maintain communication with the seller/agent, but leadership takes over primary coordination from this point forward.
+Moving to Due Diligence Period triggers a task for Joe (he handles dispo). The disposition process begins immediately. You are encouraged to maintain communication with the seller/agent, but leadership takes over primary coordination from this point forward.
 
 \#\#\# Non-Negotiables  
 \- If it's not documented, it doesn't exist  
@@ -1230,8 +1230,8 @@ Moving here triggers: (1) pre-filled offer email draft using correct market temp
 \*\*Offer Out:\*\*  
 Gayden or Joe moves here after signing. Triggers: (1) automated SMS to realtor via "Offer Out" template confirming contract sent, (2) 24-hour follow-up task for you.
 
-\*\*Due Diligence Period:\*\*  
-Auto-task created for Gayden. Disposition process begins immediately.
+\*\*Due Diligence Period:\*\*
+Auto-task created for Joe (he handles dispo). Disposition process begins immediately.
 
 \#\#\# SMS Templates in Close
 
@@ -1433,3 +1433,56 @@ A: Typically $3,000–$5,000 EMD (1% of purchase price) depending on the deal.
 \*\*Scheduling Texts:\*\* Use Schedule button for personal follow-ups.
 
 \*\*Workflow Timing:\*\* Close uses contact's area code timezone. Know "contact first name" vs "contact name" tags.
+
+\*\*Workflow Approval:\*\* Approval from Gayden needed when CREATING or PUBLISHING workflows, not when sending. Training wheels until confident.
+
+\#\#\# Tools & Features
+
+\*\*Deal Page Creator:\*\* Notes entered now auto-populate into opportunity notes in Close CRM (deployed March 26). No more double-entry.
+
+\*\*Good Results Academy:\*\* Now has its own tool card on the hub page. Landing page at goodresults.org/gimmebrain/academy with how-to guide and module directory.
+
+\#\#\# Process Clarifications
+
+\*\*Agents Send Terms, Realtors Write Contracts:\*\* When we say "send terms" or "send an offer," the agent sends offer terms (price, timeline, conditions) via the Close CRM template. The realtor or listing agent drafts the actual contract.
+
+\*\*Photo Requests:\*\* Ask the realtor politely but firmly. If they push back or get heated, escalate to Gayden.
+
+\*\*Disapproved Deals:\*\* If Joe disapproves: check why. Price issue → twork at Joe's numbers. Bad for other reasons → Dead.
+
+\*\*Rejected Offers:\*\* Move back to Tworking It. Follow up every 1-3 weeks.
+
+\*\*Call Analyzer (New Agents):\*\* Take every meaningful call to the Analyzer when new. Once experienced, less critical but always valuable.
+
+\*\*Dispo (Disposition):\*\* Moving contract from our possession to someone else (buyers). When realtors say they buy flips: qualify as potential buyer, but 90% are BS. Route investor-realtors to Gayden.
+
+\#\#\# Module Quiz Pool Updates (March 28, 2026)
+
+\*\*Module 1 — Pipeline & CRM (21 questions):\*\*
+\- Q10: Disapproved deals → twork at Joe's price or move to Dead
+\- Q14: Signed contracts → Deal Processing page, Google Drive, upload docs, share via opp notes
+\- Q16: Seller not ready → ask timeline + target price, Tworking It with 1-3 week follow-ups
+\- Q18: Wrong template on multi-opportunity leads → template pulled from wrong primary opportunity
+\- Q19 (new): Contract sent to your email → redirect to contracts@goodresults.org + verify terms
+\- Q20 (new): Rejected offer → back to Tworking It, follow up 1-3 weeks
+
+\*\*Module 2 — Realtor Outreach & Calls (23 questions):\*\*
+\- Q1: First thing on cold call → state name/company, then qualify
+\- Q8: Call Analyzer usage → every meaningful call when new
+\- Q18: "Seller wants higher price" → stay warm, don't chase, let deal come back
+\- Q21 (new): "Burned by investors" → empathize, explain verbal-float-first process
+\- Q22 (new): Before any contract → ALWAYS float a verbal offer first
+
+\*\*Module 3 — The Offer Process:\*\*
+\- Q0: Five pipeline stages → Unprocessed → Pre Twork → Tworking It → Send Terms → Offer Out
+\- Q6: "Before sending offer terms" (not "before writing a contract") — agents send terms, realtors write contracts
+
+\*\*Module 4 — Post-Contract SOP:\*\*
+\- Q8: References Deal Page Creator tool (not manual Google Docs)
+\- Q9: When to move to DD → after the contract is signed
+\- Q16: When to move to Due Diligence Period (replaced old naming convention Q)
+\- Q5: Photo requests → politely but firmly ask, escalate to Gayden if needed
+
+\*\*Module 5 — SMS Playbook:\*\*
+\- Q13: Send Terms template purpose → gives realtor everything to write the contract
+\- Q19: Approval needed when creating/publishing workflows (not sending)
