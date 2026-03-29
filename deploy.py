@@ -21,7 +21,7 @@ REPO = '2wice23/goodresults'
 API = f'https://api.github.com/repos/{REPO}'
 LOCAL_ROOT = os.path.dirname(os.path.abspath(__file__))
 BRANCH = 'main'
-SITE_URL = 'https://www.goodresults.org'
+SITE_URL = 'https://goodresults.org'
 SLACK_NOTIFY_PATH = '/.netlify/functions/slack-score-notify'
 
 def notify_slack(message, file_count, commit_sha, file_list):
