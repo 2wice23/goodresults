@@ -1385,3 +1385,51 @@ A: Typically $3,000–$5,000 EMD (1% of purchase price) depending on the deal.
 \---
 
 \*Last updated: March 2026\. Version 2.2. Final comprehensive rewrite with all 68 assumption corrections applied. This is the authoritative version.\*
+
+\---
+
+\#\# SLACK-SOURCED UPDATES (2026-03-29)
+
+\#\#\# Pipeline & CRM
+
+\*\*ACQ Lead Owner:\*\* ALWAYS change the ACQ Lead Owner custom field to yourself after any follow-up call. If you forget, those calls go to waste.
+
+\*\*Opportunity Creation:\*\* Must include asking price AND address. Without both, opportunity won't auto-populate.
+
+\*\*Undoing Done Messages:\*\* Inbox > Done tab > click message > Move to Inbox.
+
+\*\*Investor-Realtors:\*\* Route to Gayden. He handles investor relationships. Don't manage these yourself.
+
+\#\#\# Deal Types
+
+\*\*Short Sales:\*\* We work them if the deal makes sense. Long wait. Our value = early relationship + consistent follow-up. Relationship play.
+
+\*\*Sub2 vs Loan Assumption:\*\* Sub2 = trust, no qualifying, flexible buy box. Loan assumption = must qualify. Different things.
+
+\*\*Direct-to-Seller:\*\* Collaborate with Joe until comfortable handling solo.
+
+\#\#\# Property Conditions
+
+\*\*Mold:\*\* Not a deal-killer for the right price.
+\*\*Termite:\*\* Yes, we take them.
+\*\*HOA Townhomes:\*\* HOA handles exterior. Cheaper rehab. Higher DOM on resale.
+
+\#\#\# Comps & Analysis
+
+\*\*CMAs:\*\* Irrelevant to investors. Price/sqft and radius searching are flawed. Rookie tool.
+
+\*\*Comping Notes:\*\* Detail doesn't hurt. ChatGPT for concise versions. Detailed info may = wholesaler.
+
+\#\#\# Title & Escrow
+
+\*\*GF Number:\*\* Guaranty File Number. Title/escrow uses it to ID the file.
+
+\*\*Title Insurance vs Closing Costs:\*\* Different things. Title insurance is only part of closing costs.
+
+\*\*Title Company Policy:\*\* If we pay closing costs, we use our title company. Escalation: Gayden calls their title contact.
+
+\#\#\# SMS & Workflows
+
+\*\*Scheduling Texts:\*\* Use Schedule button for personal follow-ups.
+
+\*\*Workflow Timing:\*\* Close uses contact's area code timezone. Know "contact first name" vs "contact name" tags.

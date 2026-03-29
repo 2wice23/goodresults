@@ -1,17 +1,95 @@
-\=== WHAT CHANGED THIS CYCLE (2026-03-26) \===  
-VERSION: v2.0 → v2.1
+\=== WHAT CHANGED THIS CYCLE (2026-03-29) \===  
+VERSION: v2.1 → v2.2
 
-ADDED:  
-\- ESTABLISHED RELATIONSHIP CHECK-IN call type (for past sellers / warm pipeline follow-up)  
-\- Closing timeline extension policy: can accommodate longer timelines if seller requests; lead with speed by default  
-\- Analyzer KB: ESTABLISHED RELATIONSHIP CHECK-IN added to call type list (after BAD TIMING)
+ADDED (from Slack channel scrape — #questions-and-answers, #the-group-chat, #hack-the-planet):  
+\- SHORT SALES: We work short sales. Patience + follow-up = our value. Relationship play, not quick-close.  
+\- SUB2 vs LOAN ASSUMPTION: Sub2 = no qualifying (trust). Loan assumption = must qualify (DTI, credit, income). Different things.  
+\- CMA POLICY: Irrelevant to investors. Price/sqft and radius searching are flawed. Rookie realtors use these.  
+\- GF NUMBER: Guaranty File Number for title/escrow file identification.  
+\- MOLD HOUSES: Not a deal-killer for the right price.  
+\- TERMITE HOUSES: Yes, we take them.  
+\- HOA TOWNHOMES: HOA handles exterior. Cheaper rehab but higher DOM on resale.  
+\- INVESTOR-REALTORS: Route to Gayden. He handles investor relationships directly.  
+\- DIRECT-TO-SELLER: Collaborate with Joe until comfortable.  
+\- COMPING NOTES: Detail doesn't hurt. Use ChatGPT for concise versions. Detailed info may indicate wholesaler.  
+\- ACQ LEAD OWNER: ALWAYS assign yourself after follow-up calls. Forgetting = lost calls.  
+\- OPPORTUNITY CREATION: Must include price + address or it won't populate.  
+\- SMS SCHEDULING: Use Schedule button for personal follow-ups.  
+\- SMS WORKFLOW TIMING: Close uses contact's area code timezone. Know first name vs name tags.  
+\- SMART VIEW FIX: HTX call me now filters out contacts contacted in last 7 days.  
+\- UNDOING DONE MESSAGES: Inbox > Done tab > Move to Inbox.  
+
+UPDATED:  
+\- Buyer agent commission script (full Gayden script added)  
+\- Title company escalation path added  
+\- Title insurance vs closing costs clarified  
+\- Deployment destinations updated: GitHub is now the ONLY source of truth (no Google Docs)
 
 FLAGGED FOR OWNER:  
-\- goodresults.org/gimmebrain shows "20–30 days" for close timeline — should be updated to "10–21 days"
+\- (none this cycle)
 
-\=== END WHAT CHANGED \===  
-\# GOOD RESULTS — MASTER KNOWLEDGE BASE v2.1  
-\*\*Version:\*\* 2.0 — COMPLETE consolidation from all 4 KBs (March 26, 2026\)  
+\=== END WHAT CHANGED \===
+
+\---
+
+\#\# SLACK-SOURCED KNOWLEDGE (Consolidated 2026-03-29)
+Knowledge extracted from team Slack channels and verified by Gayden Rosales.
+
+\#\#\# Deal Types & Property Conditions
+
+\*\*Short Sales:\*\* We work short sales if the deal makes sense. Requires patience — long wait to close. Our competitive advantage: early engagement with realtor + consistent follow-up throughout the process. This is a relationship play, not a quick-close play.
+
+\*\*Subject-To (Sub2) vs Loan Assumption:\*\* Completely different things. Sub2: property goes into a trust, no qualifying required, more flexible buy box. Loan assumption: must qualify (DTI, credit, income, tax statements).
+
+\*\*Mold Houses:\*\* Not a deal-killer for the right price.
+
+\*\*Termite Houses:\*\* Yes, we take them.
+
+\*\*HOA Townhomes:\*\* HOA handles entire exterior. Interior-only rehab can be cheaper. BUT: resale takes longer — higher Days on Market (DOM).
+
+\#\#\# Comps & Analysis
+
+\*\*CMAs (Comparative Market Analysis):\*\* Irrelevant to investors. Price/sqft calculations don't apply. Radius searching doesn't stay in correct neighborhoods. Realtors using CMAs are usually rookies.
+
+\*\*Comping Notes:\*\* More detail doesn't hurt. Use ChatGPT for concise versions of verbose descriptions. Deals with very detailed renovation info may be coming from a wholesaler.
+
+\#\#\# Offers & Contracts
+
+\*\*Buyer Agent Commission (Gayden's script):\*\* "I love paying agents as much as possible. If you can fit your commission into the offer price, great. But I can't increase my offer to cover it. Either the seller pays it, or we lower the offer to fit it in." Don't send offers as gambles — talk to listing agent first. For agents who won't discuss without formal offer: send a "fuck you offer" but respect your time.
+
+\*\*Direct-to-Seller:\*\* We don't need a realtor for D2S deals. New agents should collaborate with Joe until comfortable handling solo.
+
+\#\#\# Title & Escrow
+
+\*\*Title Company Policy:\*\* If we pay closing costs, we use our title company. Escalation: ask for their title contact number, Gayden calls. If they already opened title elsewhere with costs: add costs to purchase price.
+
+\*\*Title Insurance vs Closing Costs:\*\* Different things. Title insurance is only PART of closing costs.
+
+\*\*GF Number (Guaranty File Number):\*\* Used by title/escrow to identify the file. Important for closer communication.
+
+\#\#\# CRM & Pipeline
+
+\*\*ACQ Lead Owner:\*\* ALWAYS assign yourself after follow-up calls. Forgetting = lost calls + manual rework.
+
+\*\*Opportunity Creation:\*\* Must include asking price AND address. Without both, opportunity won't auto-populate.
+
+\*\*Investor-Realtors:\*\* Route to Gayden. He handles investor relationships directly. Don't manage these solo.
+
+\*\*Dispo (Disposition):\*\* Moving contract from our possession to someone else (buyers). When realtors say they buy flips: qualify them as potential buyer, but 90% are BS.
+
+\*\*Undoing Done Messages:\*\* Inbox > Done tab > click message > Move to Inbox.
+
+\#\#\# SMS & Workflows
+
+\*\*Scheduling Texts:\*\* Use Schedule button instead of Send. Great for personal follow-ups after realtor shares something personal on a call.
+
+\*\*Workflow Timing:\*\* Close uses contact's area code timezone, not yours. Know the difference between "contact first name" and "contact name" coding tags.
+
+\*\*Smart View Fix (HTX call me):\*\* Now filters out contacts contacted in last 7 days, preventing calls to SMS workflow responders.
+
+  
+\# GOOD RESULTS — MASTER KNOWLEDGE BASE v2.2  
+\*\*Version:\*\* 2.2 — COMPLETE consolidation from all 4 KBs (March 26, 2026\)  
 \*\*Purpose:\*\* Single source of truth. Weekly consolidation of changes from all 4 projects. Sliced into 4 native-format KBs for deployment.  
 \*\*Status:\*\* COMPLETE & TESTED  
 \*\*All Conflicts:\*\* RESOLVED  
@@ -21,10 +99,10 @@ FLAGGED FOR OWNER:
 
 \#\# DEPLOYMENT DESTINATIONS
 
-\- \*\*Call Analyzer KB\*\* → goodresults.org/gimmebrain/analyzer (Google Doc \+ web tool)  
-\- \*\*SMS Playbook KB\*\* → SMS strategy & recommendations (Google Doc)  
-\- \*\*Voice Agent KB (Chloe)\*\* → Close CRM \+ Google Doc  
-\- \*\*Curriculum KB\*\* → Academy modules (Google Doc \+ website)
+\- \*\*Call Analyzer KB\*\* → GitHub (2wice23/goodresults) \+ goodresults.org/gimmebrain/analyzer  
+\- \*\*SMS Playbook KB\*\* → GitHub (2wice23/goodresults)  
+\- \*\*Voice Agent KB (Chloe)\*\* → GitHub (2wice23/goodresults) \+ Close CRM  
+\- \*\*Curriculum KB\*\* → GitHub (2wice23/goodresults) \+ goodresults.org/gimmebrain/academy
 
 \---
 

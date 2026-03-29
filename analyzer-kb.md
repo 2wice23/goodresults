@@ -234,3 +234,23 @@ Last updated: 2026-03-27 (Saturday KB Learn Phase — Cycle 2)
 * **Kayden Rogers**: 18 positive, 33 negative — highest ratio of negatives. May need 1-on-1 coaching focus.
 * **Gayden Rosales**: 6 calls, all negative KB entries relate to a single title officer incident. In realtor calls, performs well. Flag: tone management.
 * **Franklin Ladaga**: 5 calls, 31.4 avg, no KB pattern entries yet. Focus: stating name, delivering buy box, setting next steps.
+
+\---
+
+\#\# SLACK-SOURCED UPDATES (2026-03-29)
+
+\#\#\# Additional Call Context for Scoring
+
+\*\*Short Sale Calls:\*\* We work short sales. Score on relationship-building and follow-up commitment, not speed-to-close. Agent should demonstrate patience and communicate our value: early engagement + consistent follow-up.
+
+\*\*Sub2 / Loan Assumption Calls:\*\* Sub2 and loan assumption are different. Sub2 = no qualifying. Loan assumption = must qualify (DTI, credit, income). If agent confuses these, flag as coaching moment.
+
+\*\*CMA Mentions:\*\* If a realtor references a CMA, agent should not rely on it. CMAs use price/sqft and radius searching which are irrelevant. Agent should redirect to proper comp methodology.
+
+\*\*Mold/Termite Properties:\*\* Neither is a deal-killer for the right price. If agent reflexively rejects, flag as coaching moment.
+
+\*\*Commission Handling:\*\* Agent should use Gayden's framework: love paying agents, fit commission into offer price, can't increase offer for it. If agent agrees to increase offer to cover commission, flag as red flag.
+
+\*\*Investor-Realtor Identification:\*\* When realtor identifies as primarily an investor, agent should route to Gayden. Score positively if routed. Score negatively if agent tries to manage solo.
+
+\*\*Direct-to-Seller Calls:\*\* New agents should collaborate with Joe on D2S leads. If a new agent handles D2S solo, flag for coaching.

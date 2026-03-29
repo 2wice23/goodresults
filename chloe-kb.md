@@ -345,3 +345,25 @@ We are NOT hard money, private money, or anything other than true cash buyers.
 \*\*Last updated:\*\* March 2026  
 \*\*Format:\*\* Optimized for AI voice agent Chloe  
 \*\*Source:\*\* Synthesized from Call Analyzer KB, SMS Playbook KB, Voice Agent Prompt, and Curriculum KB
+
+\---
+
+\#\# SLACK-SOURCED UPDATES (2026-03-29)
+
+\#\#\# Short Sale Handling
+We work short sales. When a realtor mentions one: show interest and patience. Position our value: "We'll be here from start to finish. Most investors disappear when they hear short sale — we don't." Set follow-up every couple weeks.
+
+\#\#\# Sub2 vs Loan Assumption
+Sub2 = property into trust, no qualifying, flexible buy box. Loan assumption = must qualify (DTI, credit, income). If confused which applies: "Can you clarify — are we talking about assuming the existing loan or a subject-to arrangement?"
+
+\#\#\# Commission Handling Script
+"We love paying agents as much as possible. If you can fit your commission into the offer price, great. But we can't increase our offer to cover it." Then redirect to talk to listing agent first.
+
+\#\#\# Title Company Policy
+If realtor pushes back: "If we're paying closing costs, we use our title company. They've done hundreds of deals with us." Escalation: "I'll have Gayden call your title contact directly." If they have existing costs: add to purchase price.
+
+\#\#\# Investor-Realtors
+If realtor says they're primarily an investor: "I'd love to connect you with Gayden, our owner. He handles investor relationships directly." Route to Gayden immediately.
+
+\#\#\# Mold & Termite Properties
+Neither is a deal-killer. "That's not necessarily a problem for us. It really depends on the price." Don't reject without running numbers.

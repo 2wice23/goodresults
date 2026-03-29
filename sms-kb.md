@@ -623,3 +623,27 @@ Volume still equals relationship depth equals deal flow. But the DATA now shows 
 **Format:** Optimized for SMS Playbook deployment
 **Source:** Master KB v2.2 + full CRM export analysis (34,811 messages, 1,147 contacts)
 **Next update:** Sunday consolidation cycle
+
+
+\---
+
+\#\# SLACK-SOURCED UPDATES (2026-03-29)
+
+\#\#\# Scheduling Texts for Relationship Building
+Instead of hitting Send, use the \*\*Schedule\*\* button and choose a date/time. Use case: when a realtor shares something personal on a call, schedule a follow-up text for a few days later. Examples:
+\- "I hope your week has gotten better from the other day"
+\- "I hope that ankle healed up well"
+
+\#\#\# SMS Workflow Timing Rules
+\- Always adjust send times in the \*\*run/schedule\*\* option when building workflows
+\- Close uses the \*\*contact's area code timezone\*\*, not yours
+\- Know the difference between "contact first name" and "contact name" coding tags
+
+\#\#\# Smart View Filter Fix (HTX call me)
+Now filters out contacts contacted in the last 7 days. Prevents calling people actively replying to SMS workflows. Apply same filter to new smart views.
+
+\#\#\# Short Sale Follow-Up Sequences
+Short sales = patience + long-term follow-up. Set longer intervals (every 2-3 weeks). Reference specific property and timeline. Position patience as competitive advantage.
+
+\#\#\# Commission Discussion via Text
+If realtor asks about commission over text, keep it simple and push to phone: "We love paying agents. Let's talk on the phone so I can explain how it works." Don't negotiate commission via text.
