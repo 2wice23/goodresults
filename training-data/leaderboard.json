@@ -1,0 +1,26 @@
+[
+  {
+    "agent_name": "Gayden Rosales",
+    "total_calls": 10,
+    "total_score": 712.3,
+    "avg": 50
+  },
+  {
+    "agent_name": "Anthony Cruz",
+    "total_calls": 4,
+    "total_score": 75.5,
+    "avg": 19
+  },
+  {
+    "agent_name": "Franklin Ladaga",
+    "total_calls": 5,
+    "total_score": 157.2,
+    "avg": 31
+  },
+  {
+    "agent_name": "Dan VanMatre",
+    "total_calls": 1,
+    "total_score": 89.0,
+    "avg": 89
+  }
+]

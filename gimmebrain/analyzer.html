@@ -676,7 +676,7 @@ AGENT-SPECIFIC INSIGHTS FROM CALL DATA:
 - Franklin Ladaga: 5 calls, 31.4 avg, no KB pattern entries yet. Focus: stating name, delivering buy box, setting next steps.
 `;
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
+const APPS_SCRIPT_URL = '/.netlify/functions/analyzer-api';
 
 const ANTHROPIC_PROXY = '/.netlify/functions/anthropic-proxy';
 
@@ -771,7 +771,6 @@ async function submitCustomKnowledge(report) {
   try {
     await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         action: 'addKnowledge',
@@ -803,7 +802,7 @@ async function pushKBToRemote(callId, agent, score, callType, examples, sentimen
     + '&sentiment=' + encodeURIComponent(sentiment || 'positive')
     + '&examples=' + encodeURIComponent(JSON.stringify(examples));
   try {
-    await fetch(url, { mode: 'no-cors' });
+    await fetch(url);
   } catch(e) {
     console.warn('KB push failed:', e);
   }
@@ -905,7 +904,7 @@ async function submitToLeaderboard(result) {
   const score = result.overall_score ?? calcAvg(result.scores);
   const url = `${APPS_SCRIPT_URL}?action=update&agent=${encodeURIComponent(result.agent_name)}&score=${score}&cachebust=${Date.now()}`;
   try {
-    await fetch(url, { mode: 'no-cors' });
+    await fetch(url);
   } catch (e) {
     console.warn('Leaderboard submit failed:', e);
   }
@@ -920,7 +919,6 @@ async function postReportToSlack(result, score) {
   try {
     await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'postToSlack', avg: String(score), report: result })
     });
@@ -930,7 +928,7 @@ async function postReportToSlack(result, score) {
 }
 
 // ============================================================
-// CALL REPORT → GOOGLE SHEET
+// CALL REPORT
 // ============================================================
 
 async function submitCallReport(result) {
@@ -960,7 +958,6 @@ async function submitCallReport(result) {
   try {
     await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
@@ -968,7 +965,7 @@ async function submitCallReport(result) {
 }
 
 // ============================================================
-// EXTRACTED RE KNOWLEDGE → GOOGLE SHEET
+// EXTRACTED RE KNOWLEDGE
 // ============================================================
 
 async function pushExtractedKnowledge(result) {
@@ -985,7 +982,6 @@ async function pushExtractedKnowledge(result) {
   try {
     await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
@@ -1410,7 +1406,7 @@ function renderSharedLeaderboardRows(agents) {
 
   el.innerHTML = `
     <div class="lb-meta-bar">
-      <div class="lb-source-badge"><div class="dot live"></div>SHARED — LIVE FROM GOOGLE SHEET</div>
+      <div class="lb-source-badge"><div class="dot live"></div>SHARED — LIVE</div>
       <button class="lb-refresh" onclick="renderLeaderboard()">↻ Refresh</button>
     </div>
     ${rows}`;
