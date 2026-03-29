@@ -169,7 +169,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
     <div class="explainer-card">
       <div class="ec-num">What Gets Created</div>
       <div class="ec-title">Live Page + Close Workflow</div>
-      <div class="ec-desc">Your deal page goes live at goodresults.org/deals/[deal-id]. In Close, you get a draft workflow with: teaser SMS, deal-link email (both instant), deal-link SMS (2hrs later), and a follow-up SMS (next day). Just activate it and enroll contacts.</div>
+      <div class="ec-desc">Your deal page goes live at goodresults.org/deals/[deal-id]. In Close, you get a 6-step dispo workflow: Day 1 — teaser SMS + email (instant), then deal-link SMS (46 min). Day 2 — follow-up SMS + email, then final nudge SMS (2 hrs). Just activate it and enroll contacts.</div>
     </div>
   </div>
 </div>
@@ -552,9 +552,11 @@ function renderExtracted(d) {
   set('eContractPrice', d.contractPrice);
   set('eExecutedDate', d.executedDate);
   set('eCoe', d.coeDate);
-  set('eDdPeriod', d.ddDays ? d.ddDays + ' days' : null);
+  const ddEndCalc = (d.executedDate && d.ddDays) ? addDaysToDate(d.executedDate, d.ddDays) : null;
+  set('eDdPeriod', d.ddDays ? d.ddDays + ' days' + (ddEndCalc ? ' (ends ' + ddEndCalc + ')' : '') : null);
   set('eEmd', d.emdAmount);
-  set('eEmdDue', d.emdDays ? d.emdDays + ' days after execution' : null);
+  const emdDueCalc = (d.executedDate && d.emdDays) ? addDaysToDate(d.executedDate, d.emdDays) : null;
+  set('eEmdDue', d.emdDays ? d.emdDays + ' days' + (emdDueCalc ? ' (due ' + emdDueCalc + ')' : '') : (emdDueCalc ? emdDueCalc : null));
   set('eSeller', d.seller);
   set('eBuyer', d.buyer);
   set('eOnMarket', d.onMarket);
@@ -833,6 +835,18 @@ async function closeAPI(path, method, body) {
   return resp.json();
 }
 
+// Add N days to a date string (YYYY-MM-DD or MM/DD/YYYY) → returns YYYY-MM-DD
+function addDaysToDate(dateStr, days) {
+  if (!dateStr || days == null) return null;
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return null;
+  d.setDate(d.getDate() + Number(days));
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return yyyy + '-' + mm + '-' + dd;
+}
+
 // Small delay between API calls to avoid rate limits / race conditions
 function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
@@ -876,17 +890,14 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
 
   const photoLabel = dealPhotos.length ? 'Uploading ' + dealPhotos.length + ' photos to GitHub...' : 'No photos (skipping)';
   initLog([
-    'Fetching deal page template...',           // 0
-    'Pushing deal page to GitHub...',            // 1
-    'Pushing deal data to GitHub...',            // 2
-    photoLabel,                                  // 3
-    'Searching for lead in Close...',            // 4
-    'Updating opportunity in Close...',          // 5
-    'Loading SMS playbook from KB...',           // 6
-    'Generating workflow messages with AI...',   // 7
-    'Creating dispo SMS templates in Close...',  // 8
-    'Creating dispo email template in Close...', // 9
-    'Creating dispo workflow draft in Close...'  // 10
+    'Fetching deal page template...',              // 0
+    'Pushing deal page to GitHub...',              // 1
+    'Pushing deal data to GitHub...',              // 2
+    photoLabel,                                    // 3
+    'Searching for lead in Close...',              // 4
+    'Updating opportunity in Close...',            // 5
+    'Creating deal-link templates in Close...',    // 6
+    'Creating dispo workflow draft in Close...'    // 7
   ]);
 
   const slug = dealId;
@@ -1002,24 +1013,57 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
       setLogStep(4, 'done', 'Lead search skipped: ' + e.message);
     }
 
-    // --- STEP 5: Update opportunity ---
+    // --- STEP 5: Update opportunity (only fill blank fields) ---
     await wait(800);
     setLogStep(5, 'active');
     if (targetOpp) {
+      // Fetch existing opp to see what's already filled
+      const existingOpp = await closeAPI('/opportunity/' + targetOpp.id + '/', 'GET');
+      const existing = existingOpp.custom || {};
+
       const updatePayload = {};
-      function setCF(key, val) { if (val) updatePayload['custom.' + CF[key]] = val; }
+      // Only set a custom field if it has a value AND the field is currently blank
+      function setCF(key, val) {
+        if (!val) return;
+        const fieldId = CF[key];
+        const current = existing[fieldId];
+        if (!current || current === '' || current === null) {
+          updatePayload['custom.' + fieldId] = val;
+        }
+      }
 
       const fullAddr = [address, extractedDeal.city, extractedDeal.state, extractedDeal.zip].filter(Boolean).join(', ');
       setCF('address', fullAddr);
-      if (askingN) setCF('ask', '$' + askingN.toLocaleString());
-      if (arvN) setCF('arv', '$' + arvN.toLocaleString());
-      if (extractedDeal.coeDate) setCF('coeDate', extractedDeal.coeDate);
-      if (askingN) {
-        setCF('currentContractPrice', '$' + askingN.toLocaleString());
+
+      // currentContractPrice = what we got the deal at (from the contract)
+      const contractPriceN = parseDollar(extractedDeal.contractPrice);
+      if (contractPriceN) setCF('currentContractPrice', '$' + contractPriceN.toLocaleString());
+
+      // wholesalePrice = what we're selling it for to buyers (user input)
+      if (askingN) setCF('wholesalePrice', '$' + askingN.toLocaleString());
+
+      // Only set opp value if not already set
+      if (askingN && !existingOpp.value) {
         updatePayload.value = Math.round(askingN * 100); // cents
       }
 
-      // Property details in the note
+      if (arvN) setCF('arv', '$' + arvN.toLocaleString());
+      if (extractedDeal.coeDate) setCF('coeDate', extractedDeal.coeDate);
+      if (extractedDeal.executedDate) setCF('acceptedDate', extractedDeal.executedDate);
+      if (extractedDeal.emdAmount) setCF('emdAmount', extractedDeal.emdAmount);
+      if (extractedDeal.onMarket) setCF('onMarket', extractedDeal.onMarket);
+
+      // Calculate DD end date and EMD due date from executed date + day counts
+      if (extractedDeal.executedDate && extractedDeal.ddDays) {
+        const ddEnd = addDaysToDate(extractedDeal.executedDate, extractedDeal.ddDays);
+        if (ddEnd) setCF('ddEndDate', ddEnd);
+      }
+      if (extractedDeal.executedDate && extractedDeal.emdDays) {
+        const emdDue = addDaysToDate(extractedDeal.executedDate, extractedDeal.emdDays);
+        if (emdDue) setCF('emdDueDate', emdDue);
+      }
+
+      // Property details in the note (always update — more info is better)
       const noteLines = [address];
       const propDetails = [
         extractedDeal.beds ? extractedDeal.beds + ' bd' : null,
@@ -1032,129 +1076,64 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
       noteLines.push('Deal page: ' + dealUrl);
       updatePayload.note = noteLines.join('\n');
 
-      await closeAPI('/opportunity/' + targetOpp.id + '/', 'PUT', updatePayload);
-      oppUpdated = true;
-      setLogStep(5, 'done', 'Opportunity updated on "' + matchedLead.display_name + '"');
+      const fieldCount = Object.keys(updatePayload).length;
+      if (fieldCount > 1) { // always has 'note', so > 1 means we have other updates
+        await closeAPI('/opportunity/' + targetOpp.id + '/', 'PUT', updatePayload);
+        oppUpdated = true;
+        setLogStep(5, 'done', 'Opportunity updated (' + (fieldCount - 1) + ' fields filled)');
+      } else {
+        await closeAPI('/opportunity/' + targetOpp.id + '/', 'PUT', updatePayload);
+        oppUpdated = true;
+        setLogStep(5, 'done', 'Note updated (all fields already filled)');
+      }
     } else {
       setLogStep(5, 'done', 'Skipped — no opportunity to update');
     }
 
-    // --- STEP 6: Fetch SMS KB from GitHub ---
+    // --- STEP 6: Create deal-link SMS + email templates (only these need the URL) ---
     await wait(800);
     setLogStep(6, 'active');
-    let smsKbContent = '';
-    try {
-      const kbResult = await githubAPI('sms-kb.md', 'GET');
-      if (kbResult.ok && kbResult.data.content) {
-        smsKbContent = decodeURIComponent(escape(atob(kbResult.data.content.replace(/\n/g, ''))));
-        setLogStep(6, 'done', 'SMS KB loaded (' + Math.round(smsKbContent.length / 1024) + ' KB)');
-      } else {
-        setLogStep(6, 'done', 'KB not found — using default messages');
-      }
-    } catch(e) {
-      setLogStep(6, 'done', 'KB fetch failed — using default messages');
-    }
 
-    // --- STEP 7: Generate workflow messages with Claude AI ---
-    await wait(600);
-    setLogStep(7, 'active');
+    // Static template IDs (created once in Close, reused every deal)
+    const TEASER_TMPL  = 'smstmpl_5TJvHLXfVDqBV5c5D4a1MZ';  // "Dispo - Teaser"
+    const FOLLOWUP_TMPL = 'smstmpl_3GVufkhASUv2ao47VskWV2'; // "Dispo - Follow Up"
+    const NUDGE_TMPL   = 'smstmpl_5gHTK848OX3hK9WP1cbG4A';  // "Dispo - Final Nudge v2"
 
-    // Default messages (fallback if AI fails or KB empty)
-    let smsTeaser = 'How goes it {{ contact.first_name }}? it\'s {{ user.first_name }}... I have a deal in ' + zip + ' you might be into... Want me to send over the details?';
-    let smsLink = 'Not sure if you\'re still active.. But here are the details if you want to give it a look... Reach out if you have any questions\n' + dealUrl;
-    let smsFollowUp = 'Hey {{ contact.first_name }}... just circling back on the ' + zip + ' deal... still have it if you want to take a look 👀';
-    let emailSubject = 'Deal in ' + zip;
-    let emailBody = '<p>Hey {{ contact.first_name }},</p><p>Hope you\'re doing well! I\'ve got a deal I think you might be interested in.</p><p><a href="' + dealUrl + '">' + dealUrl + '</a></p><p>Give me a shout if you want any more details on it...</p><p>- {{ user.first_name }}<br>Good Results Home Buyers</p>';
-
-    if (smsKbContent) {
-      try {
-        // Trim KB to key sections to stay under token limits
-        const kbTrimmed = smsKbContent.substring(0, 12000);
-
-        const aiResp = await fetch(ANTHROPIC_PROXY, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514',
-            max_tokens: 1200,
-            system: 'You write dispo SMS and email messages for a real estate wholesaler. Use the SMS KB data to match the company\'s proven texting style — casual, human, uses "..." and "lol", short messages. Use {{ contact.first_name }} for the recipient and {{ user.first_name }} for the sender. NEVER use forbidden words: wholesaler, wholesale, assign, flip, cash buyer, investor. Return ONLY valid JSON, no markdown fences.',
-            messages: [{
-              role: 'user',
-              content: 'Based on this SMS KB data, generate dispo workflow messages for this deal:\n\nDEAL: ' + address + ' | ZIP: ' + zip + ' | Deal page: ' + dealUrl + '\n\nReturn JSON with exactly these keys:\n- smsTeaser: first text to spark interest (1-2 lines, no deal link, get them curious)\n- smsLink: second text with the deal link (casual, include the URL: ' + dealUrl + ')\n- smsFollowUp: third text if no reply (light persistence, playful)\n- emailSubject: short email subject line\n- emailBody: HTML email body (use <p> tags, include deal link, sign off with {{ user.first_name }} and Good Results Home Buyers)\n\nSMS KB DATA (use the highest-performing patterns and Gayden\'s voice DNA):\n' + kbTrimmed
-            }]
-          })
-        });
-
-        if (aiResp.ok) {
-          const aiData = await aiResp.json();
-          const aiText = aiData.content?.[0]?.text || '';
-          // Parse JSON — handle possible markdown fences just in case
-          const jsonStr = aiText.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
-          const gen = JSON.parse(jsonStr);
-          if (gen.smsTeaser) smsTeaser = gen.smsTeaser;
-          if (gen.smsLink) smsLink = gen.smsLink;
-          if (gen.smsFollowUp) smsFollowUp = gen.smsFollowUp;
-          if (gen.emailSubject) emailSubject = gen.emailSubject;
-          if (gen.emailBody) emailBody = gen.emailBody;
-          setLogStep(7, 'done', 'AI-generated messages from KB patterns');
-        } else {
-          setLogStep(7, 'done', 'AI unavailable — using default messages');
-        }
-      } catch(e) {
-        console.warn('AI generation failed:', e);
-        setLogStep(7, 'done', 'AI parse error — using default messages');
-      }
-    } else {
-      setLogStep(7, 'done', 'No KB data — using default messages');
-    }
-
-    // --- STEP 8: Create SMS templates ---
-    await wait(800);
-    setLogStep(8, 'active');
-    const smsTmpl1 = await closeAPI('/sms_template/', 'POST', {
-      name: address + ' - Dispo Teaser',
-      text: smsTeaser,
+    // Deal-link SMS — only thing injected is the URL
+    const linkSmsTmpl = await closeAPI('/sms_template/', 'POST', {
+      name: address + ' - Deal Link',
+      text: 'Here are the details on that deal I mentioned... check it out and let me know if you have any questions\n' + dealUrl,
       is_shared: true
     });
     await wait(600);
-    const smsTmpl2 = await closeAPI('/sms_template/', 'POST', {
-      name: address + ' - Dispo Link',
-      text: smsLink,
-      is_shared: true
-    });
-    await wait(600);
-    const smsTmpl3 = await closeAPI('/sms_template/', 'POST', {
-      name: address + ' - Dispo Follow-Up',
-      text: smsFollowUp,
-      is_shared: true
-    });
-    setLogStep(8, 'done', '3 SMS templates created');
 
-    // --- STEP 9: Create email template ---
-    await wait(800);
-    setLogStep(9, 'active');
+    // Deal email — only thing injected is the URL (reused on both days)
     const emailTmpl = await closeAPI('/email_template/', 'POST', {
-      name: address + ' - Dispo Email',
-      subject: emailSubject,
-      body: emailBody,
+      name: address + ' - Deal Email',
+      subject: 'Deal details — ' + address,
+      body: '<p>Hey {{ contact.first_name }},</p><p>Here are the details on that deal I mentioned...</p><p><a href="' + dealUrl + '">' + dealUrl + '</a></p><p>Let me know if you have any questions or want to take a look at it.</p><p>{{ user.first_name }}<br>Good Results Home Buyers</p>',
       is_shared: true
     });
-    setLogStep(9, 'done', 'Email template created');
+    setLogStep(6, 'done', 'Deal-link SMS + email templates created');
 
-    // --- STEP 10: Create workflow draft ---
+    // --- STEP 7: Create 6-step workflow draft ---
+    // Day 1: teaser SMS + email (instant) → deal-link SMS (46 min)
+    // Day 2: follow-up SMS + email (1 day) → final nudge SMS (2 hr)
     await wait(800);
-    setLogStep(10, 'active');
+    setLogStep(7, 'active');
     const workflow = await closeAPI('/sequence/', 'POST', {
       name: address + ' - Dispo',
       steps: [
-        { step_type: 'sms', delay: 'PT0S', sms_template_id: smsTmpl1.id },
-        { step_type: 'email', delay: 'PT0S', email_template_id: emailTmpl.id, threading: 'new_thread' },
-        { step_type: 'sms', delay: 'PT2H', sms_template_id: smsTmpl2.id },
-        { step_type: 'sms', delay: 'P1D', sms_template_id: smsTmpl3.id }
+        { step_type: 'sms',   delay: 'PT0S',  sms_template_id: TEASER_TMPL },
+        { step_type: 'email', delay: 'PT0S',  email_template_id: emailTmpl.id, threading: 'new_thread' },
+        { step_type: 'sms',   delay: 'PT46M', sms_template_id: linkSmsTmpl.id },
+        { step_type: 'sms',   delay: 'P1D',   sms_template_id: FOLLOWUP_TMPL },
+        { step_type: 'email', delay: 'PT0S',  email_template_id: emailTmpl.id, threading: 'new_thread' },
+        { step_type: 'sms',   delay: 'PT2H',  sms_template_id: NUDGE_TMPL }
       ]
     });
     workflowName = workflow.name;
-    setLogStep(10, 'done', 'Workflow "' + workflowName + '" created (draft)');
+    setLogStep(7, 'done', 'Workflow "' + workflowName + '" created (6-step draft)');
 
     // =============================================
     // SUCCESS
