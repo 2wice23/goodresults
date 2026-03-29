@@ -17,7 +17,7 @@ exports.handler = async (event) => {
     const { action, path, method, body } = JSON.parse(event.body);
 
     // Whitelist allowed paths to prevent abuse
-    const allowed = ['/lead/', '/opportunity/'];
+    const allowed = ['/lead/', '/opportunity/', '/sms_template/', '/sequence/', '/email_template/'];
     const isAllowed = allowed.some(prefix => path.startsWith(prefix));
     if (!isAllowed) {
       return { statusCode: 403, body: JSON.stringify({ error: 'Path not allowed: ' + path }) };

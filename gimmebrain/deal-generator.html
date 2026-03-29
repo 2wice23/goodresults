@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
@@ -15,6 +15,7 @@
   --orange:#FF5C1A;--orange-glow:rgba(255,92,26,0.15);--orange-border:rgba(255,92,26,0.25);
   --green:#22C55E;--green-bg:rgba(34,197,94,0.1);--green-border:rgba(34,197,94,0.25);
   --red:#EF4444;--red-bg:rgba(239,68,68,0.08);
+  --purple:#A855F7;--purple-bg:rgba(168,85,247,0.1);--purple-border:rgba(168,85,247,0.25);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{font-size:16px;}
@@ -30,10 +31,19 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .eyebrow{font-family:'Inter',sans-serif;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-weight:500;}
 .hero h1{font-family:'Inter',sans-serif;font-size:clamp(1.4rem,2.8vw,2.2rem);line-height:1.15;margin-bottom:10px;font-weight:800;letter-spacing:0.02em;}
 .hero h1 em{font-style:normal;color:var(--orange);}
-.hero-sub{font-size:0.9rem;color:var(--cream);line-height:1.7;max-width:640px;font-weight:400;}
+.hero-sub{font-size:0.9rem;color:var(--cream);line-height:1.7;max-width:720px;font-weight:400;}
 .divider{border:none;border-top:1px solid var(--border);margin:0 44px;}
 
-.app{max-width:1100px;margin:0 auto;padding:32px 44px 100px;display:grid;grid-template-columns:360px 1fr;gap:24px;align-items:start;}
+/* How-it-works explainer */
+.explainer{max-width:1100px;margin:0 auto;padding:24px 44px 0;}
+.explainer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media(max-width:900px){.explainer-grid{grid-template-columns:1fr;}}
+.explainer-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:16px 18px;}
+.explainer-card .ec-num{font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--orange);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;margin-bottom:6px;}
+.explainer-card .ec-title{font-family:'Inter',sans-serif;font-size:0.78rem;color:var(--white);font-weight:700;margin-bottom:6px;}
+.explainer-card .ec-desc{font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--muted);line-height:1.7;font-weight:400;}
+
+.app{max-width:1100px;margin:0 auto;padding:32px 44px 100px;display:grid;grid-template-columns:380px 1fr;gap:24px;align-items:start;}
 @media(max-width:900px){.app{grid-template-columns:1fr;}}
 
 .panel{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;position:sticky;top:88px;}
@@ -43,6 +53,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 
 .step-label{font-family:'Inter',sans-serif;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;margin-top:18px;font-weight:600;}
 .step-label:first-child{margin-top:0;}
+.step-hint{font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--dim);line-height:1.6;margin-bottom:8px;font-weight:400;}
 
 .upload-zone{border:1.5px dashed var(--orange-border);border-radius:4px;padding:20px 12px;text-align:center;cursor:pointer;transition:all 0.2s;background:transparent;position:relative;}
 .upload-zone:hover,.upload-zone.drag-over{border-color:var(--orange);background:var(--orange-glow);}
@@ -64,9 +75,10 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .extract-btn:hover:not(:disabled){background:rgba(34,197,94,0.2);border-color:var(--green);}
 .extract-btn:disabled{opacity:0.35;cursor:not-allowed;}
 
-.generate-btn{width:100%;padding:13px;background:var(--orange);color:var(--white);border:none;border-radius:3px;font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.05em;cursor:pointer;transition:all 0.2s;text-transform:uppercase;margin-top:8px;}
-.generate-btn:hover:not(:disabled){background:#ff6d3a;}
-.generate-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.launch-btn{width:100%;padding:15px;background:var(--orange);color:var(--white);border:none;border-radius:4px;font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:800;letter-spacing:0.06em;cursor:pointer;transition:all 0.2s;text-transform:uppercase;margin-top:12px;}
+.launch-btn:hover:not(:disabled){background:#ff6d3a;transform:translateY(-1px);box-shadow:0 4px 20px rgba(255,92,26,0.3);}
+.launch-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.launch-btn.success{background:rgba(34,197,94,0.2);color:var(--green);border:1px solid var(--green-border);}
 
 .status-line{font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--muted);text-align:center;padding:8px 0 0;letter-spacing:0.02em;min-height:22px;font-weight:400;}
 .status-line.active{color:var(--green);}
@@ -78,6 +90,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .info-box strong{color:var(--orange);display:block;margin-bottom:4px;font-weight:600;}
 .info-box code{background:rgba(255,92,26,0.1);padding:2px 4px;border-radius:2px;font-family:'Inter',sans-serif;font-weight:500;}
 
+/* Output panel */
 .output-panel{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;min-height:400px;}
 .output-hdr{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--orange-glow);}
 .output-hdr-left{display:flex;align-items:center;gap:8px;}
@@ -86,25 +99,46 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .badge-ready{color:var(--green);border-color:var(--green-border);background:var(--green-bg);}
 .badge-empty{color:var(--dim);border-color:var(--dim);}
 
-.download-btn{padding:8px 18px;background:var(--orange);color:var(--white);border:none;border-radius:3px;font-family:'Inter',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.05em;cursor:pointer;transition:all 0.2s;text-transform:uppercase;display:none;}
-.download-btn:hover{background:#ff6d3a;}
-
-.output-empty{padding:60px 40px;text-align:center;}
-.output-empty-icon{font-size:2.5rem;margin-bottom:16px;opacity:0.3;}
-.output-empty-text{font-family:'Inter',sans-serif;font-size:0.65rem;color:var(--muted);letter-spacing:0.02em;line-height:1.8;font-weight:400;}
-
 .extracted-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:16px;}
 .ext-field{background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:8px 10px;}
 .ext-key{font-family:'Inter',sans-serif;font-size:0.52rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;font-weight:600;}
 .ext-val{font-family:'Inter',sans-serif;font-size:0.68rem;color:var(--orange);font-weight:500;}
 .ext-val.empty{color:var(--dim);}
 
-.success-box{margin:16px;padding:18px 20px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:4px;display:none;}
-.success-box h3{font-family:'Inter',sans-serif;font-size:0.78rem;color:var(--green);margin-bottom:10px;letter-spacing:0.05em;font-weight:700;}
-.success-steps{font-family:'Inter',sans-serif;font-size:0.62rem;color:var(--cream);line-height:2;counter-reset:step;font-weight:400;}
-.success-steps li{list-style:none;padding-left:20px;position:relative;}
-.success-steps li::before{content:counter(step);counter-increment:step;position:absolute;left:0;color:var(--orange);font-weight:700;}
-.success-steps li span{color:var(--orange);font-weight:600;}
+.output-empty{padding:60px 40px;text-align:center;}
+.output-empty-icon{font-size:2.5rem;margin-bottom:16px;opacity:0.3;}
+.output-empty-text{font-family:'Inter',sans-serif;font-size:0.65rem;color:var(--muted);letter-spacing:0.02em;line-height:1.8;font-weight:400;}
+
+/* Progress log */
+.progress-log{padding:16px;display:none;}
+.progress-log .log-entry{font-family:'Inter',sans-serif;font-size:0.6rem;padding:5px 0;color:var(--cream);letter-spacing:0.02em;display:flex;align-items:center;gap:8px;line-height:1.5;}
+.progress-log .log-entry .log-icon{width:16px;text-align:center;flex-shrink:0;}
+.progress-log .log-entry.done .log-icon{color:var(--green);}
+.progress-log .log-entry.active .log-icon{color:var(--orange);}
+.progress-log .log-entry.error .log-icon{color:var(--red);}
+.progress-log .log-entry.pending{color:var(--dim);}
+
+/* Success banner */
+.success-banner{margin:16px;padding:20px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:4px;display:none;text-align:center;}
+.success-banner h3{font-family:'Inter',sans-serif;font-size:0.85rem;color:var(--green);margin-bottom:8px;font-weight:700;}
+.success-banner .live-url{font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:600;}
+.success-banner .live-url a{color:var(--orange);text-decoration:underline;}
+.success-banner .success-details{font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--cream);margin-top:10px;line-height:1.8;}
+
+/* Photo thumbs with drag reorder */
+.photo-zone{border:1.5px dashed var(--purple-border);border-radius:4px;padding:16px 12px;text-align:center;cursor:pointer;transition:all 0.2s;background:transparent;position:relative;}
+.photo-zone:hover,.photo-zone.drag-over{border-color:var(--purple);background:var(--purple-bg);}
+.photo-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.photo-count{font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--green);margin-top:8px;display:none;font-weight:500;}
+.photo-thumbs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.photo-thumb{width:56px;height:56px;border-radius:3px;overflow:hidden;position:relative;border:2px solid transparent;cursor:grab;transition:all 0.15s;flex-shrink:0;}
+.photo-thumb:active{cursor:grabbing;}
+.photo-thumb.drag-over-thumb{border-color:var(--orange);transform:scale(1.08);}
+.photo-thumb.dragging{opacity:0.4;}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;}
+.photo-thumb .thumb-num{position:absolute;top:2px;left:2px;background:rgba(0,0,0,0.7);color:var(--white);font-family:'Inter',sans-serif;font-size:0.48rem;font-weight:700;padding:1px 4px;border-radius:2px;}
+.photo-thumb .thumb-remove{position:absolute;top:2px;right:2px;background:rgba(239,68,68,0.85);color:white;border:none;font-size:0.5rem;width:14px;height:14px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.15s;}
+.photo-thumb:hover .thumb-remove{opacity:1;}
 </style>
 </head>
 <body>
@@ -116,18 +150,40 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 
 <div class="hero">
   <div class="eyebrow"></div>
-  <h1>Drop The Deal. <em>Get The Page.</em></h1>
-  <p class="hero-sub">Upload the contract PDF, enter your numbers, and download a <code style="color:var(--orange);font-size:0.85em;">deal-doc.txt</code> file. Drop it in a folder with the universal template and your photos — done. One file per deal, name the folder anything you want.</p>
+  <h1>Drop The Deal. <em>Launch The Page.</em></h1>
+  <p class="hero-sub">Upload a contract, enter your numbers, add photos, and hit one button. It builds the deal page on the website, creates a dispo workflow in Close, and gives you a live URL — all in one shot.</p>
 </div>
-<hr class="divider">
+
+<div class="explainer">
+  <div class="explainer-grid">
+    <div class="explainer-card">
+      <div class="ec-num">What It Does</div>
+      <div class="ec-title">One Button, Three Things</div>
+      <div class="ec-desc">Extracts property data from your contract PDF using AI. Pushes a deal page (template + data + photos) straight to GitHub which auto-deploys to the live site. Then creates a dispo text/email workflow in Close CRM — named after the address, ready to activate.</div>
+    </div>
+    <div class="explainer-card">
+      <div class="ec-num">How To Use It</div>
+      <div class="ec-title">Fill the Left, Watch the Right</div>
+      <div class="ec-desc">Upload the contract PDF and hit Extract. Fill in asking price, ARV, and repairs. Upload your deal photos and drag them into the order you want. Confirm the folder name. Hit "Launch Deal" — done. The right panel shows progress and your live link when it's ready.</div>
+    </div>
+    <div class="explainer-card">
+      <div class="ec-num">What Gets Created</div>
+      <div class="ec-title">Live Page + Close Workflow</div>
+      <div class="ec-desc">Your deal page goes live at goodresults.org/deals/[folder-name]. In Close, you get a draft workflow with: teaser SMS, deal-link email (both instant), deal-link SMS (2hrs later), and a follow-up SMS (next day). Just activate it and enroll contacts.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" style="margin-top:24px;">
 
 <div class="app">
 
   <div class="panel">
-    <div class="panel-hdr"><h2>📋 Deal Inputs</h2></div>
+    <div class="panel-hdr"><h2>Deal Inputs</h2></div>
     <div class="panel-body">
 
       <div class="step-label">Step 1 — Contract PDF</div>
+      <div class="step-hint">Drop the signed contract here. Claude reads it and pulls out address, beds/baths, sqft, COE date, etc.</div>
       <div class="upload-zone" id="pdfZone">
         <input type="file" id="pdfInput" accept=".pdf">
         <div class="upload-icon">📄</div>
@@ -136,12 +192,14 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
       <div class="file-tag" id="pdfTag"></div>
 
       <div class="step-label">Step 2 — Extract from PDF</div>
+      <div class="step-hint">Hit extract and the property details auto-fill on the right. If the PDF is a scanned image, skip this and the page will still work — just less data shown.</div>
       <button class="extract-btn" id="extractBtn" disabled>⚡ Extract Property Data</button>
       <div class="status-line" id="statusLine">Upload a PDF to begin</div>
 
       <hr class="panel-sep">
 
       <div class="step-label">Step 3 — Your Numbers</div>
+      <div class="step-hint">These show up on the deal page for buyers. Leave blank if you don't have them yet — you can update later on the deals dashboard.</div>
       <div class="field-row">
         <div class="field-label">Asking Price</div>
         <input class="field-input" type="text" id="fAsking" placeholder="e.g. $210,000">
@@ -160,6 +218,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
       <hr class="panel-sep">
 
       <div class="step-label">Listing Status</div>
+      <div class="step-hint">Off-market shows the "off-market" badge on the deal page. Active shows "active listing."</div>
       <div style="display:flex;gap:0;border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-bottom:4px;">
         <button id="btnOffMarket" onclick="setMarket('off')" style="flex:1;padding:9px;background:var(--orange);color:var(--white);border:none;font-family:'Inter',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.05em;cursor:pointer;text-transform:uppercase;transition:all 0.2s;">Off-Market</button>
         <button id="btnOnMarket" onclick="setMarket('on')" style="flex:1;padding:9px;background:var(--surface2);color:var(--muted);border:none;font-family:'Inter',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.05em;cursor:pointer;text-transform:uppercase;transition:all 0.2s;">Active</button>
@@ -168,6 +227,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
       <hr class="panel-sep">
 
       <div class="step-label">Step 4 — Deal ID</div>
+      <div class="step-hint">Deal number auto-generates the ID (format: MMYYYYN). Bump the number for each new deal this month.</div>
       <div class="field-row">
         <div class="field-label">Deal Number</div>
         <input class="field-input" type="number" id="fDealNum" value="8" min="1">
@@ -179,14 +239,30 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 
       <hr class="panel-sep">
 
-      <div class="info-box">
-        <strong>📸 About Photos</strong>
-        Rename your photos <code>1.jpg  2.jpg  3.jpg ...</code><br>
-        (PC: select all photos → right-click → Rename → Windows auto-numbers them.<br>Or use PowerShell: <code>$i=1; Get-ChildItem *.jpg | Sort-Object LastWriteTime | ForEach-Object { Rename-Item $_ ("{0:D2}.jpg" -f $i); $i++ }</code>)<br><br>
-        The deal page auto-discovers them in order — no generator needed.
+      <div class="step-label">Step 5 — Deal Folder Name</div>
+      <div class="step-hint">This becomes the URL: goodresults.org/deals/[this-name]. Auto-fills from the address. You can change it.</div>
+      <div class="field-row">
+        <div class="field-label">Folder / URL Slug</div>
+        <input class="field-input" type="text" id="fFolderName" placeholder="e.g. 3202-melbourne-st">
       </div>
+      <div style="font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--muted);margin-top:-4px;margin-bottom:10px;">Live URL: <span style="color:var(--orange);" id="dealUrlPreview">goodresults.org/deals/...</span></div>
 
-      <button class="generate-btn" id="generateBtn" disabled>🔥 Generate deal-doc.txt</button>
+      <hr class="panel-sep">
+
+      <div class="step-label">Step 6 — Photos</div>
+      <div class="step-hint">Upload your deal photos. Drag thumbnails to reorder — photo #1 is the hero image on the deal page. Click the X to remove any.</div>
+      <div class="photo-zone" id="photoDrop">
+        <input type="file" id="photoInput" accept="image/*" multiple>
+        <div class="upload-icon">📸</div>
+        <div class="upload-label">Drop photos here or <span>click to browse</span><br>JPG, PNG — any number of photos</div>
+      </div>
+      <div class="photo-count" id="photoCountLabel"></div>
+      <div class="photo-thumbs" id="photoThumbs"></div>
+
+      <hr class="panel-sep">
+
+      <button class="launch-btn" id="launchBtn" disabled>🚀 Launch Deal</button>
+      <div style="font-family:'Inter',sans-serif;font-size:0.52rem;color:var(--dim);text-align:center;margin-top:6px;line-height:1.6;">Pushes deal page to GitHub (auto-deploys to site)<br>+ creates dispo workflow draft in Close CRM</div>
 
     </div>
   </div>
@@ -197,7 +273,6 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
         <h2>Output</h2>
         <span class="badge badge-empty" id="outputBadge">WAITING</span>
       </div>
-      <button class="download-btn" id="downloadBtn">⬇ Download deal-doc.txt Again</button>
     </div>
 
     <div class="extracted-grid" id="extractedGrid" style="display:none;">
@@ -211,20 +286,17 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
       <div class="ext-field"><div class="ext-key">COE Date</div><div class="ext-val" id="eCoe">—</div></div>
     </div>
 
-    <div class="success-box" id="successBox">
-      <h3>✓ deal-doc.txt Downloaded — Here's What To Do</h3>
-      <ol class="success-steps">
-        <li>Open <span>deal-doc.txt</span> in Notepad — fill in <span>dealId</span>, <span>askingPrice</span>, <span>arv</span>, <span>estRepairs</span> and save</li>
-        <li>Create a new folder anywhere and name it whatever you want (e.g. <span id="sFolderName">123mainst</span>)</li>
-        <li>Copy <span>_template.html</span> into the folder, rename it <span>index.html</span></li>
-        <li>Drop <span>deal-doc.txt</span> + your photos (<span>01.jpg, 02.jpg...</span>) into the same folder</li>
-        <li>Upload the folder to Netlify → live at <span id="sLiveUrl">goodresults.org/your-folder-name</span></li>
-      </ol>
+    <div class="progress-log" id="progressLog"></div>
+
+    <div class="success-banner" id="successBanner">
+      <h3>Deal Launched</h3>
+      <div class="live-url" id="liveUrlLink"></div>
+      <div class="success-details" id="successDetails"></div>
     </div>
 
     <div class="output-empty" id="outputEmpty">
       <div class="output-empty-icon">📦</div>
-      <div class="output-empty-text">Extract PDF → fill numbers<br>→ download deal-doc.txt → drop photos in → deploy</div>
+      <div class="output-empty-text">Upload contract → Extract → Fill numbers → Add photos → Launch Deal<br><br>One button pushes everything live and creates your dispo workflow.</div>
     </div>
   </div>
 
@@ -232,14 +304,20 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 
 <script>
 const ANTHROPIC_PROXY = '/.netlify/functions/anthropic-proxy';
+const CLOSE_PROXY = '/.netlify/functions/close-proxy';
+const GITHUB_PROXY = '/.netlify/functions/github-proxy';
+const GITHUB_REPO = '2wice23/goodresults';
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
 let currentPDF = null;
 let extractedDeal = {};
 let marketStatus = 'off';
 let lastDealId = '';
+const dealPhotos = []; // { name, originalName, dataUrl, base64, type }
 
-// --- DEAL ID ---
+// ============================================================
+// DEAL ID
+// ============================================================
 function updateDealId() {
   const now = new Date();
   const mm = String(now.getMonth() + 1).padStart(2, '0');
@@ -251,7 +329,9 @@ function updateDealId() {
 document.getElementById('fDealNum').addEventListener('input', updateDealId);
 updateDealId();
 
-// --- MARKET TOGGLE ---
+// ============================================================
+// MARKET TOGGLE
+// ============================================================
 function setMarket(val) {
   marketStatus = val;
   const off = document.getElementById('btnOffMarket');
@@ -265,7 +345,31 @@ function setMarket(val) {
   }
 }
 
-// --- PDF UPLOAD ---
+// ============================================================
+// FOLDER SLUG
+// ============================================================
+function slugify(str) {
+  return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+function updateFolderSlug() {
+  const addr = extractedDeal.address;
+  if (addr) {
+    const slug = slugify(addr);
+    const field = document.getElementById('fFolderName');
+    if (!field.dataset.manual) field.value = slug;
+    document.getElementById('dealUrlPreview').textContent = 'goodresults.org/deals/' + (field.value || slug);
+  }
+}
+
+document.getElementById('fFolderName').addEventListener('input', function() {
+  this.dataset.manual = '1';
+  document.getElementById('dealUrlPreview').textContent = 'goodresults.org/deals/' + this.value;
+});
+
+// ============================================================
+// PDF UPLOAD
+// ============================================================
 const pdfInput = document.getElementById('pdfInput');
 const pdfZone = document.getElementById('pdfZone');
 pdfInput.addEventListener('change', e => {
@@ -294,7 +398,9 @@ pdfInput.addEventListener('change', e => {
   });
 });
 
-// --- PDF TEXT ---
+// ============================================================
+// PDF TEXT EXTRACTION
+// ============================================================
 async function extractPDFText(file) {
   const ab = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: ab }).promise;
@@ -307,7 +413,9 @@ async function extractPDFText(file) {
   return text;
 }
 
-// --- EXTRACT ---
+// ============================================================
+// EXTRACT HANDLER
+// ============================================================
 document.getElementById('extractBtn').addEventListener('click', async () => {
   if (!currentPDF) return;
   setStatus('Reading PDF...', 'active');
@@ -317,7 +425,7 @@ document.getElementById('extractBtn').addEventListener('click', async () => {
     if (text.trim().length < 100) {
       setStatus('PDF appears to be a scanned image — fill fields manually', 'error');
       document.getElementById('extractBtn').disabled = false;
-      document.getElementById('generateBtn').disabled = false;
+      document.getElementById('launchBtn').disabled = false;
       return;
     }
     setStatus('Sending to Claude...', 'active');
@@ -350,13 +458,14 @@ ${text.slice(0, 14000)}`;
     if (!jsonStr) throw new Error('No JSON returned');
     extractedDeal = JSON.parse(jsonStr);
     renderExtracted(extractedDeal);
-    setStatus('Extracted ✓ — fill in your numbers and generate', 'active');
-    document.getElementById('generateBtn').disabled = false;
+    updateFolderSlug();
+    setStatus('Extracted ✓ — fill in your numbers and launch', 'active');
+    document.getElementById('launchBtn').disabled = false;
   } catch(e) {
-    setStatus('Extraction failed — you can still fill fields manually and generate', 'error');
+    setStatus('Extraction failed — you can still fill fields manually and launch', 'error');
     console.error(e);
     document.getElementById('extractBtn').disabled = false;
-    document.getElementById('generateBtn').disabled = false;
+    document.getElementById('launchBtn').disabled = false;
   }
 });
 
@@ -384,23 +493,253 @@ function setStatus(msg, cls) {
   el.className = 'status-line' + (cls ? ' ' + cls : '');
 }
 
-// --- GENERATE ---
-document.getElementById('generateBtn').addEventListener('click', () => {
-  const asking  = document.getElementById('fAsking').value.trim();
-  const arv     = document.getElementById('fArv').value.trim();
+function parseDollar(str) {
+  if (!str) return null;
+  const n = Number(str.replace(/[^0-9.]/g, ''));
+  return isNaN(n) || n === 0 ? null : n;
+}
+
+// ============================================================
+// PHOTO UPLOAD + DRAG-TO-REORDER
+// ============================================================
+const photoInput = document.getElementById('photoInput');
+photoInput.addEventListener('change', e => {
+  if (e.target.files.length) handlePhotos(e.target.files);
+});
+
+// Drop zone
+const photoDrop = document.getElementById('photoDrop');
+['dragenter','dragover'].forEach(evt => {
+  photoDrop.addEventListener(evt, e => { e.preventDefault(); photoDrop.classList.add('drag-over'); });
+});
+['dragleave','drop'].forEach(evt => {
+  photoDrop.addEventListener(evt, e => { e.preventDefault(); photoDrop.classList.remove('drag-over'); });
+});
+photoDrop.addEventListener('drop', e => {
+  if (e.dataTransfer.files.length) handlePhotos(e.dataTransfer.files);
+});
+
+function handlePhotos(fileList) {
+  Array.from(fileList).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      const base64 = dataUrl.split(',')[1];
+      const ext = file.name.split('.').pop().toLowerCase();
+      const num = String(dealPhotos.length + 1).padStart(2, '0');
+      dealPhotos.push({ name: num + '.' + ext, originalName: file.name, dataUrl, base64, type: file.type });
+      renumberPhotos();
+      renderPhotoThumbs();
+    };
+    reader.readAsDataURL(file);
+  });
+  photoInput.value = '';
+}
+
+function renumberPhotos() {
+  dealPhotos.forEach((p, i) => {
+    const ext = p.originalName.split('.').pop().toLowerCase();
+    p.name = String(i + 1).padStart(2, '0') + '.' + ext;
+  });
+}
+
+function removePhoto(idx) {
+  dealPhotos.splice(idx, 1);
+  renumberPhotos();
+  renderPhotoThumbs();
+}
+
+// Drag reorder state
+let dragIdx = null;
+
+function renderPhotoThumbs() {
+  const container = document.getElementById('photoThumbs');
+  const countLabel = document.getElementById('photoCountLabel');
+  if (!dealPhotos.length) {
+    container.innerHTML = '';
+    countLabel.style.display = 'none';
+    return;
+  }
+  countLabel.style.display = 'block';
+  countLabel.textContent = dealPhotos.length + ' photo' + (dealPhotos.length !== 1 ? 's' : '') + ' — drag to reorder, #1 is the hero image';
+
+  container.innerHTML = dealPhotos.map((p, i) =>
+    '<div class="photo-thumb" draggable="true" data-idx="' + i + '">' +
+      '<img src="' + p.dataUrl + '" alt="' + p.name + '">' +
+      '<span class="thumb-num">' + (i + 1) + '</span>' +
+      '<button class="thumb-remove" onclick="event.stopPropagation();removePhoto(' + i + ')">✕</button>' +
+    '</div>'
+  ).join('');
+
+  // Wire up drag events on each thumb
+  container.querySelectorAll('.photo-thumb').forEach(thumb => {
+    thumb.addEventListener('dragstart', e => {
+      dragIdx = parseInt(thumb.dataset.idx);
+      thumb.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    thumb.addEventListener('dragend', () => {
+      thumb.classList.remove('dragging');
+      dragIdx = null;
+      container.querySelectorAll('.photo-thumb').forEach(t => t.classList.remove('drag-over-thumb'));
+    });
+    thumb.addEventListener('dragover', e => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      thumb.classList.add('drag-over-thumb');
+    });
+    thumb.addEventListener('dragleave', () => {
+      thumb.classList.remove('drag-over-thumb');
+    });
+    thumb.addEventListener('drop', e => {
+      e.preventDefault();
+      const dropIdx = parseInt(thumb.dataset.idx);
+      if (dragIdx !== null && dragIdx !== dropIdx) {
+        // Move the dragged photo to the drop position
+        const [moved] = dealPhotos.splice(dragIdx, 1);
+        dealPhotos.splice(dropIdx, 0, moved);
+        renumberPhotos();
+        renderPhotoThumbs();
+      }
+    });
+  });
+}
+
+// ============================================================
+// GITHUB API HELPER
+// ============================================================
+async function githubAPI(repoPath, method, body) {
+  const resp = await fetch(GITHUB_PROXY, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      path: '/repos/' + GITHUB_REPO + '/contents/' + repoPath,
+      method: method || 'GET',
+      body: body || undefined
+    })
+  });
+  const data = await resp.json();
+  if (!resp.ok && resp.status !== 404) {
+    throw new Error(data.message || 'GitHub API error ' + resp.status);
+  }
+  return { ok: resp.ok, status: resp.status, data };
+}
+
+async function pushFile(filePath, contentBase64, commitMsg) {
+  let sha = null;
+  try {
+    const checkResult = await githubAPI(filePath, 'GET');
+    if (checkResult.ok) sha = checkResult.data.sha;
+  } catch(e) {}
+  const body = { message: commitMsg, content: contentBase64 };
+  if (sha) body.sha = sha;
+  const putResult = await githubAPI(filePath, 'PUT', body);
+  if (!putResult.ok) throw new Error(putResult.data.message || 'Push failed');
+  return putResult;
+}
+
+// ============================================================
+// CLOSE API HELPER + CUSTOM FIELDS
+// ============================================================
+const CLOSE_PIPELINE = 'pipe_1P0GjK0TFer4Yw2rbArK0u'; // Properties pipeline
+const CF = {
+  address:              'cf_NdiIYfY11hv4MI2EccVt1UBe7hc3UcrPFVJn44F9AuT',
+  ask:                  'cf_vjCMz4xV8VVONcfII1tqKNbrw4WhRCU80PmVBYdHvdv',
+  arv:                  'cf_I31MKYiLvGaKZIifqfVQxkjMjhpkrImNP1q7DQOQxUZ',
+  mao:                  'cf_BKzKEuNx4uGjjJpV78goMM7Duovz630H3Hse3z4mjZC',
+  onMarket:             'cf_deI0gLpduQLEzquwHGcsaOcwJfxsLmDOszUCkP7r2yU',
+  closingCosts:         'cf_I382twtiVhhsQ57v5x0ZoQ65zESufG7qM6FOQvoTbFp',
+  officialOfferPrice:   'cf_geYAfr1h8XVC3x0bzMIEf0Aj6580oaFQ39wdLAJ2Gqe',
+  emdAmount:            'cf_SOdFoDCrSlKj3uJlxR1Yv0vP1LrlyGatZVmtgDOqIcj',
+  coeDate:              'cf_0maXpCwRBInrLrsfyJOPVZPDTTipRetz10WGJz2ptDO',
+  acceptedDate:         'cf_EVnxq4atDCF6u1Ohl13HCad8mAGiK4RijRqhBJrZNzg',
+  ddEndDate:            'cf_dYuh3zK6om5wx7DazAPdoknMZI1083pJ9Xfon6vdmYf',
+  emdDueDate:           'cf_v7RDgaN83GrYYyUPjwry71a2COpLSEhM0Dn7Lbs4Vn7',
+  currentContractPrice: 'cf_lnzdav3LInFjRAbyUATuFShueu7pIaFebA988JE8H91',
+  wholesalePrice:       'cf_MDzK5zNGLLLUE9yYYWqubvC3hFzDeKA8m4ta6p8OPhx'
+};
+
+async function closeAPI(path, method, body) {
+  const resp = await fetch(CLOSE_PROXY, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ path, method, body })
+  });
+  if (!resp.ok) {
+    const err = await resp.text();
+    throw new Error(`Close API ${path} failed (${resp.status}): ${err}`);
+  }
+  return resp.json();
+}
+
+// Small delay between API calls to avoid rate limits / race conditions
+function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ============================================================
+// PROGRESS LOG
+// ============================================================
+function initLog(steps) {
+  const log = document.getElementById('progressLog');
+  log.style.display = 'block';
+  log.innerHTML = steps.map((s, i) =>
+    '<div class="log-entry pending" id="log' + i + '">' +
+      '<span class="log-icon">○</span> ' + s +
+    '</div>'
+  ).join('');
+}
+function setLogStep(idx, state, label) {
+  const el = document.getElementById('log' + idx);
+  if (!el) return;
+  el.className = 'log-entry ' + state;
+  const icons = { active: '◉', done: '✓', error: '✗', pending: '○' };
+  el.innerHTML = '<span class="log-icon">' + (icons[state] || '○') + '</span> ' + (label || el.textContent.trim());
+}
+
+// ============================================================
+// LAUNCH DEAL — THE BIG BUTTON
+// ============================================================
+document.getElementById('launchBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('launchBtn');
+  const folderName = document.getElementById('fFolderName').value.trim();
+  const dealId = document.getElementById('fDealId').value.trim();
+  const asking = document.getElementById('fAsking').value.trim();
+  const arv = document.getElementById('fArv').value.trim();
   const repairs = document.getElementById('fRepairs').value.trim();
-  const dealId  = document.getElementById('fDealId').value.trim();
+
+  if (!folderName) { setStatus('Enter a folder name first', 'error'); return; }
   if (!dealId) { setStatus('Enter a deal number first', 'error'); return; }
 
-  setStatus('Building deal-doc.txt...', 'active');
+  btn.disabled = true;
+  btn.textContent = 'Launching...';
+  document.getElementById('outputEmpty').style.display = 'none';
+  document.getElementById('successBanner').style.display = 'none';
 
+  const photoLabel = dealPhotos.length ? 'Uploading ' + dealPhotos.length + ' photos to GitHub...' : 'No photos (skipping)';
+  initLog([
+    'Fetching deal page template...',           // 0
+    'Pushing deal page to GitHub...',            // 1
+    'Pushing deal data to GitHub...',            // 2
+    photoLabel,                                  // 3
+    'Searching for lead in Close...',            // 4
+    'Updating opportunity in Close...',          // 5
+    'Loading SMS playbook from KB...',           // 6
+    'Generating workflow messages with AI...',   // 7
+    'Creating dispo SMS templates in Close...',  // 8
+    'Creating dispo email template in Close...', // 9
+    'Creating dispo workflow draft in Close...'  // 10
+  ]);
 
-  const askingN  = parseDollar(asking);
-  const arvN     = parseDollar(arv);
+  const slug = folderName;
+  const address = extractedDeal.address || 'Unknown Address';
+  const zip = extractedDeal.zip || '?????';
+  const dealUrl = 'https://goodresults.org/deals/' + slug + '/';
+  const askingN = parseDollar(asking);
+  const arvN = parseDollar(arv);
   const repairsN = parseDollar(repairs);
-  const profitN  = (arvN && repairsN && askingN) ? arvN - repairsN - askingN : null;
+  const profitN = (arvN && repairsN && askingN) ? arvN - repairsN - askingN : null;
 
-  const dealData = {
+  const dealJson = {
     dealId,
     market: marketStatus,
     address: extractedDeal.address || null,
@@ -420,28 +759,271 @@ document.getElementById('generateBtn').addEventListener('click', () => {
     profitPotential: profitN
   };
 
-  const blob = new Blob([JSON.stringify(dealData, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'deal-doc.txt'; a.click();
+  let workflowName = '';
+  let oppUpdated = false;
 
-  document.getElementById('successBox').style.display = 'block';
-  document.getElementById('outputEmpty').style.display = 'none';
-  document.getElementById('sFolderName').textContent = dealId;
-  document.getElementById('sLiveUrl').textContent = `goodresults.org/deals/your-folder-name`;
-  document.getElementById('outputBadge').textContent = 'READY';
-  document.getElementById('outputBadge').className = 'badge badge-ready';
-  const dlBtn = document.getElementById('downloadBtn');
-  dlBtn.style.display = 'block';
-  dlBtn.onclick = () => { const a2 = document.createElement('a'); a2.href = url; a2.download = 'deal-doc.txt'; a2.click(); };
-  setStatus('deal-doc.txt downloaded ✓ — follow the steps on the right', 'active');
+  try {
+    // =============================================
+    // PHASE 1: GITHUB (deal page + data + photos)
+    // =============================================
+
+    // --- STEP 0: Fetch template ---
+    setLogStep(0, 'active');
+    let templateContent;
+    try {
+      const siteResp = await fetch('/deals/_template.html');
+      if (!siteResp.ok) throw new Error('site fetch failed');
+      const tplText = await siteResp.text();
+      templateContent = btoa(unescape(encodeURIComponent(tplText)));
+    } catch(e) {
+      const tplResult = await githubAPI('deals/_template.html', 'GET');
+      if (!tplResult.ok) throw new Error('Could not fetch template');
+      templateContent = tplResult.data.content.replace(/\n/g, '');
+    }
+    setLogStep(0, 'done', 'Template fetched');
+
+    // --- STEP 1: Push index.html ---
+    await wait(300);
+    setLogStep(1, 'active');
+    await pushFile('deals/' + slug + '/index.html', templateContent, 'Deal page: ' + address + ' (template)');
+    setLogStep(1, 'done', 'Deal page template pushed');
+
+    // --- STEP 2: Push deal-doc.txt ---
+    await wait(300);
+    setLogStep(2, 'active');
+    const jsonB64 = btoa(unescape(encodeURIComponent(JSON.stringify(dealJson, null, 2))));
+    await pushFile('deals/' + slug + '/deal-doc.txt', jsonB64, 'Deal page: ' + address + ' (data)');
+    setLogStep(2, 'done', 'Deal data pushed');
+
+    // --- STEP 3: Push photos ---
+    await wait(300);
+    setLogStep(3, 'active');
+    if (dealPhotos.length) {
+      for (let i = 0; i < dealPhotos.length; i++) {
+        const photo = dealPhotos[i];
+        setLogStep(3, 'active', 'Uploading photo ' + (i + 1) + ' of ' + dealPhotos.length + '...');
+        await pushFile('deals/' + slug + '/' + photo.name, photo.base64, 'Deal page: ' + address + ' (photo ' + photo.name + ')');
+        if (i < dealPhotos.length - 1) await wait(200); // brief pause between photos
+      }
+      setLogStep(3, 'done', dealPhotos.length + ' photos uploaded');
+    } else {
+      setLogStep(3, 'done', 'No photos (skipped)');
+    }
+
+    // =============================================
+    // PHASE 2: CLOSE CRM (opportunity + workflow)
+    // Spaced out to avoid hammering the API
+    // =============================================
+
+    await wait(500); // pause between GitHub and Close phases
+
+    // --- STEP 4: Find lead + opportunity ---
+    setLogStep(4, 'active');
+    let targetOpp = null;
+    let matchedLead = null;
+    try {
+      const searchData = await closeAPI(
+        '/lead/?query=' + encodeURIComponent(address) + '&_fields=id,display_name,opportunities&_limit=5',
+        'GET'
+      );
+      const leads = searchData.data || [];
+      for (const lead of leads) {
+        const opps = lead.opportunities || [];
+        const pipelineOpp = opps.find(o => o.pipeline_id === CLOSE_PIPELINE);
+        if (pipelineOpp) { targetOpp = pipelineOpp; matchedLead = lead; break; }
+        if (!targetOpp && opps.length > 0) { targetOpp = opps[0]; matchedLead = lead; }
+      }
+      if (targetOpp) {
+        setLogStep(4, 'done', 'Found opp on "' + matchedLead.display_name + '"');
+      } else {
+        setLogStep(4, 'done', 'No matching lead found — skipping opp update');
+      }
+    } catch(e) {
+      setLogStep(4, 'done', 'Lead search skipped: ' + e.message);
+    }
+
+    // --- STEP 5: Update opportunity ---
+    await wait(400);
+    setLogStep(5, 'active');
+    if (targetOpp) {
+      const updatePayload = {};
+      function setCF(key, val) { if (val) updatePayload['custom.' + CF[key]] = val; }
+
+      const fullAddr = [address, extractedDeal.city, extractedDeal.state, extractedDeal.zip].filter(Boolean).join(', ');
+      setCF('address', fullAddr);
+      if (askingN) setCF('ask', '$' + askingN.toLocaleString());
+      if (arvN) setCF('arv', '$' + arvN.toLocaleString());
+      if (extractedDeal.coeDate) setCF('coeDate', extractedDeal.coeDate);
+      if (askingN) {
+        setCF('currentContractPrice', '$' + askingN.toLocaleString());
+        updatePayload.value = Math.round(askingN * 100); // cents
+      }
+
+      // Property details in the note
+      const noteLines = [address];
+      const propDetails = [
+        extractedDeal.beds ? extractedDeal.beds + ' bd' : null,
+        extractedDeal.baths ? extractedDeal.baths + ' ba' : null,
+        extractedDeal.sqft ? Number(extractedDeal.sqft).toLocaleString() + ' sqft' : null
+      ].filter(Boolean).join(' / ');
+      if (propDetails) noteLines.push(propDetails);
+      if (extractedDeal.yearBuilt) noteLines.push('Year: ' + extractedDeal.yearBuilt);
+      if (extractedDeal.lotSize) noteLines.push('Lot: ' + extractedDeal.lotSize);
+      noteLines.push('Deal page: ' + dealUrl);
+      updatePayload.note = noteLines.join('\n');
+
+      await closeAPI('/opportunity/' + targetOpp.id + '/', 'PUT', updatePayload);
+      oppUpdated = true;
+      setLogStep(5, 'done', 'Opportunity updated on "' + matchedLead.display_name + '"');
+    } else {
+      setLogStep(5, 'done', 'Skipped — no opportunity to update');
+    }
+
+    // --- STEP 6: Fetch SMS KB from GitHub ---
+    await wait(400);
+    setLogStep(6, 'active');
+    let smsKbContent = '';
+    try {
+      const kbResult = await githubAPI('sms-kb.md', 'GET');
+      if (kbResult.ok && kbResult.data.content) {
+        smsKbContent = decodeURIComponent(escape(atob(kbResult.data.content.replace(/\n/g, ''))));
+        setLogStep(6, 'done', 'SMS KB loaded (' + Math.round(smsKbContent.length / 1024) + ' KB)');
+      } else {
+        setLogStep(6, 'done', 'KB not found — using default messages');
+      }
+    } catch(e) {
+      setLogStep(6, 'done', 'KB fetch failed — using default messages');
+    }
+
+    // --- STEP 7: Generate workflow messages with Claude AI ---
+    await wait(300);
+    setLogStep(7, 'active');
+
+    // Default messages (fallback if AI fails or KB empty)
+    let smsTeaser = 'How goes it {{ contact.first_name }}? it\'s {{ user.first_name }}... I have a deal in ' + zip + ' you might be into... Want me to send over the details?';
+    let smsLink = 'Not sure if you\'re still active.. But here are the details if you want to give it a look... Reach out if you have any questions\n' + dealUrl;
+    let smsFollowUp = 'Hey {{ contact.first_name }}... just circling back on the ' + zip + ' deal... still have it if you want to take a look 👀';
+    let emailSubject = 'Deal in ' + zip;
+    let emailBody = '<p>Hey {{ contact.first_name }},</p><p>Hope you\'re doing well! I\'ve got a deal I think you might be interested in.</p><p><a href="' + dealUrl + '">' + dealUrl + '</a></p><p>Give me a shout if you want any more details on it...</p><p>- {{ user.first_name }}<br>Good Results Home Buyers</p>';
+
+    if (smsKbContent) {
+      try {
+        // Trim KB to key sections to stay under token limits
+        const kbTrimmed = smsKbContent.substring(0, 12000);
+
+        const aiResp = await fetch(ANTHROPIC_PROXY, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1200,
+            system: 'You write dispo SMS and email messages for a real estate wholesaler. Use the SMS KB data to match the company\'s proven texting style — casual, human, uses "..." and "lol", short messages. Use {{ contact.first_name }} for the recipient and {{ user.first_name }} for the sender. NEVER use forbidden words: wholesaler, wholesale, assign, flip, cash buyer, investor. Return ONLY valid JSON, no markdown fences.',
+            messages: [{
+              role: 'user',
+              content: 'Based on this SMS KB data, generate dispo workflow messages for this deal:\n\nDEAL: ' + address + ' | ZIP: ' + zip + ' | Deal page: ' + dealUrl + '\n\nReturn JSON with exactly these keys:\n- smsTeaser: first text to spark interest (1-2 lines, no deal link, get them curious)\n- smsLink: second text with the deal link (casual, include the URL: ' + dealUrl + ')\n- smsFollowUp: third text if no reply (light persistence, playful)\n- emailSubject: short email subject line\n- emailBody: HTML email body (use <p> tags, include deal link, sign off with {{ user.first_name }} and Good Results Home Buyers)\n\nSMS KB DATA (use the highest-performing patterns and Gayden\'s voice DNA):\n' + kbTrimmed
+            }]
+          })
+        });
+
+        if (aiResp.ok) {
+          const aiData = await aiResp.json();
+          const aiText = aiData.content?.[0]?.text || '';
+          // Parse JSON — handle possible markdown fences just in case
+          const jsonStr = aiText.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+          const gen = JSON.parse(jsonStr);
+          if (gen.smsTeaser) smsTeaser = gen.smsTeaser;
+          if (gen.smsLink) smsLink = gen.smsLink;
+          if (gen.smsFollowUp) smsFollowUp = gen.smsFollowUp;
+          if (gen.emailSubject) emailSubject = gen.emailSubject;
+          if (gen.emailBody) emailBody = gen.emailBody;
+          setLogStep(7, 'done', 'AI-generated messages from KB patterns');
+        } else {
+          setLogStep(7, 'done', 'AI unavailable — using default messages');
+        }
+      } catch(e) {
+        console.warn('AI generation failed:', e);
+        setLogStep(7, 'done', 'AI parse error — using default messages');
+      }
+    } else {
+      setLogStep(7, 'done', 'No KB data — using default messages');
+    }
+
+    // --- STEP 8: Create SMS templates ---
+    await wait(400);
+    setLogStep(8, 'active');
+    const smsTmpl1 = await closeAPI('/sms_template/', 'POST', {
+      name: address + ' - Dispo Teaser',
+      text: smsTeaser,
+      is_shared: true
+    });
+    await wait(300);
+    const smsTmpl2 = await closeAPI('/sms_template/', 'POST', {
+      name: address + ' - Dispo Link',
+      text: smsLink,
+      is_shared: true
+    });
+    await wait(300);
+    const smsTmpl3 = await closeAPI('/sms_template/', 'POST', {
+      name: address + ' - Dispo Follow-Up',
+      text: smsFollowUp,
+      is_shared: true
+    });
+    setLogStep(8, 'done', '3 SMS templates created');
+
+    // --- STEP 9: Create email template ---
+    await wait(400);
+    setLogStep(9, 'active');
+    const emailTmpl = await closeAPI('/email_template/', 'POST', {
+      name: address + ' - Dispo Email',
+      subject: emailSubject,
+      body: emailBody,
+      is_shared: true
+    });
+    setLogStep(9, 'done', 'Email template created');
+
+    // --- STEP 10: Create workflow draft ---
+    await wait(400);
+    setLogStep(10, 'active');
+    const workflow = await closeAPI('/sequence/', 'POST', {
+      name: address + ' - Dispo',
+      steps: [
+        { step_type: 'sms', delay: 'PT0S', sms_template_id: smsTmpl1.id },
+        { step_type: 'email', delay: 'PT0S', email_template_id: emailTmpl.id, threading: 'new_thread' },
+        { step_type: 'sms', delay: 'PT2H', sms_template_id: smsTmpl2.id },
+        { step_type: 'sms', delay: 'P1D', sms_template_id: smsTmpl3.id }
+      ]
+    });
+    workflowName = workflow.name;
+    setLogStep(10, 'done', 'Workflow "' + workflowName + '" created (draft)');
+
+    // =============================================
+    // SUCCESS
+    // =============================================
+    btn.textContent = '✓ Deal Launched';
+    btn.className = 'launch-btn success';
+    document.getElementById('outputBadge').textContent = 'LIVE';
+    document.getElementById('outputBadge').className = 'badge badge-ready';
+
+    const banner = document.getElementById('successBanner');
+    banner.style.display = 'block';
+    document.getElementById('liveUrlLink').innerHTML = '<a href="' + dealUrl + '" target="_blank">' + dealUrl + '</a>';
+    const photoNote = dealPhotos.length ? dealPhotos.length + ' photos' : 'no photos';
+    const oppNote = oppUpdated ? 'Opportunity updated on "' + matchedLead.display_name + '"' : 'No matching lead found (opp not updated)';
+    document.getElementById('successDetails').innerHTML =
+      'Deal page is deploying now (takes ~30 seconds).<br>' +
+      'GitHub: template + deal-doc.txt + ' + photoNote + '<br>' +
+      'Close: ' + oppNote + '<br>' +
+      'Close: "' + workflowName + '" workflow draft created — activate it and enroll contacts to start blasting.';
+
+    setStatus('Deal launched ✓', 'active');
+
+  } catch(err) {
+    console.error('Launch failed:', err);
+    setStatus('Launch failed: ' + err.message, 'error');
+    btn.textContent = '🚀 Retry Launch';
+    btn.disabled = false;
+  }
 });
-
-function parseDollar(str) {
-  if (!str) return null;
-  const n = Number(str.replace(/[^0-9.]/g, ''));
-  return isNaN(n) || n === 0 ? null : n;
-}
 </script>
 </body>
-</h
+</html>
