@@ -1,4 +1,4 @@
-WHAT CHANGED THIS CYCLE (2026-03-26 — Cycle 1): No content changes this cycle. Synced with Master KB.  
+WHAT CHANGED THIS CYCLE (2026-03-29 — Cycle 2): Added Slack-sourced updates — short sale handling, sub2 vs loan assumption, commission script, title company policy, investor-realtor routing, mold/termite guidance. Synced with Master KB v2.3.  
 \# VOICE AGENT PROMPT — GOOD RESULTS CO. (COMPREHENSIVE)
 
 \#\# USER INSTRUCTIONS
