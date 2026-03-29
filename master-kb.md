@@ -1,31 +1,42 @@
-\=== WHAT CHANGED THIS CYCLE (2026-03-29) \===  
-VERSION: v2.1 → v2.2
+\=== WHAT CHANGED THIS CYCLE (2026-03-29) \===
+VERSION: v2.2 → v2.3
 
-ADDED (from Slack channel scrape — #questions-and-answers, #the-group-chat, #hack-the-planet):  
-\- SHORT SALES: We work short sales. Patience + follow-up = our value. Relationship play, not quick-close.  
-\- SUB2 vs LOAN ASSUMPTION: Sub2 = no qualifying (trust). Loan assumption = must qualify (DTI, credit, income). Different things.  
-\- CMA POLICY: Irrelevant to investors. Price/sqft and radius searching are flawed. Rookie realtors use these.  
-\- GF NUMBER: Guaranty File Number for title/escrow file identification.  
-\- MOLD HOUSES: Not a deal-killer for the right price.  
-\- TERMITE HOUSES: Yes, we take them.  
-\- HOA TOWNHOMES: HOA handles exterior. Cheaper rehab but higher DOM on resale.  
-\- INVESTOR-REALTORS: Route to Gayden. He handles investor relationships directly.  
-\- DIRECT-TO-SELLER: Collaborate with Joe until comfortable.  
-\- COMPING NOTES: Detail doesn't hurt. Use ChatGPT for concise versions. Detailed info may indicate wholesaler.  
-\- ACQ LEAD OWNER: ALWAYS assign yourself after follow-up calls. Forgetting = lost calls.  
-\- OPPORTUNITY CREATION: Must include price + address or it won't populate.  
-\- SMS SCHEDULING: Use Schedule button for personal follow-ups.  
-\- SMS WORKFLOW TIMING: Close uses contact's area code timezone. Know first name vs name tags.  
-\- SMART VIEW FIX: HTX call me now filters out contacts contacted in last 7 days.  
-\- UNDOING DONE MESSAGES: Inbox > Done tab > Move to Inbox.  
+ADDED (from Slack channel scrape — #questions-and-answers, #the-group-chat, #hack-the-planet):
+\- SHORT SALES: We work short sales. Patience + follow-up = our value. Relationship play, not quick-close.
+\- SUB2 vs LOAN ASSUMPTION: Sub2 = no qualifying (trust). Loan assumption = must qualify (DTI, credit, income). Different things.
+\- CMA POLICY: Irrelevant to investors. Price/sqft and radius searching are flawed. Rookie realtors use these.
+\- GF NUMBER: Guaranty File Number for title/escrow file identification.
+\- MOLD HOUSES: Not a deal-killer for the right price.
+\- TERMITE HOUSES: Yes, we take them.
+\- HOA TOWNHOMES: HOA handles exterior. Cheaper rehab but higher DOM on resale.
+\- INVESTOR-REALTORS: Route to Gayden. He handles investor relationships directly.
+\- DIRECT-TO-SELLER: Collaborate with Joe until comfortable.
+\- COMPING NOTES: Detail doesn't hurt. Use ChatGPT for concise versions. Detailed info may indicate wholesaler.
+\- ACQ LEAD OWNER: ALWAYS assign yourself after follow-up calls. Forgetting = lost calls.
+\- OPPORTUNITY CREATION: Must include price + address or it won't populate.
+\- SMS SCHEDULING: Use Schedule button for personal follow-ups.
+\- SMS WORKFLOW TIMING: Close uses contact's area code timezone. Know first name vs name tags.
+\- SMART VIEW FIX: HTX call me now filters out contacts contacted in last 7 days.
+\- UNDOING DONE MESSAGES: Inbox > Done tab > Move to Inbox.
+\- DEAL PAGE CREATOR: Notes entered in Deal Page Creator now auto-populate into opportunity notes (deployed Mar 26).
+\- DISPO DEFINITION: Disposition = moving contract from our possession to someone else (buyers). When realtors say they buy flips, qualify as potential buyer — but 90% are BS.
+\- PHOTO REQUEST ESCALATION: Ask realtor politely but firmly. If temperature rises, escalate to Gayden.
+\- AGENTS SEND TERMS, REALTORS WRITE CONTRACTS: Important distinction. Agents don't write contracts — they send terms. Realtors draft the actual contract.
+\- WORKFLOW APPROVAL: Approval needed when CREATING/PUBLISHING workflows, not when sending. Training wheels until confident.
 
-UPDATED:  
-\- Buyer agent commission script (full Gayden script added)  
-\- Title company escalation path added  
-\- Title insurance vs closing costs clarified  
+UPDATED:
+\- Buyer agent commission script (full Gayden script added)
+\- Title company escalation path added
+\- Title insurance vs closing costs clarified
 \- Deployment destinations updated: GitHub is now the ONLY source of truth (no Google Docs)
+\- DD task assignment corrected: Due Diligence Period automatic task → Joe (handles dispo), not Gayden
+\- Module quiz pools expanded: Module 1 (19→21 questions), Module 2 (21→23 questions)
+\- SMS KB updated to v2.3 with full CRM analysis: 34,811 messages, 1,147 contacts, reply rate data
+\- SMS top performer: "favorite realtor" pattern at 41.6% reply rate on 1,269 sends
+\- SMS worst performer: "super_confused" at 5.8% — removed from recommended sequences
+\- Good Results Academy now has its own tool card on hub + landing page at goodresults.org/gimmebrain/academy
 
-FLAGGED FOR OWNER:  
+FLAGGED FOR OWNER:
 \- (none this cycle)
 
 \=== END WHAT CHANGED \===
@@ -87,9 +98,29 @@ Knowledge extracted from team Slack channels and verified by Gayden Rosales.
 
 \*\*Smart View Fix (HTX call me):\*\* Now filters out contacts contacted in last 7 days, preventing calls to SMS workflow responders.
 
+\*\*Workflow Approval:\*\* Approval from Gayden needed when CREATING or PUBLISHING workflows, not when sending individual messages. Training wheels until agents are confident building their own.
+
+\#\#\# Tools & Features
+
+\*\*Deal Page Creator:\*\* Notes entered in the Deal Page Creator now auto-populate into opportunity notes in Close CRM (deployed March 26, 2026). No more double-entry.
+
+\*\*Good Results Academy:\*\* Now has its own tool card on the hub page at goodresults.org/gimmebrain. Dedicated landing page live at goodresults.org/gimmebrain/academy with how-to guide and module directory.
+
+\#\#\# Process Clarifications
+
+\*\*Agents Send Terms, Realtors Write Contracts:\*\* Important distinction. When we say "send terms" or "send an offer," the agent is not drafting a contract — they are sending the offer terms (price, timeline, conditions) via the Close CRM template. The realtor or listing agent then drafts the actual contract.
+
+\*\*Photo Requests:\*\* Ask the realtor politely but firmly for property photos. If the realtor pushes back or gets heated, escalate to Gayden — he'll handle the conversation.
+
+\*\*Disapproved Deals — What To Do:\*\* If Joe disapproves a deal: check why. If it's a price issue, twork the deal at the price Joe's numbers support. If it's bad for another reason (location, condition, etc.), move to Dead.
+
+\*\*Rejected Offers:\*\* When an offer is rejected, move the opportunity back to Tworking It. Follow up every 1-3 weeks. Don't burn the relationship.
+
+\*\*Call Analyzer Usage (New Agents):\*\* Take every meaningful call to the Call Analyzer when you're new. It's how you build skill fast. Once experienced, it's less critical but always valuable.
+
   
-\# GOOD RESULTS — MASTER KNOWLEDGE BASE v2.2  
-\*\*Version:\*\* 2.2 — COMPLETE consolidation from all 4 KBs (March 26, 2026\)  
+\# GOOD RESULTS — MASTER KNOWLEDGE BASE v2.3
+\*\*Version:\*\* 2.3 — Weekly sync consolidation (March 29, 2026\)  
 \*\*Purpose:\*\* Single source of truth. Weekly consolidation of changes from all 4 projects. Sliced into 4 native-format KBs for deployment.  
 \*\*Status:\*\* COMPLETE & TESTED  
 \*\*All Conflicts:\*\* RESOLVED  
@@ -108,15 +139,23 @@ Knowledge extracted from team Slack channels and verified by Gayden Rosales.
 
 \#\# WEEKLY CHANGE LOG
 
-\*\*Week of March 26, 2026:\*\*  
-\- Initial MASTER KB v2.1 consolidation from all 4 KBs (COMPLETE, not abbreviated)  
-\- All 6 conflicts resolved per leadership decisions  
-\- All 4 KBs now have single authoritative source to pull from  
-\- Ready for first Sunday consolidation cycle  
-\- Test slices created and verified against originals  
-\- Safety checks built in
+\*\*Week of March 29, 2026 (v2.3):\*\*
+\- Consolidated Slack knowledge from #questions-and-answers, #the-group-chat, #hack-the-planet
+\- SMS KB v2.3 full CRM analysis (34,811 messages) merged into Master
+\- Module quiz pool expansions documented (Module 1: 21 Qs, Module 2: 23 Qs)
+\- DD task assignment corrected (Joe handles dispo, not Gayden)
+\- Deal Page Creator tool update: notes auto-populate opportunity notes
+\- Dispo definition added from Gayden's Slack explanation
+\- Photo request escalation path documented
+\- Agents send terms / realtors write contracts distinction added
+\- Workflow approval clarification (creating/publishing, not sending)
+\- Good Results Academy tool card + landing page documented
 
-\[Previous weeks will accumulate here each Sunday\]
+\*\*Week of March 26, 2026 (v2.1→v2.2):\*\*
+\- Initial MASTER KB v2.1 consolidation from all 4 KBs (COMPLETE, not abbreviated)
+\- All 6 conflicts resolved per leadership decisions
+\- All 4 KBs now have single authoritative source to pull from
+\- Test slices created and verified against originals
 
 \---
 
@@ -1045,7 +1084,7 @@ Opportunities enter here automatically after "Approved" status. This is where ag
 \- \*\*Tworking It (Active)\*\* — Deal cannot happen immediately. A workflow fires: Day 6 sends automated SMS asking for updates, Day 7 creates a follow-up task. Agent continues following up every 1–3 weeks until ready to submit an offer or the deal dies. If an offer is rejected, opportunity returns here.  
 \- \*\*Send Terms (Active)\*\* — Agent is ready to submit an offer. Before moving here, complete ALL required custom fields. Moving here triggers: (1) pre-filled offer email draft using correct market template, (2) SMS to realtor confirming terms sent, (3) next-day follow-up task.  
 \- \*\*Offer Out (Active)\*\* — Signed contract sent back. Gayden or Joe moves opportunity here after signing. Automated SMS confirms completion, 24-hour follow-up task created.  
-\- \*\*Due Diligence Period (Won)\*\* — Offer was accepted. Deal is locked. Automatic task created for Gayden. Agent proceeds to Post-Contract SOP. Disposition begins immediately.  
+\- \*\*Due Diligence Period (Won)\*\* — Offer was accepted. Deal is locked. Automatic task created for Joe (he handles dispo). Agent proceeds to Post-Contract SOP. Disposition begins immediately.  
 \- \*\*A$$igned (Won)\*\* — Deal successfully assigned to end buyer.  
 \- \*\*Chicken Dinner (Won)\*\* — Deal fully closed and paid.  
 \- \*\*Dead (Lost)\*\* — Opportunity fell through. Reason documented.  
@@ -1205,8 +1244,8 @@ Moving here triggers: (1) pre-filled offer email draft, (2) SMS to realtor via "
 \*\*Offer Out:\*\*  
 Gayden or Joe moves here after signing. Triggers: (1) automated SMS via "Offer Out" template, (2) 24-hour follow-up task.
 
-\*\*Due Diligence Period:\*\*  
-Auto-task created for Gayden. Disposition process begins immediately.
+\*\*Due Diligence Period:\*\*
+Auto-task created for Joe (he handles dispo). Disposition process begins immediately.
 
 \---
 
@@ -1436,7 +1475,7 @@ Inside the main Drive folder, create a Google Doc titled \*\*Deal Basics – \[P
 \*\*Step 6: Move Opportunity to Due Diligence Period\*\*  
 Once the contract is signed and accepted, update the opportunity status in Close CRM to \*\*Due Diligence Period\*\*.
 
-\*\*NOTE:\*\* Due Diligence Period is a Won status. Moving here signals the deal is locked and disposition begins. A task is automatically created for Gayden.
+\*\*NOTE:\*\* Due Diligence Period is a Won status. Moving here signals the deal is locked and disposition begins. A task is automatically created for Joe (he handles dispo).
 
 \*\*Step 7: Document Access Information in Notes\*\*  
 In the Notes section of the opportunity in Close CRM, clearly document:  
@@ -1464,7 +1503,7 @@ Before you are done, confirm every item:
 
 \#\#\# What Happens Next (Awareness Only)
 
-Moving to Due Diligence Period triggers a task for Gayden. The disposition process begins immediately. You are encouraged to maintain communication with the seller/agent, but leadership takes over primary coordination from this point forward.
+Moving to Due Diligence Period triggers a task for Joe (he handles dispo). The disposition process begins immediately. You are encouraged to maintain communication with the seller/agent, but leadership takes over primary coordination from this point forward.
 
 \---
 
@@ -1961,10 +2000,12 @@ Before deploying the 4 sliced KBs, Claude performs:
 |---------|------|--------|-------|  
 | 1.0 | March 26, 2026 | INCOMPLETE | Abbreviated content, missing 70% of Curriculum |  
 | 2.0 | March 26, 2026 | ✅ COMPLETE & READY | All 4 KBs fully consolidated, nothing abbreviated |
+| 2.2 | March 29, 2026 | ✅ COMPLETE | Slack-sourced knowledge added (sub2, commission, title, CRM tips) |
+| 2.3 | March 29, 2026 | ✅ COMPLETE | Module updates, SMS v2.3 CRM analysis, DD task fix, new tool docs |
 
 \---
 
-\*\*END OF MASTER KB v2.1\*\*
+\*\*END OF MASTER KB v2.3\*\*
 
 \*\*READY FOR DEPLOYMENT & WEEKLY CONSOLIDATION PROCESS\*\*
 
