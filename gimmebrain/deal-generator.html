@@ -771,27 +771,27 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     setLogStep(0, 'done', 'Template fetched');
 
     // --- STEP 1: Push index.html ---
-    await wait(300);
+    await wait(600);
     setLogStep(1, 'active');
     await pushFile('deals/' + slug + '/index.html', templateContent, 'Deal page: ' + address + ' (template)');
     setLogStep(1, 'done', 'Deal page template pushed');
 
     // --- STEP 2: Push deal-doc.txt ---
-    await wait(300);
+    await wait(600);
     setLogStep(2, 'active');
     const jsonB64 = btoa(unescape(encodeURIComponent(JSON.stringify(dealJson, null, 2))));
     await pushFile('deals/' + slug + '/deal-doc.txt', jsonB64, 'Deal page: ' + address + ' (data)');
     setLogStep(2, 'done', 'Deal data pushed');
 
     // --- STEP 3: Push photos ---
-    await wait(300);
+    await wait(600);
     setLogStep(3, 'active');
     if (dealPhotos.length) {
       for (let i = 0; i < dealPhotos.length; i++) {
         const photo = dealPhotos[i];
         setLogStep(3, 'active', 'Uploading photo ' + (i + 1) + ' of ' + dealPhotos.length + '...');
         await pushFile('deals/' + slug + '/' + photo.name, photo.base64, 'Deal page: ' + address + ' (photo ' + photo.name + ')');
-        if (i < dealPhotos.length - 1) await wait(200); // brief pause between photos
+        if (i < dealPhotos.length - 1) await wait(400); // brief pause between photos
       }
       setLogStep(3, 'done', dealPhotos.length + ' photos uploaded');
     } else {
@@ -803,7 +803,7 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     // Spaced out to avoid hammering the API
     // =============================================
 
-    await wait(500); // pause between GitHub and Close phases
+    await wait(1000); // pause between GitHub and Close phases
 
     // --- STEP 4: Find lead + opportunity ---
     setLogStep(4, 'active');
@@ -831,7 +831,7 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     }
 
     // --- STEP 5: Update opportunity ---
-    await wait(400);
+    await wait(800);
     setLogStep(5, 'active');
     if (targetOpp) {
       const updatePayload = {};
@@ -868,7 +868,7 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     }
 
     // --- STEP 6: Fetch SMS KB from GitHub ---
-    await wait(400);
+    await wait(800);
     setLogStep(6, 'active');
     let smsKbContent = '';
     try {
@@ -884,7 +884,7 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     }
 
     // --- STEP 7: Generate workflow messages with Claude AI ---
-    await wait(300);
+    await wait(600);
     setLogStep(7, 'active');
 
     // Default messages (fallback if AI fails or KB empty)
@@ -937,20 +937,20 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     }
 
     // --- STEP 8: Create SMS templates ---
-    await wait(400);
+    await wait(800);
     setLogStep(8, 'active');
     const smsTmpl1 = await closeAPI('/sms_template/', 'POST', {
       name: address + ' - Dispo Teaser',
       text: smsTeaser,
       is_shared: true
     });
-    await wait(300);
+    await wait(600);
     const smsTmpl2 = await closeAPI('/sms_template/', 'POST', {
       name: address + ' - Dispo Link',
       text: smsLink,
       is_shared: true
     });
-    await wait(300);
+    await wait(600);
     const smsTmpl3 = await closeAPI('/sms_template/', 'POST', {
       name: address + ' - Dispo Follow-Up',
       text: smsFollowUp,
@@ -959,7 +959,7 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     setLogStep(8, 'done', '3 SMS templates created');
 
     // --- STEP 9: Create email template ---
-    await wait(400);
+    await wait(800);
     setLogStep(9, 'active');
     const emailTmpl = await closeAPI('/email_template/', 'POST', {
       name: address + ' - Dispo Email',
@@ -970,7 +970,7 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     setLogStep(9, 'done', 'Email template created');
 
     // --- STEP 10: Create workflow draft ---
-    await wait(400);
+    await wait(800);
     setLogStep(10, 'active');
     const workflow = await closeAPI('/sequence/', 'POST', {
       name: address + ' - Dispo',
