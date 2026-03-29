@@ -164,7 +164,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
     <div class="explainer-card">
       <div class="ec-num">How To Use It</div>
       <div class="ec-title">Fill the Left, Watch the Right</div>
-      <div class="ec-desc">Upload the contract PDF and hit Extract. Fill in asking price, ARV, and repairs per sqft. Upload your deal photos and drag them into the order you want. Confirm the deal page ID. Hit "Launch Deal" — done. The right panel shows progress and your live link when it's ready.</div>
+      <div class="ec-desc">Upload the contract PDF and hit Extract. Fill in wholesale price, ARV, and repairs per sqft. Upload your deal photos and drag them into the order you want. Confirm the deal page ID. Hit "Launch Deal" — done. The right panel shows progress and your live link when it's ready.</div>
     </div>
     <div class="explainer-card">
       <div class="ec-num">What Gets Created</div>
@@ -201,7 +201,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
       <div class="step-label">Step 3 — Your Numbers</div>
       <div class="step-hint">These show up on the deal page for buyers. Leave blank if you don't have them yet — you can update later on the deals dashboard.</div>
       <div class="field-row">
-        <div class="field-label">Asking Price</div>
+        <div class="field-label">Wholesale Price</div>
         <input class="field-input" type="text" id="fAsking" placeholder="e.g. $210,000">
       </div>
       <div class="field-row">
@@ -740,7 +740,7 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     yearBuilt: extractedDeal.yearBuilt || null,
     garage: extractedDeal.garage || null,
     coeDate: extractedDeal.coeDate || null,
-    askingPrice: askingN,
+    wholesalePrice: askingN,
     arv: arvN,
     repairsPerSqft: repairsPerSqft || null,
     estRepairs: repairsN,
