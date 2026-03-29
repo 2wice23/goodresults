@@ -496,11 +496,11 @@ ${text.slice(0, 14000)}`;
     if (result.error) throw new Error('API error: ' + (result.error.message || result.error));
     if (!result.content || !result.content[0]) throw new Error('Empty response from Claude');
     const raw = result.content[0].text;
-    console.log('Claude raw response:', raw);
+    // raw response logged only in dev
     const jsonStr = raw.match(/\{[\s\S]*\}/)?.[0];
     if (!jsonStr) throw new Error('No JSON in response');
     extractedDeal = JSON.parse(jsonStr);
-    console.log('Extracted deal:', extractedDeal);
+    // extracted deal logged only in dev
     renderExtracted(extractedDeal);
     updateRepairsTotal();
     setStatus('Contract extracted ✓ — looking up property specs...', 'active');
@@ -517,7 +517,7 @@ ${text.slice(0, 14000)}`;
         );
         // Merge into extractedDeal
         extractedDeal = { ...extractedDeal, ...propData };
-        console.log('RentCast merged:', extractedDeal);
+        // RentCast merge logged only in dev
         renderExtracted(extractedDeal);
         updateRepairsTotal();
         setStatus('Done ✓ — contract + property data loaded. Fill your numbers and launch.', 'active');
