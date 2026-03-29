@@ -21,32 +21,6 @@ REPO = '2wice23/goodresults'
 API = f'https://api.github.com/repos/{REPO}'
 LOCAL_ROOT = os.path.dirname(os.path.abspath(__file__))
 BRANCH = 'main'
-SITE_URL = 'https://goodresults.org'
-SLACK_NOTIFY_PATH = '/.netlify/functions/slack-score-notify'
-
-def notify_slack(message, file_count, commit_sha, file_list):
-    """Post a deploy summary to Slack via the Netlify function."""
-    files_text = '\n'.join(f'  • {f}' for f in file_list[:15])
-    if len(file_list) > 15:
-        files_text += f'\n  ...and {len(file_list) - 15} more'
-    text = (
-        f':rocket: *Deploy to goodresults.org*\n'
-        f'*{message}*\n'
-        f'{file_count} file(s) pushed — commit `{commit_sha[:8]}`\n'
-        f'```{files_text}```'
-    )
-    try:
-        data = json.dumps({'text': text}).encode()
-        req = urllib.request.Request(
-            SITE_URL + SLACK_NOTIFY_PATH,
-            data=data, method='POST',
-            headers={'Content-Type': 'application/json'}
-        )
-        urllib.request.urlopen(req, timeout=10)
-        print('Slack notified.')
-    except Exception as e:
-        print(f'Slack notify failed (non-blocking): {e}')
-
 def api_request(path, method='GET', data=None):
     """Make an authenticated GitHub API request."""
     url = f'{API}/{path}' if not path.startswith('http') else path
@@ -167,10 +141,7 @@ def deploy(message, file_paths):
     # Step 5: Update branch ref
     update_ref(new_commit_sha)
     print(f'\n✓ Pushed {len(entries)} file(s) in 1 commit. Netlify will auto-deploy.')
-
-    # Step 6: Notify Slack
-    file_list = [path for path, _ in entries]
-    notify_slack(message, len(entries), new_commit_sha, file_list)
+    return new_commit_sha, [path for path, _ in entries]
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
