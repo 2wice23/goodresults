@@ -1,0 +1,18 @@
+{
+  "dealId": "0320261",
+  "market": "off",
+  "address": "3759 Glen Avenue",
+  "city": "Las Vegas",
+  "state": "NV",
+  "zip": "89121",
+  "beds": 5,
+  "baths": 5,
+  "sqft": 3867,
+  "lotSize": "10,454 sqft",
+  "yearBuilt": 1953,
+  "garage": null,
+  "coeDate": "March 31, 2026",
+  "askingPrice": null,
+  "arv": null,
+  "estRepairs": null
+}
