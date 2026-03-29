@@ -164,12 +164,12 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
     <div class="explainer-card">
       <div class="ec-num">How To Use It</div>
       <div class="ec-title">Fill the Left, Watch the Right</div>
-      <div class="ec-desc">Upload the contract PDF and hit Extract. Fill in asking price, ARV, and repairs. Upload your deal photos and drag them into the order you want. Confirm the folder name. Hit "Launch Deal" — done. The right panel shows progress and your live link when it's ready.</div>
+      <div class="ec-desc">Upload the contract PDF and hit Extract. Fill in asking price, ARV, and repairs per sqft. Upload your deal photos and drag them into the order you want. Confirm the deal page ID. Hit "Launch Deal" — done. The right panel shows progress and your live link when it's ready.</div>
     </div>
     <div class="explainer-card">
       <div class="ec-num">What Gets Created</div>
       <div class="ec-title">Live Page + Close Workflow</div>
-      <div class="ec-desc">Your deal page goes live at goodresults.org/deals/[folder-name]. In Close, you get a draft workflow with: teaser SMS, deal-link email (both instant), deal-link SMS (2hrs later), and a follow-up SMS (next day). Just activate it and enroll contacts.</div>
+      <div class="ec-desc">Your deal page goes live at goodresults.org/deals/[deal-id]. In Close, you get a draft workflow with: teaser SMS, deal-link email (both instant), deal-link SMS (2hrs later), and a follow-up SMS (next day). Just activate it and enroll contacts.</div>
     </div>
   </div>
 </div>
@@ -204,16 +204,15 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
         <div class="field-label">Asking Price</div>
         <input class="field-input" type="text" id="fAsking" placeholder="e.g. $210,000">
       </div>
-      <div class="field-row-2">
-        <div class="field-row">
-          <div class="field-label">ARV</div>
-          <input class="field-input" type="text" id="fArv" placeholder="e.g. $380,000">
-        </div>
-        <div class="field-row">
-          <div class="field-label">Est. Repairs</div>
-          <input class="field-input" type="text" id="fRepairs" placeholder="e.g. $45,000">
-        </div>
+      <div class="field-row">
+        <div class="field-label">ARV</div>
+        <input class="field-input" type="text" id="fArv" placeholder="e.g. $380,000">
       </div>
+      <div class="field-row">
+        <div class="field-label">Est. Repairs ($/sqft)</div>
+        <input class="field-input" type="text" id="fRepairs" placeholder="e.g. 35">
+      </div>
+      <div style="font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--muted);margin-top:-4px;margin-bottom:10px;">Usually $20–60/sqft. Total: <span style="color:var(--orange);font-weight:600;" id="repairsTotal">—</span></div>
 
       <hr class="panel-sep">
 
@@ -226,30 +225,21 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 
       <hr class="panel-sep">
 
-      <div class="step-label">Step 4 — Deal ID</div>
-      <div class="step-hint">Deal number auto-generates the ID (format: MMYYYYN). Bump the number for each new deal this month.</div>
+      <div class="step-label">Step 4 — Deal Page ID</div>
+      <div class="step-hint">Auto-generated from the month + year + deal number. This is the folder name and URL slug for the deal page. Bump the number for each new deal this month.</div>
       <div class="field-row">
-        <div class="field-label">Deal Number</div>
+        <div class="field-label">Deal # This Month</div>
         <input class="field-input" type="number" id="fDealNum" value="8" min="1">
       </div>
       <div class="field-row">
-        <div class="field-label">Deal Page ID (auto)</div>
+        <div class="field-label">Deal Page ID</div>
         <input class="field-input" type="text" id="fDealId" readonly placeholder="e.g. 0420268">
       </div>
+      <div style="font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--muted);margin-top:-4px;margin-bottom:10px;">Live URL: <span style="color:var(--orange);font-weight:600;" id="dealUrlPreview">goodresults.org/deals/...</span></div>
 
       <hr class="panel-sep">
 
-      <div class="step-label">Step 5 — Deal Folder Name</div>
-      <div class="step-hint">This becomes the URL: goodresults.org/deals/[this-name]. Auto-fills from the address. You can change it.</div>
-      <div class="field-row">
-        <div class="field-label">Folder / URL Slug</div>
-        <input class="field-input" type="text" id="fFolderName" placeholder="e.g. 3202-melbourne-st">
-      </div>
-      <div style="font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--muted);margin-top:-4px;margin-bottom:10px;">Live URL: <span style="color:var(--orange);" id="dealUrlPreview">goodresults.org/deals/...</span></div>
-
-      <hr class="panel-sep">
-
-      <div class="step-label">Step 6 — Photos</div>
+      <div class="step-label">Step 5 — Photos</div>
       <div class="step-hint">Upload your deal photos. Drag thumbnails to reorder — photo #1 is the hero image on the deal page. Click the X to remove any.</div>
       <div class="photo-zone" id="photoDrop">
         <input type="file" id="photoInput" accept="image/*" multiple>
@@ -325,9 +315,27 @@ function updateDealId() {
   const n = document.getElementById('fDealNum').value || '8';
   lastDealId = `${mm}${yyyy}${n}`;
   document.getElementById('fDealId').value = lastDealId;
+  document.getElementById('dealUrlPreview').textContent = 'goodresults.org/deals/' + lastDealId;
 }
 document.getElementById('fDealNum').addEventListener('input', updateDealId);
 updateDealId();
+
+// ============================================================
+// REPAIRS $/SQFT CALCULATOR
+// ============================================================
+function updateRepairsTotal() {
+  const perSqft = parseFloat(document.getElementById('fRepairs').value) || 0;
+  const sqft = parseFloat(extractedDeal.sqft) || 0;
+  const el = document.getElementById('repairsTotal');
+  if (perSqft > 0 && sqft > 0) {
+    el.textContent = '$' + Math.round(perSqft * sqft).toLocaleString() + ' (' + sqft.toLocaleString() + ' sqft × $' + perSqft + ')';
+  } else if (perSqft > 0) {
+    el.textContent = '$' + perSqft + '/sqft (no sqft extracted yet)';
+  } else {
+    el.textContent = '—';
+  }
+}
+document.getElementById('fRepairs').addEventListener('input', updateRepairsTotal);
 
 // ============================================================
 // MARKET TOGGLE
@@ -345,27 +353,7 @@ function setMarket(val) {
   }
 }
 
-// ============================================================
-// FOLDER SLUG
-// ============================================================
-function slugify(str) {
-  return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-}
-
-function updateFolderSlug() {
-  const addr = extractedDeal.address;
-  if (addr) {
-    const slug = slugify(addr);
-    const field = document.getElementById('fFolderName');
-    if (!field.dataset.manual) field.value = slug;
-    document.getElementById('dealUrlPreview').textContent = 'goodresults.org/deals/' + (field.value || slug);
-  }
-}
-
-document.getElementById('fFolderName').addEventListener('input', function() {
-  this.dataset.manual = '1';
-  document.getElementById('dealUrlPreview').textContent = 'goodresults.org/deals/' + this.value;
-});
+// (Folder slug removed — deal ID is the slug now)
 
 // ============================================================
 // PDF UPLOAD
@@ -458,7 +446,7 @@ ${text.slice(0, 14000)}`;
     if (!jsonStr) throw new Error('No JSON returned');
     extractedDeal = JSON.parse(jsonStr);
     renderExtracted(extractedDeal);
-    updateFolderSlug();
+    updateRepairsTotal();
     setStatus('Extracted ✓ — fill in your numbers and launch', 'active');
     document.getElementById('launchBtn').disabled = false;
   } catch(e) {
@@ -701,13 +689,12 @@ function setLogStep(idx, state, label) {
 // ============================================================
 document.getElementById('launchBtn').addEventListener('click', async () => {
   const btn = document.getElementById('launchBtn');
-  const folderName = document.getElementById('fFolderName').value.trim();
   const dealId = document.getElementById('fDealId').value.trim();
   const asking = document.getElementById('fAsking').value.trim();
   const arv = document.getElementById('fArv').value.trim();
-  const repairs = document.getElementById('fRepairs').value.trim();
+  const repairsPerSqft = parseFloat(document.getElementById('fRepairs').value) || 0;
+  const sqft = parseFloat(extractedDeal.sqft) || 0;
 
-  if (!folderName) { setStatus('Enter a folder name first', 'error'); return; }
   if (!dealId) { setStatus('Enter a deal number first', 'error'); return; }
 
   btn.disabled = true;
@@ -730,13 +717,13 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     'Creating dispo workflow draft in Close...'  // 10
   ]);
 
-  const slug = folderName;
+  const slug = dealId;
   const address = extractedDeal.address || 'Unknown Address';
   const zip = extractedDeal.zip || '?????';
   const dealUrl = 'https://goodresults.org/deals/' + slug + '/';
   const askingN = parseDollar(asking);
   const arvN = parseDollar(arv);
-  const repairsN = parseDollar(repairs);
+  const repairsN = (repairsPerSqft > 0 && sqft > 0) ? Math.round(repairsPerSqft * sqft) : null;
   const profitN = (arvN && repairsN && askingN) ? arvN - repairsN - askingN : null;
 
   const dealJson = {
@@ -755,6 +742,7 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     coeDate: extractedDeal.coeDate || null,
     askingPrice: askingN,
     arv: arvN,
+    repairsPerSqft: repairsPerSqft || null,
     estRepairs: repairsN,
     profitPotential: profitN
   };
