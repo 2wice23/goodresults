@@ -4,26 +4,16 @@
 <script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Financing Types — Good Results Training</title>
+<title>Investor Vocabulary — Good Results Training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<script>const SHEET_ID='1T-5pNnoQjRyS_Uu3ESFgzASRiG9xFHN7AkAl-o57J-c';</script>
 <style>
-:root{
-  --black:#0D0F14; --surface:#11141A; --surface2:#161B24; --surface3:#0A0C10;
-  --white:#F0F4FF; --cream:#C8D4E4; --muted:#8A95A8; --dim:#555A66;
-  --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.04);
-  --orange:#FF5C1A; --orange-glow:rgba(255,92,26,0.15); --orange-border:rgba(255,92,26,0.25);
-  --green:#22C55E; --green-bg:rgba(34,197,94,0.1); --green-border:#22C55E;
-  --red:#EF4444; --red-bg:rgba(239,68,68,0.08); --red-border:#EF4444;
-  --radius:8px; --radius-sm:5px; --radius-lg:12px;
-}
+:root{--black:#0D0F14;--surface:#11141A;--surface2:#161B24;--surface3:#0A0C10;--white:#F0F4FF;--cream:#C8D4E4;--muted:#8A95A8;--dim:#555A66;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.04);--orange:#FF5C1A;--orange-glow:rgba(255,92,26,0.15);--orange-border:rgba(255,92,26,0.25);--green:#22C55E;--green-bg:rgba(34,197,94,0.1);--green-border:#22C55E;--red:#EF4444;--red-bg:rgba(239,68,68,0.08);--red-border:#EF4444;--radius:8px;--radius-sm:5px;--radius-lg:12px;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{font-size:16px;scroll-behavior:smooth;}
 body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;}
-#rpbar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:linear-gradient(90deg,#FF5C1A,#FF8A50,#FF5C1A);background-size:200% 100%;animation:rpShimmer 2.5s linear infinite;transition:width .06s linear;box-shadow:0 0 10px rgba(255,92,26,.55);}
-@keyframes rpShimmer{from{background-position:0%}to{background-position:200%}}
+
+/* Header */
 .header{padding:14px 44px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,.97);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;}
 .logo{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);font-weight:700;}
 .header-right{display:flex;align-items:center;gap:20px;}
@@ -32,95 +22,96 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 @keyframes fireFlicker{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.15) rotate(3deg)}}
 .back-link{font-size:.78rem;color:var(--dim);text-decoration:none;transition:color .2s;}
 .back-link:hover{color:var(--orange);}
-.hero{padding:56px 44px 40px;border-bottom:1px solid var(--border);max-width:900px;}
+
+/* Hero */
+.hero{padding:48px 44px 32px;max-width:820px;margin:0 auto;}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--orange-glow);border:1px solid var(--orange-border);color:var(--orange);font-size:.67rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 13px;border-radius:3px;margin-bottom:18px;}
-.hero h1{font-size:2.5rem;font-weight:800;line-height:1.1;color:var(--white);margin-bottom:12px;}
+.hero h1{font-size:2.4rem;font-weight:800;line-height:1.1;color:var(--white);margin-bottom:10px;}
 .hero h1 span{color:var(--orange);}
-.hero p{font-size:.97rem;color:var(--muted);line-height:1.7;max-width:560px;}
-.meta-bar{display:flex;gap:40px;padding:20px 44px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
-.meta-item{display:flex;flex-direction:column;gap:2px;}
-.meta-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);font-weight:700;}
-.meta-val{font-size:.84rem;color:var(--muted);font-weight:500;}
-.body-wrap{display:grid;grid-template-columns:1fr 176px;gap:0;align-items:start;max-width:1060px;margin:0 auto;}
-.content-col{padding:52px 44px;border-right:1px solid var(--border);}
-.nav-col{padding:32px 24px;position:sticky;top:80px;}
-.snav{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;}
-.snav h4{font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-.snav-item{display:block;padding:7px 10px;border-radius:4px;font-size:.76rem;color:var(--dim);cursor:pointer;transition:all .18s;border-left:2px solid transparent;line-height:1.35;margin-bottom:2px;}
-.snav-item:hover{color:var(--cream);background:rgba(255,255,255,.04);}
-.snav-item.active{color:var(--orange);border-left-color:var(--orange);background:var(--orange-glow);}
-.section{margin-bottom:52px;}
-.section-num{font-size:.6rem;font-weight:800;letter-spacing:.18em;color:var(--orange);text-transform:uppercase;margin-bottom:6px;}
-.section h2{font-size:1.3rem;font-weight:700;color:var(--cream);margin-bottom:14px;line-height:1.3;}
-.section p{font-size:.93rem;color:var(--muted);line-height:1.78;margin-bottom:13px;}
-.section p:last-of-type{margin-bottom:0;}
-.section strong{color:var(--cream);font-weight:600;}
-.script-block{background:var(--surface3);border:1px solid var(--orange-border);border-left:3px solid var(--orange);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;margin:18px 0;position:relative;}
-.script-label{font-size:.6rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;}
-.script-text{font-size:.9rem;color:#C8D4E4;line-height:1.72;font-style:italic;}
-.copy-btn{position:absolute;top:13px;right:13px;background:var(--orange-glow);border:1px solid var(--orange-border);color:var(--orange);font-size:.67rem;font-weight:700;letter-spacing:.08em;padding:4px 11px;border-radius:var(--radius-sm);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;}
-.copy-btn:hover{background:var(--orange);color:#fff;}
-.copy-btn.copied{background:#22C55E;border-color:#22C55E;color:#fff;}
-.callout{background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:var(--radius);padding:18px 22px;margin:18px 0;}
-.callout-label{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:7px;}
-.callout p{font-size:.9rem;color:#C8D4E4;line-height:1.68;margin:0;}
-.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:17px 20px;}
-.card h4{font-size:.8rem;font-weight:700;color:var(--cream);margin-bottom:5px;}
-.card p{font-size:.8rem;color:var(--dim);line-height:1.55;margin:0;}
-.card.orange-tint{border-color:var(--orange-border);background:var(--orange-glow);}
-.card.orange-tint h4{color:var(--orange);}
-.data-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.85rem;}
-.data-table th{text-align:left;padding:9px 14px;font-size:.63rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:var(--surface);border-bottom:1px solid var(--border);}
-.data-table td{padding:10px 14px;border-bottom:1px solid var(--border2);color:var(--muted);vertical-align:top;line-height:1.55;}
-.data-table tr:last-child td{border-bottom:none;}
-.data-table tr:hover td{background:rgba(255,255,255,.02);}
+.hero-desc{font-size:.93rem;color:var(--muted);line-height:1.7;max-width:600px;}
+
+/* Progress Bar */
+.progress-wrap{max-width:820px;margin:0 auto;padding:0 44px 36px;}
+.progress-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.progress-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+.progress-count{font-size:.78rem;font-weight:700;color:var(--orange);}
+.progress-track{width:100%;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--orange),#FF8A50);border-radius:3px;transition:width .4s ease;width:0%;}
+.progress-time{font-size:.68rem;color:var(--dim);margin-top:8px;text-align:right;}
+
+/* Expand/Collapse */
+.controls{max-width:820px;margin:0 auto;padding:0 44px 16px;display:flex;gap:10px;}
+.ctrl-btn{background:var(--surface);border:1px solid var(--border);color:var(--dim);font-size:.7rem;font-weight:600;letter-spacing:.06em;padding:6px 14px;border-radius:var(--radius-sm);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;}
+.ctrl-btn:hover{color:var(--cream);border-color:var(--orange-border);}
+
+/* Accordion Stack */
+.accordion-stack{max-width:820px;margin:0 auto;padding:0 44px 40px;display:flex;flex-direction:column;gap:6px;}
+
+.acc-item{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .25s;}
+.acc-item.open{border-color:var(--orange-border);}
+.acc-item.completed{border-color:rgba(34,197,94,0.25);}
+.acc-item.completed .acc-check{background:var(--green);border-color:var(--green);color:#fff;}
+.acc-item.completed .acc-title{color:var(--green);}
+
+.acc-header{padding:16px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;background:var(--surface);transition:background .18s;user-select:none;}
+.acc-header:hover{background:var(--surface2);}
+
+.acc-num{font-size:.6rem;font-weight:800;letter-spacing:.14em;color:var(--dim);min-width:24px;}
+.acc-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--dim);display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;transition:all .3s;}
+.acc-info{flex:1;}
+.acc-title{font-size:.9rem;font-weight:600;color:var(--cream);line-height:1.3;transition:color .3s;}
+.acc-sub{font-size:.7rem;color:var(--dim);margin-top:2px;}
+.acc-meta{display:flex;align-items:center;gap:8px;}
+.acc-time{font-size:.65rem;color:var(--dim);font-weight:600;letter-spacing:.04em;background:var(--surface2);padding:3px 8px;border-radius:10px;}
+.acc-arrow{font-size:.7rem;color:var(--dim);transition:transform .25s;flex-shrink:0;}
+.acc-item.open .acc-arrow{transform:rotate(180deg);}
+
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.acc-item.open .acc-body{max-height:3000px;}
+.acc-inner{padding:0 20px 24px;border-top:1px solid var(--border);}
+.acc-inner{padding-top:20px;}
+
+/* Content inside sections */
+.acc-inner p{font-size:.9rem;color:var(--muted);line-height:1.78;margin-bottom:12px;}
+.acc-inner p:last-of-type{margin-bottom:0;}
+.acc-inner strong{color:var(--cream);font-weight:600;}
+
+.callout{background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:var(--radius);padding:16px 20px;margin:16px 0;}
+.callout-label{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;}
+.callout p{font-size:.87rem;color:#C8D4E4;line-height:1.68;margin:0;}
+
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.83rem;}
+.data-table th{text-align:left;padding:8px 12px;font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:var(--surface2);border-bottom:1px solid var(--border);}
+.data-table td{padding:9px 12px;border-bottom:1px solid var(--border2);color:var(--muted);vertical-align:top;line-height:1.5;}
 .data-table td strong{color:var(--cream);font-weight:600;}
-.td-badge{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:3px;}
-.badge-green{background:var(--green-bg);color:#86EFAC;}
-.badge-red{background:var(--red-bg);color:#FCA5A5;}
-.badge-orange{background:var(--orange-glow);color:var(--orange);}
-.step-list{display:flex;flex-direction:column;gap:8px;margin:16px 0;}
-.step{display:flex;gap:13px;align-items:flex-start;padding:13px 16px;background:rgba(255,255,255,.02);border:1px solid var(--border2);border-radius:var(--radius);}
-.step-num{font-size:.68rem;font-weight:900;color:var(--orange);min-width:18px;padding-top:1px;flex-shrink:0;}
-.step p{font-size:.88rem;color:var(--muted);line-height:1.55;margin:0;}
-.step p strong{color:var(--cream);}
-.deepdive{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:9px;}
-.dd-header{padding:14px 18px;background:var(--surface);display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background .18s;user-select:none;}
-.dd-header:hover{background:var(--surface2);}
-.dd-header-left{display:flex;align-items:center;gap:9px;}
-.dd-icon{width:20px;height:20px;background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--orange);font-weight:900;flex-shrink:0;}
-.dd-title{font-size:.87rem;font-weight:600;color:var(--cream);}
-.dd-sub{font-size:.7rem;color:var(--dim);margin-left:8px;}
-.dd-arrow{font-size:.68rem;color:var(--dim);transition:transform .22s;}
-.deepdive.open .dd-arrow{transform:rotate(180deg);}
-.dd-body{max-height:0;overflow:hidden;transition:max-height .32s ease;background:var(--surface3);}
-.deepdive.open .dd-body{max-height:600px;}
-.dd-inner{padding:18px 22px;}
-.dd-inner p{font-size:.87rem;color:var(--muted);line-height:1.72;margin-bottom:10px;}
-.dd-inner p:last-child{margin-bottom:0;}
-.dd-inner strong{color:var(--cream);}
-.kcheck{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 26px;margin:24px 0;transition:border-color .25s;}
-.kcheck.answered-correct{border-color:var(--green-border);}
-.kcheck.answered-wrong{border-color:var(--red-border);}
-.kc-header{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
-.kc-icon{width:26px;height:26px;background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:900;color:var(--orange);flex-shrink:0;}
-.kc-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);}
-.kc-question{font-size:.95rem;font-weight:600;color:var(--cream);margin-bottom:14px;line-height:1.45;}
-.kc-options{display:flex;flex-direction:column;gap:7px;}
-.kc-opt{display:flex;align-items:center;gap:11px;padding:10px 15px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);cursor:pointer;transition:all .18s;font-size:.88rem;color:var(--muted);}
-.kc-opt:hover{background:rgba(255,255,255,.06);color:var(--cream);}
-.kc-opt.opt-correct{background:var(--green-bg);border-color:var(--green-border);color:#86EFAC;pointer-events:none;}
-.kc-opt.opt-wrong{background:var(--red-bg);border-color:var(--red-border);color:#FCA5A5;pointer-events:none;}
-.kc-opt.opt-disabled{pointer-events:none;opacity:.55;}
-.kc-letter{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:800;color:var(--dim);flex-shrink:0;}
-.kc-feedback{margin-top:12px;padding:11px 15px;border-radius:var(--radius);font-size:.84rem;line-height:1.55;display:none;}
+.data-table tr:last-child td{border-bottom:none;}
+
+/* Inline Knowledge Check */
+.kc-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-top:20px;}
+.kc-label{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.kc-question{font-size:.88rem;font-weight:600;color:var(--cream);margin-bottom:12px;line-height:1.4;}
+.kc-opts{display:flex;flex-direction:column;gap:5px;}
+.kc-opt{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid rgba(255,255,255,.07);border-radius:5px;background:rgba(255,255,255,.02);cursor:pointer;transition:all .18s;font-size:.84rem;color:var(--muted);}
+.kc-opt:hover{background:rgba(255,255,255,.05);color:var(--cream);}
+.kc-opt.kc-correct{background:var(--green-bg);border-color:var(--green-border);color:#86EFAC;pointer-events:none;}
+.kc-opt.kc-wrong{background:var(--red-bg);border-color:var(--red-border);color:#FCA5A5;pointer-events:none;}
+.kc-opt.kc-disabled{pointer-events:none;opacity:.4;}
+.kc-opt-letter{width:18px;height:18px;border-radius:3px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:800;color:var(--dim);flex-shrink:0;}
+.kc-feedback{display:none;font-size:.82rem;padding:10px 12px;border-radius:5px;margin-top:10px;line-height:1.6;}
 .kc-feedback.show{display:block;}
-.kc-feedback.fb-correct{background:var(--green-bg);color:#86EFAC;}
-.kc-feedback.fb-wrong{background:var(--red-bg);color:#FCA5A5;}
-.quiz-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-top:56px;}
+.kc-feedback.fb-correct{background:var(--green-bg);border:1px solid var(--green-border);color:#86EFAC;}
+.kc-feedback.fb-wrong{background:var(--red-bg);border:1px solid var(--red-border);color:#FCA5A5;}
+
+/* Section complete banner */
+.section-done{display:none;align-items:center;gap:8px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--radius);padding:12px 16px;margin-top:16px;font-size:.8rem;font-weight:600;color:#86EFAC;}
+.section-done.show{display:flex;}
+.section-done-icon{font-size:1rem;}
+
+/* Quiz Section */
+.quiz-wrap{max-width:820px;margin:0 auto;padding:0 44px 40px;}
+.quiz-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;}
 .quiz-section h3{font-size:1.05rem;font-weight:700;color:var(--cream);margin-bottom:4px;}
-.quiz-section p{font-size:.84rem;color:var(--dim);margin-bottom:20px;}
+.quiz-section>p{font-size:.84rem;color:var(--dim);margin-bottom:20px;}
 #quiz-area{display:flex;flex-direction:column;gap:10px;}
 .quiz-q{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;}
 .quiz-q-text{font-size:.93rem;font-weight:600;color:var(--cream);margin-bottom:12px;line-height:1.4;}
@@ -131,245 +122,370 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .quiz-opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:#FCA5A5;pointer-events:none;}
 .quiz-opt.disabled{pointer-events:none;opacity:.4;}
 .quiz-opt-letter{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--dim);flex-shrink:0;}
-.quiz-score-bar{margin-top:20px;padding:18px 22px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);display:none;align-items:center;justify-content:space-between;}
+.quiz-score-bar{margin-top:20px;padding:18px 22px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);display:flex;align-items:center;justify-content:space-between;}
 .score-text{font-size:1rem;font-weight:700;color:var(--cream);}
 .score-sub{font-size:.78rem;color:var(--dim);margin-top:2px;}
 .submit-quiz-btn{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .2s;}
 .submit-quiz-btn:hover{opacity:.88;}
 .submit-quiz-btn:disabled{opacity:.4;pointer-events:none;}
+.qfb{display:none;font-size:.82rem;padding:11px 14px;border-radius:5px;margin-top:8px;line-height:1.65;}
+.qfb.show{display:block;}
+.qfb.fb-correct{background:var(--green-bg);border:1px solid var(--green-border);color:#86EFAC;}
+.qfb.fb-wrong{background:var(--red-bg);border:1px solid var(--red-border);color:#FCA5A5;}
+
+/* Notes Box */
+.notes-wrap{max-width:820px;margin:0 auto;padding:0 44px 40px;}
+.module-update-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;}
+.module-update-box h3{font-size:.95rem;font-weight:700;color:var(--cream);margin-bottom:4px;}
+.module-update-box p{font-size:.78rem;color:var(--dim);margin-bottom:14px;}
+.module-update-textarea{width:100%;min-height:100px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--cream);font-family:'Inter',sans-serif;font-size:.88rem;padding:14px;resize:vertical;line-height:1.6;}
+.module-update-textarea:focus{outline:none;border-color:var(--orange-border);}
+.module-update-textarea::placeholder{color:var(--dim);}
+.module-update-submit{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:10px;letter-spacing:.04em;}
+.module-update-submit:hover{opacity:.88;}
+
+/* Bottom Nav */
 .bottom-nav{border-top:1px solid var(--border);padding:18px 44px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,.97);}
 .bn-prev,.bn-next{display:flex;align-items:center;gap:7px;font-size:.82rem;color:var(--dim);text-decoration:none;padding:9px 18px;border:1px solid var(--border);border-radius:var(--radius-sm);transition:all .2s;}
 .bn-prev:hover,.bn-next:hover{border-color:var(--orange-border);color:var(--orange);}
 .bn-module-info{text-align:center;}
 .bn-num{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
 .bn-title{font-size:.84rem;color:var(--muted);}
-@media(max-width:768px){.header{padding:12px 20px;}.hero{padding:36px 20px 28px;}.meta-bar{padding:14px 20px;gap:20px;}.body-wrap{grid-template-columns:1fr;}.content-col{padding:32px 20px;}.nav-col{display:none;}.card-grid{grid-template-columns:1fr;}.bottom-nav{padding:14px 20px;}}
-.module-update-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-top:32px;}.module-update-box h3{font-size:.95rem;font-weight:700;color:var(--cream);margin-bottom:4px;}.module-update-box p{font-size:.78rem;color:var(--dim);margin-bottom:14px;}.module-update-textarea{width:100%;min-height:100px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--cream);font-family:'Inter',sans-serif;font-size:.88rem;padding:14px;resize:vertical;line-height:1.6;}.module-update-textarea:focus{outline:none;border-color:var(--orange-border);}.module-update-textarea::placeholder{color:var(--dim);}.module-update-submit{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:10px;letter-spacing:.04em;}.module-update-submit:hover{opacity:.88;}.module-update-submit:disabled{opacity:.4;pointer-events:none;}</style>
+
+@media(max-width:768px){
+  .header{padding:12px 20px;}
+  .hero{padding:32px 20px 24px;}
+  .progress-wrap,.controls,.accordion-stack,.quiz-wrap,.notes-wrap{padding-left:20px;padding-right:20px;}
+  .bottom-nav{padding:14px 20px;}
+  .hero h1{font-size:1.8rem;}
+}
+</style>
 </head>
 <body>
-<div id="rpbar"></div>
+
+<!-- HEADER -->
 <div class="header">
   <div class="logo">Good Results // Training</div>
   <div class="header-right">
     <div class="streak-pill"><span class="streak-fire">🔥</span> <span id="streak-count">—</span></div>
-    <a href="/gimmebrain/" class="back-link">← Hub</a>
+    <a href="/gimmebrain/academy" class="back-link">← Academy</a>
   </div>
 </div>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">Good Results Training · Module 10 of 12</div>
+  <div class="hero-eyebrow">Module 10 of 12</div>
   <h1>Investor <span>Vocabulary</span></h1>
-  <p>Master the language of funding. Know what to say to realtors, understand the mechanics behind the scenes, and handle the nuances of different financing types — from cash and hard money to owner financing and manufactured home deals.</p>
+  <p class="hero-desc">Master the language of funding. Know what to say to realtors, understand the mechanics behind the scenes, and handle the nuances of different financing types — from cash and hard money to owner financing and manufactured home deals.</p>
 </div>
 
-<div class="meta-bar">
-  <div class="meta-item">
-    <div class="meta-label">Track</div>
-    <div class="meta-val">Good Results Training</div>
+<!-- PROGRESS BAR -->
+<div class="progress-wrap">
+  <div class="progress-header">
+    <span class="progress-label">Module Progress</span>
+    <span class="progress-count" id="progress-count">0 of 8 sections</span>
   </div>
-  <div class="meta-item">
-    <div class="meta-label">Read Time</div>
-    <div class="meta-val">~15 min</div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
   </div>
-  <div class="meta-item">
-    <div class="meta-label">Markets</div>
-    <div class="meta-val">NV · TX</div>
-  </div>
+  <div class="progress-time" id="progress-time">~15 min remaining</div>
 </div>
 
-<div class="body-wrap">
-<div class="content-col">
-
-<!-- SECTION 1 -->
-<div class="section" data-section="s1">
-  <div class="section-num">Section 1</div>
-  <h2>Always Lead With Cash</h2>
-  <p>When any realtor, seller, or agent asks how you fund deals, your answer is simple and consistent: <strong>"We're a cash buyer. We close in 10–21 days, no bank approval needed, no appraisal contingency."</strong> Don't elaborate unless directly pressed. Good Results buys with <strong>TRUE CASH from our bank account.</strong> Period. No hard money. No private money. No borrowing from anyone. No lender permission needed.</p>
-  <p>This isn't deception. It's positioning. The mechanisms underneath don't matter to the realtor. What matters is whether the deal closes, on time, without contingencies. That's what "cash" signals.</p>
-
-  <div class="kcheck" id="kc1">
-    <div class="kc-header">
-      <div class="kc-icon">✓</div>
-      <div class="kc-label">Knowledge Check</div>
-    </div>
-    <div class="kc-question">What do you say when a realtor asks how you fund your deals?</div>
-    <div class="kc-options">
-      <div class="kc-opt" onclick="checkInline(this,'kc1',true,'Correct. Confidence and simplicity signal strength. Realtors have been burned by financing contingencies falling through. Cash = no contingencies = certainty.')">
-        <div class="kc-letter">A</div>
-        We're true cash. Our money is in our account. No approval process, no lender, no conditions. That's why we can close in 10–21 days.
-      </div>
-      <div class="kc-opt" onclick="checkInline(this,'kc1',false,'Incorrect. Never lead with hard money — it raises questions about your capital stability and triggers red flags. Save this for follow-up if pressed.')">
-        <div class="kc-letter">B</div>
-        We use hard money loans primarily.
-      </div>
-      <div class="kc-opt" onclick="checkInline(this,'kc1',false,'Incorrect. Private investor capital is internal. Realtors don\'t care about the source — they care about certainty. Lead with cash, not mechanics.')">
-        <div class="kc-letter">C</div>
-        We use private investor capital.
-      </div>
-    </div>
-    <div class="kc-feedback" id="kc1-fb"></div>
-  </div>
+<!-- CONTROLS -->
+<div class="controls">
+  <button class="ctrl-btn" onclick="expandAll()">Expand All</button>
+  <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>
 </div>
 
-<!-- SECTION 2 -->
-<div class="section" data-section="s2">
-  <div class="section-num">Section 2</div>
-  <h2>The Funding Stack (Internal Reality)</h2>
-  <p>Behind the "cash" label, there are multiple mechanisms. You need to understand all of them — both for structuring deals and for the rare moments when realtors or sellers press for details.</p>
+<!-- ACCORDION SECTIONS -->
+<div class="accordion-stack" id="acc-stack">
 
-  <table class="data-table">
-    <thead>
-      <tr>
-        <th>Source</th>
-        <th>What Realtors Hear</th>
-        <th>Internal Reality</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Cash</strong></td>
-        <td>Fast, 10–21 day close, no bank, no appraisal</td>
-        <td>May be hard money or private money underneath</td>
-      </tr>
-      <tr>
-        <td><strong>Hard Money</strong></td>
-        <td>Internal mechanism only</td>
-        <td>Short-term asset-based loan</td>
-      </tr>
-      <tr>
-        <td><strong>Owner Finance</strong></td>
-        <td>Creative option for motivated sellers</td>
-        <td>Seller carries the note</td>
-      </tr>
-      <tr>
-        <td><strong>Private Money</strong></td>
-        <td>Internal only</td>
-        <td>Investor capital</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="script-block">
-    <div class="script-label">Script — When Pressed Harder</div>
-    <button class="copy-btn" onclick="copyScript('script1',this)">Copy</button>
-    <div class="script-text" id="script1">"We use a combination of capital sources — it all closes like cash to you. No bank contingency, no appraisal, you just need to make sure title is clear."</div>
-  </div>
-</div>
-
-<!-- SECTION 3 -->
-<div class="section" data-section="s3">
-  <div class="section-num">Section 3</div>
-  <h2>Hard Money, Owner Finance & Private Money</h2>
-  <p><strong>Hard Money:</strong> Short-term, asset-backed loans from private lenders. Good Results uses when needed. DO NOT lead with this — it raises questions about stability. The realtor doesn't need to know it's hard money. They need to know it closes like cash.</p>
-  <p><strong>Owner Financing:</strong> Seller acts as the bank — buyer makes monthly payments directly to seller. Used primarily with highly motivated/distressed sellers who need monthly income or have specific tax situations. Good Results uses this for certain manufactured home portfolio deals where the buyer can't qualify for specialty lenders.</p>
-  <p><strong>Private Money:</strong> Capital from private investors and partners. This stays internal. Never discussed with realtors or public-facing conversations. It's one part of your funding stack.</p>
-
-  <div class="callout">
-    <div class="callout-label">Golden Rule</div>
-    <p>The mechanism doesn't matter to the realtor. What matters is certainty. Will the deal close on time, without contingencies? If yes, you're a cash buyer in their eyes.</p>
-  </div>
-</div>
-
-<!-- SECTION 4 -->
-<div class="section" data-section="s4">
-  <div class="section-num">Section 4</div>
-  <h2>Manufactured Homes: Special Financing Warning</h2>
-  <p>Multi-moved manufactured homes (moved 2+ times) have a very limited buyer pool because standard financing (FHA/conventional) is not available. Only specialty lenders (21st Mortgage Corporation, Credit Human, Triad) will touch them, and their requirements are strict:</p>
-
-  <div class="step-list">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div><p><strong>Minimum 660 credit score</strong> — no exceptions for lower credit</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div><p><strong>5% of borrower's own funds</strong> as down payment</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div><p><strong>~8% interest rate</strong> — higher than conventional</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <div><p><strong>25-year term</strong> — standard for specialty lenders</p></div>
-    </div>
-  </div>
-
-  <p>The buyer pool that qualifies: someone with $50K–$80K in savings, 660+ credit, stable income. That's not the pool buying mobile homes. This creates a very small buyer pool.</p>
-
-  <div class="kcheck" id="kc2">
-    <div class="kc-header">
-      <div class="kc-icon">✓</div>
-      <div class="kc-label">Knowledge Check</div>
-    </div>
-    <div class="kc-question">You're about to go under contract on a multi-moved manufactured home. What's your first move?</div>
-    <div class="kc-options">
-      <div class="kc-opt" onclick="checkInline(this,'kc2',true,'Correct. Multi-moved manufactured homes have a limited buyer pool and unique financing constraints. Gayden knows the networks and can help you avoid a deal that won\'t sell.')">
-        <div class="kc-letter">A</div>
-        Call Gayden first before signing the contract
+  <!-- S1: Always Lead With Cash -->
+  <div class="acc-item" data-section="1">
+    <div class="acc-header" onclick="toggleSection(1)">
+      <div class="acc-check" id="check-1"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">Always Lead With Cash</div>
+        <div class="acc-sub">Your opening positioning on every call</div>
       </div>
-      <div class="kc-opt" onclick="checkInline(this,'kc2',false,'Incorrect. Running your own numbers won\'t tell you about the financing availability or buyer networks for multi-moved homes. That\'s Gayden\'s specialty.')">
-        <div class="kc-letter">B</div>
-        Run the numbers yourself and see if the deal pencils
-      </div>
-      <div class="kc-opt" onclick="checkInline(this,'kc2',false,'Incorrect. The realtor doesn\'t know the specialty lender networks or what loans will actually be available. You need Gayden\'s expertise here.')">
-        <div class="kc-letter">C</div>
-        Ask the realtor what financing options are available
+      <div class="acc-meta">
+        <span class="acc-time">2 min</span>
+        <span class="acc-arrow">▼</span>
       </div>
     </div>
-    <div class="kc-feedback" id="kc2-fb"></div>
-  </div>
-</div>
-
-<!-- SECTION 5 -->
-<div class="section" data-section="s5">
-  <div class="section-num">Section 5</div>
-  <h2>Why This Matters for Realtors</h2>
-  <p>Realtors have been burned. They've had a "cash buyer" come in, get a deal under contract, and then reveal financing contingencies mid-closing. The deal falls apart. The realtor looks bad. Their client is angry. Realtors remember this.</p>
-  <p>When you say cash, you're making a promise. Your entire credibility rests on follow-through. Every deal that closes on time, without contingency surprises, creates a realtor who will send you more deals. Your reputation is your most valuable asset in this business.</p>
-
-  <div class="script-block">
-    <div class="script-label">Script — If There's Doubt</div>
-    <button class="copy-btn" onclick="copyScript('script2',this)">Copy</button>
-    <div class="script-text" id="script2">"If you're concerned, call Aaron at my title company — he'll tell you exactly what our track record looks like. We close deals on time, period."</div>
-  </div>
-
-  <div class="deepdive" id="dd1">
-    <div class="dd-header" onclick="toggleDD('dd1')">
-      <div class="dd-header-left">
-        <div class="dd-icon">+</div>
-        <div class="dd-title">What exactly is hard money and why do we use it?</div>
-        <div class="dd-sub">The mechanism behind the scenes</div>
+    <div class="acc-body"><div class="acc-inner">
+      <p>When any realtor, seller, or agent asks how you fund deals, your answer is simple and consistent: <strong>"We're a cash buyer. We close in 10–21 days, no bank approval needed, no appraisal contingency."</strong> Don't elaborate unless directly pressed. Good Results buys with <strong>TRUE CASH from our bank account.</strong> Period. No hard money. No private money. No borrowing from anyone. No lender permission needed.</p>
+      <p>This isn't deception. It's positioning. The mechanisms underneath don't matter to the realtor. What matters is whether the deal closes, on time, without contingencies. That's what "cash" signals.</p>
+      <div class="callout">
+        <div class="callout-label">The Golden Rule</div>
+        <p>Lead with certainty. Realtors have been burned by "cash buyers" who fell through. Your job is to signal strength and follow-through, every single time.</p>
       </div>
-      <div class="dd-arrow">▼</div>
-    </div>
-    <div class="dd-body">
-      <div class="dd-inner">
-        <p>Hard money is a short-term loan from a private lender secured by the property itself. Instead of a bank evaluating your credit score and income history, the hard lender evaluates the property's value and your exit strategy.</p>
-        <p>Why we use it: When we need to close fast without waiting for traditional bank approval (which takes 30–45 days), hard money lets us fund the deal in days. It costs more in interest (typically 10–15% annually), but it closes like cash to the seller. We never volunteer this info to the realtor.</p>
-        <p>The realtor doesn't care if it's hard money underneath. They care that the deal closes. And hard money deals close.</p>
+
+      <div class="kc-box" id="kc-1">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">What do you say when a realtor asks how you fund your deals?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(1,0,true)"><div class="kc-opt-letter">A</div>We're true cash. Our money is in our account. No approval process, no lender, no conditions. That's why we can close in 10–21 days.</div>
+          <div class="kc-opt" onclick="answerKC(1,1,false)"><div class="kc-opt-letter">B</div>We primarily use hard money loans from private lenders.</div>
+          <div class="kc-opt" onclick="answerKC(1,2,false)"><div class="kc-opt-letter">C</div>It depends on the property and our available capital.</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-1"></div>
       </div>
-    </div>
+      <div class="section-done" id="done-1"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
   </div>
 
-  <div class="deepdive" id="dd2">
-    <div class="dd-header" onclick="toggleDD('dd2')">
-      <div class="dd-header-left">
-        <div class="dd-icon">+</div>
-        <div class="dd-title">What makes owner financing work for motivated sellers?</div>
-        <div class="dd-sub">Why some sellers prefer monthly payments</div>
+  <!-- S2: The Funding Stack -->
+  <div class="acc-item" data-section="2">
+    <div class="acc-header" onclick="toggleSection(2)">
+      <div class="acc-check" id="check-2"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">The Funding Stack (Internal Reality)</div>
+        <div class="acc-sub">Multiple mechanisms behind the "cash" label</div>
       </div>
-      <div class="dd-body">
-      <div class="dd-inner">
-        <p>Some sellers owe little or nothing on the property and would rather receive monthly payments (steady income, tax spread across years) than a lump sum. This is especially relevant for manufactured home deals and sellers with IRS complications.</p>
-        <p>Example: Seller owns a mobile home free and clear. Selling for $80K as a lump sum = $80K taxable income in one year. Owner financing the same property for $100K over 10 years = $10K income per year = spread tax liability. For sellers with complicated tax situations, this is attractive.</p>
-        <p>Gayden negotiates these directly when the seller motivation and property situation align. It's a niche strategy, not a primary play, but it's powerful when it works.</p>
+      <div class="acc-meta">
+        <span class="acc-time">3 min</span>
+        <span class="acc-arrow">▼</span>
       </div>
     </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p>Behind the "cash" label, there are multiple mechanisms. You need to understand all of them — both for structuring deals and for the rare moments when realtors or sellers press for details.</p>
+      <table class="data-table">
+        <thead><tr><th>Source</th><th>What Realtors Hear</th><th>Internal Reality</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cash</strong></td><td>Fast, 10–21 day close, no bank, no appraisal</td><td>May be hard money or private money underneath</td></tr>
+          <tr><td><strong>Hard Money</strong></td><td>Internal mechanism only</td><td>Short-term asset-based loan</td></tr>
+          <tr><td><strong>Owner Finance</strong></td><td>Creative option for motivated sellers</td><td>Seller carries the note</td></tr>
+          <tr><td><strong>Private Money</strong></td><td>Internal only</td><td>Investor capital</td></tr>
+        </tbody>
+      </table>
+
+      <div class="kc-box" id="kc-2">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">What's the relationship between "cash buyer" positioning and your actual funding sources?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(2,0,true)"><div class="kc-opt-letter">A</div>You always say "cash," but the mechanism underneath (hard money, private money) stays internal.</div>
+          <div class="kc-opt" onclick="answerKC(2,1,false)"><div class="kc-opt-letter">B</div>You should explain your hard money sources to build trust with realtors.</div>
+          <div class="kc-opt" onclick="answerKC(2,2,false)"><div class="kc-opt-letter">C</div>The funding stack doesn't matter as long as you close the deal.</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-2"></div>
+      </div>
+      <div class="section-done" id="done-2"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
   </div>
+
+  <!-- S3: Hard Money Explained -->
+  <div class="acc-item" data-section="3">
+    <div class="acc-header" onclick="toggleSection(3)">
+      <div class="acc-check" id="check-3"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">Hard Money: Speed vs. Cost</div>
+        <div class="acc-sub">Why we use it and when it makes sense</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">3 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+    </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p><strong>Hard Money:</strong> Short-term, asset-backed loans from private lenders — typically 6–18 months at high interest rates (10–15% annually). Hard money lenders lend based on property value, not borrower credit. The lender evaluates your exit strategy, not your credit score.</p>
+      <p><strong>Why we use it:</strong> When we need to close fast without waiting for traditional bank approval (which takes 30–45 days), hard money lets us fund the deal in days. It costs more in interest, but it closes like cash to the seller. We never volunteer this info to the realtor — they don't care about the mechanism, only that we close.</p>
+      <div class="callout">
+        <div class="callout-label">Critical Point</div>
+        <p>Never lead with "hard money" to a realtor. It raises questions about capital stability and triggers red flags. Say "cash," not the mechanism.</p>
+      </div>
+
+      <div class="kc-box" id="kc-3">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">Hard money loans are primarily valued for which characteristic?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(3,0,false)"><div class="kc-opt-letter">A</div>Lower interest rates than conventional loans.</div>
+          <div class="kc-opt" onclick="answerKC(3,1,true)"><div class="kc-opt-letter">B</div>Fast closing without traditional bank approval.</div>
+          <div class="kc-opt" onclick="answerKC(3,2,false)"><div class="kc-opt-letter">C</div>Extended repayment terms up to 30 years.</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-3"></div>
+      </div>
+      <div class="section-done" id="done-3"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
+  </div>
+
+  <!-- S4: Owner Financing & Private Money -->
+  <div class="acc-item" data-section="4">
+    <div class="acc-header" onclick="toggleSection(4)">
+      <div class="acc-check" id="check-4"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">Owner Financing & Private Money</div>
+        <div class="acc-sub">When the seller acts as the bank; internal capital sources</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">3 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+    </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p><strong>Owner Financing (Seller Financing):</strong> The seller carries the note — the buyer makes monthly payments directly to the seller instead of a bank. Used when a seller owns the property free and clear and is willing to act as the bank. Can be attractive to sellers who want monthly income. Not something we do on acquisitions, but may come up when we're selling a property to an end buyer.</p>
+      <p><strong>Private Money:</strong> Loans from individuals (friends, family, high-net-worth investors) rather than institutions. Lower rates than hard money, more flexible terms, but still involves a lender relationship. We are NOT private money. When an investor says "I use private money," they have a partner or backer providing funds on a deal-by-deal basis. Our capital is ours — no partner approval, no draw schedule, no lender.</p>
+      <div class="callout">
+        <div class="callout-label">Owner Finance Advantage</div>
+        <p>Motivated sellers with free-and-clear properties may prefer monthly payments (tax spread across years) over a lump sum. This is especially valuable for manufactured home portfolio deals.</p>
+      </div>
+
+      <div class="kc-box" id="kc-4">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">What does "owner financing" mean in the context of real estate deals?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(4,0,false)"><div class="kc-opt-letter">A</div>The buyer finances the purchase through a bank loan.</div>
+          <div class="kc-opt" onclick="answerKC(4,1,true)"><div class="kc-opt-letter">B</div>The seller acts as the bank — buyer makes payments directly to seller.</div>
+          <div class="kc-opt" onclick="answerKC(4,2,false)"><div class="kc-opt-letter">C</div>The investor secures a line of credit from a hard money lender.</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-4"></div>
+      </div>
+      <div class="section-done" id="done-4"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
+  </div>
+
+  <!-- S5: Conventional Loan vs. Your Positioning -->
+  <div class="acc-item" data-section="5">
+    <div class="acc-header" onclick="toggleSection(5)">
+      <div class="acc-check" id="check-5"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">Conventional Loans vs. Your Positioning</div>
+        <div class="acc-sub">What retail buyers use (and why you're different)</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">2 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+    </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p><strong>Conventional Loan:</strong> A standard bank mortgage. Requires credit score, income verification, appraisal, and typically takes 30–45 days to close. Sellers hate the uncertainty. This is what retail buyers use. Completely irrelevant to our acquisitions — but know it so you can position against it.</p>
+      <p>When a realtor mentions a buyer with a conventional loan, your opening is always: <strong>"We're not a conventional buyer. No appraisal. No bank. We close in 10–21 days."</strong> This is your competitive advantage. Many realtors have been burned by conventional buyers whose loans fell through. You're the anti-conventional buyer.</p>
+
+      <div class="kc-box" id="kc-5">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">What's the typical closing timeline for a conventional bank loan?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(5,0,false)"><div class="kc-opt-letter">A</div>5–10 days</div>
+          <div class="kc-opt" onclick="answerKC(5,1,true)"><div class="kc-opt-letter">B</div>30–45 days</div>
+          <div class="kc-opt" onclick="answerKC(5,2,false)"><div class="kc-opt-letter">C</div>60–90 days</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-5"></div>
+      </div>
+      <div class="section-done" id="done-5"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
+  </div>
+
+  <!-- S6: Manufactured Home Financing Warning -->
+  <div class="acc-item" data-section="6">
+    <div class="acc-header" onclick="toggleSection(6)">
+      <div class="acc-check" id="check-6"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">Manufactured Homes: Specialty Financing</div>
+        <div class="acc-sub">Limited buyer pool and strict requirements</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">4 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+    </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p>Multi-moved manufactured homes (moved 2+ times) have a very limited buyer pool because standard financing (FHA/conventional) is not available. Only specialty lenders (21st Mortgage Corporation, Credit Human, Triad) will touch them, and their requirements are strict:</p>
+      <table class="data-table">
+        <thead><tr><th>Requirement</th><th>Specification</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Minimum Credit Score</strong></td><td>660 — no exceptions for lower credit</td></tr>
+          <tr><td><strong>Down Payment</strong></td><td>5% of borrower's own funds</td></tr>
+          <tr><td><strong>Interest Rate</strong></td><td>~8% — higher than conventional</td></tr>
+          <tr><td><strong>Loan Term</strong></td><td>25 years — standard for specialty lenders</td></tr>
+        </tbody>
+      </table>
+      <p>The buyer pool that qualifies: someone with $50K–$80K in savings, 660+ credit, stable income. That's not the pool buying mobile homes. This creates a very small buyer pool.</p>
+      <div class="callout">
+        <div class="callout-label">Critical Action</div>
+        <p>Call Gayden first before going under contract on a multi-moved manufactured home. He knows the specialty lender networks and can help you avoid a deal that won't sell.</p>
+      </div>
+
+      <div class="kc-box" id="kc-6">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">What should you do before going under contract on a multi-moved manufactured home?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(6,0,false)"><div class="kc-opt-letter">A</div>Run your own numbers and make a decision.</div>
+          <div class="kc-opt" onclick="answerKC(6,1,false)"><div class="kc-opt-letter">B</div>Ask the realtor what financing is available.</div>
+          <div class="kc-opt" onclick="answerKC(6,2,true)"><div class="kc-opt-letter">C</div>Call Gayden first — he knows the specialty lender networks.</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-6"></div>
+      </div>
+      <div class="section-done" id="done-6"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
+  </div>
+
+  <!-- S7: When Realtors Doubt Your Funding -->
+  <div class="acc-item" data-section="7">
+    <div class="acc-header" onclick="toggleSection(7)">
+      <div class="acc-check" id="check-7"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">When Realtors Doubt Your Funding</div>
+        <div class="acc-sub">Building credibility and closing confidence</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">2 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+    </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p>Realtors have been burned. They've had a "cash buyer" come in, get a deal under contract, and then reveal financing contingencies mid-closing. The deal falls apart. The realtor looks bad. Their client is angry. Realtors remember this.</p>
+      <p>When you say cash, you're making a promise. Your entire credibility rests on follow-through. Every deal that closes on time, without contingency surprises, creates a realtor who will send you more deals. Your reputation is your most valuable asset in this business.</p>
+      <p>If a realtor presses you for proof: <strong>"Call Aaron at my title company — he'll tell you exactly what our track record looks like. We close deals on time, period."</strong> Third-party credibility beats your word every time.</p>
+
+      <div class="kc-box" id="kc-7">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">If a realtor presses you harder about your funding source, what do you say?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(7,0,true)"><div class="kc-opt-letter">A</div>We use a combination of capital sources — it all closes like cash to you. Call Aaron at our title company to verify our close rate.</div>
+          <div class="kc-opt" onclick="answerKC(7,1,false)"><div class="kc-opt-letter">B</div>We only use traditional bank financing.</div>
+          <div class="kc-opt" onclick="answerKC(7,2,false)"><div class="kc-opt-letter">C</div>Our funding sources are proprietary — I can't discuss them.</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-7"></div>
+      </div>
+      <div class="section-done" id="done-7"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
+  </div>
+
+  <!-- S8: DSCR Loans & Other Investment Financing -->
+  <div class="acc-item" data-section="8">
+    <div class="acc-header" onclick="toggleSection(8)">
+      <div class="acc-check" id="check-8"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">DSCR & Other Investment Financing</div>
+        <div class="acc-sub">What you'll hear from other buyers</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">2 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+    </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p><strong>DSCR Loan (Debt Service Coverage Ratio):</strong> A type of investment property loan where qualification is based on the rental income the property generates, not the borrower's personal income. Used by landlords and long-term hold investors. Not relevant to our acquisitions. You may hear it from buyers on the dispo side or from other investors talking about their long-term portfolios.</p>
+      <p>When you hear "DSCR," you'll know someone is a landlord/hold investor, not a cash buyer. This isn't your competition — they're playing a different game with different timelines and capital structures. You're the speed and certainty play.</p>
+
+      <div class="kc-box" id="kc-8">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">What does DSCR stand for and who uses it?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(8,0,false)"><div class="kc-opt-letter">A</div>Debt Service Coverage Ratio — hard money lenders use it to evaluate borrowers.</div>
+          <div class="kc-opt" onclick="answerKC(8,1,true)"><div class="kc-opt-letter">B</div>Debt Service Coverage Ratio — landlords and hold investors use it to qualify for investment property loans.</div>
+          <div class="kc-opt" onclick="answerKC(8,2,false)"><div class="kc-opt-letter">C</div>Debt Servicing Cash Reserve — banks use it to verify down payments.</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-8"></div>
+      </div>
+      <div class="section-done" id="done-8"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
+  </div>
+
 </div>
 
 <!-- QUIZ SECTION -->
+<div class="quiz-wrap">
 <div class="quiz-section">
   <h3>Module Quiz</h3>
   <p id="quiz-status">Loading quiz...</p>
@@ -382,24 +498,16 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
     <button id="submit-btn" class="submit-quiz-btn" onclick="submitScore()" disabled>Submit Score</button>
   </div>
 </div>
-
 </div>
 
-    <div class="module-update-box">
-      <h3>Update This Module</h3>
-      <p>Drop corrections, new info, or notes below. These go to the update queue and get reviewed before going live.</p>
-      <textarea class="module-update-textarea" id="moduleUpdateInput" placeholder="Type any updates, corrections, or new information for this module..."></textarea>
-      <button class="module-update-submit" id="moduleUpdateBtn" onclick="submitModuleUpdate()">Submit To Me Foo</button>
-    </div>
-
-<!-- SIDEBAR NAV -->
-<div class="nav-col">
-  <div class="snav">
-    <h4>Sections</h4>
-    <div id="snav-links"></div>
+<!-- NOTES BOX -->
+<div class="notes-wrap">
+  <div class="module-update-box">
+    <h3>Update This Module</h3>
+    <p>Drop corrections, new info, or notes below. These go to the update queue and get reviewed before going live.</p>
+    <textarea class="module-update-textarea" id="moduleUpdateInput" placeholder="Type any updates, corrections, or new information for this module..."></textarea>
+    <button class="module-update-submit" id="moduleUpdateBtn" onclick="submitModuleUpdate()">Submit To Me Foo</button>
   </div>
-</div>
-
 </div>
 
 <!-- BOTTOM NAV -->
@@ -443,73 +551,283 @@ const QUIZ_POOL = [
   {q:"In your funding stack, 'private money' refers to:",opts:[{t:"Loans from traditional banks.",correct:false},{t:"Capital from private investors and partners.",correct:true},{t:"Money you personally save.",correct:false}],explanation:"Private money = investor capital. Keep it internal."}
 ];
 
-window.addEventListener('scroll',()=>{
-  const h=document.documentElement.scrollHeight-window.innerHeight;
-  document.getElementById('rpbar').style.width=(window.scrollY/h*100)+'%';
-});
-(function buildNav(){
-  const sections=document.querySelectorAll('[data-section]');
-  const nav=document.getElementById('snav-links');
-  if(!nav||!sections.length)return;
-  sections.forEach(s=>{
-    const h2=s.querySelector('h2');
-    if(!h2)return;
-    const a=document.createElement('div');
-    a.className='snav-item';
-    a.textContent=h2.textContent;
-    a.onclick=()=>s.scrollIntoView({behavior:'smooth',block:'start'});
-    a.dataset.sec=s.dataset.section;
-    nav.appendChild(a);
-  });
-  window.addEventListener('scroll',()=>{
-    let active=null;
-    sections.forEach(s=>{if(s.getBoundingClientRect().top<180)active=s.dataset.section;});
-    nav.querySelectorAll('.snav-item').forEach(a=>a.classList.toggle('active',a.dataset.sec===active));
-  },{passive:true});
-})();
-function copyScript(id,btn){
-  const text=document.getElementById(id).textContent;
-  navigator.clipboard.writeText(text).then(()=>{
-    btn.textContent='✓ Copied!';btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
-  });
+function toggleSection(sectionNum){
+  const item = document.querySelector(`[data-section="${sectionNum}"]`);
+  if(!item) return;
+  item.classList.toggle('open');
+  updateProgress();
 }
-function toggleDD(id){
-  const el=document.getElementById(id);
-  el.classList.toggle('open');
-  el.querySelector('.dd-icon').textContent=el.classList.contains('open')?'−':'+';
+
+function expandAll(){
+  document.querySelectorAll('.acc-item').forEach(item => item.classList.add('open'));
+  updateProgress();
 }
-function checkInline(opt,cardId,correct,explanation){
-  const card=document.getElementById(cardId);
-  if(card.classList.contains('answered-correct')||card.classList.contains('answered-wrong'))return;
-  card.classList.add(correct?'answered-correct':'answered-wrong');
-  card.querySelectorAll('.kc-opt').forEach(o=>{
-    if(o===opt){o.classList.add(correct?'opt-correct':'opt-wrong');}
-    else{
-      const oc=o.getAttribute('onclick');
-      if(!correct&&oc&&oc.includes(',true,'))o.classList.add('opt-correct');
-      else o.classList.add('opt-disabled');
+
+function collapseAll(){
+  document.querySelectorAll('.acc-item').forEach(item => item.classList.remove('open'));
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = document.querySelectorAll('.acc-item').length;
+  const completed = document.querySelectorAll('.acc-item.completed').length;
+  const pct = total > 0 ? Math.round(completed / total * 100) : 0;
+  const el = document.getElementById('progress-fill');
+  if(el) el.style.width = pct + '%';
+  const count = document.getElementById('progress-count');
+  if(count) count.textContent = completed + ' of ' + total + ' sections';
+  const time = document.getElementById('progress-time');
+  if(time) time.textContent = completed >= total ? 'Ready for quiz!' : '~15 min remaining';
+}
+
+function answerKC(sectionNum, selectedIdx, isCorrect){
+  const check = document.getElementById('check-' + sectionNum);
+  const done = document.getElementById('done-' + sectionNum);
+  const item = document.querySelector(`[data-section="${sectionNum}"]`);
+  const kcBox = document.getElementById('kc-' + sectionNum);
+
+  if(!kcBox) return;
+  const opts = kcBox.querySelectorAll('.kc-opt');
+
+  opts.forEach((opt, idx) => {
+    if(idx === selectedIdx){
+      opt.classList.add(isCorrect ? 'kc-correct' : 'kc-wrong');
+    } else if(opt.querySelector('div:last-child')?.textContent.includes('correct') || opt.getAttribute('onclick')?.includes(',true,')){
+      opt.classList.add('kc-correct');
+    } else {
+      opt.classList.add('kc-disabled');
     }
   });
-  const fb=document.getElementById(cardId+'-fb');
-  fb.textContent=(correct?'✓ ':'✗ ')+explanation;
-  fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');
+
+  const fb = document.getElementById('kcfb-' + sectionNum);
+  if(fb){
+    fb.classList.add('show', isCorrect ? 'fb-correct' : 'fb-wrong');
+    fb.textContent = (isCorrect ? '✓ ' : '✗ ') + (isCorrect ? 'Correct!' : 'Not quite.');
+  }
+
+  if(isCorrect && check && item){
+    check.textContent = '✓';
+    check.style.background = 'var(--green)';
+    check.style.borderColor = 'var(--green)';
+    item.classList.add('completed');
+    if(done) done.classList.add('show');
+    updateProgress();
+  }
 }
+
 (function loadStreak(){
-  const streak=parseInt(localStorage.getItem('gr_streak')||'0');
-  const el=document.getElementById('streak-count');
-  if(el)el.textContent=streak>0?streak+'-day streak':'Start your streak';
+  const streak = parseInt(localStorage.getItem('gr_streak') || '0');
+  const el = document.getElementById('streak-count');
+  if(el) el.textContent = streak > 0 ? streak + '-day streak' : 'Start your streak';
 })();
-const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
-let quizQuestions=[],userAnswers={},quizDone=false,masteredIndices=[];
-async function loadMasteredAndInit(){const agent=sessionStorage.getItem('gr_agent')||'';if(agent){try{const res=await fetch(APPS_SCRIPT_URL+`?action=getModuleProgress&agent=${encodeURIComponent(agent)}&module=${MODULE_NUM}`);const data=await res.json();masteredIndices=data.mastered||[];}catch(e){}}initQuiz();}
-function initQuiz(){const area=document.getElementById('quiz-area');const status=document.getElementById('quiz-status');if(!QUIZ_POOL||!QUIZ_POOL.length){if(status)status.textContent='No questions loaded yet.';return;}const indexed=QUIZ_POOL.map((q,i)=>Object.assign({poolIdx:i},q));const shuffled=[...indexed].sort(()=>Math.random()-.5);quizQuestions=shuffled.slice(0,Math.min(10,shuffled.length));if(status)status.textContent=`${quizQuestions.length} questions · Pick the best answer for each.`;quizQuestions.forEach((q,qi)=>{const isMastered=masteredIndices.includes(q.poolIdx);const opts=q.opts.map((o,oi)=>`<div class="quiz-opt${isMastered&&o.correct?' correct':isMastered?' disabled':''}" id="qo-${qi}-${oi}" onclick="${isMastered?'':'answerQuiz('+qi+','+oi+')'}"${isMastered?' style="pointer-events:none"':''}><div class="quiz-opt-letter">${String.fromCharCode(65+oi)}</div>${o.t}</div>`).join('');area.innerHTML+=`<div class="quiz-q" id="qq-${qi}">${isMastered?'<div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">✓ Already mastered</div>':''}<div class="quiz-q-text">Pool Q${q.poolIdx}. ${q.q}</div><div class="quiz-q-opts" id="qopts-${qi}">${opts}</div><div class="kc-feedback" id="qfb-${qi}"></div></div>`;if(isMastered){const correctOi=q.opts.findIndex(o=>o.correct);if(correctOi>=0)userAnswers[qi]=correctOi;}});const sb=document.getElementById('score-bar');if(sb)sb.style.display='flex';updateScore();}
-function answerQuiz(qi,oi){if(userAnswers[qi]!==undefined)return;userAnswers[qi]=oi;const q=quizQuestions[qi];const correct=q.opts[oi].correct;q.opts.forEach((_,i)=>{const el=document.getElementById(`qo-${qi}-${i}`);if(!el)return;if(i===oi)el.classList.add(correct?'correct':'wrong');else if(q.opts[i].correct)el.classList.add('correct');else el.classList.add('disabled');});const fb=document.getElementById(`qfb-${qi}`);if(fb){fb.textContent=(correct?'✓ ':'✗ ')+q.explanation;fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');}updateScore();}
-function updateScore(){const answered=Object.keys(userAnswers).length;const total=quizQuestions.length;const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).length;const pct=total?Math.round(correct/total*100):0;const st=document.getElementById('score-text');const ss=document.getElementById('score-sub');const btn=document.getElementById('submit-btn');if(st)st.textContent=`${correct} / ${total} correct  (${pct}%)`;if(ss)ss.textContent=answered<total?`${total-answered} questions remaining`:'Quiz complete — submit your score!';if(btn)btn.disabled=answered<total;quizDone=answered>=total;}
-function notifySlackScore(agent,modTitle,modNum,pct,correct,total){fetch(APPS_SCRIPT_URL+'?action=gettrainingprogress').then(r=>r.json()).then(agents=>{const sc=[[100,'PERFECT SCORE \ud83d\udcaf Absolutely disgusting dominance. Everyone else should be worried.'],[90,'Strong. Very strong. That\'s the kind of energy this team needs.'],[80,'Solid work. Not perfect, but definitely respectable.'],[70,'Ehh... it\'s passing. Barely. Maybe crack open the module one more time.'],[60,'That\'s... not great. You might wanna re-read that module, just saying.'],[0,'Yikes. \ud83d\ude2c Did you even read the module or just start clicking randomly?']];let cmt='';for(const[th,m]of sc){if(pct>=th){cmt=m;break;}}let lp=null,la=Infinity,ls=Infinity,lm='';agents.forEach(a=>{const ms=Object.entries(a.modules||{});if(!ms.length)return;const avg=ms.reduce((s,[_,m])=>s+(m.best_score||0),0)/ms.length;if(avg<la){la=avg;lp=a.name;let w=Infinity,wm='';ms.forEach(([n,m])=>{if((m.best_score||0)<w){w=m.best_score||0;wm=n;}});ls=w;lm=wm;}});const tt=['When are you gonna step it up? Asking for the whole team. \ud83d\udc40','That score is genuinely embarrassing. I\'d be scared to show my face in the office.','The leaderboard is BEGGING you to do literally anything.','At this point even a coin flip would score better. Just saying. \ud83e\ude99','Everyone else is getting better. You\'re getting... comfortable? \ud83d\udecb\ufe0f','That leaderboard position is a cry for help honestly.','You know the modules are FREE to re-take right?? Nobody\'s stopping you.','I\'ve seen better scores from people who accidentally hit submit. \ud83d\udc80','Your score is so low it\'s basically a rounding error.','If effort was a scoreboard you wouldn\'t even be on it.'];const t=tt[Math.floor(Math.random()*tt.length)];let msg='\ud83c\udf93 *'+agent+'* just finished *Module '+modNum+' \u2014 '+modTitle+'*\nScore: '+correct+'/'+total+' ('+pct+'%)\n'+cmt;if(lp&&lp.toLowerCase()!==agent.toLowerCase()){msg+='\n\n\ud83d\udcc9 Meanwhile... *'+lp+'* is camping out in LAST PLACE with a '+Math.round(ls)+'% on Module '+lm+'. '+t;}else if(lp&&lp.toLowerCase()===agent.toLowerCase()){msg+='\n\n\ud83d\udcc9 Plot twist... *'+agent+'* IS in last place. '+(pct<70?'And this score ain\'t helping. \ud83d\udc80':'But at least they\'re trying to climb out. Respect... barely.');}fetch('/.netlify/functions/slack-score-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:msg})}).catch(()=>{});}).catch(()=>{});}
-function submitScore(){if(!quizDone)return;const total=quizQuestions.length;const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).length;const pct=Math.round(correct/total*100);const agent=sessionStorage.getItem('gr_agent')||'Unknown';const email=sessionStorage.getItem('gr_email')||'';const xp=Math.round(pct*1.2);const correctPoolIndices=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).map(([qi])=>quizQuestions[qi].poolIdx);const allMastered=[...new Set([...masteredIndices,...correctPoolIndices])];const body={action:'moduleComplete',agent,email,module:MODULE_NUM,moduleTitle:MODULE_TITLE,score:pct,xp,correct,total,poolSize:QUIZ_POOL.length,correctIndices:allMastered,date:new Date().toISOString()};fetch(APPS_SCRIPT_URL,{method:'POST',body:JSON.stringify(body)}).then(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='✓ Score Saved!';btn.style.background='#22C55E';btn.disabled=true;}masteredIndices=allMastered;notifySlackScore(agent,MODULE_TITLE,MODULE_NUM,pct,correct,total);const today=new Date().toDateString();const lastDay=localStorage.getItem('gr_streak_day');let streak=parseInt(localStorage.getItem('gr_streak')||'0');if(lastDay!==today){const yesterday=new Date(Date.now()-86400000).toDateString();streak=lastDay===yesterday?streak+1:1;localStorage.setItem('gr_streak',streak);localStorage.setItem('gr_streak_day',today);const sc=document.getElementById('streak-count');if(sc)sc.textContent=streak+'-day streak';}}).catch(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='Retry';btn.disabled=false;}});}
-function submitModuleUpdate(){const txt=document.getElementById('moduleUpdateInput').value.trim();if(!txt){alert('Type something first.');return;}const btn=document.getElementById('moduleUpdateBtn');btn.disabled=true;btn.textContent='Sending...';const agent=sessionStorage.getItem('gr_agent')||'Unknown';const payload={action:'addModuleUpdate',module:MODULE_NUM,moduleTitle:MODULE_TITLE,agent:agent,update:txt,date:new Date().toISOString()};fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(()=>{btn.textContent='✓ Sent!';btn.style.background='#22C55E';document.getElementById('moduleUpdateInput').value='';setTimeout(()=>{btn.textContent='Submit To Me Foo';btn.style.background='';btn.disabled=false;},3000);}).catch(()=>{btn.textContent='Retry';btn.disabled=false;});}
+
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
+let quizQuestions = [], userAnswers = {}, quizDone = false, masteredIndices = [];
+
+async function loadMasteredAndInit(){
+  const agent = sessionStorage.getItem('gr_agent') || '';
+  if(agent){
+    try{
+      const res = await fetch(APPS_SCRIPT_URL + `?action=getModuleProgress&agent=${encodeURIComponent(agent)}&module=${MODULE_NUM}`);
+      const data = await res.json();
+      masteredIndices = data.mastered || [];
+    } catch(e){}
+  }
+  initQuiz();
+}
+
+function initQuiz(){
+  const area = document.getElementById('quiz-area');
+  const status = document.getElementById('quiz-status');
+  if(!QUIZ_POOL || !QUIZ_POOL.length){
+    if(status) status.textContent = 'No questions loaded yet.';
+    return;
+  }
+  const indexed = QUIZ_POOL.map((q, i) => Object.assign({poolIdx: i}, q));
+  const shuffled = [...indexed].sort(() => Math.random() - 0.5);
+  quizQuestions = shuffled.slice(0, Math.min(10, shuffled.length));
+  if(status) status.textContent = `${quizQuestions.length} questions · Pick the best answer for each.`;
+
+  quizQuestions.forEach((q, qi) => {
+    const isMastered = masteredIndices.includes(q.poolIdx);
+    const opts = q.opts.map((o, oi) => `<div class="quiz-opt${isMastered && o.correct ? ' correct' : isMastered ? ' disabled' : ''}" id="qo-${qi}-${oi}" onclick="${isMastered ? '' : 'answerQuiz(' + qi + ',' + oi + ')'}"${isMastered ? ' style="pointer-events:none"' : ''}><div class="quiz-opt-letter">${String.fromCharCode(65 + oi)}</div>${o.t}</div>`).join('');
+    area.innerHTML += `<div class="quiz-q" id="qq-${qi}">${isMastered ? '<div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">✓ Already mastered</div>' : ''}<div class="quiz-q-text">Pool Q${q.poolIdx}. ${q.q}</div><div class="quiz-q-opts" id="qopts-${qi}">${opts}</div><div class="kc-feedback" id="qfb-${qi}"></div></div>`;
+    if(isMastered){
+      const correctOi = q.opts.findIndex(o => o.correct);
+      if(correctOi >= 0) userAnswers[qi] = correctOi;
+    }
+  });
+  const sb = document.getElementById('score-bar');
+  if(sb) sb.style.display = 'flex';
+  updateScore();
+}
+
+function answerQuiz(qi, oi){
+  if(userAnswers[qi] !== undefined) return;
+  userAnswers[qi] = oi;
+  const q = quizQuestions[qi];
+  const correct = q.opts[oi].correct;
+  q.opts.forEach((_, i) => {
+    const el = document.getElementById(`qo-${qi}-${i}`);
+    if(!el) return;
+    if(i === oi) el.classList.add(correct ? 'correct' : 'wrong');
+    else if(q.opts[i].correct) el.classList.add('correct');
+    else el.classList.add('disabled');
+  });
+  const fb = document.getElementById(`qfb-${qi}`);
+  if(fb){
+    fb.textContent = (correct ? '✓ ' : '✗ ') + q.explanation;
+    fb.className = 'kc-feedback show ' + (correct ? 'fb-correct' : 'fb-wrong');
+  }
+  updateScore();
+}
+
+function updateScore(){
+  const answered = Object.keys(userAnswers).length;
+  const total = quizQuestions.length;
+  const correct = Object.entries(userAnswers).filter(([qi, oi]) => quizQuestions[qi] && quizQuestions[qi].opts[oi].correct).length;
+  const pct = total ? Math.round(correct / total * 100) : 0;
+  const st = document.getElementById('score-text');
+  const ss = document.getElementById('score-sub');
+  const btn = document.getElementById('submit-btn');
+  if(st) st.textContent = `${correct} / ${total} correct  (${pct}%)`;
+  if(ss) ss.textContent = answered < total ? `${total - answered} questions remaining` : 'Quiz complete — submit your score!';
+  if(btn) btn.disabled = answered < total;
+  quizDone = answered >= total;
+}
+
+function notifySlackScore(agent, modTitle, modNum, pct, correct, total){
+  fetch(APPS_SCRIPT_URL + '?action=gettrainingprogress').then(r => r.json()).then(agents => {
+    const sc = [[100, 'PERFECT SCORE 🎯 Absolutely disgusting dominance. Everyone else should be worried.'], [90, 'Strong. Very strong. That\'s the kind of energy this team needs.'], [80, 'Solid work. Not perfect, but definitely respectable.'], [70, 'Ehh... it\'s passing. Barely. Maybe crack open the module one more time.'], [60, 'That\'s... not great. You might wanna re-read that module, just saying.'], [0, 'Yikes. 😬 Did you even read the module or just start clicking randomly?']];
+    let cmt = '';
+    for(const [th, m] of sc){
+      if(pct >= th){
+        cmt = m;
+        break;
+      }
+    }
+    let lp = null, la = Infinity, ls = Infinity, lm = '';
+    agents.forEach(a => {
+      const ms = Object.entries(a.modules || {});
+      if(!ms.length) return;
+      const avg = ms.reduce((s, [_, m]) => s + (m.best_score || 0), 0) / ms.length;
+      if(avg < la){
+        la = avg;
+        lp = a.name;
+        let w = Infinity, wm = '';
+        ms.forEach(([n, m]) => {
+          if((m.best_score || 0) < w){
+            w = m.best_score || 0;
+            wm = n;
+          }
+        });
+        ls = w;
+        lm = wm;
+      }
+    });
+    const tt = ['When are you gonna step it up? Asking for the whole team. 👀', 'That score is genuinely embarrassing. I\'d be scared to show my face in the office.', 'The leaderboard is BEGGING you to do literally anything.', 'At this point even a coin flip would score better. Just saying. 🤪', 'Everyone else is getting better. You\'re getting... comfortable? 🛏️', 'That leaderboard position is a cry for help honestly.', 'You know the modules are FREE to re-take right?? Nobody\'s stopping you.', 'I\'ve seen better scores from people who accidentally hit submit. 💀', 'Your score is so low it\'s basically a rounding error.', 'If effort was a scoreboard you wouldn\'t even be on it.'];
+    const t = tt[Math.floor(Math.random() * tt.length)];
+    let msg = '🎓 *' + agent + '* just finished *Module ' + modNum + ' — ' + modTitle + '*\nScore: ' + correct + '/' + total + ' (' + pct + '%)\n' + cmt;
+    if(lp && lp.toLowerCase() !== agent.toLowerCase()){
+      msg += '\n\n📈 Meanwhile... *' + lp + '* is camping out in LAST PLACE with a ' + Math.round(ls) + '% on Module ' + lm + '. ' + t;
+    } else if(lp && lp.toLowerCase() === agent.toLowerCase()){
+      msg += '\n\n📈 Plot twist... *' + agent + '* IS in last place. ' + (pct < 70 ? 'And this score ain\'t helping. 💀' : 'But at least they\'re trying to climb out. Respect... barely.');
+    }
+    fetch('/.netlify/functions/slack-score-notify', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({text: msg})
+    }).catch(() => {});
+  }).catch(() => {});
+}
+
+function submitScore(){
+  if(!quizDone) return;
+  const total = quizQuestions.length;
+  const correct = Object.entries(userAnswers).filter(([qi, oi]) => quizQuestions[qi] && quizQuestions[qi].opts[oi].correct).length;
+  const pct = Math.round(correct / total * 100);
+  const agent = sessionStorage.getItem('gr_agent') || 'Unknown';
+  const email = sessionStorage.getItem('gr_email') || '';
+  const xp = Math.round(pct * 1.2);
+  const correctPoolIndices = Object.entries(userAnswers).filter(([qi, oi]) => quizQuestions[qi] && quizQuestions[qi].opts[oi].correct).map(([qi]) => quizQuestions[qi].poolIdx);
+  const allMastered = [...new Set([...masteredIndices, ...correctPoolIndices])];
+  const body = {action: 'moduleComplete', agent, email, module: MODULE_NUM, moduleTitle: MODULE_TITLE, score: pct, xp, correct, total, poolSize: QUIZ_POOL.length, correctIndices: allMastered, date: new Date().toISOString()};
+  fetch(APPS_SCRIPT_URL, {method: 'POST', body: JSON.stringify(body)}).then(() => {
+    const btn = document.getElementById('submit-btn');
+    if(btn){
+      btn.textContent = '✓ Score Saved!';
+      btn.style.background = '#22C55E';
+      btn.disabled = true;
+    }
+    masteredIndices = allMastered;
+    notifySlackScore(agent, MODULE_TITLE, MODULE_NUM, pct, correct, total);
+    const today = new Date().toDateString();
+    const lastDay = localStorage.getItem('gr_streak_day');
+    let streak = parseInt(localStorage.getItem('gr_streak') || '0');
+    if(lastDay !== today){
+      const yesterday = new Date(Date.now() - 86400000).toDateString();
+      streak = lastDay === yesterday ? streak + 1 : 1;
+      localStorage.setItem('gr_streak', streak);
+      localStorage.setItem('gr_streak_day', today);
+      const sc = document.getElementById('streak-count');
+      if(sc) sc.textContent = streak + '-day streak';
+    }
+  }).catch(() => {
+    const btn = document.getElementById('submit-btn');
+    if(btn){
+      btn.textContent = 'Retry';
+      btn.disabled = false;
+    }
+  });
+}
+
+function submitModuleUpdate(){
+  const txt = document.getElementById('moduleUpdateInput').value.trim();
+  if(!txt){
+    alert('Type something first.');
+    return;
+  }
+  const btn = document.getElementById('moduleUpdateBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  const agent = sessionStorage.getItem('gr_agent') || 'Unknown';
+  const payload = {action: 'addModuleUpdate', module: MODULE_NUM, moduleTitle: MODULE_TITLE, agent: agent, update: txt, date: new Date().toISOString()};
+  fetch(APPS_SCRIPT_URL, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload)}).then(() => {
+    btn.textContent = '✓ Sent!';
+    btn.style.background = '#22C55E';
+    document.getElementById('moduleUpdateInput').value = '';
+    setTimeout(() => {
+      btn.textContent = 'Submit To Me Foo';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+  }).catch(() => {
+    btn.textContent = 'Retry';
+    btn.disabled = false;
+  });
+}
+
 loadMasteredAndInit();
+updateProgress();
 </script>
+
+
+<style>
+.module-nav-strip{background:var(--surface3,#0A0C10);border-top:1px solid var(--border,rgba(255,255,255,.07));padding:20px 44px;display:flex;align-items:center;justify-content:center;gap:12px;}
+.module-nav-arrow{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--radius-sm,5px);border:1px solid var(--border,rgba(255,255,255,.07));color:var(--dim,#555A66);font-size:1rem;text-decoration:none;transition:all .2s;flex-shrink:0;}
+.module-nav-arrow:hover{color:var(--orange,#FF5C1A);border-color:var(--orange-border,rgba(255,92,26,.25));}
+.module-nav-arrow.disabled{opacity:.25;pointer-events:none;}
+.module-nav-nums{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;}
+.module-nav-num{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-sm,5px);border:1px solid var(--border,rgba(255,255,255,.07));color:var(--dim,#555A66);font-size:.75rem;font-weight:700;text-decoration:none;transition:all .2s;}
+.module-nav-num:hover{color:var(--cream,#C8D4E4);border-color:rgba(255,255,255,.2);}
+.module-nav-num.current{width:42px;height:42px;font-size:.92rem;background:var(--orange,#FF5C1A);border-color:var(--orange,#FF5C1A);color:#fff;box-shadow:0 0 16px rgba(255,92,26,.35);}
+@media(max-width:768px){.module-nav-strip{padding:16px 20px;gap:8px;}.module-nav-num{width:28px;height:28px;font-size:.68rem;}.module-nav-num.current{width:36px;height:36px;font-size:.82rem;}}
+</style>
+
+<nav class="module-nav-strip">
+  <a href="/gimmebrain/module9.html" class="module-nav-arrow" title="Module 9">←</a>
+  <div class="module-nav-nums"><a href="/gimmebrain/module1.html" class="module-nav-num" title="Module 1: Pipeline & CRM">1</a><a href="/gimmebrain/module2.html" class="module-nav-num" title="Module 2: Prospecting">2</a><a href="/gimmebrain/module3.html" class="module-nav-num" title="Module 3: First Contact">3</a><a href="/gimmebrain/module4.html" class="module-nav-num" title="Module 4: Follow-Up">4</a><a href="/gimmebrain/module5.html" class="module-nav-num" title="Module 5: Running Comps">5</a><a href="/gimmebrain/module6.html" class="module-nav-num" title="Module 6: Making Offers">6</a><a href="/gimmebrain/module7.html" class="module-nav-num" title="Module 7: Contract to Close">7</a><a href="/gimmebrain/module8.html" class="module-nav-num" title="Module 8: Objection Handling">8</a><a href="/gimmebrain/module9.html" class="module-nav-num" title="Module 9: Scripts & Dialogues">9</a><span class="module-nav-num current" title="Module 10: Disposition">10</span><a href="/gimmebrain/module11.html" class="module-nav-num" title="Module 11: Market Knowledge">11</a><a href="/gimmebrain/module12.html" class="module-nav-num" title="Module 12: Systems & Automation">12</a></div>
+  <a href="/gimmebrain/module11.html" class="module-nav-arrow" title="Module 11">→</a>
+</nav>
 </body>
 </html>

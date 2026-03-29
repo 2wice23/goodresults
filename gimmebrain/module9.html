@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nevada RPA vs Texas TREC — Good Results Training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<script>const SHEET_ID='1T-5pNnoQjRyS_Uu3ESFgzASRiG9xFHN7AkAl-o57J-c';</script>
 <style>
 :root{--black:#0D0F14;--surface:#11141A;--surface2:#161B24;--surface3:#0A0C10;--white:#F0F4FF;--cream:#C8D4E4;--muted:#8A95A8;--dim:#555A66;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.04);--orange:#FF5C1A;--orange-glow:rgba(255,92,26,0.15);--orange-border:rgba(255,92,26,0.25);--green:#22C55E;--green-bg:rgba(34,197,94,0.1);--green-border:#22C55E;--red:#EF4444;--red-bg:rgba(239,68,68,0.08);--red-border:#EF4444;--radius:8px;--radius-sm:5px;--radius-lg:12px;}
-*{margin:0;padding:0;box-sizing:border-box;}html{font-size:16px;scroll-behavior:smooth;}body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;}
-#rpbar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:linear-gradient(90deg,#FF5C1A,#FF8A50,#FF5C1A);background-size:200% 100%;animation:rpShimmer 2.5s linear infinite;transition:width .06s linear;box-shadow:0 0 10px rgba(255,92,26,.55);}
-@keyframes rpShimmer{from{background-position:0%}to{background-position:200%}}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;}
+
+/* Header */
 .header{padding:14px 44px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,.97);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;}
 .logo{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);font-weight:700;}
 .header-right{display:flex;align-items:center;gap:20px;}
@@ -22,85 +21,98 @@
 @keyframes fireFlicker{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.15) rotate(3deg)}}
 .back-link{font-size:.78rem;color:var(--dim);text-decoration:none;transition:color .2s;}
 .back-link:hover{color:var(--orange);}
-.hero{padding:56px 44px 40px;border-bottom:1px solid var(--border);max-width:900px;}
+
+/* Hero */
+.hero{padding:48px 44px 32px;max-width:820px;margin:0 auto;}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--orange-glow);border:1px solid var(--orange-border);color:var(--orange);font-size:.67rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 13px;border-radius:3px;margin-bottom:18px;}
-.hero h1{font-size:2.5rem;font-weight:800;line-height:1.1;color:var(--white);margin-bottom:12px;}
+.hero h1{font-size:2.4rem;font-weight:800;line-height:1.1;color:var(--white);margin-bottom:10px;}
 .hero h1 span{color:var(--orange);}
-.hero p{font-size:.97rem;color:var(--muted);line-height:1.7;max-width:560px;}
-.meta-bar{display:flex;gap:40px;padding:20px 44px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
-.meta-item{display:flex;flex-direction:column;gap:2px;}
-.meta-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);font-weight:700;}
-.meta-val{font-size:.84rem;color:var(--muted);font-weight:500;}
-.body-wrap{display:grid;grid-template-columns:1fr 176px;gap:0;align-items:start;max-width:1060px;margin:0 auto;}
-.content-col{padding:52px 44px;border-right:1px solid var(--border);}
-.nav-col{padding:32px 24px;position:sticky;top:80px;}
-.snav{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;}
-.snav h4{font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-.snav-item{display:block;padding:7px 10px;border-radius:4px;font-size:.76rem;color:var(--dim);cursor:pointer;transition:all .18s;border-left:2px solid transparent;line-height:1.35;margin-bottom:2px;}
-.snav-item:hover{color:var(--cream);background:rgba(255,255,255,.04);}
-.snav-item.active{color:var(--orange);border-left-color:var(--orange);background:var(--orange-glow);}
-.section{margin-bottom:52px;}
-.section-num{font-size:.6rem;font-weight:800;letter-spacing:.18em;color:var(--orange);text-transform:uppercase;margin-bottom:6px;}
-.section h2{font-size:1.3rem;font-weight:700;color:var(--cream);margin-bottom:14px;line-height:1.3;}
-.section p{font-size:.93rem;color:var(--muted);line-height:1.78;margin-bottom:13px;}
-.section p:last-of-type{margin-bottom:0;}
-.section strong{color:var(--cream);font-weight:600;}
-.script-block{background:var(--surface3);border:1px solid var(--orange-border);border-left:3px solid var(--orange);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;margin:18px 0;position:relative;}
-.script-label{font-size:.6rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;}
-.script-text{font-size:.9rem;color:#C8D4E4;line-height:1.72;font-style:italic;}
-.copy-btn{position:absolute;top:13px;right:13px;background:var(--orange-glow);border:1px solid var(--orange-border);color:var(--orange);font-size:.67rem;font-weight:700;letter-spacing:.08em;padding:4px 11px;border-radius:var(--radius-sm);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;}
-.copy-btn:hover{background:var(--orange);color:#fff;}
-.copy-btn.copied{background:#22C55E;border-color:#22C55E;color:#fff;}
-.callout{background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:var(--radius);padding:18px 22px;margin:18px 0;}
-.callout-label{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:7px;}
-.callout p{font-size:.9rem;color:#C8D4E4;line-height:1.68;margin:0;}
-.data-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.85rem;}
-.data-table th{text-align:left;padding:9px 14px;font-size:.63rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:var(--surface);border-bottom:1px solid var(--border);}
-.data-table td{padding:10px 14px;border-bottom:1px solid var(--border2);color:var(--muted);vertical-align:top;line-height:1.55;}
-.data-table tr:last-child td{border-bottom:none;}
-.data-table tr:hover td{background:rgba(255,255,255,.02);}
+.hero-desc{font-size:.93rem;color:var(--muted);line-height:1.7;max-width:600px;}
+
+/* Progress Bar */
+.progress-wrap{max-width:820px;margin:0 auto;padding:0 44px 36px;}
+.progress-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.progress-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+.progress-count{font-size:.78rem;font-weight:700;color:var(--orange);}
+.progress-track{width:100%;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--orange),#FF8A50);border-radius:3px;transition:width .4s ease;width:0%;}
+.progress-time{font-size:.68rem;color:var(--dim);margin-top:8px;text-align:right;}
+
+/* Expand/Collapse */
+.controls{max-width:820px;margin:0 auto;padding:0 44px 16px;display:flex;gap:10px;}
+.ctrl-btn{background:var(--surface);border:1px solid var(--border);color:var(--dim);font-size:.7rem;font-weight:600;letter-spacing:.06em;padding:6px 14px;border-radius:var(--radius-sm);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;}
+.ctrl-btn:hover{color:var(--cream);border-color:var(--orange-border);}
+
+/* Accordion Stack */
+.accordion-stack{max-width:820px;margin:0 auto;padding:0 44px 40px;display:flex;flex-direction:column;gap:6px;}
+
+.acc-item{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .25s;}
+.acc-item.open{border-color:var(--orange-border);}
+.acc-item.completed{border-color:rgba(34,197,94,0.25);}
+.acc-item.completed .acc-check{background:var(--green);border-color:var(--green);color:#fff;}
+.acc-item.completed .acc-title{color:var(--green);}
+
+.acc-header{padding:16px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;background:var(--surface);transition:background .18s;user-select:none;}
+.acc-header:hover{background:var(--surface2);}
+
+.acc-num{font-size:.6rem;font-weight:800;letter-spacing:.14em;color:var(--dim);min-width:24px;}
+.acc-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--dim);display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;transition:all .3s;}
+.acc-info{flex:1;}
+.acc-title{font-size:.9rem;font-weight:600;color:var(--cream);line-height:1.3;transition:color .3s;}
+.acc-sub{font-size:.7rem;color:var(--dim);margin-top:2px;}
+.acc-meta{display:flex;align-items:center;gap:8px;}
+.acc-time{font-size:.65rem;color:var(--dim);font-weight:600;letter-spacing:.04em;background:var(--surface2);padding:3px 8px;border-radius:10px;}
+.acc-arrow{font-size:.7rem;color:var(--dim);transition:transform .25s;flex-shrink:0;}
+.acc-item.open .acc-arrow{transform:rotate(180deg);}
+
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.acc-item.open .acc-body{max-height:3000px;}
+.acc-inner{padding:0 20px 24px;border-top:1px solid var(--border);}
+.acc-inner{padding-top:20px;}
+
+/* Content inside sections */
+.acc-inner p{font-size:.9rem;color:var(--muted);line-height:1.78;margin-bottom:12px;}
+.acc-inner p:last-of-type{margin-bottom:0;}
+.acc-inner strong{color:var(--cream);font-weight:600;}
+.acc-inner ul{font-size:.9rem;color:var(--muted);line-height:1.78;}
+.acc-inner ol{font-size:.9rem;color:var(--muted);line-height:1.78;}
+
+.callout{background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:var(--radius);padding:16px 20px;margin:16px 0;}
+.callout-label{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;}
+.callout p{font-size:.87rem;color:#C8D4E4;line-height:1.68;margin:0;}
+
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.83rem;}
+.data-table th{text-align:left;padding:8px 12px;font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:var(--surface2);border-bottom:1px solid var(--border);}
+.data-table td{padding:9px 12px;border-bottom:1px solid var(--border2);color:var(--muted);vertical-align:top;line-height:1.5;}
 .data-table td strong{color:var(--cream);font-weight:600;}
-.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:17px 20px;}
-.card h4{font-size:.8rem;font-weight:700;color:var(--cream);margin-bottom:5px;}
-.card p{font-size:.8rem;color:var(--dim);line-height:1.55;margin:0;}
-.card.orange-tint{border-color:var(--orange-border);background:var(--orange-glow);}
-.card.orange-tint h4{color:var(--orange);}
-.deepdive{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:9px;}
-.dd-header{padding:14px 18px;background:var(--surface);display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background .18s;user-select:none;}
-.dd-header:hover{background:var(--surface2);}
-.dd-header-left{display:flex;align-items:center;gap:9px;}
-.dd-icon{width:20px;height:20px;background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--orange);font-weight:900;flex-shrink:0;}
-.dd-title{font-size:.87rem;font-weight:600;color:var(--cream);}
-.dd-arrow{font-size:.68rem;color:var(--dim);transition:transform .22s;}
-.deepdive.open .dd-arrow{transform:rotate(180deg);}
-.dd-body{max-height:0;overflow:hidden;transition:max-height .32s ease;background:var(--surface3);}
-.deepdive.open .dd-body{max-height:900px;}
-.dd-inner{padding:18px 22px;}
-.dd-inner p{font-size:.87rem;color:var(--muted);line-height:1.72;margin-bottom:10px;}
-.dd-inner p:last-child{margin-bottom:0;}
-.dd-inner strong{color:var(--cream);}
-.kcheck{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 26px;margin:24px 0;transition:border-color .25s;}
-.kcheck.answered-correct{border-color:var(--green-border);}
-.kcheck.answered-wrong{border-color:var(--red-border);}
-.kc-header{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
-.kc-icon{width:26px;height:26px;background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:900;color:var(--orange);flex-shrink:0;}
-.kc-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);}
-.kc-question{font-size:.95rem;font-weight:600;color:var(--cream);margin-bottom:14px;line-height:1.45;}
-.kc-options{display:flex;flex-direction:column;gap:7px;}
-.kc-opt{display:flex;align-items:center;gap:11px;padding:10px 15px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);cursor:pointer;transition:all .18s;font-size:.88rem;color:var(--muted);}
-.kc-opt:hover{background:rgba(255,255,255,.06);color:var(--cream);}
-.kc-opt.opt-correct{background:var(--green-bg);border-color:var(--green-border);color:#86EFAC;pointer-events:none;}
-.kc-opt.opt-wrong{background:var(--red-bg);border-color:var(--red-border);color:#FCA5A5;pointer-events:none;}
-.kc-opt.opt-disabled{pointer-events:none;opacity:.55;}
-.kc-letter{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:800;color:var(--dim);flex-shrink:0;}
-.kc-feedback{margin-top:12px;padding:11px 15px;border-radius:var(--radius);font-size:.84rem;line-height:1.55;display:none;}
+.data-table tr:last-child td{border-bottom:none;}
+
+/* Inline Knowledge Check */
+.kc-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-top:20px;}
+.kc-label{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.kc-question{font-size:.88rem;font-weight:600;color:var(--cream);margin-bottom:12px;line-height:1.4;}
+.kc-opts{display:flex;flex-direction:column;gap:5px;}
+.kc-opt{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid rgba(255,255,255,.07);border-radius:5px;background:rgba(255,255,255,.02);cursor:pointer;transition:all .18s;font-size:.84rem;color:var(--muted);}
+.kc-opt:hover{background:rgba(255,255,255,.05);color:var(--cream);}
+.kc-opt.kc-correct{background:var(--green-bg);border-color:var(--green-border);color:#86EFAC;pointer-events:none;}
+.kc-opt.kc-wrong{background:var(--red-bg);border-color:var(--red-border);color:#FCA5A5;pointer-events:none;}
+.kc-opt.kc-disabled{pointer-events:none;opacity:.4;}
+.kc-opt-letter{width:18px;height:18px;border-radius:3px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:800;color:var(--dim);flex-shrink:0;}
+.kc-feedback{display:none;font-size:.82rem;padding:10px 12px;border-radius:5px;margin-top:10px;line-height:1.6;}
 .kc-feedback.show{display:block;}
-.kc-feedback.fb-correct{background:var(--green-bg);color:#86EFAC;}
-.kc-feedback.fb-wrong{background:var(--red-bg);color:#FCA5A5;}
-.quiz-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-top:56px;}
+.kc-feedback.fb-correct{background:var(--green-bg);border:1px solid var(--green-border);color:#86EFAC;}
+.kc-feedback.fb-wrong{background:var(--red-bg);border:1px solid var(--red-border);color:#FCA5A5;}
+
+/* Section complete banner */
+.section-done{display:none;align-items:center;gap:8px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--radius);padding:12px 16px;margin-top:16px;font-size:.8rem;font-weight:600;color:#86EFAC;}
+.section-done.show{display:flex;}
+.section-done-icon{font-size:1rem;}
+
+/* Quiz Section */
+.quiz-wrap{max-width:820px;margin:0 auto;padding:0 44px 40px;}
+.quiz-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;}
 .quiz-section h3{font-size:1.05rem;font-weight:700;color:var(--cream);margin-bottom:4px;}
-.quiz-section p{font-size:.84rem;color:var(--dim);margin-bottom:20px;}
+.quiz-section>p{font-size:.84rem;color:var(--dim);margin-bottom:20px;}
 #quiz-area{display:flex;flex-direction:column;gap:10px;}
 .quiz-q{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;}
 .quiz-q-text{font-size:.93rem;font-weight:600;color:var(--cream);margin-bottom:12px;line-height:1.4;}
@@ -117,199 +129,402 @@
 .submit-quiz-btn{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .2s;}
 .submit-quiz-btn:hover{opacity:.88;}
 .submit-quiz-btn:disabled{opacity:.4;pointer-events:none;}
+.qfb{display:none;font-size:.82rem;padding:11px 14px;border-radius:5px;margin-top:8px;line-height:1.65;}
+.qfb.show{display:block;}
+.qfb.fb-correct{background:var(--green-bg);border:1px solid var(--green-border);color:#86EFAC;}
+.qfb.fb-wrong{background:var(--red-bg);border:1px solid var(--red-border);color:#FCA5A5;}
+
+/* Notes Box */
+.notes-wrap{max-width:820px;margin:0 auto;padding:0 44px 40px;}
+.module-update-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;}
+.module-update-box h3{font-size:.95rem;font-weight:700;color:var(--cream);margin-bottom:4px;}
+.module-update-box p{font-size:.78rem;color:var(--dim);margin-bottom:14px;}
+.module-update-textarea{width:100%;min-height:100px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--cream);font-family:'Inter',sans-serif;font-size:.88rem;padding:14px;resize:vertical;line-height:1.6;}
+.module-update-textarea:focus{outline:none;border-color:var(--orange-border);}
+.module-update-textarea::placeholder{color:var(--dim);}
+.module-update-submit{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:10px;letter-spacing:.04em;}
+.module-update-submit:hover{opacity:.88;}
+
+/* Bottom Nav */
 .bottom-nav{border-top:1px solid var(--border);padding:18px 44px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,.97);}
 .bn-prev,.bn-next{display:flex;align-items:center;gap:7px;font-size:.82rem;color:var(--dim);text-decoration:none;padding:9px 18px;border:1px solid var(--border);border-radius:var(--radius-sm);transition:all .2s;}
 .bn-prev:hover,.bn-next:hover{border-color:var(--orange-border);color:var(--orange);}
 .bn-module-info{text-align:center;}
 .bn-num{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
 .bn-title{font-size:.84rem;color:var(--muted);}
-@media(max-width:768px){.header{padding:12px 20px;}.hero{padding:36px 20px 28px;}.meta-bar{padding:14px 20px;gap:20px;}.body-wrap{grid-template-columns:1fr;}.content-col{padding:32px 20px;}.nav-col{display:none;}.card-grid{grid-template-columns:1fr;}.bottom-nav{padding:14px 20px;}}
-.module-update-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-top:32px;}.module-update-box h3{font-size:.95rem;font-weight:700;color:var(--cream);margin-bottom:4px;}.module-update-box p{font-size:.78rem;color:var(--dim);margin-bottom:14px;}.module-update-textarea{width:100%;min-height:100px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--cream);font-family:'Inter',sans-serif;font-size:.88rem;padding:14px;resize:vertical;line-height:1.6;}.module-update-textarea:focus{outline:none;border-color:var(--orange-border);}.module-update-textarea::placeholder{color:var(--dim);}.module-update-submit{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:10px;letter-spacing:.04em;}.module-update-submit:hover{opacity:.88;}.module-update-submit:disabled{opacity:.4;pointer-events:none;}</style>
+
+@media(max-width:768px){
+  .header{padding:12px 20px;}
+  .hero{padding:32px 20px 24px;}
+  .progress-wrap,.controls,.accordion-stack,.quiz-wrap,.notes-wrap{padding-left:20px;padding-right:20px;}
+  .bottom-nav{padding:14px 20px;}
+  .hero h1{font-size:1.8rem;}
+}
+</style>
 </head>
 <body>
+<script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
 
-<div id="rpbar"></div>
+<!-- HEADER -->
 <div class="header">
   <div class="logo">Good Results // Training</div>
   <div class="header-right">
     <div class="streak-pill"><span class="streak-fire">🔥</span> <span id="streak-count">—</span></div>
-    <a href="/gimmebrain/" class="back-link">← Hub</a>
+    <a href="/gimmebrain/academy" class="back-link">← Academy</a>
   </div>
 </div>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">KNOWLEDGE TRACK · Module 9 of 12</div>
-  <h1>Nevada RPA vs <span>Texas TREC</span></h1>
-  <p>Why our contracts look different in each state — DD periods, option fees, and the non-negotiable clauses that appear on every Good Results offer.</p>
+  <div class="hero-eyebrow">Module 9 of 12</div>
+  <h1>Nevada <span>RPA</span> vs Texas TREC</h1>
+  <p class="hero-desc">Two states, two standard contracts, and one set of non-negotiable terms. Master the key differences between Nevada's RPA and Texas's TREC form — and learn exactly what stays the same on every Good Results offer.</p>
 </div>
 
-<div class="meta-bar">
-  <div class="meta-item"><span class="meta-label">Read Time</span><span class="meta-val">~22 min</span></div>
-  <div class="meta-item"><span class="meta-label">Quiz</span><span class="meta-val">10 random Qs</span></div>
-  <div class="meta-item"><span class="meta-label">Markets</span><span class="meta-val">NV · TX</span></div>
-  <div class="meta-item"><span class="meta-label">Track</span><span class="meta-val">Good Results Training</span></div>
+<!-- PROGRESS BAR -->
+<div class="progress-wrap">
+  <div class="progress-header">
+    <span class="progress-label">Module Progress</span>
+    <span class="progress-count" id="progress-count">0 of 7 sections</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-time" id="progress-time">~21 min remaining</div>
 </div>
 
-<div class="body-wrap">
-  <div class="content-col" id="content-col">
+<!-- CONTROLS -->
+<div class="controls">
+  <button class="ctrl-btn" onclick="expandAll()">Expand All</button>
+  <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>
+</div>
 
-    <div class="section" data-section="s1">
-      <div class="section-num">01 — Why Contracts Look Different By State</div>
-      <h2>Why Contracts Look Different By State</h2>
-      <p>Nevada uses the <strong>RPA (Residential Purchase Agreement)</strong>. Texas uses the <strong>TREC (Texas Real Estate Commission) standard form</strong>. Both are the standard contracts that listing agents in each state know and expect.</p>
-      <p>Good Results uses these standard forms because they're what the other side expects. Showing up with a custom contract you had an attorney draw slows deals and raises red flags. We use the standard form and add our required terms within it.</p>
+<!-- ACCORDION SECTIONS -->
+<div class="accordion-stack" id="acc-stack">
+
+  <!-- S1: Why Contracts Look Different -->
+  <div class="acc-item" data-section="1">
+    <div class="acc-header" onclick="toggleSection(1)">
+      <div class="acc-check" id="check-1"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">Why Contracts Look Different By State</div>
+        <div class="acc-sub">RPA in Nevada, TREC in Texas — and why we use state standard forms</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">2 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
     </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p>Nevada uses the <strong>RPA (Residential Purchase Agreement)</strong>. Texas uses the <strong>TREC (Texas Real Estate Commission)</strong> standard form. Both are standard contracts in their respective states. Good Results uses these because they're what the listing agents know and expect.</p>
+      <p>We don't reinvent the wheel with custom attorney forms. We start with the state standard and layer in our four non-negotiable terms. This approach is faster, cleaner, and meets seller expectations.</p>
+      <div class="callout">
+        <div class="callout-label">Key Principle</div>
+        <p>Always use state standard forms. List agents are familiar with them. Sellers are comfortable with them. Adding our non-negotiable clauses is enough.</p>
+      </div>
 
-    <div class="section" data-section="s2">
-      <div class="section-num">02 — The DD / Option Period Comparison</div>
-      <h2>The DD / Option Period Comparison</h2>
-      <p>The key difference between states is the inspection/due diligence period. Here's the full breakdown:</p>
+      <div class="kc-box" id="kc-1">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">Nevada uses what standard contract form?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(1,0,false)"><div class="kc-opt-letter">A</div>TREC</div>
+          <div class="kc-opt" onclick="answerKC(1,1,true)"><div class="kc-opt-letter">B</div>RPA</div>
+          <div class="kc-opt" onclick="answerKC(1,2,false)"><div class="kc-opt-letter">C</div>CAR Form</div>
+          <div class="kc-opt" onclick="answerKC(1,3,false)"><div class="kc-opt-letter">D</div>Custom attorney form</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-1"></div>
+      </div>
+      <div class="section-done" id="done-1"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
+  </div>
+
+  <!-- S2: DD Period vs Option Period -->
+  <div class="acc-item" data-section="2">
+    <div class="acc-header" onclick="toggleSection(2)">
+      <div class="acc-check" id="check-2"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">Due Diligence vs Option Period</div>
+        <div class="acc-sub">Nevada DD, Texas option — the inspection windows compared</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">3 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+    </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p>Both states have an inspection window, but they call them different things and have different costs attached:</p>
       <table class="data-table">
-        <thead>
-          <tr><th>Feature</th><th>Nevada (RPA)</th><th>Texas (TREC)</th></tr>
-        </thead>
+        <thead><tr><th>Feature</th><th>Nevada (RPA)</th><th>Texas (TREC)</th></tr></thead>
         <tbody>
-          <tr><td><strong>Name</strong></td><td>Due Diligence Period</td><td>Option Period</td></tr>
+          <tr><td><strong>Name</strong></td><td>Due Diligence (DD) Period</td><td>Option Period</td></tr>
           <tr><td><strong>Good Results Standard</strong></td><td>7 days</td><td>7–10 days</td></tr>
-          <tr><td><strong>Cost to Cancel</strong></td><td>$0</td><td>Option Fee ($1.00 — Good Results standard)</td></tr>
+          <tr><td><strong>Cost to Cancel</strong></td><td>$0 — free cancellation right</td><td>Option Fee ($1.00 — GR standard)</td></tr>
           <tr><td><strong>EMD Refundable?</strong></td><td>Yes, during DD</td><td>Yes, during option period</td></tr>
-          <tr><td><strong>Day 1 Countdown</strong></td><td>First day after acceptance</td><td>First day after acceptance</td></tr>
-          <tr><td><strong>Deadline</strong></td><td>Day 7 at 5pm local</td><td>Varies by contract terms</td></tr>
+          <tr><td><strong>Day 1 countdown</strong></td><td>First day after acceptance</td><td>First day after acceptance</td></tr>
         </tbody>
       </table>
-      <p><strong>Key point:</strong> In Texas, BOTH the option fee AND earnest money are due at the END of the DD/option period (typically days 7–10), NOT within 3 calendar days of acceptance.</p>
-    </div>
-
-    <div class="section" data-section="s3">
-      <div class="section-num">03 — The Texas Option Fee Explained</div>
-      <h2>The Texas Option Fee Explained</h2>
-      <p>The option fee gives the buyer an <strong>unrestricted right to terminate</strong> the contract during the option period without penalty (except losing the option fee).</p>
-      <p><strong>Good Results pays $1.00.</strong></p>
-      <p>Market standard is $100–$500. Our $1.00 is intentional and legal. Sellers agree to it because it's so low and because the industry standard is so variable.</p>
       <div class="callout">
-        <div class="callout-label">Option Fee Key Points</div>
-        <p><strong>The option fee is NOT earnest money.</strong> They are separate.<br><strong>Both are due at end of the option period</strong> (not 3 calendar days from acceptance).<br><strong>If realtor pushes back:</strong> "If you want proof of seriousness, call Aaron at Spartan Title. He'll tell you how many deals we close."<br><strong>If seller absolutely insists on more:</strong> Escalate to Gayden.</p>
-      </div>
-      <div class="script-block">
-        <div class="script-label">Option Fee Pushback Script</div>
-        <div class="script-text" id="st-optfee">"The option fee is standard. Market rate is $100–$500, and we're coming in at $1. If you want evidence of our follow-through, call Aaron at Spartan Title and ask about our close rate."</div>
-        <button class="copy-btn" onclick="copyScript('st-optfee',this)">Copy</button>
-      </div>
-      <div class="kcheck" id="kc-s3">
-        <div class="kc-header"><div class="kc-icon">?</div><span class="kc-label">Quick Check</span></div>
-        <div class="kc-question">Are option fee and earnest money the same thing in Texas?</div>
-        <div class="kc-options">
-          <div class="kc-opt" onclick="checkInline(this,'kc-s3',false,'They serve different purposes and are both required.')"><div class="kc-letter">A</div>Yes, same thing</div>
-          <div class="kc-opt" onclick="checkInline(this,'kc-s3',true,'Option fee buys right to terminate. EMD is held in escrow.')"><div class="kc-letter">B</div>No, they are separate</div>
-          <div class="kc-opt" onclick="checkInline(this,'kc-s3',false,'EMD only exists if option fee is over $100.')"><div class="kc-letter">C</div>Option fee only if above market</div>
-        </div>
-        <div class="kc-feedback" id="kc-s3-fb"></div>
-      </div>
-    </div>
-
-    <div class="section" data-section="s4">
-      <div class="section-num">04 — Non-Negotiable Terms on Every Offer</div>
-      <h2>Non-Negotiable Terms on Every Offer</h2>
-      <p>These 4 clauses appear on every single Good Results offer, regardless of state:</p>
-      <div class="card-grid">
-        <div class="card orange-tint">
-          <h4>1. Investor Intent Clause</h4>
-          <p>Buyer is a real estate investor. Does not intend to occupy as primary residence. Plans to make profit through renovation and/or resale.</p>
-        </div>
-        <div class="card orange-tint">
-          <h4>2. Assignment Clause</h4>
-          <p>Buyer reserves the right to assign this contract. (Reason: we may close in a different entity or partner with contractors/co-investors.)</p>
-        </div>
-        <div class="card orange-tint">
-          <h4>3. Cash Offer</h4>
-          <p>No financing contingency. No appraisal contingency. Cash buyer, 10–21 day close.</p>
-        </div>
-        <div class="card orange-tint">
-          <h4>4. As-Is</h4>
-          <p>Property purchased as-is. No repair requests from seller. Buyer responsible for all repairs/updates post-closing.</p>
-        </div>
-      </div>
-      <div class="script-block">
-        <div class="script-label">Investor Intent Explanation Script</div>
-        <div class="script-text" id="st-investorintent">"We're real estate investors. We acquire properties, fix them up, and resell them for profit. That's why the investor intent clause is in the contract — it's standard for us."</div>
-        <button class="copy-btn" onclick="copyScript('st-investorintent',this)">Copy</button>
-      </div>
-    </div>
-
-    <div class="section" data-section="s5">
-      <div class="section-num">05 — Assignment vs Removing It</div>
-      <h2>Assignment vs Removing It</h2>
-      <p>If a seller objects to the assignment clause:</p>
-      <p><strong>Option 1: Offer to remove it.</strong> Then you're obligated to take title yourself, but you can still double-close if needed (you close on the property, then immediately resell it).</p>
-      <p><strong>Option 2: Keep it.</strong> Explain why: "We operate through multiple entities for tax and operational reasons. The assignment clause gives us flexibility to close through whichever entity has available capital at closing."</p>
-      <div class="callout">
-        <div class="callout-label">Gayden's 25th-Hour Play</div>
-        <p>When a deal is falling apart and you're hours from closing, Gayden has gotten sellers to sign assignment agreements the day before closing by explaining: "I need this for entity purposes, and we're already closing tomorrow anyway." It works when you have a strong relationship and the seller is already motivated.</p>
-      </div>
-      <div class="callout">
-        <div class="callout-label">Why Keep Assignment In?</div>
-        <p>We operate 6+ LLCs. Capital sits in different entities. Some deals we partner with contractors who bring capital. Assignment lets us close through the entity that's ready, not force restructuring.</p>
-      </div>
-      <div class="kcheck" id="kc-s5">
-        <div class="kc-header"><div class="kc-icon">?</div><span class="kc-label">Quick Check</span></div>
-        <div class="kc-question">If seller rejects assignment clause, what's your best option?</div>
-        <div class="kc-options">
-          <div class="kc-opt" onclick="checkInline(this,'kc-s5',false,'Walk away from the deal.')"><div class="kc-letter">A</div>Walk away</div>
-          <div class="kc-opt" onclick="checkInline(this,'kc-s5',true,'Remove it and use double-close if needed.')"><div class="kc-letter">B</div>Offer to remove it</div>
-          <div class="kc-opt" onclick="checkInline(this,'kc-s5',false,'Keep it in and refuse to negotiate.')"><div class="kc-letter">C</div>Refuse to change</div>
-        </div>
-        <div class="kc-feedback" id="kc-s5-fb"></div>
-      </div>
-      <div class="deepdive" id="dd-1" onclick="toggleDD('dd-1')">
-        <div class="dd-header"><div class="dd-header-left"><div class="dd-icon">+</div><span class="dd-title">What is a double close exactly?</span></div><div class="dd-arrow">⌄</div></div>
-        <div class="dd-body"><div class="dd-inner"><p>A double close is two closings that happen on the same day (or within hours): (1) You close on the property from the seller, and (2) You immediately close on the property to your end buyer.</p><p><strong>Why?</strong> If assignment is removed from the contract, you have to take title yourself. A double close lets you take title and resell within minutes without waiting.</p><p><strong>How it works:</strong> Your title company coordinates both. You wire funds for side A (original purchase), take title for seconds, then side B funds come in (your buyer wires), you close to them, you keep the spread, seller gets paid, and your buyer gets title. All on the same day.</p><p><strong>Cost:</strong> $1,000–$2,000 in additional title coordination fees. Only worth it if your margin justifies it.</p></div></div>
-      </div>
-      <div class="deepdive" id="dd-2" onclick="toggleDD('dd-2')">
-        <div class="dd-header"><div class="dd-header-left"><div class="dd-icon">+</div><span class="dd-title">What happens if we miss the 3-day option fee deadline?</span></div><div class="dd-arrow">⌄</div></div>
-        <div class="dd-body"><div class="dd-inner"><p>If you miss the 3-calendar-day deadline for the option fee (in Texas), the seller has the right to terminate the contract. You lose the deal.</p><p>This is why it matters. It's not just a technicality — missing the deadline gives the seller an out if they change their mind or get a better offer. Don't be late on this deadline.</p><p><strong>Good process:</strong> Wire option fee within 2 days to be safe. Don't wait until day 3.</p></div></div>
-      </div>
-      <div class="deepdive" id="dd-3" onclick="toggleDD('dd-3')">
-        <div class="dd-header"><div class="dd-header-left"><div class="dd-icon">+</div><span class="dd-title">Why do we keep the investor intent clause in?</span></div><div class="dd-arrow">⌄</div></div>
-        <div class="dd-body"><div class="dd-inner"><p>The investor intent clause tells the seller upfront: "We're not owner-occupants. We're buying to fix and flip (or hold and rent)."</p><p><strong>Why not hide it?</strong> Because it comes out in inspection. A contractor comes to inspect the property, takes photos, makes notes about rehab, and the seller figures it out anyway. Better to be transparent at the start than have it be a surprise mid-deal.</p><p><strong>Does it hurt?</strong> Not really. Most distressed sellers prefer cash buyers who will buy as-is. They don't care if you're an investor — they care that you close fast and take the property off their hands.</p></div></div>
-      </div>
-    </div>
-
-    <div class="quiz-section">
-      <h3>Test Your Knowledge</h3>
-      <p id="quiz-status">Loading quiz...</p>
-      <div id="quiz-area"></div>
-      <div class="quiz-score-bar" id="score-bar" style="display:none;">
-        <div><div class="score-text" id="score-text">0 / 10 correct (0%)</div><div class="score-sub" id="score-sub">10 questions remaining</div></div>
-        <button class="submit-quiz-btn" id="submit-btn" onclick="submitScore()" disabled>Submit Score</button>
+        <div class="callout-label">Critical Timing</div>
+        <p>Don't be late on the option/DD period deadline. Missing it gives the seller the right to terminate the contract. Verify exact timing on the contract itself.</p>
       </div>
 
-    <div class="module-update-box">
-      <h3>Update This Module</h3>
-      <p>Drop corrections, new info, or notes below. These go to the update queue and get reviewed before going live.</p>
-      <textarea class="module-update-textarea" id="moduleUpdateInput" placeholder="Type any updates, corrections, or new information for this module..."></textarea>
-      <button class="module-update-submit" id="moduleUpdateBtn" onclick="submitModuleUpdate()">Submit To Me Foo</button>
-    </div>
-
+      <div class="kc-box" id="kc-2">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">Texas option period: how many days does Good Results standard use?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(2,0,false)"><div class="kc-opt-letter">A</div>5 days</div>
+          <div class="kc-opt" onclick="answerKC(2,1,false)"><div class="kc-opt-letter">B</div>7 days</div>
+          <div class="kc-opt" onclick="answerKC(2,2,true)"><div class="kc-opt-letter">C</div>7–10 days</div>
+          <div class="kc-opt" onclick="answerKC(2,3,false)"><div class="kc-opt-letter">D</div>14 days</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-2"></div>
+      </div>
+      <div class="section-done" id="done-2"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
   </div>
 
-  <div class="nav-col">
-    <div class="snav">
-      <h4>Sections</h4>
-      <div id="snav-links"></div>
+  <!-- S3: The Texas Option Fee -->
+  <div class="acc-item" data-section="3">
+    <div class="acc-header" onclick="toggleSection(3)">
+      <div class="acc-check" id="check-3"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">The Texas Option Fee</div>
+        <div class="acc-sub">Why $1 is legal, valid, and intentional</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">2 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
     </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p>The option fee gives the buyer an <strong>unrestricted right to terminate</strong> during the option period. Good Results pays <strong>$1.00</strong>.</p>
+      <ul style="margin: 12px 0; padding-left: 20px;">
+        <li>Market standard is $100–500. Our $1.00 is intentional.</li>
+        <li>It is a valid, legal amount. Sellers agree to it.</li>
+        <li>If a realtor pushes back: "If you want proof of seriousness, call Aaron at Spartan Title. He'll tell you how many deals we close."</li>
+        <li>If a seller absolutely insists on more: escalate to Gayden.</li>
+      </ul>
+      <div class="callout">
+        <div class="callout-label">Not the Same as EMD</div>
+        <p>The option fee is NOT earnest money. The EMD (also due at end of option period) is separate. Both are nonrefundable after the option period expires.</p>
+      </div>
+
+      <div class="kc-box" id="kc-3">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">Good Results Texas option fee amount?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(3,0,false)"><div class="kc-opt-letter">A</div>$100</div>
+          <div class="kc-opt" onclick="answerKC(3,1,false)"><div class="kc-opt-letter">B</div>$500</div>
+          <div class="kc-opt" onclick="answerKC(3,2,true)"><div class="kc-opt-letter">C</div>$1</div>
+          <div class="kc-opt" onclick="answerKC(3,3,false)"><div class="kc-opt-letter">D</div>$1,000</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-3"></div>
+      </div>
+      <div class="section-done" id="done-3"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
+  </div>
+
+  <!-- S4: Four Non-Negotiable Clauses -->
+  <div class="acc-item" data-section="4">
+    <div class="acc-header" onclick="toggleSection(4)">
+      <div class="acc-check" id="check-4"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">Four Non-Negotiable Clauses</div>
+        <div class="acc-sub">These appear on every Good Results offer, in both states</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">3 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+    </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p>These four clauses appear on every Good Results offer in Nevada and Texas. They're non-negotiable — we don't remove them:</p>
+      <table class="data-table">
+        <thead><tr><th>Clause</th><th>What It Says</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Investor Intent Clause</strong></td><td>Buyer is a real estate investor, does not intend to occupy as primary residence, plans to profit through renovation and/or resale.</td></tr>
+          <tr><td><strong>Assignment Clause</strong></td><td>Buyer reserves the right to assign this contract. (We may close in a different entity or partner with a contractor/co-investor.)</td></tr>
+          <tr><td><strong>Cash Offer</strong></td><td>No financing contingency, no appraisal contingency.</td></tr>
+          <tr><td><strong>As-Is</strong></td><td>No repair requests from seller. Buyer accepts property in current condition.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        <div class="callout-label">Why Be Transparent?</div>
+        <p>Contractor inspections reveal rehab plans anyway. Better to disclose upfront that you're an investor than for the seller to find out mid-deal. Honesty builds trust and prevents last-minute surprises.</p>
+      </div>
+
+      <div class="kc-box" id="kc-4">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">Which clause reserves your right to assign the contract?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(4,0,false)"><div class="kc-opt-letter">A</div>Investor Intent Clause</div>
+          <div class="kc-opt" onclick="answerKC(4,1,true)"><div class="kc-opt-letter">B</div>Assignment Clause</div>
+          <div class="kc-opt" onclick="answerKC(4,2,false)"><div class="kc-opt-letter">C</div>Cash Offer Clause</div>
+          <div class="kc-opt" onclick="answerKC(4,3,false)"><div class="kc-opt-letter">D</div>As-Is Clause</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-4"></div>
+      </div>
+      <div class="section-done" id="done-4"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
+  </div>
+
+  <!-- S5: Assignment Rejected -->
+  <div class="acc-item" data-section="5">
+    <div class="acc-header" onclick="toggleSection(5)">
+      <div class="acc-check" id="check-5"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">Assignment Clause — If It's Rejected</div>
+        <div class="acc-sub">Escalation path and the double-close option</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">2 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+    </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p>Some sellers object to the assignment clause. Here's the process:</p>
+      <ol style="margin: 12px 0; padding-left: 20px;">
+        <li><strong>First:</strong> Use objection handlers to KEEP assignment language. Explain we're investors, operate 6+ LLCs, and need entity flexibility for capital purposes.</li>
+        <li><strong>If seller keeps fighting it:</strong> Talk to Gayden.</li>
+        <li><strong>Offer removal:</strong> You can still double-close if needed. Costs more ($1–2K) but doesn't require seller permission.</li>
+        <li><strong>Last-minute play:</strong> Gayden has gotten sellers to sign assignment agreements the day before closing by explaining it's needed for entity purposes. Works when you have a strong relationship.</li>
+      </ol>
+      <div class="callout">
+        <div class="callout-label">Why We Keep It</div>
+        <p>Assignment allows us to close through whichever entity has available capital. It's not about hiding anything — it's about operational flexibility.</p>
+      </div>
+
+      <div class="kc-box" id="kc-5">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">If a seller rejects the assignment clause, what's the first move?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(5,0,false)"><div class="kc-opt-letter">A</div>Walk away from the deal</div>
+          <div class="kc-opt" onclick="answerKC(5,1,true)"><div class="kc-opt-letter">B</div>Use objection handlers to try to keep it</div>
+          <div class="kc-opt" onclick="answerKC(5,2,false)"><div class="kc-opt-letter">C</div>Immediately remove it</div>
+          <div class="kc-opt" onclick="answerKC(5,3,false)"><div class="kc-opt-letter">D</div>Call the attorney</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-5"></div>
+      </div>
+      <div class="section-done" id="done-5"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
+  </div>
+
+  <!-- S6: EMD and Option Fee Timing -->
+  <div class="acc-item" data-section="6">
+    <div class="acc-header" onclick="toggleSection(6)">
+      <div class="acc-check" id="check-6"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">EMD & Option Fee — Due at End of Period</div>
+        <div class="acc-sub">Not 3 calendar days. Not right away. At the deadline.</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">2 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+    </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p>Both the option fee AND earnest money are due at the end of the option/DD period (days 7–10 for Texas, day 7 for Nevada) — NOT 3 calendar days from acceptance. This is a common mistake.</p>
+      <p>Verify exact timing on the contract. Missing this deadline gives the seller the right to terminate. Do not be late. Mark it on your calendar the moment the contract is signed.</p>
+      <div class="callout">
+        <div class="callout-label">Timeline Clarity</div>
+        <p>Day 1 = first day after acceptance. EMD + Option Fee both due on Day 7 (Nevada) or by Day 7–10 (Texas). Check contract language for exact time (often 5pm local time).</p>
+      </div>
+
+      <div class="kc-box" id="kc-6">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">When are option fee + EMD due in Texas TREC?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(6,0,false)"><div class="kc-opt-letter">A</div>At closing</div>
+          <div class="kc-opt" onclick="answerKC(6,1,false)"><div class="kc-opt-letter">B</div>Within 3 calendar days of acceptance</div>
+          <div class="kc-opt" onclick="answerKC(6,2,false)"><div class="kc-opt-letter">C</div>Within 7 calendar days of acceptance</div>
+          <div class="kc-opt" onclick="answerKC(6,3,true)"><div class="kc-opt-letter">D</div>At end of option period (typically days 7–10)</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-6"></div>
+      </div>
+      <div class="section-done" id="done-6"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
+  </div>
+
+  <!-- S7: Double Close Basics -->
+  <div class="acc-item" data-section="7">
+    <div class="acc-header" onclick="toggleSection(7)">
+      <div class="acc-check" id="check-7"><span></span></div>
+      <div class="acc-info">
+        <div class="acc-title">The Double Close Option</div>
+        <div class="acc-sub">When assignment isn't possible, close twice instead</div>
+      </div>
+      <div class="acc-meta">
+        <span class="acc-time">2 min</span>
+        <span class="acc-arrow">▼</span>
+      </div>
+    </div>
+    <div class="acc-body"><div class="acc-inner">
+      <p>If a seller absolutely refuses assignment, you can still get the deal done with a double close. You close on the property from the original seller, then immediately resell it to your end buyer. Both closings can happen on the same day.</p>
+      <p><strong>Cost:</strong> Typically $1,000–2,000 in title and coordination fees. Requires coordination with title company. No seller permission needed — it's your deal once you own it.</p>
+      <p>In practice: Assignment is preferred (faster, cheaper), but double-close is the backup when a seller won't budge on the assignment clause. It works, and deals still close profitably.</p>
+      <div class="callout">
+        <div class="callout-label">Approval Required</div>
+        <p>Double-close decisions should be discussed with Gayden or Joe before committing. Title and financing logistics need lead time.</p>
+      </div>
+
+      <div class="kc-box" id="kc-7">
+        <div class="kc-label">✦ Quick Check</div>
+        <div class="kc-question">What's a typical double-close cost?</div>
+        <div class="kc-opts">
+          <div class="kc-opt" onclick="answerKC(7,0,false)"><div class="kc-opt-letter">A</div>$0 — included in title fees</div>
+          <div class="kc-opt" onclick="answerKC(7,1,false)"><div class="kc-opt-letter">B</div>$100–500</div>
+          <div class="kc-opt" onclick="answerKC(7,2,true)"><div class="kc-opt-letter">C</div>$1,000–2,000</div>
+          <div class="kc-opt" onclick="answerKC(7,3,false)"><div class="kc-opt-letter">D</div>$5,000+</div>
+        </div>
+        <div class="kc-feedback" id="kcfb-7"></div>
+      </div>
+      <div class="section-done" id="done-7"><span class="section-done-icon">✓</span> Section complete</div>
+    </div></div>
   </div>
 
 </div>
 
+<!-- QUIZ SECTION -->
+<div class="quiz-wrap">
+  <div class="quiz-section">
+    <h3>Mastery Quiz</h3>
+    <p id="quiz-status">Loading questions...</p>
+    <div id="quiz-area"></div>
+    <div id="score-bar" class="quiz-score-bar" style="display:none;">
+      <div>
+        <div class="score-text" id="score-text">0 / 10 (0%)</div>
+        <div class="score-sub" id="score-sub">10 questions remaining</div>
+      </div>
+      <button class="submit-quiz-btn" id="submit-btn" onclick="submitScore()" disabled>Submit Score</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTES BOX -->
+<div class="notes-wrap">
+  <div class="module-update-box">
+    <h3>Notes & Feedback</h3>
+    <p>Found something confusing in this module? Spotted an error? Leave feedback here and we'll review it.</p>
+    <textarea class="module-update-textarea" id="moduleUpdateInput" placeholder="Your feedback or follow-up question..."></textarea>
+    <button class="module-update-submit" id="moduleUpdateBtn" onclick="submitModuleUpdate()">Submit</button>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <a href="module8.html" class="bn-prev">← Prev</a>
-  <div class="bn-module-info"><div class="bn-num">Module 9 / 12</div><div class="bn-title">Nevada RPA vs Texas TREC</div></div>
+  <a href="module8.html" class="bn-prev">← Previous</a>
+  <div class="bn-module-info">
+    <div class="bn-num">Module 9 of 12</div>
+    <div class="bn-title">Nevada RPA vs Texas TREC</div>
+  </div>
   <a href="module10.html" class="bn-next">Next →</a>
 </div>
 
 <script>
 const MODULE_NUM = 9;
 const MODULE_TITLE = 'Nevada RPA vs Texas TREC';
+const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
+
 const QUIZ_POOL = [
   {q:'Nevada uses what standard contract form?', opts:[{t:'TREC',correct:false},{t:'RPA',correct:true},{t:'CAR Form',correct:false},{t:'Custom attorney form',correct:false}], explanation:'Nevada uses RPA (Residential Purchase Agreement).'},
   {q:'Texas uses what standard contract form?', opts:[{t:'RPA',correct:false},{t:'TREC',correct:true},{t:'Nevada Form',correct:false},{t:'NAR Form',correct:false}], explanation:'Texas uses TREC (Texas Real Estate Commission) standard form.'},
@@ -317,51 +532,208 @@ const QUIZ_POOL = [
   {q:'Texas option period: how many days?', opts:[{t:'5 days',correct:false},{t:'7 days',correct:false},{t:'7–10 days',correct:true},{t:'14 days',correct:false}], explanation:'Texas option period is typically 7–10 days.'},
   {q:'Nevada DD period: cost to cancel?', opts:[{t:'$1',correct:false},{t:'$50–100',correct:false},{t:'$0 — free to walk',correct:true},{t:'$500+',correct:false}], explanation:'Nevada DD period is free to cancel ($0).'},
   {q:'Texas option period: cost to cancel?', opts:[{t:'$0 — free',correct:false},{t:'$1 option fee',correct:true},{t:'$100+',correct:false},{t:'Non-refundable deposit',correct:false}], explanation:'Texas requires option fee (Good Results pays $1).'},
-  {q:'Are option fee and earnest money the same?', opts:[{t:'Yes',correct:false},{t:'No, they are separate',correct:true},{t:'Only in Nevada',correct:false},{t:'Only in Texas',correct:false}], explanation:'Option fee and EMD are separate. Both due at end of option/DD period (days 7-10), not 3 days.'},
+  {q:'Are option fee and earnest money the same?', opts:[{t:'Yes',correct:false},{t:'No, they are separate',correct:true},{t:'Only in Nevada',correct:false},{t:'Only in Texas',correct:false}], explanation:'Option fee and EMD are separate. Both due at end of option/DD period.'},
   {q:'Good Results Texas option fee amount?', opts:[{t:'$100',correct:false},{t:'$500',correct:false},{t:'$1',correct:true},{t:'$1,000',correct:false}], explanation:'Good Results pays $1 option fee (market standard is $100–500).'},
-  {q:'When are option fee + EMD due in Texas?', opts:[{t:'At closing',correct:false},{t:'Within 3 calendar days',correct:false},{t:'Within 7 calendar days',correct:false},{t:'At end of DD/option period (days 7-10)',correct:true}], explanation:'Option fee + EMD due at end of option/DD period (typically days 7-10), not within 3 days of acceptance.'},
+  {q:'When are option fee + EMD due in Texas?', opts:[{t:'At closing',correct:false},{t:'Within 3 calendar days',correct:false},{t:'Within 7 calendar days',correct:false},{t:'At end of option period (days 7-10)',correct:true}], explanation:'Option fee + EMD due at end of option period, not within 3 days.'},
   {q:'Which clause lets you assign the contract?', opts:[{t:'Investor Intent Clause',correct:false},{t:'Assignment Clause',correct:true},{t:'Cash Offer Clause',correct:false},{t:'As-Is Clause',correct:false}], explanation:'Assignment Clause reserves right to assign to another entity.'},
-  {q:'Investor Intent Clause purpose:', opts:[{t:'Hide investor status from seller',correct:false},{t:'Disclose you\'re buying to profit',correct:true},{t:'Qualify for investor financing',correct:false},{t:'Speed up closing',correct:false}], explanation:'Investor intent clause discloses you\'re not an owner-occupant.'},
-  {q:'How many non-negotiable clauses does Good Results use?', opts:[{t:'2',correct:false},{t:'3',correct:false},{t:'4',correct:true},{t:'5+',correct:false}], explanation:'4 non-negotiable: investor intent, assignment, cash/no financing, as-is.'},
-  {q:'Good Results always uses:', opts:[{t:'Custom attorney contracts',correct:false},{t:'State standard forms',correct:true},{t:'Seller\'s contract',correct:false},{t:'Realtor template',correct:false}], explanation:'We use state standard forms (TREC in TX, RPA in NV) and add our terms.'},
-  {q:'If seller rejects assignment clause:', opts:[{t:'Walk away',correct:false},{t:'Offer to remove it',correct:true},{t:'Refuse to change',correct:false},{t:'Call attorney',correct:false}], explanation:'Remove assignment and use double-close if needed.'},
-  {q:'EMD refundable status during DD/option period:', opts:[{t:'Never',correct:false},{t:'Yes, if you walk',correct:true},{t:'Only if seller agrees',correct:false},{t:'Only in Nevada',correct:false}], explanation:'EMD is refundable during DD/option period. Non-refundable after.'},
-  {q:'Why does Good Results keep assignment in?', opts:[{t:'To hide from seller',correct:false},{t:'Operate 6+ LLCs, flexibility for capital',correct:true},{t:'To flip properties faster',correct:false},{t:'Tax advantage',correct:false}], explanation:'Assignment allows us to close through whichever entity has available capital.'},
-  {q:'Day 1 for DD/Option countdown starts:', opts:[{t:'Day contract is signed',correct:false},{t:'First day after acceptance',correct:true},{t:'Next business day',correct:false},{t:'When EMD is paid',correct:false}], explanation:'Day 1 = first day after contract acceptance.'},
-  {q:'Market standard option fee range:', opts:[{t:'$1–10',correct:false},{t:'$100–500',correct:true},{t:'$500–1000',correct:false},{t:'$1000+',correct:false}], explanation:'Market standard is $100–500. We pay $1.'},
-  {q:'What does "as-is" clause mean?', opts:[{t:'No repairs needed',correct:false},{t:'No repair requests from seller',correct:true},{t:'Inspection waived',correct:false},{t:'Cosmetic only',correct:false}], explanation:'As-is = seller does no repairs. Buyer accepts property in current condition.'},
-  {q:'Can you have a double close same-day?', opts:[{t:'No',correct:false},{t:'Yes, both closings same day',correct:true},{t:'Only in Texas',correct:false},{t:'Only in Nevada',correct:false}], explanation:'Double close = two closings on same day (or within hours).'},
-  {q:'Double close typical cost:', opts:[{t:'$0 — included in title',correct:false},{t:'$100–500',correct:false},{t:'$1,000–2,000',correct:true},{t:'$5,000+',correct:false}], explanation:'Double close adds $1–2K in title and coordination fees.'},
-  {q:'Miss DD/option fee deadline:', opts:[{t:'Seller can terminate',correct:true},{t:'Deal continues normally',correct:false},{t:'Penalty is just late fee',correct:false},{t:'Only matters in Nevada',correct:false}], explanation:'Missing option/DD period deadline gives seller right to terminate. Don\u0027t be late.'},
-  {q:'What is cash offer clause?', opts:[{t:'No down payment',correct:false},{t:'No financing or appraisal contingency',correct:true},{t:'Pay all cash at signing',correct:false},{t:'No seller financing',correct:false}], explanation:'Cash clause = no financing contingency, no appraisal contingency.'},
-  {q:'Why not hide investor status from seller?', opts:[{t:'It\'s illegal',correct:false},{t:'Contractor inspections reveal it anyway',correct:true},{t:'Seller will find out at closing',correct:false},{t:'Reduces offer value',correct:false}], explanation:'Contractor inspections reveal rehab plans. Better to be transparent upfront.'},
-  {q:'What does "unrestricted right to terminate" mean?', opts:[{t:'Can walk without reason',correct:true},{t:'Must have inspection issues',correct:false},{t:'Requires seller approval',correct:false},{t:'Only before DD ends',correct:false}], explanation:'Unrestricted = can walk for any reason during option period.'},
-  {q:'Gayden\'s 25th-hour assignment play:', opts:[{t:'Remove clause to close faster',correct:false},{t:'Get seller to sign assignment agreement day before closing',correct:true},{t:'Assign to contractor at last minute',correct:false},{t:'Always remove assignment',correct:false}], explanation:'Get seller to sign assignment day before closing in urgent situation (requires strong relationship).'},
-  {q:'When does EMD become non-refundable?', opts:[{t:'At contract signing',correct:false},{t:'During DD/option period',correct:false},{t:'After DD/option period ends',correct:true},{t:'Never',correct:false}], explanation:'EMD becomes non-refundable once DD/option period expires.'},
-  {q:'Can you assign Texas contracts?', opts:[{t:'No, prohibited by TREC',correct:false},{t:'Yes, if assignment clause is in',correct:true},{t:'Only with seller permission',correct:false},{t:'Only in commercial deals',correct:false}], explanation:'Assignment allowed if clause is in contract. Standard in Good Results offers.'},
-  {q:'Contract form choice: custom or standard?', opts:[{t:'Always custom for protection',correct:false},{t:'Always standard what seller expects',correct:true},{t:'Mix both',correct:false},{t:'Depends on state',correct:false}], explanation:'Use state standard forms (TREC, RPA) — what agents expect.'},
-  {q:'Non-negotiable clause count in EVERY offer:', opts:[{t:'1',correct:false},{t:'2',correct:false},{t:'3',correct:false},{t:'4: investor intent, assignment, cash, as-is',correct:true}], explanation:'All 4 clauses are non-negotiable and appear on every Good Results offer.'},
+  {q:'Investor Intent Clause discloses:', opts:[{t:'Buyer intends to owner-occupy',correct:false},{t:'Buyer is an investor buying to profit',correct:true},{t:'Buyer needs financing',correct:false},{t:'Buyer wants repair credits',correct:false}], explanation:'Investor intent clause discloses you are not owner-occupant.'},
+  {q:'How many non-negotiable clauses?', opts:[{t:'2',correct:false},{t:'3',correct:false},{t:'4',correct:true},{t:'5+',correct:false}], explanation:'4 non-negotiable: investor intent, assignment, cash, as-is.'},
+  {q:'What contract form does Good Results use?', opts:[{t:'Custom attorney forms',correct:false},{t:'State standard forms (RPA/TREC)',correct:true},{t:'Seller-provided contracts',correct:false},{t:'Realtor templates',correct:false}], explanation:'Use state standard forms and layer on our 4 non-negotiable clauses.'},
+  {q:'If seller rejects assignment clause:', opts:[{t:'Walk away immediately',correct:false},{t:'Try to keep it first via objections',correct:true},{t:'Remove it without question',correct:false},{t:'Escalate to attorney',correct:false}], explanation:'First use objection handlers; escalate to Gayden if needed.'},
+  {q:'EMD refundable during DD/option?', opts:[{t:'Never refundable',correct:false},{t:'Yes, if you terminate',correct:true},{t:'Only in Nevada',correct:false},{t:'Only with seller approval',correct:false}], explanation:'EMD is refundable during DD/option period; non-refundable after.'},
+  {q:'Why does Good Results keep assignment?', opts:[{t:'To hide from sellers',correct:false},{t:'Flexibility to close in different LLCs',correct:true},{t:'To flip properties faster',correct:false},{t:'Tax benefit',correct:false}], explanation:'Assignment allows us to close via whichever entity has capital.'},
+  {q:'Day 1 countdown begins:', opts:[{t:'Date contract signed',correct:false},{t:'First day after acceptance',correct:true},{t:'Next business day',correct:false},{t:'When EMD received',correct:false}], explanation:'Day 1 = first calendar day after contract acceptance.'},
+  {q:'Market option fee range:', opts:[{t:'$1–10',correct:false},{t:'$100–500',correct:true},{t:'$500–1000',correct:false},{t:'$1000+',correct:false}], explanation:'Market standard is $100–500; Good Results pays $1.'},
+  {q:'As-Is clause means:', opts:[{t:'No inspections allowed',correct:false},{t:'Seller makes no repairs',correct:true},{t:'Cosmetic repairs only',correct:false},{t:'Inspection waived',correct:false}], explanation:'As-Is = seller does no repairs; buyer takes property as-is.'},
+  {q:'Double close same-day possible?', opts:[{t:'No',correct:false},{t:'Yes, both closings same day',correct:true},{t:'Only in Texas',correct:false},{t:'Only in Nevada',correct:false}], explanation:'Double close allows two closings on same day (or within hours).'},
+  {q:'Typical double-close cost:', opts:[{t:'$0 — included',correct:false},{t:'$100–500',correct:false},{t:'$1,000–2,000',correct:true},{t:'$5,000+',correct:false}], explanation:'Double close adds $1–2K in title and coordination fees.'},
+  {q:'Miss DD/option deadline:', opts:[{t:'Late fee only',correct:false},{t:'Seller can terminate',correct:true},{t:'Deal continues normal',correct:false},{t:'Nevada only issue',correct:false}], explanation:'Missing deadline gives seller right to terminate contract.'},
+  {q:'Cash offer clause means:', opts:[{t:'No down payment',correct:false},{t:'No financing/appraisal contingency',correct:true},{t:'Pay all cash at signing',correct:false},{t:'No seller financing',correct:false}], explanation:'Cash clause = no financing contingency, no appraisal contingency.'},
+  {q:'Why disclose investor status?', opts:[{t:'Required by law',correct:false},{t:'Contractors reveal it anyway',correct:true},{t:'Seller finds out at closing',correct:false},{t:'Reduces offer value',correct:false}], explanation:'Contractor inspections reveal rehab plans; better upfront.'},
+  {q:'Unrestricted terminate right means:', opts:[{t:'Walk for any reason',correct:true},{t:'Must have inspection issue',correct:false},{t:'Needs seller approval',correct:false},{t:'Only before DD ends',correct:false}], explanation:'Unrestricted = can terminate for any reason during option period.'},
 ];
-</script>
 
-<script>
-window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('rpbar').style.width=(window.scrollY/h*100)+'%';});
-(function buildNav(){const sections=document.querySelectorAll('[data-section]');const nav=document.getElementById('snav-links');if(!nav||!sections.length)return;sections.forEach(s=>{const h2=s.querySelector('h2');if(!h2)return;const a=document.createElement('div');a.className='snav-item';a.textContent=h2.textContent;a.onclick=()=>s.scrollIntoView({behavior:'smooth',block:'start'});a.dataset.sec=s.dataset.section;nav.appendChild(a);});window.addEventListener('scroll',()=>{let active=null;sections.forEach(s=>{if(s.getBoundingClientRect().top<180)active=s.dataset.section;});nav.querySelectorAll('.snav-item').forEach(a=>a.classList.toggle('active',a.dataset.sec===active));},{passive:true});})();
-function copyScript(id,btn){const text=document.getElementById(id).textContent;navigator.clipboard.writeText(text).then(()=>{btn.textContent='✓ Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);});}
-function toggleDD(id){const el=document.getElementById(id);el.classList.toggle('open');el.querySelector('.dd-icon').textContent=el.classList.contains('open')?'−':'+';}
-function checkInline(opt,cardId,correct,explanation){const card=document.getElementById(cardId);if(card.classList.contains('answered-correct')||card.classList.contains('answered-wrong'))return;card.classList.add(correct?'answered-correct':'answered-wrong');card.querySelectorAll('.kc-opt').forEach(o=>{if(o===opt){o.classList.add(correct?'opt-correct':'opt-wrong');}else{const oc=o.getAttribute('onclick');if(!correct&&oc&&oc.includes(',true,'))o.classList.add('opt-correct');else o.classList.add('opt-disabled');}});const fb=document.getElementById(cardId+'-fb');fb.textContent=(correct?'✓ ':'✗ ')+explanation;fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');}
-(function loadStreak(){const streak=parseInt(localStorage.getItem('gr_streak')||'0');const el=document.getElementById('streak-count');if(el)el.textContent=streak>0?streak+'-day streak':'Start your streak';})();
-const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
 let quizQuestions=[],userAnswers={},quizDone=false,masteredIndices=[];
-async function loadMasteredAndInit(){const agent=sessionStorage.getItem('gr_agent')||'';if(agent){try{const res=await fetch(APPS_SCRIPT_URL+`?action=getModuleProgress&agent=${encodeURIComponent(agent)}&module=${MODULE_NUM}`);const data=await res.json();masteredIndices=data.mastered||[];}catch(e){}}initQuiz();}
-function initQuiz(){const area=document.getElementById('quiz-area');const status=document.getElementById('quiz-status');if(!QUIZ_POOL||!QUIZ_POOL.length){if(status)status.textContent='No questions loaded yet.';return;}const indexed=QUIZ_POOL.map((q,i)=>Object.assign({poolIdx:i},q));const shuffled=[...indexed].sort(()=>Math.random()-.5);quizQuestions=shuffled.slice(0,Math.min(10,shuffled.length));if(status)status.textContent=`${quizQuestions.length} questions · Pick the best answer for each.`;quizQuestions.forEach((q,qi)=>{const isMastered=masteredIndices.includes(q.poolIdx);const opts=q.opts.map((o,oi)=>`<div class="quiz-opt${isMastered&&o.correct?' correct':isMastered?' disabled':''}" id="qo-${qi}-${oi}" onclick="${isMastered?'':'answerQuiz('+qi+','+oi+')'}"${isMastered?' style="pointer-events:none"':''}><div class="quiz-opt-letter">${String.fromCharCode(65+oi)}</div>${o.t}</div>`).join('');area.innerHTML+=`<div class="quiz-q" id="qq-${qi}">${isMastered?'<div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">✓ Already mastered</div>':''}<div class="quiz-q-text">Pool Q${q.poolIdx}. ${q.q}</div><div class="quiz-q-opts" id="qopts-${qi}">${opts}</div><div class="kc-feedback" id="qfb-${qi}"></div></div>`;if(isMastered){const correctOi=q.opts.findIndex(o=>o.correct);if(correctOi>=0)userAnswers[qi]=correctOi;}});const sb=document.getElementById('score-bar');if(sb)sb.style.display='flex';updateScore();}
-function answerQuiz(qi,oi){if(userAnswers[qi]!==undefined)return;userAnswers[qi]=oi;const q=quizQuestions[qi];const correct=q.opts[oi].correct;q.opts.forEach((_,i)=>{const el=document.getElementById(`qo-${qi}-${i}`);if(!el)return;if(i===oi)el.classList.add(correct?'correct':'wrong');else if(q.opts[i].correct)el.classList.add('correct');else el.classList.add('disabled');});const fb=document.getElementById(`qfb-${qi}`);if(fb){fb.textContent=(correct?'✓ ':'✗ ')+q.explanation;fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');}updateScore();}
-function updateScore(){const answered=Object.keys(userAnswers).length;const total=quizQuestions.length;const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).length;const pct=total?Math.round(correct/total*100):0;const st=document.getElementById('score-text');const ss=document.getElementById('score-sub');const btn=document.getElementById('submit-btn');if(st)st.textContent=`${correct} / ${total} correct  (${pct}%)`;if(ss)ss.textContent=answered<total?`${total-answered} questions remaining`:'Quiz complete — submit your score!';if(btn)btn.disabled=answered<total;quizDone=answered>=total;}
-function notifySlackScore(agent,modTitle,modNum,pct,correct,total){fetch(APPS_SCRIPT_URL+'?action=gettrainingprogress').then(r=>r.json()).then(agents=>{const sc=[[100,'PERFECT SCORE \ud83d\udcaf Absolutely disgusting dominance. Everyone else should be worried.'],[90,'Strong. Very strong. That\'s the kind of energy this team needs.'],[80,'Solid work. Not perfect, but definitely respectable.'],[70,'Ehh... it\'s passing. Barely. Maybe crack open the module one more time.'],[60,'That\'s... not great. You might wanna re-read that module, just saying.'],[0,'Yikes. \ud83d\ude2c Did you even read the module or just start clicking randomly?']];let cmt='';for(const[th,m]of sc){if(pct>=th){cmt=m;break;}}let lp=null,la=Infinity,ls=Infinity,lm='';agents.forEach(a=>{const ms=Object.entries(a.modules||{});if(!ms.length)return;const avg=ms.reduce((s,[_,m])=>s+(m.best_score||0),0)/ms.length;if(avg<la){la=avg;lp=a.name;let w=Infinity,wm='';ms.forEach(([n,m])=>{if((m.best_score||0)<w){w=m.best_score||0;wm=n;}});ls=w;lm=wm;}});const tt=['When are you gonna step it up? Asking for the whole team. \ud83d\udc40','That score is genuinely embarrassing. I\'d be scared to show my face in the office.','The leaderboard is BEGGING you to do literally anything.','At this point even a coin flip would score better. Just saying. \ud83e\ude99','Everyone else is getting better. You\'re getting... comfortable? \ud83d\udecb\ufe0f','That leaderboard position is a cry for help honestly.','You know the modules are FREE to re-take right?? Nobody\'s stopping you.','I\'ve seen better scores from people who accidentally hit submit. \ud83d\udc80','Your score is so low it\'s basically a rounding error.','If effort was a scoreboard you wouldn\'t even be on it.'];const t=tt[Math.floor(Math.random()*tt.length)];let msg='\ud83c\udf93 *'+agent+'* just finished *Module '+modNum+' \u2014 '+modTitle+'*\nScore: '+correct+'/'+total+' ('+pct+'%)\n'+cmt;if(lp&&lp.toLowerCase()!==agent.toLowerCase()){msg+='\n\n\ud83d\udcc9 Meanwhile... *'+lp+'* is camping out in LAST PLACE with a '+Math.round(ls)+'% on Module '+lm+'. '+t;}else if(lp&&lp.toLowerCase()===agent.toLowerCase()){msg+='\n\n\ud83d\udcc9 Plot twist... *'+agent+'* IS in last place. '+(pct<70?'And this score ain\'t helping. \ud83d\udc80':'But at least they\'re trying to climb out. Respect... barely.');}fetch('/.netlify/functions/slack-score-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:msg})}).catch(()=>{});}).catch(()=>{});}
-function submitScore(){if(!quizDone)return;const total=quizQuestions.length;const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).length;const pct=Math.round(correct/total*100);const agent=sessionStorage.getItem('gr_agent')||'Unknown';const email=sessionStorage.getItem('gr_email')||'';const xp=Math.round(pct*1.2);const correctPoolIndices=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).map(([qi])=>quizQuestions[qi].poolIdx);const allMastered=[...new Set([...masteredIndices,...correctPoolIndices])];const body={action:'moduleComplete',agent,email,module:MODULE_NUM,moduleTitle:MODULE_TITLE,score:pct,xp,correct,total,poolSize:QUIZ_POOL.length,correctIndices:allMastered,date:new Date().toISOString()};fetch(APPS_SCRIPT_URL,{method:'POST',body:JSON.stringify(body)}).then(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='✓ Score Saved!';btn.style.background='#22C55E';btn.disabled=true;}masteredIndices=allMastered;notifySlackScore(agent,MODULE_TITLE,MODULE_NUM,pct,correct,total);const today=new Date().toDateString();const lastDay=localStorage.getItem('gr_streak_day');let streak=parseInt(localStorage.getItem('gr_streak')||'0');if(lastDay!==today){const yesterday=new Date(Date.now()-86400000).toDateString();streak=lastDay===yesterday?streak+1:1;localStorage.setItem('gr_streak',streak);localStorage.setItem('gr_streak_day',today);const sc=document.getElementById('streak-count');if(sc)sc.textContent=streak+'-day streak';}}).catch(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='Retry';btn.disabled=false;}});}
-function submitModuleUpdate(){const txt=document.getElementById('moduleUpdateInput').value.trim();if(!txt){alert('Type something first.');return;}const btn=document.getElementById('moduleUpdateBtn');btn.disabled=true;btn.textContent='Sending...';const agent=sessionStorage.getItem('gr_agent')||'Unknown';const payload={action:'addModuleUpdate',module:MODULE_NUM,moduleTitle:MODULE_TITLE,agent:agent,update:txt,date:new Date().toISOString()};fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(()=>{btn.textContent='✓ Sent!';btn.style.background='#22C55E';document.getElementById('moduleUpdateInput').value='';setTimeout(()=>{btn.textContent='Submit To Me Foo';btn.style.background='';btn.disabled=false;},3000);}).catch(()=>{btn.textContent='Retry';btn.disabled=false;});}
+
+async function loadMasteredAndInit(){
+  const agent=sessionStorage.getItem('gr_agent')||'';
+  if(agent){
+    try{
+      const res=await fetch(APPS_SCRIPT_URL+`?action=getModuleProgress&agent=${encodeURIComponent(agent)}&module=${MODULE_NUM}`);
+      const data=await res.json();
+      masteredIndices=data.mastered||[];
+    }catch(e){}
+  }
+  initQuiz();
+}
+
+function initQuiz(){
+  const area=document.getElementById('quiz-area');
+  const status=document.getElementById('quiz-status');
+  if(!QUIZ_POOL||!QUIZ_POOL.length){if(status)status.textContent='No questions loaded yet.';return;}
+  const indexed=QUIZ_POOL.map((q,i)=>Object.assign({poolIdx:i},q));
+  const shuffled=[...indexed].sort(()=>Math.random()-.5);
+  quizQuestions=shuffled.slice(0,Math.min(10,shuffled.length));
+  if(status)status.textContent=`${quizQuestions.length} questions · Pick the best answer for each.`;
+  quizQuestions.forEach((q,qi)=>{
+    const isMastered=masteredIndices.includes(q.poolIdx);
+    const opts=q.opts.map((o,oi)=>`<div class="quiz-opt${isMastered&&o.correct?' correct':isMastered?' disabled':''}" id="qo-${qi}-${oi}" onclick="${isMastered?'':'answerQuiz('+qi+','+oi+')'}"${isMastered?' style="pointer-events:none"':''}><div class="quiz-opt-letter">${String.fromCharCode(65+oi)}</div>${o.t}</div>`).join('');
+    area.innerHTML+=`<div class="quiz-q" id="qq-${qi}">${isMastered?'<div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">✓ Already mastered</div>':''}<div class="quiz-q-text">Pool Q${q.poolIdx}. ${q.q}</div><div class="quiz-q-opts" id="qopts-${qi}">${opts}</div><div class="kc-feedback" id="qfb-${qi}"></div></div>`;
+    if(isMastered){const correctOi=q.opts.findIndex(o=>o.correct);if(correctOi>=0)userAnswers[qi]=correctOi;}
+  });
+  const sb=document.getElementById('score-bar');
+  if(sb)sb.style.display='flex';
+  updateScore();
+}
+
+function answerQuiz(qi,oi){
+  if(userAnswers[qi]!==undefined)return;
+  userAnswers[qi]=oi;
+  const q=quizQuestions[qi];
+  const correct=q.opts[oi].correct;
+  q.opts.forEach((_,i)=>{
+    const el=document.getElementById(`qo-${qi}-${i}`);
+    if(!el)return;
+    if(i===oi)el.classList.add(correct?'correct':'wrong');
+    else if(q.opts[i].correct)el.classList.add('correct');
+    else el.classList.add('disabled');
+  });
+  const fb=document.getElementById(`qfb-${qi}`);
+  if(fb){fb.textContent=(correct?'✓ ':'✗ ')+q.explanation;fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');}
+  updateScore();
+}
+
+function updateScore(){
+  const answered=Object.keys(userAnswers).length;
+  const total=quizQuestions.length;
+  const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).length;
+  const pct=total?Math.round(correct/total*100):0;
+  const st=document.getElementById('score-text');
+  const ss=document.getElementById('score-sub');
+  const btn=document.getElementById('submit-btn');
+  if(st)st.textContent=`${correct} / ${total} correct  (${pct}%)`;
+  if(ss)ss.textContent=answered<total?`${total-answered} questions remaining`:'Quiz complete — submit your score!';
+  if(btn)btn.disabled=answered<total;
+  quizDone=answered>=total;
+}
+
+function answerKC(id,oi,correct){
+  const card=document.getElementById('kc-'+id);
+  if(!card||card.classList.contains('answered-correct')||card.classList.contains('answered-wrong'))return;
+  card.classList.add(correct?'answered-correct':'answered-wrong');
+  card.querySelectorAll('.kc-opt').forEach((o,idx)=>{
+    if(idx===oi)o.classList.add(correct?'kc-correct':'kc-wrong');
+    else if(!correct&&QUIZ_POOL[id]&&QUIZ_POOL[id].opts[idx]&&QUIZ_POOL[id].opts[idx].correct)o.classList.add('kc-correct');
+    else o.classList.add('kc-disabled');
+  });
+  const fb=document.getElementById('kcfb-'+id);
+  if(fb&&QUIZ_POOL[id]){fb.textContent=(correct?'✓ Correct! ':'✗ Not quite. ')+QUIZ_POOL[id].explanation;fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');}
+}
+
+function expandAll(){
+  document.querySelectorAll('.acc-item').forEach(item=>item.classList.add('open'));
+  document.querySelectorAll('.acc-body').forEach(body=>body.style.maxHeight='3000px');
+  updateProgress();
+}
+
+function collapseAll(){
+  document.querySelectorAll('.acc-item').forEach(item=>item.classList.remove('open'));
+  document.querySelectorAll('.acc-body').forEach(body=>body.style.maxHeight='0');
+  updateProgress();
+}
+
+function toggleSection(sec){
+  const item=document.querySelector(`.acc-item[data-section="${sec}"]`);
+  if(!item)return;
+  item.classList.toggle('open');
+  updateProgress();
+}
+
+function updateProgress(){
+  const total=document.querySelectorAll('.acc-item').length;
+  const open=document.querySelectorAll('.acc-item.open').length;
+  const pct=total?Math.round(open/total*100):0;
+  const fill=document.getElementById('progress-fill');
+  if(fill)fill.style.width=pct+'%';
+  const cnt=document.getElementById('progress-count');
+  if(cnt)cnt.textContent=`${open} of ${total} sections`;
+}
+
+function submitScore(){
+  if(!quizDone)return;
+  const total=quizQuestions.length;
+  const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).length;
+  const pct=Math.round(correct/total*100);
+  const agent=sessionStorage.getItem('gr_agent')||'Unknown';
+  const email=sessionStorage.getItem('gr_email')||'';
+  const xp=Math.round(pct*1.2);
+  const correctPoolIndices=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).map(([qi])=>quizQuestions[qi].poolIdx);
+  const allMastered=[...new Set([...masteredIndices,...correctPoolIndices])];
+  const body={action:'moduleComplete',agent,email,module:MODULE_NUM,moduleTitle:MODULE_TITLE,score:pct,xp,correct,total,poolSize:QUIZ_POOL.length,correctIndices:allMastered,date:new Date().toISOString()};
+  fetch(APPS_SCRIPT_URL,{method:'POST',body:JSON.stringify(body)}).then(()=>{
+    const btn=document.getElementById('submit-btn');
+    if(btn){btn.textContent='✓ Score Saved!';btn.style.background='#22C55E';btn.disabled=true;}
+    masteredIndices=allMastered;
+    const today=new Date().toDateString();
+    const lastDay=localStorage.getItem('gr_streak_day');
+    let streak=parseInt(localStorage.getItem('gr_streak')||'0');
+    if(lastDay!==today){
+      const yesterday=new Date(Date.now()-86400000).toDateString();
+      streak=lastDay===yesterday?streak+1:1;
+      localStorage.setItem('gr_streak',streak);
+      localStorage.setItem('gr_streak_day',today);
+      const sc=document.getElementById('streak-count');
+      if(sc)sc.textContent=streak+'-day streak';
+    }
+  }).catch(()=>{
+    const btn=document.getElementById('submit-btn');
+    if(btn){btn.textContent='Retry';btn.disabled=false;}
+  });
+}
+
+function submitModuleUpdate(){
+  const txt=document.getElementById('moduleUpdateInput').value.trim();
+  if(!txt){alert('Type something first.');return;}
+  const btn=document.getElementById('moduleUpdateBtn');
+  btn.disabled=true;
+  btn.textContent='Sending...';
+  const agent=sessionStorage.getItem('gr_agent')||'Unknown';
+  const payload={action:'addModuleUpdate',module:MODULE_NUM,moduleTitle:MODULE_TITLE,agent:agent,update:txt,date:new Date().toISOString()};
+  fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(()=>{
+    btn.textContent='✓ Sent!';
+    btn.style.background='#22C55E';
+    document.getElementById('moduleUpdateInput').value='';
+    setTimeout(()=>{btn.textContent='Submit';btn.style.background='';btn.disabled=false;},3000);
+  }).catch(()=>{btn.textContent='Retry';btn.disabled=false;});
+}
+
+(function loadStreak(){
+  const streak=parseInt(localStorage.getItem('gr_streak')||'0');
+  const el=document.getElementById('streak-count');
+  if(el)el.textContent=streak>0?streak+'-day streak':'—';
+})();
+
 loadMasteredAndInit();
 </script>
 
+
+
+<style>
+.module-nav-strip{background:var(--surface3,#0A0C10);border-top:1px solid var(--border,rgba(255,255,255,.07));padding:20px 44px;display:flex;align-items:center;justify-content:center;gap:12px;}
+.module-nav-arrow{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--radius-sm,5px);border:1px solid var(--border,rgba(255,255,255,.07));color:var(--dim,#555A66);font-size:1rem;text-decoration:none;transition:all .2s;flex-shrink:0;}
+.module-nav-arrow:hover{color:var(--orange,#FF5C1A);border-color:var(--orange-border,rgba(255,92,26,.25));}
+.module-nav-arrow.disabled{opacity:.25;pointer-events:none;}
+.module-nav-nums{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;}
+.module-nav-num{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-sm,5px);border:1px solid var(--border,rgba(255,255,255,.07));color:var(--dim,#555A66);font-size:.75rem;font-weight:700;text-decoration:none;transition:all .2s;}
+.module-nav-num:hover{color:var(--cream,#C8D4E4);border-color:rgba(255,255,255,.2);}
+.module-nav-num.current{width:42px;height:42px;font-size:.92rem;background:var(--orange,#FF5C1A);border-color:var(--orange,#FF5C1A);color:#fff;box-shadow:0 0 16px rgba(255,92,26,.35);}
+@media(max-width:768px){.module-nav-strip{padding:16px 20px;gap:8px;}.module-nav-num{width:28px;height:28px;font-size:.68rem;}.module-nav-num.current{width:36px;height:36px;font-size:.82rem;}}
+</style>
+
+<nav class="module-nav-strip">
+  <a href="/gimmebrain/module8.html" class="module-nav-arrow" title="Module 8">←</a>
+  <div class="module-nav-nums"><a href="/gimmebrain/module1.html" class="module-nav-num" title="Module 1: Pipeline & CRM">1</a><a href="/gimmebrain/module2.html" class="module-nav-num" title="Module 2: Prospecting">2</a><a href="/gimmebrain/module3.html" class="module-nav-num" title="Module 3: First Contact">3</a><a href="/gimmebrain/module4.html" class="module-nav-num" title="Module 4: Follow-Up">4</a><a href="/gimmebrain/module5.html" class="module-nav-num" title="Module 5: Running Comps">5</a><a href="/gimmebrain/module6.html" class="module-nav-num" title="Module 6: Making Offers">6</a><a href="/gimmebrain/module7.html" class="module-nav-num" title="Module 7: Contract to Close">7</a><a href="/gimmebrain/module8.html" class="module-nav-num" title="Module 8: Objection Handling">8</a><span class="module-nav-num current" title="Module 9: Scripts & Dialogues">9</span><a href="/gimmebrain/module10.html" class="module-nav-num" title="Module 10: Disposition">10</a><a href="/gimmebrain/module11.html" class="module-nav-num" title="Module 11: Market Knowledge">11</a><a href="/gimmebrain/module12.html" class="module-nav-num" title="Module 12: Systems & Automation">12</a></div>
+  <a href="/gimmebrain/module10.html" class="module-nav-arrow" title="Module 10">→</a>
+</nav>
 </body>
 </html>

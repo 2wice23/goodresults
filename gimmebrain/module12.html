@@ -1,532 +1,1073 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Foreclosures & Distressed Deals — Good Results Training</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<script>const SHEET_ID='1T-5pNnoQjRyS_Uu3ESFgzASRiG9xFHN7AkAl-o57J-c';</script>
-<style>
-:root{
-  --black:#0D0F14; --surface:#11141A; --surface2:#161B24; --surface3:#0A0C10;
-  --white:#F0F4FF; --cream:#C8D4E4; --muted:#8A95A8; --dim:#555A66;
-  --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.04);
-  --orange:#FF5C1A; --orange-glow:rgba(255,92,26,0.15); --orange-border:rgba(255,92,26,0.25);
-  --green:#22C55E; --green-bg:rgba(34,197,94,0.1); --green-border:#22C55E;
-  --red:#EF4444; --red-bg:rgba(239,68,68,0.08); --red-border:#EF4444;
-  --radius:8px; --radius-sm:5px; --radius-lg:12px;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{font-size:16px;scroll-behavior:smooth;}
-body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;}
-#rpbar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:linear-gradient(90deg,#FF5C1A,#FF8A50,#FF5C1A);background-size:200% 100%;animation:rpShimmer 2.5s linear infinite;transition:width .06s linear;box-shadow:0 0 10px rgba(255,92,26,.55);}
-@keyframes rpShimmer{from{background-position:0%}to{background-position:200%}}
-.header{padding:14px 44px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,.97);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;}
-.logo{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);font-weight:700;}
-.header-right{display:flex;align-items:center;gap:20px;}
-.streak-pill{display:flex;align-items:center;gap:5px;background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:20px;padding:4px 12px;font-size:.72rem;font-weight:700;color:var(--orange);}
-.streak-fire{animation:fireFlicker 1.1s ease-in-out infinite alternate;}
-@keyframes fireFlicker{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.15) rotate(3deg)}}
-.back-link{font-size:.78rem;color:var(--dim);text-decoration:none;transition:color .2s;}
-.back-link:hover{color:var(--orange);}
-.hero{padding:56px 44px 40px;border-bottom:1px solid var(--border);max-width:900px;}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--orange-glow);border:1px solid var(--orange-border);color:var(--orange);font-size:.67rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 13px;border-radius:3px;margin-bottom:18px;}
-.hero h1{font-size:2.5rem;font-weight:800;line-height:1.1;color:var(--white);margin-bottom:12px;}
-.hero h1 span{color:var(--orange);}
-.hero p{font-size:.97rem;color:var(--muted);line-height:1.7;max-width:560px;}
-.meta-bar{display:flex;gap:40px;padding:20px 44px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
-.meta-item{display:flex;flex-direction:column;gap:2px;}
-.meta-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);font-weight:700;}
-.meta-val{font-size:.84rem;color:var(--muted);font-weight:500;}
-.body-wrap{display:grid;grid-template-columns:1fr 176px;gap:0;align-items:start;max-width:1060px;margin:0 auto;}
-.content-col{padding:52px 44px;border-right:1px solid var(--border);}
-.nav-col{padding:32px 24px;position:sticky;top:80px;}
-.snav{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;}
-.snav h4{font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-.snav-item{display:block;padding:7px 10px;border-radius:4px;font-size:.76rem;color:var(--dim);cursor:pointer;transition:all .18s;border-left:2px solid transparent;line-height:1.35;margin-bottom:2px;}
-.snav-item:hover{color:var(--cream);background:rgba(255,255,255,.04);}
-.snav-item.active{color:var(--orange);border-left-color:var(--orange);background:var(--orange-glow);}
-.section{margin-bottom:52px;}
-.section-num{font-size:.6rem;font-weight:800;letter-spacing:.18em;color:var(--orange);text-transform:uppercase;margin-bottom:6px;}
-.section h2{font-size:1.3rem;font-weight:700;color:var(--cream);margin-bottom:14px;line-height:1.3;}
-.section p{font-size:.93rem;color:var(--muted);line-height:1.78;margin-bottom:13px;}
-.section p:last-of-type{margin-bottom:0;}
-.section strong{color:var(--cream);font-weight:600;}
-.script-block{background:var(--surface3);border:1px solid var(--orange-border);border-left:3px solid var(--orange);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;margin:18px 0;position:relative;}
-.script-label{font-size:.6rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;}
-.script-text{font-size:.9rem;color:#C8D4E4;line-height:1.72;font-style:italic;}
-.copy-btn{position:absolute;top:13px;right:13px;background:var(--orange-glow);border:1px solid var(--orange-border);color:var(--orange);font-size:.67rem;font-weight:700;letter-spacing:.08em;padding:4px 11px;border-radius:var(--radius-sm);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;}
-.copy-btn:hover{background:var(--orange);color:#fff;}
-.copy-btn.copied{background:#22C55E;border-color:#22C55E;color:#fff;}
-.callout{background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:var(--radius);padding:18px 22px;margin:18px 0;}
-.callout-label{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:7px;}
-.callout p{font-size:.9rem;color:#C8D4E4;line-height:1.68;margin:0;}
-.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:17px 20px;}
-.card h4{font-size:.8rem;font-weight:700;color:var(--cream);margin-bottom:5px;}
-.card p{font-size:.8rem;color:var(--dim);line-height:1.55;margin:0;}
-.card.orange-tint{border-color:var(--orange-border);background:var(--orange-glow);}
-.card.orange-tint h4{color:var(--orange);}
-.data-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.85rem;}
-.data-table th{text-align:left;padding:9px 14px;font-size:.63rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:var(--surface);border-bottom:1px solid var(--border);}
-.data-table td{padding:10px 14px;border-bottom:1px solid var(--border2);color:var(--muted);vertical-align:top;line-height:1.55;}
-.data-table tr:last-child td{border-bottom:none;}
-.data-table tr:hover td{background:rgba(255,255,255,.02);}
-.data-table td strong{color:var(--cream);font-weight:600;}
-.td-badge{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:3px;}
-.badge-green{background:var(--green-bg);color:#86EFAC;}
-.badge-red{background:var(--red-bg);color:#FCA5A5;}
-.badge-orange{background:var(--orange-glow);color:var(--orange);}
-.step-list{display:flex;flex-direction:column;gap:8px;margin:16px 0;}
-.step{display:flex;gap:13px;align-items:flex-start;padding:13px 16px;background:rgba(255,255,255,.02);border:1px solid var(--border2);border-radius:var(--radius);}
-.step-num{font-size:.68rem;font-weight:900;color:var(--orange);min-width:18px;padding-top:1px;flex-shrink:0;}
-.step p{font-size:.88rem;color:var(--muted);line-height:1.55;margin:0;}
-.step p strong{color:var(--cream);}
-.deepdive{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:9px;}
-.dd-header{padding:14px 18px;background:var(--surface);display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background .18s;user-select:none;}
-.dd-header:hover{background:var(--surface2);}
-.dd-header-left{display:flex;align-items:center;gap:9px;}
-.dd-icon{width:20px;height:20px;background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--orange);font-weight:900;flex-shrink:0;}
-.dd-title{font-size:.87rem;font-weight:600;color:var(--cream);}
-.dd-sub{font-size:.7rem;color:var(--dim);margin-left:8px;}
-.dd-arrow{font-size:.68rem;color:var(--dim);transition:transform .22s;}
-.deepdive.open .dd-arrow{transform:rotate(180deg);}
-.dd-body{max-height:0;overflow:hidden;transition:max-height .32s ease;background:var(--surface3);}
-.deepdive.open .dd-body{max-height:800px;}
-.dd-inner{padding:18px 22px;}
-.dd-inner p{font-size:.87rem;color:var(--muted);line-height:1.72;margin-bottom:10px;}
-.dd-inner p:last-child{margin-bottom:0;}
-.dd-inner strong{color:var(--cream);}
-.kcheck{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 26px;margin:24px 0;transition:border-color .25s;}
-.kcheck.answered-correct{border-color:var(--green-border);}
-.kcheck.answered-wrong{border-color:var(--red-border);}
-.kc-header{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
-.kc-icon{width:26px;height:26px;background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:900;color:var(--orange);flex-shrink:0;}
-.kc-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);}
-.kc-question{font-size:.95rem;font-weight:600;color:var(--cream);margin-bottom:14px;line-height:1.45;}
-.kc-options{display:flex;flex-direction:column;gap:7px;}
-.kc-opt{display:flex;align-items:center;gap:11px;padding:10px 15px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);cursor:pointer;transition:all .18s;font-size:.88rem;color:var(--muted);}
-.kc-opt:hover{background:rgba(255,255,255,.06);color:var(--cream);}
-.kc-opt.opt-correct{background:var(--green-bg);border-color:var(--green-border);color:#86EFAC;pointer-events:none;}
-.kc-opt.opt-wrong{background:var(--red-bg);border-color:var(--red-border);color:#FCA5A5;pointer-events:none;}
-.kc-opt.opt-disabled{pointer-events:none;opacity:.55;}
-.kc-letter{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:800;color:var(--dim);flex-shrink:0;}
-.kc-feedback{margin-top:12px;padding:11px 15px;border-radius:var(--radius);font-size:.84rem;line-height:1.55;display:none;}
-.kc-feedback.show{display:block;}
-.kc-feedback.fb-correct{background:var(--green-bg);color:#86EFAC;}
-.kc-feedback.fb-wrong{background:var(--red-bg);color:#FCA5A5;}
-.quiz-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-top:56px;}
-.quiz-section h3{font-size:1.05rem;font-weight:700;color:var(--cream);margin-bottom:4px;}
-.quiz-section p{font-size:.84rem;color:var(--dim);margin-bottom:20px;}
-#quiz-area{display:flex;flex-direction:column;gap:10px;}
-.quiz-q{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;}
-.quiz-q-text{font-size:.93rem;font-weight:600;color:var(--cream);margin-bottom:12px;line-height:1.4;}
-.quiz-q-opts{display:flex;flex-direction:column;gap:6px;}
-.quiz-opt{display:flex;align-items:center;gap:10px;padding:9px 13px;border:1px solid rgba(255,255,255,.07);border-radius:5px;background:rgba(255,255,255,.02);cursor:pointer;transition:all .18s;font-size:.86rem;color:var(--muted);}
-.quiz-opt:hover{background:rgba(255,255,255,.05);color:var(--cream);}
-.quiz-opt.correct{background:var(--green-bg);border-color:var(--green-border);color:#86EFAC;pointer-events:none;}
-.quiz-opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:#FCA5A5;pointer-events:none;}
-.quiz-opt.disabled{pointer-events:none;opacity:.4;}
-.quiz-opt-letter{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--dim);flex-shrink:0;}
-.quiz-score-bar{margin-top:20px;padding:18px 22px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);display:none;align-items:center;justify-content:space-between;}
-.score-text{font-size:1rem;font-weight:700;color:var(--cream);}
-.score-sub{font-size:.78rem;color:var(--dim);margin-top:2px;}
-.submit-quiz-btn{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .2s;}
-.submit-quiz-btn:hover{opacity:.88;}
-.submit-quiz-btn:disabled{opacity:.4;pointer-events:none;}
-.bottom-nav{border-top:1px solid var(--border);padding:18px 44px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,.97);}
-.bn-prev,.bn-next{display:flex;align-items:center;gap:7px;font-size:.82rem;color:var(--dim);text-decoration:none;padding:9px 18px;border:1px solid var(--border);border-radius:var(--radius-sm);transition:all .2s;}
-.bn-prev:hover,.bn-next:hover{border-color:var(--orange-border);color:var(--orange);}
-.bn-module-info{text-align:center;}
-.bn-num{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
-.bn-title{font-size:.84rem;color:var(--muted);}
-@media(max-width:768px){.header{padding:12px 20px;}.hero{padding:36px 20px 28px;}.meta-bar{padding:14px 20px;gap:20px;}.body-wrap{grid-template-columns:1fr;}.content-col{padding:32px 20px;}.nav-col{display:none;}.card-grid{grid-template-columns:1fr;}.bottom-nav{padding:14px 20px;}}
-.module-update-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-top:32px;}.module-update-box h3{font-size:.95rem;font-weight:700;color:var(--cream);margin-bottom:4px;}.module-update-box p{font-size:.78rem;color:var(--dim);margin-bottom:14px;}.module-update-textarea{width:100%;min-height:100px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--cream);font-family:'Inter',sans-serif;font-size:.88rem;padding:14px;resize:vertical;line-height:1.6;}.module-update-textarea:focus{outline:none;border-color:var(--orange-border);}.module-update-textarea::placeholder{color:var(--dim);}.module-update-submit{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:10px;letter-spacing:.04em;}.module-update-submit:hover{opacity:.88;}.module-update-submit:disabled{opacity:.4;pointer-events:none;}</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 12: Foreclosures & Distressed Deals</title>
+  <script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
+  <style>
+    :root {
+      --black: #0D0F14;
+      --dark: #1A1D26;
+      --darker: #25282F;
+      --orange: #FF5C1A;
+      --green: #10B981;
+      --red: #EF4444;
+      --gray: #6B7280;
+      --light: #F3F4F6;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--black);
+      color: #E5E7EB;
+      line-height: 1.6;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--dark);
+      border-bottom: 1px solid var(--darker);
+    }
+    .logo {
+      font-weight: bold;
+      color: var(--orange);
+      text-decoration: none;
+    }
+    .streak-pill {
+      background: var(--darker);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      color: var(--orange);
+    }
+    .back-link {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+    .back-link:hover {
+      color: var(--orange);
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .hero {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+    .eyebrow {
+      font-size: 0.875rem;
+      color: var(--orange);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin: 0.5rem 0 1rem 0;
+      font-weight: bold;
+    }
+    .hero h1 span {
+      color: var(--orange);
+    }
+    .hero p {
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    .progress-bar {
+      background: var(--darker);
+      border-radius: 10px;
+      height: 20px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-fill {
+      background: var(--orange);
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
+      border-radius: 10px;
+    }
+    .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #E5E7EB;
+    }
+    .controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--darker);
+      background: var(--dark);
+      color: #E5E7EB;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .acc-item {
+      border: 1px solid var(--darker);
+      border-radius: 8px;
+      background: var(--dark);
+      overflow: hidden;
+    }
+    .acc-header {
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    .acc-header:hover {
+      background: var(--darker);
+    }
+    .acc-item.open .acc-header {
+      background: var(--darker);
+      border-bottom: 1px solid var(--darker);
+    }
+    .acc-left {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      flex: 1;
+    }
+    .check {
+      color: var(--green);
+      font-size: 1.5rem;
+      margin-top: 0.25rem;
+    }
+    .check.hidden {
+      visibility: hidden;
+    }
+    .header-text h3 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: #E5E7EB;
+    }
+    .header-text .subtitle {
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-bottom: 0.25rem;
+    }
+    .header-text .time {
+      font-size: 0.75rem;
+      color: var(--orange);
+    }
+    .acc-arrow {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+      color: var(--gray);
+    }
+    .acc-item.open .acc-arrow {
+      transform: rotate(180deg);
+    }
+    .acc-body {
+      display: none;
+      padding: 0;
+    }
+    .acc-item.open .acc-body {
+      display: block;
+    }
+    .acc-inner {
+      padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+    .acc-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+    .acc-body table th {
+      background: var(--darker);
+      padding: 0.75rem;
+      text-align: left;
+      border: 1px solid var(--darker);
+      color: var(--orange);
+    }
+    .acc-body table td {
+      padding: 0.75rem;
+      border: 1px solid var(--darker);
+    }
+    .callout {
+      background: var(--darker);
+      border-left: 3px solid var(--orange);
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .script-block {
+      background: var(--darker);
+      border: 1px solid var(--darker);
+      border-radius: 4px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      position: relative;
+      font-size: 0.85rem;
+    }
+    .script-block code {
+      display: block;
+      color: var(--green);
+      font-family: "Monaco", "Courier New", monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--orange);
+      color: var(--black);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .copy-btn:hover {
+      opacity: 0.9;
+    }
+    .kc-box {
+      background: var(--darker);
+      border: 1px solid var(--darker);
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .kc-question {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #E5E7EB;
+    }
+    .kc-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .kc-option {
+      padding: 0.75rem 1rem;
+      background: var(--black);
+      border: 1px solid var(--darker);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+    .kc-option:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+    .kc-option.selected {
+      background: var(--darker);
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+    .kc-feedback {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 4px;
+      display: none;
+      font-size: 0.9rem;
+    }
+    .kc-feedback.correct {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid var(--green);
+      color: var(--green);
+      display: block;
+    }
+    .kc-feedback.wrong {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid var(--red);
+      color: var(--red);
+      display: block;
+    }
+    .section-complete {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(16, 185, 129, 0.1);
+      border-left: 3px solid var(--green);
+      border-radius: 4px;
+      color: var(--green);
+      font-size: 0.9rem;
+      display: none;
+    }
+    .section-complete.show {
+      display: block;
+    }
+    .quiz-wrap {
+      background: var(--dark);
+      border: 1px solid var(--darker);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+    .quiz-header {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: #E5E7EB;
+    }
+    .quiz-area {
+      margin-bottom: 2rem;
+    }
+    .quiz-question {
+      margin-bottom: 1.5rem;
+    }
+    .quiz-question .question-text {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #E5E7EB;
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .quiz-option {
+      padding: 0.75rem 1rem;
+      background: var(--darker);
+      border: 1px solid var(--darker);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .quiz-option:hover {
+      border-color: var(--orange);
+    }
+    .quiz-option.selected {
+      background: var(--orange);
+      color: var(--black);
+      border-color: var(--orange);
+    }
+    .score-display {
+      background: var(--darker);
+      padding: 1rem;
+      border-radius: 4px;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+    .score-display .score-num {
+      font-size: 2rem;
+      color: var(--orange);
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--orange);
+      color: var(--black);
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .submit-btn:hover {
+      opacity: 0.9;
+    }
+    .notes-box {
+      background: var(--dark);
+      border: 1px solid var(--darker);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .notes-box h3 {
+      margin-bottom: 0.5rem;
+      color: var(--orange);
+    }
+    .notes-box p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      border-top: 1px solid var(--darker);
+      gap: 1rem;
+    }
+    .nav-link {
+      color: var(--gray);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+      color: var(--orange);
+    }
+    .nav-center {
+      text-align: center;
+      flex: 1;
+    }
+    .nav-module {
+      font-size: 0.875rem;
+      color: var(--gray);
+      margin-bottom: 0.25rem;
+    }
+    .nav-title {
+      font-weight: 600;
+      color: #E5E7EB;
+    }
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      .hero h1 {
+        font-size: 1.75rem;
+      }
+      .acc-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .acc-left {
+        width: 100%;
+      }
+      .acc-arrow {
+        align-self: flex-end;
+        margin-top: 1rem;
+      }
+      .controls {
+        flex-direction: column;
+      }
+      .bottom-nav {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
-<div id="rpbar"></div>
-<div class="header">
-  <div class="logo">Good Results // Training</div>
-  <div class="header-right">
-    <div class="streak-pill"><span class="streak-fire">🔥</span> <span id="streak-count">—</span></div>
-    <a href="hub.html" class="back-link">← Hub</a>
+  <div class="header">
+    <a href="/gimmebrain/academy" class="logo">Good Results Academy</a>
+    <div class="streak-pill">🔥 Streak: <span id="streakCount">0</span></div>
+    <a href="/gimmebrain/academy" class="back-link">← Back to Hub</a>
   </div>
-</div>
 
-<div class="hero">
-  <div class="hero-eyebrow">Good Results Training · Module 12 of 12</div>
-  <h1>Foreclosures & <span>Distressed Deals</span></h1>
-  <p>Master the landscape of distressed properties. Understand foreclosure timelines, learn the quick-response playbook for motivated sellers, and build long-term realtor relationships through dealing with nightmare situations professionally.</p>
-</div>
-
-<div class="meta-bar">
-  <div class="meta-item">
-    <div class="meta-label">Track</div>
-    <div class="meta-val">Good Results Training</div>
-  </div>
-  <div class="meta-item">
-    <div class="meta-label">Read Time</div>
-    <div class="meta-val">~20 min</div>
-  </div>
-  <div class="meta-item">
-    <div class="meta-label">Markets</div>
-    <div class="meta-val">NV · TX</div>
-  </div>
-</div>
-
-<div class="body-wrap">
-<div class="content-col">
-
-<!-- SECTION 1 -->
-<div class="section" data-section="s1">
-  <div class="section-num">Section 1</div>
-  <h2>Distressed Situation Types</h2>
-  <p>Distressed deals are your bread and butter. They're deals where realtors have been stuck, sellers need help, and you can build lifetime relationships. Learn to spot the situations, understand the motivation levels, and respond with confidence.</p>
-
-  <table class="data-table">
-    <thead>
-      <tr>
-        <th>Situation</th>
-        <th>Motivation</th>
-        <th>Red Flags & Signals</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Foreclosure / Pre-Foreclosure</strong></td>
-        <td><span class="td-badge badge-red">Very High</span></td>
-        <td>Bank filing notice, delinquent payments, seller needs to close before auction date</td>
-      </tr>
-      <tr>
-        <td><strong>Probate / Estate Sale</strong></td>
-        <td><span class="td-badge badge-red">High</span></td>
-        <td>Executors/heirs just want it liquidated, long court process, as-is condition</td>
-      </tr>
-      <tr>
-        <td><strong>Divorce Liquidation</strong></td>
-        <td><span class="td-badge badge-red">High</span></td>
-        <td>Both parties need clean separation, settlement deadline, below-market listing</td>
-      </tr>
-      <tr>
-        <td><strong>Tax Foreclosure Pending</strong></td>
-        <td><span class="td-badge badge-red">Very High</span></td>
-        <td>Unpaid property taxes, tax sale approaching, countdown clock visible</td>
-      </tr>
-      <tr>
-        <td><strong>Underwater Mortgage</strong></td>
-        <td><span class="td-badge badge-orange">High</span></td>
-        <td>Seller owes more than it's worth, short sale scenario, relocation urgency</td>
-      </tr>
-      <tr>
-        <td><strong>Inherited / Absentee</strong></td>
-        <td><span class="td-badge badge-orange">Moderate</span></td>
-        <td>Owner doesn't live here, inherited recently, out-of-state seller</td>
-      </tr>
-      <tr>
-        <td><strong>Distressed Listing (High DOM)</strong></td>
-        <td><span class="td-badge badge-orange">Moderate-High</span></td>
-        <td>On market 90+ days, price reduced multiple times, property sits vacant</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>The more motivation signals you see, the more powerful your positioning. A realtor with a nightmare estate deal sees you close cleanly, and you've got a partner for life.</p>
-
-  <div class="kcheck" id="kc1">
-    <div class="kc-header">
-      <div class="kc-icon">✓</div>
-      <div class="kc-label">Knowledge Check</div>
+  <div class="container">
+    <div class="hero">
+      <div class="eyebrow">Module 12 of 12</div>
+      <h1>Foreclosures & <span>Distressed Deals</span></h1>
+      <p>Master the fundamentals of distressed real estate investing. Learn to identify motivated sellers, handle complexity, and close deals others walk away from.</p>
     </div>
-    <div class="kc-question">What are the two things distressed sellers care about most?</div>
-    <div class="kc-options">
-      <div class="kc-opt" onclick="checkInline(this,'kc1',true,'Correct. Distressed sellers don\'t care about squeezing the last dollar. They want certainty (will close close?) and speed (when can I be done?). Position around these.')">
-        <div class="kc-letter">A</div>
-        Certainty and Speed
+
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+      <div class="progress-text"><span id="progressCount">0</span> of 8 sections</div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" onclick="expandAll()">+ Expand All</button>
+      <button class="btn" onclick="collapseAll()">− Collapse All</button>
+    </div>
+
+    <div class="accordion">
+      <!-- Section 1: Distressed Situation Types -->
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleSection(1)">
+          <div class="acc-left">
+            <div class="check" id="check1">✓</div>
+            <div class="header-text">
+              <h3>Distressed Situation Types</h3>
+              <div class="subtitle">Recognize what you're dealing with</div>
+              <div class="time">4 min</div>
+            </div>
+          </div>
+          <div class="acc-arrow">↓</div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <p>Every distressed deal falls into one of these buckets. Your job is to identify which type it is, because that tells you the seller's pain point and how to pitch the solution.</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Situation</th>
+                  <th>Motivation</th>
+                  <th>Realtor's Tell</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Foreclosure / Pre-Foreclosure</td>
+                  <td>Very High</td>
+                  <td>"Needs to close before bank takes it"</td>
+                </tr>
+                <tr>
+                  <td>Probate / Estate Sale</td>
+                  <td>High</td>
+                  <td>"Executors just want it gone"</td>
+                </tr>
+                <tr>
+                  <td>Divorce Liquidation</td>
+                  <td>High</td>
+                  <td>"Both parties want it done"</td>
+                </tr>
+                <tr>
+                  <td>Tax Foreclosure Pending</td>
+                  <td>Very High</td>
+                  <td>"Unpaid property taxes"</td>
+                </tr>
+                <tr>
+                  <td>Underwater Mortgage</td>
+                  <td>High</td>
+                  <td>"They owe more than it's worth"</td>
+                </tr>
+                <tr>
+                  <td>Inherited / Absentee</td>
+                  <td>Moderate</td>
+                  <td>"Owner doesn't live here"</td>
+                </tr>
+                <tr>
+                  <td>High DOM (4+ months)</td>
+                  <td>Moderate-High</td>
+                  <td>"No offers in months"</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="margin-top: 1rem;">The higher the motivation, the more likely they'll accept your offer fast and the less likely they'll haggle.</p>
+            <div class="kc-box">
+              <div class="kc-question">What is the primary pain point in a foreclosure situation?</div>
+              <div class="kc-options">
+                <div class="kc-option" onclick="answerKC(1, 0, true)">A. Speed and certainty before the bank takes over</div>
+                <div class="kc-option" onclick="answerKC(1, 1, false)">B. Getting the highest possible price</div>
+                <div class="kc-option" onclick="answerKC(1, 2, false)">C. Finding an owner-occupant buyer</div>
+              </div>
+              <div class="kc-feedback"></div>
+              <div class="section-complete" id="sc1">✓ Section complete</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="kc-opt" onclick="checkInline(this,'kc1',false,'Incorrect. Distressed sellers are already motivated — price and conditions matter less than closing certainty and speed.')">
-        <div class="kc-letter">B</div>
-        Price and Conditions
+
+      <!-- Section 2: The Distressed Deal Pitch -->
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleSection(2)">
+          <div class="acc-left">
+            <div class="check" id="check2">✓</div>
+            <div class="header-text">
+              <h3>The Distressed Deal Pitch</h3>
+              <div class="subtitle">How to position your offer</div>
+              <div class="time">3 min</div>
+            </div>
+          </div>
+          <div class="acc-arrow">↓</div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <p>In distressed situations, the seller's pain point is <strong>certainty</strong> and <strong>speed</strong>. Position around those two things.</p>
+            <div class="script-block">
+              <button class="copy-btn" onclick="copyScript('script2')">Copy</button>
+              <code id="script2">"Cash buyer. As-is. 10–21 day close. We handle the complexity — title issues, liens, estate paperwork, whatever it is. We close. That's what we do."</code>
+            </div>
+            <p>This pitch works because it:</p>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+              <li><strong>Cash</strong> = No financing delays</li>
+              <li><strong>As-is</strong> = No inspection contingencies holding things up</li>
+              <li><strong>10–21 days</strong> = Specific, believable timeline</li>
+              <li><strong>"We handle the complexity"</strong> = You're the problem-solver, not another headache</li>
+            </ul>
+            <div class="kc-box">
+              <div class="kc-question">Why do distressed sellers prefer a 21-day close over negotiating for 10% more in price?</div>
+              <div class="kc-options">
+                <div class="kc-option" onclick="answerKC(2, 0, true)">A. Certainty and speed reduce their financial burden and risk</div>
+                <div class="kc-option" onclick="answerKC(2, 1, false)">B. They don't care about the extra money</div>
+                <div class="kc-option" onclick="answerKC(2, 2, false)">C. Good Results requires them to accept lower offers</div>
+              </div>
+              <div class="kc-feedback"></div>
+              <div class="section-complete" id="sc2">✓ Section complete</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="kc-opt" onclick="checkInline(this,'kc1',false,'Incorrect. Distressed sellers are past caring about closing costs or timeline preferences. They want out.')">
-        <div class="kc-letter">C</div>
-        Closing costs and timeline flexibility
+
+      <!-- Section 3: Handling Liens & Assignment Language -->
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleSection(3)">
+          <div class="acc-left">
+            <div class="check" id="check3">✓</div>
+            <div class="header-text">
+              <h3>Handling Liens & Assignment Language</h3>
+              <div class="subtitle">Don't let contract language kill the deal</div>
+              <div class="time">3 min</div>
+            </div>
+          </div>
+          <div class="acc-arrow">↓</div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <p>Some sellers (especially in estate/probate situations) will object to assignment language in the contract. They may also object to language suggesting the buyer is an investor who might resell quickly.</p>
+            <div class="callout">
+              <strong>Gayden's take:</strong> "I keep that language in not because I'm trying to do something shady — I might close in any of six different LLC entities I own. If the word 'assignment' is the issue, I'll happily remove it. But I need the rest of the language because I'm not presenting myself as an owner-occupant. I'm an investor. I'm going to make money. You need to know that."
+            </div>
+            <p style="margin-top: 1rem;"><strong>The key insight:</strong> Be transparent about your role. Don't hide that you're an investor, but do remove language that makes them uncomfortable if it doesn't affect the deal's core structure.</p>
+            <div class="kc-box">
+              <div class="kc-question">When a seller objects to assignment language, what should you do?</div>
+              <div class="kc-options">
+                <div class="kc-option" onclick="answerKC(3, 0, true)">A. Offer to remove it if it doesn't change the deal structure</div>
+                <div class="kc-option" onclick="answerKC(3, 1, false)">B. Insist the language stays as-is</div>
+                <div class="kc-option" onclick="answerKC(3, 2, false)">C. Walk away from the deal</div>
+              </div>
+              <div class="kc-feedback"></div>
+              <div class="section-complete" id="sc3">✓ Section complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Red Flags & Motivation Signals -->
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleSection(4)">
+          <div class="acc-left">
+            <div class="check" id="check4">✓</div>
+            <div class="header-text">
+              <h3>Red Flags & Motivation Signals</h3>
+              <div class="subtitle">Read between the lines</div>
+              <div class="time">2 min</div>
+            </div>
+          </div>
+          <div class="acc-arrow">↓</div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <p>Learn to read between the lines when realtors describe a situation:</p>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+              <li><strong>Delinquent taxes or HOA fees</strong> → Financial stress. They need a fast close.</li>
+              <li><strong>"As-is listing"</strong> → Seller can't or won't do repairs. No negotiating timeline.</li>
+              <li><strong>Property sits vacant</strong> → Holding costs with no income. Pain is real.</li>
+              <li><strong>Long DOM at reduced price</strong> → Retail market rejected it. Room for your offer.</li>
+              <li><strong>Estate, divorce, or probate</strong> → Emotional and legal pressure to close.</li>
+              <li><strong>Tenant damage with deferred maintenance</strong> → Overwhelmed landlord. Good candidate.</li>
+            </ul>
+            <div class="kc-box">
+              <div class="kc-question">If a property has been listed for 4 months with no offers and the price just dropped 15%, what signal does this send?</div>
+              <div class="kc-options">
+                <div class="kc-option" onclick="answerKC(4, 0, true)">A. The retail market rejected it; it's a good investment candidate</div>
+                <div class="kc-option" onclick="answerKC(4, 1, false)">B. The property is worthless</div>
+                <div class="kc-option" onclick="answerKC(4, 2, false)">C. The seller will always ask for their original price</div>
+              </div>
+              <div class="kc-feedback"></div>
+              <div class="section-complete" id="sc4">✓ Section complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: Manufactured Homes & Know Your Limits -->
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleSection(5)">
+          <div class="acc-left">
+            <div class="check" id="check5">✓</div>
+            <div class="header-text">
+              <h3>Manufactured Homes & Know Your Limits</h3>
+              <div class="subtitle">When to escalate to Gayden</div>
+              <div class="time">2 min</div>
+            </div>
+          </div>
+          <div class="acc-arrow">↓</div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <p>Manufactured homes (mobile homes, modulars) are a different animal. Financing, title, liens, and repairs are all different. If you're not experienced with them, escalate to Gayden.</p>
+            <div class="callout">
+              <strong>Rule of thumb:</strong> If the property is on a foundation (stick-built house) or has a traditional mortgage with a standard title, you can handle it. If it's a manufactured home with any complexity, ask Gayden first.
+            </div>
+            <p style="margin-top: 1rem;"><strong>Why it matters:</strong> Manufactured home loans are harder to finance, liens are harder to clear, and repairs are subject to different codes. It's not worth the headache if you're not an expert.</p>
+            <div class="kc-box">
+              <div class="kc-question">What should you do if a distressed deal involves a manufactured home on a pad?</div>
+              <div class="kc-options">
+                <div class="kc-option" onclick="answerKC(5, 0, true)">A. Escalate to Gayden before proceeding</div>
+                <div class="kc-option" onclick="answerKC(5, 1, false)">B. Handle it the same as a traditional house</div>
+                <div class="kc-option" onclick="answerKC(5, 2, false)">C. Pass on all manufactured home deals</div>
+              </div>
+              <div class="kc-feedback"></div>
+              <div class="section-complete" id="sc5">✓ Section complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 6: Complex Estate & Probate Deals -->
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleSection(6)">
+          <div class="acc-left">
+            <div class="check" id="check6">✓</div>
+            <div class="header-text">
+              <h3>Complex Estate & Probate Deals</h3>
+              <div class="subtitle">The executor wants it gone</div>
+              <div class="time">3 min</div>
+            </div>
+          </div>
+          <div class="acc-body">
+            <div class="acc-inner">
+            <p>Estate and probate deals are some of the best distressed opportunities because executors have legal and financial incentives to close fast. But they also come with complexity.</p>
+            <p><strong>What makes them different:</strong></p>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+              <li>Multiple heirs may need to agree (leverage for speed)</li>
+              <li>Court approval may be required (timing is tight)</li>
+              <li>Executor liability is real (they want the property off their hands)</li>
+              <li>Property condition is often poor (years of deferred maintenance)</li>
+            </ul>
+            <p><strong>Your positioning:</strong> "We specialize in estate properties. Cash, as-is, fast close. You're off the hook."</p>
+            <p>Executors understand liability and want certainty. That's your advantage.</p>
+            <div class="kc-box">
+              <div class="kc-question">Why do executors prefer a fast cash offer over a higher contingent offer?</div>
+              <div class="kc-options">
+                <div class="kc-option" onclick="answerKC(6, 0, true)">A. They have liability and legal pressure to close the estate</div>
+                <div class="kc-option" onclick="answerKC(6, 1, false)">B. They get a bonus for closing quickly</div>
+                <div class="kc-option" onclick="answerKC(6, 2, false)">C. They secretly don't want the money from the sale</div>
+              </div>
+              <div class="kc-feedback"></div>
+              <div class="section-complete" id="sc6">✓ Section complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 7: Timeline Mastery & Communication -->
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleSection(7)">
+          <div class="acc-left">
+            <div class="check" id="check7">✓</div>
+            <div class="header-text">
+              <h3>Timeline Mastery & Communication</h3>
+              <div class="subtitle">Close the deal in writing</div>
+              <div class="time">3 min</div>
+            </div>
+          </div>
+          <div class="acc-arrow">↓</div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <p>Once you've got a seller interested, your pitch becomes about the timeline. Here's how to communicate it:</p>
+            <div class="script-block">
+              <button class="copy-btn" onclick="copyScript('script7')">Copy</button>
+              <code id="script7">Day 1: We send the contract (2-hour turnaround after your realtor's approval)
+Day 2-3: You sign, we verify title and liens (instant if clean)
+Day 4-7: Appraisal and inspection (if needed for financing)
+Day 8-14: Underwriting and final walkthrough
+Day 15-21: Closing (we handle all escrow and document signing)</code>
+            </div>
+            <p style="margin-top: 1rem;"><strong>What this messaging does:</strong></p>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+              <li>Shows you're fast but not reckless</li>
+              <li>Sets expectations (no surprises)</li>
+              <li>Removes objections before they come up</li>
+            </ul>
+            <div class="kc-box">
+              <div class="kc-question">What is the primary purpose of laying out a detailed closing timeline for a distressed seller?</div>
+              <div class="kc-options">
+                <div class="kc-option" onclick="answerKC(7, 0, true)">A. To manage expectations and remove doubt about whether you can actually close</div>
+                <div class="kc-option" onclick="answerKC(7, 1, false)">B. To make them think you're slower than you really are</div>
+                <div class="kc-option" onclick="answerKC(7, 2, false)">C. To give them time to back out of the deal</div>
+              </div>
+              <div class="kc-feedback"></div>
+              <div class="section-complete" id="sc7">✓ Section complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 8: Build Long-Term Realtor Relationships -->
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggleSection(8)">
+          <div class="acc-left">
+            <div class="check" id="check8">✓</div>
+            <div class="header-text">
+              <h3>Build Long-Term Realtor Relationships</h3>
+              <div class="subtitle">They bring you the deals</div>
+              <div class="time">2 min</div>
+            </div>
+          </div>
+          <div class="acc-arrow">↓</div>
+        </div>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <p>Realtors are your best source for distressed deals. They know the market, they know the motivated sellers, and they know when someone is desperate.</p>
+            <p><strong>How to work with realtors:</strong></p>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+              <li>Respond fast (same day or next morning)</li>
+              <li>Close what you say you'll close</li>
+              <li>Pay commission on time, no excuses</li>
+              <li>Refer them other agents when you know people</li>
+              <li>Make it easy for them (clear contract, no drama)</li>
+            </ul>
+            <p><strong>The payoff:</strong> Good realtors will call you first for their distressed listings. That's where the best deals live.</p>
+            <div class="kc-box">
+              <div class="kc-question">Why is paying realtor commissions on time important for your distressed deal pipeline?</div>
+              <div class="kc-options">
+                <div class="kc-option" onclick="answerKC(8, 0, true)">A. Realtors will prioritize you for future deals if you're reliable</div>
+                <div class="kc-option" onclick="answerKC(8, 1, false)">B. It's legally required and you have no choice</div>
+                <div class="kc-option" onclick="answerKC(8, 2, false)">C. It keeps your commission percentage lower</div>
+              </div>
+              <div class="kc-feedback"></div>
+              <div class="section-complete" id="sc8">✓ Section complete</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="kc-feedback" id="kc1-fb"></div>
-  </div>
-</div>
 
-<!-- SECTION 2 -->
-<div class="section" data-section="s2">
-  <div class="section-num">Section 2</div>
-  <h2>The Distressed Deal Pitch</h2>
-  <p>Your positioning is simple and powerful: <strong>"Cash buyer. As-is. 10–21 day close. We handle the complexity — title issues, liens, estate paperwork, whatever it is. We close. That's what we do."</strong></p>
-  <p>In distressed situations, the seller's pain point is certainty and speed. Position around those two things every single time. Don't negotiate on these pillars.</p>
-
-  <div class="script-block">
-    <div class="script-label">Quick-Response Playbook</div>
-    <button class="copy-btn" onclick="copyScript('script1',this)">Copy</button>
-    <div class="script-text" id="script1">Estate sale: "That's a great fit for us. Cash, as-is, 10–21 days. Executors love that."
-Tax foreclosure: "We can move fast. What's the timeline before tax sale?"
-Divorce: "Quick close, no repairs required, cash. That's exactly what we do."
-Judgment lien: "What's the lien amount? That comes out at closing — not a deal-killer."
-Long DOM: "What are they willing to take? Let's run the numbers."</div>
-  </div>
-</div>
-
-<!-- SECTION 3 -->
-<div class="section" data-section="s3">
-  <div class="section-num">Section 3</div>
-  <h2>The Assignment Clause & Investor Language Issue</h2>
-  <p>Some sellers (especially estate/probate) object to assignment language. They worry you're going to flip the contract to someone else. Here's Gayden's explanation:</p>
-
-  <div class="script-block">
-    <div class="script-label">Script — Addressing Assignment Concerns</div>
-    <button class="copy-btn" onclick="copyScript('script2',this)">Copy</button>
-    <div class="script-text" id="script2">"I keep that language in not because I'm trying to do something shady — I might close in any of six different LLC entities I own. If the word 'assignment' is the issue, I'll happily remove it. But I need the rest of the language because I'm not presenting myself as an owner-occupant. I'm an investor. I'm going to make money. You need to know that."</div>
-  </div>
-
-  <p>Honesty + confidence disarms objections. Most sellers respect the directness.</p>
-
-  <div class="kcheck" id="kc2">
-    <div class="kc-header">
-      <div class="kc-icon">✓</div>
-      <div class="kc-label">Knowledge Check</div>
-    </div>
-    <div class="kc-question">A realtor says a seller has a judgment lien on the property. What do you say?</div>
-    <div class="kc-options">
-      <div class="kc-opt" onclick="checkInline(this,'kc2',true,'Correct. Judgment liens come out of seller proceeds at closing — they\'re the escrow\'s job to handle. It\'s not a deal-killer.')">
-        <div class="kc-letter">A</div>
-        "What's the lien amount? That comes out at closing — not a deal-killer."
+    <!-- Quiz Wrap -->
+    <div class="quiz-wrap">
+      <div class="quiz-header">🎯 Module 12 — Mastery Quiz</div>
+      <div class="score-display">
+        <div>Your Score</div>
+        <div class="score-num"><span id="scoreNum">0</span>%</div>
       </div>
-      <div class="kc-opt" onclick="checkInline(this,'kc2',false,'Incorrect. Liens don\'t prevent closing — they just get paid from proceeds. This signals weakness.')">
-        <div class="kc-letter">B</div>
-        "We can't close with a lien on the property"
+      <div class="quiz-area" id="quizArea"></div>
+      <button class="submit-btn" onclick="submitScore()">Submit Score</button>
+    </div>
+
+    <!-- Notes Box -->
+    <div class="notes-box">
+      <h3>📝 Module Notes</h3>
+      <p>Distressed deals are the foundation of the Good Results model. Master this module, and you'll know how to spot opportunities other investors miss, negotiate with confidence, and close deals that look impossible to others.</p>
+    </div>
+
+    <div class="bottom-nav">
+      <a href="/gimmebrain/module11.html" class="nav-link">← Prev: Module 11</a>
+      <div class="nav-center">
+        <div class="nav-module">Module 12 / 12</div>
+        <div class="nav-title">Foreclosures & Distressed Deals</div>
       </div>
-      <div class="kc-opt" onclick="checkInline(this,'kc2',false,'Incorrect. Never offer to absorb a lien amount as a price reduction. That\'s giving away your margin.')">
-        <div class="kc-letter">C</div>
-        "We'll lower our offer to cover the lien"
-      </div>
-    </div>
-    <div class="kc-feedback" id="kc2-fb"></div>
-  </div>
-</div>
-
-<!-- SECTION 4 -->
-<div class="section" data-section="s4">
-  <div class="section-num">Section 4</div>
-  <h2>Manufactured Homes & Mobile Homes (Distressed)</h2>
-  <p>Gayden maintains a separate portfolio of manufactured home deals, often in Nevada, often owner-financed or private money, often to buyers who are underserved by traditional lenders. This is a niche Gayden manages personally.</p>
-
-  <div class="callout">
-    <div class="callout-label">Critical Note</div>
-    <p>If a manufactured home (distressed or otherwise) comes up: escalate to Gayden. This is his specialty niche. You don't have the buyer networks or financing knowledge yet.</p>
-  </div>
-
-  <p>Distressed manufactured homes often have complex titles (multiple moves, ownership issues, financing complications). Gayden knows how to navigate these. Don't try solo.</p>
-</div>
-
-<!-- SECTION 5 -->
-<div class="section" data-section="s5">
-  <div class="section-num">Section 5</div>
-  <h2>Building Long-Term Realtor Relationships From Distressed Deals</h2>
-  <p>Distressed deals are where trust is built fastest. A realtor with a nightmare estate deal — liens, deferred maintenance, executor drama, title mess — who sees you close cleanly and on time will never forget you. That's the deal that turns a cold contact into a loyal source.</p>
-  <p>Your advantage: most investors avoid these deals because they're complex. You show up, you handle the chaos, you close on time. Realtors remember that.</p>
-
-  <div class="step-list">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div><p><strong>Communicate every step.</strong> Don't ghost. Daily updates if needed.</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div><p><strong>Close on time.</strong> Period. No excuses. Complex doesn't mean late.</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div><p><strong>Make the realtor look like a hero to their client.</strong> "Thanks for getting us the right buyer" vibe.</p></div>
+      <a href="/gimmebrain/academy.html" class="nav-link">Back to Academy →</a>
     </div>
   </div>
 
-  <div class="deepdive" id="dd1">
-    <div class="dd-header" onclick="toggleDD('dd1')">
-      <div class="dd-header-left">
-        <div class="dd-icon">+</div>
-        <div class="dd-title">What actually happens in a foreclosure situation?</div>
-        <div class="dd-sub">Pre-foreclosure timeline and your role</div>
-      </div>
-      <div class="dd-arrow">▼</div>
-    </div>
-    <div class="dd-body">
-      <div class="dd-inner">
-        <p>Pre-foreclosure: the bank has filed a notice of default/foreclosure. The seller has weeks or months before the foreclosure auction. If they don't close before that date, they lose the property and all equity.</p>
-        <p>Time is literally money. Seller owes $200K on a $250K house, they have 60 days before auction. You offer $240K cash, close in 20 days. Seller keeps $40K. Without you, they get $0.</p>
-        <p>Your positioning: "We understand the timeline. We can move fast. What's the date we're working against?" Confidence about speed wins these deals.</p>
-      </div>
-    </div>
-  </div>
+  <script>
+    const MODULE_NUM = 12;
+    const MODULE_TITLE = 'Foreclosures & Distressed Deals';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
+    const TOTAL_SECTIONS = 8;
+    let completedSections = new Set();
+    let quizAnswers = {};
 
-  <div class="deepdive" id="dd2">
-    <div class="dd-header" onclick="toggleDD('dd2')">
-      <div class="dd-header-left">
-        <div class="dd-icon">+</div>
-        <div class="dd-title">Probate and estate deals — the hidden complexity</div>
-        <div class="dd-sub">Why court approval matters</div>
-      </div>
-      <div class="dd-body">
-      <div class="dd-inner">
-        <p>Probate is the legal process of settling a deceased person's estate. The executor (or administrator if no will) must get court approval to sell. This can take weeks or months depending on the state and court backlog.</p>
-        <p>Realtors working probate deals already know this complexity. Position as a patient, reliable buyer who understands the process. Your speed is still valuable — you don't jerk around with inspections or second-guess financing.</p>
-        <p>Executors are often family members dealing with grief + legal bureaucracy. Your professionalism and follow-through become even more valuable.</p>
-      </div>
-    </div>
-  </div>
-</div>
+    const QUIZ_POOL = [
+      { q: "What is the primary pain point in a foreclosure situation?", a: 0, opts: ["Speed and certainty before the bank takes over", "Getting the highest possible price", "Finding an owner-occupant buyer"], exp: "Distressed sellers prioritize certainty and timeline over maximizing price." },
+      { q: "Why do distressed sellers prefer a 21-day close over negotiating for 10% more in price?", a: 0, opts: ["Certainty and speed reduce their financial burden and risk", "They don't care about the extra money", "Good Results requires them to accept lower offers"], exp: "Certainty eliminates risk and ongoing holding costs." },
+      { q: "When a seller objects to assignment language, what should you do?", a: 0, opts: ["Offer to remove it if it doesn't change the deal structure", "Insist the language stays as-is", "Walk away from the deal"], exp: "Flexibility on wording while maintaining deal integrity is key to closing." },
+      { q: "If a property has been listed for 4 months with no offers and the price just dropped 15%, what signal does this send?", a: 0, opts: ["The retail market rejected it; it's a good investment candidate", "The property is worthless", "The seller will always ask for their original price"], exp: "High DOM with price reductions signal a motivated seller and investment opportunity." },
+      { q: "What should you do if a distressed deal involves a manufactured home on a pad?", a: 0, opts: ["Escalate to Gayden before proceeding", "Handle it the same as a traditional house", "Pass on all manufactured home deals"], exp: "Manufactured homes require specialized knowledge and should be escalated." },
+      { q: "Why do executors prefer a fast cash offer over a higher contingent offer?", a: 0, opts: ["They have liability and legal pressure to close the estate", "They get a bonus for closing quickly", "They secretly don't want the money from the sale"], exp: "Executors have fiduciary duty and want to close the estate quickly." },
+      { q: "What is the primary purpose of laying out a detailed closing timeline for a distressed seller?", a: 0, opts: ["To manage expectations and remove doubt about whether you can actually close", "To make them think you're slower than you really are", "To give them time to back out of the deal"], exp: "Clear timelines build confidence and remove objections." },
+      { q: "Why is paying realtor commissions on time important for your distressed deal pipeline?", a: 0, opts: ["Realtors will prioritize you for future deals if you're reliable", "It's legally required and you have no choice", "It keeps your commission percentage lower"], exp: "Reliability and speed are how you build realtor relationships." },
+      { q: "What is the key red flag that signals a seller is in financial distress?", a: 0, opts: ["Delinquent taxes, HOA fees, or vacant property holding costs", "The realtor uses professional language", "The property has a HOA"], exp: "Financial stress signals (unpaid obligations, vacant holdings) show motivation." },
+      { q: "In a probate situation, why is the property often in poor condition?", a: 0, opts: ["Years of deferred maintenance while the estate was in process", "The deceased intentionally damaged it", "Poor condition is not common in probate sales"], exp: "Estates take time to process, during which maintenance is deferred." },
+      { q: "What does 'as-is' mean in a distressed deal context?", a: 0, opts: ["The buyer accepts the property without inspections or repair negotiations", "The seller will fix everything before closing", "The property is in perfect condition"], exp: "'As-is' removes inspection contingencies and speeds up closing." },
+      { q: "What is the most common mistake agents make when pitching distressed deals to Good Results?", a: 0, opts: ["Leading with price instead of timeline and certainty", "Being too honest about the property condition", "Offering too low a commission"], exp: "Distressed sellers want certainty and speed, not haggling over $5K more." },
+      { q: "If a seller owes back taxes that exceed the property value, what happens at closing?", a: 0, opts: ["The liens come out of the seller's proceeds in escrow", "Good Results covers the tax debt", "The deal cannot close"], exp: "Escrow handles all lien payoffs from seller proceeds at closing." },
+      { q: "What should you research immediately after a realtor sends you a distressed deal?", a: 0, opts: ["Title status, existing liens, back taxes, and closing timeline", "The seller's personal background", "Recent comparable sales only"], exp: "Title clarity and timeline determine deal viability." },
+      { q: "Why does Good Results specialize in distressed deals instead of retail?", a: 0, opts: ["Certainty and speed are our competitive advantages in emotional, time-sensitive situations", "Distressed deals are always cheaper", "Retail deals require too much work"], exp: "Cash + as-is + fast close = competitive advantage others can't match." },
+      { q: "What is the difference between a pre-foreclosure and a tax foreclosure timeline?", a: 0, opts: ["Pre-foreclosure: months; Tax foreclosure: weeks before the auction", "They are the same thing", "Tax foreclosure is faster because court approval is not needed"], exp: "Tax foreclosures have hard deadlines set by government; pre-foreclosure timelines are longer." }
+    ];
 
-<!-- QUIZ SECTION -->
-<div class="quiz-section">
-  <h3>Module Quiz</h3>
-  <p id="quiz-status">Loading quiz...</p>
-  <div id="quiz-area"></div>
-  <div class="quiz-score-bar" id="score-bar">
-    <div>
-      <div class="score-text" id="score-text">— / — correct</div>
-      <div class="score-sub" id="score-sub">Questions remaining</div>
-    </div>
-    <button id="submit-btn" class="submit-quiz-btn" onclick="submitScore()" disabled>Submit Score</button>
-  </div>
-</div>
+    const KC_EXPLANATIONS = {
+      1: "High motivation is driven by timeline pressure and financial stress. The clock is ticking before the bank takes over.",
+      2: "Certainty and speed eliminate ongoing holding costs, fees, and emotional stress for the seller.",
+      3: "Flexibility on contract language maintains deal integrity while addressing seller concerns.",
+      4: "DOM and price drops are objective signals that the retail market rejected the property—time for an investor offer.",
+      5: "Manufactured homes require specialized knowledge. When in doubt, escalate to avoid costly mistakes.",
+      6: "Executors have fiduciary duty and legal liability. They prioritize closing over maximum proceeds.",
+      7: "Clear timelines build confidence, manage expectations, and remove objections before they become deal-killers.",
+      8: "Reliability and transparency build long-term relationships, which leads to preferential deal flow."
+    };
 
-</div>
-
-    <div class="module-update-box">
-      <h3>Update This Module</h3>
-      <p>Drop corrections, new info, or notes below. These go to the update queue and get reviewed before going live.</p>
-      <textarea class="module-update-textarea" id="moduleUpdateInput" placeholder="Type any updates, corrections, or new information for this module..."></textarea>
-      <button class="module-update-submit" id="moduleUpdateBtn" onclick="submitModuleUpdate()">Submit To Me Foo</button>
-    </div>
-
-<!-- SIDEBAR NAV -->
-<div class="nav-col">
-  <div class="snav">
-    <h4>Sections</h4>
-    <div id="snav-links"></div>
-  </div>
-</div>
-
-</div>
-
-<!-- BOTTOM NAV -->
-<div class="bottom-nav">
-  <a href="module11.html" class="bn-prev">← Previous</a>
-  <div class="bn-module-info">
-    <div class="bn-num">Module 12 of 12</div>
-    <div class="bn-title">Foreclosures & Distressed Deals</div>
-  </div>
-  <a href="hub.html" class="bn-next">Back to Hub →</a>
-</div>
-
-<script>
-const MODULE_NUM = 12;
-const MODULE_TITLE = 'Foreclosures & Distressed Deals';
-const QUIZ_POOL = [
-  {q:"What are the two things distressed sellers care about most?",opts:[{t:"Certainty and Speed",correct:true},{t:"Price and Conditions",correct:false},{t:"Closing costs and timeline flexibility",correct:false}],explanation:"Distressed sellers want to know: will it close? How fast? Everything else is secondary."},
-  {q:"A realtor mentions an estate sale. What's your opening response?",opts:[{t:"That's a great fit for us. Cash, as-is, 10–21 days. Executors love that.",correct:true},{t:"Estate sales are too complicated for us.",correct:false},{t:"We need to see all the court paperwork first.",correct:false}],explanation:"Express confidence + speed. Executors are drowning in bureaucracy — you look like a lifeline."},
-  {q:"A property has a judgment lien of $15K. The asking price is $200K. What do you do?",opts:[{t:"Ignore it — liens are common.",correct:false},{t:"Ask 'What's the lien amount? That comes out at closing — not a deal-killer.'",correct:true},{t:"Lower your offer by $15K to cover the lien.",correct:false}],explanation:"Liens come out of seller proceeds — escrow handles it. Don't let it shake your offer."},
-  {q:"Which situation signals the HIGHEST seller motivation?",opts:[{t:"Long DOM (days on market)",correct:false},{t:"Foreclosure or tax foreclosure pending",correct:true},{t:"Inherited property",correct:false}],explanation:"Foreclosure = countdown clock = desperation. Tax foreclosure = even tighter. Highest motivation."},
-  {q:"A seller objects to assignment language in the contract. What do you do?",opts:[{t:"Remove it immediately — don't argue.",correct:false},{t:"Explain honestly: you invest in multiple LLCs, but you're transparent about being an investor.",correct:true},{t:"Tell them assignment is non-negotiable.",correct:false}],explanation:"Honesty + confidence disarms objections. Most sellers respect transparency about your role."},
-  {q:"An estate sale has unpermitted additions to the house. What's your move?",opts:[{t:"Proceed anyway — unpermitted work is common.",correct:false},{t:"Escalate to Gayden immediately — it's a title/escrow issue.",correct:true},{t:"Ask the executor to get permits before closing.",correct:false}],explanation:"Unpermitted work = title problem. Gayden coordinates with title company and escrow."},
-  {q:"What motivation signal appears in a foreclosure situation?",opts:[{t:"Seller needs to close before bank auction date.",correct:true},{t:"Seller inherited the property recently.",correct:false},{t:"Property has been on market 30 days.",correct:false}],explanation:"Foreclosure = deadline. Auction date is the hard stop. Seller's timeline is your advantage."},
-  {q:"A manufactured home (distressed) comes up in conversation. What do you do?",opts:[{t:"Run the numbers yourself and make an offer.",correct:false},{t:"Escalate to Gayden — he manages this niche.",correct:true},{t:"Ask the realtor for financing options.",correct:false}],explanation:"Manufactured homes are Gayden's specialty niche. Don't try solo. You don't have the buyer networks."},
-  {q:"Which statement about estate/probate deals is TRUE?",opts:[{t:"Executors must get court approval to sell the property.",correct:true},{t:"Court approval is a formality — usually instant.",correct:false},{t:"Executors have no legal restrictions on selling.",correct:false}],explanation:"Executors need court approval — can take weeks or months. Realtors know this already. Position as patient + reliable."},
-  {q:"A tax foreclosure is pending in 45 days. What's your positioning?",opts:[{t:"Move fast? We can move fast. What's the timeline you're working against?",correct:true},{t:"We typically need 60 days for inspections.",correct:false},{t:"We'll need to see if the numbers work first.",correct:false}],explanation:"Tax foreclosure = hardest deadline. Show speed confidence immediately. That's your superpower here."},
-  {q:"Why are distressed deals valuable for building realtor relationships?",opts:[{t:"Because most investors avoid the complexity, so you stand out.",correct:true},{t:"Because they're more profitable than retail deals.",correct:false},{t:"Because sellers are more willing to negotiate.",correct:false}],explanation:"Most investors avoid mess. You show up, handle chaos, close clean. Realtor never forgets."},
-  {q:"After closing a distressed deal, what's your next move with the realtor?",opts:[{t:"Thank them and ask if they have more deals like this.",correct:true},{t:"Wait for them to contact you next time.",correct:false},{t:"Send them a generic thank you card.",correct:false}],explanation:"Make them look like a hero to their client. Build the relationship actively. Follow up personally."},
-  {q:"A divorce liquidation situation comes up. Both parties want it done quickly. What's your angle?",opts:[{t:"Quick close, no repairs required, cash. That's exactly what we do.",correct:true},{t:"We'll need time to inspect carefully.",correct:false},{t:"We need to negotiate both parties' sign-off separately.",correct:false}],explanation:"Divorce = urgency for both sides. Your speed + simplicity is exactly what they need."},
-  {q:"True or false: In pre-foreclosure, the seller has unlimited time to close.",opts:[{t:"False — there's an auction date deadline.",correct:true},{t:"True — banks are flexible on timing.",correct:false}],explanation:"Pre-foreclosure = countdown. Auction date is hard stop. Seller loses everything if deadline passes."},
-  {q:"A realtor mentions a property on market 120+ days with price reductions. What does this signal?",opts:[{t:"High seller motivation — they're desperate to move it.",correct:true},{t:"Low seller motivation — they're picky.",correct:false},{t:"Normal market conditions.",correct:false}],explanation:"Long DOM + price drops = seller needs to move it. Motivation is there — position around speed + certainty."},
-  {q:"What's your primary advantage in distressed deals vs. traditional deals?",opts:[{t:"You can offer lower prices.",correct:false},{t:"You handle complexity and close on time reliably.",correct:true},{t:"You have more cash available.",correct:false}],explanation:"Most investors avoid the mess. Your professionalism + follow-through in chaos = competitive advantage."},
-  {q:"An inherited property with absentee owner comes up. Motivation level?",opts:[{t:"Moderate — they probably need liquidity but aren't in crisis.",correct:true},{t:"Very high — they must sell immediately.",correct:false},{t:"Low — inherited property owners are never motivated.",correct:false}],explanation:"Inherited = moderate motivation. Owner doesn't live here, probably wants cash. But no hard deadline."},
-  {q:"What does 'making the realtor look like a hero' mean?",opts:[{t:"Negotiating a lower price so their seller is happier.",correct:false},{t:"Closing cleanly, on time, without surprises — validating their recommendation.",correct:true},{t:"Giving them a commission bonus.",correct:false}],explanation:"Close on time. No surprises. Their client gets a reliable buyer. That's hero status."},
-  {q:"A probate situation mentions multiple heirs with conflicting interests. What's your move?",opts:[{t:"Demand they resolve family issues before closing.",correct:false},{t:"Escalate to Gayden — legal/family complexity exceeds your scope.",correct:true},{t:"Proceed normally — it's a standard deal.",correct:false}],explanation:"Family drama + legal complexity = escalate to Gayden. He coordinates with executors and attorneys."},
-  {q:"True or false: Distressed sellers care more about price than certainty of closing.",opts:[{t:"False — certainty of closing is the #1 concern.",correct:true},{t:"True — they always want top dollar.",correct:false}],explanation:"Distressed sellers would take $5K less if it means guaranteed close. Certainty > price."},
-  {q:"What's the distressed deal pitch in one sentence?",opts:[{t:"Cash buyer, as-is, 10–21 day close, we handle the complexity.",correct:true},{t:"We'll buy your property sight unseen.",correct:false},{t:"We offer the best price in the market.",correct:false}],explanation:"That's the pitch. Certainty + speed + simplicity. Every distressed seller hears those words."},
-  {q:"An estate sale has deferred maintenance AND unpermitted additions. Complexity level?",opts:[{t:"Low — both are routine.",correct:false},{t:"High — escalate to Gayden.",correct:true},{t:"Medium — you can handle it solo.",correct:false}],explanation:"Unpermitted work is title issue (Gayden). Complex estate + major issues = escalate."},
-  {q:"True or false: You should communicate daily during a distressed deal.",opts:[{t:"True — realtors need updates to stay engaged.",correct:true},{t:"False — weekly updates are fine.",correct:false}],explanation:"In distressed deals, communication = trust. Daily touches keep momentum alive."},
-  {q:"A tax foreclosure has 30 days until sale. What's your timeline pitch?",opts:[{t:"We need 60 days for inspections.",correct:false},{t:"We can close in 20 days, no problem.",correct:true},{t:"We'll try our best but can't promise 30 days.",correct:false}],explanation:"Confidence. Speed. That is your value proposition. 20 days signals you can win."},
-  {q:"Why is honesty about being an investor critical in distressed deals?",opts:[{t:"Because distressed sellers respect transparency more than owner-occupant cover stories.",correct:true},{t:"Because it lowers your offer price expectations.",correct:false},{t:"Because it's required by law.",correct:false}],explanation:"Distressed sellers know the score. They respect investors who are honest about making money."}
-];
-
-window.addEventListener('scroll',()=>{
-  const h=document.documentElement.scrollHeight-window.innerHeight;
-  document.getElementById('rpbar').style.width=(window.scrollY/h*100)+'%';
-});
-(function buildNav(){
-  const sections=document.querySelectorAll('[data-section]');
-  const nav=document.getElementById('snav-links');
-  if(!nav||!sections.length)return;
-  sections.forEach(s=>{
-    const h2=s.querySelector('h2');
-    if(!h2)return;
-    const a=document.createElement('div');
-    a.className='snav-item';
-    a.textContent=h2.textContent;
-    a.onclick=()=>s.scrollIntoView({behavior:'smooth',block:'start'});
-    a.dataset.sec=s.dataset.section;
-    nav.appendChild(a);
-  });
-  window.addEventListener('scroll',()=>{
-    let active=null;
-    sections.forEach(s=>{if(s.getBoundingClientRect().top<180)active=s.dataset.section;});
-    nav.querySelectorAll('.snav-item').forEach(a=>a.classList.toggle('active',a.dataset.sec===active));
-  },{passive:true});
-})();
-function copyScript(id,btn){
-  const text=document.getElementById(id).textContent;
-  navigator.clipboard.writeText(text).then(()=>{
-    btn.textContent='✓ Copied!';btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
-  });
-}
-function toggleDD(id){
-  const el=document.getElementById(id);
-  el.classList.toggle('open');
-  el.querySelector('.dd-icon').textContent=el.classList.contains('open')?'−':'+';
-}
-function checkInline(opt,cardId,correct,explanation){
-  const card=document.getElementById(cardId);
-  if(card.classList.contains('answered-correct')||card.classList.contains('answered-wrong'))return;
-  card.classList.add(correct?'answered-correct':'answered-wrong');
-  card.querySelectorAll('.kc-opt').forEach(o=>{
-    if(o===opt){o.classList.add(correct?'opt-correct':'opt-wrong');}
-    else{
-      const oc=o.getAttribute('onclick');
-      if(!correct&&oc&&oc.includes(',true,'))o.classList.add('opt-correct');
-      else o.classList.add('opt-disabled');
+    function toggleSection(n) {
+      const item = document.querySelectorAll('.acc-item')[n - 1];
+      item.classList.toggle('open');
+      if (item.classList.contains('open')) {
+        setTimeout(() => {
+          const header = item.querySelector('.acc-header');
+          header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
     }
-  });
-  const fb=document.getElementById(cardId+'-fb');
-  fb.textContent=(correct?'✓ ':'✗ ')+explanation;
-  fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');
-}
-(function loadStreak(){
-  const streak=parseInt(localStorage.getItem('gr_streak')||'0');
-  const el=document.getElementById('streak-count');
-  if(el)el.textContent=streak>0?streak+'-day streak':'Start your streak';
-})();
-const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
-let quizQuestions=[],userAnswers={},quizDone=false,masteredIndices=[];
-async function loadMasteredAndInit(){const agent=sessionStorage.getItem('gr_agent')||'';if(agent){try{const res=await fetch(APPS_SCRIPT_URL+`?action=getModuleProgress&agent=${encodeURIComponent(agent)}&module=${MODULE_NUM}`);const data=await res.json();masteredIndices=data.mastered||[];}catch(e){}}initQuiz();}
-function initQuiz(){const area=document.getElementById('quiz-area');const status=document.getElementById('quiz-status');if(!QUIZ_POOL||!QUIZ_POOL.length){if(status)status.textContent='No questions loaded yet.';return;}const indexed=QUIZ_POOL.map((q,i)=>Object.assign({poolIdx:i},q));const shuffled=[...indexed].sort(()=>Math.random()-.5);quizQuestions=shuffled.slice(0,Math.min(10,shuffled.length));if(status)status.textContent=`${quizQuestions.length} questions · Pick the best answer for each.`;quizQuestions.forEach((q,qi)=>{const isMastered=masteredIndices.includes(q.poolIdx);const opts=q.opts.map((o,oi)=>`<div class="quiz-opt${isMastered&&o.correct?' correct':isMastered?' disabled':''}" id="qo-${qi}-${oi}" onclick="${isMastered?'':'answerQuiz('+qi+','+oi+')'}"${isMastered?' style="pointer-events:none"':''}><div class="quiz-opt-letter">${String.fromCharCode(65+oi)}</div>${o.t}</div>`).join('');area.innerHTML+=`<div class="quiz-q" id="qq-${qi}">${isMastered?'<div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">✓ Already mastered</div>':''}<div class="quiz-q-text">Pool Q${q.poolIdx}. ${q.q}</div><div class="quiz-q-opts" id="qopts-${qi}">${opts}</div><div class="kc-feedback" id="qfb-${qi}"></div></div>`;if(isMastered){const correctOi=q.opts.findIndex(o=>o.correct);if(correctOi>=0)userAnswers[qi]=correctOi;}});const sb=document.getElementById('score-bar');if(sb)sb.style.display='flex';updateScore();}
-function answerQuiz(qi,oi){if(userAnswers[qi]!==undefined)return;userAnswers[qi]=oi;const q=quizQuestions[qi];const correct=q.opts[oi].correct;q.opts.forEach((_,i)=>{const el=document.getElementById(`qo-${qi}-${i}`);if(!el)return;if(i===oi)el.classList.add(correct?'correct':'wrong');else if(q.opts[i].correct)el.classList.add('correct');else el.classList.add('disabled');});const fb=document.getElementById(`qfb-${qi}`);if(fb){fb.textContent=(correct?'✓ ':'✗ ')+q.explanation;fb.className='kc-feedback show '+(correct?'fb-correct':'fb-wrong');}updateScore();}
-function updateScore(){const answered=Object.keys(userAnswers).length;const total=quizQuestions.length;const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).length;const pct=total?Math.round(correct/total*100):0;const st=document.getElementById('score-text');const ss=document.getElementById('score-sub');const btn=document.getElementById('submit-btn');if(st)st.textContent=`${correct} / ${total} correct  (${pct}%)`;if(ss)ss.textContent=answered<total?`${total-answered} questions remaining`:'Quiz complete — submit your score!';if(btn)btn.disabled=answered<total;quizDone=answered>=total;}
-function notifySlackScore(agent,modTitle,modNum,pct,correct,total){fetch(APPS_SCRIPT_URL+'?action=gettrainingprogress').then(r=>r.json()).then(agents=>{const sc=[[100,'PERFECT SCORE \ud83d\udcaf Absolutely disgusting dominance. Everyone else should be worried.'],[90,'Strong. Very strong. That\'s the kind of energy this team needs.'],[80,'Solid work. Not perfect, but definitely respectable.'],[70,'Ehh... it\'s passing. Barely. Maybe crack open the module one more time.'],[60,'That\'s... not great. You might wanna re-read that module, just saying.'],[0,'Yikes. \ud83d\ude2c Did you even read the module or just start clicking randomly?']];let cmt='';for(const[th,m]of sc){if(pct>=th){cmt=m;break;}}let lp=null,la=Infinity,ls=Infinity,lm='';agents.forEach(a=>{const ms=Object.entries(a.modules||{});if(!ms.length)return;const avg=ms.reduce((s,[_,m])=>s+(m.best_score||0),0)/ms.length;if(avg<la){la=avg;lp=a.name;let w=Infinity,wm='';ms.forEach(([n,m])=>{if((m.best_score||0)<w){w=m.best_score||0;wm=n;}});ls=w;lm=wm;}});const tt=['When are you gonna step it up? Asking for the whole team. \ud83d\udc40','That score is genuinely embarrassing. I\'d be scared to show my face in the office.','The leaderboard is BEGGING you to do literally anything.','At this point even a coin flip would score better. Just saying. \ud83e\ude99','Everyone else is getting better. You\'re getting... comfortable? \ud83d\udecb\ufe0f','That leaderboard position is a cry for help honestly.','You know the modules are FREE to re-take right?? Nobody\'s stopping you.','I\'ve seen better scores from people who accidentally hit submit. \ud83d\udc80','Your score is so low it\'s basically a rounding error.','If effort was a scoreboard you wouldn\'t even be on it.'];const t=tt[Math.floor(Math.random()*tt.length)];let msg='\ud83c\udf93 *'+agent+'* just finished *Module '+modNum+' \u2014 '+modTitle+'*\nScore: '+correct+'/'+total+' ('+pct+'%)\n'+cmt;if(lp&&lp.toLowerCase()!==agent.toLowerCase()){msg+='\n\n\ud83d\udcc9 Meanwhile... *'+lp+'* is camping out in LAST PLACE with a '+Math.round(ls)+'% on Module '+lm+'. '+t;}else if(lp&&lp.toLowerCase()===agent.toLowerCase()){msg+='\n\n\ud83d\udcc9 Plot twist... *'+agent+'* IS in last place. '+(pct<70?'And this score ain\'t helping. \ud83d\udc80':'But at least they\'re trying to climb out. Respect... barely.');}fetch('/.netlify/functions/slack-score-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:msg})}).catch(()=>{});}).catch(()=>{});}
-function submitScore(){if(!quizDone)return;const total=quizQuestions.length;const correct=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).length;const pct=Math.round(correct/total*100);const agent=sessionStorage.getItem('gr_agent')||'Unknown';const email=sessionStorage.getItem('gr_email')||'';const xp=Math.round(pct*1.2);const correctPoolIndices=Object.entries(userAnswers).filter(([qi,oi])=>quizQuestions[qi]&&quizQuestions[qi].opts[oi].correct).map(([qi])=>quizQuestions[qi].poolIdx);const allMastered=[...new Set([...masteredIndices,...correctPoolIndices])];const body={action:'moduleComplete',agent,email,module:MODULE_NUM,moduleTitle:MODULE_TITLE,score:pct,xp,correct,total,poolSize:QUIZ_POOL.length,correctIndices:allMastered,date:new Date().toISOString()};fetch(APPS_SCRIPT_URL,{method:'POST',body:JSON.stringify(body)}).then(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='✓ Score Saved!';btn.style.background='#22C55E';btn.disabled=true;}masteredIndices=allMastered;notifySlackScore(agent,MODULE_TITLE,MODULE_NUM,pct,correct,total);const today=new Date().toDateString();const lastDay=localStorage.getItem('gr_streak_day');let streak=parseInt(localStorage.getItem('gr_streak')||'0');if(lastDay!==today){const yesterday=new Date(Date.now()-86400000).toDateString();streak=lastDay===yesterday?streak+1:1;localStorage.setItem('gr_streak',streak);localStorage.setItem('gr_streak_day',today);const sc=document.getElementById('streak-count');if(sc)sc.textContent=streak+'-day streak';}}).catch(()=>{const btn=document.getElementById('submit-btn');if(btn){btn.textContent='Retry';btn.disabled=false;}});}
-function submitModuleUpdate(){const txt=document.getElementById('moduleUpdateInput').value.trim();if(!txt){alert('Type something first.');return;}const btn=document.getElementById('moduleUpdateBtn');btn.disabled=true;btn.textContent='Sending...';const agent=sessionStorage.getItem('gr_agent')||'Unknown';const payload={action:'addModuleUpdate',module:MODULE_NUM,moduleTitle:MODULE_TITLE,agent:agent,update:txt,date:new Date().toISOString()};fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(()=>{btn.textContent='✓ Sent!';btn.style.background='#22C55E';document.getElementById('moduleUpdateInput').value='';setTimeout(()=>{btn.textContent='Submit To Me Foo';btn.style.background='';btn.disabled=false;},3000);}).catch(()=>{btn.textContent='Retry';btn.disabled=false;});}
-loadMasteredAndInit();
-</script>
+
+    function expandAll() {
+      document.querySelectorAll('.acc-item').forEach(item => item.classList.add('open'));
+    }
+
+    function collapseAll() {
+      document.querySelectorAll('.acc-item').forEach(item => item.classList.remove('open'));
+    }
+
+    function answerKC(section, optIdx, isCorrect) {
+      const item = document.querySelectorAll('.acc-item')[section - 1];
+      const options = item.querySelectorAll('.kc-option');
+      const feedback = item.querySelector('.kc-feedback');
+      const complete = item.querySelector('.section-complete');
+      
+      options.forEach((opt, idx) => {
+        opt.classList.toggle('selected', idx === optIdx);
+        opt.style.pointerEvents = 'none';
+        opt.style.opacity = '0.6';
+      });
+
+      if (isCorrect) {
+        feedback.className = 'kc-feedback correct';
+        feedback.innerHTML = '✓ Correct! ' + KC_EXPLANATIONS[section];
+        if (!completedSections.has(section)) {
+          completedSections.add(section);
+          updateProgress();
+          setTimeout(() => {
+            document.getElementById(`check${section}`).classList.remove('hidden');
+            complete.classList.add('show');
+            if (section < TOTAL_SECTIONS) {
+              setTimeout(() => toggleSection(section + 1), 800);
+            }
+          }, 500);
+        }
+      } else {
+        feedback.className = 'kc-feedback wrong';
+        feedback.innerHTML = '✗ Not quite. ' + KC_EXPLANATIONS[section];
+      }
+    }
+
+    function updateProgress() {
+      const count = completedSections.size;
+      document.getElementById('progressCount').textContent = count;
+      const width = (count / TOTAL_SECTIONS) * 100;
+      document.querySelector('.progress-fill').style.width = width + '%';
+    }
+
+    function copyScript(scriptId) {
+      const text = document.getElementById(scriptId).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+
+    function initQuiz() {
+      const selected = [];
+      for (let i = 0; i < 5; i++) {
+        let idx;
+        do { idx = Math.floor(Math.random() * QUIZ_POOL.length); } 
+        while (selected.includes(idx));
+        selected.push(idx);
+      }
+
+      let html = '';
+      selected.forEach((idx, i) => {
+        const q = QUIZ_POOL[idx];
+        let opts = q.opts.map((opt, oi) => `<div class="quiz-option" onclick="answerQuiz(${i}, ${oi})">${opt}</div>`).join('');
+        html += `<div class="quiz-question" id="q${i}"><div class="question-text">${i + 1}. ${q.q}</div><div class="quiz-options">${opts}</div></div>`;
+      });
+      document.getElementById('quizArea').innerHTML = html;
+      window.quizQuestions = selected;
+    }
+
+    function answerQuiz(qIdx, optIdx) {
+      quizAnswers[qIdx] = optIdx;
+      const opts = document.querySelectorAll(`#q${qIdx} .quiz-option`);
+      opts.forEach(opt => opt.style.pointerEvents = 'none');
+      opts[optIdx].classList.add('selected');
+      updateScore();
+    }
+
+    function updateScore() {
+      let correct = 0;
+      for (let i = 0; i < window.quizQuestions.length; i++) {
+        if (quizAnswers[i] === QUIZ_POOL[window.quizQuestions[i]].a) correct++;
+      }
+      const pct = Math.round((correct / window.quizQuestions.length) * 100);
+      document.getElementById('scoreNum').textContent = pct;
+    }
+
+    function submitScore() {
+      let correct = 0;
+      for (let i = 0; i < window.quizQuestions.length; i++) {
+        if (quizAnswers[i] === QUIZ_POOL[window.quizQuestions[i]].a) correct++;
+      }
+      const score = Math.round((correct / window.quizQuestions.length) * 100);
+      
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+          module: MODULE_NUM,
+          title: MODULE_TITLE,
+          score: score,
+          timestamp: new Date().toISOString()
+        })
+      }).then(r => r.json()).catch(e => console.log(e));
+
+      const streak = (parseInt(localStorage.getItem('gr_streak')) || 0) + 1;
+      localStorage.setItem('gr_streak', streak);
+      document.getElementById('streakCount').textContent = streak;
+      
+      alert(`Module 12 complete! Your score: ${score}%\n\nYou've completed all 12 modules. 🎉`);
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      document.querySelector('.progress-fill').style.width = Math.max((completedSections.size / TOTAL_SECTIONS) * 100, scrollPercentage / 5) + '%';
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const streak = localStorage.getItem('gr_streak') || 0;
+      document.getElementById('streakCount').textContent = streak;
+      
+      document.querySelectorAll('.check').forEach(check => {
+        if (!completedSections.has(parseInt(check.id.substring(5)))) {
+          check.classList.add('hidden');
+        }
+      });
+      
+      initQuiz();
+    });
+  </script>
+
+
+<style>
+.module-nav-strip{background:var(--surface3,#0A0C10);border-top:1px solid var(--border,rgba(255,255,255,.07));padding:20px 44px;display:flex;align-items:center;justify-content:center;gap:12px;}
+.module-nav-arrow{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--radius-sm,5px);border:1px solid var(--border,rgba(255,255,255,.07));color:var(--dim,#555A66);font-size:1rem;text-decoration:none;transition:all .2s;flex-shrink:0;}
+.module-nav-arrow:hover{color:var(--orange,#FF5C1A);border-color:var(--orange-border,rgba(255,92,26,.25));}
+.module-nav-arrow.disabled{opacity:.25;pointer-events:none;}
+.module-nav-nums{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;}
+.module-nav-num{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-sm,5px);border:1px solid var(--border,rgba(255,255,255,.07));color:var(--dim,#555A66);font-size:.75rem;font-weight:700;text-decoration:none;transition:all .2s;}
+.module-nav-num:hover{color:var(--cream,#C8D4E4);border-color:rgba(255,255,255,.2);}
+.module-nav-num.current{width:42px;height:42px;font-size:.92rem;background:var(--orange,#FF5C1A);border-color:var(--orange,#FF5C1A);color:#fff;box-shadow:0 0 16px rgba(255,92,26,.35);}
+@media(max-width:768px){.module-nav-strip{padding:16px 20px;gap:8px;}.module-nav-num{width:28px;height:28px;font-size:.68rem;}.module-nav-num.current{width:36px;height:36px;font-size:.82rem;}}
+</style>
+
+<nav class="module-nav-strip">
+  <a href="/gimmebrain/module11.html" class="module-nav-arrow" title="Module 11">←</a>
+  <div class="module-nav-nums"><a href="/gimmebrain/module1.html" class="module-nav-num" title="Module 1: Pipeline & CRM">1</a><a href="/gimmebrain/module2.html" class="module-nav-num" title="Module 2: Prospecting">2</a><a href="/gimmebrain/module3.html" class="module-nav-num" title="Module 3: First Contact">3</a><a href="/gimmebrain/module4.html" class="module-nav-num" title="Module 4: Follow-Up">4</a><a href="/gimmebrain/module5.html" class="module-nav-num" title="Module 5: Running Comps">5</a><a href="/gimmebrain/module6.html" class="module-nav-num" title="Module 6: Making Offers">6</a><a href="/gimmebrain/module7.html" class="module-nav-num" title="Module 7: Contract to Close">7</a><a href="/gimmebrain/module8.html" class="module-nav-num" title="Module 8: Objection Handling">8</a><a href="/gimmebrain/module9.html" class="module-nav-num" title="Module 9: Scripts & Dialogues">9</a><a href="/gimmebrain/module10.html" class="module-nav-num" title="Module 10: Disposition">10</a><a href="/gimmebrain/module11.html" class="module-nav-num" title="Module 11: Market Knowledge">11</a><span class="module-nav-num current" title="Module 12: Systems & Automation">12</span></div>
+  <span class="module-nav-arrow disabled">→</span>
+</nav>
 </body>
 </html>
