@@ -1,4 +1,4 @@
-GR CALL ANALYZER Ã¢ÂÂ KNOWLEDGE BASE Good Results Home Buyers Last Updated: March 21, 2026
+GR CALL ANALYZER Ã¢ÂÂ KNOWLEDGE BASE Good Results Home Buyers Last Updated: March 29, 2026
 
 WHAT CHANGED THIS CYCLE (2026-03-27 â Cycle 2): â¢ Added weekly performance data from Google Sheet (14 calls analyzed) â¢ Updated agent coaching flags with real call data for Frank Ladaga, Anthony Cruz, and Kayden Rogers â¢ Added coaching insights from 120 KB patterns (60 positive, 60 negative) â¢ Scoring scale confirmed as 0-100 integer system (not 1-10)
 
