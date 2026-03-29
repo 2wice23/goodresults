@@ -1,43 +1,57 @@
 === WHAT CHANGED THIS CYCLE (2026-03-28) ===
-VERSION: v2.1 → v2.2
+VERSION: v2.2 → v2.3
 
 ADDED:
-- Full deal thread analysis from CRM export (1,651 messages across 13 deal-producing realtors)
-- Anthony Cruz deal-stage patterns (Melbourne St Houston — text to signed contract in 2 days)
-- Contract negotiation via text section (terms, option periods, EMD, title coordination)
-- Multi-agent touchpoint strategy documented (multiple agents texting same realtor = social proof)
-- New escalation variations: "Me: Waiting for you to bring me a deal:" and "favorite buyer" guilt
-- Relationship signals that precede deals (Christmas cards, pho offers, personal check-ins)
-- Deal progression indicators (realtor proactively sharing property info = hot lead)
-- Agent-specific SMS style notes for Anthony Cruz and Joe Kruse
-- Expanded deal-stage transactional templates with real examples
-- New gold standard: Anthony Cruz → Javier Gallardo (Melbourne St, Houston)
+- Full-scale CRM analysis: 34,811 messages (21,531 outbound / 13,280 inbound) across 1,147 contacts
+- Reply rate data by message category at scale (not just deal-producing threads)
+- Follow-up breakthrough analysis: what texts break through after silence
+- Conversation starter reply rates with statistical significance (1,269+ send sample sizes)
+- Gayden's voice DNA analysis (20K outbound texts): phrase frequency, emoji usage, message length
+- New "Optimized Follow-Up" workflow created in Close CRM based on data
+- CORRECTED: "what_happened" text only 14.9% reply rate at scale (was overrated from small sample)
+- CORRECTED: "super_confused" text is worst performer at 5.8% — removed from recommended sequences
+- NEW FINDING: "favorite realtor" pattern is the #1 workhorse opener at 41.6% on 1,269 sends
+- NEW FINDING: Short questions get 52.3% reply rate as follow-ups (highest category)
+- NEW FINDING: Overall reply rate across all contacts is 44.7%
 
 UPDATED:
-- Proven SMS Patterns section expanded from 5 to 8 patterns with real message data
-- Cold SMS sequences updated with new variations from CSV
-- Check-in patterns expanded with "spend money" variants
-- Evaluation criteria updated with deal-velocity metrics
+- Section 3 sequences updated with reply-rate rankings from full dataset
+- Section 5 relationship maintenance updated with frequency data
+- Section 8 patterns reordered by actual effectiveness
+- Section 11 Gayden voice notes expanded with quantified style markers
+- Section 14 metrics completely rewritten with full CRM data
+
+PREVIOUS CYCLE (2026-03-28 v2.2):
+- Full deal thread analysis from CRM export (1,651 messages across 13 deal-producing realtors)
+- Anthony Cruz deal-stage patterns, contract negotiation via text, multi-agent touchpoint strategy
+- 8 proven patterns with exact message text from closed deals
 
 === END WHAT CHANGED ===
 
-# GR SMS PLAYBOOK — KNOWLEDGE BASE v2.2
-**Version:** 2.2 — Updated from CRM deal export analysis (March 28, 2026)
+# GR SMS PLAYBOOK — KNOWLEDGE BASE v2.3
+**Version:** 2.3 — Updated from full CRM analysis (March 28, 2026)
 **Purpose:** SMS strategy, templates, sequences, and evaluation criteria for Good Results Home Buyers
-**Source:** Master KB v2.1 + CRM export of 1,651 messages across 13 deal-producing realtors
-**Status:** COMPLETE — incorporates all proven patterns from real closed deals
+**Source:** Master KB v2.2 + full CRM export of 34,811 messages across 1,147 contacts
+**Status:** COMPLETE — incorporates full-scale reply rate analysis and voice pattern data
 
 ---
 
 ## WEEKLY CHANGE LOG
 
-**Week of March 28, 2026:**
-- Analyzed full CRM SMS export: 1,651 messages, 13 realtors, all from deals that advanced to contract or close
-- Added 8 new proven patterns with exact message text from closed deals
-- Added contract negotiation via text as a new category
-- Added Anthony Cruz deal-stage style documentation
-- Updated gold standard examples with Melbourne St (Houston) and Fallen Oaks (Houston)
-- Added multi-agent touchpoint strategy
+**Week of March 28, 2026 (v2.3 — Full CRM Analysis):**
+- Analyzed complete CRM export: 34,811 messages, 1,147 contacts, all agents
+- Reply rate analysis by message category with statistical significance
+- Follow-up breakthrough analysis: what breaks through after silence
+- Gayden voice DNA: "..." 61%, "lol" 37%, "favorite" 14%, avg 129 chars, 52% questions
+- CRITICAL CORRECTION: "what_happened" only 14.9% reply rate (was overrated), "super_confused" worst at 5.8%
+- TOP PERFORMERS: "favorite realtor" 41.6% starter rate, short questions 52.3% follow-up rate
+- Created "🔥 G Follow Up v2 — Data-Driven" workflow with all-new original templates
+- New optimized sequence: 8 steps over 24 days, front-loads high-reply patterns
+
+**Week of March 28, 2026 (v2.2 — Deal Thread Analysis):**
+- Analyzed deal-thread CRM export: 1,651 messages, 13 realtors
+- Added 8 proven patterns, contract negotiation via text, multi-agent touchpoint strategy
+- Gold standard examples: Melbourne St (Houston), Fallen Oaks (Houston), Meghan Hofland (LV)
 
 [Previous weeks will accumulate here each Sunday]
 
@@ -184,23 +198,42 @@ Agents can create their own post-call SMS template in their own style, but it MU
 ### Purpose
 Stay top of mind with realtors between deals. These are the texts that ensure you're the first call when the next deal surfaces.
 
-### Check-In Patterns (Proven — All From Deal-Producing Threads)
+### Check-In Patterns (Ranked by Reply Rate — Full CRM Analysis, 34,811 messages)
 
-**The "Spend Money" Check-In (Most effective — appears in nearly every closed deal thread):**
-- "How're things, anything new I can spend some money on? 🤞🏼🤞🏼"
-- "How's my favorite realtor doing?? lol Have you seen anything in the last few weeks I can check out?"
-- "How's my very favorite realtor in the whole wide world doing? Help me spend some money before the end of [month] lol 🙏🏼🙏🏼🙏🏼"
+**#1 — "Favorite Realtor" Pattern (41.6% reply rate as conversation starter, 33.8% as follow-up — THE WORKHORSE)**
+- "How's my favorite realtor doing?? lol Have you seen anything in the last few weeks that you think I should see?" (434x used)
+- "How's my very favorite realtor in the whole wide world doing? Help me spend some money before the end of [month] lol 🙏🏼🙏🏼🙏🏼" (515x used)
+- "How's my favorite realtor doing?? lol Have you seen anything in the last few weeks I can check out? I need to close on something..." (354x used)
 
-Why it works: Casual, funny, creates time urgency without pressure. Reframes so realtor is doing YOU a favor. One realtor replied: "Your follow up is impeccable, definitely warrants a response."
+Why it works: "Favorite" creates personal bond. Sent 1,269+ times as conversation starters with 41.6% reply rate — statistically the best opener at scale. Even negative replies ("Nothing, sorry") keep the thread alive.
 
-**The Casual Check-In:**
-- "Okie dokie... Anything on the horizon?"
-- "How goes it brotha... Anything new on [property/area]?"
-- "How're things?"
+**#2 — The "Spend Money" Check-In (33.3% reply rate as starter, 21.1% as follow-up)**
+- "How're things, anything new I can spend some money on? 🤞🏼🤞🏼" (160x used)
 
-**The "Keep Me in the Loop" Close:**
+Decent but NOT the top performer at scale. Works better as a starter than a follow-up. One realtor replied: "Your follow up is impeccable, definitely warrants a response."
+
+**#3 — Short Questions (52.3% reply rate as follow-up — HIGHEST follow-up category)**
+- "You still there? lol"
+- "Did you see my text earlier?"
+- "Is everything good? Did I miss something?"
+- "?"
+
+Why it works: Low effort to reply to. Doesn't create pressure. Just needs a yes/no. Use these MID-SEQUENCE when previous longer texts got ignored.
+
+**The "Keep Me in the Loop" Close (Use after they reply "nothing right now"):**
 - "Right on... Well I'd rather see too much, than miss a deal... keep me in the loop if something comes your way in the next monthish? 🤞🙏"
-- "Just keep me in the loop. I'm ready to buy whenever it comes time to close"
+- "Okie dokie... Keep me in the loop if something does come your way in the next monthish?"
+
+### TEXTS TO AVOID IN SEQUENCES (Low Reply Rates at Scale)
+
+**"Super confused" — 5.8% reply rate (WORST). Remove from all sequences.**
+- "I'm super confused by you not calling me anymore, you were super eager to work when we first spoke.." → Only 7 replies out of 121 sends as follow-up. Too heavy, too guilt-trippy. By the time this fires, they're already gone.
+
+**"What happened" — 14.9% reply rate (OVERRATED)**
+- "What the heck lol... What happened?" → Only 117 replies out of 787 sends. Was overrated in small-sample analysis. Works OK early in sequence but NOT as a late-stage re-engagement.
+
+**"Waiting meme" — 9.4% reply rate**
+- "Me: Waiting for you to bring me a deal:" → Only 3 replies out of 32. Cute but doesn't drive responses.
 
 ### Holiday and Personal Messages
 
@@ -447,14 +480,32 @@ Anthony: "Heck yeah! Thanks man 🙏 We'll talk soon 🤙"
 
 ## SECTION 11: AGENT-SPECIFIC SMS STYLE NOTES
 
-### Gayden Rosales
-- Master of the playful escalation. Uses emojis heavily (🤞🏼🤞🏼, 🥲🥲🥲🤣🤣, 🤷‍♀️🤷‍♀️)
-- Keeps check-ins short: "How're things?" / "Okie dokie... Anything on the horizon?"
-- Deal-stage texts are efficient: "Okie dokie... Signed" / "Yes ma'am... We're good to go"
-- Uses "spend some money" framing consistently
-- Sends memes/images as guilt-trip humor
+### Gayden Rosales (Quantified from 19,878 outbound texts)
+
+**Voice DNA (measured across 20K texts):**
+- "..." (trailing ellipsis) in 61% of messages — his signature rhythm
+- "lol" in 37% of messages — softens everything
+- "favorite" in 14% (2,814 uses) — his relationship anchor word
+- "how goes it" in 11.5% — preferred greeting over "hey"
+- "not trying to" in 7.5% — always softening the ask
+- "squeaky wheel" in 6.4% — go-to persistence justification
+- Average message: 129 chars, median 122 chars
+- Questions in 52% of messages
+- Top emojis: 🤞 (839x), 🤙 (520x), 🙏🏼 (519x), 🤷‍♀️ (460x), 🥲 (280x)
+
+**Most-Used Templates (by volume):**
+1. "Come onnnnn lol... Is this your way of saying I'm not your favorite anymore?" (875x)
+2. "I'm not trying to be annoying, it's just the squeaky wheel gets the grease lol..." (811x)
+3. "Don't leave me hanging lol I'm not looking to create extra work for you..." (516x)
+4. "How's my very favorite realtor in the whole wide world doing?" (515x)
+5. "Well, not sure what happened... give me a shout or connect me with another realtor..." (460x)
+
+**Style Rules:**
+- Makes realtors feel like friends, not leads
+- Always gives an off-ramp ("just say so", "lose your number", "zero hard feelings")
+- Deal-stage texts are ultra-efficient: "Okie dokie... Signed" / "Not a problem 🤙"
 - Signs post-call texts: "- Gayden Rosales gayden@goodresults.org"
-- Strength: Makes realtors feel like friends, not leads
+- Never hostile — guilt is always wrapped in humor
 
 ### Anthony Cruz
 - Enthusiastic, grateful, fast
@@ -521,29 +572,54 @@ Anthony: "Heck yeah! Thanks man 🙏 We'll talk soon 🤙"
 
 ---
 
-## SECTION 14: KEY METRICS FROM CRM DATA (March 2026)
+## SECTION 14: KEY METRICS FROM FULL CRM DATA (March 2026)
 
-### Volume by Realtor (Deal-Producing Threads Only)
-- Meghan Hofland: 310 msgs (116 out / 194 in) — Las Vegas — Multiple deals
-- John Williford: 291 msgs — Reno — Active relationship
-- Kari Breuer: 160 msgs — Reno — Warm, deal-producing
-- Sonya Milana: 135 msgs — Las Vegas — Active prospecting
-- Max Buffamante: 131 msgs — Houston — Flip partner relationship
-- Daniel J Caldera: 118 msgs — Multi-agent touches
-- Hanna Nardelli: 103 msgs — Las Vegas — Escalation sequence target
-- Rod V. Blake: 97 msgs — Las Vegas — Consistent check-ins
-- Javier Gallardo: 94 msgs — Houston — Fast deal (Melbourne St)
-- Michelle VanderStokker: 92 msgs — Reno — Steady engagement
-- Cathy Genovesi: 50 msgs — Houston — Fallen Oaks deal
-- Brent Copeland: 50 msgs — Reno — Escalation target
-- Tonia Smith: 20 msgs — Houston — Early relationship
+### Full CRM Overview (34,811 messages, 1,147 contacts)
+- Total outbound: 21,531 | Total inbound: 13,280
+- Overall reply rate: 44.7% (9,619 outbound texts got an inbound reply)
+- Follow-up reply rate (after silence): 28.3% (2,812 breakthroughs out of 9,937 follow-ups)
+- Conversation starter reply rate: 38.3% (1,926 replied out of 5,034 starters)
+- Average conversation depth: 30.3 messages per contact
 
-### Key Insight
-The realtors with the most messages (Meghan, John, Kari) are the ones producing the most deals. Volume = relationship depth = deal flow. There is no shortcut.
+### Outbound Volume by Agent
+- Gayden Rosales: 19,878 (92% of all outbound)
+- Ana Sanchez: 814
+- Gabrielle Connelly: 550
+- Dan VanMatre: 145
+- Anthony Cruz: 80
+- Joe Kruse: 62
+
+### Reply Rate Rankings — Conversation Starters
+1. "Favorite realtor" pattern: 41.6% (1,269 sends — statistically significant)
+2. Humor-based: 37.1% (1,315 sends)
+3. "Spend money" pattern: 33.3% (693 sends)
+
+### Reply Rate Rankings — Follow-Ups (After Silence)
+1. Short questions: 52.3% (310 sends)
+2. Casual check-in: 50.0% (22 sends)
+3. "Favorite person" pattern: 33.8% (842 sends)
+4. Humor: 32.7% (2,806 sends)
+5. "Spend money": 21.1% (408 sends)
+6. "Squeaky wheel": 21.5% (1,106 sends)
+7. "Don't love me": 16.7% (114 sends)
+8. "What happened": 14.9% (787 sends) ⚠️ OVERRATED
+9. "Waiting meme": 9.4% (32 sends)
+10. "Super confused": 5.8% (121 sends) ❌ REMOVE FROM SEQUENCES
+
+### Key Insight (Updated)
+Volume still equals relationship depth equals deal flow. But the DATA now shows which specific texts work and which don't. "Super confused" and "what happened" should be retired from late-sequence positions. "Favorite realtor" and short questions are the real workhorses. The sequence that produces the most replies front-loads the patterns with highest reply rates at each position in the flow.
+
+### Close CRM Workflows (Active — March 2026)
+- "🔥 G Follow Up v2 — Data-Driven" — NEW, 8 steps over 24 days, all-original text, data-optimized ordering
+- "🔥 G Follow Up - Optimized" — 8 steps over 24 days, reordered existing templates
+- "🟢🟢🟢Follow Up - G" — Original 6-step sequence (active)
+- "***FOLLOW UP*** Use Me - G" — Clone of original (active)
+- "Bub Follow Up" — Anthony's 6-step sequence
+- "Bub Cold" — Anthony's 8-step cold sequence
 
 ---
 
 **Last updated:** March 28, 2026
 **Format:** Optimized for SMS Playbook deployment
-**Source:** Master KB v2.1 + CRM deal export analysis (1,651 messages, 13 realtors)
+**Source:** Master KB v2.2 + full CRM export analysis (34,811 messages, 1,147 contacts)
 **Next update:** Sunday consolidation cycle
