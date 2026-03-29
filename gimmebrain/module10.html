@@ -621,7 +621,7 @@ function answerKC(sectionNum, selectedIdx, isCorrect){
   if(el) el.textContent = streak > 0 ? streak + '-day streak' : 'Start your streak';
 })();
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwp9uom7vWnfHAdJlkJEq0mSm_SDNQnFSDn3PysoXwRcqieYfVuwLN9dbEPaYVshUun/exec';
+const APPS_SCRIPT_URL = '/.netlify/functions/module-api';
 let quizQuestions = [], userAnswers = {}, quizDone = false, masteredIndices = [];
 
 async function loadMasteredAndInit(){
