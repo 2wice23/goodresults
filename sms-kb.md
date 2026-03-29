@@ -31,7 +31,7 @@ PREVIOUS CYCLE (2026-03-28 v2.2):
 # GR SMS PLAYBOOK — KNOWLEDGE BASE v2.3
 **Version:** 2.3 — Updated from full CRM analysis (March 28, 2026)
 **Purpose:** SMS strategy, templates, sequences, and evaluation criteria for Good Results Home Buyers
-**Source:** Master KB v2.2 + full CRM export of 34,811 messages across 1,147 contacts
+**Source:** Master KB v2.3 + full CRM export of 34,811 messages across 1,147 contacts
 **Status:** COMPLETE — incorporates full-scale reply rate analysis and voice pattern data
 
 ---
