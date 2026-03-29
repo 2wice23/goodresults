@@ -461,20 +461,24 @@ ${text.slice(0, 14000)}`;
     const resp = await fetch(ANTHROPIC_PROXY, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 800, messages: [{ role: 'user', content: prompt }] })
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1200, messages: [{ role: 'user', content: prompt }] })
     });
     const result = await resp.json();
+    if (result.error) throw new Error('API error: ' + (result.error.message || result.error));
+    if (!result.content || !result.content[0]) throw new Error('Empty response from Claude');
     const raw = result.content[0].text;
+    console.log('Claude raw response:', raw);
     const jsonStr = raw.match(/\{[\s\S]*\}/)?.[0];
-    if (!jsonStr) throw new Error('No JSON returned');
+    if (!jsonStr) throw new Error('No JSON in response');
     extractedDeal = JSON.parse(jsonStr);
+    console.log('Extracted deal:', extractedDeal);
     renderExtracted(extractedDeal);
     updateRepairsTotal();
     setStatus('Extracted ✓ — fill in your numbers and launch', 'active');
     document.getElementById('launchBtn').disabled = false;
   } catch(e) {
-    setStatus('Extraction failed — you can still fill fields manually and launch', 'error');
-    console.error(e);
+    setStatus('Extraction failed: ' + e.message + ' — fill fields manually', 'error');
+    console.error('Extraction error:', e);
     document.getElementById('extractBtn').disabled = false;
     document.getElementById('launchBtn').disabled = false;
   }
