@@ -1,11 +1,11 @@
 // Netlify serverless function — replaces Google Apps Script for training modules
 // Handles: quiz score saves, module update notes, mastery progress lookups
 // Storage: GitHub JSON files in training-data/ folder (2wice23/goodresults repo)
-// Notifications: Short Slack pings only — full data lives in the Training Board canvas
+// Notifications: Quiz scores with leaderboard trash talk + module update pings to Slack
 //
 // Env vars used:
 //   GitHubToken            — GitHub PAT for reading/writing to repo
-//   SLACK_TRAINING_WEBHOOK — Slack incoming webhook for #hack-the-planet (brief pings only)
+//   slack_the_group_chat   — Slack incoming webhook for #the-group-chat
 
 const GITHUB_API = 'https://api.github.com';
 const REPO_PATH = '/repos/2wice23/goodresults/contents';
@@ -266,7 +266,7 @@ exports.handler = async (event) => {
   }
 
   const GITHUB_TOKEN = process.env.GitHubToken;
-  const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK_URL;
+  const SLACK_WEBHOOK = process.env.slack_the_group_chat;
 
   if (!GITHUB_TOKEN) {
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'GitHubToken not configured' }) };
