@@ -827,5 +827,34 @@
       15,
       20
     ]
+  },
+  {
+    "timestamp": "2026-03-30T21:16:19.700Z",
+    "agent": "Gayden",
+    "email": "gayden@goodresults.org",
+    "module": 6,
+    "moduleTitle": "Buy Box, Markets & Company",
+    "scorePct": 90,
+    "correct": 9,
+    "total": 10,
+    "xp": 108,
+    "poolSize": 17,
+    "correctIndices": [
+      2,
+      10,
+      11,
+      4,
+      1,
+      7,
+      0,
+      3,
+      16,
+      12,
+      14,
+      8,
+      13,
+      15,
+      9
+    ]
   }
 ]
