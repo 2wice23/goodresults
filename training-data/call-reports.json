@@ -558,5 +558,25 @@
     "resistance_moments": "Initial confusion about how Dan got his contact | Didn't remember the Friday text message | Brief guard up asking 'Who give you my contact?'",
     "script_moment": "After Santiago said he didn't remember the text: 'No worries at all - I'm Dan, I'm a cash buyer expanding from Nevada into Houston, and I'm looking to connect with agents who work with investors on fix and flip opportunities. Do you work with investors at all?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774906653294",
+    "timestamp": "2026-03-30T21:37:33.294Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Dana Caldwell",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "9m 8s",
+    "call_date": "03/30/2026",
+    "score": 82,
+    "realtor_engagement": 85,
+    "summary": "Franklin followed up with Dana, a realtor he met at a networking event about a year ago. Dana mentioned a potential condo but it didn't fit Franklin's buy box. They had an engaging conversation about Dana's rental portfolio and upcoming travel plans.",
+    "what_worked": "Strong opener referencing prior meeting | Complete buy box delivery with all elements | Excellent conversation flow that let Dana share extensively | Genuine interest in her business model | Specific follow-up timeline set",
+    "what_to_tighten": "Could have explored her network connections given her rental expertise | Missed opportunity to ask about other investors she knows",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked if she knows other investors or agents who might have distressed properties | Could have explored referral opportunities given her established network",
+    "positive_moments": "Volunteered potential condo property unprompted | Shared extensive details about her 7-property rental portfolio | Asked qualifying questions about cash vs terms | Discussed challenges with terms deals showing industry knowledge | Shared personal travel plans and movie recommendations | Agreed to follow-up schedule willingly",
+    "resistance_moments": "Brief initial response that she doesn't currently have anything | Had to reject his interest due to property type mismatch",
+    "script_moment": "When Dana mentioned struggling with terms deals, Franklin could have said: 'That's exactly why we try to make our cash offers as clean as possible - no financing contingencies, close in 2-3 weeks. Do you have any agents in your office who work with distressed properties or probate?'",
+    "on_leaderboard": "yes"
   }
 ]
