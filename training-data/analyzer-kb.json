@@ -62,6 +62,9 @@
     "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Agreed to email exchange for ongoing communication"
   ],
   "negative": [
+    "[Anthony Cruz — NEGOTIATION]: Revealed property is already under contract early in call",
+    "[Anthony Cruz — NEGOTIATION]: Firm on minimum $70k price point",
+    "[Anthony Cruz — NEGOTIATION]: Expressed negative experience with his preferred title company",
     "[Anthony Cruz — DEAL DISCUSSION]: Initial confusion when she just walked in the door created some delay",
     "[Anthony Cruz — DEAL DISCUSSION]: Couldn't answer why the flipper wasn't taking the project themselves",
     "[Anthony Cruz — RE-ENGAGEMENT]: Direct 'No, I don't have that' when asked about renovation properties",
@@ -118,10 +121,7 @@
     "[Gayden Rosales — OTHER]: Called the title officer 'poop ball' and 'goofball' when she couldn't provide legal advice",
     "[Gayden Rosales — OTHER]: Became hostile when told the officer couldn't interfere with seller's title company choice",
     "[Gayden Rosales — OTHER]: Escalated frustration into personal attacks",
-    "[Gayden Rosales — OTHER — manually flagged]: Called the title officer 'poop ball' and 'goofball' when she couldn't provide legal advice",
-    "[Gayden Rosales — OTHER — manually flagged]: Became hostile when told the officer couldn't interfere with seller's title company choice",
-    "[Gayden Rosales — OTHER — manually flagged]: Escalated frustration into personal attacks",
-    "[Anthony Cruz — WARM FOLLOW-UP]: Initial confusion when Anthony called him Kayla"
+    "[Gayden Rosales — OTHER — manually flagged]: Called the title officer 'poop ball' and 'goofball' when she couldn't provide legal advice"
   ],
   "reknowledge": [
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: Stacy Rogers has a marketing campaign launching next week that should generate additional property leads",
