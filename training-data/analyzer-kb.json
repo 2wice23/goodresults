@@ -62,6 +62,8 @@
     "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: Specific logistics provided (Google Drive, pictures vs video)"
   ],
   "negative": [
+    "[Anthony Cruz — DEAL DISCUSSION]: Brief 'I personally don't' when asked about distressed properties in pipeline",
+    "[Anthony Cruz — DEAL DISCUSSION]: Had to clarify the duplex situation when Anthony seemed confused about the address",
     "[Gayden Rosales — CONTRACT WALKTHROUGH]: Initial confusion at start of call",
     "[Gayden Rosales — CONTRACT WALKTHROUGH]: Had to end call when title company called",
     "[Dan VanMatre — RE-ENGAGEMENT]: Immediate 'I don't right now' to investment properties question",
@@ -119,9 +121,7 @@
     "[Anthony Cruz — WARM FOLLOW-UP]: Brief 'Not often' and 'Sometimes' responses when asked about deal frequency",
     "[Anthony Cruz — WARM FOLLOW-UP]: Very brief responses throughout",
     "[Anthony Cruz — WARM FOLLOW-UP]: No questions or curiosity about Anthony's business",
-    "[Anthony Cruz — WARM FOLLOW-UP]: Very brief 'Distress. I would have to see what we have currently' - not immediately helpful",
-    "[Anthony Cruz — WARM FOLLOW-UP]: Somewhat dismissive 'right now I don't really have much' without much exploration",
-    "[Anthony Cruz — DEAL REJECTION]: Brief 'I don't have anything right now' after rejection"
+    "[Anthony Cruz — WARM FOLLOW-UP]: Very brief 'Distress. I would have to see what we have currently' - not immediately helpful"
   ],
   "reknowledge": [
     "[RE Knowledge — Gayden Rosales — 03/30/2026]: the analyzer appears to be taking the n/a and including them in average score... if a score has any n/a in it, do not include them in the average.\nalso, does the filler words affect the score? if so, let's make the filler word thing way better. or remove its affect on score",
