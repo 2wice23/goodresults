@@ -1063,5 +1063,29 @@
       15,
       7
     ]
+  },
+  {
+    "timestamp": "2026-03-30T22:46:05.069Z",
+    "agent": "Joe",
+    "email": "joe@goodresults.org",
+    "module": 10,
+    "moduleTitle": "Investor Vocabulary",
+    "scorePct": 100,
+    "correct": 10,
+    "total": 10,
+    "xp": 120,
+    "poolSize": 25,
+    "correctIndices": [
+      20,
+      13,
+      22,
+      12,
+      14,
+      18,
+      17,
+      0,
+      3,
+      5
+    ]
   }
 ]
