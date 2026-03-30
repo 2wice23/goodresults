@@ -6,7 +6,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "Test submission from the fix - delete me",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Test entry \u2014 discarded. 2026-03-30."
   },
   {
     "timestamp": "2026-03-29T17:00:28.641Z",
@@ -14,8 +15,9 @@
     "moduleTitle": "Pipeline & CRM",
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
-    "update": "When a due for pool question number 24 when an offer gets submitted and doesn’t get accepted, we do not just move it to dead. We follow up with it in a week or two or three until we get a deal or till the deal dies for some reason always follow up that is what this company is built on.",
-    "status": "pending"
+    "update": "When a due for pool question number 24 when an offer gets submitted and doesn't get accepted, we do not just move it to dead. We follow up with it in a week or two or three until we get a deal or till the deal dies for some reason always follow up that is what this company is built on.",
+    "status": "processed",
+    "processedNote": "Drafted KB change: strengthen Tworking It description and Critical Rule #5 re rejected offers never going to Dead. Add Q24 to Module 1 quiz pool notes. Awaiting Gayden approval. 2026-03-30."
   },
   {
     "timestamp": "2026-03-30T00:30:48.376Z",
@@ -24,7 +26,8 @@
     "agent": "Test",
     "email": "test@test.com",
     "update": "TEST SUBMIT - ignore this",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Test entry \u2014 discarded. 2026-03-30."
   },
   {
     "timestamp": "2026-03-30T00:31:03.681Z",
@@ -33,7 +36,8 @@
     "agent": "Test",
     "email": "test@test.com",
     "update": "test submission - please ignore",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Test entry \u2014 discarded. 2026-03-30."
   },
   {
     "timestamp": "2026-03-30T00:32:06.326Z",
@@ -42,7 +46,8 @@
     "agent": "Test",
     "email": "test@test.com",
     "update": "test 123 test 123",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Test entry \u2014 discarded. 2026-03-30."
   },
   {
     "timestamp": "2026-03-30T05:15:41.562Z",
@@ -51,6 +56,7 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "Q28 - a model match definitely means identical. Like same footage; bed/bath, year built. Identical",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Drafted KB change: add explicit model match definition to Module 7 Comp Rules. Add Q28 to Module 7 quiz pool notes. Awaiting Gayden approval. 2026-03-30."
   }
 ]
