@@ -738,5 +738,25 @@
     "resistance_moments": "Had to cut call short due to vet appointment timing",
     "script_moment": "When she said the property would be worth $450-500k flipped and they're asking $300k, Franklin should have said: 'That sounds like it could work - let me run our numbers tonight and call you back tomorrow morning with a decision. Does that timeline work for you?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774912688949",
+    "timestamp": "2026-03-30T23:18:08.949Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Julie Ardizzone",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "2m 25s",
+    "call_date": "03/30/2026",
+    "score": 77,
+    "realtor_engagement": 65,
+    "summary": "Franklin re-engaged with Julie after 6 months, delivered partial buy box verbally despite her being on the road, and set a follow-up timeline. Julie was receptive but brief due to driving.",
+    "what_worked": "Strong opener with specific context about 6-month gap | Complete buy box delivery with memorable language | Adapted well to her driving situation | Set clear follow-up timeline with text promise",
+    "what_to_tighten": "Could have asked about her typical deal types or market areas | Might have offered to call back when she's not driving",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked what types of properties she typically handles | Didn't explore her market area or specialty",
+    "positive_moments": "Said 'Yeah, that'd be great' when offered to text the buy box | Agreed to follow-up timeline with 'sounds good' | Remained engaged despite driving",
+    "resistance_moments": "Very brief 'Not lately' and 'No' responses showing limited current inventory | Had to keep responses short due to driving safety",
+    "script_moment": "After she said 'Not lately, I haven't had anything' - 'No worries at all. Just so I know what to keep an eye out for in the future, what types of properties do you typically work with in your area?'",
+    "on_leaderboard": "yes"
   }
 ]
