@@ -1,5 +1,9 @@
 {
   "positive": [
+    "[Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Asked 'are you looking to buy cash or how are you?' showing genuine interest",
+    "[Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Immediately offered to look during her Baytown meetings tomorrow",
+    "[Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Mentioned specific FSBO prospects she's meeting with",
+    "[Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Confirmed receipt of his contact information",
     "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Asked 'are you looking for turnkey or needing fixing up?' showing she understood his needs",
     "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Volunteered extensive details about her 12 properties and partner's distressed portfolio",
     "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Offered to pass his information to her partner who has distressed properties",
@@ -55,15 +59,9 @@
     "[Kayden Rogers — RE-ENGAGEMENT — Grade B+]: Strong positioning with Mr. Rosales credibility",
     "[Kayden Rogers — RE-ENGAGEMENT — Grade B+]: Excellent next step with multiple contact methods",
     "[Kayden Rogers — RE-ENGAGEMENT — Grade B+]: Adapted well to her questions and showed flexibility",
-    "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Tracy immediately offered a property: 'we have a house that's out here in Katy'",
-    "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Provided detailed property description including location, no HOA, school proximity, pool",
-    "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Asked clarifying questions about their strategy (rental vs flip, pool concerns)",
-    "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Said 'Let me look and see if I can find something' showing commitment to help",
-    "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Agreed to email exchange for ongoing communication"
+    "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Tracy immediately offered a property: 'we have a house that's out here in Katy'"
   ],
   "negative": [
-    "[Dan VanMatre — RE-ENGAGEMENT]: Didn't remember their previous conversation due to phone change",
-    "[Dan VanMatre — RE-ENGAGEMENT]: Brief initial confusion about the prior contact",
     "[Franklin Ladaga — WARM FOLLOW-UP]: Initial explanation of why her market is difficult for investors (contractor costs, housing challenges)",
     "[Franklin Ladaga — WARM FOLLOW-UP]: Mentioned she focuses on vacant land primarily rather than houses",
     "[Anthony Cruz — DEAL DISCUSSION]: Initial confusion when she just walked in the door created some delay",
@@ -121,9 +119,14 @@
     "[Dan VanMatre — RE-ENGAGEMENT]: Cautious at the beginning due to not remembering previous contact",
     "[Gayden Rosales — OTHER]: Called the title officer 'poop ball' and 'goofball' when she couldn't provide legal advice",
     "[Gayden Rosales — OTHER]: Became hostile when told the officer couldn't interfere with seller's title company choice",
-    "[Gayden Rosales — OTHER]: Escalated frustration into personal attacks"
+    "[Gayden Rosales — OTHER]: Escalated frustration into personal attacks",
+    "[Gayden Rosales — OTHER — manually flagged]: Called the title officer 'poop ball' and 'goofball' when she couldn't provide legal advice",
+    "[Gayden Rosales — OTHER — manually flagged]: Became hostile when told the officer couldn't interfere with seller's title company choice"
   ],
   "reknowledge": [
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: Dulce Pacheco works Baytown area and has FSBO prospects",
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: She has meetings scheduled with three families doing for-sale-by-owner",
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: She's willing to actively look for investment properties during client meetings",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Lovelock NV market has contractor scarcity driving up renovation costs significantly",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Mining industry in Pershing County creates housing shortage for workers",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Laura Lunn primarily focuses on vacant land deals but handles some residential",
@@ -200,9 +203,6 @@
     "[Dan VanMatre — COLD OPEN — Grade A]: [Dan VanMatre — COLD OPEN — Realtor responded positively to]: Asked about Houston deals and immediately offered a property",
     "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: Enthusiastic acceptance of partnership proposal",
     "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: Clear process explanation for deal evaluation",
-    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: Strong positioning with reputation and resources",
-    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: Good market knowledge discussion",
-    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Realtor responded positively to]: Joe initiated the partnership proposal",
-    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Realtor responded positively to]: Asked specific follow-up questions about geography and process"
+    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: Strong positioning with reputation and resources"
   ]
 }
