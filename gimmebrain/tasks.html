@@ -136,6 +136,19 @@ body>*{position:relative;z-index:1;}
 .tag-status{color:var(--green);border-color:var(--green-border);background:var(--green-bg);}
 .tag-error{color:var(--red);border-color:var(--red-border);background:var(--red-bg);}
 .tag-pending{color:var(--dim);border-color:rgba(85,90,102,.3);background:rgba(85,90,102,.05);}
+.tag-ai{color:#A78BFA;border-color:rgba(167,139,250,.25);background:rgba(167,139,250,.08);}
+.tag-server{color:var(--green);border-color:var(--green-border);background:var(--green-bg);}
+.tag-disabled{color:var(--dim);border-color:rgba(85,90,102,.3);background:rgba(85,90,102,.05);text-decoration:line-through;}
+
+.dot-purple{background:#A78BFA;box-shadow:0 0 8px rgba(167,139,250,.5);}
+
+.runtime-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.58rem;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;padding:5px 14px;border-radius:4px;
+}
+.runtime-server{color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);}
+.runtime-ai{color:#A78BFA;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.25);}
 
 .task-toggle{
   font-size:.7rem;color:var(--dim);font-weight:600;
@@ -230,31 +243,48 @@ body>*{position:relative;z-index:1;}
 <section class="hero fade-in">
   <div class="hero-eyebrow">Scheduled Tasks</div>
   <h1>Task <span>Monitor</span></h1>
-  <p class="hero-sub">Every automated task that runs on the Good Results back end. These run on Netlify servers on a schedule — they do not require anyone to be logged in, any computer to be on, or any manual trigger. When something goes wrong, they post to Slack. When everything is fine, they log quietly and move on.</p>
+  <p class="hero-sub">Every automated task that runs on the Good Results back end — split into server tasks that run 24/7 regardless of anything, and AI tasks that require an active Cowork session. If Gayden's computer is off, the server tasks keep running but the AI tasks pause until the next session.</p>
 </section>
 
 <main class="main">
 
   <!-- Overview Strip -->
-  <div class="overview-strip fade-in" id="overview-strip">
+  <div class="overview-strip fade-in" id="overview-strip" style="grid-template-columns:repeat(4,1fr);">
     <div class="ov-card"><div class="ov-num dim" id="ov-total">—</div><div class="ov-label">Total Tasks</div></div>
-    <div class="ov-card"><div class="ov-num dim" id="ov-healthy">—</div><div class="ov-label">Healthy</div></div>
+    <div class="ov-card"><div class="ov-num dim" id="ov-server">—</div><div class="ov-label">Server (24/7)</div></div>
+    <div class="ov-card"><div class="ov-num dim" id="ov-ai">—</div><div class="ov-label">AI (Cowork)</div></div>
     <div class="ov-card"><div class="ov-num dim" id="ov-issues">—</div><div class="ov-label">Issues</div></div>
   </div>
 
-  <!-- Task List -->
-  <div class="sec-label fade-in">All Tasks</div>
-  <div class="task-list fade-in" id="task-list">
-    <div class="loading"><div class="loading-spinner"></div>Loading task data...</div>
+  <!-- Server Tasks -->
+  <div class="sec-label fade-in"><span class="runtime-badge runtime-server">Netlify Server</span> Always Running — 24/7</div>
+  <div class="task-list fade-in" id="server-task-list">
+    <div class="loading"><div class="loading-spinner"></div>Loading server tasks...</div>
+  </div>
+
+  <!-- AI Tasks -->
+  <div class="sec-label fade-in"><span class="runtime-badge runtime-ai">Cowork AI</span> Requires Active Session</div>
+  <div class="task-list fade-in" id="ai-task-list"></div>
+
+  <!-- AI-Powered Site Features -->
+  <div class="sec-label fade-in">AI-Powered Site Features</div>
+  <div class="fade-in" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:20px;">
+    <div style="font-size:.92rem;color:var(--cream);line-height:1.72;max-width:700px;">
+      <p style="margin-bottom:14px;">These tools use AI through Netlify proxy functions and work <span style="color:var(--green);font-weight:600;">24/7 for anyone on the team</span>, no computer required:</p>
+      <p style="margin-bottom:6px;color:var(--white);font-weight:600;">Call Analyzer <span style="color:var(--muted);font-weight:400;">— Upload a call recording, get scored and coached by AI</span></p>
+      <p style="margin-bottom:6px;color:var(--white);font-weight:600;">Deal Generator <span style="color:var(--muted);font-weight:400;">— Pull property data and generate deal packages with AI</span></p>
+      <p style="margin-bottom:14px;color:var(--white);font-weight:600;">Deal Doc Builder <span style="color:var(--muted);font-weight:400;">— AI generates formatted deal documentation from inputs</span></p>
+      <p style="font-size:.82rem;color:var(--dim);">These call the Anthropic API via <span style="color:var(--orange);font-weight:600;">anthropic-proxy.js</span> on Netlify. The API key lives in the <span style="color:var(--orange);font-weight:600;">AnthropicAPI</span> env var. No Cowork session needed.</p>
+    </div>
   </div>
 
   <!-- How It Works -->
   <div class="sec-label fade-in">How This Works</div>
   <div class="fade-in" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 28px;">
     <div style="font-size:.92rem;color:var(--cream);line-height:1.72;max-width:700px;">
-      <p style="margin-bottom:14px;">Each task is a serverless function deployed on Netlify with a cron schedule attached to it. Netlify runs the function automatically at the scheduled time, every day or every week, regardless of whether anyone is logged in or any computer is turned on.</p>
-      <p style="margin-bottom:14px;">When a task runs, it does its job (check KBs, pull leaderboard data, scan for deal deadlines), logs the result to this page, and posts to Slack if there is anything the team needs to see. If a task fails, it posts an error alert to Slack and tags Gayden and Joe.</p>
-      <p>To add a new scheduled task, create a new Netlify function, add a schedule entry in <span style="color:var(--orange);font-weight:600;">netlify.toml</span>, and register it in <span style="color:var(--orange);font-weight:600;">task-log.json</span>. It deploys automatically with the next GitHub push.</p>
+      <p style="margin-bottom:14px;"><span style="color:var(--green);font-weight:700;">Server tasks</span> are Netlify scheduled functions that run on cron schedules, 24/7. They handle monitoring, digests, and simple data pulls. They do not need AI — just HTTP calls to GitHub, Slack, and the module API.</p>
+      <p style="margin-bottom:14px;"><span style="color:#A78BFA;font-weight:700;">AI tasks</span> run in Cowork (Claude desktop app) and require an active session on Gayden's computer. These handle things that need intelligence — analyzing call data, merging knowledge bases, writing coaching reports, composing Slack messages with context. If the computer is off or Cowork isn't running, these tasks pause and pick up at the next session.</p>
+      <p>The site tools (Analyzer, Deal Generator, Deal Docs) use AI but run through Netlify proxy functions, so they work for the whole team around the clock.</p>
     </div>
   </div>
 
@@ -300,98 +330,174 @@ function formatTime(iso) {
   });
 }
 
+// ── AI Tasks (Cowork scheduled) — hardcoded since they run client-side ──
+const AI_TASKS = [
+  {
+    name: 'Morning Briefing',
+    description: 'Pulls leaderboard + call data, writes a motivational team briefing with accountability callouts, posts to #the-group-chat.',
+    schedule: 'Mon–Fri 8:40 AM',
+    slackChannel: '#the-group-chat',
+    enabled: true,
+    lastRun: null, // will be filled from Cowork if available
+    requiresAI: 'Writes custom Slack messages with context-aware commentary'
+  },
+  {
+    name: 'Weekly Coaching Report',
+    description: 'Analyzes each agent\'s call volume, scores, and KB data to generate per-agent coaching summaries with specific improvement suggestions.',
+    schedule: 'Monday 8:04 AM',
+    slackChannel: '#the-group-chat',
+    enabled: true,
+    requiresAI: 'Generates personalized coaching insights from raw score data'
+  },
+  {
+    name: 'Daily KB Learn',
+    description: 'Pulls new call analyzer data, reads the current analyzer-kb.md on GitHub, proposes targeted updates based on patterns in recent calls.',
+    schedule: 'Daily 9:05 AM',
+    slackChannel: '#hack-the-planet',
+    enabled: true,
+    requiresAI: 'Reads call data and writes KB improvement proposals'
+  },
+  {
+    name: 'Weekly KB Sync (Master Merge)',
+    description: 'Hub-and-spoke sync — consolidates all small brain changes into the Master KB, pushes updates back down to individual KBs, commits to GitHub.',
+    schedule: 'Sunday 9:02 AM',
+    slackChannel: '#hack-the-planet',
+    enabled: true,
+    requiresAI: 'Merges and reconciles 4 knowledge bases intelligently'
+  },
+  {
+    name: 'Module Update Queue Processor',
+    description: 'Reads pending module update submissions from GitHub JSON, reviews them, and posts a summary of what was submitted and by whom.',
+    schedule: 'Daily 9:36 AM',
+    slackChannel: '#hack-the-planet',
+    enabled: true,
+    requiresAI: 'Summarizes and categorizes submitted module notes'
+  },
+  {
+    name: 'Call Target Tracker',
+    description: 'Checks daily call counts against the 13/day target for each agent. Tags anyone behind and posts running totals to keep the team accountable.',
+    schedule: 'Hourly 10AM–6PM Mon–Fri',
+    slackChannel: '#the-group-chat',
+    enabled: true,
+    requiresAI: 'Composes targeted accountability messages with context'
+  }
+];
+
+function renderTaskCard(t, runtime) {
+  const isAI = runtime === 'ai';
+  const dotClass = !t.enabled ? 'dot-gray' : isAI ? 'dot-purple' : (t._status === 'success' ? 'dot-green' : t._status === 'error' ? 'dot-red' : 'dot-gray');
+
+  const statusTag = !t.enabled
+    ? '<span class="task-tag tag-disabled">Disabled</span>'
+    : t._status === 'success'
+    ? '<span class="task-tag tag-status">Last Run: OK</span>'
+    : t._status === 'error'
+    ? '<span class="task-tag tag-error">Last Run: Error</span>'
+    : isAI
+    ? '<span class="task-tag tag-ai">Runs in Cowork</span>'
+    : '<span class="task-tag tag-pending">Not Run Yet</span>';
+
+  const lastRunTime = t._lastRunTime ? `<span class="task-tag tag-pending">${timeAgo(t._lastRunTime)}</span>` : '';
+
+  const runtimeTag = isAI
+    ? '<span class="task-tag tag-ai">AI Required</span>'
+    : '<span class="task-tag tag-server">Serverless</span>';
+
+  // Run history rows (server tasks only)
+  let historyHtml = '';
+  if (t._runs && t._runs.length > 0) {
+    historyHtml = t._runs.slice(0, 15).map(r => `
+      <div class="run-row">
+        <div class="run-status ${r.status === 'success' ? 'run-ok' : 'run-err'}"></div>
+        <div class="run-details">${r.details || 'No details'}</div>
+        <div class="run-time">${formatTime(r.timestamp)}</div>
+      </div>
+    `).join('');
+  } else if (isAI) {
+    historyHtml = `<div class="no-runs">AI tasks run in Cowork sessions. Run history is not tracked on this page — check Slack for output.${t.requiresAI ? '<br><br><span style="color:#A78BFA;font-weight:600;">Why AI:</span> ' + t.requiresAI : ''}</div>`;
+  } else {
+    historyHtml = '<div class="no-runs">This task has not run yet. It will execute on its next scheduled time and results will appear here.</div>';
+  }
+
+  return `
+    <div class="task-card" onclick="this.classList.toggle('open')">
+      <div class="task-header">
+        <div class="task-status-dot ${dotClass}"></div>
+        <div class="task-info">
+          <div class="task-name">${t.name}</div>
+          <div class="task-desc">${t.description || ''}</div>
+          <div class="task-meta">
+            <span class="task-tag tag-schedule">${t.schedule || t.cron || 'No schedule'}</span>
+            ${t.slackChannel ? `<span class="task-tag tag-slack">${t.slackChannel}</span>` : ''}
+            ${runtimeTag}
+            ${statusTag}
+            ${lastRunTime}
+          </div>
+        </div>
+        <div class="task-toggle"><span class="toggle-arrow">▼</span></div>
+      </div>
+      <div class="task-history">
+        <div class="history-content">
+          <div class="history-title">${isAI ? 'Task Details' : 'Run History'}</div>
+          ${historyHtml}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 // Load and render
 async function loadTasks() {
-  const container = document.getElementById('task-list');
+  const serverContainer = document.getElementById('server-task-list');
+  const aiContainer = document.getElementById('ai-task-list');
+
+  // ── Server tasks from task-status API ──
+  let serverCount = 0, serverIssues = 0;
   try {
     const res = await fetch('/.netlify/functions/task-status');
     const data = await res.json();
     const tasks = data.tasks || {};
     const taskKeys = Object.keys(tasks);
 
-    if (taskKeys.length === 0) {
-      container.innerHTML = '<div class="no-runs">No scheduled tasks configured yet.</div>';
-      return;
-    }
-
-    // Overview stats
-    let healthy = 0, issues = 0;
-    taskKeys.forEach(key => {
-      const t = tasks[key];
-      const lastRun = t.runs && t.runs[0];
-      if (!lastRun) return; // not run yet, don't count
-      if (lastRun.status === 'success') healthy++;
-      else issues++;
-    });
-
-    document.getElementById('ov-total').textContent = taskKeys.length;
-    document.getElementById('ov-total').className = 'ov-num orange';
-
-    document.getElementById('ov-healthy').textContent = healthy;
-    document.getElementById('ov-healthy').className = 'ov-num ' + (healthy > 0 ? 'green' : 'dim');
-
-    document.getElementById('ov-issues').textContent = issues;
-    document.getElementById('ov-issues').className = 'ov-num ' + (issues > 0 ? 'red' : 'green');
-
-    // Render task cards
     let html = '';
     taskKeys.forEach(key => {
       const t = tasks[key];
       const lastRun = t.runs && t.runs[0];
-      const status = lastRun ? lastRun.status : 'pending';
-      const dotClass = status === 'success' ? 'dot-green' : status === 'error' ? 'dot-red' : 'dot-gray';
-      const statusTag = status === 'success'
-        ? '<span class="task-tag tag-status">Last Run: OK</span>'
-        : status === 'error'
-        ? '<span class="task-tag tag-error">Last Run: Error</span>'
-        : '<span class="task-tag tag-pending">Not Run Yet</span>';
-
-      const lastRunTime = lastRun ? `<span class="task-tag tag-pending">${timeAgo(lastRun.timestamp)}</span>` : '';
-
-      // Run history rows
-      let historyHtml = '';
-      if (t.runs && t.runs.length > 0) {
-        historyHtml = t.runs.slice(0, 15).map(r => `
-          <div class="run-row">
-            <div class="run-status ${r.status === 'success' ? 'run-ok' : 'run-err'}"></div>
-            <div class="run-details">${r.details || 'No details'}</div>
-            <div class="run-time">${formatTime(r.timestamp)}</div>
-          </div>
-        `).join('');
-      } else {
-        historyHtml = '<div class="no-runs">This task has not run yet. It will execute on its next scheduled time and results will appear here.</div>';
-      }
-
-      html += `
-        <div class="task-card" onclick="this.classList.toggle('open')">
-          <div class="task-header">
-            <div class="task-status-dot ${dotClass}"></div>
-            <div class="task-info">
-              <div class="task-name">${t.name || key}</div>
-              <div class="task-desc">${t.description || ''}</div>
-              <div class="task-meta">
-                <span class="task-tag tag-schedule">${t.schedule || t.cron || 'No schedule'}</span>
-                ${t.slackChannel ? `<span class="task-tag tag-slack">→ ${t.slackChannel}</span>` : ''}
-                ${statusTag}
-                ${lastRunTime}
-              </div>
-            </div>
-            <div class="task-toggle"><span class="toggle-arrow">▼</span></div>
-          </div>
-          <div class="task-history">
-            <div class="history-content">
-              <div class="history-title">Run History</div>
-              ${historyHtml}
-            </div>
-          </div>
-        </div>
-      `;
+      t._status = lastRun ? lastRun.status : 'pending';
+      t._lastRunTime = lastRun ? lastRun.timestamp : null;
+      t._runs = t.runs || [];
+      t.name = t.name || key;
+      html += renderTaskCard(t, 'server');
+      serverCount++;
+      if (lastRun && lastRun.status === 'error') serverIssues++;
     });
 
-    container.innerHTML = html;
+    serverContainer.innerHTML = html || '<div class="no-runs">No server tasks configured yet.</div>';
   } catch (e) {
-    container.innerHTML = '<div class="no-runs">Could not load task data. The task-status function may not be deployed yet.</div>';
+    serverContainer.innerHTML = '<div class="no-runs">Could not load server task data. The task-status function may not be deployed yet.</div>';
   }
+
+  // ── AI tasks (hardcoded) ──
+  const enabledAI = AI_TASKS.filter(t => t.enabled);
+  aiContainer.innerHTML = AI_TASKS.map(t => {
+    t._status = t.enabled ? 'ai' : 'disabled';
+    return renderTaskCard(t, 'ai');
+  }).join('');
+
+  // ── Overview stats ──
+  const totalTasks = serverCount + AI_TASKS.length;
+  document.getElementById('ov-total').textContent = totalTasks;
+  document.getElementById('ov-total').className = 'ov-num orange';
+
+  document.getElementById('ov-server').textContent = serverCount;
+  document.getElementById('ov-server').className = 'ov-num green';
+
+  document.getElementById('ov-ai').textContent = enabledAI.length;
+  document.getElementById('ov-ai').className = 'ov-num';
+  document.getElementById('ov-ai').style.color = '#A78BFA';
+
+  document.getElementById('ov-issues').textContent = serverIssues;
+  document.getElementById('ov-issues').className = 'ov-num ' + (serverIssues > 0 ? 'red' : 'green');
 }
 
 loadTasks();
