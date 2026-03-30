@@ -1087,5 +1087,27 @@
       3,
       5
     ]
+  },
+  {
+    "timestamp": "2026-03-30T22:53:33.335Z",
+    "agent": "Joe",
+    "email": "joe@goodresults.org",
+    "module": 11,
+    "moduleTitle": "Due Diligence Deep Dive",
+    "scorePct": 80,
+    "correct": 8,
+    "total": 10,
+    "xp": 96,
+    "poolSize": 20,
+    "correctIndices": [
+      4,
+      13,
+      9,
+      3,
+      0,
+      11,
+      18,
+      15
+    ]
   }
 ]
