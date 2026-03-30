@@ -478,5 +478,25 @@
     "resistance_moments": "",
     "script_moment": "After 'they do not line up for me at this moment' should have added: 'What I really need is subdivision homes built between the 60s and early 2000s, around 2000 square feet, any condition - those are my bread and butter deals.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774901452103",
+    "timestamp": "2026-03-30T20:10:52.103Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Sydney Peterson",
+    "call_type": "NEGOTIATION",
+    "duration": "2m 42s",
+    "call_date": "03/30/2026",
+    "score": 55,
+    "realtor_engagement": 60,
+    "summary": "Anthony called to present a $60k cash offer on a $75k Texas City property, but Sydney revealed it's already under contract and she needs at least $70k due to probate attorney fees. They discussed title company preferences before agreeing to reconnect if anything changes.",
+    "what_worked": "Professional handling of pricing objection | Strong credibility with deal volume statistics | Offered additional value with closing costs | Graceful acceptance when deal didn't work",
+    "what_to_tighten": "Opener should reference prior conversation context | Need specific follow-up timeline instead of vague 'let me know' | Could have asked about other properties in her pipeline",
+    "language_flags": "",
+    "missed_opportunities": "Didn't ask about other properties she might have | No timeline set for follow-up | Could have explored if she works probate deals regularly",
+    "positive_moments": "Explained her position clearly about probate costs and pricing needs | Offered to reach back out if price changes | Engaged in detailed discussion about title company preferences",
+    "resistance_moments": "Revealed property is already under contract early in call | Firm on minimum $70k price point | Expressed negative experience with his preferred title company",
+    "script_moment": "After she said 'I'll let you know if I get a price reduction,' Anthony should have said: 'Sounds good Sydney. Mind if I check back with you in about 30 days to see how things are going? And do you work many probate deals like this one?'",
+    "on_leaderboard": "yes"
   }
 ]
