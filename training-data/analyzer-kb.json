@@ -124,6 +124,7 @@
     "[Anthony Cruz — DEAL REJECTION]: Brief 'I don't have anything right now' after rejection"
   ],
   "reknowledge": [
+    "[RE Knowledge — Gayden Rosales — 03/30/2026]: the analyzer appears to be taking the n/a and including them in average score... if a score has any n/a in it, do not include them in the average.\nalso, does the filler words affect the score? if so, let's make the filler word thing way better. or remove its affect on score",
     "[RE Knowledge — Dan VanMatre — 03/30/2026]: Yunyue Wang works Houston market and has current on-market inventory",
     "[RE Knowledge — Dan VanMatre — 03/30/2026]: She's receptive to working with investors and asks qualifying questions",
     "[RE Knowledge — Dan VanMatre — 03/30/2026]: She proactively offers properties when criteria matches",
@@ -202,7 +203,6 @@
     "[Dan VanMatre — RE-ENGAGEMENT — Grade C+]: [Dan VanMatre — RE-ENGAGEMENT]: Ended with generic 'I'll keep you in mind' brush-off language",
     "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT]: Initial confusion about not remembering previous conversations",
     "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Asked 'what price range are you looking for?' showing immediate interest",
-    "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT]: Brief 'No' when asked if she remembered prior conversation",
-    "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Asked 'how long have you been investing?' indicating she's qualifying him seriously"
+    "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT]: Brief 'No' when asked if she remembered prior conversation"
   ]
 }
