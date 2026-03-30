@@ -728,5 +728,41 @@
       25,
       22
     ]
+  },
+  {
+    "timestamp": "2026-03-30T21:08:39.721Z",
+    "agent": "Gayden",
+    "email": "gayden@goodresults.org",
+    "module": 3,
+    "moduleTitle": "The Offer Process",
+    "scorePct": 100,
+    "correct": 10,
+    "total": 10,
+    "xp": 120,
+    "poolSize": 25,
+    "correctIndices": [
+      3,
+      19,
+      9,
+      2,
+      5,
+      15,
+      4,
+      7,
+      18,
+      17,
+      6,
+      20,
+      10,
+      1,
+      13,
+      0,
+      16,
+      21,
+      11,
+      12,
+      24,
+      14
+    ]
   }
 ]
