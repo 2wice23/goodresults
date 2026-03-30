@@ -62,7 +62,7 @@ Do not confuse the two. The 3-day post-call text is a relationship move after a 
 | Template Name | When to Use |
 |---------------|-------------|
 | **0 Great Talk - Buy Box** | After every live call where the realtor showed interest. Send same day. Includes buy box info, agent name, Good Results. This is the gold standard post-call text. |
-| **0 Too Nice** | Realtor was pleasant but clearly has nothing for us right now — they're too "polite busy." Acknowledges the call, keeps door open, low pressure. |
+| **0 Too Nice** | Property the realtor sent is already rehabbed or doesn't need work — too nice to make an investment deal or be sold by a wholesaler. Use when the deal falls apart because the property condition is too nice, not because the realtor has nothing. |
 | **0 Send it anyway** | When you're unsure whether to send an offer — a casual "sending it anyway" vibe to keep momentum. |
 | **Blast 1** | First in the blast cold outreach sequence. |
 | **Blast 2** | Second follow-up in the blast sequence. |
