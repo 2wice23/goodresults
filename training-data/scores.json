@@ -612,5 +612,28 @@
       1,
       14
     ]
+  },
+  {
+    "timestamp": "2026-03-30T20:41:18.850Z",
+    "agent": "Joe",
+    "email": "joe@goodresults.org",
+    "module": 5,
+    "moduleTitle": "SMS Playbook",
+    "scorePct": 90,
+    "correct": 9,
+    "total": 10,
+    "xp": 108,
+    "poolSize": 23,
+    "correctIndices": [
+      10,
+      1,
+      7,
+      9,
+      15,
+      0,
+      16,
+      11,
+      2
+    ]
   }
 ]
