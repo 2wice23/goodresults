@@ -607,7 +607,7 @@ const QUIZ_POOL = [
   {q:'How long should a soft comp take?', opts:[{t:'30 seconds',correct:false},{t:'3 minutes maximum',correct:true},{t:'15-20 minutes',correct:false},{t:'However long until you\'re confident',correct:false}], explanation:'Soft comp = quick check. 3 minutes max. Just verify you\'re in the ballpark. Deep analysis comes later if the deal moves forward.'},
   {q:'What should you use to filter sold properties when running a soft comp on Zillow?', opts:[{t:'All listings from the past year',correct:false},{t:'Sold only, last 12 months, similar sqft (within 10-20%)',correct:true},{t:'Any property within 5 miles',correct:false},{t:'Just use the first 3 results',correct:false}], explanation:'Filter: Sold listings, 12 months, similar square footage. This gives you model-match comparables for ARV estimation.'},
   {q:'If the first comp you find has an ADU, what should you do?', opts:[{t:'Use it as-is',correct:false},{t:'Discard it or adjust heavily',correct:true},{t:'Use it but note the ADU in your analysis',correct:false},{t:'Ask the realtor what to do',correct:false}], explanation:'ADU adds value standard homes don\'t have. Discard it or adjust down significantly. Use non-ADU properties as comps.'},
-  {q:'Why is floating the verbal before writing the contract critical?', opts:[{t:'It saves time on paperwork and shows respect for everyone\'s time',correct:true},{t:'Realtor law requires it',correct:false},{t:'It guarantees a higher offer will be accepted',correct:false},{t:'It\'s optional but nice to do',correct:false}], explanation:'Prevents wasted contracts. Get a yes, no, or "let me ask them" before writing. Saves contractors, title companies, and realtors from rejections.'},
+  {q:'Why is floating the verbal before writing the contract critical?', opts:[{t:'It saves time on paperwork and shows respect for everyone\'s time',correct:true},{t:'Realtor law requires it',correct:false},{t:'It guarantees a higher offer will be accepted',correct:false},{t:'It\'s optional but nice to do',correct:false}], explanation:'Prevents wasted contracts. Get a yes, no, or "let me ask them" before writing. Saves end buyers, title companies, and realtors from rejections.'},
   {q:'When you float a verbal and the realtor says "Let me ask them," what does that mean?', opts:[{t:'They\'re rejecting your offer',correct:false},{t:'You have permission to write the contract',correct:true},{t:'You need to increase your offer',correct:false},{t:'The deal is dead',correct:false}], explanation:'"Let me ask them" = permission to write. "No, they need more" = realtor told you the range. "Yeah, that works" = move forward immediately.'},
   {q:'Before sending offer terms to a realtor, what key questions should you ask them?', opts:[{t:'"Any title issues?" "Estate or standard sale?" "Solar?" "HOA?" "Roof/Foundation/HVAC condition?"',correct:true},{t:'"What\'s your commission?" "Can you come down on price?"',correct:false},{t:'"When can I walk the property?" "Who\'s your lender?"',correct:false},{t:'"What\'s the lowest the seller will take?" "Are there other offers?"',correct:false}], explanation:'Before sending terms, get the facts that affect your numbers: title status, estate complications, solar payoff, HOA fees, and major system conditions. You send the offer terms — the realtor writes the actual contract.'},
   {q:'What is the standard Nevada purchase agreement form?', opts:[{t:'TREC form',correct:false},{t:'RPA (Residential Purchase Agreement)',correct:true},{t:'Vegas Standard',correct:false},{t:'State-required form',correct:false}], explanation:'Nevada uses RPA. Texas uses TREC. Both support assignment and investor intent language. Know your state\'s form.'},
@@ -627,7 +627,7 @@ const QUIZ_POOL = [
   {q:'What should you NEVER do when a realtor asks "What is your offer based on?"', opts:[{t:'Share your reasoning about comps and repairs',correct:false},{t:'Reveal your Maximum Allowable Offer (MAO)',correct:true},{t:'Explain your methodology',correct:false},{t:'Show them your comp analysis',correct:false}], explanation:'Share reasoning: ARV, repair estimate, comparable sales. Never share your MAO (profit ceiling) — they\'ll shop your offer to get sellers to reject it.'},
   {q:'What is the main risk if you share your Maximum Allowable Offer (MAO) with a realtor?', opts:[{t:'It\'s completely fine and professional',correct:false},{t:'They\'ll shop your offer around to get sellers to reject it so they can negotiate higher',correct:true},{t:'Sellers will immediately accept your offer',correct:false},{t:'It reduces your credibility',correct:false}], explanation:'Sharing MAO removes negotiating leverage. Realtors will use your ceiling against you. Keep profit ceiling secret; share only your reasoning (comps, repairs, timeline).'},
   {q:'When running a soft comp, how many model-match sales should you identify?', opts:[{t:'1 comparable is enough',correct:false},{t:'2-3 model-match sales',correct:true},{t:'5-7 comparables minimum',correct:false},{t:'10+ sales for accuracy',correct:false}], explanation:'2-3 model-match sales give you sufficient data for a quick sanity check. More is unnecessary for a soft comp.'},
-  {q:'If a realtor is pushing back on your due diligence period, what\'s the key principle?', opts:[{t:'Always give in to keep the deal moving',correct:false},{t:'You need enough time to get your contractor to the property for inspection',correct:true},{t:'Reduce the period to close faster',correct:false},{t:'Go straight to double close',correct:false}], explanation:'DD period protects you. You need time for contractor inspection. Too short a window forces EMD early and inspection costs before you know viability.'}
+  {q:'If a realtor is pushing back on your due diligence period, what\'s the key principle?', opts:[{t:'Always give in to keep the deal moving',correct:false},{t:'You need enough time to get your end buyers through the property to evaluate the deal',correct:true},{t:'Reduce the period to close faster',correct:false},{t:'Go straight to double close',correct:false}], explanation:'DD period protects you. You need time to get end buyers (potential buyers for the assignment) through the property. With realtors, you call them "contractors" — but internally, these are the people who will actually buy the deal from you. Too short a window and you can\'t get them in before EMD goes non-refundable.'}
 ];
 
 let sectionTimes = [3, 2, 3, 4, 3, 3, 3, 2];
@@ -777,47 +777,6 @@ function updateScore(){
   if(ss) ss.textContent = answered < total ? `${total - answered} questions remaining` : 'Quiz complete — submit your score!';
   if(btn) btn.disabled = answered < total;
   quizDone = answered >= total;
-}
-
-function {
-  fetch(APPS_SCRIPT_URL + '?action=gettrainingprogress').then(r => r.json()).then(agents => {
-    const sc = [[100, 'PERFECT SCORE 🧠 Absolutely disgusting dominance. Everyone else should be worried.'], [90, 'Strong. Very strong. That\'s the kind of energy this team needs.'], [80, 'Solid work. Not perfect, but definitely respectable.'], [70, 'Ehh... it\'s passing. Barely. Maybe crack open the module one more time.'], [60, 'That\'s... not great. You might wanna re-read that module, just saying.'], [0, 'Yikes. 😬 Did you even read the module or just start clicking randomly?']];
-    let cmt = '';
-    for(const[th, m] of sc){
-      if(pct >= th){
-        cmt = m;
-        break;
-      }
-    }
-    let lp = null, la = Infinity, ls = Infinity, lm = '';
-    agents.forEach(a => {
-      const ms = Object.entries(a.modules || {});
-      if(!ms.length) return;
-      const avg = ms.reduce((s, [_, m]) => s + (m.best_score || 0), 0) / ms.length;
-      if(avg < la){
-        la = avg;
-        lp = a.name;
-        let w = Infinity, wm = '';
-        ms.forEach(([n, m]) => {
-          if((m.best_score || 0) < w){
-            w = m.best_score || 0;
-            wm = n;
-          }
-        });
-        ls = w;
-        lm = wm;
-      }
-    });
-    const tt = ['When are you gonna step it up? Asking for the whole team. 👀', 'That score is genuinely embarrassing. I\'d be scared to show my face in the office.', 'The leaderboard is BEGGING you to do literally anything.', 'At this point even a coin flip would score better. Just saying. 🤯', 'Everyone else is getting better. You\'re getting... comfortable? 🛏️', 'You know the modules are FREE to re-take right?? Nobody\'s stopping you.', 'I\'ve seen better scores from people who accidentally hit submit. 💀', 'Your score is so low it\'s basically a rounding error.', 'If effort was a scoreboard you wouldn\'t even be on it.'];
-    const t = tt[Math.floor(Math.random() * tt.length)];
-    let msg = '🎓 *' + agent + '* just finished *Module ' + modNum + ' — ' + modTitle + '*\nScore: ' + correct + '/' + total + ' (' + pct + '%)\n' + cmt;
-    if(lp && lp.toLowerCase() !== agent.toLowerCase()){
-      msg += '\n\n📈 Meanwhile... *' + lp + '* is camping out in LAST PLACE with a ' + Math.round(ls) + '% on Module ' + lm + '. ' + t;
-    } else if(lp && lp.toLowerCase() === agent.toLowerCase()){
-      msg += '\n\n📈 Plot twist... *' + agent + '* IS in last place. ' + (pct < 70 ? 'And this score ain\'t helping. 💀' : 'But at least they\'re trying to climb out. Respect... barely.');
-    }
-    fetch('/.netlify/functions/slack-score-notify', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({text: msg})}).catch(() => {});
-  }).catch(() => {});
 }
 
 function submitScore(){

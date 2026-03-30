@@ -364,7 +364,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
         <div class="kc-opts">
           <div class="kc-opt" onclick="answerKC(4,0,false)"><div class="kc-opt-letter">A</div>Explain your past bad experiences with title delays</div>
           <div class="kc-opt" onclick="answerKC(4,1,false)"><div class="kc-opt-letter">B</div>Say it's your company policy and non-negotiable</div>
-          <div class="kc-opt" onclick="answerKC(4,2,true)"><div class="kc-opt-letter">C</div>Use the construction angle: contractors need to start fast, requires contract first</div>
+          <div class="kc-opt" onclick="answerKC(4,2,true)"><div class="kc-opt-letter">C</div>Use the "construction angle" script with realtors: say your contractors need contract first — internally this gets your end buyers through the property during DD</div>
           <div class="kc-opt" onclick="answerKC(4,3,false)"><div class="kc-opt-letter">D</div>Insist and refuse to negotiate</div>
         </div>
         <div class="kc-feedback" id="kcfb-4"></div>
@@ -589,7 +589,7 @@ const kcExplanations = {
   1: "Always say 'cash buyer.' That's the entire value prop — no financing contingency, no appraisal drama, 10–21 day close. The source of funds doesn't matter to realtors.",
   2: "Structural issues like foundation problems warrant a Gayden discussion. 69% is the default, but major system issues may justify going lower.",
   3: "Heavy scope (roof, HVAC) = $50–60/sqft. For 2,500 sqft at $60/sqft = $150k repairs. MAO = ($350k × 0.75) − $150k = $112,500.",
-  4: "The construction angle is most credible: contractors need to be in contract to start. It explains your processes without being adversarial.",
+  4: "The 'construction angle' is the realtor-facing script: you tell them contractors need to be in contract before they start. Internally: what you're actually doing is getting end buyers through the property during DD. Never tell realtors these are your buyers — 'contractor' is the external framing.",
   5: "Never fight over title company. Add their costs to your offer instead. Keeps the deal alive and maintains the relationship.",
   6: "Transparency without formula: explain comps, repair estimate, market conditions. Never mention MAO or wholesale model.",
   7: "Volume is proof. 60 homes/year in Nevada = execution, capital, team, process. That's what realtors care about, not LLC structures.",
@@ -694,7 +694,7 @@ const QUIZ_POOL = [
   {q:'In Texas, what does $35/sqft repair estimate cover?', opts:[{t:'Cosmetic only',correct:false},{t:'Standard full renovation (kitchen, bath, floors, paint)',correct:true},{t:'Heavy reno (roof, HVAC)',correct:false},{t:'Major structural work',correct:false}], explanation:'$35/sqft is the standard full reno scope. Adjust up for roof, HVAC, electrical, plumbing (heavy).'},
   {q:'What is the primary title company you should push for in Texas?', opts:[{t:'Landmark Title',correct:false},{t:'Core Title',correct:false},{t:'Spartan Title (Aaron)',correct:true},{t:'Any company the seller chooses',correct:false}], explanation:'Push Spartan Title (Aaron) on every Texas deal. We have a high-volume relationship.'},
   {q:'What should you do if a seller or realtor wants to use a different title company instead of ours?', opts:[{t:'Add their title costs to your offer price and move on',correct:false},{t:'Walk the deal immediately',correct:false},{t:'Insist on our title company — if they refuse, seller covers all title and escrow fees, and escalate to Gayden before arguing',correct:true},{t:'Let them pick whichever title company they want',correct:false}], explanation:'We ALWAYS insist on our title company. We offer to pay 100% of closing costs, and in return we use our title company. If the other side won\'t use ours, then the seller covers all title and escrow fees — this is non-negotiable. Before it becomes an argument, bring the deal to Gayden and let him handle it.'},
-  {q:'Why do you need to be in contract before sending contractors?', opts:[{t:'Because contractors are expensive',correct:false},{t:'Because you don\'t want to tip off the seller',correct:false},{t:'Because your business model requires contract first to justify contractor costs',correct:true},{t:'Because realtors require it',correct:false}], explanation:'The construction angle: contractors cost $600–800/day. You can\'t justify that cost without a contract.'},
+  {q:'Why do you need to be in contract before bringing end buyers through the property?', opts:[{t:'Because end buyers are expensive to manage',correct:false},{t:'Because you don\'t want to tip off the seller',correct:false},{t:'Because you need the contractual right to assign before end buyers can evaluate and commit',correct:true},{t:'Because realtors require it',correct:false}], explanation:'Internally: you need to be under contract first to have the right to assign the deal — end buyers won\'t commit without a real deal on the table. With realtors, you use the "contractor" framing ($600–800/day) as the external explanation for why you need DD time before walking the property.'},
   {q:'Why do you own multiple LLCs?', opts:[{t:'To hide assets from realtors',correct:false},{t:'To protect assets, manage liability, allow flexibility in capital deployment',correct:true},{t:'Because Gayden likes complex structures',correct:false},{t:'To avoid paying taxes',correct:false}], explanation:'Multiple entities protect assets, manage liability, and allow flexibility. Realtors don\'t care which LLC you use—they see "Good Results."'},
   {q:'Should you ever say "wholesaler" to a realtor?', opts:[{t:'Yes, always be honest',correct:false},{t:'Only if they ask directly',correct:false},{t:'No, never. You\'re a buyer.',correct:true},{t:'Only in wholesale deals',correct:false}], explanation:'Never say "wholesaler." Realtors assume you\'re a middleman with no real capital. You\'re a buyer.'},
   {q:'Should you ever share your MAO formula with a realtor?', opts:[{t:'Yes, it builds trust',correct:false},{t:'Only if they ask directly',correct:false},{t:'No, never. MAO is internal only.',correct:true},{t:'Only after getting the contract',correct:false}], explanation:'MAO is internal. Never share it. Tell them offer price based on comps, repairs, and market conditions.'},
@@ -778,51 +778,6 @@ function updateScore() {
   if (ss) ss.textContent = answered < total ? `${total - answered} questions remaining` : 'Quiz complete — submit your score!';
   if (btn) btn.disabled = answered < total;
   quizDone = answered >= total;
-}
-
-function  {
-  fetch(APPS_SCRIPT_URL + '?action=gettrainingprogress').then(r => r.json()).then(agents => {
-    const sc = [[100, 'PERFECT SCORE 📏 Absolutely disgusting dominance. Everyone else should be worried.'], [90, 'Strong. Very strong. That\'s the kind of energy this team needs.'], [80, 'Solid work. Not perfect, but definitely respectable.'], [70, 'Ehh... it\'s passing. Barely. Maybe crack open the module one more time.'], [60, 'That\'s... not great. You might wanna re-read that module, just saying.'], [0, 'Yikes. 🤬 Did you even read the module or just start clicking randomly?']];
-    let cmt = '';
-    for (const [th, m] of sc) {
-      if (pct >= th) {
-        cmt = m;
-        break;
-      }
-    }
-    let lp = null, la = Infinity, ls = Infinity, lm = '';
-    agents.forEach(a => {
-      const ms = Object.entries(a.modules || {});
-      if (!ms.length) return;
-      const avg = ms.reduce((s, [_, m]) => s + (m.best_score || 0), 0) / ms.length;
-      if (avg < la) {
-        la = avg;
-        lp = a.name;
-        let w = Infinity, wm = '';
-        ms.forEach(([n, m]) => {
-          if ((m.best_score || 0) < w) {
-            w = m.best_score || 0;
-            wm = n;
-          }
-        });
-        ls = w;
-        lm = wm;
-      }
-    });
-    const tt = ['When are you gonna step it up? Asking for the whole team. 👀', 'That score is genuinely embarrassing. I\'d be scared to show my face in the office.', 'The leaderboard is BEGGING you to do literally anything.', 'At this point even a coin flip would score better. Just saying. 🤡', 'Everyone else is getting better. You\'re getting... comfortable? 🪫', 'That leaderboard position is a cry for help honestly.', 'You know the modules are FREE to re-take right?? Nobody\'s stopping you.', 'I\'ve seen better scores from people who accidentally hit submit. 💀', 'Your score is so low it\'s basically a rounding error.', 'If effort was a scoreboard you wouldn\'t even be on it.'];
-    const t = tt[Math.floor(Math.random() * tt.length)];
-    let msg = '🎓 *' + agent + '* just finished *Module ' + modNum + ' — ' + modTitle + '*\nScore: ' + correct + '/' + total + ' (' + pct + '%)\n' + cmt;
-    if (lp && lp.toLowerCase() !== agent.toLowerCase()) {
-      msg += '\n\n📉 Meanwhile... *' + lp + '* is camping out in LAST PLACE with a ' + Math.round(ls) + '% on Module ' + lm + '. ' + t;
-    } else if (lp && lp.toLowerCase() === agent.toLowerCase()) {
-      msg += '\n\n📉 Plot twist... *' + agent + '* IS in last place. ' + (pct < 70 ? 'And this score ain\'t helping. 💀' : 'But at least they\'re trying to climb out. Respect... barely.');
-    }
-    fetch('/.netlify/functions/slack-score-notify', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({text: msg})
-    }).catch(() => {});
-  }).catch(() => {});
 }
 
 function submitScore() {
