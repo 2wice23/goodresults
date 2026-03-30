@@ -458,5 +458,25 @@
     "resistance_moments": "Initial confusion when she just walked in the door created some delay | Couldn't answer why the flipper wasn't taking the project themselves",
     "script_moment": "When Kristi mentioned she doesn't know why the flipper passed, Anthony should have said: 'That's interesting - do you know what their typical buy criteria is? That might help me understand if this fits what I'm looking for.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774901338497",
+    "timestamp": "2026-03-30T20:08:58.497Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Stacy Rogers",
+    "call_type": "DEAL REJECTION",
+    "duration": "1m 18s",
+    "call_date": "03/30/2026",
+    "score": 50,
+    "realtor_engagement": 78,
+    "summary": "Anthony called to reject two properties Stacy had sent him, explaining they don't align with his current needs. Stacy responded positively, mentioning her marketing campaign launching next week that should generate additional properties.",
+    "what_worked": "Clean, professional rejection that didn't burn the bridge | Good follow-up question about communication process | Let Stacy share her marketing campaign plans",
+    "what_to_tighten": "Should have delivered buy box when rejecting - 'what I really need is subdivision homes from the 60s to early 2000s, around 2000 square feet' | Could have been more specific about timeline for next contact | Missed opportunity to position why these didn't work to help her target better",
+    "language_flags": "",
+    "missed_opportunities": "Prime moment to deliver buy box after rejection to redirect Stacy's future efforts | Could have asked about the type of properties her campaign will generate | Should have set more specific follow-up timeline rather than relying on her campaign",
+    "positive_moments": "Said 'I will definitely keep you in mind' showing continued interest | Volunteered information about her marketing campaign launching next week | Offered multiple ways to stay in touch (her reaching out or him texting) | Mentioned expecting additional properties mid next week",
+    "resistance_moments": "",
+    "script_moment": "After 'they do not line up for me at this moment' should have added: 'What I really need is subdivision homes built between the 60s and early 2000s, around 2000 square feet, any condition - those are my bread and butter deals.'",
+    "on_leaderboard": "yes"
   }
 ]
