@@ -378,5 +378,25 @@
     "resistance_moments": "Initial confusion at start of call | Had to end call when title company called",
     "script_moment": "When she mentioned trouble getting survey quotes, could have said 'Let me get you connected with my survey guy today - I'll tell him to give you my rate since you're helping me close this deal.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774899627324",
+    "timestamp": "2026-03-30T19:40:27.324Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Shannon Armstrong",
+    "call_type": "DEAL DISCUSSION",
+    "duration": "4m 22s",
+    "call_date": "03/30/2026",
+    "score": 77,
+    "realtor_engagement": 82,
+    "summary": "Anthony called about a property Shannon sent him in Alvin, learned it was turnkey when he needed renovation projects. Shannon explained she sold her distressed duplexes quickly but offered to connect him with her partner who owns distressed properties and mentioned Net Worth Realty as a source.",
+    "what_worked": "Strong buy box delivery with specific criteria at the end | Good follow-up questions about her distressed property pipeline | Set clear next step with specific timeline | Let Shannon share extensive information about her portfolio and connections",
+    "what_to_tighten": "Opener could have been cleaner with name stated upfront | Some confusion in middle of call about which specific property they were discussing",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked more about Net Worth Realty and how that relationship works | Could have explored the timing on when her partner might consider selling properties",
+    "positive_moments": "Asked 'are you looking for turnkey or needing fixing up?' showing she understood his needs | Volunteered extensive details about her 12 properties and partner's distressed portfolio | Offered to pass his information to her partner who has distressed properties | Discussed Net Worth Realty as a potential source | Agreed to one-month follow-up willingly",
+    "resistance_moments": "Brief 'I personally don't' when asked about distressed properties in pipeline | Had to clarify the duplex situation when Anthony seemed confused about the address",
+    "script_moment": "When Shannon mentioned her partner has distressed properties but doesn't want to sell because they generate income, Anthony should have said: 'I totally get that - cash flow is king. Sometimes though owners get tired of the management headaches or want to free up capital for other deals. Would it be worth having a quick conversation with him to see if any of his properties might make sense to move?'",
+    "on_leaderboard": "yes"
   }
 ]
