@@ -818,5 +818,25 @@
     "resistance_moments": "Initial confusion about who Franklin was until he clarified his full name",
     "script_moment": "When Taylor said 'I actually have one in mind,' Franklin should have said 'Oh great! Can you tell me a bit about it?' instead of just saying 'I'd love to look at it' - he missed the chance to get immediate details about a live opportunity.",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774914953491",
+    "timestamp": "2026-03-30T23:55:53.491Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Jo Salcedo",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "10m 21s",
+    "call_date": "03/30/2026",
+    "score": 87,
+    "realtor_engagement": 92,
+    "summary": "Franklin re-engaged with Jo after 6 months, who immediately offered a duplex property on Keystone. Franklin delivered his complete buy box and explained why the property didn't fit, but Jo showed strong engagement by asking detailed questions about their investment formula and requesting specific communication preferences.",
+    "what_worked": "Complete buy box delivery with memorable imagery | Strong re-engagement opener referencing prior contact | Clear rejection reasoning for offered property | Specific follow-up timeline set | Jo's immediate property offer shows criteria resonated",
+    "what_to_tighten": "Could have asked more about Jo's typical deal flow and sources | Slight confusion in yield calculation explanation",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked what other types of properties Jo typically sees | Could have probed more about Jo's investor network or referral potential",
+    "positive_moments": "Immediately offered specific property (144 Keystone) when asked about investment deals | Asked detailed questions about yield requirements and investment formula | Requested preferred communication method for future properties | Stayed engaged despite being under review | Asked clarifying questions about square footage vs total purchase price",
+    "resistance_moments": "Had to clarify initially that he was under review which limited conversation depth",
+    "script_moment": "When Jo asked about yield requirements, Franklin could have said: 'Great question - we typically pay around 70% of ARV minus repairs. So on a $500k property, we'd be looking at offers in the $340-360k range depending on condition. What kinds of price points do you typically see in distressed properties?'",
+    "on_leaderboard": "yes"
   }
 ]
