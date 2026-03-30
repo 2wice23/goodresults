@@ -7,7 +7,7 @@
     "email": "gayden@goodresults.org",
     "update": "Test submission from the fix - delete me",
     "status": "processed",
-    "processedNote": "Test entry \u2014 discarded. 2026-03-30."
+    "processedNote": "Test entry — discarded. 2026-03-30."
   },
   {
     "timestamp": "2026-03-29T17:00:28.641Z",
@@ -27,7 +27,7 @@
     "email": "test@test.com",
     "update": "TEST SUBMIT - ignore this",
     "status": "processed",
-    "processedNote": "Test entry \u2014 discarded. 2026-03-30."
+    "processedNote": "Test entry — discarded. 2026-03-30."
   },
   {
     "timestamp": "2026-03-30T00:31:03.681Z",
@@ -37,7 +37,7 @@
     "email": "test@test.com",
     "update": "test submission - please ignore",
     "status": "processed",
-    "processedNote": "Test entry \u2014 discarded. 2026-03-30."
+    "processedNote": "Test entry — discarded. 2026-03-30."
   },
   {
     "timestamp": "2026-03-30T00:32:06.326Z",
@@ -47,7 +47,7 @@
     "email": "test@test.com",
     "update": "test 123 test 123",
     "status": "processed",
-    "processedNote": "Test entry \u2014 discarded. 2026-03-30."
+    "processedNote": "Test entry — discarded. 2026-03-30."
   },
   {
     "timestamp": "2026-03-30T05:15:41.562Z",
@@ -58,5 +58,14 @@
     "update": "Q28 - a model match definitely means identical. Like same footage; bed/bath, year built. Identical",
     "status": "processed",
     "processedNote": "Drafted KB change: add explicit model match definition to Module 7 Comp Rules. Add Q28 to Module 7 quiz pool notes. Awaiting Gayden approval. 2026-03-30."
+  },
+  {
+    "timestamp": "2026-03-30T16:36:30.347Z",
+    "module": 5,
+    "moduleTitle": "SMS Playbook",
+    "agent": "Gayden",
+    "email": "gayden@goodresults.org",
+    "update": "q12 - actualy, the too nice template is for when they send you a proeprty that is too nice, maybe its already rehabbed, or doesnt need a full remodel. for whatever reason, it is \"too nice\" to make an investment deal or be sold by a wholesaler. fix this question and answer - and add a new question to the pool as well",
+    "status": "pending"
   }
 ]
