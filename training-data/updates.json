@@ -94,5 +94,14 @@
     "email": "gayden@goodresults.org",
     "update": "q24 - we tell the realtor we need to get the contractors in - then explain how that works - but what is actualy happenign on our end is that we are waiting to send our buyers in after we have it in contract and hopefuly get a deal sold",
     "status": "pending"
+  },
+  {
+    "timestamp": "2026-03-30T21:09:46.273Z",
+    "module": 4,
+    "moduleTitle": "Post-Contract SOP",
+    "agent": "Gayden",
+    "email": "gayden@goodresults.org",
+    "update": "q4 - wheneevr making a google drive - it should be visible to anyone in good results - editor. it used to be anyone with link - we have updated this process - this is a big change in the system and a lot of dsections will change possibly",
+    "status": "pending"
   }
 ]
