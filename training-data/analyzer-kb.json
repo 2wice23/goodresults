@@ -1,5 +1,15 @@
 {
   "positive": [
+    "[Franklin Ladaga — RE-ENGAGEMENT — Score 87/100]: Complete buy box delivery with memorable imagery",
+    "[Franklin Ladaga — RE-ENGAGEMENT — Score 87/100]: Strong re-engagement opener referencing prior contact",
+    "[Franklin Ladaga — RE-ENGAGEMENT — Score 87/100]: Clear rejection reasoning for offered property",
+    "[Franklin Ladaga — RE-ENGAGEMENT — Score 87/100]: Specific follow-up timeline set",
+    "[Franklin Ladaga — RE-ENGAGEMENT — Score 87/100]: Jo's immediate property offer shows criteria resonated",
+    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Immediately offered specific property (144 Keystone) when asked about investment deals",
+    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Asked detailed questions about yield requirements and investment formula",
+    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Requested preferred communication method for future properties",
+    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Stayed engaged despite being under review",
+    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Asked clarifying questions about square footage vs total purchase price",
     "[Anthony Cruz — DEAL DISCUSSION — Score 87/100]: Complete buy box delivery with all key elements",
     "[Anthony Cruz — DEAL DISCUSSION — Score 87/100]: Let Chris provide extensive property details naturally",
     "[Anthony Cruz — DEAL DISCUSSION — Score 87/100]: Good follow-up questions about condition and pictures",
@@ -49,19 +59,10 @@
     "[Franklin Ladaga — WARM FOLLOW-UP — Realtor responded positively to]: Said 'I can try to see what I can find' showing commitment to help",
     "[Franklin Ladaga — WARM FOLLOW-UP — Realtor responded positively to]: Committed to calling the probate seller today",
     "[Franklin Ladaga — WARM FOLLOW-UP — Realtor responded positively to]: Agreed enthusiastically to next steps",
-    "[Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Asked 'are you looking to buy cash or how are you?' showing genuine interest",
-    "[Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Immediately offered to look during her Baytown meetings tomorrow",
-    "[Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Mentioned specific FSBO prospects she's meeting with",
-    "[Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Confirmed receipt of his contact information",
-    "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Asked 'are you looking for turnkey or needing fixing up?' showing she understood his needs",
-    "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Volunteered extensive details about her 12 properties and partner's distressed portfolio",
-    "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Offered to pass his information to her partner who has distressed properties",
-    "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Discussed Net Worth Realty as a potential source",
-    "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Agreed to one-month follow-up willingly",
-    "[Gayden Rosales — CONTRACT WALKTHROUGH — Realtor responded positively to]: Provided extensive detail about LLC ownership and death certificates",
-    "[Gayden Rosales — CONTRACT WALKTHROUGH — Realtor responded positively to]: Asked for help with personal survey project"
+    "[Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Asked 'are you looking to buy cash or how are you?' showing genuine interest"
   ],
   "negative": [
+    "[Franklin Ladaga — RE-ENGAGEMENT]: Had to clarify initially that he was under review which limited conversation depth",
     "[Anthony Cruz — RE-ENGAGEMENT]: Didn't remember the January conversation",
     "[Anthony Cruz — RE-ENGAGEMENT]: Said 'I'm sorry, what is it' showing confusion",
     "[Anthony Cruz — RE-ENGAGEMENT]: Direct 'No, not anymore' to distressed properties question",
@@ -120,19 +121,9 @@
     "[Anthony Cruz — DEAL DISCUSSION]: Initially confused about who Anthony was",
     "[Anthony Cruz — DEAL DISCUSSION]: Hesitant to provide address for second property since it's not yet under contract",
     "[Franklin Ladaga — WARM FOLLOW-UP]: Immediately explained why he doesn't have investment deals without being asked",
-    "[Franklin Ladaga — WARM FOLLOW-UP]: Gave very brief responses throughout",
-    "[Franklin Ladaga — WARM FOLLOW-UP]: No follow-up questions about their investment criteria"
+    "[Franklin Ladaga — WARM FOLLOW-UP]: Gave very brief responses throughout"
   ],
   "reknowledge": [
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Jo Salcedo works with multiple investors and understands yield calculations",
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: He has access to duplex/multi-unit properties in high rental demand areas like Keystone",
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: He asks detailed questions about investment criteria showing professional approach",
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: 144 Keystone is a unique property structure - single residence with separate addresses due to basement unit",
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Jo understands the concept of duplex value even when properties aren't officially classified as duplexes",
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Keystone area is described as highly rental condensed area",
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Jo mentioned recent HVAC updates but property still needs repairs to bring up to par",
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Current asking price is $485k each (unclear if total or per unit)",
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Jo works with investors regularly and has established process for communication preferences",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Taylor Stoker gets off-market deals occasionally from sellers who can't maintain their homes anymore but need to sell",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: She had a specific property in mind immediately after hearing Franklin's buy box",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: She's proactive about requesting contact information to send property details",
@@ -203,6 +194,15 @@
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: Novid Rezai has access to off-market land deals in Golden Forest area",
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: He represents sellers looking for bulk lot sales (5 lots for $225-230k)",
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: He doesn't typically handle distressed residential properties but was open to keeping Anthony in mind",
-    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Houston market has development opportunities in certain areas that agents recognize"
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Houston market has development opportunities in certain areas that agents recognize",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Amy Melesky gets distressed properties every couple months in Houston market",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: She's receptive to working with investors and proactively requests contact information",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: She asks qualifying questions about location specifics showing professional approach",
+    "[RE Knowledge — Gayden Rosales — 03/30/2026]: the analyzer appears to be taking the n/a and including them in average score... if a score has any n/a in it, do not include them in the average.\nalso, does the filler words affect the score? if so, let's make the filler word thing way better. or remove its affect on score",
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: Yunyue Wang works Houston market and has current on-market inventory",
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: She's receptive to working with investors and asks qualifying questions",
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: She proactively offers properties when criteria matches",
+    "[RE Knowledge — Anthony Cruz — 2024-12-17]: Marcus works Houston market but currently has limited off-market inventory",
+    "[RE Knowledge — Anthony Cruz — 2024-12-17]: He's receptive to working with investors and asks qualifying questions about budget and location"
   ]
 }
