@@ -358,5 +358,25 @@
     "resistance_moments": "Initial 'Who is that?' and 'Who am I speaking with?' showed some guard up at the beginning",
     "script_moment": "When she said 'not right now' at 0:59, Dan should have immediately asked 'What about off-market - do you ever run across properties before they hit MLS?' to dig deeper into her pipeline.",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774896215481",
+    "timestamp": "2026-03-30T18:43:35.481Z",
+    "agent": "Gayden Rosales",
+    "realtor": "Cathy Genovesi",
+    "call_type": "CONTRACT WALKTHROUGH",
+    "duration": "9m 25s",
+    "call_date": "03/30/2026",
+    "score": 69,
+    "realtor_engagement": 85,
+    "summary": "Gayden handled a complex title issue with a property owned by a deceased LLC, offering to switch title companies if needed and requesting extension. He also offered to help Cathy with a personal survey need for her patio project.",
+    "what_worked": "Professional handling of complex title situation | Offered to switch title companies to accommodate seller | Genuine help with her personal survey needs | Strong relationship management",
+    "what_to_tighten": "Could have been more proactive about requesting extension earlier in process",
+    "language_flags": "",
+    "missed_opportunities": "",
+    "positive_moments": "Provided extensive detail about LLC ownership and death certificates | Asked for help with personal survey project | Agreed to extension without hesitation | Shared specific title company contacts and experiences",
+    "resistance_moments": "Initial confusion at start of call | Had to end call when title company called",
+    "script_moment": "When she mentioned trouble getting survey quotes, could have said 'Let me get you connected with my survey guy today - I'll tell him to give you my rate since you're helping me close this deal.'",
+    "on_leaderboard": "yes"
   }
 ]
