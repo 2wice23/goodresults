@@ -778,5 +778,25 @@
     "resistance_moments": "Didn't remember the January conversation | Said 'I don't typically sell that, per se' | Stated 'I don't have anything at the moment' | Predicted 'I don't think I'll have something in a month'",
     "script_moment": "When she said 'I don't typically sell that, per se' - should have said: 'That's totally fine - what types of properties do you typically work with? I'm always looking to understand how I might fit into your business.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774913542000",
+    "timestamp": "2026-03-30T23:32:22.000Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Haley Pham",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "2m",
+    "call_date": "03/30/2026",
+    "score": 51,
+    "realtor_engagement": 25,
+    "summary": "Anthony reconnected with Haley after several months, confirmed she still works distressed properties but has nothing currently. She was clearly busy and requested future communication via text only.",
+    "what_worked": "Delivered buy box verbally with key elements | Set specific follow-up timeline | Offered buyer's agent commission structure",
+    "what_to_tighten": "Pick up on realtor being busy earlier and keep call shorter | Stronger opener that establishes context more clearly | Better phone connection or audio quality",
+    "language_flags": "",
+    "missed_opportunities": "Could have acknowledged she was busy and offered to call back at a better time | Could have asked when would be a good time to text rather than assuming immediate follow-up",
+    "positive_moments": "Said 'Yes, yes, yes' when confirming she still works with distressed properties",
+    "resistance_moments": "Multiple 'Hello?' and 'Who is that?' due to connection issues | Very brief responses throughout | Said 'I'm sorry' when he explained commission structure | Explicitly stated 'I'm busy at the moment. Just text me if you need anything'",
+    "script_moment": "When she said 'I'm sorry' after the commission explanation, should have said: 'Sounds like I caught you at a busy time - would it be better if I just text you my info and we can connect later when it's more convenient?'",
+    "on_leaderboard": "yes"
   }
 ]
