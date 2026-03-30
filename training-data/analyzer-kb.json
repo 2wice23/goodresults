@@ -62,9 +62,6 @@
     "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Agreed to email exchange for ongoing communication"
   ],
   "negative": [
-    "[Anthony Cruz — NEGOTIATION]: Revealed property is already under contract early in call",
-    "[Anthony Cruz — NEGOTIATION]: Firm on minimum $70k price point",
-    "[Anthony Cruz — NEGOTIATION]: Expressed negative experience with his preferred title company",
     "[Anthony Cruz — DEAL DISCUSSION]: Initial confusion when she just walked in the door created some delay",
     "[Anthony Cruz — DEAL DISCUSSION]: Couldn't answer why the flipper wasn't taking the project themselves",
     "[Anthony Cruz — RE-ENGAGEMENT]: Direct 'No, I don't have that' when asked about renovation properties",
@@ -121,9 +118,16 @@
     "[Gayden Rosales — OTHER]: Called the title officer 'poop ball' and 'goofball' when she couldn't provide legal advice",
     "[Gayden Rosales — OTHER]: Became hostile when told the officer couldn't interfere with seller's title company choice",
     "[Gayden Rosales — OTHER]: Escalated frustration into personal attacks",
-    "[Gayden Rosales — OTHER — manually flagged]: Called the title officer 'poop ball' and 'goofball' when she couldn't provide legal advice"
+    "[Gayden Rosales — OTHER — manually flagged]: Called the title officer 'poop ball' and 'goofball' when she couldn't provide legal advice",
+    "[Gayden Rosales — OTHER — manually flagged]: Became hostile when told the officer couldn't interfere with seller's title company choice",
+    "[Gayden Rosales — OTHER — manually flagged]: Escalated frustration into personal attacks",
+    "[Anthony Cruz — WARM FOLLOW-UP]: Initial confusion when Anthony called him Kayla"
   ],
   "reknowledge": [
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Sydney Peterson works probate deals in Texas City area",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Probate deals often have attorney fees that affect seller net proceeds",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: She prefers larger title companies like Capital or Fidelity over smaller ones",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Spartan Title may have lending-side issues that concern some realtors",
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: Stacy Rogers has a marketing campaign launching next week that should generate additional property leads",
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: She expects properties to start coming in mid next week from this campaign",
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: She's proactive about staying in touch with investors and encourages them to reach out",
@@ -199,10 +203,6 @@
     "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — manually flagged]: Clear process explanation for deal evaluation",
     "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — manually flagged]: Strong positioning with reputation and resources",
     "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — manually flagged]: Good market knowledge discussion",
-    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — realtor responded well to]: Joe initiated the partnership proposal",
-    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — realtor responded well to]: Asked specific follow-up questions about geography and process",
-    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — realtor responded well to]: Stayed engaged throughout discussion of competition and tactics",
-    "[Dan VanMatre — COLD OPEN — Grade C+]: [Dan VanMatre — COLD OPEN]: Phone connection issues caused brief interruption but was technical, not resistance",
-    "[Dan VanMatre — COLD OPEN — Grade C+]: [Dan VanMatre — COLD OPEN — Realtor responded positively to]: Asked 'How much are you spending?' immediately showing interest"
+    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — realtor responded well to]: Joe initiated the partnership proposal"
   ]
 }
