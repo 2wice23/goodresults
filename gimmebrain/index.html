@@ -245,13 +245,13 @@ body>*{position:relative;z-index:1;}
       </div>
     </a>
 
-    <a href="/gimmebrain/tasks" class="tool-card live">
-      <div class="tool-icon" style="background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.22);">⏱</div>
+    <div id="dashboard-card" class="tool-card locked" style="cursor:default;">
+      <div class="tool-icon" style="background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.22);">🖥</div>
       <div class="tool-body">
-        <div class="tool-head"><div class="tool-name">Task Monitor</div><span class="badge badge-live">● LIVE</span></div>
-        <div class="tool-desc">See every automated task running on the Good Results back end — KB health checks, weekly leaderboard digests, deal deadline alerts. Each task runs on a schedule on Netlify servers, logs its results here, and posts to Slack when something needs attention. No computer needs to be on. Check this page to confirm everything is running smoothly and review run history.</div>
+        <div class="tool-head"><div class="tool-name">Gimme Brain Dashboard</div><span class="badge badge-live">● OWNERS ONLY</span></div>
+        <div class="tool-desc dim">System health, automations, leaderboards, and everything under the hood. This page is restricted to Gayden and Joe.</div>
       </div>
-    </a>
+    </div>
 
     <div class="tool-card locked">
       <div class="tool-icon ti-purple">📝</div>
@@ -361,6 +361,20 @@ if (userEl) userEl.textContent = fullName || 'Team Member';
   const streak = parseInt(localStorage.getItem('gr_streak') || '0');
   const el = document.getElementById('streak-count');
   if (el) el.textContent = streak > 0 ? streak + '-day streak' : 'Start your streak';
+})();
+
+// ── Dashboard card — owners only ──
+(function() {
+  const email = (sessionStorage.getItem('gr_email') || '').toLowerCase();
+  const owners = ['gayden@goodresults.org','joe@goodresults.org'];
+  const card = document.getElementById('dashboard-card');
+  if (card && owners.includes(email)) {
+    card.classList.remove('locked');
+    card.classList.add('live');
+    card.style.cursor = 'pointer';
+    card.querySelector('.tool-desc').classList.remove('dim');
+    card.onclick = function(){ window.location.href = '/gimmebrain/tasks'; };
+  }
 })();
 
 // ── Hero greeting ──
