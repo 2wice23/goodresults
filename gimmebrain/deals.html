@@ -111,6 +111,12 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .btn-cancel{background:var(--red-bg);color:var(--red);border-color:rgba(239,68,68,0.25);}
 .btn-cancel:hover{background:rgba(239,68,68,0.15);}
 .btn-save:disabled{opacity:0.4;cursor:not-allowed;}
+.btn-close{background:rgba(37,99,235,0.08);color:#3B82F6;border-color:rgba(37,99,235,0.25);}
+.btn-close:hover{background:rgba(37,99,235,0.15);}
+.btn-workflow{background:rgba(34,197,94,0.08);color:var(--green);border-color:rgba(34,197,94,0.25);}
+.btn-workflow:hover{background:rgba(34,197,94,0.15);}
+.btn-close:disabled,.btn-workflow:disabled{opacity:0.4;cursor:not-allowed;}
+.btn-close.done,.btn-workflow.done{opacity:0.6;cursor:default;}
 
 /* PHOTO GALLERY */
 .photo-section{margin-top:16px;}
@@ -162,7 +168,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 <header class="header">
   <div class="logo">Good Results // Deal Dashboard</div>
   <div class="header-right">
-    <a href="/gimmebrain/deal-doc" class="header-link">Deal Processor</a>
+    <a href="/gimmebrain/deal-generator" class="header-link">Deal Generator</a>
     <a href="/gimmebrain/" class="header-link">&larr; Hub</a>
   </div>
 </header>
@@ -251,6 +257,58 @@ async function ghDelete(path, body) {
   return r.json();
 }
 
+// ── Close CRM proxy + custom fields ──
+
+const CLOSE_PROXY = '/.netlify/functions/close-proxy';
+const CLOSE_PIPELINE = 'pipe_1P0GjK0TFer4Yw2rbArK0u';
+const CF = {
+  address:              'cf_NdiIYfY11hv4MI2EccVt1UBe7hc3UcrPFVJn44F9AuT',
+  ask:                  'cf_vjCMz4xV8VVONcfII1tqKNbrw4WhRCU80PmVBYdHvdv',
+  arv:                  'cf_I31MKYiLvGaKZIifqfVQxkjMjhpkrImNP1q7DQOQxUZ',
+  mao:                  'cf_BKzKEuNx4uGjjJpV78goMM7Duovz630H3Hse3z4mjZC',
+  closingCosts:         'cf_I382twtiVhhsQ57v5x0ZoQ65zESufG7qM6FOQvoTbFp',
+  officialOfferPrice:   'cf_geYAfr1h8XVC3x0bzMIEf0Aj6580oaFQ39wdLAJ2Gqe',
+  emdAmount:            'cf_SOdFoDCrSlKj3uJlxR1Yv0vP1LrlyGatZVmtgDOqIcj',
+  coeDate:              'cf_0maXpCwRBInrLrsfyJOPVZPDTTipRetz10WGJz2ptDO',
+  acceptedDate:         'cf_EVnxq4atDCF6u1Ohl13HCad8mAGiK4RijRqhBJrZNzg',
+  ddEndDate:            'cf_dYuh3zK6om5wx7DazAPdoknMZI1083pJ9Xfon6vdmYf',
+  emdDueDate:           'cf_v7RDgaN83GrYYyUPjwry71a2COpLSEhM0Dn7Lbs4Vn7',
+  currentContractPrice: 'cf_lnzdav3LInFjRAbyUATuFShueu7pIaFebA988JE8H91',
+  wholesalePrice:       'cf_MDzK5zNGLLLUE9yYYWqubvC3hFzDeKA8m4ta6p8OPhx'
+};
+
+// Static dispo template IDs
+const TEASER_TMPL   = 'smstmpl_5TJvHLXfVDqBV5c5D4a1MZ';
+const FOLLOWUP_TMPL = 'smstmpl_3GVufkhASUv2ao47VskWV2';
+const NUDGE_TMPL    = 'smstmpl_5gHTK848OX3hK9WP1cbG4A';
+
+async function closeAPI(path, method, body) {
+  const resp = await fetch(CLOSE_PROXY, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ path, method, body })
+  });
+  if (!resp.ok) {
+    const err = await resp.text();
+    throw new Error('Close API ' + path + ' failed (' + resp.status + '): ' + err);
+  }
+  return resp.json();
+}
+
+function parseDollar(str) {
+  if (!str && str !== 0) return null;
+  const n = Number(String(str).replace(/[^0-9.]/g, ''));
+  return isNaN(n) || n === 0 ? null : n;
+}
+
+function addDaysToDate(dateStr, days) {
+  if (!dateStr || days == null) return null;
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return null;
+  d.setDate(d.getDate() + Number(days));
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
 // ── Load deals ──
 
 async function loadDeals() {
@@ -272,6 +330,11 @@ async function loadDeals() {
         const json = JSON.parse(atob(file.content.replace(/\n/g, '')));
         json._slug = folder.name;
         json._docSha = file.sha;
+        // Normalize field names (generator uses wholesalePrice/repairsPerSqft, dashboard uses askingPrice/estRepairs)
+        if (json.wholesalePrice && !json.askingPrice) json.askingPrice = json.wholesalePrice;
+        if (json.askingPrice && !json.wholesalePrice) json.wholesalePrice = json.askingPrice;
+        if (json.repairsPerSqft && !json.estRepairs) json.estRepairs = json.repairsPerSqft;
+        if (json.profitPotential && !json.profit) json.profit = json.profitPotential;
 
         // Get all files in deal folder (for photos)
         const files = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name).catch(() => []);
@@ -453,10 +516,11 @@ function renderDeals() {
         // ACTIONS
         '<div class="card-actions">' +
           '<a href="' + liveUrl + '" target="_blank" class="card-action-btn btn-view" onclick="event.stopPropagation()">View Deal Page &rarr;</a>' +
-          '<a href="/gimmebrain/deal-doc" class="card-action-btn btn-process" onclick="event.stopPropagation()">Open in Processor</a>' +
           '<button class="card-action-btn btn-edit" onclick="event.stopPropagation();enterEditMode(this)">Edit Deal</button>' +
           '<button class="card-action-btn btn-save" onclick="event.stopPropagation();saveDeal(this)" style="display:none;">Save Changes</button>' +
           '<button class="card-action-btn btn-cancel" onclick="event.stopPropagation();cancelEdit(this)" style="display:none;">Cancel</button>' +
+          '<button class="card-action-btn btn-close" onclick="event.stopPropagation();pushToClose(this)">Push to Close</button>' +
+          '<button class="card-action-btn btn-workflow" onclick="event.stopPropagation();createWorkflow(this)">Create Workflow</button>' +
           '<div class="save-status" id="status-' + d._slug + '"></div>' +
         '</div>' +
       '</div></div>' +
@@ -717,6 +781,172 @@ function fileToBase64(file) {
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
+}
+
+// ── Push to Close CRM ──
+
+async function pushToClose(btn) {
+  const card = btn.closest('.deal-card');
+  const slug = card.dataset.slug;
+  const deal = allDeals.find(d => d._slug === slug);
+  if (!deal) return;
+
+  const status = document.getElementById('status-' + slug);
+  btn.disabled = true;
+  btn.textContent = 'Pushing...';
+  status.className = 'save-status saving';
+  status.textContent = 'Searching Close for lead...';
+
+  const address = deal.address || slug;
+  const dealUrl = 'https://goodresults.org/deals/' + slug + '/';
+  const askingN = parseDollar(deal.wholesalePrice || deal.askingPrice);
+  const arvN = parseDollar(deal.arv);
+
+  try {
+    // Find lead
+    const searchData = await closeAPI(
+      '/lead/?query=' + encodeURIComponent(address) + '&_fields=id,display_name,opportunities&_limit=5',
+      'GET'
+    );
+    const leads = searchData.data || [];
+    let targetOpp = null;
+    let matchedLead = null;
+    for (const lead of leads) {
+      const opps = lead.opportunities || [];
+      const pipelineOpp = opps.find(o => o.pipeline_id === CLOSE_PIPELINE);
+      if (pipelineOpp) { targetOpp = pipelineOpp; matchedLead = lead; break; }
+      if (!targetOpp && opps.length > 0) { targetOpp = opps[0]; matchedLead = lead; }
+    }
+
+    if (!targetOpp) {
+      status.className = 'save-status error';
+      status.textContent = 'No matching lead found in Close for "' + address + '"';
+      btn.textContent = 'Push to Close';
+      btn.disabled = false;
+      return;
+    }
+
+    status.textContent = 'Updating opp on "' + matchedLead.display_name + '"...';
+
+    // Get existing opp
+    const existingOpp = await closeAPI('/opportunity/' + targetOpp.id + '/', 'GET');
+    const existing = existingOpp.custom || {};
+
+    const updatePayload = {};
+    function setCF(key, val) {
+      if (!val) return;
+      const fieldId = CF[key];
+      const current = existing[fieldId];
+      if (!current || current === '' || current === null) {
+        updatePayload['custom.' + fieldId] = val;
+      }
+    }
+
+    const fullAddr = [address, deal.city, deal.state, deal.zip].filter(Boolean).join(', ');
+    setCF('address', fullAddr);
+
+    const contractPriceN = parseDollar(deal.contractPrice);
+    if (contractPriceN) setCF('currentContractPrice', '$' + contractPriceN.toLocaleString());
+    if (askingN) setCF('wholesalePrice', '$' + askingN.toLocaleString());
+    if (askingN && !existingOpp.value) {
+      updatePayload.value = Math.round(askingN * 100);
+    }
+    if (arvN) setCF('arv', '$' + arvN.toLocaleString());
+    if (deal.coeDate) setCF('coeDate', deal.coeDate);
+    if (deal.acceptedDate || deal.executedDate) setCF('acceptedDate', deal.acceptedDate || deal.executedDate);
+    if (deal.emdAmount) setCF('emdAmount', deal.emdAmount);
+    if (deal.ddEndDate) setCF('ddEndDate', deal.ddEndDate);
+    if (deal.emdDueDate) setCF('emdDueDate', deal.emdDueDate);
+
+    // Note with property details + deal URL
+    const noteLines = [address];
+    const propDetails = [
+      deal.beds ? deal.beds + ' bd' : null,
+      deal.baths ? deal.baths + ' ba' : null,
+      deal.sqft ? Number(deal.sqft).toLocaleString() + ' sqft' : null
+    ].filter(Boolean).join(' / ');
+    if (propDetails) noteLines.push(propDetails);
+    if (deal.yearBuilt) noteLines.push('Year: ' + deal.yearBuilt);
+    if (deal.lotSize) noteLines.push('Lot: ' + deal.lotSize);
+    noteLines.push('Deal page: ' + dealUrl);
+    updatePayload.note = noteLines.join('\n');
+
+    const fieldCount = Object.keys(updatePayload).length;
+    await closeAPI('/opportunity/' + targetOpp.id + '/', 'PUT', updatePayload);
+
+    status.className = 'save-status saved';
+    status.textContent = 'Close updated ✓ on "' + matchedLead.display_name + '" (' + (fieldCount - 1) + ' fields)';
+    btn.textContent = '✓ Close Updated';
+    btn.classList.add('done');
+
+  } catch(err) {
+    console.error('Close push failed:', err);
+    status.className = 'save-status error';
+    status.textContent = 'Close push failed: ' + err.message;
+    btn.textContent = 'Retry Close';
+    btn.disabled = false;
+  }
+}
+
+// ── Create Dispo Workflow ──
+
+async function createWorkflow(btn) {
+  const card = btn.closest('.deal-card');
+  const slug = card.dataset.slug;
+  const deal = allDeals.find(d => d._slug === slug);
+  if (!deal) return;
+
+  const status = document.getElementById('status-' + slug);
+  btn.disabled = true;
+  btn.textContent = 'Creating...';
+  status.className = 'save-status saving';
+  status.textContent = 'Creating templates + workflow...';
+
+  const address = deal.address || slug;
+  const dealUrl = 'https://goodresults.org/deals/' + slug + '/';
+
+  try {
+    // Create deal-link SMS template
+    const linkSmsTmpl = await closeAPI('/sms_template/', 'POST', {
+      name: address + ' - Deal Link',
+      text: 'Here are the details on that deal I mentioned... check it out and let me know if you have any questions\n' + dealUrl,
+      is_shared: true
+    });
+
+    // Create deal email template
+    const emailTmpl = await closeAPI('/email_template/', 'POST', {
+      name: address + ' - Deal Email',
+      subject: 'Deal details — ' + address,
+      body: '<p>Hey {{ contact.first_name }},</p><p>Here are the details on that deal I mentioned...</p><p><a href="' + dealUrl + '">' + dealUrl + '</a></p><p>Let me know if you have any questions or want to take a look at it.</p><p>{{ user.first_name }}<br>Good Results Home Buyers</p>',
+      is_shared: true
+    });
+
+    // Create 6-step workflow
+    const workflow = await closeAPI('/sequence/', 'POST', {
+      name: address + ' - Dispo',
+      timezone: 'America/Los_Angeles',
+      steps: [
+        { step_type: 'sms',   delay: 0,     sms_template_id: TEASER_TMPL },
+        { step_type: 'email', delay: 0,     email_template_id: emailTmpl.id, threading: 'new_thread' },
+        { step_type: 'sms',   delay: 2760,  sms_template_id: linkSmsTmpl.id },
+        { step_type: 'sms',   delay: 86400, sms_template_id: FOLLOWUP_TMPL },
+        { step_type: 'email', delay: 0,     email_template_id: emailTmpl.id, threading: 'new_thread' },
+        { step_type: 'sms',   delay: 7200,  sms_template_id: NUDGE_TMPL }
+      ]
+    });
+
+    status.className = 'save-status saved';
+    status.textContent = 'Workflow "' + workflow.name + '" created ✓';
+    btn.textContent = '✓ Workflow Created';
+    btn.classList.add('done');
+
+  } catch(err) {
+    console.error('Workflow creation failed:', err);
+    status.className = 'save-status error';
+    status.textContent = 'Workflow failed: ' + err.message;
+    btn.textContent = 'Retry Workflow';
+    btn.disabled = false;
+  }
 }
 
 // ── Filters ──
