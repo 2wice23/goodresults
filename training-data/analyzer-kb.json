@@ -62,6 +62,10 @@
     "[Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Volunteered that she's an investor herself and works with other investors"
   ],
   "negative": [
+    "[Anthony Cruz — RE-ENGAGEMENT]: Didn't remember the January conversation",
+    "[Anthony Cruz — RE-ENGAGEMENT]: Said 'I don't typically sell that, per se'",
+    "[Anthony Cruz — RE-ENGAGEMENT]: Stated 'I don't have anything at the moment'",
+    "[Anthony Cruz — RE-ENGAGEMENT]: Predicted 'I don't think I'll have something in a month'",
     "[Franklin Ladaga — RE-ENGAGEMENT]: Very brief 'Not lately' and 'No' responses showing limited current inventory",
     "[Franklin Ladaga — RE-ENGAGEMENT]: Had to keep responses short due to driving safety",
     "[Franklin Ladaga — RE-ENGAGEMENT]: Had to cut call short due to vet appointment timing",
@@ -117,16 +121,9 @@
     "[Gayden Rosales — DEAL DISCUSSION]: Initial concern about whether this was a wholesale deal rather than end-buyer purchase",
     "[Gayden Rosales — DEAL DISCUSSION]: Some hesitation about presenting an offer on a property outside Gayden's typical buy box",
     "[Gayden Rosales — WARM FOLLOW-UP]: Had to cut call short due to meeting",
-    "[Gayden Rosales — WARM FOLLOW-UP]: Initially seemed confused about whether she had already sent him this property",
-    "[Gayden Rosales — WARM FOLLOW-UP — manually flagged]: Had to cut call short due to meeting",
-    "[Gayden Rosales — WARM FOLLOW-UP — manually flagged]: Initially seemed confused about whether she had already sent him this property",
-    "[Gayden Rosales — DEAL DISCUSSION]: Brief confusion initially about property visitor but quickly engaged once story connected",
-    "[Gayden Rosales — WARM FOLLOW-UP]: Brief initial confusion about Rob's departure but quickly moved past it"
+    "[Gayden Rosales — WARM FOLLOW-UP]: Initially seemed confused about whether she had already sent him this property"
   ],
   "reknowledge": [
-    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Gabriela Gomez Pena is a Houston realtor who doesn't typically handle distressed properties",
-    "[RE Knowledge — Anthony Cruz — 03/30/2026]: She prefers text communication over phone calls for follow-up",
-    "[RE Knowledge — Anthony Cruz — 03/30/2026]: She's willing to keep investors in mind but doesn't expect inventory in the short term",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Julie Ardizzone occasionally gets off-market investment deals but not currently",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: She's receptive to investor relationships and follow-up contact",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: She was driving during this call which limited conversation depth",
@@ -203,6 +200,9 @@
     "[Gayden Rosales — DEAL DISCUSSION — Grade B+]: [Gayden Rosales — DEAL DISCUSSION — Grade B+]: Flexible on commission structure",
     "[Gayden Rosales — DEAL DISCUSSION — Grade B+]: [Gayden Rosales — DEAL DISCUSSION — Grade B+]: Acknowledged property might not be right fit rather than forcing it",
     "[Gayden Rosales — DEAL DISCUSSION — Grade B+]: [Gayden Rosales — DEAL DISCUSSION — Realtor responded positively to]: Asked 'what would be your top dollar offer?' showing genuine interest",
-    "[Gayden Rosales — DEAL DISCUSSION — Grade B+]: [Gayden Rosales — DEAL DISCUSSION — Realtor responded positively to]: Offered to send old listing photos immediately"
+    "[Gayden Rosales — DEAL DISCUSSION — Grade B+]: [Gayden Rosales — DEAL DISCUSSION — Realtor responded positively to]: Offered to send old listing photos immediately",
+    "[Gayden Rosales — DEAL DISCUSSION — Grade B+]: [Gayden Rosales — DEAL DISCUSSION — Realtor responded positively to]: Suggested working out commission structure to make deal work",
+    "[Gayden Rosales — DEAL DISCUSSION — Grade B+]: [Gayden Rosales — DEAL DISCUSSION — Realtor responded positively to]: Provided detailed property condition information unprompted",
+    "[Gayden Rosales — DEAL DISCUSSION — Grade B+]: [Gayden Rosales — DEAL DISCUSSION]: Mentioned it's loud where she is, suggesting some distraction from the environment"
   ]
 }
