@@ -698,5 +698,25 @@
     "resistance_moments": "Very brief responses throughout ('Okay', 'I mean, like I said, not super often') | Repeatedly emphasized she doesn't often see his type of deals | Didn't ask follow-up questions about his business or experience",
     "script_moment": "When she mentioned development work, he could have said: 'That's interesting - do those developments ever involve renovating existing structures, or are you working with builders who might see distressed properties that don't fit their timeline?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774910677417",
+    "timestamp": "2026-03-30T22:44:37.417Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Scott Dozois",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "2m 30s",
+    "call_date": "03/30/2026",
+    "score": 63,
+    "realtor_engagement": 65,
+    "summary": "Franklin re-engaged Scott after 6 months of no contact, delivered buy box criteria and positioned as cash buyer spending over $400k annually across multiple markets. Scott was receptive but had limited time due to walking into an office.",
+    "what_worked": "Strong buy box delivery with specific criteria | Good cash buyer positioning with concrete volume numbers | Acknowledged the relationship timing honestly | Responded well to Scott's budget questions",
+    "what_to_tighten": "Opener could have been clearer about the 6-month gap upfront | Could have asked for specific follow-up timeline beyond just texting | Missed opportunity to ask about Scott's typical deal flow",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about Scott's client base or typical listings | Didn't explore what type of 'random' deals Scott typically sees",
+    "positive_moments": "Asked specific budget questions showing genuine interest | Said 'that's why we do it right? Numbers game' showing he understands the business | Requested text to save contact information | Acknowledged he does get investment deals 'randomly'",
+    "resistance_moments": "Initial confusion about who Franklin was | Had to cut conversation short due to walking into office | Emphasized need to be fast due to time constraint",
+    "script_moment": "When Scott said he gets deals 'randomly', Franklin should have asked: 'When you do get those random investment deals, what do they typically look like? Same areas you normally work?'",
+    "on_leaderboard": "yes"
   }
 ]
