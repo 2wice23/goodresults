@@ -718,5 +718,25 @@
     "resistance_moments": "Initial confusion about who Franklin was | Had to cut conversation short due to walking into office | Emphasized need to be fast due to time constraint",
     "script_moment": "When Scott said he gets deals 'randomly', Franklin should have asked: 'When you do get those random investment deals, what do they typically look like? Same areas you normally work?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774911510090",
+    "timestamp": "2026-03-30T22:58:30.090Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Natalie Walker",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "4m 32s",
+    "call_date": "03/30/2026",
+    "score": 48,
+    "realtor_engagement": 85,
+    "summary": "Franklin reconnected with Natalie after 6 months and she immediately volunteered a 3-unit property on one parcel in Yerington. However, the property is outside Franklin's typical buy box and he struggled to evaluate the unusual structure.",
+    "what_worked": "Good opener referencing prior permission | Realtor immediately engaged with property details | Asked relevant due diligence questions about liens and condition",
+    "what_to_tighten": "Deliver buy box more confidently and earlier | Set specific follow-up timeline instead of vague 'let you know' | Be more decisive about whether property fits criteria",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about other properties in her pipeline | Missed chance to set specific callback date given her immediate engagement",
+    "positive_moments": "Immediately said 'I do' when asked about off-market properties | Volunteered specific property with addresses without being asked | Provided ARV estimates ($450-500k) and pricing ($300k) | Explained multiple exit strategies (rent, flip, subdivide) | Stayed engaged despite being interrupted at the vet",
+    "resistance_moments": "Had to cut call short due to vet appointment timing",
+    "script_moment": "When she said the property would be worth $450-500k flipped and they're asking $300k, Franklin should have said: 'That sounds like it could work - let me run our numbers tonight and call you back tomorrow morning with a decision. Does that timeline work for you?'",
+    "on_leaderboard": "yes"
   }
 ]
