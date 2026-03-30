@@ -1,8 +1,5 @@
 {
   "positive": [
-    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Asked 'Exactly what area are you looking at in Houston?' showing genuine interest",
-    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Requested his email address unprompted to save his information",
-    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Agreed enthusiastically to monthly follow-up with 'That sounds great'",
     "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Asked 'are you looking for turnkey or needing fixing up?' showing she understood his needs",
     "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Volunteered extensive details about her 12 properties and partner's distressed portfolio",
     "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Offered to pass his information to her partner who has distressed properties",
@@ -59,7 +56,10 @@
     "[Kayden Rogers — RE-ENGAGEMENT — Grade B+]: Excellent next step with multiple contact methods",
     "[Kayden Rogers — RE-ENGAGEMENT — Grade B+]: Adapted well to her questions and showed flexibility",
     "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Tracy immediately offered a property: 'we have a house that's out here in Katy'",
-    "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Provided detailed property description including location, no HOA, school proximity, pool"
+    "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Provided detailed property description including location, no HOA, school proximity, pool",
+    "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Asked clarifying questions about their strategy (rental vs flip, pool concerns)",
+    "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Said 'Let me look and see if I can find something' showing commitment to help",
+    "[Kayden Rogers — RE-ENGAGEMENT — Realtor responded positively to]: Agreed to email exchange for ongoing communication"
   ],
   "negative": [
     "[Anthony Cruz — DEAL DISCUSSION]: Brief 'I personally don't' when asked about distressed properties in pipeline",
@@ -124,6 +124,9 @@
     "[Anthony Cruz — WARM FOLLOW-UP]: Very brief 'Distress. I would have to see what we have currently' - not immediately helpful"
   ],
   "reknowledge": [
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Amy Melesky gets distressed properties every couple months in Houston market",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: She's receptive to working with investors and proactively requests contact information",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: She asks qualifying questions about location specifics showing professional approach",
     "[RE Knowledge — Gayden Rosales — 03/30/2026]: the analyzer appears to be taking the n/a and including them in average score... if a score has any n/a in it, do not include them in the average.\nalso, does the filler words affect the score? if so, let's make the filler word thing way better. or remove its affect on score",
     "[RE Knowledge — Dan VanMatre — 03/30/2026]: Yunyue Wang works Houston market and has current on-market inventory",
     "[RE Knowledge — Dan VanMatre — 03/30/2026]: She's receptive to working with investors and asks qualifying questions",
@@ -200,9 +203,6 @@
     "[Anthony Cruz — RE-ENGAGEMENT — Grade C+]: [Anthony Cruz — RE-ENGAGEMENT]: Focused conversation on his luxury/second home niche",
     "[Anthony Cruz — WARM FOLLOW-UP — Grade B-]: [Anthony Cruz — WARM FOLLOW-UP]: No clear resistance, but Ken's 'Like everybody' comment suggests Anthony didn't differentiate himself",
     "[Dan VanMatre — RE-ENGAGEMENT — Grade C+]: [Dan VanMatre — RE-ENGAGEMENT]: Initial confusion about whether they'd met before created awkward start",
-    "[Dan VanMatre — RE-ENGAGEMENT — Grade C+]: [Dan VanMatre — RE-ENGAGEMENT]: Ended with generic 'I'll keep you in mind' brush-off language",
-    "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT]: Initial confusion about not remembering previous conversations",
-    "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Asked 'what price range are you looking for?' showing immediate interest",
-    "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT]: Brief 'No' when asked if she remembered prior conversation"
+    "[Dan VanMatre — RE-ENGAGEMENT — Grade C+]: [Dan VanMatre — RE-ENGAGEMENT]: Ended with generic 'I'll keep you in mind' brush-off language"
   ]
 }
