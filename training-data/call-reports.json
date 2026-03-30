@@ -798,5 +798,25 @@
     "resistance_moments": "Multiple 'Hello?' and 'Who is that?' due to connection issues | Very brief responses throughout | Said 'I'm sorry' when he explained commission structure | Explicitly stated 'I'm busy at the moment. Just text me if you need anything'",
     "script_moment": "When she said 'I'm sorry' after the commission explanation, should have said: 'Sounds like I caught you at a busy time - would it be better if I just text you my info and we can connect later when it's more convenient?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774913954675",
+    "timestamp": "2026-03-30T23:39:14.675Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Taylor Stoker",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "1m 53s",
+    "call_date": "03/30/2026",
+    "score": 78,
+    "realtor_engagement": 85,
+    "summary": "Franklin re-engaged Taylor after 6 months, referencing their prior text exchange. Taylor immediately showed interest and volunteered having a specific property in mind after hearing the buy box.",
+    "what_worked": "Strong opener referencing specific 6-month timeframe from prior contact | Complete buy box delivery with vivid imagery about subdivision neighborhoods | Taylor immediately volunteered a specific property | Set dual next steps - immediate email exchange plus two-week follow-up",
+    "what_to_tighten": "Could have asked follow-up questions about the property Taylor mentioned | Could have explored what types of situations typically create her off-market deals",
+    "language_flags": "",
+    "missed_opportunities": "Didn't ask any details about the property Taylor mentioned having in mind | Could have asked about her typical deal flow or what situations create off-market opportunities",
+    "positive_moments": "Taylor said 'I actually have one in mind' unprompted after hearing the buy box | Requested Franklin's email to send property details immediately | Confirmed she gets these deals 'occasionally' showing this fits her business",
+    "resistance_moments": "Initial confusion about who Franklin was until he clarified his full name",
+    "script_moment": "When Taylor said 'I actually have one in mind,' Franklin should have said 'Oh great! Can you tell me a bit about it?' instead of just saying 'I'd love to look at it' - he missed the chance to get immediate details about a live opportunity.",
+    "on_leaderboard": "yes"
   }
 ]
