@@ -678,5 +678,25 @@
     "resistance_moments": "Firm rejection of $100k with 'I'm not okay with 100' | Insisted on his preferred title company due to work already completed | Called the price difference 'huge, huge difference'",
     "script_moment": "When Sylvester mentioned the other buyer at $120k, Anthony should have asked: 'What's their timeline and are they cash? Because if there's any financing risk or delays, we could still be the safer option at $100k with our proven track record.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774909753119",
+    "timestamp": "2026-03-30T22:29:13.119Z",
+    "agent": "Dan VanMatre",
+    "realtor": "Flor Velasquez",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "3m 51s",
+    "call_date": "03/30/2026",
+    "score": 76,
+    "realtor_engagement": 65,
+    "summary": "Dan followed up on Flor's text response explaining his investment criteria. Flor indicated she occasionally sees distressed properties but focuses more on larger development projects. She agreed to ask colleagues and accepted Dan's contact information for future opportunities.",
+    "what_worked": "Complete buy box delivery with all elements | Good follow-up on her text response | Set clear next steps with contact exchange | Asked about her business model and listened to her development focus",
+    "what_to_tighten": "Avoid credibility-killer language about 'just moved here' | Could have dug deeper into her development work to find connection points | Missed opportunity to ask about her colleagues' specialties",
+    "language_flags": "Credibility-killer: 'just moved over here from Nevada' - suggests newness rather than established market presence",
+    "missed_opportunities": "Could have asked which colleagues specialize in distressed properties | Missed chance to learn about her development projects' renovation components that might align",
+    "positive_moments": "Asked 'What are you looking for?' showing genuine interest in his criteria | Volunteered to ask colleagues at her company for matching properties | Agreed readily to receiving his contact information",
+    "resistance_moments": "Very brief responses throughout ('Okay', 'I mean, like I said, not super often') | Repeatedly emphasized she doesn't often see his type of deals | Didn't ask follow-up questions about his business or experience",
+    "script_moment": "When she mentioned development work, he could have said: 'That's interesting - do those developments ever involve renovating existing structures, or are you working with builders who might see distressed properties that don't fit their timeline?'",
+    "on_leaderboard": "yes"
   }
 ]
