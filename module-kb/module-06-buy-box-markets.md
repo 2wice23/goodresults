@@ -62,6 +62,6 @@ This builds credibility and explains our processes naturally.
 | Reno, NV | Amy Kromberg | Core Title |
 | Houston, TX | Aaron Krominga | Spartan Title (aaronk@spartantitle.com) |
 
-We have a high-volume relationship with Spartan. Push to use Spartan on every Texas deal.
+We have a high-volume relationship with our title companies. Always insist on using our title company on every deal — this is non-negotiable.
 
-If a seller has already opened title with another company and there are costs: offer to add those costs to the purchase price. Don't fight about title company at the expense of the deal.
+**Title Company Policy:** We always insist on our title company. We offer to pay 100% of closing costs, and in return we use our title company. If the seller or realtor refuses to use our title company, then the seller covers all title and escrow fees. Do not argue back and forth — if there's pushback, bring the deal to Gayden and let him handle it.
