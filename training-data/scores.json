@@ -856,5 +856,33 @@
       15,
       9
     ]
+  },
+  {
+    "timestamp": "2026-03-30T21:21:56.117Z",
+    "agent": "Gayden",
+    "email": "gayden@goodresults.org",
+    "module": 7,
+    "moduleTitle": "Comps & Deal Analysis",
+    "scorePct": 90,
+    "correct": 9,
+    "total": 10,
+    "xp": 108,
+    "poolSize": 30,
+    "correctIndices": [
+      0,
+      22,
+      8,
+      26,
+      11,
+      25,
+      13,
+      23,
+      17,
+      20,
+      15,
+      29,
+      3,
+      7
+    ]
   }
 ]
