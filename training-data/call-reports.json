@@ -538,5 +538,25 @@
     "resistance_moments": "Brief initial response that they don't have anything 'at this moment' but immediately clarified they do get them",
     "script_moment": "When Katie mentioned the probate property, Frank should have said: 'That sounds really interesting Katie. Can you tell me a bit about the condition of the property and what the timeline looks like for the seller?' This would have gathered more qualifying information while the opportunity was live.",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774905737755",
+    "timestamp": "2026-03-30T21:22:17.755Z",
+    "agent": "Dan VanMatre",
+    "realtor": "Santiago Bolanos",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "2m 4s",
+    "call_date": "03/30/2026",
+    "score": 76,
+    "realtor_engagement": 88,
+    "summary": "Dan followed up on a Friday text that Santiago didn't remember. After brief confusion, Santiago revealed he's an investment agent and immediately requested Dan's buy box, promising to call back with opportunities.",
+    "what_worked": "Complete buy box delivery with specific criteria | Adapted quickly when Santiago took control | Confirmed text sent immediately | Let realtor drive the process once engaged",
+    "what_to_tighten": "Opener mistake saying 'this is Santiago' instead of 'this is Dan' | Don't reference texts realtors don't remember | Could have been smoother transitioning from text confusion",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked what type of investment deals Santiago typically works on | Could have mentioned cash capability or timeline",
+    "positive_moments": "Asked 'You have any buy box?' showing immediate professional interest | Revealed 'I'm an investment agent' indicating this is his specialty | Requested buy box via text to save Dan's number | Promised to call back tonight with specific follow-up | Said 'I do a lot of things like that' confirming he works Dan's criteria",
+    "resistance_moments": "Initial confusion about how Dan got his contact | Didn't remember the Friday text message | Brief guard up asking 'Who give you my contact?'",
+    "script_moment": "After Santiago said he didn't remember the text: 'No worries at all - I'm Dan, I'm a cash buyer expanding from Nevada into Houston, and I'm looking to connect with agents who work with investors on fix and flip opportunities. Do you work with investors at all?'",
+    "on_leaderboard": "yes"
   }
 ]
