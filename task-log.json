@@ -14,7 +14,13 @@
       "cron": "0 15 * * 1",
       "description": "Pulls Academy leaderboard data, calculates weekly progress changes, and posts a team training summary to Slack. Shows who completed modules, who improved scores, and who needs to catch up.",
       "slackChannel": "#the-group-chat",
-      "runs": []
+      "runs": [
+        {
+          "timestamp": "2026-03-30T15:00:23.547Z",
+          "status": "success",
+          "details": "Posted digest for 1 agents. Leader: Gayden at 61%."
+        }
+      ]
     },
     "deal-deadline-check": {
       "name": "Deal Deadline Alert",
