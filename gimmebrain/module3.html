@@ -631,7 +631,7 @@ const QUIZ_POOL = [
 ];
 
 let sectionTimes = [3, 2, 3, 4, 3, 3, 3, 2];
-let kcExplanations = {};
+let kcExplanations = {1:"A soft comp should take 3 minutes max. Quick Zillow/Redfin check to see if the numbers are in the ballpark. If you're spending 15+ minutes, you're doing a full comp — that's Joe's job.",2:"'Let me ask them' means the realtor is presenting your verbal to the seller. That's permission to write it up. Get the contract terms ready.",3:"Title issues, estate status, solar, HOA, and major systems (roof/HVAC/foundation) — these affect your pricing and can kill a deal. Get clarity before sending terms.",4:"Texas uses the TREC (Texas Real Estate Commission) standard form. Nevada uses the RPA. Always use the correct state form.",5:"Assignment gives you flexibility to close in different entities or transfer rights to an end buyer. It's faster and cheaper than double close. Keep it in every contract.",6:"EMD is due at the END of the due diligence period, not 3 days after contract. This protects you — you can walk away penalty-free if inspections reveal major issues.",7:"Escalate to Gayden when assignment language is refused and you need it. He's handled double closes and can navigate the situation.",8:"Never reveal your MAO (Maximum Allowable Offer). Share your reasoning about comps and repairs instead. If the realtor knows your ceiling, they'll negotiate you up to it every time."};
 
 let quizQuestions = [], userAnswers = {}, quizDone = false, masteredIndices = [], completedSections = new Set();
 
@@ -674,9 +674,8 @@ function answerKC(sectionNum, optIdx, isCorrect){
   opts.forEach((opt, i) => {
     if(i === optIdx) opt.classList.add(isCorrect ? 'kc-correct' : 'kc-wrong');
     else {
-      opt.classList.add('kc-disabled');
-      if(q.querySelectorAll('.kc-opt')[i].querySelector ? q.querySelectorAll('.kc-opt')[i].dataset.correct === 'true' : false)
-        opt.classList.add('kc-correct');
+      if(opt.getAttribute('onclick')?.includes('true')) opt.classList.add('kc-correct');
+      else opt.classList.add('kc-disabled');
     }
   });
 

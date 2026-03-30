@@ -805,7 +805,7 @@ function submitScore() {
 }
 
 // ── Init: open first section and load quiz ──
-document.querySelector('.acc-item[data-section="1"]').classList.add('open');
+document.querySelector('.acc-item[data-section="1"]')?.classList.add('open');
 loadMasteredAndInit();
 
 // ── Module Update Submit ─────────────────
