@@ -672,5 +672,28 @@
       24,
       23
     ]
+  },
+  {
+    "timestamp": "2026-03-30T20:59:10.026Z",
+    "agent": "Joe",
+    "email": "joe@goodresults.org",
+    "module": 1,
+    "moduleTitle": "Pipeline & CRM",
+    "scorePct": 90,
+    "correct": 9,
+    "total": 10,
+    "xp": 108,
+    "poolSize": 27,
+    "correctIndices": [
+      0,
+      18,
+      21,
+      13,
+      3,
+      22,
+      14,
+      8,
+      24
+    ]
   }
 ]
