@@ -1,5 +1,10 @@
 {
   "positive": [
+    "[Dan VanMatre — WARM FOLLOW-UP — Realtor responded positively to]: Asked 'You have any buy box?' showing immediate professional interest",
+    "[Dan VanMatre — WARM FOLLOW-UP — Realtor responded positively to]: Revealed 'I'm an investment agent' indicating this is his specialty",
+    "[Dan VanMatre — WARM FOLLOW-UP — Realtor responded positively to]: Requested buy box via text to save Dan's number",
+    "[Dan VanMatre — WARM FOLLOW-UP — Realtor responded positively to]: Promised to call back tonight with specific follow-up",
+    "[Dan VanMatre — WARM FOLLOW-UP — Realtor responded positively to]: Said 'I do a lot of things like that' confirming he works Dan's criteria",
     "[Franklin Ladaga — WARM FOLLOW-UP — Score 82/100]: Complete buy box delivery with specific criteria",
     "[Franklin Ladaga — WARM FOLLOW-UP — Score 82/100]: Professional explanation of ARV formula with concrete example",
     "[Franklin Ladaga — WARM FOLLOW-UP — Score 82/100]: Katie volunteered a specific property that fits perfectly",
@@ -54,12 +59,7 @@
     "[Anthony Cruz — WARM FOLLOW-UP — Grade B+]: Complete buy box delivery with all elements",
     "[Anthony Cruz — WARM FOLLOW-UP — Grade B+]: Strong credibility with 60 deals per year statistic",
     "[Anthony Cruz — WARM FOLLOW-UP — Grade B+]: Set specific follow-up timeline",
-    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Al immediately asked 'what are you looking for?' showing genuine interest",
-    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Asked about budget unprompted",
-    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Asked about location parameters showing he was thinking about inventory",
-    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Agreed to one month follow-up",
-    "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Immediately offered a property: 'I got a listing right now you can look at'",
-    "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Shared confidential info: 'between you and me the owner is getting anxious to sell'"
+    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Al immediately asked 'what are you looking for?' showing genuine interest"
   ],
   "negative": [
     "[Franklin Ladaga — WARM FOLLOW-UP]: Brief initial response that they don't have anything 'at this moment' but immediately clarified they do get them",
