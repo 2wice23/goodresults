@@ -418,5 +418,25 @@
     "resistance_moments": "",
     "script_moment": "After she said she gets them every couple months, should have asked: 'Do you happen to have anything in your pipeline right now that might fit?' to potentially uncover immediate opportunities.",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774899762714",
+    "timestamp": "2026-03-30T19:42:42.714Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Novid Rezai",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "3m 45s",
+    "call_date": "03/30/2026",
+    "score": 76,
+    "realtor_engagement": 65,
+    "summary": "Anthony followed up with Novid after a January conversation and text exchange. Novid offered 5 vacant lots for $225-230k total but doesn't have renovation properties. Anthony delivered his buy box and set a one-month follow-up timeline.",
+    "what_worked": "Referenced specific prior conversation from January | Complete buy box delivery with all key elements | Respectful handling of the land offer he wasn't interested in | Set clear follow-up timeline",
+    "what_to_tighten": "Could have asked more about Novid's business and what types of deals he typically sees | Missed opportunity to ask about his network or referral sources",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about Novid's typical client base or deal flow | Missed chance to ask about other agents in his network who might have renovation properties",
+    "positive_moments": "Immediately acknowledged the text exchange | Proactively offered the land opportunity with specific details | Provided pricing information ($225-230k for all five lots) | Sent property information during the call | Engaged with Anthony's buy box criteria respectfully | Suggested developer angle for the land",
+    "resistance_moments": "Direct 'No, I don't have that' when asked about renovation properties | Very brief responses throughout most of the call",
+    "script_moment": "After Novid said he doesn't have renovation properties, Anthony should have said: 'No worries at all. Out of curiosity, what types of deals do you typically see come across your desk? I'm always looking to understand different agents' specialties.'",
+    "on_leaderboard": "yes"
   }
 ]
