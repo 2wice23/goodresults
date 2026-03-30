@@ -851,7 +851,7 @@ We purchase title insurance at closing. It protects against undiscovered title d
 4\. Deed recorded  
 5\. Keys exchanged
 
-Cash deals close in 10–21 days from contract signing (15-day average). There is no bank approval step, no appraisal, no financing contingency. If our contractor gives the go-ahead after DD, we cut the check.
+Cash deals close in 10–21 days from contract signing (15-day average). There is no bank approval step, no appraisal, no financing contingency. If our end buyer gives the go-ahead after DD, we assign the contract to them and the deal closes.
 
 \#\#\# Working With Our Title Company  
 \- \*\*Texas:\*\* Spartan Title (Aaron Krominga). We close 2+ deals/month there — strong relationship.  
@@ -967,12 +967,12 @@ DD is the inspection and verification period between contract and closing. The p
 | Day 1 | Contract accepted. EMD sent to escrow. Title search ordered. General inspection scheduled. |  
 | Days 1–3 | General home inspection |  
 | Days 2–5 | Specialty inspections if needed (roof, HVAC, structural, environmental) |  
-| Days 3–7 | Title commitment received. Payoff letters requested. Contractor repair estimates gathered. |  
+| Days 3–7 | Title commitment received. Payoff letters requested. End buyer evaluations conducted (called "contractor visits" externally). |  
 | Day 7–8 | Internal decision point: proceed, request credit, or terminate. Realtor gets clear answer. |  
 | After DD | Move to closing. Earnest money becomes non-refundable. |
 
 \#\#\# Repair Cost Framework (For DD Adjustments)  
-During DD, if the contractor finds surprises beyond what was estimated at offer:  
+During DD, if the end buyer's evaluation reveals surprises beyond what was estimated at offer:  
 \- \*\*Minor surprises (\< $5,000 off):\*\* Proceed as-is. Not worth jeopardizing the relationship.  
 \- \*\*Moderate surprises ($5,000–$20,000 off):\*\* Discuss with Gayden. May request credit or ask to modify price.  
 \- \*\*Major surprises (\> $20,000 off or structural/foundation):\*\* Gayden decides — could walk, could renegotiate.
