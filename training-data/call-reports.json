@@ -638,5 +638,25 @@
     "resistance_moments": "",
     "script_moment": "When Anthony mentioned the Peppermint deal challenges, Gayden could have said: 'I appreciate you working with them on that. Even if this one doesn't work out, situations like this come up regularly - would you feel comfortable sending me other distressed deals as they come across your desk, even if they're not your listings?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774909149210",
+    "timestamp": "2026-03-30T22:19:09.210Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Michael Wood",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "1m 57s",
+    "call_date": "03/30/2026",
+    "score": 78,
+    "realtor_engagement": 72,
+    "summary": "Franklin reconnected with Michael after 6 months, discovering Michael has an established team of flippers who handle all his investment deals. Michael was open to keeping Franklin as a backup contact for deals his team doesn't take.",
+    "what_worked": "Acknowledged 6-month time gap directly in opener | Complete buy box delivery despite competitive situation | Positioned as backup rather than trying to compete with existing team | Set clear follow-up timeline",
+    "what_to_tighten": "Could have asked more about what types of deals his team typically passes on | Missed opportunity to learn about his team's criteria to better position future opportunities",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked what price range or condition his team typically avoids | Didn't explore if there are geographic areas his team doesn't cover",
+    "positive_moments": "Explained his business model with flippers on his team | Suggested Franklin text him to save as contact | Said 'yeah' when asked about 2-week follow-up",
+    "resistance_moments": "Immediately mentioned having team members who handle investment deals | Brief responses throughout indicating limited availability for new relationships",
+    "script_moment": "When Michael mentioned his flippers, Franklin could have asked: 'That's a great system. What types of properties do they typically pass on or not want to take?' This would have given him specific positioning for future opportunities.",
+    "on_leaderboard": "no"
   }
 ]
