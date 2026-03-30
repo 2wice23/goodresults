@@ -104,6 +104,9 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .ext-key{font-family:'Inter',sans-serif;font-size:0.52rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;font-weight:600;}
 .ext-val{font-family:'Inter',sans-serif;font-size:0.68rem;color:var(--orange);font-weight:500;}
 .ext-val.empty{color:var(--dim);}
+.ext-input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:5px 7px;font-family:'Inter',sans-serif;font-size:0.68rem;color:var(--orange);font-weight:500;outline:none;transition:border-color 0.2s;}
+.ext-input:focus{border-color:var(--orange);}
+.ext-input::placeholder{color:var(--dim);font-weight:400;}
 
 .output-empty{padding:60px 40px;text-align:center;}
 .output-empty-icon{font-size:2.5rem;margin-bottom:16px;opacity:0.3;}
@@ -151,20 +154,20 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 <div class="hero">
   <div class="eyebrow"></div>
   <h1>Drop The Deal. <em>Launch The Page.</em></h1>
-  <p class="hero-sub">Upload a contract, enter your numbers, add photos, and hit one button. It builds the deal page on the website, creates a dispo workflow in Close, and gives you a live URL — all in one shot.</p>
+  <p class="hero-sub">Upload a contract, review and edit all extracted fields, enter your numbers, add photos, then use the action buttons to push each piece — deal folder, photos, Close CRM, and dispo workflow — one step at a time.</p>
 </div>
 
 <div class="explainer">
   <div class="explainer-grid">
     <div class="explainer-card">
       <div class="ec-num">What It Does</div>
-      <div class="ec-title">One Button, Three Things</div>
-      <div class="ec-desc">Extracts property data from your contract PDF using AI. Pushes a deal page (template + data + photos) straight to GitHub which auto-deploys to the live site. Then creates a dispo text/email workflow in Close CRM — named after the address, ready to activate.</div>
+      <div class="ec-title">Four Buttons, Full Control</div>
+      <div class="ec-desc">Extracts property data from your contract PDF using AI. Every field is editable — review and tweak before pushing. Create the deal folder on GitHub, push photos, update Close CRM, and create the dispo workflow — each with its own button.</div>
     </div>
     <div class="explainer-card">
       <div class="ec-num">How To Use It</div>
-      <div class="ec-title">Fill the Left, Watch the Right</div>
-      <div class="ec-desc">Upload the contract PDF and hit Extract. Fill in wholesale price, ARV, and repairs per sqft. Upload your deal photos and drag them into the order you want. Confirm the deal page ID. Hit "Launch Deal" — done. The right panel shows progress and your live link when it's ready.</div>
+      <div class="ec-title">Extract → Edit → Push</div>
+      <div class="ec-desc">Upload the contract PDF and hit Extract. All fields appear as editable inputs on the right — fix anything Claude missed. Fill in your numbers (price, ARV, repairs). Upload photos and drag to reorder. Then use the action buttons in order: Create Folder → Push Photos → Push to Close → Create Workflow.</div>
     </div>
     <div class="explainer-card">
       <div class="ec-num">What Gets Created</div>
@@ -251,8 +254,20 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 
       <hr class="panel-sep">
 
-      <button class="launch-btn" id="launchBtn" disabled>🚀 Launch Deal</button>
-      <div style="font-family:'Inter',sans-serif;font-size:0.52rem;color:var(--dim);text-align:center;margin-top:6px;line-height:1.6;">Pushes deal page to GitHub (auto-deploys to site)<br>+ creates dispo workflow draft in Close CRM</div>
+      <div class="step-label">Actions</div>
+      <div class="step-hint">Each button does one thing. Run them in order, or skip what you don't need.</div>
+
+      <button class="launch-btn" id="btnCreateFolder" disabled style="background:var(--orange);margin-top:4px;font-size:0.72rem;padding:12px;">📁 Create Deal Folder</button>
+      <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Pushes template + deal data to GitHub → auto-deploys to site</div>
+
+      <button class="launch-btn" id="btnPushPhotos" disabled style="background:var(--purple);margin-top:10px;font-size:0.72rem;padding:12px;">📸 Push Photos</button>
+      <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Uploads photos to the deal folder on GitHub</div>
+
+      <button class="launch-btn" id="btnPushClose" disabled style="background:#2563EB;margin-top:10px;font-size:0.72rem;padding:12px;">📊 Push to Close</button>
+      <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Updates the Close CRM opportunity with deal data</div>
+
+      <button class="launch-btn" id="btnCreateWorkflow" disabled style="background:var(--green);color:var(--white);margin-top:10px;font-size:0.72rem;padding:12px;">⚡ Create Dispo Workflow</button>
+      <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Creates 6-step SMS + email dispo workflow in Close</div>
 
     </div>
   </div>
@@ -266,33 +281,38 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
     </div>
 
     <div class="extracted-grid" id="extractedGrid" style="display:none;">
-      <div class="ext-field" style="grid-column:1/-1;"><div class="ext-key">Address</div><div class="ext-val" id="eAddress" style="font-size:0.82rem;">—</div></div>
-      <div class="ext-field"><div class="ext-key">City / State / ZIP</div><div class="ext-val" id="eCityStateZip">—</div></div>
-      <div class="ext-field"><div class="ext-key">Market</div><div class="ext-val" id="eMarket">—</div></div>
+      <div class="ext-field" style="grid-column:1/-1;"><div class="ext-key">Address</div><input class="ext-input" id="eAddress" data-field="address" placeholder="Street address" style="font-size:0.82rem;font-weight:700;"></div>
+      <div class="ext-field"><div class="ext-key">City</div><input class="ext-input" id="eCity" data-field="city" placeholder="City"></div>
+      <div class="ext-field"><div class="ext-key">State</div><input class="ext-input" id="eState" data-field="state" placeholder="ST"></div>
+      <div class="ext-field"><div class="ext-key">ZIP</div><input class="ext-input" id="eZip" data-field="zip" placeholder="Zip"></div>
+      <div class="ext-field"><div class="ext-key">Market</div><input class="ext-input" id="eMarket" data-field="market" placeholder="Las Vegas / Reno / Houston"></div>
 
       <div style="grid-column:1/-1;font-family:'Inter',sans-serif;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);font-weight:700;padding:8px 0 2px;border-top:1px solid var(--border);margin-top:4px;">Contract Details</div>
-      <div class="ext-field"><div class="ext-key">Contract Price</div><div class="ext-val" id="eContractPrice">—</div></div>
-      <div class="ext-field"><div class="ext-key">Executed Date</div><div class="ext-val" id="eExecutedDate">—</div></div>
-      <div class="ext-field"><div class="ext-key">COE / Closing Date</div><div class="ext-val" id="eCoe">—</div></div>
-      <div class="ext-field"><div class="ext-key">DD / Option Period</div><div class="ext-val" id="eDdPeriod">—</div></div>
-      <div class="ext-field"><div class="ext-key">EMD Amount</div><div class="ext-val" id="eEmd">—</div></div>
-      <div class="ext-field"><div class="ext-key">EMD Due</div><div class="ext-val" id="eEmdDue">—</div></div>
-      <div class="ext-field"><div class="ext-key">Seller</div><div class="ext-val" id="eSeller">—</div></div>
-      <div class="ext-field"><div class="ext-key">Buyer / Entity</div><div class="ext-val" id="eBuyer">—</div></div>
-      <div class="ext-field"><div class="ext-key">On Market?</div><div class="ext-val" id="eOnMarket">—</div></div>
+      <div class="ext-field"><div class="ext-key">Contract Price</div><input class="ext-input" id="eContractPrice" data-field="contractPrice" placeholder="$000,000"></div>
+      <div class="ext-field"><div class="ext-key">Executed Date</div><input class="ext-input" id="eExecutedDate" data-field="executedDate" placeholder="MM/DD/YYYY"></div>
+      <div class="ext-field"><div class="ext-key">COE / Closing Date</div><input class="ext-input" id="eCoe" data-field="coeDate" placeholder="MM/DD/YYYY"></div>
+      <div class="ext-field"><div class="ext-key">DD Days</div><input class="ext-input" id="eDdDays" data-field="ddDays" placeholder="e.g. 10"></div>
+      <div class="ext-field"><div class="ext-key">DD End Date</div><input class="ext-input" id="eDdEnd" data-field="_ddEnd" placeholder="Auto-calculated" readonly style="color:var(--muted);"></div>
+      <div class="ext-field"><div class="ext-key">EMD Amount</div><input class="ext-input" id="eEmd" data-field="emdAmount" placeholder="$0,000"></div>
+      <div class="ext-field"><div class="ext-key">EMD Days</div><input class="ext-input" id="eEmdDays" data-field="emdDays" placeholder="e.g. 10"></div>
+      <div class="ext-field"><div class="ext-key">EMD Due Date</div><input class="ext-input" id="eEmdDue" data-field="_emdDue" placeholder="Auto-calculated" readonly style="color:var(--muted);"></div>
+      <div class="ext-field"><div class="ext-key">Seller</div><input class="ext-input" id="eSeller" data-field="seller" placeholder="Seller name"></div>
+      <div class="ext-field"><div class="ext-key">Buyer / Entity</div><input class="ext-input" id="eBuyer" data-field="buyer" placeholder="Buyer entity"></div>
+      <div class="ext-field"><div class="ext-key">On Market?</div><input class="ext-input" id="eOnMarket" data-field="onMarket" placeholder="Yes / No / Unknown"></div>
 
       <div style="grid-column:1/-1;font-family:'Inter',sans-serif;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);font-weight:700;padding:8px 0 2px;border-top:1px solid var(--border);margin-top:4px;">Realtor / Agent</div>
-      <div class="ext-field"><div class="ext-key">Agent Name</div><div class="ext-val" id="eAgentName">—</div></div>
-      <div class="ext-field"><div class="ext-key">Phone</div><div class="ext-val" id="eAgentPhone">—</div></div>
-      <div class="ext-field"><div class="ext-key">Email</div><div class="ext-val" id="eAgentEmail">—</div></div>
-      <div class="ext-field"><div class="ext-key">Brokerage</div><div class="ext-val" id="eAgentBrokerage">—</div></div>
+      <div class="ext-field"><div class="ext-key">Agent Name</div><input class="ext-input" id="eAgentName" data-field="agentName" placeholder="Agent name"></div>
+      <div class="ext-field"><div class="ext-key">Phone</div><input class="ext-input" id="eAgentPhone" data-field="agentPhone" placeholder="Phone"></div>
+      <div class="ext-field"><div class="ext-key">Email</div><input class="ext-input" id="eAgentEmail" data-field="agentEmail" placeholder="Email"></div>
+      <div class="ext-field"><div class="ext-key">Brokerage</div><input class="ext-input" id="eAgentBrokerage" data-field="agentBrokerage" placeholder="Brokerage"></div>
 
       <div style="grid-column:1/-1;font-family:'Inter',sans-serif;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);font-weight:700;padding:8px 0 2px;border-top:1px solid var(--border);margin-top:4px;">Property Specs <span style="color:var(--muted);font-weight:400;">(from RentCast)</span></div>
-      <div class="ext-field"><div class="ext-key">Beds / Baths</div><div class="ext-val" id="eBedsAndBaths">—</div></div>
-      <div class="ext-field"><div class="ext-key">Sqft</div><div class="ext-val" id="eSqft">—</div></div>
-      <div class="ext-field"><div class="ext-key">Lot Size</div><div class="ext-val" id="eLot">—</div></div>
-      <div class="ext-field"><div class="ext-key">Year Built</div><div class="ext-val" id="eYear">—</div></div>
-      <div class="ext-field"><div class="ext-key">Garage</div><div class="ext-val" id="eGarage">—</div></div>
+      <div class="ext-field"><div class="ext-key">Beds</div><input class="ext-input" id="eBeds" data-field="beds" placeholder="e.g. 3"></div>
+      <div class="ext-field"><div class="ext-key">Baths</div><input class="ext-input" id="eBaths" data-field="baths" placeholder="e.g. 2"></div>
+      <div class="ext-field"><div class="ext-key">Sqft</div><input class="ext-input" id="eSqft" data-field="sqft" placeholder="e.g. 1500"></div>
+      <div class="ext-field"><div class="ext-key">Lot Size</div><input class="ext-input" id="eLot" data-field="lotSize" placeholder="e.g. 7,500 sqft"></div>
+      <div class="ext-field"><div class="ext-key">Year Built</div><input class="ext-input" id="eYear" data-field="yearBuilt" placeholder="e.g. 1995"></div>
+      <div class="ext-field"><div class="ext-key">Garage</div><input class="ext-input" id="eGarage" data-field="garage" placeholder="e.g. 2-car"></div>
     </div>
 
     <div id="dealSummary" style="display:none;padding:12px 16px;margin:0 16px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
@@ -420,18 +440,74 @@ pdfInput.addEventListener('change', e => {
 });
 
 // ============================================================
-// PDF TEXT EXTRACTION
+// PDF TEXT EXTRACTION — finds and isolates the RPA/ROA/TREC
 // ============================================================
 async function extractPDFText(file) {
   const ab = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: ab }).promise;
-  let text = '';
+
+  // Extract each page separately so we can identify the contract
+  const pages = [];
   for (let i = 1; i <= pdf.numPages; i++) {
     const page = await pdf.getPage(i);
     const content = await page.getTextContent();
-    text += content.items.map(item => item.str).join(' ') + '\n';
+    pages.push(content.items.map(item => item.str).join(' '));
   }
-  return text;
+
+  // Identify which pages are the actual purchase agreement
+  // Nevada: "RESIDENTIAL OFFER AND ACCEPTANCE AGREEMENT" or "RESIDENTIAL PURCHASE AGREEMENT" with "Page X of Y" footer
+  // Texas: "ONE TO FOUR FAMILY RESIDENTIAL CONTRACT" or "PROMULGATED BY THE TEXAS REAL ESTATE COMMISSION"
+  const CONTRACT_MARKERS = [
+    /RESIDENTIAL OFFER AND ACCEPTANCE/i,
+    /RESIDENTIAL PURCHASE AGREEMENT/i,
+    /ONE TO FOUR FAMILY RESIDENTIAL CONTRACT/i,
+    /PROMULGATED BY THE TEXAS REAL ESTATE COMMISSION/i,
+    /ROA\s+\d+\/\d+/i,    // "ROA 1/12" footer
+    /RPA\s+\d+\/\d+/i     // "RPA 1/12" footer
+  ];
+
+  // Non-contract pages to skip
+  const SKIP_MARKERS = [
+    /DUTIES OWED BY A NEVADA REAL ESTATE LICENSEE/i,
+    /UNREPRESENTED PARTY ACKNOWLEDGEMENT/i,
+    /LEAD.BASED PAINT/i,
+    /SELLER.S REAL PROPERTY DISCLOSURE/i,
+    /WIRE FRAUD ADVISORY/i,
+    /CONSENT TO ACT/i,
+    /COMMON.INTEREST COMMUNITY DISCLOSURE FORM/i,
+    /SOLAR POWER SYSTEM DISCLOSURE/i
+  ];
+
+  let contractPages = [];
+
+  // First pass: find pages that ARE the contract
+  let inContract = false;
+  for (let i = 0; i < pages.length; i++) {
+    const txt = pages[i];
+    const isContractPage = CONTRACT_MARKERS.some(rx => rx.test(txt));
+    const isSkipPage = SKIP_MARKERS.some(rx => rx.test(txt));
+
+    if (isContractPage && !isSkipPage) {
+      inContract = true;
+      contractPages.push(txt);
+    } else if (inContract && !isSkipPage) {
+      // Check if this page has the same "Page X of Y" footer pattern as the contract
+      // This catches contract pages that don't repeat the title
+      const footerMatch = txt.match(/(?:ROA|RPA|Page)\s+\d+\s*(?:of|\/)\s*\d+/i);
+      if (footerMatch) {
+        contractPages.push(txt);
+      } else {
+        // Left the contract section
+        inContract = false;
+      }
+    }
+  }
+
+  // If we found contract pages, use only those. Otherwise fall back to full PDF.
+  if (contractPages.length >= 3) {
+    return contractPages.join('\n--- PAGE BREAK ---\n');
+  }
+  return pages.join('\n');
 }
 
 // ============================================================
@@ -446,23 +522,45 @@ document.getElementById('extractBtn').addEventListener('click', async () => {
     if (text.trim().length < 100) {
       setStatus('PDF appears to be a scanned image — fill fields manually', 'error');
       document.getElementById('extractBtn').disabled = false;
-      document.getElementById('launchBtn').disabled = false;
+      enableActionButtons();
       return;
     }
     setStatus('Sending to Claude...', 'active');
-    const prompt = `You are a real estate contract analyst specializing in both Nevada RPA and Texas TREC contracts. Extract all available deal information from this contract and return a single valid JSON object. Use null for any field you cannot find. Return only the JSON — no explanation, no markdown.
+    const prompt = `You are a real estate contract analyst. Extract deal information and return a single valid JSON object. Use null for any field you cannot find. Return ONLY the JSON — no explanation, no markdown.
 
-IMPORTANT FIELD GUIDANCE:
-- executedDate: The date all parties signed — look for "Effective Date," "Date of Acceptance," or the latest signature date. Return as MM/DD/YYYY.
-- coeDate: The closing date. In TREC look for "Closing Date" (paragraph 9 or financing section). In RPA look for "Close of Escrow." Return as MM/DD/YYYY.
-- ddDays: THE NUMBER OF DAYS in the due diligence / option period — return as an integer only (e.g. 10). In TREC look for "Option Period." In RPA look for "Investigation Period" or "Due Diligence Period." Extract just the number.
-- emdDays: THE NUMBER OF DAYS after the Effective Date that earnest money is due — return as an integer only. In TREC look in the Earnest Money paragraph for "within ___ days." In RPA look for "within ___ days of acceptance." Extract just the number.
-- emdAmount: The earnest money / option fee deposit amount as a dollar string (e.g. "$1,000").
-- sellerNames: All seller names. In estate situations include the executor name too.
-- onMarket: Whether the property was listed on MLS. Look for MLS number, listing agent, or "listed" references. If buyer's agent and seller's agent are different companies, likely on-market.
-- agent: Look for the listing/seller's agent name, phone, email, and brokerage.
+STEP 1 — IDENTIFY THE CONTRACT TYPE:
+Non-contract pages have already been filtered out. Determine which contract type this is:
+- NEVADA RPA/ROA: "RESIDENTIAL OFFER AND ACCEPTANCE AGREEMENT" — paginated "Page X of 12" (or similar). Also called the RPA.
+- TEXAS TREC: "ONE TO FOUR FAMILY RESIDENTIAL CONTRACT (RESALE)" — has numbered paragraphs.
+If you see leftover non-contract text (disclosures, lead paint, etc.), IGNORE it entirely.
 
-Return this exact structure:
+STEP 2 — EXTRACT FIELDS (with exact locations):
+
+NEVADA RPA:
+- address/city/state/zip: RPA page 1, lines 1-5. Buyer name on line 1, property address on line 3, city/state/zip on line 4.
+- contractPrice: RPA page 1, "TOTAL PURCHASE PRICE" line (usually line 30). This is the dollar amount after all financing lines.
+- executedDate: FINAL PAGE of the RPA — look for the SELLER's signature with a date next to it. The date the SELLER signed IS the Acceptance/Executed date. If there are multiple sellers, use the LATEST date. Return as MM/DD/YYYY.
+- coeDate: RPA page 1, "CLOSING" section (usually line 38). Look for "Close of Escrow (COE) will occur on [DATE]". Return as MM/DD/YYYY.
+- ddDays: RPA page 6 (Inspection Contingency section). Look for "within ___ days from Acceptance" — that number IS the due diligence period. Usually 7 or 10. Return as integer only.
+- emdDays: USE THE SAME NUMBER AS ddDays. In Good Results contracts, the Additional Terms section states "EMD due on or before end of due diligence period" — so EMD days = DD days.
+- emdAmount: RPA page 1, "EARNEST MONEY DEPOSIT (EMD)" section (usually line 10-13). The dollar amount on the right side.
+- seller: The signature block on the final pages of the RPA. Include full name and title (e.g. "Florence Waneva Pearce, Trustee"). In estate/trust situations, include the trustee or executor name.
+- buyer: RPA page 1, line 1. Usually "Good Results, LLC" or similar entity name.
+- market: Determine from the city/state. Las Vegas / North Las Vegas / Henderson / Boulder City = "Las Vegas". Reno / Sparks = "Reno". Houston area / Texas cities = "Houston".
+- onMarket: If a listing agent or Broker represents the SELLER (check the Duties Owed page or the RPA definitions), it is likely on-market. If Good Results is the only party with an agent, it is off-market.
+- agent: The SELLER's agent/broker. Look for "Licensee" or "Broker" entries that are acting for the Seller/Landlord. Extract name, phone, email, brokerage. Phone and email may not be on the contract — return null if not found.
+
+TEXAS TREC:
+- address: Paragraph 2 — property address
+- contractPrice: Paragraph 3 — "Sales Price"
+- executedDate: Final page — "Effective Date" or the latest signature date among all parties
+- coeDate: Paragraph 9 — "Closing Date" or in the financing section
+- ddDays: Paragraph 23 — "Option Period" — the number of days
+- emdDays: Paragraph 5 — "within ___ days" after effective date for earnest money deposit
+- emdAmount: Paragraph 5 — earnest money dollar amount
+- seller/buyer/market/onMarket/agent: Same logic as Nevada
+
+Return this exact JSON structure:
 {
   "address": "street address only",
   "city": "city name",
@@ -478,19 +576,19 @@ Return this exact structure:
   "buyer": "buyer entity name or null",
   "market": "Las Vegas / Reno / Houston",
   "onMarket": "Yes / No / Unknown",
-  "agentName": "listing agent full name or null",
+  "agentName": "listing/seller agent full name or null",
   "agentPhone": "phone or null",
   "agentEmail": "email or null",
   "agentBrokerage": "brokerage name or null"
 }
 
-Contract text:
-${text.slice(0, 14000)}`;
+Contract text (non-contract pages have been filtered out — this is the purchase agreement only):
+${text.slice(0, 50000)}`;
 
     const resp = await fetch(ANTHROPIC_PROXY, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1200, messages: [{ role: 'user', content: prompt }] })
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1500, messages: [{ role: 'user', content: prompt }] })
     });
     const result = await resp.json();
     if (result.error) throw new Error('API error: ' + (result.error.message || result.error));
@@ -504,7 +602,7 @@ ${text.slice(0, 14000)}`;
     renderExtracted(extractedDeal);
     updateRepairsTotal();
     setStatus('Contract extracted ✓ — looking up property specs...', 'active');
-    document.getElementById('launchBtn').disabled = false;
+    enableActionButtons();
 
     // Step 2: Pull property specs from RentCast
     if (extractedDeal.address) {
@@ -532,7 +630,7 @@ ${text.slice(0, 14000)}`;
     setStatus('Extraction failed: ' + e.message + ' — fill fields manually', 'error');
     console.error('Extraction error:', e);
     document.getElementById('extractBtn').disabled = false;
-    document.getElementById('launchBtn').disabled = false;
+    enableActionButtons();
   }
 });
 
@@ -540,26 +638,28 @@ function renderExtracted(d) {
   const set = (id, val) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.textContent = val || '—';
-    el.className = 'ext-val' + (val ? '' : ' empty');
+    el.value = val || '';
   };
-  // Address
+  // Address fields (now separate inputs)
   set('eAddress', d.address);
-  set('eCityStateZip', [d.city, d.state, d.zip].filter(Boolean).join(', '));
+  set('eCity', d.city);
+  set('eState', d.state);
+  set('eZip', d.zip);
   set('eMarket', d.market);
 
   // Contract details
   set('eContractPrice', d.contractPrice);
   set('eExecutedDate', d.executedDate);
   set('eCoe', d.coeDate);
-  const ddEndCalc = (d.executedDate && d.ddDays) ? addDaysToDate(d.executedDate, d.ddDays) : null;
-  set('eDdPeriod', d.ddDays ? d.ddDays + ' days' + (ddEndCalc ? ' (ends ' + ddEndCalc + ')' : '') : null);
+  set('eDdDays', d.ddDays);
   set('eEmd', d.emdAmount);
-  const emdDueCalc = (d.executedDate && d.emdDays) ? addDaysToDate(d.executedDate, d.emdDays) : null;
-  set('eEmdDue', d.emdDays ? d.emdDays + ' days' + (emdDueCalc ? ' (due ' + emdDueCalc + ')' : '') : (emdDueCalc ? emdDueCalc : null));
+  set('eEmdDays', d.emdDays);
   set('eSeller', d.seller);
   set('eBuyer', d.buyer);
   set('eOnMarket', d.onMarket);
+
+  // Auto-calculate DD end and EMD due dates
+  recalcDates();
 
   // Agent
   set('eAgentName', d.agentName);
@@ -567,9 +667,10 @@ function renderExtracted(d) {
   set('eAgentEmail', d.agentEmail);
   set('eAgentBrokerage', d.agentBrokerage);
 
-  // Property specs (from RentCast merge)
-  set('eBedsAndBaths', (d.beds && d.baths) ? d.beds + ' bd / ' + d.baths + ' ba' : null);
-  set('eSqft', d.sqft ? Number(d.sqft).toLocaleString() + ' sqft' : null);
+  // Property specs (from RentCast merge) — now individual fields
+  set('eBeds', d.beds);
+  set('eBaths', d.baths);
+  set('eSqft', d.sqft);
   set('eLot', d.lotSize);
   set('eYear', d.yearBuilt);
   set('eGarage', d.garage);
@@ -579,6 +680,39 @@ function renderExtracted(d) {
   document.getElementById('dealSummary').style.display = 'block';
   updateDealNumbers();
 }
+
+// Recalculate DD end date and EMD due date from editable fields
+function recalcDates() {
+  const execDate = document.getElementById('eExecutedDate').value;
+  const ddDays = document.getElementById('eDdDays').value;
+  const emdDays = document.getElementById('eEmdDays').value;
+  const ddEnd = (execDate && ddDays) ? addDaysToDate(execDate, parseInt(ddDays)) : '';
+  const emdDue = (execDate && emdDays) ? addDaysToDate(execDate, parseInt(emdDays)) : '';
+  document.getElementById('eDdEnd').value = ddEnd || '';
+  document.getElementById('eEmdDue').value = emdDue || '';
+}
+
+// Sync all editable inputs back to extractedDeal on change
+function syncFieldsToExtracted() {
+  document.querySelectorAll('#extractedGrid .ext-input').forEach(input => {
+    const field = input.dataset.field;
+    if (!field || field.startsWith('_')) return; // skip calculated fields
+    extractedDeal[field] = input.value || null;
+  });
+  // Recalculate sqft-dependent stuff
+  updateRepairsTotal();
+  updateDealNumbers();
+}
+
+// Wire up all extracted field inputs
+document.getElementById('extractedGrid').addEventListener('input', e => {
+  if (e.target.classList.contains('ext-input')) {
+    syncFieldsToExtracted();
+    // Recalculate dates if executed date or day counts changed
+    const f = e.target.dataset.field;
+    if (f === 'executedDate' || f === 'ddDays' || f === 'emdDays') recalcDates();
+  }
+});
 
 function updateDealNumbers() {
   const set = (id, val) => {
@@ -868,45 +1002,26 @@ function setLogStep(idx, state, label) {
 }
 
 // ============================================================
-// LAUNCH DEAL — THE BIG BUTTON
+// ENABLE ACTION BUTTONS (called after extract or manual fill)
 // ============================================================
-document.getElementById('launchBtn').addEventListener('click', async () => {
-  const btn = document.getElementById('launchBtn');
+function enableActionButtons() {
+  document.getElementById('btnCreateFolder').disabled = false;
+  document.getElementById('btnPushPhotos').disabled = false;
+  document.getElementById('btnPushClose').disabled = false;
+  document.getElementById('btnCreateWorkflow').disabled = false;
+}
+
+// Helper: gather current deal data from all editable fields
+function gatherDealJson() {
+  syncFieldsToExtracted();
   const dealId = document.getElementById('fDealId').value.trim();
-  const asking = document.getElementById('fAsking').value.trim();
-  const arv = document.getElementById('fArv').value.trim();
+  const askingN = parseDollar(document.getElementById('fAsking').value);
+  const arvN = parseDollar(document.getElementById('fArv').value);
   const repairsPerSqft = parseFloat(document.getElementById('fRepairs').value) || 0;
   const sqft = parseFloat(extractedDeal.sqft) || 0;
-
-  if (!dealId) { setStatus('Enter a deal number first', 'error'); return; }
-
-  btn.disabled = true;
-  btn.textContent = 'Launching...';
-  document.getElementById('outputEmpty').style.display = 'none';
-  document.getElementById('successBanner').style.display = 'none';
-
-  const photoLabel = dealPhotos.length ? 'Uploading ' + dealPhotos.length + ' photos to GitHub...' : 'No photos (skipping)';
-  initLog([
-    'Fetching deal page template...',              // 0
-    'Pushing deal page to GitHub...',              // 1
-    'Pushing deal data to GitHub...',              // 2
-    photoLabel,                                    // 3
-    'Searching for lead in Close...',              // 4
-    'Updating opportunity in Close...',            // 5
-    'Creating deal-link templates in Close...',    // 6
-    'Creating dispo workflow draft in Close...'    // 7
-  ]);
-
-  const slug = dealId;
-  const address = extractedDeal.address || 'Unknown Address';
-  const zip = extractedDeal.zip || '?????';
-  const dealUrl = 'https://goodresults.org/deals/' + slug + '/';
-  const askingN = parseDollar(asking);
-  const arvN = parseDollar(arv);
   const repairsN = (repairsPerSqft > 0 && sqft > 0) ? Math.round(repairsPerSqft * sqft) : null;
   const profitN = (arvN && repairsN && askingN) ? arvN - repairsN - askingN : null;
-
-  const dealJson = {
+  return {
     dealId,
     market: marketStatus,
     address: extractedDeal.address || null,
@@ -920,22 +1035,51 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     yearBuilt: extractedDeal.yearBuilt || null,
     garage: extractedDeal.garage || null,
     coeDate: extractedDeal.coeDate || null,
+    executedDate: extractedDeal.executedDate || null,
+    ddDays: extractedDeal.ddDays || null,
+    emdDays: extractedDeal.emdDays || null,
+    emdAmount: extractedDeal.emdAmount || null,
+    seller: extractedDeal.seller || null,
+    buyer: extractedDeal.buyer || null,
+    onMarket: extractedDeal.onMarket || null,
+    contractPrice: extractedDeal.contractPrice || null,
+    agentName: extractedDeal.agentName || null,
+    agentPhone: extractedDeal.agentPhone || null,
+    agentEmail: extractedDeal.agentEmail || null,
+    agentBrokerage: extractedDeal.agentBrokerage || null,
     wholesalePrice: askingN,
     arv: arvN,
     repairsPerSqft: repairsPerSqft || null,
     estRepairs: repairsN,
     profitPotential: profitN
   };
+}
 
-  let workflowName = '';
-  let oppUpdated = false;
+// ============================================================
+// BUTTON 1: CREATE DEAL FOLDER (GitHub template + deal-doc.txt)
+// ============================================================
+document.getElementById('btnCreateFolder').addEventListener('click', async () => {
+  const btn = document.getElementById('btnCreateFolder');
+  const dealId = document.getElementById('fDealId').value.trim();
+  if (!dealId) { setStatus('Enter a deal number first', 'error'); return; }
+
+  btn.disabled = true;
+  btn.textContent = '📁 Creating...';
+  document.getElementById('outputEmpty').style.display = 'none';
+
+  const dealJson = gatherDealJson();
+  const slug = dealId;
+  const address = dealJson.address || 'Unknown Address';
+  const dealUrl = 'https://goodresults.org/deals/' + slug + '/';
+
+  initLog([
+    'Fetching deal page template...',
+    'Pushing deal page to GitHub...',
+    'Pushing deal data to GitHub...'
+  ]);
 
   try {
-    // =============================================
-    // PHASE 1: GITHUB (deal page + data + photos)
-    // =============================================
-
-    // --- STEP 0: Fetch template ---
+    // Fetch template
     setLogStep(0, 'active');
     let templateContent;
     try {
@@ -950,174 +1094,244 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
     }
     setLogStep(0, 'done', 'Template fetched');
 
-    // --- STEP 1: Push index.html ---
+    // Push index.html
     await wait(600);
     setLogStep(1, 'active');
     await pushFile('deals/' + slug + '/index.html', templateContent, 'Deal page: ' + address + ' (template)');
     setLogStep(1, 'done', 'Deal page template pushed');
 
-    // --- STEP 2: Push deal-doc.txt ---
+    // Push deal-doc.txt
     await wait(600);
     setLogStep(2, 'active');
     const jsonB64 = btoa(unescape(encodeURIComponent(JSON.stringify(dealJson, null, 2))));
     await pushFile('deals/' + slug + '/deal-doc.txt', jsonB64, 'Deal page: ' + address + ' (data)');
     setLogStep(2, 'done', 'Deal data pushed');
 
-    // --- STEP 3: Push photos ---
-    await wait(600);
-    setLogStep(3, 'active');
-    if (dealPhotos.length) {
-      for (let i = 0; i < dealPhotos.length; i++) {
-        const photo = dealPhotos[i];
-        setLogStep(3, 'active', 'Uploading photo ' + (i + 1) + ' of ' + dealPhotos.length + '...');
-        await pushFile('deals/' + slug + '/' + photo.name, photo.base64, 'Deal page: ' + address + ' (photo ' + photo.name + ')');
-        if (i < dealPhotos.length - 1) await wait(400); // brief pause between photos
-      }
-      setLogStep(3, 'done', dealPhotos.length + ' photos uploaded');
-    } else {
-      setLogStep(3, 'done', 'No photos (skipped)');
+    btn.textContent = '✓ Folder Created';
+    btn.className = 'launch-btn success';
+    setStatus('Deal folder created ✓ — ' + dealUrl, 'active');
+
+    const banner = document.getElementById('successBanner');
+    banner.style.display = 'block';
+    document.getElementById('liveUrlLink').innerHTML = '<a href="' + dealUrl + '" target="_blank">' + dealUrl + '</a>';
+    document.getElementById('successDetails').innerHTML = 'Deal page is deploying now (takes ~30 seconds).<br>GitHub: template + deal-doc.txt pushed.';
+    document.getElementById('outputBadge').textContent = 'LIVE';
+    document.getElementById('outputBadge').className = 'badge badge-ready';
+
+  } catch(err) {
+    console.error('Create folder failed:', err);
+    setStatus('Create folder failed: ' + err.message, 'error');
+    btn.textContent = '📁 Retry Create Folder';
+    btn.disabled = false;
+  }
+});
+
+// ============================================================
+// BUTTON 2: PUSH PHOTOS TO GITHUB
+// ============================================================
+document.getElementById('btnPushPhotos').addEventListener('click', async () => {
+  const btn = document.getElementById('btnPushPhotos');
+  const dealId = document.getElementById('fDealId').value.trim();
+  if (!dealId) { setStatus('Enter a deal number first', 'error'); return; }
+  if (!dealPhotos.length) { setStatus('No photos to push — upload some first', 'error'); return; }
+
+  btn.disabled = true;
+  btn.textContent = '📸 Pushing...';
+
+  const slug = dealId;
+  const address = extractedDeal.address || 'Unknown Address';
+
+  initLog(['Uploading ' + dealPhotos.length + ' photos to GitHub...']);
+
+  try {
+    setLogStep(0, 'active');
+    for (let i = 0; i < dealPhotos.length; i++) {
+      const photo = dealPhotos[i];
+      setLogStep(0, 'active', 'Uploading photo ' + (i + 1) + ' of ' + dealPhotos.length + '...');
+      await pushFile('deals/' + slug + '/' + photo.name, photo.base64, 'Deal page: ' + address + ' (photo ' + photo.name + ')');
+      if (i < dealPhotos.length - 1) await wait(400);
     }
+    setLogStep(0, 'done', dealPhotos.length + ' photos uploaded');
 
-    // =============================================
-    // PHASE 2: CLOSE CRM (opportunity + workflow)
-    // Spaced out to avoid hammering the API
-    // =============================================
+    btn.textContent = '✓ Photos Pushed';
+    btn.className = 'launch-btn success';
+    setStatus(dealPhotos.length + ' photos pushed to GitHub ✓', 'active');
 
-    await wait(1000); // pause between GitHub and Close phases
+  } catch(err) {
+    console.error('Photo push failed:', err);
+    setStatus('Photo push failed: ' + err.message, 'error');
+    btn.textContent = '📸 Retry Photos';
+    btn.disabled = false;
+  }
+});
 
-    // --- STEP 4: Find lead + opportunity ---
-    setLogStep(4, 'active');
+// ============================================================
+// BUTTON 3: PUSH TO CLOSE CRM
+// ============================================================
+document.getElementById('btnPushClose').addEventListener('click', async () => {
+  const btn = document.getElementById('btnPushClose');
+  const dealId = document.getElementById('fDealId').value.trim();
+  if (!dealId) { setStatus('Enter a deal number first', 'error'); return; }
+
+  btn.disabled = true;
+  btn.textContent = '📊 Pushing...';
+
+  syncFieldsToExtracted();
+  const address = extractedDeal.address || 'Unknown Address';
+  const askingN = parseDollar(document.getElementById('fAsking').value);
+  const arvN = parseDollar(document.getElementById('fArv').value);
+  const dealUrl = 'https://goodresults.org/deals/' + dealId + '/';
+
+  initLog([
+    'Searching for lead in Close...',
+    'Updating opportunity in Close...'
+  ]);
+
+  try {
+    // Find lead + opportunity
+    setLogStep(0, 'active');
     let targetOpp = null;
     let matchedLead = null;
-    try {
-      const searchData = await closeAPI(
-        '/lead/?query=' + encodeURIComponent(address) + '&_fields=id,display_name,opportunities&_limit=5',
-        'GET'
-      );
-      const leads = searchData.data || [];
-      for (const lead of leads) {
-        const opps = lead.opportunities || [];
-        const pipelineOpp = opps.find(o => o.pipeline_id === CLOSE_PIPELINE);
-        if (pipelineOpp) { targetOpp = pipelineOpp; matchedLead = lead; break; }
-        if (!targetOpp && opps.length > 0) { targetOpp = opps[0]; matchedLead = lead; }
-      }
-      if (targetOpp) {
-        setLogStep(4, 'done', 'Found opp on "' + matchedLead.display_name + '"');
-      } else {
-        setLogStep(4, 'done', 'No matching lead found — skipping opp update');
-      }
-    } catch(e) {
-      setLogStep(4, 'done', 'Lead search skipped: ' + e.message);
+    const searchData = await closeAPI(
+      '/lead/?query=' + encodeURIComponent(address) + '&_fields=id,display_name,opportunities&_limit=5',
+      'GET'
+    );
+    const leads = searchData.data || [];
+    for (const lead of leads) {
+      const opps = lead.opportunities || [];
+      const pipelineOpp = opps.find(o => o.pipeline_id === CLOSE_PIPELINE);
+      if (pipelineOpp) { targetOpp = pipelineOpp; matchedLead = lead; break; }
+      if (!targetOpp && opps.length > 0) { targetOpp = opps[0]; matchedLead = lead; }
     }
 
-    // --- STEP 5: Update opportunity (only fill blank fields) ---
+    if (!targetOpp) {
+      setLogStep(0, 'done', 'No matching lead found');
+      setLogStep(1, 'done', 'Skipped — no opportunity to update');
+      btn.textContent = '📊 No Lead Found';
+      btn.disabled = false;
+      setStatus('No matching lead found in Close for "' + address + '"', 'error');
+      return;
+    }
+    setLogStep(0, 'done', 'Found opp on "' + matchedLead.display_name + '"');
+
+    // Update opportunity (only fill blank fields)
     await wait(800);
-    setLogStep(5, 'active');
-    if (targetOpp) {
-      // Fetch existing opp to see what's already filled
-      const existingOpp = await closeAPI('/opportunity/' + targetOpp.id + '/', 'GET');
-      const existing = existingOpp.custom || {};
+    setLogStep(1, 'active');
+    const existingOpp = await closeAPI('/opportunity/' + targetOpp.id + '/', 'GET');
+    const existing = existingOpp.custom || {};
 
-      const updatePayload = {};
-      // Only set a custom field if it has a value AND the field is currently blank
-      function setCF(key, val) {
-        if (!val) return;
-        const fieldId = CF[key];
-        const current = existing[fieldId];
-        if (!current || current === '' || current === null) {
-          updatePayload['custom.' + fieldId] = val;
-        }
+    const updatePayload = {};
+    function setCF(key, val) {
+      if (!val) return;
+      const fieldId = CF[key];
+      const current = existing[fieldId];
+      if (!current || current === '' || current === null) {
+        updatePayload['custom.' + fieldId] = val;
       }
-
-      const fullAddr = [address, extractedDeal.city, extractedDeal.state, extractedDeal.zip].filter(Boolean).join(', ');
-      setCF('address', fullAddr);
-
-      // currentContractPrice = what we got the deal at (from the contract)
-      const contractPriceN = parseDollar(extractedDeal.contractPrice);
-      if (contractPriceN) setCF('currentContractPrice', '$' + contractPriceN.toLocaleString());
-
-      // wholesalePrice = what we're selling it for to buyers (user input)
-      if (askingN) setCF('wholesalePrice', '$' + askingN.toLocaleString());
-
-      // Only set opp value if not already set
-      if (askingN && !existingOpp.value) {
-        updatePayload.value = Math.round(askingN * 100); // cents
-      }
-
-      if (arvN) setCF('arv', '$' + arvN.toLocaleString());
-      if (extractedDeal.coeDate) setCF('coeDate', extractedDeal.coeDate);
-      if (extractedDeal.executedDate) setCF('acceptedDate', extractedDeal.executedDate);
-      if (extractedDeal.emdAmount) setCF('emdAmount', extractedDeal.emdAmount);
-      if (extractedDeal.onMarket) setCF('onMarket', extractedDeal.onMarket);
-
-      // Calculate DD end date and EMD due date from executed date + day counts
-      if (extractedDeal.executedDate && extractedDeal.ddDays) {
-        const ddEnd = addDaysToDate(extractedDeal.executedDate, extractedDeal.ddDays);
-        if (ddEnd) setCF('ddEndDate', ddEnd);
-      }
-      if (extractedDeal.executedDate && extractedDeal.emdDays) {
-        const emdDue = addDaysToDate(extractedDeal.executedDate, extractedDeal.emdDays);
-        if (emdDue) setCF('emdDueDate', emdDue);
-      }
-
-      // Property details in the note (always update — more info is better)
-      const noteLines = [address];
-      const propDetails = [
-        extractedDeal.beds ? extractedDeal.beds + ' bd' : null,
-        extractedDeal.baths ? extractedDeal.baths + ' ba' : null,
-        extractedDeal.sqft ? Number(extractedDeal.sqft).toLocaleString() + ' sqft' : null
-      ].filter(Boolean).join(' / ');
-      if (propDetails) noteLines.push(propDetails);
-      if (extractedDeal.yearBuilt) noteLines.push('Year: ' + extractedDeal.yearBuilt);
-      if (extractedDeal.lotSize) noteLines.push('Lot: ' + extractedDeal.lotSize);
-      noteLines.push('Deal page: ' + dealUrl);
-      updatePayload.note = noteLines.join('\n');
-
-      const fieldCount = Object.keys(updatePayload).length;
-      if (fieldCount > 1) { // always has 'note', so > 1 means we have other updates
-        await closeAPI('/opportunity/' + targetOpp.id + '/', 'PUT', updatePayload);
-        oppUpdated = true;
-        setLogStep(5, 'done', 'Opportunity updated (' + (fieldCount - 1) + ' fields filled)');
-      } else {
-        await closeAPI('/opportunity/' + targetOpp.id + '/', 'PUT', updatePayload);
-        oppUpdated = true;
-        setLogStep(5, 'done', 'Note updated (all fields already filled)');
-      }
-    } else {
-      setLogStep(5, 'done', 'Skipped — no opportunity to update');
     }
 
-    // --- STEP 6: Create deal-link SMS + email templates (only these need the URL) ---
-    await wait(800);
-    setLogStep(6, 'active');
+    const fullAddr = [address, extractedDeal.city, extractedDeal.state, extractedDeal.zip].filter(Boolean).join(', ');
+    setCF('address', fullAddr);
 
-    // Static template IDs (created once in Close, reused every deal)
-    const TEASER_TMPL  = 'smstmpl_5TJvHLXfVDqBV5c5D4a1MZ';  // "Dispo - Teaser"
-    const FOLLOWUP_TMPL = 'smstmpl_3GVufkhASUv2ao47VskWV2'; // "Dispo - Follow Up"
-    const NUDGE_TMPL   = 'smstmpl_5gHTK848OX3hK9WP1cbG4A';  // "Dispo - Final Nudge v2"
+    const contractPriceN = parseDollar(extractedDeal.contractPrice);
+    if (contractPriceN) setCF('currentContractPrice', '$' + contractPriceN.toLocaleString());
+    if (askingN) setCF('wholesalePrice', '$' + askingN.toLocaleString());
+    if (askingN && !existingOpp.value) {
+      updatePayload.value = Math.round(askingN * 100);
+    }
+    if (arvN) setCF('arv', '$' + arvN.toLocaleString());
+    if (extractedDeal.coeDate) setCF('coeDate', extractedDeal.coeDate);
+    if (extractedDeal.executedDate) setCF('acceptedDate', extractedDeal.executedDate);
+    if (extractedDeal.emdAmount) setCF('emdAmount', extractedDeal.emdAmount);
+    if (extractedDeal.onMarket) setCF('onMarket', extractedDeal.onMarket);
 
-    // Deal-link SMS — only thing injected is the URL
+    if (extractedDeal.executedDate && extractedDeal.ddDays) {
+      const ddEnd = addDaysToDate(extractedDeal.executedDate, extractedDeal.ddDays);
+      if (ddEnd) setCF('ddEndDate', ddEnd);
+    }
+    if (extractedDeal.executedDate && extractedDeal.emdDays) {
+      const emdDue = addDaysToDate(extractedDeal.executedDate, extractedDeal.emdDays);
+      if (emdDue) setCF('emdDueDate', emdDue);
+    }
+
+    const noteLines = [address];
+    const propDetails = [
+      extractedDeal.beds ? extractedDeal.beds + ' bd' : null,
+      extractedDeal.baths ? extractedDeal.baths + ' ba' : null,
+      extractedDeal.sqft ? Number(extractedDeal.sqft).toLocaleString() + ' sqft' : null
+    ].filter(Boolean).join(' / ');
+    if (propDetails) noteLines.push(propDetails);
+    if (extractedDeal.yearBuilt) noteLines.push('Year: ' + extractedDeal.yearBuilt);
+    if (extractedDeal.lotSize) noteLines.push('Lot: ' + extractedDeal.lotSize);
+    noteLines.push('Deal page: ' + dealUrl);
+    updatePayload.note = noteLines.join('\n');
+
+    const fieldCount = Object.keys(updatePayload).length;
+    await closeAPI('/opportunity/' + targetOpp.id + '/', 'PUT', updatePayload);
+    setLogStep(1, 'done', 'Opportunity updated (' + (fieldCount - 1) + ' fields filled)');
+
+    btn.textContent = '✓ Close Updated';
+    btn.className = 'launch-btn success';
+    setStatus('Close opportunity updated ✓ on "' + matchedLead.display_name + '"', 'active');
+
+  } catch(err) {
+    console.error('Close push failed:', err);
+    setStatus('Close push failed: ' + err.message, 'error');
+    btn.textContent = '📊 Retry Close';
+    btn.disabled = false;
+  }
+});
+
+// ============================================================
+// BUTTON 4: CREATE DISPO WORKFLOW
+// ============================================================
+// Static template IDs (created once in Close, reused every deal)
+const TEASER_TMPL  = 'smstmpl_5TJvHLXfVDqBV5c5D4a1MZ';
+const FOLLOWUP_TMPL = 'smstmpl_3GVufkhASUv2ao47VskWV2';
+const NUDGE_TMPL   = 'smstmpl_5gHTK848OX3hK9WP1cbG4A';
+
+document.getElementById('btnCreateWorkflow').addEventListener('click', async () => {
+  const btn = document.getElementById('btnCreateWorkflow');
+  const dealId = document.getElementById('fDealId').value.trim();
+  if (!dealId) { setStatus('Enter a deal number first', 'error'); return; }
+
+  btn.disabled = true;
+  btn.textContent = '⚡ Creating...';
+
+  syncFieldsToExtracted();
+  const address = extractedDeal.address || 'Unknown Address';
+  const dealUrl = 'https://goodresults.org/deals/' + dealId + '/';
+
+  initLog([
+    'Creating deal-link SMS template...',
+    'Creating deal email template...',
+    'Creating 6-step dispo workflow...'
+  ]);
+
+  try {
+    // Deal-link SMS template
+    setLogStep(0, 'active');
     const linkSmsTmpl = await closeAPI('/sms_template/', 'POST', {
       name: address + ' - Deal Link',
       text: 'Here are the details on that deal I mentioned... check it out and let me know if you have any questions\n' + dealUrl,
       is_shared: true
     });
-    await wait(600);
+    setLogStep(0, 'done', 'Deal-link SMS template created');
 
-    // Deal email — only thing injected is the URL (reused on both days)
+    // Deal email template
+    await wait(600);
+    setLogStep(1, 'active');
     const emailTmpl = await closeAPI('/email_template/', 'POST', {
       name: address + ' - Deal Email',
       subject: 'Deal details — ' + address,
       body: '<p>Hey {{ contact.first_name }},</p><p>Here are the details on that deal I mentioned...</p><p><a href="' + dealUrl + '">' + dealUrl + '</a></p><p>Let me know if you have any questions or want to take a look at it.</p><p>{{ user.first_name }}<br>Good Results Home Buyers</p>',
       is_shared: true
     });
-    setLogStep(6, 'done', 'Deal-link SMS + email templates created');
+    setLogStep(1, 'done', 'Deal email template created');
 
-    // --- STEP 7: Create 6-step workflow draft ---
-    // Day 1: teaser SMS + email (instant) → deal-link SMS (46 min)
-    // Day 2: follow-up SMS + email (1 day) → final nudge SMS (2 hr)
-    await wait(800);
-    setLogStep(7, 'active');
+    // 6-step workflow
+    await wait(600);
+    setLogStep(2, 'active');
     const workflow = await closeAPI('/sequence/', 'POST', {
       name: address + ' - Dispo',
       steps: [
@@ -1129,34 +1343,16 @@ document.getElementById('launchBtn').addEventListener('click', async () => {
         { step_type: 'sms',   delay: 'PT2H',  sms_template_id: NUDGE_TMPL }
       ]
     });
-    workflowName = workflow.name;
-    setLogStep(7, 'done', 'Workflow "' + workflowName + '" created (6-step draft)');
+    setLogStep(2, 'done', 'Workflow "' + workflow.name + '" created (6-step draft)');
 
-    // =============================================
-    // SUCCESS
-    // =============================================
-    btn.textContent = '✓ Deal Launched';
+    btn.textContent = '✓ Workflow Created';
     btn.className = 'launch-btn success';
-    document.getElementById('outputBadge').textContent = 'LIVE';
-    document.getElementById('outputBadge').className = 'badge badge-ready';
-
-    const banner = document.getElementById('successBanner');
-    banner.style.display = 'block';
-    document.getElementById('liveUrlLink').innerHTML = '<a href="' + dealUrl + '" target="_blank">' + dealUrl + '</a>';
-    const photoNote = dealPhotos.length ? dealPhotos.length + ' photos' : 'no photos';
-    const oppNote = oppUpdated ? 'Opportunity updated on "' + matchedLead.display_name + '"' : 'No matching lead found (opp not updated)';
-    document.getElementById('successDetails').innerHTML =
-      'Deal page is deploying now (takes ~30 seconds).<br>' +
-      'GitHub: template + deal-doc.txt + ' + photoNote + '<br>' +
-      'Close: ' + oppNote + '<br>' +
-      'Close: "' + workflowName + '" workflow draft created — activate it and enroll contacts to start blasting.';
-
-    setStatus('Deal launched ✓', 'active');
+    setStatus('Dispo workflow created ✓ — activate it and enroll contacts', 'active');
 
   } catch(err) {
-    console.error('Launch failed:', err);
-    setStatus('Launch failed: ' + err.message, 'error');
-    btn.textContent = '🚀 Retry Launch';
+    console.error('Workflow creation failed:', err);
+    setStatus('Workflow failed: ' + err.message, 'error');
+    btn.textContent = '⚡ Retry Workflow';
     btn.disabled = false;
   }
 });
