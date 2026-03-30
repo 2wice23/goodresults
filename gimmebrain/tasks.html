@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
+<script>(function(){
+  const a=sessionStorage.getItem('gr_authed');
+  const u=(sessionStorage.getItem('gr_user_email')||'').toLowerCase();
+  const ok=['gayden@goodresults.org','joe@goodresults.org','gaydenjr@gmail.com'];
+  if(a!=='1'||!ok.includes(u)){sessionStorage.setItem('gr_brain_bounce','1');window.location.href='/gimmebrain/login.html';}
+})()</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Task Monitor — Good Results Hub</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Gimme Brain Back Door Terminal Dashboard Extraordinaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --black:#0D0F14;--surface:#11141A;--surface2:#161B24;--surface3:#0A0C10;
@@ -18,489 +22,423 @@
   --gold:#F59E0B;--gold-bg:rgba(245,158,11,0.08);--gold-border:rgba(245,158,11,0.25);
   --blue:#3B82F6;--blue-bg:rgba(59,130,246,0.08);--blue-border:rgba(59,130,246,0.25);
   --radius:8px;--radius-sm:5px;--radius-lg:12px;
+  --mono:'JetBrains Mono',monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{font-size:16px;scroll-behavior:smooth;}
 body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
-
-#rpbar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:linear-gradient(90deg,#FF5C1A,#FF8A50,#FF5C1A);background-size:200% 100%;animation:rpShimmer 2.5s linear infinite;transition:width .06s linear;box-shadow:0 0 10px rgba(255,92,26,.55);}
-@keyframes rpShimmer{from{background-position:0%}to{background-position:200%}}
-
 body::before{content:'';position:fixed;inset:0;pointer-events:none;background:
-  radial-gradient(ellipse 80% 45% at 50% -10%, rgba(255,92,26,0.07) 0%, transparent 55%),
+  radial-gradient(ellipse 80% 45% at 50% -10%,rgba(255,92,26,0.07) 0%,transparent 55%),
   repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px),
-  repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px);
-  z-index:0;}
+  repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px);z-index:0;}
 body>*{position:relative;z-index:1;}
 
 /* HEADER */
-.header{
-  padding:14px 44px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(13,15,20,.97);backdrop-filter:blur(20px);
-  position:sticky;top:0;z-index:100;
-}
-.logo-mark{display:flex;align-items:center;gap:10px;}
-.logo-icon{
-  width:30px;height:30px;background:var(--orange-glow);
-  border:1px solid var(--orange-border);border-radius:5px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.65rem;font-weight:900;color:var(--orange);
-}
-.logo-name{font-size:.8rem;font-weight:800;color:var(--white);letter-spacing:.04em;}
-.logo-sub{font-size:.58rem;color:var(--dim);font-weight:500;}
-.header-right{display:flex;align-items:center;gap:12px;}
-.back-link{
-  font-size:.78rem;color:var(--muted);text-decoration:none;
-  transition:color .2s;display:flex;align-items:center;gap:5px;font-weight:500;
-}
-.back-link:hover{color:var(--orange);}
+.header{padding:14px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,.97);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;}
+.header-left{display:flex;align-items:center;gap:12px;}
+.hub-link{display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--cream);text-decoration:none;font-weight:600;padding:6px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);transition:all 0.2s;}
+.hub-link:hover{color:var(--orange);border-color:var(--orange-border);background:var(--orange-glow);}
+.logo{font-size:0.9rem;color:var(--orange);font-weight:800;letter-spacing:0.04em;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s ease infinite;}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+.header-status{font-size:0.7rem;color:var(--muted);font-weight:600;letter-spacing:0.05em;text-transform:uppercase;}
 
 /* HERO */
-.hero{
-  padding:48px 44px 36px;
-  max-width:1160px;margin:0 auto;
-}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:7px;
-  background:var(--orange-glow);border:1px solid var(--orange-border);
-  color:var(--orange);font-size:.62rem;font-weight:800;
-  letter-spacing:.16em;text-transform:uppercase;
-  padding:4px 12px;border-radius:3px;margin-bottom:16px;
-}
-.hero h1{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;line-height:1.1;margin-bottom:10px;letter-spacing:-.02em;}
-.hero h1 span{color:var(--orange);}
-.hero-sub{font-size:.92rem;color:var(--muted);line-height:1.72;max-width:680px;}
+.hero{max-width:1200px;margin:0 auto;padding:40px 32px 24px;}
+.hero h1{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;letter-spacing:-0.02em;line-height:1.2;}
+.hero h1 em{font-style:normal;color:var(--orange);}
+.hero-sub{font-size:0.85rem;color:var(--muted);margin-top:8px;}
 
-/* MAIN */
-.main{max-width:1160px;margin:0 auto;padding:0 44px 100px;}
+/* SECTION */
+.section{max-width:1200px;margin:0 auto;padding:0 32px 32px;}
+.section-title{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border);}
 
-.sec-label{
-  display:flex;align-items:center;gap:14px;
-  font-size:.62rem;font-weight:800;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--muted);
-  margin-bottom:20px;margin-top:48px;
-}
-.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+/* HEALTH GRID */
+.health-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:24px;}
+.health-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;transition:border-color 0.2s;}
+.health-card.up{border-left:3px solid var(--green);}
+.health-card.down{border-left:3px solid var(--red);}
+.health-card.checking{border-left:3px solid var(--dim);}
+.health-label{font-size:0.7rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;}
+.health-value{font-size:0.85rem;font-weight:700;font-family:var(--mono);}
+.health-value.up{color:var(--green);}
+.health-value.down{color:var(--red);}
+.health-value.checking{color:var(--dim);}
 
-/* OVERVIEW STRIP */
-.overview-strip{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
-  margin-top:32px;
-}
-.ov-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:20px;text-align:center;
-}
-.ov-num{font-size:2rem;font-weight:900;line-height:1;margin-bottom:4px;}
-.ov-num.green{color:var(--green);}
-.ov-num.orange{color:var(--orange);}
-.ov-num.red{color:var(--red);}
-.ov-num.dim{color:var(--dim);}
-.ov-label{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+/* STAT STRIP */
+.stat-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:24px;}
+.stat-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;}
+.stat-number{font-size:1.6rem;font-weight:900;font-family:var(--mono);color:var(--white);}
+.stat-label{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-top:4px;}
+
+/* LEADERBOARD TABLE */
+.lb-table{width:100%;border-collapse:collapse;margin-bottom:24px;}
+.lb-table th{font-size:0.6rem;color:var(--dim);text-transform:uppercase;letter-spacing:0.1em;font-weight:700;text-align:left;padding:8px 12px;border-bottom:1px solid var(--border);}
+.lb-table th.num{text-align:right;}
+.lb-table td{font-size:0.8rem;padding:10px 12px;border-bottom:1px solid var(--border2);font-weight:500;}
+.lb-table td.num{text-align:right;font-family:var(--mono);font-weight:700;}
+.lb-table td.name{color:var(--white);font-weight:700;}
+.lb-table tr:hover td{background:var(--surface2);}
+.score-pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:700;font-family:var(--mono);}
+.score-pill.green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
+.score-pill.gold{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border);}
+.score-pill.blue{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border);}
+.score-pill.red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);}
 
 /* TASK CARDS */
-.task-list{display:flex;flex-direction:column;gap:12px;margin-top:20px;}
-
-.task-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius-lg);overflow:hidden;
-  transition:border-color .2s;
-}
-.task-card:hover{border-color:rgba(255,255,255,0.12);}
-
-.task-header{
-  padding:20px 24px;display:flex;align-items:flex-start;gap:16px;
-  cursor:pointer;user-select:none;
-}
-.task-status-dot{
-  width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:4px;
-  box-shadow:0 0 8px;
-}
-.dot-green{background:var(--green);box-shadow:0 0 8px rgba(34,197,94,.5);}
-.dot-orange{background:var(--orange);box-shadow:0 0 8px rgba(255,92,26,.5);}
-.dot-red{background:var(--red);box-shadow:0 0 8px rgba(239,68,68,.5);}
-.dot-gray{background:var(--dim);box-shadow:0 0 8px rgba(85,90,102,.3);}
-
-.task-info{flex:1;}
-.task-name{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:3px;}
-.task-desc{font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:8px;}
-.task-meta{display:flex;flex-wrap:wrap;gap:12px;}
-.task-tag{
-  font-size:.62rem;font-weight:700;letter-spacing:.08em;
-  padding:3px 10px;border-radius:3px;border:1px solid;
-  text-transform:uppercase;
-}
-.tag-schedule{color:var(--blue);border-color:var(--blue-border);background:var(--blue-bg);}
-.tag-slack{color:var(--gold);border-color:var(--gold-border);background:var(--gold-bg);}
-.tag-status{color:var(--green);border-color:var(--green-border);background:var(--green-bg);}
-.tag-error{color:var(--red);border-color:var(--red-border);background:var(--red-bg);}
-.tag-pending{color:var(--dim);border-color:rgba(85,90,102,.3);background:rgba(85,90,102,.05);}
-.tag-ai{color:#A78BFA;border-color:rgba(167,139,250,.25);background:rgba(167,139,250,.08);}
-.tag-server{color:var(--green);border-color:var(--green-border);background:var(--green-bg);}
-.tag-disabled{color:var(--dim);border-color:rgba(85,90,102,.3);background:rgba(85,90,102,.05);text-decoration:line-through;}
-
-.dot-purple{background:#A78BFA;box-shadow:0 0 8px rgba(167,139,250,.5);}
-
-.runtime-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:.58rem;font-weight:800;letter-spacing:.12em;
-  text-transform:uppercase;padding:5px 14px;border-radius:4px;
-}
-.runtime-server{color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);}
-.runtime-ai{color:#A78BFA;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.25);}
-
-.task-toggle{
-  font-size:.7rem;color:var(--dim);font-weight:600;
-  display:flex;align-items:center;gap:4px;flex-shrink:0;margin-top:4px;
-  transition:color .2s;
-}
-.task-card:hover .task-toggle{color:var(--muted);}
-
-/* Run History (collapsed by default) */
-.task-history{
-  max-height:0;overflow:hidden;transition:max-height .3s ease;
-  border-top:0 solid var(--border);
-}
-.task-card.open .task-history{
-  max-height:600px;border-top-width:1px;
-}
-.task-card.open .task-toggle .toggle-arrow{transform:rotate(180deg);}
-.toggle-arrow{transition:transform .2s;display:inline-block;}
-
-.history-content{padding:16px 24px 20px;}
-.history-title{font-size:.58rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
-
-.run-row{
-  display:grid;grid-template-columns:auto 1fr auto;gap:12px;
-  padding:8px 0;border-bottom:1px solid var(--border2);align-items:center;
-}
-.run-row:last-child{border-bottom:none;}
-
-.run-status{
-  width:8px;height:8px;border-radius:50%;
-}
-.run-ok{background:var(--green);}
-.run-err{background:var(--red);}
-
-.run-details{font-size:.8rem;color:var(--cream);line-height:1.5;}
-.run-time{font-size:.7rem;color:var(--dim);text-align:right;white-space:nowrap;}
-
-.no-runs{font-size:.82rem;color:var(--dim);padding:12px 0;font-style:italic;}
+.task-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;}
+.task-header{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;transition:background 0.15s;user-select:none;}
+.task-header:hover{background:var(--surface2);}
+.task-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.task-dot.active{background:var(--green);}
+.task-dot.disabled{background:var(--dim);}
+.task-name{font-size:0.85rem;font-weight:700;color:var(--white);flex:1;}
+.task-schedule{font-size:0.7rem;color:var(--muted);font-family:var(--mono);font-weight:500;}
+.task-arrow{font-size:0.7rem;color:var(--dim);transition:transform 0.2s;}
+.task-card.open .task-arrow{transform:rotate(90deg);}
+.task-body{display:none;padding:0 18px 16px;border-top:1px solid var(--border);}
+.task-card.open .task-body{display:block;padding-top:14px;}
+.task-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.task-meta-item{font-size:0.7rem;}
+.task-meta-label{color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-size:0.6rem;}
+.task-meta-value{color:var(--cream);font-family:var(--mono);font-weight:500;margin-top:2px;}
+.task-desc{font-size:0.75rem;color:var(--cream);line-height:1.6;background:var(--surface3);padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--border2);}
 
 /* FOOTER */
-.footer{
-  max-width:1160px;margin:0 auto;padding:0 44px 48px;
-  display:flex;justify-content:space-between;align-items:center;
-  border-top:1px solid var(--border);padding-top:22px;margin-top:20px;
-}
-.footer-brand{font-size:.78rem;font-weight:900;color:var(--orange);letter-spacing:.04em;}
-.footer-info{font-size:.62rem;color:var(--dim);font-weight:500;letter-spacing:.08em;text-transform:uppercase;}
-
-/* FADE IN */
-.fade-in{opacity:0;transform:translateY(8px);transition:opacity .38s ease,transform .38s ease;}
-.fade-in.visible{opacity:1;transform:none;}
-
-/* LOADING */
-.loading{text-align:center;padding:48px 24px;font-size:.82rem;color:var(--dim);}
-.loading-spinner{
-  width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--orange);
-  border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
+.footer{max-width:1200px;margin:0 auto;padding:24px 32px 40px;display:flex;align-items:center;justify-content:space-between;}
+.footer-text{font-size:0.7rem;color:var(--dim);font-weight:500;}
 
 /* RESPONSIVE */
-@media(max-width:960px){
-  .hero{padding:36px 24px 28px;}
-  .main{padding:0 24px 80px;}
-  .overview-strip{grid-template-columns:1fr;}
-  .footer{padding:0 24px 40px;}
-}
-@media(max-width:560px){
-  .header{padding:12px 20px;}
-  .hero h1{font-size:1.7rem;}
-  .task-header{flex-direction:column;gap:10px;}
-  .task-meta{gap:6px;}
+@media(max-width:768px){
+  .header{padding:12px 16px;}
+  .hero,.section{padding-left:16px;padding-right:16px;}
+  .health-grid{grid-template-columns:1fr 1fr;}
+  .stat-strip{grid-template-columns:1fr 1fr;}
+  .task-meta{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
-<div id="rpbar"></div>
 
 <header class="header">
-  <div class="logo-mark">
-    <div class="logo-icon">GR</div>
-    <div>
-      <div class="logo-name">Good Results // Task Monitor</div>
-      <div class="logo-sub">Automated Operations</div>
-    </div>
+  <div class="header-left">
+    <a href="/gimmebrain/academy" class="hub-link">← Hub</a>
+    <div class="logo">GIMME BRAIN</div>
   </div>
   <div class="header-right">
-    <a href="/gimmebrain/" class="back-link">← Hub</a>
+    <div class="pulse-dot" id="systemDot"></div>
+    <div class="header-status" id="systemStatus">CHECKING...</div>
   </div>
 </header>
 
-<section class="hero fade-in">
-  <div class="hero-eyebrow">Scheduled Tasks</div>
-  <h1>Task <span>Monitor</span></h1>
-  <p class="hero-sub">Every automated task that runs on the Good Results back end — split into server tasks that run 24/7 regardless of anything, and AI tasks that require an active Cowork session. If Gayden's computer is off, the server tasks keep running but the AI tasks pause until the next session.</p>
+<section class="hero">
+  <h1>The Gimme Brain <em>Back Door Terminal Dashboard Extraordinaire</em></h1>
+  <p class="hero-sub">It's absurd, because it is. System health, automations, leaderboards, and everything under the hood. Owners only.</p>
 </section>
 
-<main class="main">
+<!-- SYSTEM HEALTH -->
+<div class="section">
+  <div class="section-title">System Health</div>
+  <div class="health-grid" id="healthGrid"></div>
+</div>
 
-  <!-- Overview Strip -->
-  <div class="overview-strip fade-in" id="overview-strip" style="grid-template-columns:repeat(4,1fr);">
-    <div class="ov-card"><div class="ov-num dim" id="ov-total">—</div><div class="ov-label">Total Tasks</div></div>
-    <div class="ov-card"><div class="ov-num dim" id="ov-server">—</div><div class="ov-label">Server (24/7)</div></div>
-    <div class="ov-card"><div class="ov-num dim" id="ov-ai">—</div><div class="ov-label">AI (Cowork)</div></div>
-    <div class="ov-card"><div class="ov-num dim" id="ov-issues">—</div><div class="ov-label">Issues</div></div>
+<!-- QUICK STATS -->
+<div class="section">
+  <div class="section-title">Quick Stats</div>
+  <div class="stat-strip" id="statStrip">
+    <div class="stat-box"><div class="stat-number" id="statTodayCalls">-</div><div class="stat-label">Calls Today</div></div>
+    <div class="stat-box"><div class="stat-number" id="statWeekCalls">-</div><div class="stat-label">Calls This Week</div></div>
+    <div class="stat-box"><div class="stat-number" id="statTodayAvg">-</div><div class="stat-label">Avg Today</div></div>
+    <div class="stat-box"><div class="stat-number" id="statWeekAvg">-</div><div class="stat-label">Avg This Week</div></div>
+    <div class="stat-box"><div class="stat-number" id="statAgents">-</div><div class="stat-label">Active Agents</div></div>
+    <div class="stat-box"><div class="stat-number" id="statAllTime">-</div><div class="stat-label">Total Calls</div></div>
   </div>
+</div>
 
-  <!-- Server Tasks -->
-  <div class="sec-label fade-in"><span class="runtime-badge runtime-server">Netlify Server</span> Always Running — 24/7</div>
-  <div class="task-list fade-in" id="server-task-list">
-    <div class="loading"><div class="loading-spinner"></div>Loading server tasks...</div>
-  </div>
+<!-- LEADERBOARD -->
+<div class="section">
+  <div class="section-title">Leaderboard</div>
+  <table class="lb-table" id="lbTable">
+    <thead><tr>
+      <th>Agent</th>
+      <th class="num">Today</th>
+      <th class="num">Today Avg</th>
+      <th class="num">Week</th>
+      <th class="num">Week Avg</th>
+      <th class="num">All-Time</th>
+      <th class="num">All-Time Avg</th>
+    </tr></thead>
+    <tbody id="lbBody"><tr><td colspan="7" style="color:var(--dim);text-align:center;padding:20px;">Loading...</td></tr></tbody>
+  </table>
+</div>
 
-  <!-- AI Tasks -->
-  <div class="sec-label fade-in"><span class="runtime-badge runtime-ai">Cowork AI</span> Requires Active Session</div>
-  <div class="task-list fade-in" id="ai-task-list"></div>
+<!-- AUTOMATIONS -->
+<div class="section">
+  <div class="section-title">Automations</div>
+  <div id="taskList"></div>
+</div>
 
-  <!-- AI-Powered Site Features -->
-  <div class="sec-label fade-in">AI-Powered Site Features</div>
-  <div class="fade-in" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:20px;">
-    <div style="font-size:.92rem;color:var(--cream);line-height:1.72;max-width:700px;">
-      <p style="margin-bottom:14px;">These tools use AI through Netlify proxy functions and work <span style="color:var(--green);font-weight:600;">24/7 for anyone on the team</span>, no computer required:</p>
-      <p style="margin-bottom:6px;color:var(--white);font-weight:600;">Call Analyzer <span style="color:var(--muted);font-weight:400;">— Upload a call recording, get scored and coached by AI</span></p>
-      <p style="margin-bottom:6px;color:var(--white);font-weight:600;">Deal Generator <span style="color:var(--muted);font-weight:400;">— Pull property data and generate deal packages with AI</span></p>
-      <p style="margin-bottom:14px;color:var(--white);font-weight:600;">Deal Doc Builder <span style="color:var(--muted);font-weight:400;">— AI generates formatted deal documentation from inputs</span></p>
-      <p style="font-size:.82rem;color:var(--dim);">These call the Anthropic API via <span style="color:var(--orange);font-weight:600;">anthropic-proxy.js</span> on Netlify. The API key lives in the <span style="color:var(--orange);font-weight:600;">AnthropicAPI</span> env var. No Cowork session needed.</p>
-    </div>
-  </div>
-
-  <!-- How It Works -->
-  <div class="sec-label fade-in">How This Works</div>
-  <div class="fade-in" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 28px;">
-    <div style="font-size:.92rem;color:var(--cream);line-height:1.72;max-width:700px;">
-      <p style="margin-bottom:14px;"><span style="color:var(--green);font-weight:700;">Server tasks</span> are Netlify scheduled functions that run on cron schedules, 24/7. They handle monitoring, digests, and simple data pulls. They do not need AI — just HTTP calls to GitHub, Slack, and the module API.</p>
-      <p style="margin-bottom:14px;"><span style="color:#A78BFA;font-weight:700;">AI tasks</span> run in Cowork (Claude desktop app) and require an active session on Gayden's computer. These handle things that need intelligence — analyzing call data, merging knowledge bases, writing coaching reports, composing Slack messages with context. If the computer is off or Cowork isn't running, these tasks pause and pick up at the next session.</p>
-      <p>The site tools (Analyzer, Deal Generator, Deal Docs) use AI but run through Netlify proxy functions, so they work for the whole team around the clock.</p>
-    </div>
-  </div>
-
-</main>
-
-<footer class="footer">
-  <div class="footer-brand">GOOD RESULTS</div>
-  <div class="footer-info">Internal Use Only</div>
-</footer>
+<!-- FOOTER -->
+<div class="footer">
+  <a href="/gimmebrain/academy" class="hub-link">← Back to Hub</a>
+  <div class="footer-text">Gimme Brain Back Door Terminal Dashboard Extraordinaire v1.0 — if you're reading this, you're either Gayden or Joe</div>
+</div>
 
 <script>
-// Scroll bar
-window.addEventListener('scroll', () => {
-  const h = document.documentElement.scrollHeight - window.innerHeight;
-  if (h > 0) document.getElementById('rpbar').style.width = (window.scrollY / h * 100) + '%';
-}, {passive: true});
+const API = '/.netlify/functions/analyzer-api';
 
-// Fade-in
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+// ============================================================
+// SYSTEM HEALTH
+// ============================================================
 
-// Time formatting
-function timeAgo(iso) {
-  if (!iso) return 'Never';
-  const diff = Date.now() - new Date(iso).getTime();
-  const mins = Math.floor(diff / 60000);
-  if (mins < 1) return 'Just now';
-  if (mins < 60) return mins + 'm ago';
-  const hrs = Math.floor(mins / 60);
-  if (hrs < 24) return hrs + 'h ago';
-  const days = Math.floor(hrs / 24);
-  if (days === 1) return 'Yesterday';
-  if (days < 7) return days + 'd ago';
-  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-}
-
-function formatTime(iso) {
-  if (!iso) return '';
-  return new Date(iso).toLocaleString('en-US', {
-    month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true
-  });
-}
-
-// ── AI Tasks (Cowork scheduled) — hardcoded since they run client-side ──
-const AI_TASKS = [
-  {
-    name: 'Morning Briefing',
-    description: 'Pulls leaderboard + call data, writes a motivational team briefing with accountability callouts, posts to #the-group-chat.',
-    schedule: 'Mon–Fri 8:40 AM',
-    slackChannel: '#the-group-chat',
-    enabled: true,
-    lastRun: null, // will be filled from Cowork if available
-    requiresAI: 'Writes custom Slack messages with context-aware commentary'
-  },
-  {
-    name: 'Weekly Coaching Report',
-    description: 'Analyzes each agent\'s call volume, scores, and KB data to generate per-agent coaching summaries with specific improvement suggestions.',
-    schedule: 'Monday 8:04 AM',
-    slackChannel: '#the-group-chat',
-    enabled: true,
-    requiresAI: 'Generates personalized coaching insights from raw score data'
-  },
-  {
-    name: 'Daily KB Learn',
-    description: 'Pulls new call analyzer data, reads the current analyzer-kb.md on GitHub, proposes targeted updates based on patterns in recent calls.',
-    schedule: 'Daily 9:05 AM',
-    slackChannel: '#hack-the-planet',
-    enabled: true,
-    requiresAI: 'Reads call data and writes KB improvement proposals'
-  },
-  {
-    name: 'Weekly KB Sync (Master Merge)',
-    description: 'Hub-and-spoke sync — consolidates all small brain changes into the Master KB, pushes updates back down to individual KBs, commits to GitHub.',
-    schedule: 'Sunday 9:02 AM',
-    slackChannel: '#hack-the-planet',
-    enabled: true,
-    requiresAI: 'Merges and reconciles 4 knowledge bases intelligently'
-  },
-  {
-    name: 'Module Update Queue Processor',
-    description: 'Reads pending module update submissions from GitHub JSON, reviews them, and posts a summary of what was submitted and by whom.',
-    schedule: 'Daily 9:36 AM',
-    slackChannel: '#hack-the-planet',
-    enabled: true,
-    requiresAI: 'Summarizes and categorizes submitted module notes'
-  },
-  {
-    name: 'Call Target Tracker',
-    description: 'Checks daily call counts against the 13/day target for each agent. Tags anyone behind and posts running totals to keep the team accountable.',
-    schedule: 'Hourly 10AM–6PM Mon–Fri',
-    slackChannel: '#the-group-chat',
-    enabled: true,
-    requiresAI: 'Composes targeted accountability messages with context'
-  }
+const endpoints = [
+  { name: 'Site', url: '/', label: 'goodresults.org' },
+  { name: 'Academy', url: '/gimmebrain/academy', label: 'Academy Page' },
+  { name: 'Analyzer', url: '/gimmebrain/analyzer', label: 'Call Analyzer' },
+  { name: 'Deals', url: '/gimmebrain/deals', label: 'Deal Dashboard' },
+  { name: 'API', url: '/.netlify/functions/analyzer-api?action=dailyStats', label: 'Analyzer API' },
+  { name: 'KB Reader', url: '/.netlify/functions/kb-reader?file=analyzer-kb', label: 'KB Reader' },
+  { name: 'GitHub Proxy', url: '/.netlify/functions/github-proxy', label: 'GitHub Proxy', expectPost: true },
 ];
 
-function renderTaskCard(t, runtime) {
-  const isAI = runtime === 'ai';
-  const dotClass = !t.enabled ? 'dot-gray' : isAI ? 'dot-purple' : (t._status === 'success' ? 'dot-green' : t._status === 'error' ? 'dot-red' : 'dot-gray');
+async function checkHealth() {
+  const grid = document.getElementById('healthGrid');
+  grid.innerHTML = endpoints.map(e =>
+    `<div class="health-card checking" id="health-${e.name}">
+      <div class="health-label">${e.label}</div>
+      <div class="health-value checking">checking...</div>
+    </div>`
+  ).join('');
 
-  const statusTag = !t.enabled
-    ? '<span class="task-tag tag-disabled">Disabled</span>'
-    : t._status === 'success'
-    ? '<span class="task-tag tag-status">Last Run: OK</span>'
-    : t._status === 'error'
-    ? '<span class="task-tag tag-error">Last Run: Error</span>'
-    : isAI
-    ? '<span class="task-tag tag-ai">Runs in Cowork</span>'
-    : '<span class="task-tag tag-pending">Not Run Yet</span>';
+  let upCount = 0;
+  const results = await Promise.all(endpoints.map(async e => {
+    const card = document.getElementById('health-' + e.name);
+    try {
+      const start = Date.now();
+      const res = await fetch(e.url, { method: 'HEAD', cache: 'no-store' });
+      const ms = Date.now() - start;
+      // For POST-only endpoints, 405 is actually "up"
+      const isUp = res.ok || (e.expectPost && res.status === 405);
+      card.className = 'health-card ' + (isUp ? 'up' : 'down');
+      card.querySelector('.health-value').className = 'health-value ' + (isUp ? 'up' : 'down');
+      card.querySelector('.health-value').textContent = isUp ? `UP ${ms}ms` : `DOWN ${res.status}`;
+      if (isUp) upCount++;
+      return isUp;
+    } catch(err) {
+      card.className = 'health-card down';
+      card.querySelector('.health-value').className = 'health-value down';
+      card.querySelector('.health-value').textContent = 'UNREACHABLE';
+      return false;
+    }
+  }));
 
-  const lastRunTime = t._lastRunTime ? `<span class="task-tag tag-pending">${timeAgo(t._lastRunTime)}</span>` : '';
-
-  const runtimeTag = isAI
-    ? '<span class="task-tag tag-ai">AI Required</span>'
-    : '<span class="task-tag tag-server">Serverless</span>';
-
-  // Run history rows (server tasks only)
-  let historyHtml = '';
-  if (t._runs && t._runs.length > 0) {
-    historyHtml = t._runs.slice(0, 15).map(r => `
-      <div class="run-row">
-        <div class="run-status ${r.status === 'success' ? 'run-ok' : 'run-err'}"></div>
-        <div class="run-details">${r.details || 'No details'}</div>
-        <div class="run-time">${formatTime(r.timestamp)}</div>
-      </div>
-    `).join('');
-  } else if (isAI) {
-    historyHtml = `<div class="no-runs">AI tasks run in Cowork sessions. Run history is not tracked on this page — check Slack for output.${t.requiresAI ? '<br><br><span style="color:#A78BFA;font-weight:600;">Why AI:</span> ' + t.requiresAI : ''}</div>`;
+  const dot = document.getElementById('systemDot');
+  const status = document.getElementById('systemStatus');
+  if (upCount === endpoints.length) {
+    dot.style.background = 'var(--green)';
+    status.textContent = 'ALL SYSTEMS GO';
+  } else if (upCount > endpoints.length / 2) {
+    dot.style.background = 'var(--gold)';
+    status.textContent = upCount + '/' + endpoints.length + ' UP';
   } else {
-    historyHtml = '<div class="no-runs">This task has not run yet. It will execute on its next scheduled time and results will appear here.</div>';
+    dot.style.background = 'var(--red)';
+    status.textContent = 'SYSTEMS DOWN';
   }
+}
 
-  return `
-    <div class="task-card" onclick="this.classList.toggle('open')">
-      <div class="task-header">
-        <div class="task-status-dot ${dotClass}"></div>
-        <div class="task-info">
-          <div class="task-name">${t.name}</div>
-          <div class="task-desc">${t.description || ''}</div>
-          <div class="task-meta">
-            <span class="task-tag tag-schedule">${t.schedule || t.cron || 'No schedule'}</span>
-            ${t.slackChannel ? `<span class="task-tag tag-slack">${t.slackChannel}</span>` : ''}
-            ${runtimeTag}
-            ${statusTag}
-            ${lastRunTime}
+// ============================================================
+// LEADERBOARD + STATS
+// ============================================================
+
+function scorePill(val) {
+  if (val == null || isNaN(val)) return '<span class="score-pill" style="opacity:0.3">-</span>';
+  const n = Math.round(val);
+  const cls = n >= 85 ? 'green' : n >= 70 ? 'gold' : n >= 50 ? 'blue' : 'red';
+  return `<span class="score-pill ${cls}">${n}</span>`;
+}
+
+async function loadLeaderboard() {
+  try {
+    const [statsRes, boardRes] = await Promise.all([
+      fetch(`${API}?action=dailyStats&cachebust=${Date.now()}`),
+      fetch(`${API}?action=get&cachebust=${Date.now()}`)
+    ]);
+    const statsData = await statsRes.json();
+    const board = await boardRes.json();
+    const stats = statsData.stats || [];
+    const agents = [...new Set([
+      ...stats.map(s => s.agent),
+      ...(Array.isArray(board) ? board.map(b => b.agent_name) : [])
+    ])].filter(n => n && n !== 'Unknown');
+
+    // Merge data
+    const rows = agents.map(name => {
+      const s = stats.find(x => x.agent === name) || {};
+      const b = (Array.isArray(board) ? board : []).find(x => x.agent_name === name) || {};
+      return {
+        name,
+        todayCalls: s.today_calls || 0,
+        todayAvg: s.today_avg,
+        weekCalls: s.week_calls || 0,
+        weekAvg: s.week_avg_score,
+        allCalls: b.total_calls || 0,
+        allAvg: b.avg
+      };
+    }).sort((a, b) => (b.weekAvg || 0) - (a.weekAvg || 0));
+
+    // Fill table
+    const tbody = document.getElementById('lbBody');
+    if (rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" style="color:var(--dim);text-align:center;padding:20px;">No data yet</td></tr>';
+    } else {
+      tbody.innerHTML = rows.map(r => `<tr>
+        <td class="name">${r.name}</td>
+        <td class="num">${r.todayCalls}</td>
+        <td class="num">${scorePill(r.todayAvg)}</td>
+        <td class="num">${r.weekCalls}</td>
+        <td class="num">${scorePill(r.weekAvg)}</td>
+        <td class="num">${r.allCalls}</td>
+        <td class="num">${scorePill(r.allAvg)}</td>
+      </tr>`).join('');
+    }
+
+    // Fill quick stats
+    const totalToday = rows.reduce((s, r) => s + r.todayCalls, 0);
+    const totalWeek = rows.reduce((s, r) => s + r.weekCalls, 0);
+    const totalAll = rows.reduce((s, r) => s + r.allCalls, 0);
+    const todayScores = rows.filter(r => r.todayAvg != null);
+    const weekScores = rows.filter(r => r.weekAvg != null);
+    const avgToday = todayScores.length ? Math.round(todayScores.reduce((s, r) => s + r.todayAvg, 0) / todayScores.length) : '-';
+    const avgWeek = weekScores.length ? Math.round(weekScores.reduce((s, r) => s + r.weekAvg, 0) / weekScores.length) : '-';
+    const activeAgents = rows.filter(r => r.todayCalls > 0).length;
+
+    document.getElementById('statTodayCalls').textContent = totalToday;
+    document.getElementById('statWeekCalls').textContent = totalWeek;
+    document.getElementById('statTodayAvg').textContent = avgToday;
+    document.getElementById('statWeekAvg').textContent = avgWeek;
+    document.getElementById('statAgents').textContent = activeAgents;
+    document.getElementById('statAllTime').textContent = totalAll;
+  } catch(e) {
+    console.error('Leaderboard load error:', e);
+    document.getElementById('lbBody').innerHTML = '<tr><td colspan="7" style="color:var(--red);text-align:center;padding:20px;">Failed to load</td></tr>';
+  }
+}
+
+// ============================================================
+// AUTOMATIONS
+// ============================================================
+
+const tasks = [
+  {
+    id: 'saturday-kb-learn',
+    name: 'Daily KB Learn',
+    schedule: 'Every day at 7:00 AM',
+    enabled: true,
+    desc: 'Pulls new call data from Google Sheet, Slack, and Close. Compares against current analyzer-kb.md on GitHub. Proposes changes and waits for Gayden approval before writing. Posts summary to #hack-the-planet.'
+  },
+  {
+    id: 'module-update-queue-processor',
+    name: 'Module Update Queue',
+    schedule: 'Every day at 7:30 AM',
+    enabled: true,
+    desc: 'Processes pending module update submissions from training-data/updates.json on GitHub. Discards test entries, drafts proposed KB/module changes for real submissions, waits for approval. Posts to #hack-the-planet.'
+  },
+  {
+    id: 'weekly-gr-coaching-report',
+    name: 'Weekly Coaching Report',
+    schedule: 'Mondays at 8:04 AM',
+    enabled: true,
+    desc: 'Per-agent coaching summary with call volume, KB-sourced insights, and personalized coaching priorities. Reads from kb-reader for analyzer-kb and chloe-kb context. Posts to #the-group-chat.'
+  },
+  {
+    id: 'daily-gr-morning-briefing',
+    name: 'Morning Briefing',
+    schedule: 'Mon-Fri at 9:30 AM',
+    enabled: true,
+    desc: 'Morning leaderboard standings, call accountability for yesterday, and a motivational quote. Tags agents who were behind target. Posts to #the-group-chat.'
+  },
+  {
+    id: 'weekly-kb-sync',
+    name: 'Weekly KB Sync (Master Merge)',
+    schedule: 'Sundays at 9:00 AM',
+    enabled: true,
+    desc: 'Hub-and-spoke KB sync. Reads all 5 KBs from GitHub, diffs small brains against Master, merges new knowledge up, pushes updates back down preserving formats. Requires Gayden approval before pushing. Posts to #hack-the-planet.'
+  },
+  {
+    id: 'call-target-tracker',
+    name: 'Call Target Tracker',
+    schedule: 'Hourly 10AM-6PM Mon-Fri',
+    enabled: true,
+    desc: 'Checks each agent\'s daily analyzed call count against the 13/day target. Posts scoreboard to #the-group-chat and tags anyone behind. Checks reactions on previous message. Leadership (Gayden, Joe) shown but never tagged.'
+  },
+  {
+    id: 'monday-analyzer-rebuild',
+    name: 'Analyzer Rebuild (Legacy)',
+    schedule: 'Disabled',
+    enabled: false,
+    desc: 'DISABLED — rebuild now happens as part of the daily KB update task after Gayden approves changes. This task is kept for reference only.'
+  },
+  {
+    id: 'monday-kb-sync',
+    name: 'Monday KB Sync (Legacy)',
+    schedule: 'Disabled',
+    enabled: false,
+    desc: 'DISABLED — redundant. Master-to-modules sync is now handled by weekly-kb-sync on Sundays at 9 AM.'
+  },
+];
+
+function renderTasks() {
+  const el = document.getElementById('taskList');
+  el.innerHTML = tasks.map(t => `
+    <div class="task-card" id="task-${t.id}">
+      <div class="task-header" onclick="toggleTask('${t.id}')">
+        <div class="task-dot ${t.enabled ? 'active' : 'disabled'}"></div>
+        <div class="task-name">${t.name}</div>
+        <div class="task-schedule">${t.schedule}</div>
+        <div class="task-arrow">&#9654;</div>
+      </div>
+      <div class="task-body">
+        <div class="task-meta">
+          <div class="task-meta-item">
+            <div class="task-meta-label">Status</div>
+            <div class="task-meta-value">${t.enabled ? 'Active' : 'Disabled'}</div>
+          </div>
+          <div class="task-meta-item">
+            <div class="task-meta-label">Task ID</div>
+            <div class="task-meta-value">${t.id}</div>
+          </div>
+          <div class="task-meta-item">
+            <div class="task-meta-label">Push Method</div>
+            <div class="task-meta-value">${t.enabled && t.id !== 'call-target-tracker' && t.id !== 'daily-gr-morning-briefing' && t.id !== 'weekly-gr-coaching-report' ? 'git clone/push' : 'N/A (no GitHub writes)'}</div>
+          </div>
+          <div class="task-meta-item">
+            <div class="task-meta-label">Approval Required</div>
+            <div class="task-meta-value">${t.id === 'saturday-kb-learn' || t.id === 'weekly-kb-sync' || t.id === 'module-update-queue-processor' ? 'Yes — Gayden' : 'No'}</div>
           </div>
         </div>
-        <div class="task-toggle"><span class="toggle-arrow">▼</span></div>
-      </div>
-      <div class="task-history">
-        <div class="history-content">
-          <div class="history-title">${isAI ? 'Task Details' : 'Run History'}</div>
-          ${historyHtml}
-        </div>
+        <div class="task-desc">${t.desc}</div>
       </div>
     </div>
-  `;
+  `).join('');
 }
 
-// Load and render
-async function loadTasks() {
-  const serverContainer = document.getElementById('server-task-list');
-  const aiContainer = document.getElementById('ai-task-list');
-
-  // ── Server tasks from task-status API ──
-  let serverCount = 0, serverIssues = 0;
-  try {
-    const res = await fetch('/.netlify/functions/task-status');
-    const data = await res.json();
-    const tasks = data.tasks || {};
-    const taskKeys = Object.keys(tasks);
-
-    let html = '';
-    taskKeys.forEach(key => {
-      const t = tasks[key];
-      const lastRun = t.runs && t.runs[0];
-      t._status = lastRun ? lastRun.status : 'pending';
-      t._lastRunTime = lastRun ? lastRun.timestamp : null;
-      t._runs = t.runs || [];
-      t.name = t.name || key;
-      html += renderTaskCard(t, 'server');
-      serverCount++;
-      if (lastRun && lastRun.status === 'error') serverIssues++;
-    });
-
-    serverContainer.innerHTML = html || '<div class="no-runs">No server tasks configured yet.</div>';
-  } catch (e) {
-    serverContainer.innerHTML = '<div class="no-runs">Could not load server task data. The task-status function may not be deployed yet.</div>';
-  }
-
-  // ── AI tasks (hardcoded) ──
-  const enabledAI = AI_TASKS.filter(t => t.enabled);
-  aiContainer.innerHTML = AI_TASKS.map(t => {
-    t._status = t.enabled ? 'ai' : 'disabled';
-    return renderTaskCard(t, 'ai');
-  }).join('');
-
-  // ── Overview stats ──
-  const totalTasks = serverCount + AI_TASKS.length;
-  document.getElementById('ov-total').textContent = totalTasks;
-  document.getElementById('ov-total').className = 'ov-num orange';
-
-  document.getElementById('ov-server').textContent = serverCount;
-  document.getElementById('ov-server').className = 'ov-num green';
-
-  document.getElementById('ov-ai').textContent = enabledAI.length;
-  document.getElementById('ov-ai').className = 'ov-num';
-  document.getElementById('ov-ai').style.color = '#A78BFA';
-
-  document.getElementById('ov-issues').textContent = serverIssues;
-  document.getElementById('ov-issues').className = 'ov-num ' + (serverIssues > 0 ? 'red' : 'green');
+function toggleTask(id) {
+  const card = document.getElementById('task-' + id);
+  card.classList.toggle('open');
 }
 
-loadTasks();
+// ============================================================
+// INIT
+// ============================================================
+
+checkHealth();
+loadLeaderboard();
+renderTasks();
+
+// Auto-refresh health every 60s
+setInterval(checkHealth, 60000);
 </script>
 </body>
 </html>
