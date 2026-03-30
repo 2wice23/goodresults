@@ -330,11 +330,12 @@ async function loadDeals() {
         const json = JSON.parse(atob(file.content.replace(/\n/g, '')));
         json._slug = folder.name;
         json._docSha = file.sha;
-        // Normalize field names (generator uses wholesalePrice/repairsPerSqft, dashboard uses askingPrice/estRepairs)
-        if (json.wholesalePrice && !json.askingPrice) json.askingPrice = json.wholesalePrice;
+        // Backfill old field names → unified names (wholesalePrice, repairsPerSqft, profitPotential)
         if (json.askingPrice && !json.wholesalePrice) json.wholesalePrice = json.askingPrice;
-        if (json.repairsPerSqft && !json.estRepairs) json.estRepairs = json.repairsPerSqft;
-        if (json.profitPotential && !json.profit) json.profit = json.profitPotential;
+        if (json.estRepairs && !json.repairsPerSqft) json.repairsPerSqft = json.estRepairs;
+        if (json.profit && !json.profitPotential) json.profitPotential = json.profit;
+        // Remove old aliases so they don't persist on next save
+        delete json.askingPrice; delete json.estRepairs; delete json.profit;
 
         // Get all files in deal folder (for photos)
         const files = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name).catch(() => []);
@@ -360,7 +361,7 @@ async function loadDeals() {
       if (da !== null && db !== null) return da - db;
       if (da !== null) return -1;
       if (db !== null) return 1;
-      return (b.askingPrice || 0) - (a.askingPrice || 0);
+      return (b.wholesalePrice || 0) - (a.wholesalePrice || 0);
     });
 
     renderStats();
@@ -374,7 +375,7 @@ function renderStats() {
   const total = allDeals.length;
   const offMarket = allDeals.filter(d => d.market !== 'on').length;
   const onMarket = total - offMarket;
-  const totalValue = allDeals.reduce((sum, d) => sum + (d.askingPrice || 0), 0);
+  const totalValue = allDeals.reduce((sum, d) => sum + (d.wholesalePrice || 0), 0);
   const urgentDates = allDeals.filter(d => { const days = daysUntil(d.coeDate); return days !== null && days >= 0 && days <= 7; }).length;
 
   let html = '';
@@ -420,8 +421,8 @@ function renderDeals() {
   }
 
   grid.innerHTML = filtered.map((d, i) => {
-    const totalRepairs = (d.estRepairs && d.sqft) ? d.estRepairs * d.sqft : null;
-    const profit = (d.arv && totalRepairs != null && d.askingPrice) ? d.arv - totalRepairs - d.askingPrice : null;
+    const totalRepairs = (d.repairsPerSqft && d.sqft) ? d.repairsPerSqft * d.sqft : null;
+    const profit = (d.arv && totalRepairs != null && d.wholesalePrice) ? d.arv - totalRepairs - d.wholesalePrice : null;
     const coeDays = daysUntil(d.coeDate);
     const liveUrl = SITE_BASE + '/deals/' + d._slug + '/';
     const thumbHtml = d._thumb ? '<img src="' + d._thumb + '" alt="">' : '🏠';
@@ -445,9 +446,9 @@ function renderDeals() {
           '<div class="card-location">' + ([d.city, d.state, d.zip].filter(Boolean).join(', ') || '—') + '</div>' +
         '</div>' +
         '<div class="card-numbers">' +
-          '<div class="card-num"><div class="card-num-label">Ask</div><div class="card-num-val orange">' + fmt$(d.askingPrice) + '</div></div>' +
+          '<div class="card-num"><div class="card-num-label">Ask</div><div class="card-num-val orange">' + fmt$(d.wholesalePrice) + '</div></div>' +
           '<div class="card-num"><div class="card-num-label">ARV</div><div class="card-num-val">' + fmt$(d.arv) + '</div></div>' +
-          (totalRepairs != null ? '<div class="card-num"><div class="card-num-label">Repairs <span style="font-size:0.45rem;opacity:0.7;">(' + d.estRepairs + '/sqft × ' + Number(d.sqft).toLocaleString() + ')</span></div><div class="card-num-val red">' + fmt$(totalRepairs) + '</div></div>' : '') +
+          (totalRepairs != null ? '<div class="card-num"><div class="card-num-label">Repairs <span style="font-size:0.45rem;opacity:0.7;">(' + d.repairsPerSqft + '/sqft × ' + Number(d.sqft).toLocaleString() + ')</span></div><div class="card-num-val red">' + fmt$(totalRepairs) + '</div></div>' : '') +
           (profit !== null ? '<div class="card-num"><div class="card-num-label">Gross Profit</div><div class="card-num-val green">' + fmt$(profit) + '</div></div>' : '') +
           '<div class="card-badges">' +
             '<span class="card-badge ' + (d.market === 'on' ? 'badge-on' : 'badge-off') + '">' + (d.market === 'on' ? 'Active' : 'Off-Market') + '</span>' +
@@ -480,10 +481,10 @@ function renderDeals() {
           // MONEY
           '<div class="detail-section">' +
             '<div class="detail-section-title">Financials</div>' +
-            field('askingPrice', 'Asking Price', d.askingPrice, 'money') +
+            field('wholesalePrice', 'Wholesale Price', d.wholesalePrice, 'money') +
             field('arv', 'ARV', d.arv, 'money') +
-            field('estRepairs', 'Repairs $/sqft', d.estRepairs) +
-            (totalRepairs != null ? '<div class="detail-row"><span class="detail-key">Total Repairs (' + d.estRepairs + ' × ' + Number(d.sqft).toLocaleString() + ')</span><span class="detail-val hi">' + fmt$(totalRepairs) + '</span></div>' : '') +
+            field('repairsPerSqft', 'Repairs $/sqft', d.repairsPerSqft) +
+            (totalRepairs != null ? '<div class="detail-row"><span class="detail-key">Total Repairs (' + d.repairsPerSqft + ' × ' + Number(d.sqft).toLocaleString() + ')</span><span class="detail-val hi">' + fmt$(totalRepairs) + '</span></div>' : '') +
             (profit !== null ? '<div class="detail-row"><span class="detail-key">Gross Profit</span><span class="detail-val green">' + fmt$(profit) + '</span></div>' : '') +
           '</div>' +
           // PROPERTY
@@ -616,17 +617,12 @@ async function saveDeal(btn) {
     const key = el.dataset.field;
     let val = el.value;
     // Convert numeric fields (strip $ and commas, preserve decimals)
-    if (['askingPrice','arv','estRepairs','beds','baths','sqft','yearBuilt','wholesalePrice','repairsPerSqft','ddDays','emdDays'].includes(key)) {
+    if (['wholesalePrice','arv','repairsPerSqft','beds','baths','sqft','yearBuilt','ddDays','emdDays'].includes(key)) {
       const num = parseFloat(String(val).replace(/[$,]/g, ''));
       val = isNaN(num) ? '' : num;
     }
     deal[key] = val;
   });
-
-  // Keep field name aliases in sync so both generator and dashboard can read the data
-  if (deal.askingPrice != null) deal.wholesalePrice = deal.askingPrice;
-  if (deal.wholesalePrice != null && !deal.askingPrice) deal.askingPrice = deal.wholesalePrice;
-  if (deal.estRepairs != null) deal.repairsPerSqft = deal.estRepairs;
 
   // Build clean JSON (strip internal fields)
   const cleanDeal = {};
@@ -804,7 +800,7 @@ async function pushToClose(btn) {
 
   const address = deal.address || slug;
   const dealUrl = 'https://goodresults.org/deals/' + slug + '/';
-  const askingN = parseDollar(deal.wholesalePrice || deal.askingPrice);
+  const askingN = parseDollar(deal.wholesalePrice);
   const arvN = parseDollar(deal.arv);
 
   try {
