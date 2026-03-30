@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Monitor — Good Results Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0D0F14;--surface:#11141A;--surface2:#161B24;--surface3:#0A0C10;
+  --white:#F0F4FF;--cream:#C8D4E4;--muted:#8A95A8;--dim:#555A66;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.04);
+  --orange:#FF5C1A;--orange-glow:rgba(255,92,26,0.12);--orange-border:rgba(255,92,26,0.25);
+  --green:#22C55E;--green-bg:rgba(34,197,94,0.08);--green-border:rgba(34,197,94,0.25);
+  --red:#EF4444;--red-bg:rgba(239,68,68,0.08);--red-border:rgba(239,68,68,0.25);
+  --gold:#F59E0B;--gold-bg:rgba(245,158,11,0.08);--gold-border:rgba(245,158,11,0.25);
+  --blue:#3B82F6;--blue-bg:rgba(59,130,246,0.08);--blue-border:rgba(59,130,246,0.25);
+  --radius:8px;--radius-sm:5px;--radius-lg:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
+
+#rpbar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:linear-gradient(90deg,#FF5C1A,#FF8A50,#FF5C1A);background-size:200% 100%;animation:rpShimmer 2.5s linear infinite;transition:width .06s linear;box-shadow:0 0 10px rgba(255,92,26,.55);}
+@keyframes rpShimmer{from{background-position:0%}to{background-position:200%}}
+
+body::before{content:'';position:fixed;inset:0;pointer-events:none;background:
+  radial-gradient(ellipse 80% 45% at 50% -10%, rgba(255,92,26,0.07) 0%, transparent 55%),
+  repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px),
+  repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px);
+  z-index:0;}
+body>*{position:relative;z-index:1;}
+
+/* HEADER */
+.header{
+  padding:14px 44px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(13,15,20,.97);backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:100;
+}
+.logo-mark{display:flex;align-items:center;gap:10px;}
+.logo-icon{
+  width:30px;height:30px;background:var(--orange-glow);
+  border:1px solid var(--orange-border);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;font-weight:900;color:var(--orange);
+}
+.logo-name{font-size:.8rem;font-weight:800;color:var(--white);letter-spacing:.04em;}
+.logo-sub{font-size:.58rem;color:var(--dim);font-weight:500;}
+.header-right{display:flex;align-items:center;gap:12px;}
+.back-link{
+  font-size:.78rem;color:var(--muted);text-decoration:none;
+  transition:color .2s;display:flex;align-items:center;gap:5px;font-weight:500;
+}
+.back-link:hover{color:var(--orange);}
+
+/* HERO */
+.hero{
+  padding:48px 44px 36px;
+  max-width:1160px;margin:0 auto;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--orange-glow);border:1px solid var(--orange-border);
+  color:var(--orange);font-size:.62rem;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;
+  padding:4px 12px;border-radius:3px;margin-bottom:16px;
+}
+.hero h1{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;line-height:1.1;margin-bottom:10px;letter-spacing:-.02em;}
+.hero h1 span{color:var(--orange);}
+.hero-sub{font-size:.92rem;color:var(--muted);line-height:1.72;max-width:680px;}
+
+/* MAIN */
+.main{max-width:1160px;margin:0 auto;padding:0 44px 100px;}
+
+.sec-label{
+  display:flex;align-items:center;gap:14px;
+  font-size:.62rem;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:20px;margin-top:48px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* OVERVIEW STRIP */
+.overview-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  margin-top:32px;
+}
+.ov-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px;text-align:center;
+}
+.ov-num{font-size:2rem;font-weight:900;line-height:1;margin-bottom:4px;}
+.ov-num.green{color:var(--green);}
+.ov-num.orange{color:var(--orange);}
+.ov-num.red{color:var(--red);}
+.ov-num.dim{color:var(--dim);}
+.ov-label{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+
+/* TASK CARDS */
+.task-list{display:flex;flex-direction:column;gap:12px;margin-top:20px;}
+
+.task-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;
+  transition:border-color .2s;
+}
+.task-card:hover{border-color:rgba(255,255,255,0.12);}
+
+.task-header{
+  padding:20px 24px;display:flex;align-items:flex-start;gap:16px;
+  cursor:pointer;user-select:none;
+}
+.task-status-dot{
+  width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:4px;
+  box-shadow:0 0 8px;
+}
+.dot-green{background:var(--green);box-shadow:0 0 8px rgba(34,197,94,.5);}
+.dot-orange{background:var(--orange);box-shadow:0 0 8px rgba(255,92,26,.5);}
+.dot-red{background:var(--red);box-shadow:0 0 8px rgba(239,68,68,.5);}
+.dot-gray{background:var(--dim);box-shadow:0 0 8px rgba(85,90,102,.3);}
+
+.task-info{flex:1;}
+.task-name{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:3px;}
+.task-desc{font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:8px;}
+.task-meta{display:flex;flex-wrap:wrap;gap:12px;}
+.task-tag{
+  font-size:.62rem;font-weight:700;letter-spacing:.08em;
+  padding:3px 10px;border-radius:3px;border:1px solid;
+  text-transform:uppercase;
+}
+.tag-schedule{color:var(--blue);border-color:var(--blue-border);background:var(--blue-bg);}
+.tag-slack{color:var(--gold);border-color:var(--gold-border);background:var(--gold-bg);}
+.tag-status{color:var(--green);border-color:var(--green-border);background:var(--green-bg);}
+.tag-error{color:var(--red);border-color:var(--red-border);background:var(--red-bg);}
+.tag-pending{color:var(--dim);border-color:rgba(85,90,102,.3);background:rgba(85,90,102,.05);}
+
+.task-toggle{
+  font-size:.7rem;color:var(--dim);font-weight:600;
+  display:flex;align-items:center;gap:4px;flex-shrink:0;margin-top:4px;
+  transition:color .2s;
+}
+.task-card:hover .task-toggle{color:var(--muted);}
+
+/* Run History (collapsed by default) */
+.task-history{
+  max-height:0;overflow:hidden;transition:max-height .3s ease;
+  border-top:0 solid var(--border);
+}
+.task-card.open .task-history{
+  max-height:600px;border-top-width:1px;
+}
+.task-card.open .task-toggle .toggle-arrow{transform:rotate(180deg);}
+.toggle-arrow{transition:transform .2s;display:inline-block;}
+
+.history-content{padding:16px 24px 20px;}
+.history-title{font-size:.58rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
+
+.run-row{
+  display:grid;grid-template-columns:auto 1fr auto;gap:12px;
+  padding:8px 0;border-bottom:1px solid var(--border2);align-items:center;
+}
+.run-row:last-child{border-bottom:none;}
+
+.run-status{
+  width:8px;height:8px;border-radius:50%;
+}
+.run-ok{background:var(--green);}
+.run-err{background:var(--red);}
+
+.run-details{font-size:.8rem;color:var(--cream);line-height:1.5;}
+.run-time{font-size:.7rem;color:var(--dim);text-align:right;white-space:nowrap;}
+
+.no-runs{font-size:.82rem;color:var(--dim);padding:12px 0;font-style:italic;}
+
+/* FOOTER */
+.footer{
+  max-width:1160px;margin:0 auto;padding:0 44px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--border);padding-top:22px;margin-top:20px;
+}
+.footer-brand{font-size:.78rem;font-weight:900;color:var(--orange);letter-spacing:.04em;}
+.footer-info{font-size:.62rem;color:var(--dim);font-weight:500;letter-spacing:.08em;text-transform:uppercase;}
+
+/* FADE IN */
+.fade-in{opacity:0;transform:translateY(8px);transition:opacity .38s ease,transform .38s ease;}
+.fade-in.visible{opacity:1;transform:none;}
+
+/* LOADING */
+.loading{text-align:center;padding:48px 24px;font-size:.82rem;color:var(--dim);}
+.loading-spinner{
+  width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--orange);
+  border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hero{padding:36px 24px 28px;}
+  .main{padding:0 24px 80px;}
+  .overview-strip{grid-template-columns:1fr;}
+  .footer{padding:0 24px 40px;}
+}
+@media(max-width:560px){
+  .header{padding:12px 20px;}
+  .hero h1{font-size:1.7rem;}
+  .task-header{flex-direction:column;gap:10px;}
+  .task-meta{gap:6px;}
+}
+</style>
+</head>
+<body>
+<div id="rpbar"></div>
+
+<header class="header">
+  <div class="logo-mark">
+    <div class="logo-icon">GR</div>
+    <div>
+      <div class="logo-name">Good Results // Task Monitor</div>
+      <div class="logo-sub">Automated Operations</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <a href="/gimmebrain/" class="back-link">← Hub</a>
+  </div>
+</header>
+
+<section class="hero fade-in">
+  <div class="hero-eyebrow">Scheduled Tasks</div>
+  <h1>Task <span>Monitor</span></h1>
+  <p class="hero-sub">Every automated task that runs on the Good Results back end. These run on Netlify servers on a schedule — they do not require anyone to be logged in, any computer to be on, or any manual trigger. When something goes wrong, they post to Slack. When everything is fine, they log quietly and move on.</p>
+</section>
+
+<main class="main">
+
+  <!-- Overview Strip -->
+  <div class="overview-strip fade-in" id="overview-strip">
+    <div class="ov-card"><div class="ov-num dim" id="ov-total">—</div><div class="ov-label">Total Tasks</div></div>
+    <div class="ov-card"><div class="ov-num dim" id="ov-healthy">—</div><div class="ov-label">Healthy</div></div>
+    <div class="ov-card"><div class="ov-num dim" id="ov-issues">—</div><div class="ov-label">Issues</div></div>
+  </div>
+
+  <!-- Task List -->
+  <div class="sec-label fade-in">All Tasks</div>
+  <div class="task-list fade-in" id="task-list">
+    <div class="loading"><div class="loading-spinner"></div>Loading task data...</div>
+  </div>
+
+  <!-- How It Works -->
+  <div class="sec-label fade-in">How This Works</div>
+  <div class="fade-in" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 28px;">
+    <div style="font-size:.92rem;color:var(--cream);line-height:1.72;max-width:700px;">
+      <p style="margin-bottom:14px;">Each task is a serverless function deployed on Netlify with a cron schedule attached to it. Netlify runs the function automatically at the scheduled time, every day or every week, regardless of whether anyone is logged in or any computer is turned on.</p>
+      <p style="margin-bottom:14px;">When a task runs, it does its job (check KBs, pull leaderboard data, scan for deal deadlines), logs the result to this page, and posts to Slack if there is anything the team needs to see. If a task fails, it posts an error alert to Slack and tags Gayden and Joe.</p>
+      <p>To add a new scheduled task, create a new Netlify function, add a schedule entry in <span style="color:var(--orange);font-weight:600;">netlify.toml</span>, and register it in <span style="color:var(--orange);font-weight:600;">task-log.json</span>. It deploys automatically with the next GitHub push.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-brand">GOOD RESULTS</div>
+  <div class="footer-info">Internal Use Only</div>
+</footer>
+
+<script>
+// Scroll bar
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  if (h > 0) document.getElementById('rpbar').style.width = (window.scrollY / h * 100) + '%';
+}, {passive: true});
+
+// Fade-in
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// Time formatting
+function timeAgo(iso) {
+  if (!iso) return 'Never';
+  const diff = Date.now() - new Date(iso).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return 'Just now';
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + 'h ago';
+  const days = Math.floor(hrs / 24);
+  if (days === 1) return 'Yesterday';
+  if (days < 7) return days + 'd ago';
+  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function formatTime(iso) {
+  if (!iso) return '';
+  return new Date(iso).toLocaleString('en-US', {
+    month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true
+  });
+}
+
+// Load and render
+async function loadTasks() {
+  const container = document.getElementById('task-list');
+  try {
+    const res = await fetch('/.netlify/functions/task-status');
+    const data = await res.json();
+    const tasks = data.tasks || {};
+    const taskKeys = Object.keys(tasks);
+
+    if (taskKeys.length === 0) {
+      container.innerHTML = '<div class="no-runs">No scheduled tasks configured yet.</div>';
+      return;
+    }
+
+    // Overview stats
+    let healthy = 0, issues = 0;
+    taskKeys.forEach(key => {
+      const t = tasks[key];
+      const lastRun = t.runs && t.runs[0];
+      if (!lastRun) return; // not run yet, don't count
+      if (lastRun.status === 'success') healthy++;
+      else issues++;
+    });
+
+    document.getElementById('ov-total').textContent = taskKeys.length;
+    document.getElementById('ov-total').className = 'ov-num orange';
+
+    document.getElementById('ov-healthy').textContent = healthy;
+    document.getElementById('ov-healthy').className = 'ov-num ' + (healthy > 0 ? 'green' : 'dim');
+
+    document.getElementById('ov-issues').textContent = issues;
+    document.getElementById('ov-issues').className = 'ov-num ' + (issues > 0 ? 'red' : 'green');
+
+    // Render task cards
+    let html = '';
+    taskKeys.forEach(key => {
+      const t = tasks[key];
+      const lastRun = t.runs && t.runs[0];
+      const status = lastRun ? lastRun.status : 'pending';
+      const dotClass = status === 'success' ? 'dot-green' : status === 'error' ? 'dot-red' : 'dot-gray';
+      const statusTag = status === 'success'
+        ? '<span class="task-tag tag-status">Last Run: OK</span>'
+        : status === 'error'
+        ? '<span class="task-tag tag-error">Last Run: Error</span>'
+        : '<span class="task-tag tag-pending">Not Run Yet</span>';
+
+      const lastRunTime = lastRun ? `<span class="task-tag tag-pending">${timeAgo(lastRun.timestamp)}</span>` : '';
+
+      // Run history rows
+      let historyHtml = '';
+      if (t.runs && t.runs.length > 0) {
+        historyHtml = t.runs.slice(0, 15).map(r => `
+          <div class="run-row">
+            <div class="run-status ${r.status === 'success' ? 'run-ok' : 'run-err'}"></div>
+            <div class="run-details">${r.details || 'No details'}</div>
+            <div class="run-time">${formatTime(r.timestamp)}</div>
+          </div>
+        `).join('');
+      } else {
+        historyHtml = '<div class="no-runs">This task has not run yet. It will execute on its next scheduled time and results will appear here.</div>';
+      }
+
+      html += `
+        <div class="task-card" onclick="this.classList.toggle('open')">
+          <div class="task-header">
+            <div class="task-status-dot ${dotClass}"></div>
+            <div class="task-info">
+              <div class="task-name">${t.name || key}</div>
+              <div class="task-desc">${t.description || ''}</div>
+              <div class="task-meta">
+                <span class="task-tag tag-schedule">${t.schedule || t.cron || 'No schedule'}</span>
+                ${t.slackChannel ? `<span class="task-tag tag-slack">→ ${t.slackChannel}</span>` : ''}
+                ${statusTag}
+                ${lastRunTime}
+              </div>
+            </div>
+            <div class="task-toggle"><span class="toggle-arrow">▼</span></div>
+          </div>
+          <div class="task-history">
+            <div class="history-content">
+              <div class="history-title">Run History</div>
+              ${historyHtml}
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  } catch (e) {
+    container.innerHTML = '<div class="no-runs">Could not load task data. The task-status function may not be deployed yet.</div>';
+  }
+}
+
+loadTasks();
+</script>
+</body>
+</html>

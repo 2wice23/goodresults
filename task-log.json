@@ -1,0 +1,28 @@
+{
+  "tasks": {
+    "kb-health-check": {
+      "name": "KB Health Check",
+      "schedule": "Daily at 9:00 AM PT",
+      "cron": "0 16 * * *",
+      "description": "Verifies all 4 knowledge bases (modules-kb, analyzer-kb, chloe-kb, sms-kb) are accessible on GitHub and have content. Posts to Slack if any KB is missing or empty.",
+      "slackChannel": "#the-group-chat",
+      "runs": []
+    },
+    "leaderboard-digest": {
+      "name": "Weekly Leaderboard Digest",
+      "schedule": "Every Monday at 8:00 AM PT",
+      "cron": "0 15 * * 1",
+      "description": "Pulls Academy leaderboard data, calculates weekly progress changes, and posts a team training summary to Slack. Shows who completed modules, who improved scores, and who needs to catch up.",
+      "slackChannel": "#the-group-chat",
+      "runs": []
+    },
+    "deal-deadline-check": {
+      "name": "Deal Deadline Alert",
+      "schedule": "Daily at 7:30 AM PT",
+      "cron": "30 14 * * *",
+      "description": "Checks all active deals in Close CRM for upcoming deadlines — EMD due dates, DD expiration, and closing dates within the next 48 hours. Posts alerts to Slack so nothing gets missed.",
+      "slackChannel": "#the-group-chat",
+      "runs": []
+    }
+  }
+}

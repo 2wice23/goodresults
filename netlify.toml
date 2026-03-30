@@ -1,2 +1,13 @@
 [functions]
   directory = "netlify/functions"
+
+# ── Scheduled Functions ──
+# Times are UTC. PT = UTC - 7 (PDT) or UTC - 8 (PST)
+
+[functions."kb-health-check"]
+  schedule = "0 16 * * *"
+  # 9:00 AM PT — checks all 4 KBs on GitHub, posts to Slack if any are broken
+
+[functions."leaderboard-digest"]
+  schedule = "0 15 * * 1"
+  # 8:00 AM PT every Monday — posts team training progress to Slack
