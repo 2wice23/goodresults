@@ -1,5 +1,16 @@
 {
   "positive": [
+    "[Franklin Ladaga — WARM FOLLOW-UP — Score 82/100]: Strong opener referencing prior meeting",
+    "[Franklin Ladaga — WARM FOLLOW-UP — Score 82/100]: Complete buy box delivery with all elements",
+    "[Franklin Ladaga — WARM FOLLOW-UP — Score 82/100]: Excellent conversation flow that let Dana share extensively",
+    "[Franklin Ladaga — WARM FOLLOW-UP — Score 82/100]: Genuine interest in her business model",
+    "[Franklin Ladaga — WARM FOLLOW-UP — Score 82/100]: Specific follow-up timeline set",
+    "[Franklin Ladaga — WARM FOLLOW-UP — Realtor responded positively to]: Volunteered potential condo property unprompted",
+    "[Franklin Ladaga — WARM FOLLOW-UP — Realtor responded positively to]: Shared extensive details about her 7-property rental portfolio",
+    "[Franklin Ladaga — WARM FOLLOW-UP — Realtor responded positively to]: Asked qualifying questions about cash vs terms",
+    "[Franklin Ladaga — WARM FOLLOW-UP — Realtor responded positively to]: Discussed challenges with terms deals showing industry knowledge",
+    "[Franklin Ladaga — WARM FOLLOW-UP — Realtor responded positively to]: Shared personal travel plans and movie recommendations",
+    "[Franklin Ladaga — WARM FOLLOW-UP — Realtor responded positively to]: Agreed to follow-up schedule willingly",
     "[Dan VanMatre — WARM FOLLOW-UP — Realtor responded positively to]: Asked 'You have any buy box?' showing immediate professional interest",
     "[Dan VanMatre — WARM FOLLOW-UP — Realtor responded positively to]: Revealed 'I'm an investment agent' indicating this is his specialty",
     "[Dan VanMatre — WARM FOLLOW-UP — Realtor responded positively to]: Requested buy box via text to save Dan's number",
@@ -48,20 +59,11 @@
     "[Anthony Cruz — DEAL REJECTION — Realtor responded positively to]: Agreed to one month follow-up willingly",
     "[Anthony Cruz — DEAL REJECTION — Realtor responded positively to]: Said 'that'll be good' when asked about future contact",
     "[Anthony Cruz — WARM FOLLOW-UP — Grade B+]: Complete buy box delivery with all key elements",
-    "[Anthony Cruz — WARM FOLLOW-UP — Grade B+]: Strong positioning as cash buyer with track record",
-    "[Anthony Cruz — WARM FOLLOW-UP — Grade B+]: Let realtor drive conversation naturally",
-    "[Anthony Cruz — WARM FOLLOW-UP — Grade B+]: Flexible on pricing when probed",
-    "[Anthony Cruz — WARM FOLLOW-UP — Grade B+]: Clear follow-up timeline set",
-    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Asked about his experience and lenders showing genuine interest",
-    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Said 'that's freaking awesome' about cash capability",
-    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Requested his email to save in her system",
-    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Mentioned keeping investors in her back pocket for when properties come up",
-    "[Anthony Cruz — WARM FOLLOW-UP — Grade B+]: Complete buy box delivery with all elements",
-    "[Anthony Cruz — WARM FOLLOW-UP — Grade B+]: Strong credibility with 60 deals per year statistic",
-    "[Anthony Cruz — WARM FOLLOW-UP — Grade B+]: Set specific follow-up timeline",
-    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Al immediately asked 'what are you looking for?' showing genuine interest"
+    "[Anthony Cruz — WARM FOLLOW-UP — Grade B+]: Strong positioning as cash buyer with track record"
   ],
   "negative": [
+    "[Franklin Ladaga — WARM FOLLOW-UP]: Brief initial response that she doesn't currently have anything",
+    "[Franklin Ladaga — WARM FOLLOW-UP]: Had to reject his interest due to property type mismatch",
     "[Dan VanMatre — WARM FOLLOW-UP]: Initial confusion about how Dan got his contact",
     "[Dan VanMatre — WARM FOLLOW-UP]: Didn't remember the Friday text message",
     "[Dan VanMatre — WARM FOLLOW-UP]: Brief guard up asking 'Who give you my contact?'",
@@ -119,16 +121,9 @@
     "[Gayden Rosales — NEGOTIATION]: Mild pushback on zero option money as unusual practice",
     "[Gayden Rosales — DEAL DISCUSSION]: Brief confusion about whether the current listing fits his buy-and-hold vs fix-and-flip criteria",
     "[Gayden Rosales — WARM FOLLOW-UP]: Initially misheard Gayden's name despite prior relationship",
-    "[Dan VanMatre — RE-ENGAGEMENT]: Initial confusion about who he was and concern it might be a scam",
-    "[Dan VanMatre — RE-ENGAGEMENT]: Cautious at the beginning due to not remembering previous contact",
-    "[Gayden Rosales — OTHER]: Called the title officer 'poop ball' and 'goofball' when she couldn't provide legal advice"
+    "[Dan VanMatre — RE-ENGAGEMENT]: Initial confusion about who he was and concern it might be a scam"
   ],
   "reknowledge": [
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Dana Caldwell operates 7 rental properties including 4 Airbnbs, 1 corporate rental, 1 state group home, and 1 long-term tenant",
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Her Airbnb on 11th Street in Sparks performs well due to proximity to concert venues and Nugget casino",
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Hawthorne NV market has strong Airbnb demand due to mining activity and low property prices",
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Dana will be out of office April 10-20 but plans to actively farm after April 20",
-    "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Terms deals are challenging for many agents due to client confusion about structure and success rates",
     "[RE Knowledge — Dan VanMatre — 03/30/2026]: Dulce Pacheco works Baytown area and has FSBO prospects",
     "[RE Knowledge — Dan VanMatre — 03/30/2026]: She has meetings scheduled with three families doing for-sale-by-owner",
     "[RE Knowledge — Dan VanMatre — 03/30/2026]: She's willing to actively look for investment properties during client meetings",
@@ -203,6 +198,11 @@
     "[Dan VanMatre — COLD OPEN — Grade A]: [Dan VanMatre — COLD OPEN — Grade A]: Set specific follow-up timeline",
     "[Dan VanMatre — COLD OPEN — Grade A]: [Dan VanMatre — COLD OPEN — Grade A]: Showed genuine interest in multiple deal types",
     "[Dan VanMatre — COLD OPEN — Grade A]: [Dan VanMatre — COLD OPEN — Realtor responded positively to]: Asked 'what is that what you're looking for' showing genuine interest",
-    "[Dan VanMatre — COLD OPEN — Grade A]: [Dan VanMatre — COLD OPEN — Realtor responded positively to]: Volunteered fourplex properties without being asked"
+    "[Dan VanMatre — COLD OPEN — Grade A]: [Dan VanMatre — COLD OPEN — Realtor responded positively to]: Volunteered fourplex properties without being asked",
+    "[Dan VanMatre — COLD OPEN — Grade A]: [Dan VanMatre — COLD OPEN — Realtor responded positively to]: Provided specific addresses and detailed property conditions",
+    "[Dan VanMatre — COLD OPEN — Grade A]: [Dan VanMatre — COLD OPEN — Realtor responded positively to]: Asked about Houston deals and immediately offered a property",
+    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: Enthusiastic acceptance of partnership proposal",
+    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: Clear process explanation for deal evaluation",
+    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: [Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Grade B+]: Strong positioning with reputation and resources"
   ]
 }
