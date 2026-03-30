@@ -615,13 +615,18 @@ async function saveDeal(btn) {
   card.querySelectorAll('[data-field]').forEach(el => {
     const key = el.dataset.field;
     let val = el.value;
-    // Convert numeric fields
-    if (['askingPrice','arv','estRepairs','beds','baths','sqft','yearBuilt'].includes(key)) {
-      const num = parseFloat(val.replace(/[,$]/g, ''));
+    // Convert numeric fields (strip $ and commas, preserve decimals)
+    if (['askingPrice','arv','estRepairs','beds','baths','sqft','yearBuilt','wholesalePrice','repairsPerSqft','ddDays','emdDays'].includes(key)) {
+      const num = parseFloat(String(val).replace(/[$,]/g, ''));
       val = isNaN(num) ? '' : num;
     }
     deal[key] = val;
   });
+
+  // Keep field name aliases in sync so both generator and dashboard can read the data
+  if (deal.askingPrice != null) deal.wholesalePrice = deal.askingPrice;
+  if (deal.wholesalePrice != null && !deal.askingPrice) deal.askingPrice = deal.wholesalePrice;
+  if (deal.estRepairs != null) deal.repairsPerSqft = deal.estRepairs;
 
   // Build clean JSON (strip internal fields)
   const cleanDeal = {};
