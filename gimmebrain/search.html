@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KB Search — Good Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0D0F14;--surface:#11141A;--surface2:#161B24;--surface3:#0A0C10;
+  --white:#F0F4FF;--cream:#C8D4E4;--muted:#8A95A8;--dim:#555A66;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.04);
+  --orange:#FF5C1A;--orange-glow:rgba(255,92,26,0.12);--orange-border:rgba(255,92,26,0.25);
+  --green:#22C55E;--green-bg:rgba(34,197,94,0.08);--green-border:rgba(34,197,94,0.25);
+  --red:#EF4444;--gold:#F59E0B;--blue:#60A5FA;
+  --radius:8px;--radius-sm:5px;--radius-lg:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
+
+/* Background texture */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;background:
+  radial-gradient(ellipse 80% 45% at 50% -10%, rgba(255,92,26,0.07) 0%, transparent 55%),
+  repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px),
+  repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px);
+  z-index:0;}
+body>*{position:relative;z-index:1;}
+
+/* ─── HEADER ─── */
+.header{
+  padding:14px 44px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(13,15,20,.97);backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:100;
+}
+.logo-mark{display:flex;align-items:center;gap:10px;}
+.logo-icon{
+  width:30px;height:30px;background:var(--orange-glow);
+  border:1px solid var(--orange-border);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;font-weight:900;color:var(--orange);
+}
+.logo-name{font-size:.8rem;font-weight:800;color:var(--white);letter-spacing:.04em;}
+.logo-sub{font-size:.58rem;color:var(--dim);font-weight:500;}
+.header-right{display:flex;align-items:center;gap:16px;}
+.back-link{font-size:.78rem;color:var(--muted);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:5px;}
+.back-link:hover{color:var(--orange);}
+
+/* ─── MAIN ─── */
+.main{max-width:820px;margin:0 auto;padding:52px 44px 100px;}
+
+/* ─── BRAINS BAR ─── */
+.brains-bar{display:flex;justify-content:center;gap:16px;margin-bottom:32px;flex-wrap:wrap;}
+.brain-chip{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:20px;
+  background:var(--surface);border:1px solid var(--border);
+  font-size:.7rem;font-weight:600;color:var(--cream);
+}
+.brain-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+
+/* ─── SEARCH HERO ─── */
+.search-hero{text-align:center;margin-bottom:20px;}
+.search-hero h1{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;line-height:1.15;margin-bottom:8px;letter-spacing:-.02em;}
+.search-hero h1 span{color:var(--orange);}
+.search-hero p{font-size:.9rem;color:var(--muted);max-width:500px;margin:0 auto;line-height:1.7;}
+
+/* ─── SEARCH BOX ─── */
+.search-wrap{
+  position:relative;margin-bottom:28px;
+}
+.search-input{
+  width:100%;padding:16px 52px 16px 20px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);color:var(--white);
+  font-family:'Inter',sans-serif;font-size:1rem;font-weight:500;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.search-input::placeholder{color:var(--dim);}
+.search-input:focus{border-color:var(--orange-border);box-shadow:0 0 0 3px var(--orange-glow);}
+.search-btn{
+  position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  background:var(--orange);border:none;border-radius:var(--radius-sm);
+  width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .2s;font-size:1.1rem;
+}
+.search-btn:hover{background:#e54e10;}
+.search-btn svg{width:18px;height:18px;stroke:white;stroke-width:2.5;fill:none;}
+
+/* ─── QUICK TAGS ─── */
+.quick-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:36px;}
+.qtag{
+  padding:5px 14px;border-radius:20px;font-size:.72rem;font-weight:600;
+  background:var(--surface2);border:1px solid var(--border);
+  color:var(--muted);cursor:pointer;transition:all .18s;white-space:nowrap;
+}
+.qtag:hover{border-color:var(--orange-border);color:var(--orange);background:var(--orange-glow);}
+
+/* ─── STATUS ─── */
+.status{text-align:center;padding:32px 0;color:var(--dim);font-size:.88rem;}
+.status.loading::before{content:'';display:inline-block;width:16px;height:16px;border:2px solid var(--dim);border-top-color:var(--orange);border-radius:50%;animation:spin .6s linear infinite;margin-right:10px;vertical-align:middle;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ─── RESULTS ─── */
+.results-meta{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:14px;}
+.results-meta::after{content:'';flex:1;height:1px;background:var(--border);}
+
+.result-card{
+  background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--border);
+  border-radius:var(--radius);padding:20px 24px;margin-bottom:10px;
+  transition:border-color .18s,background .18s;cursor:default;
+}
+.result-card:hover{background:var(--surface2);}
+.result-top{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
+.result-heading{font-size:.92rem;font-weight:700;color:var(--white);}
+.result-brain{
+  font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:2px 8px;border-radius:2px;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.result-breadcrumb{
+  font-size:.68rem;color:var(--dim);font-weight:500;margin-bottom:10px;
+}
+.result-snippet{
+  font-size:.85rem;color:var(--cream);line-height:1.75;
+  overflow:hidden;
+}
+.result-snippet mark{
+  background:var(--orange-glow);color:var(--orange);
+  border-radius:2px;padding:0 3px;font-weight:600;
+}
+
+/* ─── QUESTION BOX ─── */
+.question-box{
+  margin-top:48px;padding:28px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+}
+.question-box h3{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:4px;}
+.question-box p{font-size:.82rem;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+.question-box textarea{
+  width:100%;min-height:90px;padding:14px;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:var(--radius-sm);color:var(--white);
+  font-family:'Inter',sans-serif;font-size:.88rem;line-height:1.6;
+  resize:vertical;outline:none;transition:border-color .2s;
+}
+.question-box textarea::placeholder{color:var(--dim);}
+.question-box textarea:focus{border-color:var(--orange-border);}
+.question-submit{
+  margin-top:10px;padding:10px 24px;
+  background:var(--orange);border:none;border-radius:var(--radius-sm);
+  color:white;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:700;
+  cursor:pointer;transition:background .2s;
+}
+.question-submit:hover{background:#e54e10;}
+.question-submit:disabled{opacity:.5;cursor:default;}
+.question-success{
+  margin-top:10px;font-size:.82rem;color:var(--green);font-weight:600;
+  display:none;
+}
+
+/* ─── FOOTER ─── */
+.footer{
+  max-width:820px;margin:0 auto;padding:0 44px 52px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--border);padding-top:22px;
+}
+.ft{font-size:.62rem;color:var(--dim);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:640px){
+  .header{padding:12px 20px;}
+  .main{padding:32px 20px 80px;}
+  .search-hero h1{font-size:1.5rem;}
+  .quick-tags{gap:4px;}
+  .brains-bar{gap:8px;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo-mark">
+    <div class="logo-icon">GR</div>
+    <div>
+      <div class="logo-name">Good Results // KB Search</div>
+      <div class="logo-sub">All Knowledge Bases</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <a href="/gimmebrain/" class="back-link">&larr; Hub</a>
+    <a href="/gimmebrain/academy" class="back-link">Academy</a>
+  </div>
+</header>
+
+<main class="main">
+
+  <div class="search-hero">
+    <h1>Search <span>All the Brains</span></h1>
+    <p>One search across every Good Results knowledge base — Academy modules, call analyzer playbook, Chloe voice scripts, and SMS cadences.</p>
+  </div>
+
+  <div class="brains-bar">
+    <div class="brain-chip"><div class="brain-dot" style="background:#FF5C1A;box-shadow:0 0 6px rgba(255,92,26,.5);"></div>Academy (12 Modules)</div>
+    <div class="brain-chip"><div class="brain-dot" style="background:#22C55E;box-shadow:0 0 6px rgba(34,197,94,.5);"></div>Call Analyzer</div>
+    <div class="brain-chip"><div class="brain-dot" style="background:#60A5FA;box-shadow:0 0 6px rgba(96,165,250,.5);"></div>Chloe (Voice)</div>
+    <div class="brain-chip"><div class="brain-dot" style="background:#F59E0B;box-shadow:0 0 6px rgba(245,158,11,.5);"></div>SMS Playbook</div>
+  </div>
+
+  <div class="search-wrap">
+    <input type="text" class="search-input" id="q" placeholder="Search all knowledge bases..." autocomplete="off" autofocus>
+    <button class="search-btn" id="searchBtn" title="Search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    </button>
+  </div>
+
+  <div class="quick-tags" id="quickTags">
+    <span class="qtag">buy box</span>
+    <span class="qtag">earnest money</span>
+    <span class="qtag">realtor voicemail</span>
+    <span class="qtag">objection handling</span>
+    <span class="qtag">SMS cadence</span>
+    <span class="qtag">ARV comps</span>
+    <span class="qtag">escrow</span>
+    <span class="qtag">call scoring</span>
+    <span class="qtag">forbidden phrases</span>
+    <span class="qtag">due diligence</span>
+    <span class="qtag">foreclosure</span>
+    <span class="qtag">Chloe transfer</span>
+  </div>
+
+  <div id="output"></div>
+
+  <div class="question-box">
+    <h3>Can't find the answer?</h3>
+    <p>Drop your question below and it goes straight to Joe and Gayden in Slack. If you searched for something, we'll include what you searched for so they have context.</p>
+    <textarea id="questionInput" placeholder="Type your question here..."></textarea>
+    <button class="question-submit" id="questionBtn">Send to Slack</button>
+    <div class="question-success" id="questionSuccess">Sent! Joe and Gayden will see it in #questions-and-answers.</div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <span class="ft">Good Results Home Buyers — Internal Tool</span>
+  <span class="ft">Searching 4 KBs live from GitHub</span>
+</footer>
+
+<script>
+const q = document.getElementById('q');
+const output = document.getElementById('output');
+const searchBtn = document.getElementById('searchBtn');
+let debounceTimer = null;
+
+// Quick tag click
+document.getElementById('quickTags').addEventListener('click', e => {
+  if (e.target.classList.contains('qtag')) {
+    q.value = e.target.textContent;
+    doSearch();
+  }
+});
+
+// Enter key
+q.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+
+// Button click
+searchBtn.addEventListener('click', () => doSearch());
+
+// Live search after 400ms pause
+q.addEventListener('input', () => {
+  clearTimeout(debounceTimer);
+  if (q.value.trim().length >= 2) {
+    debounceTimer = setTimeout(doSearch, 400);
+  } else {
+    output.innerHTML = '';
+  }
+});
+
+async function doSearch() {
+  const query = q.value.trim();
+  if (query.length < 2) return;
+
+  output.innerHTML = '<div class="status loading">Searching all knowledge bases...</div>';
+
+  try {
+    const resp = await fetch('/.netlify/functions/kb-search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query })
+    });
+    const data = await resp.json();
+
+    if (!resp.ok) throw new Error(data.error || 'Search failed');
+
+    if (data.results.length === 0) {
+      output.innerHTML = '<div class="status">No results found. Try different keywords or check your spelling.</div>';
+      return;
+    }
+
+    // Highlight matching terms in snippets
+    const terms = query.toLowerCase().split(/\s+/).filter(t => t.length > 1);
+    const escapeRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const highlightRe = new RegExp('(' + terms.map(escapeRe).join('|') + ')', 'gi');
+
+    let html = `<div class="results-meta">${data.total} result${data.total === 1 ? '' : 's'} for "${esc(query)}"</div>`;
+
+    for (const r of data.results) {
+      const highlighted = esc(r.snippet).replace(highlightRe, '<mark>$1</mark>');
+      const brainColor = r.brainColor || '#FF5C1A';
+      // Generate faded bg from the brain color
+      const bgColor = brainColor + '12';
+      const borderColor = brainColor + '40';
+
+      html += `
+        <div class="result-card" style="border-left-color:${brainColor};">
+          <div class="result-top">
+            <span class="result-heading">${esc(r.heading)}</span>
+            <span class="result-brain" style="color:${brainColor};border:1px solid ${borderColor};background:${bgColor};">
+              ${r.brainIcon || ''} ${esc(r.brain)}
+            </span>
+          </div>
+          ${r.breadcrumb ? `<div class="result-breadcrumb">${esc(r.breadcrumb)}</div>` : ''}
+          <div class="result-snippet">${highlighted}</div>
+        </div>`;
+    }
+
+    output.innerHTML = html;
+  } catch (err) {
+    output.innerHTML = `<div class="status" style="color:var(--red);">Error: ${esc(err.message)}</div>`;
+  }
+}
+
+// ── Question submission ──
+const questionInput = document.getElementById('questionInput');
+const questionBtn = document.getElementById('questionBtn');
+const questionSuccess = document.getElementById('questionSuccess');
+
+questionBtn.addEventListener('click', async () => {
+  const question = questionInput.value.trim();
+  if (!question) return;
+
+  questionBtn.disabled = true;
+  questionBtn.textContent = 'Sending...';
+  questionSuccess.style.display = 'none';
+
+  try {
+    const resp = await fetch('/.netlify/functions/kb-search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'question',
+        question,
+        searchedFor: q.value.trim(),
+        agent: sessionStorage.getItem('gr_name') || sessionStorage.getItem('gr_agent') || 'Unknown',
+        email: sessionStorage.getItem('gr_agent') || ''
+      })
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Failed to send');
+
+    questionInput.value = '';
+    questionSuccess.style.display = 'block';
+    setTimeout(() => { questionSuccess.style.display = 'none'; }, 6000);
+  } catch (err) {
+    alert('Failed to send question: ' + err.message);
+  } finally {
+    questionBtn.disabled = false;
+    questionBtn.textContent = 'Send to Slack';
+  }
+});
+
+function esc(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+</script>
+</body>
+</html>
