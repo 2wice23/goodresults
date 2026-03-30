@@ -283,20 +283,23 @@ async function getDailyStats(token) {
   monday.setDate(now.getDate() - ((dayOfWeek + 6) % 7));
   const mondayStr = monday.toISOString().slice(0, 10);
 
-  // Count today's calls per agent
+  // Count today's and week's calls per agent
   const todayCounts = {};
+  const todayScores = {};
   const weekCounts = {};
   const weekScores = {};
 
   allReports.forEach(r => {
     const rDate = (r.timestamp || r.call_date || '').slice(0, 10);
     const agent = r.agent || 'Unknown';
+    const score = parseFloat(r.score) || 0;
     if (rDate === todayStr) {
       todayCounts[agent] = (todayCounts[agent] || 0) + 1;
+      if (!todayScores[agent]) todayScores[agent] = [];
+      todayScores[agent].push(score);
     }
     if (rDate >= mondayStr && rDate <= todayStr) {
       weekCounts[agent] = (weekCounts[agent] || 0) + 1;
-      const score = parseFloat(r.score) || 0;
       if (!weekScores[agent]) weekScores[agent] = [];
       weekScores[agent].push(score);
     }
@@ -310,11 +313,14 @@ async function getDailyStats(token) {
   ])];
 
   const stats = agents.map(name => {
-    const scores = weekScores[name] || [];
-    const weekAvg = scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : null;
+    const tScores = todayScores[name] || [];
+    const wScores = weekScores[name] || [];
+    const todayAvg = tScores.length > 0 ? Math.round(tScores.reduce((a, b) => a + b, 0) / tScores.length) : null;
+    const weekAvg = wScores.length > 0 ? Math.round(wScores.reduce((a, b) => a + b, 0) / wScores.length) : null;
     return {
       agent: name,
       today_calls: todayCounts[name] || 0,
+      today_avg: todayAvg,
       week_calls: weekCounts[name] || 0,
       week_avg_score: weekAvg,
       all_time_avg: (leaderboard.find(a => a.agent_name === name) || {}).avg || null
