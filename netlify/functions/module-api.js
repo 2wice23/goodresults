@@ -105,14 +105,83 @@ async function saveScore(token, body, slackWebhook) {
   scores.push(record);
   await ghWrite(token, filePath, scores, sha, `Module ${record.module} score: ${record.agent} ${record.scorePct}%`);
 
-  // Brief Slack ping — one line, no data dump
-  const emoji = record.scorePct === 100 ? ':100:' : record.scorePct >= 80 ? ':fire:' : record.scorePct >= 60 ? ':dart:' : ':muscle:';
-  const mastered = (record.correctIndices || []).length;
-  let ping = `${emoji} *${record.agent}* — Module ${record.module} — ${record.scorePct}%`;
-  if (record.poolSize > 0 && mastered >= record.poolSize) {
-    ping += ' :trophy: *MODULE MASTERED*';
+  // ── Build Slack message with leaderboard trash talk ──
+
+  // Score commentary
+  const scoreComments = [
+    [100, 'PERFECT SCORE 🧠 Absolutely disgusting dominance. Everyone else should be worried.'],
+    [90, 'Strong. Very strong. That\'s the kind of energy this team needs.'],
+    [80, 'Solid work. Not perfect, but definitely respectable.'],
+    [70, 'Ehh... it\'s passing. Barely. Maybe crack open the module one more time.'],
+    [60, 'That\'s... not great. You might wanna re-read that module, just saying.'],
+    [0, 'Yikes. 😬 Did you even read the module or just start clicking randomly?']
+  ];
+  let commentary = '';
+  for (const [threshold, msg] of scoreComments) {
+    if (record.scorePct >= threshold) { commentary = msg; break; }
   }
-  await pingSlack(slackWebhook, ping);
+
+  // Find last place agent from all scores
+  const agentStats = {};
+  for (const s of scores) {
+    const name = (s.agent || '').trim();
+    if (!name) continue;
+    const key = name.toLowerCase();
+    if (!agentStats[key]) agentStats[key] = { name, modules: {} };
+    const mod = s.module;
+    if (!agentStats[key].modules[mod]) agentStats[key].modules[mod] = { bestScore: 0 };
+    if (s.scorePct > agentStats[key].modules[mod].bestScore) {
+      agentStats[key].modules[mod].bestScore = s.scorePct;
+    }
+  }
+
+  let lastPlace = null, lowestAvg = Infinity, worstScore = Infinity, worstModule = '';
+  for (const [key, a] of Object.entries(agentStats)) {
+    const mods = Object.entries(a.modules);
+    if (!mods.length) continue;
+    const avg = mods.reduce((sum, [_, m]) => sum + m.bestScore, 0) / mods.length;
+    if (avg < lowestAvg) {
+      lowestAvg = avg;
+      lastPlace = a.name;
+      worstScore = Infinity;
+      worstModule = '';
+      for (const [n, m] of mods) {
+        if (m.bestScore < worstScore) { worstScore = m.bestScore; worstModule = n; }
+      }
+    }
+  }
+
+  const roasts = [
+    'When are you gonna step it up? Asking for the whole damn team. 👀',
+    'That score is genuinely embarrassing. I\'d be scared to show my face in the office.',
+    'The leaderboard is BEGGING you to do literally anything.',
+    'At this point even a coin flip would score better. Just saying. 🤯',
+    'Everyone else is getting better. You\'re getting... comfortable? 🛏️',
+    'You know the modules are FREE to re-take right?? Nobody\'s stopping you.',
+    'I\'ve seen better scores from people who accidentally hit submit. 💀',
+    'Your score is so low it\'s basically a rounding error.',
+    'If effort was a scoreboard you wouldn\'t even be on it.',
+    'Bro what the hell is that score. My grandma could do better and she doesn\'t even work here.',
+    'That\'s not a score, that\'s a cry for help. 😭',
+    'You\'re out here making everyone else look like geniuses by comparison.',
+    'At this rate you\'re gonna get bodied by the new hires. Step it up.',
+    'This is the kind of score that makes leadership question their hiring decisions. 💀'
+  ];
+  const roast = roasts[Math.floor(Math.random() * roasts.length)];
+
+  let slackMsg = `<!channel> 🎓 *${record.agent}* just finished *Module ${record.module} — ${record.moduleTitle}*\nScore: ${record.correct}/${record.total} (${record.scorePct}%)\n${commentary}`;
+
+  if (record.scorePct === 100 && (record.correctIndices || []).length >= (record.poolSize || 0) && record.poolSize > 0) {
+    slackMsg += '\n:trophy: *MODULE MASTERED*';
+  }
+
+  if (lastPlace && lastPlace.toLowerCase() !== record.agent.toLowerCase()) {
+    slackMsg += `\n\n📈 Meanwhile... *${lastPlace}* is camping out in LAST PLACE with a ${Math.round(worstScore)}% on Module ${worstModule}. ${roast}`;
+  } else if (lastPlace && lastPlace.toLowerCase() === record.agent.toLowerCase()) {
+    slackMsg += `\n\n📈 Plot twist... *${record.agent}* IS in last place. ${record.scorePct < 70 ? 'And this score ain\'t helping. 💀' : 'But at least they\'re trying to climb out. Respect... barely.'}`;
+  }
+
+  await pingSlack(slackWebhook, slackMsg);
 }
 
 async function saveUpdate(token, body, slackWebhook) {
@@ -197,7 +266,7 @@ exports.handler = async (event) => {
   }
 
   const GITHUB_TOKEN = process.env.GitHubToken;
-  const SLACK_WEBHOOK = process.env.slack_webhook_url || process.env.SLACK_WEBHOOK_URL || process.env.slack_the_group_chat;
+  const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK_URL;
 
   if (!GITHUB_TOKEN) {
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'GitHubToken not configured' }) };
@@ -230,11 +299,6 @@ exports.handler = async (event) => {
 
       if (action === 'moduleUpdate') {
         await saveUpdate(GITHUB_TOKEN, body, SLACK_WEBHOOK);
-        return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
-      }
-
-      if (action === 'notifyScore') {
-        // Legacy no-op — moduleComplete already pings Slack
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
 

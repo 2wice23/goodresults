@@ -742,7 +742,7 @@ function updateScore(){
   quizDone=answered>=total;
 }
 
-function notifySlackScore(agent,modTitle,modNum,pct,correct,total){
+function {
   fetch(APPS_SCRIPT_URL+'?action=gettrainingprogress').then(r=>r.json()).then(agents=>{
     const sc=[[100,'PERFECT SCORE 🧠 Absolutely disgusting dominance.'],[90,'Strong. Very strong. That\'s the energy we need.'],[80,'Solid work. Not perfect, but respectable.'],[70,'It\'s passing. Barely. Maybe re-read the module.'],[60,'Not great. You might wanna re-read it.'],[0,'Yikes. Did you even read the module?']];
     let cmt='';
@@ -767,7 +767,7 @@ function submitScore(){
     const btn=document.getElementById('submit-btn');
     if(btn){btn.textContent='✓ Score Saved!';btn.style.background='#22C55E';btn.disabled=true;}
     masteredIndices=allMastered;
-    notifySlackScore(agent,MODULE_TITLE,MODULE_NUM,pct,correct,total);
+    
     const today=new Date().toDateString();
     const lastDay=localStorage.getItem('gr_streak_day');
     let streak=parseInt(localStorage.getItem('gr_streak')||'0');

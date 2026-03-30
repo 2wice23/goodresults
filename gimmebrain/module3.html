@@ -779,7 +779,7 @@ function updateScore(){
   quizDone = answered >= total;
 }
 
-function notifySlackScore(agent, modTitle, modNum, pct, correct, total){
+function {
   fetch(APPS_SCRIPT_URL + '?action=gettrainingprogress').then(r => r.json()).then(agents => {
     const sc = [[100, 'PERFECT SCORE 🧠 Absolutely disgusting dominance. Everyone else should be worried.'], [90, 'Strong. Very strong. That\'s the kind of energy this team needs.'], [80, 'Solid work. Not perfect, but definitely respectable.'], [70, 'Ehh... it\'s passing. Barely. Maybe crack open the module one more time.'], [60, 'That\'s... not great. You might wanna re-read that module, just saying.'], [0, 'Yikes. 😬 Did you even read the module or just start clicking randomly?']];
     let cmt = '';
@@ -839,7 +839,7 @@ function submitScore(){
       btn.disabled = true;
     }
     masteredIndices = allMastered;
-    notifySlackScore(agent, MODULE_TITLE, MODULE_NUM, pct, correct, total);
+    
     const today = new Date().toDateString();
     const lastDay = localStorage.getItem('gr_streak_day');
     let streak = parseInt(localStorage.getItem('gr_streak') || '0');
