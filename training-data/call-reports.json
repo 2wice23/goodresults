@@ -318,5 +318,25 @@
     "resistance_moments": "",
     "script_moment": "After Marcus said he doesn't have anything right now, Anthony could have asked: 'What areas do you typically work in? I'd love to understand your market better so when you do come across something, you'll know if it fits what we do.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774887483914",
+    "timestamp": "2026-03-30T16:18:03.914Z",
+    "agent": "Dan VanMatre",
+    "realtor": "Alzavier Dixon",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "2m 14s",
+    "call_date": "03/30/2026",
+    "score": 68,
+    "realtor_engagement": 55,
+    "summary": "Dan followed up on a text exchange with Alzavier after she asked who he was. She doesn't typically work with investors but offered to help with listing or buyer services. Dan delivered his buy box and will send information via email.",
+    "what_worked": "Good opener with specific reference to text exchange | Complete buy box delivery with all key elements | Asked follow-up question about frequency",
+    "what_to_tighten": "Could have explored her listing/buyer services offer as potential collaboration | No specific follow-up timeline set beyond email | Missed opportunity to discuss how he could help her business",
+    "language_flags": "",
+    "missed_opportunities": "When she offered listing/buyer services, could have asked about her typical client profile | Could have set a specific follow-up call date rather than just email",
+    "positive_moments": "Said 'I will keep your contact' showing willingness to maintain connection | Offered alternative services: 'if you're looking for an agent to assist with listing or helping with any buyers, I would be willing to assist' | Agreed to receive email information",
+    "resistance_moments": "Immediate 'I don't right now' to investment properties question | 'Not typically. I don't really work on that side' indicating this isn't her focus | Very brief responses throughout suggesting limited engagement with the investment concept",
+    "script_moment": "When she said 'if you're looking for an agent to assist with listing or helping with any buyers, I would be willing to assist,' Dan should have said: 'Actually, that's interesting - I do flip houses so I'll need listing help on the back end. What areas do you typically work in for listings?'",
+    "on_leaderboard": "yes"
   }
 ]
