@@ -184,5 +184,14 @@
     "email": "gayden@goodresults.org",
     "update": "q7 this makes no sense as a question. realtors get paid at close of escrow - they have enevr once worried about when theyre gettign p[aid as long as the deal is closing",
     "status": "pending"
+  },
+  {
+    "timestamp": "2026-03-30T22:46:08.795Z",
+    "module": 10,
+    "moduleTitle": "Investor Vocabulary",
+    "agent": "Joe",
+    "email": "joe@goodresults.org",
+    "update": "Q12 doesn't make sense. If the owner has limited equity, they don't have the authority to seller finance. They can potentially sell it as a subject-to or an assumable loan.",
+    "status": "pending"
   }
 ]
