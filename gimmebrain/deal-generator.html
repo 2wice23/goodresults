@@ -1243,7 +1243,7 @@ document.getElementById('btnPushClose').addEventListener('click', async () => {
     if (extractedDeal.coeDate) setCF('coeDate', extractedDeal.coeDate);
     if (extractedDeal.executedDate) setCF('acceptedDate', extractedDeal.executedDate);
     if (extractedDeal.emdAmount) setCF('emdAmount', extractedDeal.emdAmount);
-    if (extractedDeal.onMarket) setCF('onMarket', extractedDeal.onMarket);
+    // onMarket skipped for now — Close choice field needs valid option mapping
 
     if (extractedDeal.executedDate && extractedDeal.ddDays) {
       const ddEnd = addDaysToDate(extractedDeal.executedDate, extractedDeal.ddDays);
@@ -1334,13 +1334,14 @@ document.getElementById('btnCreateWorkflow').addEventListener('click', async () 
     setLogStep(2, 'active');
     const workflow = await closeAPI('/sequence/', 'POST', {
       name: address + ' - Dispo',
+      timezone: 'America/Los_Angeles',
       steps: [
-        { step_type: 'sms',   delay: 'PT0S',  sms_template_id: TEASER_TMPL },
-        { step_type: 'email', delay: 'PT0S',  email_template_id: emailTmpl.id, threading: 'new_thread' },
-        { step_type: 'sms',   delay: 'PT46M', sms_template_id: linkSmsTmpl.id },
-        { step_type: 'sms',   delay: 'P1D',   sms_template_id: FOLLOWUP_TMPL },
-        { step_type: 'email', delay: 'PT0S',  email_template_id: emailTmpl.id, threading: 'new_thread' },
-        { step_type: 'sms',   delay: 'PT2H',  sms_template_id: NUDGE_TMPL }
+        { step_type: 'sms',   delay: 0,     sms_template_id: TEASER_TMPL },
+        { step_type: 'email', delay: 0,     email_template_id: emailTmpl.id, threading: 'new_thread' },
+        { step_type: 'sms',   delay: 2760,  sms_template_id: linkSmsTmpl.id },
+        { step_type: 'sms',   delay: 86400, sms_template_id: FOLLOWUP_TMPL },
+        { step_type: 'email', delay: 0,     email_template_id: emailTmpl.id, threading: 'new_thread' },
+        { step_type: 'sms',   delay: 7200,  sms_template_id: NUDGE_TMPL }
       ]
     });
     setLogStep(2, 'done', 'Workflow "' + workflow.name + '" created (6-step draft)');
