@@ -518,5 +518,25 @@
     "resistance_moments": "Initial explanation of why her market is difficult for investors (contractor costs, housing challenges) | Mentioned she focuses on vacant land primarily rather than houses",
     "script_moment": "When Laura mentioned the $14k courthouse steps sale, Frank should have said: 'That's exactly the kind of opportunity we look for - do you track those tax sales regularly? We'd love to get notified when you see deals like that coming up.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774905595092",
+    "timestamp": "2026-03-30T21:19:55.092Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Katie Gillespie",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "4m 44s",
+    "call_date": "03/30/2026",
+    "score": 82,
+    "realtor_engagement": 90,
+    "summary": "Franklin followed up with Katie after six months of texting, delivered a complete buy box verbally, and Katie responded very positively by volunteering a specific probate property that fits his criteria perfectly. She proactively asked about his margins and committed to calling the seller today.",
+    "what_worked": "Complete buy box delivery with specific criteria | Professional explanation of ARV formula with concrete example | Katie volunteered a specific property that fits perfectly | Set clear follow-up timeline",
+    "what_to_tighten": "Could have been more specific about the six-month gap in opener | Commission discussion could have been more explicit",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked more details about the probate property - condition, timeline, seller motivation",
+    "positive_moments": "Katie immediately volunteered a probate property worth $450-480k that seller will take $350-360k for | Asked proactive questions about profit margins and deal structure | Said 'I can try to see what I can find' showing commitment to help | Committed to calling the probate seller today | Agreed enthusiastically to next steps",
+    "resistance_moments": "Brief initial response that they don't have anything 'at this moment' but immediately clarified they do get them",
+    "script_moment": "When Katie mentioned the probate property, Frank should have said: 'That sounds really interesting Katie. Can you tell me a bit about the condition of the property and what the timeline looks like for the seller?' This would have gathered more qualifying information while the opportunity was live.",
+    "on_leaderboard": "yes"
   }
 ]
