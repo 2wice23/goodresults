@@ -578,5 +578,25 @@
     "resistance_moments": "Brief initial response that she doesn't currently have anything | Had to reject his interest due to property type mismatch",
     "script_moment": "When Dana mentioned struggling with terms deals, Franklin could have said: 'That's exactly why we try to make our cash offers as clean as possible - no financing contingencies, close in 2-3 weeks. Do you have any agents in your office who work with distressed properties or probate?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774907938758",
+    "timestamp": "2026-03-30T21:58:58.758Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Casey McDermott",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "1m 55s",
+    "call_date": "03/30/2026",
+    "score": 54,
+    "realtor_engagement": 78,
+    "summary": "Franklin followed up with Casey after 6 months, discovering Casey is both an agent and flipper. They agreed to share deals that don't fit each other's criteria and set a 2-week follow-up.",
+    "what_worked": "Good re-engagement opener referencing prior text | Adapted well to learning Casey is also a flipper | Created mutual benefit by offering to share deals | Set specific follow-up timeline | Respectful when learning about family time",
+    "what_to_tighten": "Deliver specific buy box criteria verbally on the call | Ask more qualifying questions about his flip criteria and deal volume | Explore the flipper connection more deeply for potential partnership opportunities",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked what types of deals Casey typically flips to understand overlap | Missed chance to establish what his specific criteria are versus Casey's | Could have asked about Casey's deal volume or current pipeline",
+    "positive_moments": "Casey immediately said 'Yeah, I flip homes myself' when asked about investment deals | Said 'Yeah, yeah, without a doubt' when asked about sharing deals | Provided multiple sourcing methods unprompted | Agreed to text follow-up despite being with family",
+    "resistance_moments": "Initial audio connection issues | Had to explain he was at trampoline park which limited conversation depth",
+    "script_moment": "When Casey said he flips homes, Franklin should have said: 'That's great - what's your typical buy box? We focus on 1960s to early 2000s homes, around 2,000 square feet in subdivision-style neighborhoods. We can close cash in 2-3 weeks on anything that needs work.'",
+    "on_leaderboard": "no"
   }
 ]
