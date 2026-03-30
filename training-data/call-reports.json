@@ -398,5 +398,25 @@
     "resistance_moments": "Brief 'I personally don't' when asked about distressed properties in pipeline | Had to clarify the duplex situation when Anthony seemed confused about the address",
     "script_moment": "When Shannon mentioned her partner has distressed properties but doesn't want to sell because they generate income, Anthony should have said: 'I totally get that - cash flow is king. Sometimes though owners get tired of the management headaches or want to free up capital for other deals. Would it be worth having a quick conversation with him to see if any of his properties might make sense to move?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774899712106",
+    "timestamp": "2026-03-30T19:41:52.106Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Amy Melesky",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "1m 50s",
+    "call_date": "03/30/2026",
+    "score": 79,
+    "realtor_engagement": 85,
+    "summary": "Anthony followed up on Amy's text message to gauge her distressed property flow. Amy confirmed she gets distressed properties every couple months and showed immediate interest in his criteria and contact information.",
+    "what_worked": "Complete buy box delivery with all key elements | Strong credibility with 60-100 deals per year statistic | Let Amy drive questions naturally | Set specific monthly follow-up timeline",
+    "what_to_tighten": "Should state his name clearly at the beginning | Could have asked if she has anything current before moving to follow-up",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about her current pipeline since she was engaged | Didn't explore what makes her distressed properties unique or how she gets them",
+    "positive_moments": "Asked 'Exactly what area are you looking at in Houston?' showing genuine interest | Requested his email address unprompted to save his information | Agreed enthusiastically to monthly follow-up with 'That sounds great'",
+    "resistance_moments": "",
+    "script_moment": "After she said she gets them every couple months, should have asked: 'Do you happen to have anything in your pipeline right now that might fit?' to potentially uncover immediate opportunities.",
+    "on_leaderboard": "yes"
   }
 ]
