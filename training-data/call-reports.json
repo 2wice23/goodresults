@@ -298,5 +298,25 @@
     "resistance_moments": "Initially didn't remember the text exchange | Very brief 'No' responses about distressed properties | Didn't ask follow-up questions about his criteria or business",
     "script_moment": "After she mentioned 'we don't have any distressed property' but offered the 4BR for $430k, Dan should have said: 'That's helpful to know what you're seeing. Do you ever work with other investors, or am I the first one to reach out about distressed properties?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774887421741",
+    "timestamp": "2026-03-30T16:17:01.741Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Marcus",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "1:47",
+    "call_date": "2024-12-17",
+    "score": 72,
+    "realtor_engagement": 78,
+    "summary": "Anthony followed up with Marcus about off-market properties. Marcus had no current inventory but showed interest by asking about budget and location parameters.",
+    "what_worked": "Complete buy box delivery with all key elements | Strong positioning as cash buyer with track record | Let realtor drive conversation naturally | Flexible on pricing when probed | Clear follow-up timeline set",
+    "what_to_tighten": "State name clearly in opener | Could have asked more follow-up questions about his business or market",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked what type of properties Marcus typically works with | Missed chance to explore his market area more deeply",
+    "positive_moments": "Asked 'what are you looking for?' showing genuine interest | Asked about budget unprompted | Asked about location parameters showing he was thinking about inventory | Agreed to one month follow-up willingly",
+    "resistance_moments": "",
+    "script_moment": "After Marcus said he doesn't have anything right now, Anthony could have asked: 'What areas do you typically work in? I'd love to understand your market better so when you do come across something, you'll know if it fits what we do.'",
+    "on_leaderboard": "yes"
   }
 ]
