@@ -22,5 +22,11 @@
     "total_calls": 2,
     "total_score": 165,
     "avg": 83
+  },
+  {
+    "agent_name": "Dan VanMatre",
+    "total_calls": 3,
+    "total_score": 233,
+    "avg": 78
   }
 ]
