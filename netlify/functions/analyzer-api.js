@@ -232,6 +232,64 @@ async function requestAccess(token, body, slackWebhook) {
   return { status: 'sent' };
 }
 
+// ── Daily Stats (for scheduled call-target tracker) ────────
+
+async function getDailyStats(token) {
+  const { data: reports } = await ghRead(token, 'training-data/call-reports.json');
+  const { data: board } = await ghRead(token, 'training-data/leaderboard.json');
+  const allReports = Array.isArray(reports) ? reports : [];
+  const leaderboard = Array.isArray(board) ? board : [];
+
+  // Get current date in Pacific time
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }));
+  const todayStr = now.toISOString().slice(0, 10);
+  const dayOfWeek = now.getDay(); // 0=Sun
+  // Monday of this week
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - ((dayOfWeek + 6) % 7));
+  const mondayStr = monday.toISOString().slice(0, 10);
+
+  // Count today's calls per agent
+  const todayCounts = {};
+  const weekCounts = {};
+  const weekScores = {};
+
+  allReports.forEach(r => {
+    const rDate = (r.timestamp || r.call_date || '').slice(0, 10);
+    const agent = r.agent || 'Unknown';
+    if (rDate === todayStr) {
+      todayCounts[agent] = (todayCounts[agent] || 0) + 1;
+    }
+    if (rDate >= mondayStr && rDate <= todayStr) {
+      weekCounts[agent] = (weekCounts[agent] || 0) + 1;
+      const score = parseFloat(r.score) || 0;
+      if (!weekScores[agent]) weekScores[agent] = [];
+      weekScores[agent].push(score);
+    }
+  });
+
+  // Build per-agent summary
+  const agents = [...new Set([
+    ...Object.keys(todayCounts),
+    ...Object.keys(weekCounts),
+    ...leaderboard.map(a => a.agent_name)
+  ])];
+
+  const stats = agents.map(name => {
+    const scores = weekScores[name] || [];
+    const weekAvg = scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : null;
+    return {
+      agent: name,
+      today_calls: todayCounts[name] || 0,
+      week_calls: weekCounts[name] || 0,
+      week_avg_score: weekAvg,
+      all_time_avg: (leaderboard.find(a => a.agent_name === name) || {}).avg || null
+    };
+  });
+
+  return { date: todayStr, week_start: mondayStr, stats };
+}
+
 // ── Main handler ────────────────────────────────────────────
 
 exports.handler = async (event) => {
@@ -274,6 +332,10 @@ exports.handler = async (event) => {
       if (action === 'addKBBatch') {
         await addKBBatch(GITHUB_TOKEN, params);
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
+      }
+      if (action === 'dailyStats') {
+        const stats = await getDailyStats(GITHUB_TOKEN);
+        return { statusCode: 200, headers, body: JSON.stringify(stats) };
       }
       if (action === 'checkAccess') {
         const result = await checkAccess(GITHUB_TOKEN, params.email);
