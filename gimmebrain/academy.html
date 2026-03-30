@@ -33,7 +33,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;background:
   z-index:0;}
 body>*{position:relative;z-index:1;}
 
-/* ─────────────── HEADER ─────────────── */
+/* ─── HEADER ─── */
 .header{
   padding:14px 44px;border-bottom:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;
@@ -52,15 +52,13 @@ body>*{position:relative;z-index:1;}
 .header-right{display:flex;align-items:center;gap:12px;}
 .back-link{
   font-size:.78rem;color:var(--muted);text-decoration:none;
-  transition:color .2s;display:flex;align-items:center;gap:5px;
-  font-weight:500;
+  transition:color .2s;display:flex;align-items:center;gap:5px;font-weight:500;
 }
 .back-link:hover{color:var(--orange);}
 
-/* ─────────────── HERO ─────────────── */
+/* ─── HERO ─── */
 .hero{
-  padding:52px 44px 40px;
-  border-bottom:1px solid var(--border);
+  padding:48px 44px 36px;
   max-width:1160px;margin:0 auto;
 }
 .hero-eyebrow{
@@ -70,76 +68,84 @@ body>*{position:relative;z-index:1;}
   letter-spacing:.16em;text-transform:uppercase;
   padding:4px 12px;border-radius:3px;margin-bottom:16px;
 }
-.hero h1{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;line-height:1.1;margin-bottom:10px;letter-spacing:-.02em;}
+.hero h1{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;line-height:1.1;margin-bottom:10px;letter-spacing:-.02em;}
 .hero h1 span{color:var(--orange);}
-.hero-sub{font-size:.95rem;color:var(--muted);line-height:1.72;max-width:600px;}
+.hero-sub{font-size:.92rem;color:var(--muted);line-height:1.72;max-width:620px;}
 
-/* ─────────────── MAIN ─────────────── */
-.main{max-width:1160px;margin:0 auto;padding:52px 44px 100px;}
+/* ─── MAIN ─── */
+.main{max-width:1160px;margin:0 auto;padding:0 44px 100px;}
 
 .sec-label{
   display:flex;align-items:center;gap:14px;
   font-size:.62rem;font-weight:800;letter-spacing:.2em;
   text-transform:uppercase;color:var(--muted);
-  margin-bottom:28px;
+  margin-bottom:20px;margin-top:48px;
 }
 .sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
 
-/* ─────────────── MOTIVATION BANNER ─────────────── */
-.motivation-wrap{margin-bottom:28px;}
-.motivation-card{
-  background:var(--surface);border:1px solid var(--orange-border);
-  border-left:3px solid var(--orange);border-radius:var(--radius);
-  padding:18px 22px;display:flex;align-items:center;gap:14px;
+/* ─── QUICK-START STRIP ─── */
+.quickstart{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  margin-top:32px;
 }
-.motivation-icon{font-size:1.4rem;flex-shrink:0;}
-.motivation-text{font-size:.92rem;color:var(--cream);font-weight:500;line-height:1.5;}
-.motivation-text strong{color:var(--white);font-weight:700;}
-.motivation-sub{font-size:.72rem;color:var(--muted);margin-top:3px;}
+.qs-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px 18px;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.qs-num{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:var(--orange-glow);border:1px solid var(--orange-border);
+  color:var(--orange);font-size:.72rem;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+}
+.qs-title{font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:3px;}
+.qs-desc{font-size:.8rem;color:var(--muted);line-height:1.55;}
 
-/* ─────────────── LEADERBOARD ─────────────── */
-.lb-wrap{margin-bottom:56px;}
+/* ─── LEADERBOARD ─── */
+.lb-wrap{margin-top:20px;}
 .lb-board{
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--radius-lg);overflow:hidden;
 }
 .lb-header-row{
-  padding:16px 24px;border-bottom:1px solid var(--border);
-  display:grid;grid-template-columns:52px 1fr 220px 90px;gap:16px;
+  padding:14px 24px;border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:44px 1fr 200px 80px;gap:14px;
   align-items:center;
 }
-.lb-col-label{font-size:.58rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);}
+.lb-col-label{font-size:.56rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);}
 
 .lb-row{
-  display:grid;grid-template-columns:52px 1fr 220px 90px;gap:16px;
-  padding:20px 24px;border-bottom:1px solid var(--border2);align-items:center;
+  display:grid;grid-template-columns:44px 1fr 200px 80px;gap:14px;
+  padding:16px 24px;border-bottom:1px solid var(--border2);align-items:center;
   transition:background .18s;
 }
 .lb-row:last-child{border-bottom:none;}
 .lb-row:hover{background:rgba(255,255,255,.02);}
 .lb-row.is-me{background:rgba(255,92,26,0.04)!important;border-left:2px solid var(--orange);}
+.lb-row.no-scores{opacity:.55;}
+.lb-row.no-scores:hover{opacity:.7;}
 
-/* Rank badge */
+/* Rank */
 .lb-rank{text-align:center;}
-.lb-rank-num{font-size:1.5rem;font-weight:900;line-height:1;}
-.lb-rank-num.gold{color:var(--gold);text-shadow:0 0 20px rgba(245,158,11,.5);}
+.lb-rank-num{font-size:1.3rem;font-weight:900;line-height:1;}
+.lb-rank-num.gold{color:var(--gold);text-shadow:0 0 18px rgba(245,158,11,.45);}
 .lb-rank-num.silver{color:var(--silver);}
 .lb-rank-num.bronze{color:var(--bronze);}
 .lb-rank-num.other{color:var(--dim);}
-.lb-rank-crown{font-size:.75rem;margin-top:1px;display:block;}
+.lb-rank-crown{font-size:.7rem;margin-top:1px;display:block;}
 
-/* Name + bar column */
-.lb-main{}
-.lb-name-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
-.lb-name{font-size:.95rem;font-weight:700;color:var(--white);}
+/* Name + bar */
+.lb-name-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.lb-name{font-size:.9rem;font-weight:700;color:var(--white);}
 .lb-you-tag{
-  font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  font-size:.5rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
   background:var(--orange-glow);border:1px solid var(--orange-border);
-  color:var(--orange);padding:2px 7px;border-radius:2px;
+  color:var(--orange);padding:2px 6px;border-radius:2px;
 }
 .lb-bar-track{
-  height:6px;background:rgba(255,255,255,.05);
-  border-radius:99px;overflow:hidden;margin-bottom:6px;
+  height:5px;background:rgba(255,255,255,.05);
+  border-radius:99px;overflow:hidden;margin-bottom:5px;
 }
 .lb-bar-fill{
   height:100%;border-radius:99px;
@@ -149,14 +155,14 @@ body>*{position:relative;z-index:1;}
 .lb-bar-fill.mid{background:linear-gradient(90deg,#FF5C1A,#FF8A50);}
 .lb-bar-fill.low{background:linear-gradient(90deg,#EF4444,#F87171);}
 .lb-bar-fill.zero{background:var(--dim);}
-.lb-stats-row{font-size:.68rem;color:var(--dim);}
+.lb-stats-row{font-size:.65rem;color:var(--dim);}
 
-/* Modules dots column */
+/* Module dots */
 .lb-dots{display:flex;flex-wrap:wrap;gap:3px;}
 .lb-dot{
-  width:20px;height:20px;border-radius:3px;border:1px solid;
+  width:18px;height:18px;border-radius:3px;border:1px solid;
   display:flex;align-items:center;justify-content:center;
-  font-size:.48rem;font-weight:800;cursor:default;
+  font-size:.44rem;font-weight:800;cursor:default;
   transition:transform .12s;
 }
 .lb-dot:hover{transform:scale(1.15);}
@@ -166,121 +172,116 @@ body>*{position:relative;z-index:1;}
 
 /* Pct column */
 .lb-pct-col{text-align:right;}
-.lb-pct{font-size:1.4rem;font-weight:900;line-height:1;}
+.lb-pct{font-size:1.3rem;font-weight:900;line-height:1;}
 .lb-pct.high{color:var(--green);}
 .lb-pct.mid{color:var(--orange);}
 .lb-pct.low{color:var(--red);}
 .lb-pct.zero{color:var(--dim);}
-.lb-qs{font-size:.62rem;color:var(--dim);margin-top:3px;}
+.lb-qs{font-size:.58rem;color:var(--dim);margin-top:2px;}
 
-/* Empty state */
+/* Empty / Loading */
 .lb-empty{padding:48px 24px;text-align:center;}
 .lb-empty-icon{font-size:2rem;margin-bottom:12px;}
 .lb-empty-title{font-size:1rem;font-weight:700;color:var(--cream);margin-bottom:6px;}
 .lb-empty-sub{font-size:.84rem;color:var(--muted);line-height:1.65;}
 .lb-loading{padding:40px 24px;text-align:center;font-size:.72rem;color:var(--dim);letter-spacing:.06em;}
 
-/* ─────────────── HOW IT WORKS CARDS ─────────────── */
-.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:64px;}
-.how-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:28px 24px;
-  transition:all .2s;
-}
-.how-card:hover{border-color:var(--orange-border);transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 16px rgba(255,92,26,.06);}
-.how-emoji{font-size:2rem;margin-bottom:12px;display:block;}
-.how-title{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:10px;}
-.how-desc{font-size:.88rem;color:var(--muted);line-height:1.65;}
-
-/* ─────────────── MODULE LISTING ─────────────── */
-.module-list{display:flex;flex-direction:column;gap:18px;margin-bottom:64px;}
+/* ─── MODULE LISTING ─── */
+.module-list{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
 .module-item{
   background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:28px;
+  border-radius:var(--radius);padding:22px 24px;
   text-decoration:none;color:inherit;
-  transition:all .2s;display:grid;grid-template-columns:auto 1fr auto;gap:24px;
-  align-items:start;
+  transition:all .2s;display:grid;grid-template-columns:54px 1fr auto;gap:20px;
+  align-items:center;
 }
-.module-item:hover{border-color:var(--orange-border);transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 16px rgba(255,92,26,.06);}
-.mod-num-col{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:60px;}
-.mod-num-big{font-size:2rem;font-weight:900;color:var(--orange);line-height:1;}
-.mod-num-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
-.module-content{flex:1;}
-.module-title{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:-.01em;}
-.module-desc{font-size:.92rem;color:var(--muted);line-height:1.68;}
-.module-link-col{display:flex;align-items:center;gap:6px;min-width:100px;justify-content:flex-end;}
+.module-item:hover{border-color:var(--orange-border);transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.35),0 0 12px rgba(255,92,26,.05);}
+.mod-num-col{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.mod-num-big{font-size:1.6rem;font-weight:900;color:var(--orange);line-height:1;}
+.mod-num-label{font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+.module-title{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:4px;letter-spacing:-.01em;}
+.module-desc{font-size:.84rem;color:var(--muted);line-height:1.6;}
 .module-link{
-  font-size:.88rem;font-weight:700;color:var(--orange);
+  font-size:.82rem;font-weight:700;color:var(--orange);
   text-decoration:none;transition:gap .15s;display:flex;align-items:center;gap:6px;
+  white-space:nowrap;
 }
 .module-item:hover .module-link{gap:10px;}
 
-/* ─────────────── NOTES GUIDE SECTION ─────────────── */
-.notes-guide{
-  background:var(--surface2);border:1px solid var(--orange-border);
-  border-radius:var(--radius-lg);padding:32px;
-  margin-bottom:64px;
+/* ─── NOTES GUIDE ─── */
+.notes-section{margin-top:20px;}
+.notes-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;
 }
-.notes-guide h2{
-  font-size:1.3rem;font-weight:800;color:var(--white);
-  margin-bottom:16px;letter-spacing:-.01em;
+.notes-header{
+  padding:24px 28px 20px;
+  border-bottom:1px solid var(--border);
 }
-.notes-guide-text{font-size:.95rem;color:var(--cream);line-height:1.75;margin-bottom:18px;}
-.notes-guide-text strong{color:var(--white);font-weight:700;}
-.notes-guide-text code{
-  background:rgba(255,92,26,0.1);
-  border:1px solid var(--orange-border);
-  padding:2px 6px;border-radius:3px;
-  color:var(--orange);font-family:monospace;
-  font-size:.88rem;
+.notes-header h2{
+  font-size:1.15rem;font-weight:800;color:var(--white);
+  margin-bottom:6px;letter-spacing:-.01em;
 }
-.notes-guide-list{
-  list-style:none;margin-left:0;
-  font-size:.92rem;color:var(--muted);line-height:1.75;
+.notes-header p{
+  font-size:.88rem;color:var(--muted);line-height:1.65;max-width:640px;
 }
-.notes-guide-list li{margin-bottom:12px;padding-left:20px;position:relative;}
-.notes-guide-list li::before{content:'▸';position:absolute;left:0;color:var(--orange);font-weight:900;}
-.notes-tip{
-  background:var(--green-bg);border:1px solid var(--green-border);
-  border-radius:var(--radius);padding:14px 16px;
-  margin-top:16px;font-size:.88rem;color:var(--green);font-weight:500;
+.notes-body{
+  padding:24px 28px;
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
 }
+.notes-use-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:var(--radius);padding:18px 20px;
+}
+.notes-use-icon{font-size:1.1rem;margin-bottom:8px;display:block;}
+.notes-use-title{font-size:.84rem;font-weight:700;color:var(--white);margin-bottom:6px;}
+.notes-use-desc{font-size:.8rem;color:var(--muted);line-height:1.6;}
+.notes-use-example{
+  margin-top:10px;padding:10px 12px;
+  background:rgba(255,255,255,.03);border:1px solid var(--border2);
+  border-radius:var(--radius-sm);
+  font-size:.78rem;color:var(--cream);line-height:1.55;font-style:italic;
+}
+.notes-footer{
+  padding:16px 28px;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+  font-size:.8rem;color:var(--muted);
+}
+.notes-footer-icon{color:var(--green);font-size:.9rem;}
 
-/* ─────────────── FOOTER ─────────────── */
+/* ─── FOOTER ─── */
 .footer{
-  max-width:1160px;margin:0 auto;padding:0 44px 52px;
+  max-width:1160px;margin:0 auto;padding:0 44px 48px;
   display:flex;justify-content:space-between;align-items:center;
-  border-top:1px solid var(--border);padding-top:22px;
+  border-top:1px solid var(--border);padding-top:22px;margin-top:20px;
 }
 .footer-brand{font-size:.78rem;font-weight:900;color:var(--orange);letter-spacing:.04em;}
 .footer-info{font-size:.62rem;color:var(--dim);font-weight:500;letter-spacing:.08em;text-transform:uppercase;}
 
-/* ─────────────── FADE IN ─────────────── */
+/* ─── FADE IN ─── */
 .fade-in{opacity:0;transform:translateY(8px);transition:opacity .38s ease,transform .38s ease;}
 .fade-in.visible{opacity:1;transform:none;}
 
-/* ─────────────── RESPONSIVE ─────────────── */
+/* ─── RESPONSIVE ─── */
 @media(max-width:960px){
-  .hero{padding:40px 24px 32px;}
-  .main{padding:40px 24px 80px;}
-  .how-grid{grid-template-columns:1fr;}
-  .module-item{grid-template-columns:1fr;gap:16px;}
-  .mod-num-col{flex-direction:row;justify-content:space-between;width:100%;}
-  .module-link-col{justify-content:flex-start;margin-top:8px;}
-  .notes-guide{padding:24px;}
+  .hero{padding:36px 24px 28px;}
+  .main{padding:0 24px 80px;}
+  .quickstart{grid-template-columns:1fr;}
+  .module-item{grid-template-columns:1fr;gap:12px;}
+  .mod-num-col{flex-direction:row;gap:8px;}
+  .notes-body{grid-template-columns:1fr;}
   .footer{padding:0 24px 40px;}
-  .lb-header-row,.lb-row{grid-template-columns:48px 1fr;gap:12px;}
+  .lb-header-row,.lb-row{grid-template-columns:40px 1fr;gap:10px;}
   .lb-header-row .lb-col-dots,.lb-header-row .lb-col-pct,.lb-row .lb-dots,.lb-row .lb-pct-col{display:none;}
 }
 @media(max-width:560px){
   .header{padding:12px 20px;}
-  .hero h1{font-size:1.75rem;}
+  .hero h1{font-size:1.7rem;}
   .hero-eyebrow{font-size:.56rem;padding:3px 10px;}
-  .how-grid{gap:12px;}
-  .module-item{padding:20px;}
-  .module-title{font-size:1rem;}
-  .module-desc{font-size:.88rem;}
-  .notes-guide{padding:18px;font-size:.86rem;}
+  .module-item{padding:18px 16px;}
+  .module-title{font-size:.95rem;}
+  .notes-header,.notes-body,.notes-footer{padding-left:18px;padding-right:18px;}
 }
 </style>
 </head>
@@ -302,34 +303,46 @@ body>*{position:relative;z-index:1;}
 
 <section class="hero fade-in">
   <div class="hero-eyebrow">Good Results Academy</div>
-  <h1>Your Training <span>Program</span></h1>
-  <p class="hero-sub">12 modules covering everything you need to know as a Good Results acquisition agent. Read the material, take the quizzes, and help us improve the training.</p>
+  <h1>Training <span>Program</span></h1>
+  <p class="hero-sub">12 modules covering everything you need to close deals as a Good Results acquisition agent. Read the material, take the quizzes, and use the notes box to help us keep the training sharp.</p>
 </section>
 
 <main class="main">
 
-  <!-- ── LEADERBOARD ── -->
-  <div class="sec-label fade-in">Training Leaderboard <span class="badge badge-live">● Live</span></div>
-
-  <div class="lb-wrap fade-in">
-    <!-- Motivation banner -->
-    <div class="motivation-wrap" id="motivation-wrap" style="display:none;">
-      <div class="motivation-card">
-        <div class="motivation-icon" id="motive-icon">💪</div>
-        <div>
-          <div class="motivation-text" id="motive-text">Loading your progress...</div>
-          <div class="motivation-sub" id="motive-sub"></div>
-        </div>
+  <!-- ── HOW IT WORKS ── -->
+  <div class="quickstart fade-in">
+    <div class="qs-card">
+      <div class="qs-num">1</div>
+      <div>
+        <div class="qs-title">Read the Module</div>
+        <div class="qs-desc">Each module covers one topic — scripts, workflows, objections, and real deal examples.</div>
       </div>
     </div>
+    <div class="qs-card">
+      <div class="qs-num">2</div>
+      <div>
+        <div class="qs-title">Take the Quiz</div>
+        <div class="qs-desc">10 random questions per attempt from a pool of 15–25. Mastered questions won't repeat.</div>
+      </div>
+    </div>
+    <div class="qs-card">
+      <div class="qs-num">3</div>
+      <div>
+        <div class="qs-title">Submit Notes</div>
+        <div class="qs-desc">Ask questions, flag errors, or add info. Gayden reviews them daily and updates the training.</div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Board -->
+  <!-- ── LEADERBOARD ── -->
+  <div class="sec-label fade-in">Team Leaderboard</div>
+  <div class="lb-wrap fade-in">
     <div class="lb-board">
       <div class="lb-header-row">
-        <div class="lb-col-label">Rank</div>
+        <div class="lb-col-label">#</div>
         <div class="lb-col-label">Agent</div>
         <div class="lb-col-label lb-col-dots">Modules</div>
-        <div class="lb-col-label lb-col-pct" style="text-align:right;">Progress</div>
+        <div class="lb-col-label lb-col-pct" style="text-align:right;">Score</div>
       </div>
       <div id="lb-body">
         <div class="lb-loading">Loading leaderboard...</div>
@@ -337,215 +350,158 @@ body>*{position:relative;z-index:1;}
     </div>
   </div>
 
-  <!-- ── HOW IT WORKS ── -->
-  <div class="sec-label fade-in">How It Works</div>
-  <div class="how-grid fade-in">
-    <div class="how-card">
-      <span class="how-emoji">📖</span>
-      <div class="how-title">Read</div>
-      <div class="how-desc">Each module has reading material covering a specific topic — scripts, workflows, objections, and real examples from closed deals.</div>
-    </div>
-    <div class="how-card">
-      <span class="how-emoji">🧠</span>
-      <div class="how-title">Quiz</div>
-      <div class="how-desc">Every module has a pool of 15-25 questions. You get 10 random questions each attempt. Questions you've mastered are tracked and won't repeat until you've proven mastery of the full pool.</div>
-    </div>
-    <div class="how-card">
-      <span class="how-emoji">📝</span>
-      <div class="how-title">Notes & Updates</div>
-      <div class="how-desc">At the bottom of every module there's a text box. Use it to ask questions, flag incorrect info, or submit updates. These go to Gayden daily — he reviews them and the training content gets updated automatically.</div>
-    </div>
-  </div>
-
   <!-- ── MODULES ── -->
-  <div class="sec-label fade-in">Training Modules</div>
+  <div class="sec-label fade-in">All 12 Modules</div>
   <div class="module-list fade-in">
 
     <a href="/gimmebrain/module1" class="module-item">
-      <div class="mod-num-col">
-        <div class="mod-num-big">01</div>
-        <div class="mod-num-label">Module</div>
-      </div>
+      <div class="mod-num-col"><div class="mod-num-big">01</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Pipeline &amp; CRM</div>
         <div class="module-desc">Close CRM workflow, lead vs contact vs opportunity, lead statuses, task management, and smart views.</div>
       </div>
-      <div class="module-link-col">
-        <a href="/gimmebrain/module1" class="module-link">Start →</a>
-      </div>
+      <span class="module-link">Start →</span>
     </a>
 
     <a href="/gimmebrain/module2" class="module-item">
-      <div class="mod-num-col">
-        <div class="mod-num-big">02</div>
-        <div class="mod-num-label">Module</div>
-      </div>
+      <div class="mod-num-col"><div class="mod-num-big">02</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Realtor Outreach &amp; Calls</div>
         <div class="module-desc">Cold calling scripts, buy box pitch, building realtor relationships, voicemail strategy.</div>
       </div>
-      <div class="module-link-col">
-        <a href="/gimmebrain/module2" class="module-link">Start →</a>
-      </div>
+      <span class="module-link">Start →</span>
     </a>
 
     <a href="/gimmebrain/module3" class="module-item">
-      <div class="mod-num-col">
-        <div class="mod-num-big">03</div>
-        <div class="mod-num-label">Module</div>
-      </div>
+      <div class="mod-num-col"><div class="mod-num-big">03</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">The Offer Process</div>
         <div class="module-desc">How to float a verbal, send offer terms to realtors, handle objections, and move to signed contract.</div>
       </div>
-      <div class="module-link-col">
-        <a href="/gimmebrain/module3" class="module-link">Start →</a>
-      </div>
+      <span class="module-link">Start →</span>
     </a>
 
     <a href="/gimmebrain/module4" class="module-item">
-      <div class="mod-num-col">
-        <div class="mod-num-big">04</div>
-        <div class="mod-num-label">Module</div>
-      </div>
+      <div class="mod-num-col"><div class="mod-num-big">04</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Post-Contract SOP</div>
         <div class="module-desc">The 7-step checklist after going under contract — Deal Page Creator, Google Drive, photos, and escrow kickoff.</div>
       </div>
-      <div class="module-link-col">
-        <a href="/gimmebrain/module4" class="module-link">Start →</a>
-      </div>
+      <span class="module-link">Start →</span>
     </a>
 
     <a href="/gimmebrain/module5" class="module-item">
-      <div class="mod-num-col">
-        <div class="mod-num-big">05</div>
-        <div class="mod-num-label">Module</div>
-      </div>
+      <div class="mod-num-col"><div class="mod-num-big">05</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">SMS Playbook</div>
         <div class="module-desc">Cold SMS, post-call follow-up SMS, deal-stage messaging, workflows and cadences.</div>
       </div>
-      <div class="module-link-col">
-        <a href="/gimmebrain/module5" class="module-link">Start →</a>
-      </div>
+      <span class="module-link">Start →</span>
     </a>
 
     <a href="/gimmebrain/module6" class="module-item">
-      <div class="mod-num-col">
-        <div class="mod-num-big">06</div>
-        <div class="mod-num-label">Module</div>
-      </div>
+      <div class="mod-num-col"><div class="mod-num-big">06</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Buy Box, Markets &amp; Company</div>
         <div class="module-desc">Who we are, what we buy in NV and TX, market specifics, entities, and realtor FAQ answers.</div>
       </div>
-      <div class="module-link-col">
-        <a href="/gimmebrain/module6" class="module-link">Start →</a>
-      </div>
+      <span class="module-link">Start →</span>
     </a>
 
     <a href="/gimmebrain/module7" class="module-item">
-      <div class="mod-num-col">
-        <div class="mod-num-big">07</div>
-        <div class="mod-num-label">Module</div>
-      </div>
+      <div class="mod-num-col"><div class="mod-num-big">07</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Comps &amp; Deal Analysis</div>
         <div class="module-desc">How to run comps, calculate ARV, understand MAO formulas by market, and use repair frameworks.</div>
       </div>
-      <div class="module-link-col">
-        <a href="/gimmebrain/module7" class="module-link">Start →</a>
-      </div>
+      <span class="module-link">Start →</span>
     </a>
 
     <a href="/gimmebrain/module8" class="module-item">
-      <div class="mod-num-col">
-        <div class="mod-num-big">08</div>
-        <div class="mod-num-label">Module</div>
-      </div>
+      <div class="mod-num-col"><div class="mod-num-big">08</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Closing, Title &amp; Escrow</div>
         <div class="module-desc">What happens between signed contract and closing day — title searches, liens, and escrow mechanics.</div>
       </div>
-      <div class="module-link-col">
-        <a href="/gimmebrain/module8" class="module-link">Start →</a>
-      </div>
+      <span class="module-link">Start →</span>
     </a>
 
     <a href="/gimmebrain/module9" class="module-item">
-      <div class="mod-num-col">
-        <div class="mod-num-big">09</div>
-        <div class="mod-num-label">Module</div>
-      </div>
+      <div class="mod-num-col"><div class="mod-num-big">09</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Nevada RPA vs Texas TREC</div>
         <div class="module-desc">Side-by-side contract comparison — DD periods, option fee rules, and assignment clause strategy.</div>
       </div>
-      <div class="module-link-col">
-        <a href="/gimmebrain/module9" class="module-link">Start →</a>
-      </div>
+      <span class="module-link">Start →</span>
     </a>
 
     <a href="/gimmebrain/module10" class="module-item">
-      <div class="mod-num-col">
-        <div class="mod-num-big">10</div>
-        <div class="mod-num-label">Module</div>
-      </div>
+      <div class="mod-num-col"><div class="mod-num-big">10</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Financing Types</div>
         <div class="module-desc">Why we always say cash, the internal funding stack, hard money mechanics, and manufactured home warnings.</div>
       </div>
-      <div class="module-link-col">
-        <a href="/gimmebrain/module10" class="module-link">Start →</a>
-      </div>
+      <span class="module-link">Start →</span>
     </a>
 
     <a href="/gimmebrain/module11" class="module-item">
-      <div class="mod-num-col">
-        <div class="mod-num-big">11</div>
-        <div class="mod-num-label">Module</div>
-      </div>
+      <div class="mod-num-col"><div class="mod-num-big">11</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Due Diligence Deep Dive</div>
         <div class="module-desc">DD timeline day by day, repair cost decision framework, walk vs proceed vs negotiate.</div>
       </div>
-      <div class="module-link-col">
-        <a href="/gimmebrain/module11" class="module-link">Start →</a>
-      </div>
+      <span class="module-link">Start →</span>
     </a>
 
     <a href="/gimmebrain/module12" class="module-item">
-      <div class="mod-num-col">
-        <div class="mod-num-big">12</div>
-        <div class="mod-num-label">Module</div>
-      </div>
+      <div class="mod-num-col"><div class="mod-num-big">12</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Foreclosures &amp; Distressed Deals</div>
         <div class="module-desc">Distressed situation types, motivation signals, quick-response playbook, and lifetime realtor trust.</div>
       </div>
-      <div class="module-link-col">
-        <a href="/gimmebrain/module12" class="module-link">Start →</a>
-      </div>
+      <span class="module-link">Start →</span>
     </a>
 
   </div>
 
   <!-- ── NOTES GUIDE ── -->
-  <div class="sec-label fade-in">How the Notes Box Works</div>
-  <div class="notes-guide fade-in">
-    <h2>Your Feedback Powers Updates</h2>
-    <p class="notes-guide-text">
-      At the bottom of every module, there's a text box where you can submit questions, corrections, or new information. When referencing a specific quiz question, use the pool index number—for example, <code>Pool Q14</code>—rather than the question's position in your current attempt.
-    </p>
-    <p class="notes-guide-text">
-      <strong>What happens next:</strong> Your notes are logged with your name and the module. Every morning at 9:30 AM, Gayden reviews them in a queue. If it's a question, he'll write an answer. If it's a correction or new info, he'll update the training material — the KB, the quiz questions, and the live module page all get updated together automatically.
-    </p>
-    <p class="notes-guide-text">
-      <strong>Pro tip:</strong> Be specific. "Q14 is wrong" is helpful. "The answer to Pool Q14 should be X because Y" is even better—it helps Gayden fix it faster and makes sure the update is exactly right.
-    </p>
-    <div class="notes-tip">
-      All notes are reviewed and processed daily. Check the module page to see when updates have been made based on feedback from you and your teammates.
+  <div class="sec-label fade-in">The Notes Box</div>
+  <div class="notes-section fade-in">
+    <div class="notes-card">
+      <div class="notes-header">
+        <h2>Every Module Has a Notes Field at the Bottom</h2>
+        <p>It's a text box where you can write anything — questions, corrections, or new info you think should be in the training. Your notes get logged with your name and module number, and Gayden reviews them every morning at 9:30 AM.</p>
+      </div>
+      <div class="notes-body">
+        <div class="notes-use-card">
+          <span class="notes-use-icon">❓</span>
+          <div class="notes-use-title">Ask a Question</div>
+          <div class="notes-use-desc">Confused about something in the module? Just ask. Gayden will write an answer and update the training if it's unclear for everyone.</div>
+          <div class="notes-use-example">"What do we do if the realtor says the seller already has a cash offer?"</div>
+        </div>
+        <div class="notes-use-card">
+          <span class="notes-use-icon">🔧</span>
+          <div class="notes-use-title">Flag a Correction</div>
+          <div class="notes-use-desc">If something is wrong or outdated — a script, a number, a quiz answer — call it out. Reference the pool index number for quiz questions.</div>
+          <div class="notes-use-example">"Pool Q14 says the DD period in Texas is 10 days but it should be based on the option period."</div>
+        </div>
+        <div class="notes-use-card">
+          <span class="notes-use-icon">💡</span>
+          <div class="notes-use-title">Suggest New Info</div>
+          <div class="notes-use-desc">Picked up something on a call that should be in the training? Share it. If it checks out, it gets added to the KB and the module page.</div>
+          <div class="notes-use-example">"Realtors in Henderson keep asking about our proof of funds — we should add a section on how to handle that."</div>
+        </div>
+        <div class="notes-use-card">
+          <span class="notes-use-icon">💬</span>
+          <div class="notes-use-title">Anything Else</div>
+          <div class="notes-use-desc">Feedback on the quiz difficulty, requests for more examples, thoughts on the module structure — all fair game. There are no wrong notes.</div>
+          <div class="notes-use-example">"Module 3 could use a real example of a counter-offer email thread."</div>
+        </div>
+      </div>
+      <div class="notes-footer">
+        <span class="notes-footer-icon">●</span>
+        Notes are reviewed daily. When Gayden acts on one, the KB, quiz pool, and module page all update together automatically.
+      </div>
     </div>
   </div>
 
@@ -558,230 +514,165 @@ body>*{position:relative;z-index:1;}
 
 <script>
 // Progress bar
-function updateProgressBar() {
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollPercent = (scrollTop / docHeight) * 100;
-  document.getElementById('rpbar').style.width = scrollPercent + '%';
+function updateProgressBar(){
+  const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('rpbar').style.width=(s/d*100)+'%';
 }
-window.addEventListener('scroll', updateProgressBar);
+window.addEventListener('scroll',updateProgressBar);
 
-// Fade-in animations on scroll
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
+// Fade-in
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
 
-document.querySelectorAll('.fade-in').forEach(el => {
-  observer.observe(el);
-});
+// Session
+const agentName=sessionStorage.getItem('gr_agent')||'';
 
-// Session info
-const agentName  = sessionStorage.getItem('gr_agent') || '';
+// Full team roster — everyone shows on the board
+const FULL_ROSTER=[
+  {name:'Gayden',email:'gayden@goodresults.org'},
+  {name:'Joe',email:'joe@goodresults.org'},
+  {name:'Kayden',email:'kayden@goodresults.org'},
+  {name:'Dan',email:'dan@goodresults.org'},
+  {name:'Franklin',email:'frank@goodresults.org'},
+  {name:'Anthony',email:'anthony@goodresults.org'}
+];
 
-// Data & Leaderboard
-const APPS_SCRIPT_URL = '/.netlify/functions/module-api';
-
-const MODULE_TITLES = {
-  1:'Pipeline & CRM', 2:'Realtor Outreach', 3:'The Offer Process',
-  4:'Post-Contract SOP', 5:'SMS Playbook', 6:'Buy Box & Markets',
-  7:'Comps & Analysis', 8:'Closing & Escrow', 9:'NV vs TX Contracts',
-  10:'Financing Types', 11:'Due Diligence', 12:'Foreclosures'
+const MODULE_TITLES={
+  1:'Pipeline & CRM',2:'Realtor Outreach',3:'The Offer Process',
+  4:'Post-Contract SOP',5:'SMS Playbook',6:'Buy Box & Markets',
+  7:'Comps & Analysis',8:'Closing & Escrow',9:'NV vs TX Contracts',
+  10:'Financing Types',11:'Due Diligence',12:'Foreclosures'
 };
+const APPS_SCRIPT_URL='/.netlify/functions/module-api';
 
-function getMotivation(myData, allData, rank) {
-  if (!myData) {
-    const others = allData.filter(a => a.name.toLowerCase() !== agentName.toLowerCase());
-    if (others.length > 0) {
-      return {
-        icon: '🚀',
-        text: `<strong>Your teammates are already on the board.</strong> Hit Module 1 and get in the game.`,
-        sub: `Every question you answer correctly is permanently banked — you never lose progress.`
-      };
-    }
-    return {
-      icon: '🎯',
-      text: `<strong>No scores yet — yours will be first.</strong> Finish a module quiz to get on the board.`,
-      sub: `The goal: answer every question in every module correctly. You earn it back each session.`
-    };
+function renderLeaderboard(rawData){
+  const lbBody=document.getElementById('lb-body');
+
+  // Build lookup from API data by name (lowercase)
+  const dataByName={};
+  if(rawData&&rawData.length){
+    rawData.forEach(a=>{dataByName[a.name.toLowerCase()]=a;});
   }
 
-  const total   = myData.totalMastered;
-  const poss    = myData.totalPossible;
-  const mods    = myData.modulesStarted;
-  const pct     = poss > 0 ? Math.round(total / poss * 100) : 0;
-
-  if (rank === 1 && pct === 100) {
-    return { icon: '🏆', text: `<strong>You're fully certified, ${agentName}.</strong> Every question. Every module. You know this playbook cold.`, sub: `That's the whole thing — congratulations.` };
-  }
-  if (rank === 1) {
-    const left = poss - total;
-    return { icon: '🔥', text: `<strong>You're running the board, ${agentName}.</strong> ${left} more questions to lock in your certification.`, sub: `You're ahead of the team — don't let them catch up.` };
-  }
-
-  const leader = allData[0];
-  const gap    = (leader.totalMastered || 0) - total;
-  if (gap <= 5 && gap > 0) {
-    return { icon: '💥', text: `<strong>You're ${gap} question${gap > 1 ? 's' : ''} from first place.</strong> This is a sprint finish, ${agentName}.`, sub: `Get back into a module and close the gap.` };
-  }
-  if (mods === 0) {
-    return { icon: '🚀', text: `<strong>Time to get started, ${agentName}.</strong> Your team is already moving.`, sub: `Open any module, read through it, and take the quiz. Every correct answer is saved permanently.` };
-  }
-  return {
-    icon: '💪',
-    text: `<strong>${total} questions mastered, ${agentName}.</strong> ${poss - total} more to go across all 12 modules.`,
-    sub: `Correct answers carry over — you only need to re-answer questions you've gotten wrong.`
-  };
-}
-
-function renderLeaderboard(rawData) {
-  const lbBody    = document.getElementById('lb-body');
-  const motiWrap  = document.getElementById('motivation-wrap');
-  const motiIcon  = document.getElementById('motive-icon');
-  const motiText  = document.getElementById('motive-text');
-  const motiSub   = document.getElementById('motive-sub');
-
-  if (!rawData || !rawData.length) {
-    lbBody.innerHTML = `
-      <div class="lb-empty">
-        <div class="lb-empty-icon">🎯</div>
-        <div class="lb-empty-title">No scores yet — be the first.</div>
-        <div class="lb-empty-sub">Complete a module quiz to start tracking progress. Every correct answer is permanently banked — you only re-answer questions you got wrong.</div>
-      </div>`;
-
-    // Still show motivation for the logged-in user
-    const motive = getMotivation(null, [], 0);
-    motiWrap.style.display = 'block';
-    motiIcon.textContent = motive.icon;
-    motiText.innerHTML = motive.text;
-    motiSub.textContent = motive.sub;
-    return;
-  }
-
-  // Compute stats per agent
-  const agents = rawData.map(a => {
-    let totalMastered = 0, totalPossible = 0, modulesStarted = 0, modulesFullyDone = 0;
-    for (let m = 1; m <= 12; m++) {
-      const mod = a.modules[m] || a.modules[String(m)];
-      if (mod) {
-        modulesStarted++;
-        totalMastered += (mod.mastered || []).length;
-        if (mod.pool_size > 0) {
-          totalPossible += mod.pool_size;
-          if ((mod.mastered || []).length >= mod.pool_size) modulesFullyDone++;
+  // Merge roster with API data
+  const agents=FULL_ROSTER.map(r=>{
+    const d=dataByName[r.name.toLowerCase()];
+    let totalMastered=0,totalPossible=0,modulesStarted=0,modulesFullyDone=0,modules={};
+    if(d&&d.modules){
+      modules=d.modules;
+      for(let m=1;m<=12;m++){
+        const mod=d.modules[m]||d.modules[String(m)];
+        if(mod){
+          modulesStarted++;
+          totalMastered+=(mod.mastered||[]).length;
+          if(mod.pool_size>0){
+            totalPossible+=mod.pool_size;
+            if((mod.mastered||[]).length>=mod.pool_size) modulesFullyDone++;
+          }
         }
       }
     }
-    return {
-      name: a.name,
-      email: a.email || '',
-      modules: a.modules,
-      totalMastered,
-      totalPossible,
-      modulesStarted,
-      modulesFullyDone
-    };
+    return{name:r.name,email:r.email,modules,totalMastered,totalPossible,modulesStarted,modulesFullyDone};
   });
 
-  // Sort by totalMastered desc, then modulesStarted
-  agents.sort((a, b) => b.totalMastered - a.totalMastered || b.modulesStarted - a.modulesStarted);
+  // Also add any API users NOT in the roster (just in case)
+  if(rawData&&rawData.length){
+    rawData.forEach(a=>{
+      const inRoster=FULL_ROSTER.some(r=>r.name.toLowerCase()===a.name.toLowerCase());
+      if(!inRoster){
+        let totalMastered=0,totalPossible=0,modulesStarted=0,modulesFullyDone=0;
+        for(let m=1;m<=12;m++){
+          const mod=a.modules[m]||a.modules[String(m)];
+          if(mod){modulesStarted++;totalMastered+=(mod.mastered||[]).length;if(mod.pool_size>0){totalPossible+=mod.pool_size;if((mod.mastered||[]).length>=mod.pool_size)modulesFullyDone++;}}
+        }
+        agents.push({name:a.name,email:a.email||'',modules:a.modules,totalMastered,totalPossible,modulesStarted,modulesFullyDone});
+      }
+    });
+  }
 
-  // Find current user's data and rank
-  const myIdx   = agents.findIndex(a => a.name.toLowerCase() === agentName.toLowerCase());
-  const myData  = myIdx >= 0 ? agents[myIdx] : null;
-  const myRank  = myIdx + 1;
+  // Sort: people with scores first (by totalMastered desc), then no-scores alphabetically
+  agents.sort((a,b)=>{
+    if(a.totalMastered>0&&b.totalMastered===0) return -1;
+    if(a.totalMastered===0&&b.totalMastered>0) return 1;
+    if(a.totalMastered>0&&b.totalMastered>0) return b.totalMastered-a.totalMastered||b.modulesStarted-a.modulesStarted;
+    return a.name.localeCompare(b.name);
+  });
 
-  // Show motivation
-  const motive = getMotivation(myData, agents, myRank);
-  motiWrap.style.display = 'block';
-  motiIcon.textContent = motive.icon;
-  motiText.innerHTML = motive.text;
-  motiSub.textContent = motive.sub;
+  const rankClass=i=>i===0?'gold':i===1?'silver':i===2?'bronze':'other';
 
-  // Render rows
-  const rankClass = (i) => i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : 'other';
-  const rankEmoji = (i) => i === 0 ? '👑' : '';
-
-  let html = '';
-  agents.forEach((a, i) => {
-    const isMe  = a.name.toLowerCase() === agentName.toLowerCase();
-    const pct   = a.totalPossible > 0 ? Math.round(a.totalMastered / a.totalPossible * 100) : 0;
-    const pctClass = pct >= 80 ? 'high' : pct >= 40 ? 'mid' : pct > 0 ? 'low' : 'zero';
-    const barClass = pctClass;
+  let html='';
+  let scoredRank=0;
+  agents.forEach((a,i)=>{
+    const isMe=a.name.toLowerCase()===agentName.toLowerCase();
+    const hasScores=a.totalMastered>0;
+    if(hasScores) scoredRank++;
+    const displayRank=hasScores?scoredRank:'-';
+    const pct=a.totalPossible>0?Math.round(a.totalMastered/a.totalPossible*100):0;
+    const pctClass=pct>=80?'high':pct>=40?'mid':pct>0?'low':'zero';
 
     // Module dots
-    let dots = '';
-    for (let m = 1; m <= 12; m++) {
-      const mod = a.modules[m] || a.modules[String(m)];
-      let cls = 'none', title = `Module ${m}: ${MODULE_TITLES[m]} — Not started`;
-      if (mod) {
-        const masteredCount = (mod.mastered || []).length;
-        const poolSize = mod.pool_size || 0;
-        if (poolSize > 0 && masteredCount >= poolSize) {
-          cls = 'done';
-          title = `Module ${m}: ${MODULE_TITLES[m]} — Fully mastered! (${masteredCount}/${poolSize})`;
-        } else {
-          cls = 'prog';
-          title = `Module ${m}: ${MODULE_TITLES[m]} — ${masteredCount}${poolSize > 0 ? '/' + poolSize : ''} questions mastered`;
-        }
+    let dots='';
+    for(let m=1;m<=12;m++){
+      const mod=a.modules[m]||a.modules[String(m)];
+      let cls='none',title=`Module ${m}: ${MODULE_TITLES[m]} — Not started`;
+      if(mod){
+        const mc=(mod.mastered||[]).length,ps=mod.pool_size||0;
+        if(ps>0&&mc>=ps){cls='done';title=`Module ${m}: ${MODULE_TITLES[m]} — Mastered (${mc}/${ps})`;}
+        else{cls='prog';title=`Module ${m}: ${MODULE_TITLES[m]} — ${mc}${ps>0?'/'+ps:''} mastered`;}
       }
-      dots += `<div class="lb-dot ${cls}" title="${title}">${m}</div>`;
+      dots+=`<div class="lb-dot ${cls}" title="${title}">${m}</div>`;
     }
 
-    const statsText = a.totalPossible > 0
-      ? `${a.totalMastered}/${a.totalPossible} questions · ${a.modulesFullyDone}/${a.modulesStarted} modules mastered`
-      : `${a.modulesStarted} module${a.modulesStarted !== 1 ? 's' : ''} started`;
+    const statsText=hasScores
+      ?(a.totalPossible>0?`${a.totalMastered}/${a.totalPossible} questions · ${a.modulesFullyDone}/${a.modulesStarted} modules mastered`:`${a.modulesStarted} module${a.modulesStarted!==1?'s':''} started`)
+      :'No quizzes taken yet';
 
-    html += `
-      <div class="lb-row${isMe ? ' is-me' : ''}">
+    const rClass=hasScores?rankClass(scoredRank-1):'other';
+
+    html+=`
+      <div class="lb-row${isMe?' is-me':''}${!hasScores?' no-scores':''}">
         <div class="lb-rank">
-          <div class="lb-rank-num ${rankClass(i)}">#${i + 1}</div>
-          <span class="lb-rank-crown">${rankEmoji(i)}</span>
+          <div class="lb-rank-num ${rClass}">${displayRank=== '-'?'—':'#'+displayRank}</div>
+          ${scoredRank===1&&hasScores&&i===0?'<span class="lb-rank-crown">👑</span>':''}
         </div>
         <div class="lb-main">
           <div class="lb-name-row">
             <span class="lb-name">${a.name}</span>
-            ${isMe ? '<span class="lb-you-tag">YOU</span>' : ''}
+            ${isMe?'<span class="lb-you-tag">YOU</span>':''}
           </div>
           <div class="lb-bar-track">
-            <div class="lb-bar-fill ${barClass}" style="width:0%" data-target="${pct}"></div>
+            <div class="lb-bar-fill ${pctClass}" style="width:0%" data-target="${pct}"></div>
           </div>
           <div class="lb-stats-row">${statsText}</div>
         </div>
         <div class="lb-dots">${dots}</div>
         <div class="lb-pct-col">
-          <div class="lb-pct ${pctClass}">${pct > 0 ? pct + '%' : '—'}</div>
-          <div class="lb-qs">${a.totalMastered} Qs</div>
+          <div class="lb-pct ${pctClass}">${pct>0?pct+'%':'—'}</div>
+          <div class="lb-qs">${hasScores?a.totalMastered+' Qs':''}</div>
         </div>
       </div>`;
   });
 
-  lbBody.innerHTML = html;
+  lbBody.innerHTML=html;
 
-  // Animate bars in
-  setTimeout(() => {
-    document.querySelectorAll('.lb-bar-fill[data-target]').forEach(bar => {
-      bar.style.width = bar.dataset.target + '%';
+  // Animate bars
+  setTimeout(()=>{
+    document.querySelectorAll('.lb-bar-fill[data-target]').forEach(bar=>{
+      bar.style.width=bar.dataset.target+'%';
     });
-  }, 100);
+  },100);
 }
 
-async function loadProgress() {
-  try {
-    const res  = await fetch(APPS_SCRIPT_URL + '?action=gettrainingprogress');
-    const data = await res.json();
-    renderLeaderboard(Array.isArray(data) ? data : []);
-  } catch(e) {
-    document.getElementById('lb-body').innerHTML = `
-      <div class="lb-empty">
-        <div class="lb-empty-icon">📡</div>
-        <div class="lb-empty-title">Couldn't load leaderboard</div>
-        <div class="lb-empty-sub">Check your connection — scores are still tracked when you submit a module quiz.</div>
-      </div>`;
+async function loadProgress(){
+  try{
+    const res=await fetch(APPS_SCRIPT_URL+'?action=gettrainingprogress');
+    const data=await res.json();
+    renderLeaderboard(Array.isArray(data)?data:[]);
+  }catch(e){
+    // Even on error, show the full roster with no scores
+    renderLeaderboard([]);
   }
 }
 
