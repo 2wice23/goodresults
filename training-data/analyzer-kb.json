@@ -62,6 +62,9 @@
     "[Anthony Cruz — DEAL REJECTION — Grade B+]: Clear rejection reasoning tied to buy box"
   ],
   "negative": [
+    "[Dan VanMatre — WARM FOLLOW-UP]: Very brief responses throughout ('Okay', 'I mean, like I said, not super often')",
+    "[Dan VanMatre — WARM FOLLOW-UP]: Repeatedly emphasized she doesn't often see his type of deals",
+    "[Dan VanMatre — WARM FOLLOW-UP]: Didn't ask follow-up questions about his business or experience",
     "[Anthony Cruz — NEGOTIATION]: Firm rejection of $100k with 'I'm not okay with 100'",
     "[Anthony Cruz — NEGOTIATION]: Insisted on his preferred title company due to work already completed",
     "[Anthony Cruz — NEGOTIATION]: Called the price difference 'huge, huge difference'",
@@ -118,10 +121,7 @@
     "[Anthony Cruz — RE-ENGAGEMENT]: Didn't elaborate on the Conroe property beyond basic location",
     "[Anthony Cruz — RE-ENGAGEMENT — manually flagged]: Very brief 'Yeah, sometimes' response",
     "[Anthony Cruz — RE-ENGAGEMENT — manually flagged]: Abrupt call ending when another call came in",
-    "[Anthony Cruz — RE-ENGAGEMENT — manually flagged]: Didn't elaborate on the Conroe property beyond basic location",
-    "[Anthony Cruz — WARM FOLLOW-UP]: Initial skepticism: 'I get a bunch of these texts and it's typically a lot of people that are looking for off market and looking for owner financing'",
-    "[Anthony Cruz — WARM FOLLOW-UP]: Cautious about his current listings being overpriced for investors",
-    "[Anthony Cruz — RE-ENGAGEMENT]: Initial confusion with 'Huh?' and 'About what?' responses"
+    "[Anthony Cruz — RE-ENGAGEMENT — manually flagged]: Didn't elaborate on the Conroe property beyond basic location"
   ],
   "reknowledge": [
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: Sylvester Garcia represents sellers and negotiates directly on price",
