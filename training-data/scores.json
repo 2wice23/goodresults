@@ -1017,5 +1017,29 @@
       4,
       7
     ]
+  },
+  {
+    "timestamp": "2026-03-30T22:34:18.476Z",
+    "agent": "Joe",
+    "email": "joe@goodresults.org",
+    "module": 8,
+    "moduleTitle": "Closing, Title & Escrow",
+    "scorePct": 100,
+    "correct": 10,
+    "total": 10,
+    "xp": 120,
+    "poolSize": 35,
+    "correctIndices": [
+      25,
+      9,
+      6,
+      21,
+      33,
+      0,
+      19,
+      27,
+      4,
+      8
+    ]
   }
 ]
