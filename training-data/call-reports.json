@@ -658,5 +658,25 @@
     "resistance_moments": "Immediately mentioned having team members who handle investment deals | Brief responses throughout indicating limited availability for new relationships",
     "script_moment": "When Michael mentioned his flippers, Franklin could have asked: 'That's a great system. What types of properties do they typically pass on or not want to take?' This would have given him specific positioning for future opportunities.",
     "on_leaderboard": "no"
+  },
+  {
+    "id": "1774909537128",
+    "timestamp": "2026-03-30T22:25:37.128Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Sylvester Garcia",
+    "call_type": "NEGOTIATION",
+    "duration": "4m 3s",
+    "call_date": "03/30/2026",
+    "score": 61,
+    "realtor_engagement": 72,
+    "summary": "Anthony delivered a final offer of $100,000 to realtor Sylvester Garcia, who countered with $105,000 citing a competing offer at $120,000. The call ended without agreement when Anthony held firm at $100,000.",
+    "what_worked": "Direct delivery of the number upfront | Offered tenant accommodation showing flexibility | Strong credibility with volume stats | Professional tone throughout",
+    "what_to_tighten": "Could have explored the competing buyer's situation more | Missed opportunity to create urgency or timeline pressure | Weak next step - no specific follow-up plan",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about the other buyer's financing or timeline | Didn't explore seller's real motivations beyond the price | Could have offered alternative deal structures",
+    "positive_moments": "Asked about tenant accommodation showing he was working toward a deal | Shared specific details about competing $120k offer | Countered at $105k rather than walking away | Offered to pay title costs himself",
+    "resistance_moments": "Firm rejection of $100k with 'I'm not okay with 100' | Insisted on his preferred title company due to work already completed | Called the price difference 'huge, huge difference'",
+    "script_moment": "When Sylvester mentioned the other buyer at $120k, Anthony should have asked: 'What's their timeline and are they cash? Because if there's any financing risk or delays, we could still be the safer option at $100k with our proven track record.'",
+    "on_leaderboard": "yes"
   }
 ]
