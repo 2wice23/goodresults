@@ -500,5 +500,27 @@
       15,
       8
     ]
+  },
+  {
+    "timestamp": "2026-03-30T04:00:08.842Z",
+    "agent": "Gayden",
+    "email": "gayden@goodresults.org",
+    "module": 11,
+    "moduleTitle": "Due Diligence Deep Dive",
+    "scorePct": 80,
+    "correct": 8,
+    "total": 10,
+    "xp": 96,
+    "poolSize": 20,
+    "correctIndices": [
+      5,
+      7,
+      4,
+      3,
+      2,
+      13,
+      16,
+      18
+    ]
   }
 ]
