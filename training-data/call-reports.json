@@ -598,5 +598,25 @@
     "resistance_moments": "Initial audio connection issues | Had to explain he was at trampoline park which limited conversation depth",
     "script_moment": "When Casey said he flips homes, Franklin should have said: 'That's great - what's your typical buy box? We focus on 1960s to early 2000s homes, around 2,000 square feet in subdivision-style neighborhoods. We can close cash in 2-3 weeks on anything that needs work.'",
     "on_leaderboard": "no"
+  },
+  {
+    "id": "1774908246560",
+    "timestamp": "2026-03-30T22:04:06.560Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Santana Sanchez",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "1m 47s",
+    "call_date": "03/30/2026",
+    "score": 48,
+    "realtor_engagement": 45,
+    "summary": "Franklin followed up with Santana after 6 months of prior text contact, but discovered she only works for a new home builder and doesn't handle resales or distressed properties. The conversation ended with her clearly stating she won't have any relevant inventory.",
+    "what_worked": "Strong opener with specific reference to prior contact | Good listening and recognition of business model mismatch | Professional and respectful throughout | Asked clarifying questions to understand her role",
+    "what_to_tighten": "Never delivered complete buy box criteria | Accepted dead end too easily without exploring referral opportunities | Could have asked if she knows other agents who handle resales | Missed opportunity to ask about her network or brokerage",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked for referrals to other agents in her office | Could have asked if her builder ever takes trades or has distressed inventory | Could have explored whether she knows agents who handle existing homes",
+    "positive_moments": "Answered questions directly and professionally | Clearly explained her role to avoid wasting time",
+    "resistance_moments": "Immediately shut down possibility of having relevant inventory | Discouraged follow-up attempts by emphasizing she only works new builds",
+    "script_moment": "When she said she only works for new home builders, Frank should have said: 'I understand completely. Since you're plugged into the local market, do you know any agents in your office or network who do work with existing homes or investors like me?'",
+    "on_leaderboard": "no"
   }
 ]
