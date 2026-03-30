@@ -912,5 +912,28 @@
       10,
       0
     ]
+  },
+  {
+    "timestamp": "2026-03-30T21:31:10.261Z",
+    "agent": "Joe",
+    "email": "joe@goodresults.org",
+    "module": 6,
+    "moduleTitle": "Buy Box, Markets & Company",
+    "scorePct": 90,
+    "correct": 9,
+    "total": 10,
+    "xp": 108,
+    "poolSize": 17,
+    "correctIndices": [
+      2,
+      7,
+      16,
+      6,
+      11,
+      3,
+      8,
+      15,
+      14
+    ]
   }
 ]
