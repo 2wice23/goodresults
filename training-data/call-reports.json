@@ -498,5 +498,25 @@
     "resistance_moments": "Revealed property is already under contract early in call | Firm on minimum $70k price point | Expressed negative experience with his preferred title company",
     "script_moment": "After she said 'I'll let you know if I get a price reduction,' Anthony should have said: 'Sounds good Sydney. Mind if I check back with you in about 30 days to see how things are going? And do you work many probate deals like this one?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774903861175",
+    "timestamp": "2026-03-30T20:51:01.175Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Laura Lunn",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "6m 24s",
+    "call_date": "03/30/2026",
+    "score": 68,
+    "realtor_engagement": 75,
+    "summary": "Frank followed up with Laura months after initial text exchange. Laura primarily works in rural Lovelock but offered to send letters to potential properties that fit his criteria and agreed to future check-ins.",
+    "what_worked": "Complete buy box delivery with all key elements | Set specific follow-up timeline | Let realtor explain her market situation thoroughly | Showed consideration for realtor's time investment",
+    "what_to_tighten": "Opener could reference specific timing of prior text exchange | Could have asked more about her vacant land business model | Could have explored Lovelock market opportunity more deeply",
+    "language_flags": "",
+    "missed_opportunities": "Didn't explore the courthouse steps opportunity Laura mentioned | Could have asked about Byron Rivers and potential partnership structure",
+    "positive_moments": "Laura volunteered extensive detail about Lovelock market challenges and opportunities | She offered to drive through town with her associate to identify properties | She proactively suggested sending letters to houses that might fit criteria | She agreed to two-week follow-up readily and said 'absolutely' to staying in touch | She expressed genuine interest in seeing Lovelock built up",
+    "resistance_moments": "Initial explanation of why her market is difficult for investors (contractor costs, housing challenges) | Mentioned she focuses on vacant land primarily rather than houses",
+    "script_moment": "When Laura mentioned the $14k courthouse steps sale, Frank should have said: 'That's exactly the kind of opportunity we look for - do you track those tax sales regularly? We'd love to get notified when you see deals like that coming up.'",
+    "on_leaderboard": "yes"
   }
 ]
