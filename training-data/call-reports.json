@@ -758,5 +758,25 @@
     "resistance_moments": "Very brief 'Not lately' and 'No' responses showing limited current inventory | Had to keep responses short due to driving safety",
     "script_moment": "After she said 'Not lately, I haven't had anything' - 'No worries at all. Just so I know what to keep an eye out for in the future, what types of properties do you typically work with in your area?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774913514324",
+    "timestamp": "2026-03-30T23:31:54.324Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Gabriela Gomez Pena",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "2m",
+    "call_date": "03/30/2026",
+    "score": 62,
+    "realtor_engagement": 45,
+    "summary": "Anthony attempted to re-engage with Gabriela after a January conversation about distressed properties. She didn't remember him initially and stated she doesn't typically handle distressed properties, but agreed to future contact via text.",
+    "what_worked": "Complete buy box delivery with specific details | Adapted to her preferred text communication | Set specific follow-up timeline | Professional tone throughout",
+    "what_to_tighten": "Should acknowledge time gap more directly in re-engagement calls | Could explore what types of properties she does handle | Missed opportunity to discuss value proposition for realtors",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked what types of properties she typically works with | Didn't explore her client base or typical inventory | No discussion of commission or benefits of working together",
+    "positive_moments": "Said 'Yeah, sure' to future follow-up | Offered text as preferred communication method | Said she'll save his number",
+    "resistance_moments": "Didn't remember the January conversation | Said 'I don't typically sell that, per se' | Stated 'I don't have anything at the moment' | Predicted 'I don't think I'll have something in a month'",
+    "script_moment": "When she said 'I don't typically sell that, per se' - should have said: 'That's totally fine - what types of properties do you typically work with? I'm always looking to understand how I might fit into your business.'",
+    "on_leaderboard": "yes"
   }
 ]
