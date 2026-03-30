@@ -7,7 +7,7 @@
 //   [functions."kb-health-check"]
 //   schedule = "0 16 * * *"
 //
-// Env vars: GitHubToken, slack_the_group_chat
+// Env vars: GitHubToken, slack_hack_the_planet
 
 const GITHUB_API = 'https://api.github.com';
 const REPO = '/repos/2wice23/goodresults/contents';
@@ -64,7 +64,7 @@ async function postToSlack(webhookUrl, message) {
 
 exports.handler = async function(event) {
   const token = process.env.GitHubToken;
-  const slackUrl = process.env.slack_the_group_chat;
+  const slackUrl = process.env.slack_hack_the_planet;
 
   if (!token) {
     console.error('No GitHubToken configured');
@@ -97,21 +97,33 @@ exports.handler = async function(event) {
   // Post to Slack only if something is wrong, or on Mondays for a health summary
   const today = new Date();
   const isMonday = today.getUTCDay() === 1;
+  const timestamp = new Date().toISOString();
 
   if (!allHealthy) {
-    const brokenList = broken.map(r => `  ${r.emoji} *${r.name}* (${r.file}): ${r.error}`).join('\n');
+    const brokenList = broken.map(r =>
+      `\`${r.file}\` — ${r.error} (${(r.size / 1024).toFixed(1)} KB on disk)`
+    ).join('\n');
+    const healthyList = healthy.map(r =>
+      `\`${r.file}\` — 200 OK, ${(r.size / 1024).toFixed(1)} KB`
+    ).join('\n');
     await postToSlack(slackUrl,
-      `🚨 *KB Health Check — Issues Found*\n\n` +
-      `${broken.length} of ${KBS.length} knowledge bases have problems:\n` +
-      `${brokenList}\n\n` +
-      `${healthy.length} healthy: ${healthy.map(r => r.name).join(', ')}\n\n` +
-      `<@U0AB93T37S5> <@U0976VBKCVA> — check the GitHub repo.`
+      `🚨 *INCIDENT — kb-health-check failed at ${timestamp}*\n\n` +
+      `\`GET /repos/2wice23/goodresults/contents/{file}\` returned errors on ${broken.length}/${KBS.length} knowledge bases:\n\n` +
+      `*Failed:*\n${brokenList}\n\n` +
+      `*Passing:*\n${healthyList}\n\n` +
+      `Cron: \`0 16 * * *\` | Runtime: Netlify Functions (Node 18)\n` +
+      `Repo: \`2wice23/goodresults\` | API: \`api.github.com\`\n\n` +
+      `<@U0AB93T37S5> <@U0976VBKCVA> — investigate GitHub API response. Check PAT expiration on \`GitHubToken\` env var if 401/403.`
     );
   } else if (isMonday) {
-    const summary = results.map(r => `  ${r.emoji} ${r.name}: ${(r.size/1024).toFixed(1)} KB`).join('\n');
+    const summary = results.map(r =>
+      `\`${r.file}\` → 200 OK | ${(r.size/1024).toFixed(1)} KB | content-type: base64`
+    ).join('\n');
     await postToSlack(slackUrl,
-      `✅ *Weekly KB Health Check — All Clear*\n\n` +
-      `All ${KBS.length} knowledge bases are healthy:\n${summary}`
+      `*kb-health-check — weekly status report*\n` +
+      `Executed: \`${timestamp}\` | Cron: \`0 16 * * *\` (daily 9 AM PT)\n\n` +
+      `All ${KBS.length} KBs passed validation (exists + >100 bytes):\n${summary}\n\n` +
+      `Endpoint: \`GET api.github.com/repos/2wice23/goodresults/contents/{file}\`\nAuth: Bearer \`GitHubToken\` | Next run: tomorrow 09:00 PT`
     );
   }
 

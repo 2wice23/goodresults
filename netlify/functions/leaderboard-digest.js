@@ -74,25 +74,64 @@ exports.handler = async function(event) {
       return { name: agent.name, totalMastered, totalPossible, modulesComplete, modulesStarted, pct };
     }).sort((a, b) => b.totalMastered - a.totalMastered);
 
-    // Format the Slack message
+    // Format the Slack message with hype and trash talk
     const medals = ['🥇', '🥈', '🥉'];
+    const leader = summaries[0];
+    const lastPlace = summaries.length > 1 ? summaries[summaries.length - 1] : null;
+
+    // Hype lines for the leader
+    const leaderHype = [
+      'Running this team right now. Absolutely dominant.',
+      'Setting the standard. Everyone else is playing catch-up.',
+      'ON TOP and not slowing down. This is what effort looks like.',
+      'The rest of the team should be taking notes.',
+      'Built different. That\'s all there is to say.',
+      'Carrying this leaderboard on their back like it\'s nothing.'
+    ];
+
+    // Roast lines for last place
+    const lastRoasts = [
+      'Genuinely embarrassing. The modules are RIGHT THERE.',
+      'At this point I think they forgot the Academy exists.',
+      'If this was a race they\'d still be tying their shoes.',
+      'Everyone else is getting better and they\'re just... existing.',
+      'I\'ve seen more effort from people on vacation.',
+      'This is the kind of performance that makes you wonder if they even want to be here.',
+      'The leaderboard is literally BEGGING them to do something. Anything.',
+      'Their score is so low it\'s pulling the team average down by itself.',
+      'If coasting was a skill they\'d finally be number one at something.',
+      'The new hires are going to pass them at this rate. Tragic.'
+    ];
+
     let lines = summaries.map((a, i) => {
       const medal = i < 3 ? medals[i] : '  ';
       const bar = a.pct >= 80 ? '🟢' : a.pct >= 40 ? '🟠' : a.pct > 0 ? '🔴' : '⚪';
-      return `${medal} *${a.name}* — ${bar} ${a.pct}% mastered (${a.modulesComplete}/${a.modulesStarted} modules complete, ${a.totalMastered} questions)`;
+      return `${medal} *${a.name}* — ${bar} ${a.pct}% mastered | ${a.modulesComplete} modules complete | ${a.totalMastered} questions locked in`;
     });
+
+    // Hype the leader
+    if (leader && leader.pct > 0) {
+      const hype = leaderHype[Math.floor(Math.random() * leaderHype.length)];
+      lines.unshift(`🔥 *${leader.name}* is ON TOP this week at ${leader.pct}% mastery. ${hype}\n`);
+    }
+
+    // Roast last place
+    if (lastPlace && lastPlace !== leader && summaries.length > 2) {
+      const roast = lastRoasts[Math.floor(Math.random() * lastRoasts.length)];
+      lines.push(`\n💀 And in LAST PLACE... *${lastPlace.name}* with a pathetic ${lastPlace.pct}% mastery. ${roast}`);
+    }
 
     // Find anyone who has not started
     const started = new Set(data.map(a => a.name.toLowerCase()));
     const roster = ['Gayden', 'Joe', 'Kayden', 'Dan', 'Franklin', 'Anthony'];
     const notStarted = roster.filter(n => !started.has(n.toLowerCase()));
     if (notStarted.length > 0) {
-      lines.push(`\n⚠️ *Not started yet:* ${notStarted.join(', ')}`);
+      lines.push(`\n🚫 *Haven't even started:* ${notStarted.join(', ')} — what's the excuse?`);
     }
 
-    const message = `📊 *Weekly Academy Leaderboard — ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}*\n\n` +
+    const message = `<!channel> 📊 *WEEKLY ACADEMY LEADERBOARD — ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}*\n\n` +
       lines.join('\n') +
-      `\n\n_Train daily. Analyze every call. Stay sharp._`;
+      `\n\n_The scoreboard doesn't lie. Put in the work or get left behind._`;
 
     await postToSlack(slackUrl, message);
     await logTaskRun('success', `Posted digest for ${summaries.length} agents. Leader: ${summaries[0]?.name || 'N/A'} at ${summaries[0]?.pct || 0}%.`);

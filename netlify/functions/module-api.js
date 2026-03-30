@@ -5,7 +5,8 @@
 //
 // Env vars used:
 //   GitHubToken            — GitHub PAT for reading/writing to repo
-//   slack_the_group_chat   — Slack incoming webhook for #the-group-chat
+//   slack_the_group_chat   — Slack incoming webhook for #the-group-chat (team scores, trash talk)
+//   slack_questions_answers — Slack incoming webhook for #questions-and-answers (module update notes)
 
 const GITHUB_API = 'https://api.github.com';
 const REPO_PATH = '/repos/2wice23/goodresults/contents';
@@ -202,8 +203,8 @@ async function saveUpdate(token, body, slackWebhook) {
   updates.push(record);
   await ghWrite(token, filePath, updates, sha, `Module ${record.module} update from ${record.agent}`);
 
-  // Brief Slack ping
-  await pingSlack(slackWebhook, `:memo: *${record.agent}* submitted a note for Module ${record.module}: ${record.moduleTitle}`);
+  // Clean Q&A ping — no fluff
+  await pingSlack(slackWebhook, `*${record.agent}* — Module ${record.module} (${record.moduleTitle}) note:\n> ${record.update}`);
 }
 
 async function getTrainingProgress(token) {
@@ -266,7 +267,8 @@ exports.handler = async (event) => {
   }
 
   const GITHUB_TOKEN = process.env.GitHubToken;
-  const SLACK_WEBHOOK = process.env.slack_the_group_chat;
+  const SLACK_GROUP_CHAT = process.env.slack_the_group_chat;
+  const SLACK_QA = process.env.slack_questions_answers || SLACK_GROUP_CHAT;
 
   if (!GITHUB_TOKEN) {
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'GitHubToken not configured' }) };
@@ -293,12 +295,12 @@ exports.handler = async (event) => {
       const action = body.action;
 
       if (action === 'moduleComplete') {
-        await saveScore(GITHUB_TOKEN, body, SLACK_WEBHOOK);
+        await saveScore(GITHUB_TOKEN, body, SLACK_GROUP_CHAT);
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
 
       if (action === 'moduleUpdate') {
-        await saveUpdate(GITHUB_TOKEN, body, SLACK_WEBHOOK);
+        await saveUpdate(GITHUB_TOKEN, body, SLACK_QA);
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
 

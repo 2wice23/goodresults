@@ -4,7 +4,8 @@
 //
 // Env vars used:
 //   GitHubToken       — GitHub PAT for reading/writing to repo
-//   slack_the_group_chat — Slack incoming webhook for #the-group-chat
+//   slack_the_group_chat    — Slack incoming webhook for #the-group-chat (call scores)
+//   slack_hack_the_planet   — Slack incoming webhook for #hack-the-planet (access requests, tech alerts)
 
 const GITHUB_API = 'https://api.github.com';
 const REPO_PATH = '/repos/2wice23/goodresults/contents';
@@ -184,11 +185,44 @@ async function addCallReport(token, body) {
 
 async function postToSlack(webhook, body) {
   const report = body.report || {};
-  const score = body.avg || '?';
+  const score = parseFloat(body.avg || 0);
   const agent = report.agent_name || 'Unknown';
-  const emoji = parseFloat(score) >= 80 ? ':fire:' : parseFloat(score) >= 60 ? ':dart:' : ':muscle:';
 
-  const text = `${emoji} *${agent}* — Call Score: ${score}/100\n${report.summary || ''}`;
+  let hype = '';
+  if (score >= 90) {
+    const lines = [
+      'ELITE performance. That is how you run a call.',
+      'Absolutely COOKING right now. The realtors don\'t stand a chance.',
+      'This is what a closer sounds like. Take notes, everyone.',
+      'DOMINANT. Keep this energy and deals will follow.'
+    ];
+    hype = lines[Math.floor(Math.random() * lines.length)];
+  } else if (score >= 75) {
+    const lines = [
+      'Solid call. Tighten up a few things and that\'s a 90+.',
+      'Good work. Not elite yet, but the effort is showing.',
+      'Getting better. Keep pushing and the top spot is yours.'
+    ];
+    hype = lines[Math.floor(Math.random() * lines.length)];
+  } else if (score >= 60) {
+    const lines = [
+      'Average. You know you can do better than that.',
+      'Mediocre. Go re-read the playbook and come back stronger.',
+      'That score says "I didn\'t prepare." Prove me wrong next call.'
+    ];
+    hype = lines[Math.floor(Math.random() * lines.length)];
+  } else {
+    const lines = [
+      'Rough one. That call needs to be analyzed and learned from IMMEDIATELY.',
+      'Yikes. Go listen to that recording and figure out where it fell apart.',
+      'That score is a wake-up call. Literally.',
+      'Not going to sugarcoat it — that was bad. Time to lock in.'
+    ];
+    hype = lines[Math.floor(Math.random() * lines.length)];
+  }
+
+  const emoji = score >= 90 ? '🔥' : score >= 75 ? '🎯' : score >= 60 ? '😐' : '💀';
+  const text = `<!channel> ${emoji} *${agent}* just dropped a *${Math.round(score)}/100* on a call.\n${hype}${report.summary ? '\n\n> ' + report.summary : ''}`;
   await pingSlack(webhook, text);
 }
 
@@ -228,7 +262,7 @@ async function requestAccess(token, body, slackWebhook) {
   });
 
   await ghWrite(token, filePath, list, sha, `Access request: ${email}`);
-  await pingSlack(slackWebhook, `:key: *Access request* — ${body.name || email} (${email}) wants GimmeBrain access`);
+  await pingSlack(slackWebhook, `*AUTH REQUEST* — \`requestAccess\` triggered at ${new Date().toISOString()}\nUser: \`${body.name || email}\` | Email: \`${email}\`\nEndpoint: \`POST /netlify/functions/analyzer-api\`\nPending entry written to \`training-data/access-list.json\` on GitHub.\nApprove by adding email to the \`approved[]\` array and pushing.`);
   return { status: 'sent' };
 }
 
@@ -305,7 +339,8 @@ exports.handler = async (event) => {
   }
 
   const GITHUB_TOKEN = process.env.GitHubToken;
-  const SLACK_WEBHOOK = process.env.slack_the_group_chat;
+  const SLACK_GROUP_CHAT = process.env.slack_the_group_chat;
+  const SLACK_TECH = process.env.slack_hack_the_planet || SLACK_GROUP_CHAT;
 
   if (!GITHUB_TOKEN) {
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'GitHubToken not configured' }) };
@@ -354,7 +389,7 @@ exports.handler = async (event) => {
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
       if (postAction === 'postToSlack') {
-        await postToSlack(SLACK_WEBHOOK, body);
+        await postToSlack(SLACK_GROUP_CHAT, body);
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
       if (postAction === 'addCallReport') {
@@ -362,7 +397,7 @@ exports.handler = async (event) => {
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
       if (postAction === 'requestAccess') {
-        const result = await requestAccess(GITHUB_TOKEN, body, SLACK_WEBHOOK);
+        const result = await requestAccess(GITHUB_TOKEN, body, SLACK_TECH);
         return { statusCode: 200, headers, body: JSON.stringify(result) };
       }
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown action: ' + postAction }) };
