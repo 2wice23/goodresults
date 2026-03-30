@@ -62,7 +62,6 @@
     "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Realtor responded positively to]: Provided specific process details about how he'd handle deals"
   ],
   "negative": [
-    "[Dan VanMatre — COLD OPEN]: Initial 'Who is that?' and 'Who am I speaking with?' showed some guard up at the beginning",
     "[Dan VanMatre — RE-ENGAGEMENT]: Immediate 'I don't right now' to investment properties question",
     "[Dan VanMatre — RE-ENGAGEMENT]: 'Not typically. I don't really work on that side' indicating this isn't her focus",
     "[Dan VanMatre — RE-ENGAGEMENT]: Very brief responses throughout suggesting limited engagement with the investment concept",
@@ -121,9 +120,13 @@
     "[Anthony Cruz — WARM FOLLOW-UP]: Very brief 'Distress. I would have to see what we have currently' - not immediately helpful",
     "[Anthony Cruz — WARM FOLLOW-UP]: Somewhat dismissive 'right now I don't really have much' without much exploration",
     "[Anthony Cruz — DEAL REJECTION]: Brief 'I don't have anything right now' after rejection",
-    "[Anthony Cruz — DEAL REJECTION]: Needed clarification on the follow-up timeline question"
+    "[Anthony Cruz — DEAL REJECTION]: Needed clarification on the follow-up timeline question",
+    "[Anthony Cruz — WARM FOLLOW-UP]: Noted deals are 'far in between' and 'hardly getting anything exciting' suggesting low current inventory"
   ],
   "reknowledge": [
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: Yunyue Wang works Houston market and has current on-market inventory",
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: She's receptive to working with investors and asks qualifying questions",
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: She proactively offers properties when criteria matches",
     "[RE Knowledge — Anthony Cruz — 2024-12-17]: Marcus works Houston market but currently has limited off-market inventory",
     "[RE Knowledge — Anthony Cruz — 2024-12-17]: He's receptive to working with investors and asks qualifying questions about budget and location",
     "[RE Knowledge — Gayden Rosales — 03/27/2026]: Home and Slate Real Estate is a Truckee-based brokerage with agents practicing in Reno",
@@ -200,8 +203,6 @@
     "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT]: Initial confusion about not remembering previous conversations",
     "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Asked 'what price range are you looking for?' showing immediate interest",
     "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT]: Brief 'No' when asked if she remembered prior conversation",
-    "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Asked 'how long have you been investing?' indicating she's qualifying him seriously",
-    "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Volunteered 'I have access to some pocket listings' without being asked",
-    "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Committed to send info by evening and asked for contact details to save"
+    "[Dan VanMatre — RE-ENGAGEMENT — Grade B-]: [Dan VanMatre — RE-ENGAGEMENT — Realtor responded positively to]: Asked 'how long have you been investing?' indicating she's qualifying him seriously"
   ]
 }
