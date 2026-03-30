@@ -860,31 +860,23 @@ function submitScore(){
   });
 }
 
-function submitModuleUpdate(){
-  const txt = document.getElementById('moduleUpdateInput').value.trim();
-  if(!txt){
-    alert('Type something first.');
-    return;
+document.addEventListener('DOMContentLoaded',()=>{
+  const btn=document.getElementById('moduleUpdateBtn');
+  const textarea=document.getElementById('moduleUpdateInput');
+  if(btn&&textarea){
+    btn.addEventListener('click',()=>{
+      const text=textarea.value.trim();
+      if(!text){alert('Please type an update before submitting.');return}
+      const agent=sessionStorage.getItem('gr_agent')||'Unknown';
+      const email=sessionStorage.getItem('gr_email')||'';
+      const body={action:'moduleUpdate',agent,email,module:MODULE_NUM,moduleTitle:MODULE_TITLE,update:text,date:new Date().toISOString()};
+      fetch(APPS_SCRIPT_URL,{method:'POST',body:JSON.stringify(body)}).then(()=>{
+        btn.textContent='✓ Submitted!';btn.style.background='#22C55E';
+        setTimeout(()=>{btn.textContent='Submit To Me Foo';btn.style.background='var(--orange)';textarea.value=''},2000);
+      }).catch(()=>{alert('Failed to submit. Try again.')})
+    })
   }
-  const btn = document.getElementById('moduleUpdateBtn');
-  btn.disabled = true;
-  btn.textContent = 'Sending...';
-  const agent = sessionStorage.getItem('gr_agent') || 'Unknown';
-  const payload = {action: 'addModuleUpdate', module: MODULE_NUM, moduleTitle: MODULE_TITLE, agent: agent, update: txt, date: new Date().toISOString()};
-  fetch(APPS_SCRIPT_URL, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload)}).then(() => {
-    btn.textContent = '✓ Sent!';
-    btn.style.background = '#22C55E';
-    document.getElementById('moduleUpdateInput').value = '';
-    setTimeout(() => {
-      btn.textContent = 'Submit To Me Foo';
-      btn.style.background = '';
-      btn.disabled = false;
-    }, 3000);
-  }).catch(() => {
-    btn.textContent = 'Retry';
-    btn.disabled = false;
-  });
-}
+});
 
 (function loadStreak(){
   const streak = parseInt(localStorage.getItem('gr_streak') || '0');
@@ -892,7 +884,10 @@ function submitModuleUpdate(){
   if(el) el.textContent = streak > 0 ? streak + '-day streak' : 'Start your streak';
 })();
 
-loadMasteredAndInit();
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelector('.acc-item[data-section="1"]')?.classList.add('open');
+  loadMasteredAndInit();
+});
 </script>
 
 

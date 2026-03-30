@@ -814,7 +814,7 @@ document.getElementById('moduleUpdateBtn').addEventListener('click', function() 
   const text = textarea.value.trim();
   if (!text) { alert('Please enter an update.'); return; }
   const agent = sessionStorage.getItem('gr_agent') || 'Unknown';
-  const body = {action: 'submitModuleUpdate', agent, module: MODULE_NUM, moduleTitle: MODULE_TITLE, update: text, date: new Date().toISOString()};
+  const body = {action: 'moduleUpdate', agent, email: sessionStorage.getItem('gr_email')||'', module: MODULE_NUM, moduleTitle: MODULE_TITLE, update: text, date: new Date().toISOString()};
   fetch(APPS_SCRIPT_URL, {method: 'POST', body: JSON.stringify(body)}).then(() => {
     textarea.value = '';
     this.textContent = '✓ Submitted!';
