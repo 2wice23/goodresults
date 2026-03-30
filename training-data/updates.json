@@ -67,5 +67,14 @@
     "email": "gayden@goodresults.org",
     "update": "q12 - actualy, the too nice template is for when they send you a proeprty that is too nice, maybe its already rehabbed, or doesnt need a full remodel. for whatever reason, it is \"too nice\" to make an investment deal or be sold by a wholesaler. fix this question and answer - and add a new question to the pool as well",
     "status": "pending"
+  },
+  {
+    "timestamp": "2026-03-30T19:13:55.039Z",
+    "module": 3,
+    "moduleTitle": "The Offer Process",
+    "agent": "Joe",
+    "email": "joe@goodresults.org",
+    "update": "\"Float the deal first\" has the wrong answer in it. After they say \"let me ask the seller,\" you should wait for a response from them (with consistent and daily follow up) until you get the price you need, or move on. \nAlso, Pool Q16. How should you respond if a seller pushes back on a $1 option fee? Has the incorrect answer.",
+    "status": "pending"
   }
 ]
