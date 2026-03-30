@@ -278,5 +278,25 @@
     "resistance_moments": "",
     "script_moment": "",
     "on_leaderboard": ""
+  },
+  {
+    "id": "1774886066775",
+    "timestamp": "2026-03-30T15:54:26.775Z",
+    "agent": "Dan VanMatre",
+    "realtor": "Judy Johnson",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "2m 7s",
+    "call_date": "03/30/2026",
+    "score": 76,
+    "realtor_engagement": 65,
+    "summary": "Dan followed up on a Friday text exchange with Judy. She didn't remember the context initially but once clarified, she confirmed no distressed properties available. Dan delivered his buy box verbally and committed to sending information.",
+    "what_worked": "Complete buy box delivery with all elements | Clear positioning as investor vs agent | Professional follow-up to text exchange | Committed to sending information as next step",
+    "what_to_tighten": "Could have asked if she works with other investors to gauge future potential | Missed opportunity to ask about her typical client types or market areas",
+    "language_flags": "",
+    "missed_opportunities": "Didn't ask about her typical deal types or if she works with other investors | Could have inquired about referral opportunities within her network",
+    "positive_moments": "Asked clarifying question 'so you are the agent looking for distract property to buy?' showing she was trying to understand his role | Said 'okay' when he offered to send information | Volunteered information about current property (4BR, $430k) showing she was thinking about inventory",
+    "resistance_moments": "Initially didn't remember the text exchange | Very brief 'No' responses about distressed properties | Didn't ask follow-up questions about his criteria or business",
+    "script_moment": "After she mentioned 'we don't have any distressed property' but offered the 4BR for $430k, Dan should have said: 'That's helpful to know what you're seeing. Do you ever work with other investors, or am I the first one to reach out about distressed properties?'",
+    "on_leaderboard": "yes"
   }
 ]
