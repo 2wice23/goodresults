@@ -338,5 +338,25 @@
     "resistance_moments": "Immediate 'I don't right now' to investment properties question | 'Not typically. I don't really work on that side' indicating this isn't her focus | Very brief responses throughout suggesting limited engagement with the investment concept",
     "script_moment": "When she said 'if you're looking for an agent to assist with listing or helping with any buyers, I would be willing to assist,' Dan should have said: 'Actually, that's interesting - I do flip houses so I'll need listing help on the back end. What areas do you typically work in for listings?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774894230264",
+    "timestamp": "2026-03-30T18:10:30.264Z",
+    "agent": "Dan VanMatre",
+    "realtor": "Yunyue Wang",
+    "call_type": "COLD OPEN",
+    "duration": "2m 50s",
+    "call_date": "03/30/2026",
+    "score": 77,
+    "realtor_engagement": 78,
+    "summary": "Dan made a cold call to Yunyue introducing himself as a fix and flip investor new to Houston. She immediately offered a property currently on market and requested his contact information to send details.",
+    "what_worked": "Complete buy box delivery with specific numbers | Realtor immediately offered a property | Set clear next step for property address | Professional positioning with business background",
+    "what_to_tighten": "Opener could be more specific or reference something about her market | Could have asked if property was on or off market",
+    "language_flags": "",
+    "missed_opportunities": "When she offered property, could have asked if it was on or off market to understand deal type",
+    "positive_moments": "Immediately offered 'there's a property, it's on the market right now' after hearing his criteria | Asked for his email address showing intent to stay connected | Engaged with questions about his business structure",
+    "resistance_moments": "Initial 'Who is that?' and 'Who am I speaking with?' showed some guard up at the beginning",
+    "script_moment": "When she said 'not right now' at 0:59, Dan should have immediately asked 'What about off-market - do you ever run across properties before they hit MLS?' to dig deeper into her pipeline.",
+    "on_leaderboard": "yes"
   }
 ]
