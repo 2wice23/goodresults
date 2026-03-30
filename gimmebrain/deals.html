@@ -256,9 +256,7 @@ async function ghDelete(path, body) {
 async function loadDeals() {
   const grid = document.getElementById('dealGrid');
   try {
-    const resp = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/deals');
-    if (!resp.ok) throw new Error('GitHub API ' + resp.status);
-    const items = await resp.json();
+    const items = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals');
     const folders = items.filter(i => i.type === 'dir');
 
     if (!folders.length) {
@@ -268,17 +266,15 @@ async function loadDeals() {
 
     const promises = folders.map(async folder => {
       try {
-        const fileResp = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name + '/deal-doc.txt');
-        if (!fileResp.ok) return null;
-        const file = await fileResp.json();
+        const file = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name + '/deal-doc.txt');
+        if (!file || file.error) return null;
         if (!file || !file.content) return null;
         const json = JSON.parse(atob(file.content.replace(/\n/g, '')));
         json._slug = folder.name;
         json._docSha = file.sha;
 
         // Get all files in deal folder (for photos)
-        const folderResp = await fetch('https://api.github.com/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name);
-        const files = folderResp.ok ? await folderResp.json() : [];
+        const files = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name).catch(() => []);
         const imgs = files.filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f.name));
         imgs.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true}));
         json._thumb = imgs.length ? SITE_BASE + '/deals/' + folder.name + '/' + imgs[0].name : null;

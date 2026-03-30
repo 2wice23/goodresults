@@ -742,16 +742,6 @@ function updateScore(){
   quizDone=answered>=total;
 }
 
-function {
-  fetch(APPS_SCRIPT_URL+'?action=gettrainingprogress').then(r=>r.json()).then(agents=>{
-    const sc=[[100,'PERFECT SCORE 🧠 Absolutely disgusting dominance.'],[90,'Strong. Very strong. That\'s the energy we need.'],[80,'Solid work. Not perfect, but respectable.'],[70,'It\'s passing. Barely. Maybe re-read the module.'],[60,'Not great. You might wanna re-read it.'],[0,'Yikes. Did you even read the module?']];
-    let cmt='';
-    for(const[th,m]of sc){if(pct>=th){cmt=m;break;}}
-    let msg='🎓 *'+agent+'* just finished *Module '+modNum+' — '+modTitle+'*\nScore: '+correct+'/'+total+' ('+pct+'%)\n'+cmt;
-    fetch('/.netlify/functions/slack-score-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:msg})}).catch(()=>{});
-  }).catch(()=>{});
-}
-
 function submitScore(){
   if(!quizDone)return;
   const total=quizQuestions.length;

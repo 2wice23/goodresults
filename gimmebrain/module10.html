@@ -696,51 +696,6 @@ function updateScore(){
   quizDone = answered >= total;
 }
 
-function {
-  fetch(APPS_SCRIPT_URL + '?action=gettrainingprogress').then(r => r.json()).then(agents => {
-    const sc = [[100, 'PERFECT SCORE 🎯 Absolutely disgusting dominance. Everyone else should be worried.'], [90, 'Strong. Very strong. That\'s the kind of energy this team needs.'], [80, 'Solid work. Not perfect, but definitely respectable.'], [70, 'Ehh... it\'s passing. Barely. Maybe crack open the module one more time.'], [60, 'That\'s... not great. You might wanna re-read that module, just saying.'], [0, 'Yikes. 😬 Did you even read the module or just start clicking randomly?']];
-    let cmt = '';
-    for(const [th, m] of sc){
-      if(pct >= th){
-        cmt = m;
-        break;
-      }
-    }
-    let lp = null, la = Infinity, ls = Infinity, lm = '';
-    agents.forEach(a => {
-      const ms = Object.entries(a.modules || {});
-      if(!ms.length) return;
-      const avg = ms.reduce((s, [_, m]) => s + (m.best_score || 0), 0) / ms.length;
-      if(avg < la){
-        la = avg;
-        lp = a.name;
-        let w = Infinity, wm = '';
-        ms.forEach(([n, m]) => {
-          if((m.best_score || 0) < w){
-            w = m.best_score || 0;
-            wm = n;
-          }
-        });
-        ls = w;
-        lm = wm;
-      }
-    });
-    const tt = ['When are you gonna step it up? Asking for the whole team. 👀', 'That score is genuinely embarrassing. I\'d be scared to show my face in the office.', 'The leaderboard is BEGGING you to do literally anything.', 'At this point even a coin flip would score better. Just saying. 🤪', 'Everyone else is getting better. You\'re getting... comfortable? 🛏️', 'That leaderboard position is a cry for help honestly.', 'You know the modules are FREE to re-take right?? Nobody\'s stopping you.', 'I\'ve seen better scores from people who accidentally hit submit. 💀', 'Your score is so low it\'s basically a rounding error.', 'If effort was a scoreboard you wouldn\'t even be on it.'];
-    const t = tt[Math.floor(Math.random() * tt.length)];
-    let msg = '🎓 *' + agent + '* just finished *Module ' + modNum + ' — ' + modTitle + '*\nScore: ' + correct + '/' + total + ' (' + pct + '%)\n' + cmt;
-    if(lp && lp.toLowerCase() !== agent.toLowerCase()){
-      msg += '\n\n📈 Meanwhile... *' + lp + '* is camping out in LAST PLACE with a ' + Math.round(ls) + '% on Module ' + lm + '. ' + t;
-    } else if(lp && lp.toLowerCase() === agent.toLowerCase()){
-      msg += '\n\n📈 Plot twist... *' + agent + '* IS in last place. ' + (pct < 70 ? 'And this score ain\'t helping. 💀' : 'But at least they\'re trying to climb out. Respect... barely.');
-    }
-    fetch('/.netlify/functions/slack-score-notify', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({text: msg})
-    }).catch(() => {});
-  }).catch(() => {});
-}
-
 function submitScore(){
   if(!quizDone) return;
   const total = quizQuestions.length;

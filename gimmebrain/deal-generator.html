@@ -327,7 +327,7 @@ const ANTHROPIC_PROXY = '/.netlify/functions/anthropic-proxy';
 const CLOSE_PROXY = '/.netlify/functions/close-proxy';
 const GITHUB_PROXY = '/.netlify/functions/github-proxy';
 const GITHUB_REPO = '2wice23/goodresults';
-const RENTCAST_KEY = 'c1bce705542d453f869d9eb4a12d1e2d';
+const RENTCAST_PROXY = '/.netlify/functions/rentcast-proxy';
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
 let currentPDF = null;
@@ -628,18 +628,15 @@ function parseDollar(str) {
 // RENTCAST PROPERTY LOOKUP
 // ============================================================
 async function fetchFromRentCast(address, city, state, zip) {
-  const params = new URLSearchParams({
-    address: address || '',
-    city:    city    || '',
-    state:   state   || '',
-    zipCode: zip     || ''
-  });
-
-  const resp = await fetch('https://api.rentcast.io/v1/properties?' + params.toString(), {
-    headers: {
-      'Accept':    'application/json',
-      'X-Api-Key': RENTCAST_KEY
-    }
+  const resp = await fetch(RENTCAST_PROXY, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      address: address || '',
+      city:    city    || '',
+      state:   state   || '',
+      zipCode: zip     || ''
+    })
   });
 
   if (!resp.ok) {

@@ -431,7 +431,7 @@
 // CONFIG
 // ============================================================
 const ANTHROPIC_PROXY = '/.netlify/functions/anthropic-proxy';
-const RENTCAST_KEY  = 'c1bce705542d453f869d9eb4a12d1e2d';
+const RENTCAST_PROXY = '/.netlify/functions/rentcast-proxy';
 const CLOSE_PIPELINE = 'pipe_1P0GjK0TFer4Yw2rbArK0u'; // Properties pipeline
 const CLOSE_PROXY    = '/.netlify/functions/close-proxy'; // Server-side proxy (API key lives there)
 
@@ -680,20 +680,15 @@ ${contractText.substring(0, 50000)}`;
 // RENTCAST PROPERTY LOOKUP
 // ============================================================
 async function fetchFromRedfin(address, city, state, zip) {
-  if (!RENTCAST_KEY) throw new Error('No Rentcast key — add RENTCAST_KEY to the config');
-
-  const params = new URLSearchParams({
-    address: address || '',
-    city:    city    || '',
-    state:   state   || '',
-    zipCode: zip     || ''
-  });
-
-  const resp = await fetch('https://api.rentcast.io/v1/properties?' + params.toString(), {
-    headers: {
-      'Accept':    'application/json',
-      'X-Api-Key': RENTCAST_KEY
-    }
+  const resp = await fetch(RENTCAST_PROXY, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      address: address || '',
+      city:    city    || '',
+      state:   state   || '',
+      zipCode: zip     || ''
+    })
   });
 
   if (!resp.ok) {
