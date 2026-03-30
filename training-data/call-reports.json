@@ -618,5 +618,25 @@
     "resistance_moments": "Immediately shut down possibility of having relevant inventory | Discouraged follow-up attempts by emphasizing she only works new builds",
     "script_moment": "When she said she only works for new home builders, Frank should have said: 'I understand completely. Since you're plugged into the local market, do you know any agents in your office or network who do work with existing homes or investors like me?'",
     "on_leaderboard": "no"
+  },
+  {
+    "id": "1774908494667",
+    "timestamp": "2026-03-30T22:08:14.667Z",
+    "agent": "Gayden Rosales",
+    "realtor": "Anthony Nichols",
+    "call_type": "ESTABLISHED RELATIONSHIP CHECK-IN",
+    "duration": "7m 53s",
+    "call_date": "03/30/2026",
+    "score": 83,
+    "realtor_engagement": 85,
+    "summary": "Gayden and Anthony, who have an established relationship, discuss email setup issues and a specific distressed property on Peppermint. Anthony is setting up MLS searches and opt-ins for Gayden while they review a challenging deal with tenant issues.",
+    "what_worked": "Strong established relationship rapport | Collaborative problem-solving on technical issues | Natural buy box refinement through conversation | Multiple concrete next steps established | Professional handling of ongoing deal discussion",
+    "what_to_tighten": "Could have been more specific about timeline for Peppermint property decision | Might have explored other potential deals beyond the one mentioned",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about other agents in Anthony's office who might have deals | Didn't explore if Anthony knows other realtors who work with investors",
+    "positive_moments": "Asked specific questions about price range and property types to refine search | Offered multiple communication options (email, text, MLS access) | Provided detailed explanation of current distressed deal status | Took initiative to set up comprehensive MLS searches",
+    "resistance_moments": "",
+    "script_moment": "When Anthony mentioned the Peppermint deal challenges, Gayden could have said: 'I appreciate you working with them on that. Even if this one doesn't work out, situations like this come up regularly - would you feel comfortable sending me other distressed deals as they come across your desk, even if they're not your listings?'",
+    "on_leaderboard": "yes"
   }
 ]
