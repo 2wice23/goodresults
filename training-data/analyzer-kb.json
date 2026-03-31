@@ -62,8 +62,6 @@
     "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Committed to 'check around' and 'see what I can find for you'"
   ],
   "negative": [
-    "[Anthony Cruz — DEAL DISCUSSION]: Very brief responses suggesting limited enthusiasm",
-    "[Anthony Cruz — DEAL DISCUSSION]: Only had one property and didn't volunteer information about future deal sources",
     "[Anthony Cruz — WARM FOLLOW-UP]: Initially said 'Not really' to renovation projects",
     "[Anthony Cruz — WARM FOLLOW-UP]: Joked 'That's what a wholesaler would say' showing some skepticism",
     "[Anthony Cruz — DEAL DISCUSSION]: Said 'Not really' when asked about distressed properties - indicated this isn't her typical business",
@@ -121,9 +119,15 @@
     "[Joe Kruse — ESTABLISHED RELATIONSHIP CHECK-IN]: Had to clarify family health issues are consuming considerable time",
     "[Joe Kruse — ESTABLISHED RELATIONSHIP CHECK-IN]: Mentioned wife's current illness limiting availability",
     "[Gayden Rosales — DEAL DISCUSSION]: Initial concern about wholesale deal language in contract",
-    "[Franklin Ladaga — RE-ENGAGEMENT]: Initial confusion about where he got her number"
+    "[Franklin Ladaga — RE-ENGAGEMENT]: Initial confusion about where he got her number",
+    "[Franklin Ladaga — RE-ENGAGEMENT]: Had to clarify Incline market pricing doesn't fit his criteria",
+    "[Franklin Ladaga — RE-ENGAGEMENT]: Had to clarify initially that he was under review which limited conversation depth"
   ],
   "reknowledge": [
+    "[RE Knowledge — Anthony Cruz — 03/31/2026]: Erik Portillo sent Anthony a Baytown property that needed cosmetic rehab and AC work",
+    "[RE Knowledge — Anthony Cruz — 03/31/2026]: The property was just listed but built before 1960s (too old for Anthony's criteria)",
+    "[RE Knowledge — Anthony Cruz — 03/31/2026]: Erik currently only has one distressed property in his inventory",
+    "[RE Knowledge — Anthony Cruz — 03/31/2026]: Erik was receptive to keeping Anthony informed about future opportunities fitting his buy box",
     "[RE Knowledge — Anthony Cruz — 03/31/2026]: Jose Escobedo primarily works new construction sales and focuses on land deals",
     "[RE Knowledge — Anthony Cruz — 03/31/2026]: He works with builders looking to purchase land in Houston and Rio Grande Valley area",
     "[RE Knowledge — Anthony Cruz — 03/31/2026]: New construction realtors may have builder networks that encounter renovation projects",
@@ -199,10 +203,6 @@
     "[RE Knowledge — Anthony Cruz — 03/31/2026]: Fernando Mendoza sometimes gets distressed properties across his desk but availability varies",
     "[RE Knowledge — Anthony Cruz — 03/31/2026]: He's willing to search MLS for distressed properties and provide market insight on specific areas",
     "[RE Knowledge — Anthony Cruz — 03/31/2026]: He's open to both buyer's agent arrangements and sending his own listings when available",
-    "[RE Knowledge — Anthony Cruz — 03/31/2026]: Houston market has realtors who occasionally encounter distressed properties but don't specialize in them",
-    "[RE Knowledge — Franklin Ladaga — 03/31/2026]: Sonja Leonard gets off-market investment deals but doesn't have current inventory",
-    "[RE Knowledge — Franklin Ladaga — 03/31/2026]: She will be out of town visiting her mom in 2 weeks",
-    "[RE Knowledge — Franklin Ladaga — 03/31/2026]: She was receptive to 3-week follow-up timeline",
-    "[RE Knowledge — Franklin Ladaga — 03/31/2026]: Audio connection issues can create initial confusion about caller identity"
+    "[RE Knowledge — Anthony Cruz — 03/31/2026]: Houston market has realtors who occasionally encounter distressed properties but don't specialize in them"
   ]
 }
