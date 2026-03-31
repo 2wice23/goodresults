@@ -1138,5 +1138,25 @@
     "resistance_moments": "Initial confusion about who he was due to travel and medical issues | Name didn't ring a bell despite previous conversations",
     "script_moment": "Instead of 'Hey, Winona, how you been? It's Kaden' should have opened with 'Hi Winona, this is Kayden Rogers from Good Results Home Buyers. I know I've been texting you and you mentioned not recognizing the name - we've actually spoken a few times about investment properties. Do you have a quick minute to clarify and give you an update on what we're looking for?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774986420627",
+    "timestamp": "2026-03-31T19:47:00.627Z",
+    "agent": "Kayden Rogers",
+    "realtor": "Raymond Richards",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "4m 24s",
+    "call_date": "03/31/2026",
+    "score": 68,
+    "realtor_engagement": 35,
+    "summary": "Kayden attempted to re-engage Raymond after a confusing text exchange, but Raymond was immediately hostile, claiming he doesn't remember previous conversations and doesn't work with investors. Despite strong resistance, Kayden managed to deliver his buy box and secure permission to text his information.",
+    "what_worked": "Strong buy box delivery with specific criteria | Persistent but respectful approach | Acknowledged Raymond's spam call frustration | Secured permission to send information",
+    "what_to_tighten": "Lead with clear name and company identification | Reference specific previous conversations if claiming prior contact | Address confusion immediately rather than pushing forward",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about his specific market area or typical client base | Missed opportunity to differentiate from the 22 weekly spam calls he receives",
+    "positive_moments": "Said 'go ahead and text me your info' after initially refusing | Engaged in conversation about market conditions | Shared personal context about his 30-year phone number",
+    "resistance_moments": "Immediately asked 'Who are you?' showing no recognition | Said 'I don't work with investors' as flat rejection | Listed all the spam calls he gets (22 per week) | Said 'nobody's giving their houses away' showing market skepticism",
+    "script_moment": "After Raymond asked 'Who are you?' should have said: 'I apologize - this is Kayden Rogers with Good Results Home Buyers. I believe we may have spoken before, but let me reintroduce myself properly since there seems to be some confusion.'",
+    "on_leaderboard": "yes"
   }
 ]
