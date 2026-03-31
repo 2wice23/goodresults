@@ -1118,5 +1118,25 @@
     "resistance_moments": "Victor said 'I really don't remember distinctly' and seemed apologetic about not remembering | He said 'I feel bad that I don't remember you and that I don't have you in my database' | Initial confusion about who Kayden was created some friction at the start",
     "script_moment": "When Victor said 'I saw a whole bunch of pieces of shit' - Kayden should have asked: 'What areas were those in? Were they in our price range of 150-350k?' This would have gathered valuable market intel and potentially identified immediate opportunities.",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774986374183",
+    "timestamp": "2026-03-31T19:46:14.183Z",
+    "agent": "Kayden Rogers",
+    "realtor": "Winona Smith",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "2m 16s",
+    "call_date": "03/31/2026",
+    "score": 68,
+    "realtor_engagement": 72,
+    "summary": "Kayden called Winona to follow up on recent unanswered texts and provide updated buy box criteria. Winona explained she was traveling with medical issues and didn't recognize his name, but was receptive to receiving detailed criteria via text and email.",
+    "what_worked": "Strong buy box delivery with specific, memorable criteria | Good recovery from identity confusion | Accommodating approach to her circumstances | Clear multiple next steps (text and email)",
+    "what_to_tighten": "Opener should establish context immediately instead of assuming recognition | Should have referenced specific previous conversation details | Could have been more empathetic about her medical situation",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about her current market activity or recent deals | Missed chance to acknowledge the inconvenience of her medical issues more directly",
+    "positive_moments": "Said 'I'll keep you on my database' showing willingness to work together | Agreed to provide email address for detailed information | Responded positively to his accommodation of her situation",
+    "resistance_moments": "Initial confusion about who he was due to travel and medical issues | Name didn't ring a bell despite previous conversations",
+    "script_moment": "Instead of 'Hey, Winona, how you been? It's Kaden' should have opened with 'Hi Winona, this is Kayden Rogers from Good Results Home Buyers. I know I've been texting you and you mentioned not recognizing the name - we've actually spoken a few times about investment properties. Do you have a quick minute to clarify and give you an update on what we're looking for?'",
+    "on_leaderboard": "yes"
   }
 ]
