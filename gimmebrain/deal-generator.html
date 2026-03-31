@@ -313,6 +313,10 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
       <div class="ext-field"><div class="ext-key">Lot Size</div><input class="ext-input" id="eLot" data-field="lotSize" placeholder="e.g. 7,500 sqft"></div>
       <div class="ext-field"><div class="ext-key">Year Built</div><input class="ext-input" id="eYear" data-field="yearBuilt" placeholder="e.g. 1995"></div>
       <div class="ext-field"><div class="ext-key">Garage</div><input class="ext-input" id="eGarage" data-field="garage" placeholder="e.g. 2-car"></div>
+      <div class="ext-field"><div class="ext-key">Basement</div><input class="ext-input" id="eBasement" data-field="basementSqft" placeholder="e.g. 800 sqft"></div>
+      <div class="ext-field"><div class="ext-key">Pool</div><input class="ext-input" id="ePool" data-field="pool" placeholder="Yes / No"></div>
+      <div class="ext-field"><div class="ext-key">Solar</div><input class="ext-input" id="eSolar" data-field="solar" placeholder="Yes / No"></div>
+      <div class="ext-field" style="grid-column:1/-1;background:var(--orange-glow);border-color:var(--orange-border);"><div class="ext-key" style="color:var(--orange);">Manual Entry Reminder</div><div style="font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--cream);line-height:1.7;">Basement, pool, and solar info is rarely in the contract. Enter manually if relevant — these show on the public deal page.</div></div>
     </div>
 
     <div id="dealSummary" style="display:none;padding:12px 16px;margin:0 16px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
@@ -455,15 +459,15 @@ async function extractPDFText(file) {
   }
 
   // Identify which pages are the actual purchase agreement
-  // Nevada: "RESIDENTIAL OFFER AND ACCEPTANCE AGREEMENT" or "RESIDENTIAL PURCHASE AGREEMENT" with "Page X of Y" footer
-  // Texas: "ONE TO FOUR FAMILY RESIDENTIAL CONTRACT" or "PROMULGATED BY THE TEXAS REAL ESTATE COMMISSION"
   const CONTRACT_MARKERS = [
     /RESIDENTIAL OFFER AND ACCEPTANCE/i,
     /RESIDENTIAL PURCHASE AGREEMENT/i,
     /ONE TO FOUR FAMILY RESIDENTIAL CONTRACT/i,
     /PROMULGATED BY THE TEXAS REAL ESTATE COMMISSION/i,
-    /ROA\s+\d+\/\d+/i,    // "ROA 1/12" footer
-    /RPA\s+\d+\/\d+/i     // "RPA 1/12" footer
+    /ROA\s+\d+\s*(?:of|\/)\s*\d+/i,    // "ROA 1 of 12" or "ROA 1/12"
+    /RPA\s+\d+\s*(?:of|\/)\s*\d+/i,    // "RPA 1 of 12" or "RPA 1/12"
+    /PURCHASE PRICE.*EARNEST MONEY/is,   // Generic contract pattern
+    /BUYER.*SELLER.*PROPERTY/is          // Generic contract pattern
   ];
 
   // Non-contract pages to skip
@@ -475,7 +479,10 @@ async function extractPDFText(file) {
     /WIRE FRAUD ADVISORY/i,
     /CONSENT TO ACT/i,
     /COMMON.INTEREST COMMUNITY DISCLOSURE FORM/i,
-    /SOLAR POWER SYSTEM DISCLOSURE/i
+    /SOLAR POWER SYSTEM DISCLOSURE/i,
+    /BUYER.?BROKER.*AGREEMENT/i,
+    /AGENCY DISCLOSURE/i,
+    /CONFIRMATION OF REPRESENTATION/i
   ];
 
   let contractPages = [];
@@ -491,10 +498,13 @@ async function extractPDFText(file) {
       inContract = true;
       contractPages.push(txt);
     } else if (inContract && !isSkipPage) {
-      // Check if this page has the same "Page X of Y" footer pattern as the contract
-      // This catches contract pages that don't repeat the title
+      // Keep going as long as we don't hit a skip marker.
+      // Contract pages often don't repeat the title — check for footers OR
+      // just keep including pages until we hit a known non-contract section.
       const footerMatch = txt.match(/(?:ROA|RPA|Page)\s+\d+\s*(?:of|\/)\s*\d+/i);
-      if (footerMatch) {
+      const hasSignature = /(?:SELLER|BUYER|ACCEPTANCE|SIGNATURE|DATE|DocuSign)/i.test(txt);
+      const hasContractContent = /(?:EARNEST|ESCROW|CLOSING|INSPECTION|CONTINGENC|PURCHASE PRICE|ADDITIONAL TERMS|DEFAULT|MEDIATION)/i.test(txt);
+      if (footerMatch || hasSignature || hasContractContent) {
         contractPages.push(txt);
       } else {
         // Left the contract section
@@ -504,7 +514,7 @@ async function extractPDFText(file) {
   }
 
   // If we found contract pages, use only those. Otherwise fall back to full PDF.
-  if (contractPages.length >= 3) {
+  if (contractPages.length >= 2) {
     return contractPages.join('\n--- PAGE BREAK ---\n');
   }
   return pages.join('\n');
@@ -528,37 +538,43 @@ document.getElementById('extractBtn').addEventListener('click', async () => {
     setStatus('Sending to Claude...', 'active');
     const prompt = `You are a real estate contract analyst. Extract deal information and return a single valid JSON object. Use null for any field you cannot find. Return ONLY the JSON — no explanation, no markdown.
 
-STEP 1 — IDENTIFY THE CONTRACT TYPE:
-Non-contract pages have already been filtered out. Determine which contract type this is:
-- NEVADA RPA/ROA: "RESIDENTIAL OFFER AND ACCEPTANCE AGREEMENT" — paginated "Page X of 12" (or similar). Also called the RPA.
-- TEXAS TREC: "ONE TO FOUR FAMILY RESIDENTIAL CONTRACT (RESALE)" — has numbered paragraphs.
-If you see leftover non-contract text (disclosures, lead paint, etc.), IGNORE it entirely.
+CRITICAL — IDENTIFYING THE PURCHASE AGREEMENT:
+This text may contain the purchase agreement PLUS other documents (disclosures, addenda, lead paint forms, broker agreements, wire fraud advisories, SRPD, etc.). You MUST find the actual purchase agreement first and extract ONLY from it. Look for:
+- Nevada ROA: "RESIDENTIAL OFFER AND ACCEPTANCE AGREEMENT" — created by SNR (Sierra Nevada Realtors), references NRS, numbered lines, BUYER/SELLER sections
+- Nevada RPA: "RESIDENTIAL PURCHASE AGREEMENT" — GLVAR form, similar structure, references NRS
+- Texas TREC: "ONE TO FOUR FAMILY RESIDENTIAL CONTRACT (RESALE)" or TREC form number, numbered paragraphs
+- Any other state purchase agreement: Look for the main document with purchase price, EMD, closing date, and signature blocks
+IGNORE anything labeled DISCLOSURE, ADVISORY, LEAD PAINT, BUYER BROKER, or WIRE FRAUD.
 
-STEP 2 — EXTRACT FIELDS (with exact locations):
+FIELD EXTRACTION RULES:
 
-NEVADA RPA:
-- address/city/state/zip: RPA page 1, lines 1-5. Buyer name on line 1, property address on line 3, city/state/zip on line 4.
-- contractPrice: RPA page 1, "TOTAL PURCHASE PRICE" line (usually line 30). This is the dollar amount after all financing lines.
-- executedDate: FINAL PAGE of the RPA — look for the SELLER's signature with a date next to it. The date the SELLER signed IS the Acceptance/Executed date. If there are multiple sellers, use the LATEST date. Return as MM/DD/YYYY.
-- coeDate: RPA page 1, "CLOSING" section (usually line 38). Look for "Close of Escrow (COE) will occur on [DATE]". Return as MM/DD/YYYY.
-- ddDays: RPA page 6 (Inspection Contingency section). Look for "within ___ days from Acceptance" — that number IS the due diligence period. Usually 7 or 10. Return as integer only.
-- emdDays: USE THE SAME NUMBER AS ddDays. In Good Results contracts, the Additional Terms section states "EMD due on or before end of due diligence period" — so EMD days = DD days.
-- emdAmount: RPA page 1, "EARNEST MONEY DEPOSIT (EMD)" section (usually line 10-13). The dollar amount on the right side.
-- seller: The signature block on the final pages of the RPA. Include full name and title (e.g. "Florence Waneva Pearce, Trustee"). In estate/trust situations, include the trustee or executor name.
-- buyer: RPA page 1, line 1. Usually "Good Results, LLC" or similar entity name.
-- market: Determine from the city/state. Las Vegas / North Las Vegas / Henderson / Boulder City = "Las Vegas". Reno / Sparks = "Reno". Houston area / Texas cities = "Houston".
-- onMarket: If a listing agent or Broker represents the SELLER (check the Duties Owed page or the RPA definitions), it is likely on-market. If Good Results is the only party with an agent, it is off-market.
-- agent: The SELLER's agent/broker. Look for "Licensee" or "Broker" entries that are acting for the Seller/Landlord. Extract name, phone, email, brokerage. Phone and email may not be on the contract — return null if not found.
+FOR NEVADA ROA (SNR — Reno/Carson City/Northern NV):
+- address/city/state/zip: Near top of first page, after buyer name. Look for street address, city, state, zip on consecutive lines.
+- contractPrice: Look for "TOTAL PURCHASE PRICE" or "PURCHASE PRICE" — the final dollar amount.
+- executedDate: The date the LAST person physically signed. Go to the SELLER'S ACCEPTANCE section at the very end of the ROA. Find ALL signature dates (buyer AND seller) and return the LATEST one. For DocuSign: dates appear as "MM/DD/YYYY | HH:MM AM/PM" next to signatures. Return as MM/DD/YYYY.
+- coeDate: Look for "Close of Escrow (COE)" or "CLOSING" section — a specific calendar date. Return as MM/DD/YYYY.
+- ddDays: Look for "Investigation Period" or "Inspection" section — "within ___ days from Acceptance." Return integer only. If it says "once access is provided" with no number, return null.
+- emdDays: Look for earnest money timing — "within ___ days" or "upon acceptance" (= 0). If EMD is due "at end of due diligence period," use the same number as ddDays.
+- emdAmount: Look for "EARNEST MONEY DEPOSIT" or "EMD" with a dollar amount.
+- seller: Full name(s) from signature block. Include "Trustee" or "Executor" if applicable.
+- buyer: Entity name from buyer section (usually "Good Results LLC").
+- agent: Look for SELLER'S/LISTING agent info. "Licensee" or "Broker" acting for Seller/Landlord. Good Results is always the buyer — we want the OTHER side's agent.
 
-TEXAS TREC:
+FOR NEVADA RPA (GLVAR — Las Vegas/Henderson/Southern NV):
+- Same field locations as ROA but may use different section numbering.
+
+FOR TEXAS TREC:
 - address: Paragraph 2 — property address
 - contractPrice: Paragraph 3 — "Sales Price"
-- executedDate: Final page — "Effective Date" or the latest signature date among all parties
-- coeDate: Paragraph 9 — "Closing Date" or in the financing section
-- ddDays: Paragraph 23 — "Option Period" — the number of days
-- emdDays: Paragraph 5 — "within ___ days" after effective date for earnest money deposit
+- executedDate: Final page — latest signature date among all parties
+- coeDate: Paragraph 9 — "Closing Date"
+- ddDays: Paragraph 23 — "Option Period" days
+- emdDays: Paragraph 5 — "within ___ days" for earnest money
 - emdAmount: Paragraph 5 — earnest money dollar amount
-- seller/buyer/market/onMarket/agent: Same logic as Nevada
+
+FOR ALL FORMS:
+- market: Las Vegas/North Las Vegas/Henderson/Boulder City = "Las Vegas". Reno/Sparks/Carson City = "Reno". Texas cities = "Houston".
+- onMarket: Different buyer and seller agents/brokerages = "Yes". Same or no listing agent = "No".
 
 Return this exact JSON structure:
 {
@@ -582,13 +598,13 @@ Return this exact JSON structure:
   "agentBrokerage": "brokerage name or null"
 }
 
-Contract text (non-contract pages have been filtered out — this is the purchase agreement only):
-${text.slice(0, 50000)}`;
+CONTRACT TEXT:
+${text.slice(0, 120000)}`;
 
     const resp = await fetch(ANTHROPIC_PROXY, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1500, messages: [{ role: 'user', content: prompt }] })
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 4000, messages: [{ role: 'user', content: prompt }] })
     });
     const result = await resp.json();
     if (result.error) throw new Error('API error: ' + (result.error.message || result.error));
@@ -674,6 +690,9 @@ function renderExtracted(d) {
   set('eLot', d.lotSize);
   set('eYear', d.yearBuilt);
   set('eGarage', d.garage);
+  set('eBasement', d.basementSqft);
+  set('ePool', d.pool);
+  set('eSolar', d.solar);
 
   document.getElementById('extractedGrid').style.display = 'grid';
   document.getElementById('outputEmpty').style.display = 'none';
@@ -950,7 +969,8 @@ const CF = {
   ddEndDate:            'cf_dYuh3zK6om5wx7DazAPdoknMZI1083pJ9Xfon6vdmYf',
   emdDueDate:           'cf_v7RDgaN83GrYYyUPjwry71a2COpLSEhM0Dn7Lbs4Vn7',
   currentContractPrice: 'cf_lnzdav3LInFjRAbyUATuFShueu7pIaFebA988JE8H91',
-  wholesalePrice:       'cf_MDzK5zNGLLLUE9yYYWqubvC3hFzDeKA8m4ta6p8OPhx'
+  wholesalePrice:       'cf_MDzK5zNGLLLUE9yYYWqubvC3hFzDeKA8m4ta6p8OPhx',
+  dealId:               'cf_mtdd9aMAiHZ8NfSByhliIPFJ2AEkXMGDRCZabKHEI8T'
 };
 
 async function closeAPI(path, method, body) {
@@ -1034,6 +1054,9 @@ function gatherDealJson() {
     lotSize: extractedDeal.lotSize || null,
     yearBuilt: extractedDeal.yearBuilt || null,
     garage: extractedDeal.garage || null,
+    basementSqft: extractedDeal.basementSqft || null,
+    pool: extractedDeal.pool || null,
+    solar: extractedDeal.solar || null,
     coeDate: extractedDeal.coeDate || null,
     executedDate: extractedDeal.executedDate || null,
     ddDays: extractedDeal.ddDays || null,
@@ -1075,7 +1098,9 @@ document.getElementById('btnCreateFolder').addEventListener('click', async () =>
   initLog([
     'Fetching deal page template...',
     'Pushing deal page to GitHub...',
-    'Pushing deal data to GitHub...'
+    'Pushing deal data to GitHub...',
+    'Uploading contract PDF (private)...',
+    'Pushing manifest (visibility)...'
   ]);
 
   try {
@@ -1106,6 +1131,34 @@ document.getElementById('btnCreateFolder').addEventListener('click', async () =>
     const jsonB64 = btoa(unescape(encodeURIComponent(JSON.stringify(dealJson, null, 2))));
     await pushFile('deals/' + slug + '/deal-doc.txt', jsonB64, 'Deal page: ' + address + ' (data)');
     setLogStep(2, 'done', 'Deal data pushed');
+
+    // Auto-upload contract PDF as private file
+    if (currentPDF && currentPDF.type === 'application/pdf') {
+      await wait(600);
+      setLogStep(3, 'active');
+      try {
+        const contractB64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = e => resolve(e.target.result.split(',')[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(currentPDF);
+        });
+        await pushFile('deals/' + slug + '/contract.pdf', contractB64, 'Deal page: ' + address + ' (contract)');
+        setLogStep(3, 'done', 'Contract PDF uploaded (private)');
+      } catch(e) {
+        setLogStep(3, 'error', 'Contract upload failed — continue manually');
+      }
+    } else {
+      setLogStep(3, 'done', 'No contract PDF to upload');
+    }
+
+    // Push manifest.json with contract set to private
+    await wait(600);
+    setLogStep(4, 'active');
+    const manifest = { private: ['contract.pdf'] };
+    const manifestB64 = btoa(unescape(encodeURIComponent(JSON.stringify(manifest, null, 2))));
+    await pushFile('deals/' + slug + '/manifest.json', manifestB64, 'Deal page: ' + address + ' (manifest)');
+    setLogStep(4, 'done', 'Manifest pushed');
 
     btn.textContent = '✓ Folder Created';
     btn.className = 'launch-btn success';
@@ -1232,6 +1285,7 @@ document.getElementById('btnPushClose').addEventListener('click', async () => {
 
     const fullAddr = [address, extractedDeal.city, extractedDeal.state, extractedDeal.zip].filter(Boolean).join(', ');
     setCF('address', fullAddr);
+    setCF('dealId', dealId);
 
     const contractPriceN = parseDollar(extractedDeal.contractPrice);
     if (contractPriceN) setCF('currentContractPrice', '$' + contractPriceN.toLocaleString());
@@ -1263,6 +1317,9 @@ document.getElementById('btnPushClose').addEventListener('click', async () => {
     if (propDetails) noteLines.push(propDetails);
     if (extractedDeal.yearBuilt) noteLines.push('Year: ' + extractedDeal.yearBuilt);
     if (extractedDeal.lotSize) noteLines.push('Lot: ' + extractedDeal.lotSize);
+    if (extractedDeal.basementSqft) noteLines.push('Basement: ' + extractedDeal.basementSqft);
+    if (extractedDeal.pool && extractedDeal.pool !== 'No') noteLines.push('Pool: ' + extractedDeal.pool);
+    if (extractedDeal.solar && extractedDeal.solar !== 'No') noteLines.push('Solar: ' + extractedDeal.solar);
     noteLines.push('Deal page: ' + dealUrl);
     updatePayload.note = noteLines.join('\n');
 
