@@ -344,18 +344,68 @@ async function loadDeals() {
         // Remove old aliases so they don't persist on next save
         delete json.askingPrice; delete json.estRepairs; delete json.profit;
 
-        // Get all files in deal folder (for photos)
+        // Get all files in deal folder
         const files = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name).catch(() => []);
-        const imgs = files.filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f.name));
-        imgs.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true}));
-        json._thumb = imgs.length ? SITE_BASE + '/deals/' + folder.name + '/' + imgs[0].name : null;
-        json._photos = imgs.map(img => ({
-          name: img.name,
-          sha: img.sha,
-          url: SITE_BASE + '/deals/' + folder.name + '/' + img.name,
-          path: 'deals/' + folder.name + '/' + img.name
+        const IMG_RE = /\.(jpe?g|png|webp|gif)$/i;
+        const DOC_RE = /\.(pdf|docx?|xlsx?|csv|txt)$/i;
+        const SKIP = ['deal-doc.txt', 'manifest.json', 'index.html'];
+
+        // Check for existing manifest
+        const manifestFile = files.find(f => f.name === 'manifest.json');
+        let manifest = null;
+        if (manifestFile) {
+          try {
+            const mf = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name + '/manifest.json');
+            manifest = JSON.parse(atob(mf.content.replace(/\n/g, '')));
+            json._manifestSha = mf.sha;
+          } catch(e) { manifest = null; }
+        }
+
+        // Build file list from folder contents
+        const allFiles = files.filter(f => f.type === 'file' && !SKIP.includes(f.name)).map(f => ({
+          name: f.name,
+          sha: f.sha,
+          url: SITE_BASE + '/deals/' + folder.name + '/' + f.name,
+          path: 'deals/' + folder.name + '/' + f.name,
+          type: IMG_RE.test(f.name) ? 'photo' : (DOC_RE.test(f.name) ? 'doc' : 'file'),
         }));
-        json._photoCount = imgs.length;
+
+        // If manifest exists, merge it with actual files (in case files were added/removed outside dashboard)
+        if (manifest && Array.isArray(manifest)) {
+          // Add order/visibility from manifest to matching files
+          allFiles.forEach(f => {
+            const entry = manifest.find(m => m.name === f.name);
+            if (entry) {
+              f.visibility = entry.visibility || 'public';
+              f.order = entry.order != null ? entry.order : 999;
+            } else {
+              // New file not in manifest yet — default to public for photos, private for docs
+              f.visibility = f.type === 'photo' ? 'public' : 'private';
+              f.order = 999;
+            }
+          });
+        } else {
+          // No manifest — all existing photos are public, docs default private
+          allFiles.forEach((f, i) => {
+            f.visibility = f.type === 'photo' ? 'public' : 'private';
+            f.order = i;
+          });
+        }
+
+        // Sort by order
+        allFiles.sort((a, b) => a.order - b.order);
+
+        // Split into categories for rendering
+        const publicPhotos = allFiles.filter(f => f.type === 'photo' && f.visibility === 'public');
+        const privateFiles = allFiles.filter(f => f.visibility === 'private');
+        const docs = allFiles.filter(f => f.type !== 'photo');
+
+        json._allFiles = allFiles;
+        json._thumb = publicPhotos.length ? publicPhotos[0].url : null;
+        json._photos = allFiles.filter(f => f.type === 'photo');
+        json._docs = docs;
+        json._photoCount = allFiles.filter(f => f.type === 'photo').length;
+        json._publicPhotoCount = publicPhotos.length;
         return json;
       } catch(e) { return null; }
     });
@@ -680,6 +730,26 @@ async function saveDeal(btn) {
 
     if (result.content) {
       deal._docSha = result.content.sha;
+
+      // Also save manifest.json with current file visibility/order
+      if (deal._allFiles && deal._allFiles.length) {
+        const manifestData = deal._allFiles.map(f => ({
+          name: f.name,
+          type: f.type,
+          visibility: f.visibility,
+          order: f.order
+        }));
+        const manifestBody = {
+          message: 'Update manifest: ' + (deal.address || slug),
+          content: btoa(unescape(encodeURIComponent(JSON.stringify(manifestData, null, 2)))),
+        };
+        if (deal._manifestSha) manifestBody.sha = deal._manifestSha;
+        try {
+          const mResult = await ghPut('/repos/' + GITHUB_REPO + '/contents/deals/' + slug + '/manifest.json', manifestBody);
+          if (mResult.content) deal._manifestSha = mResult.content.sha;
+        } catch(e) { console.warn('Manifest save failed:', e); }
+      }
+
       status.className = 'save-status saved';
       status.textContent = 'Saved!';
       setTimeout(() => {
