@@ -1098,5 +1098,25 @@
     "resistance_moments": "Multiple apologies for multitasking while taking notes, but this was more logistics than resistance",
     "script_moment": "When Teri asked about area preferences, Kayden could have said: 'What areas do you typically work in? I'd love to know where you see the most distressed properties come across your desk.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774986244603",
+    "timestamp": "2026-03-31T19:44:04.603Z",
+    "agent": "Kayden Rogers",
+    "realtor": "Victor Boyd",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "4m 37s",
+    "call_date": "03/31/2026",
+    "score": 79,
+    "realtor_engagement": 78,
+    "summary": "Kayden re-engaged Victor after not speaking since summer, updated him on budget increase to $720k cap and refined focus to distressed/rehab properties only. Victor didn't remember him but was receptive, mentioned seeing distressed properties recently for other clients, and requested email contact.",
+    "what_worked": "Strong buy box delivery with all key elements delivered verbally | Good recovery from Victor not remembering him | Excellent next step - Victor requested email contact | Let Victor drive the conversation toward contact exchange | Professional positioning throughout",
+    "what_to_tighten": "Opener could be more confident - felt a bit rushed explaining the context | Could have dug deeper into the 'pieces of shit' properties he mentioned seeing recently | Missed opportunity to ask about specific areas or price ranges of those distressed properties",
+    "language_flags": "",
+    "missed_opportunities": "When Victor mentioned seeing 'a whole bunch of pieces of shit' for other clients, could have asked for specifics about those properties or areas | Could have asked what price range those distressed properties were in to gauge market availability",
+    "positive_moments": "Victor said 'I have a good area for you' showing immediate interest | He proactively asked for Kayden's email address | He committed to responding with his email once stopped driving | He correctly guessed the spelling of Kayden's name showing attention | He mentioned seeing 'a whole bunch of pieces of shit' properties recently for other clients | He said 'Very good' when Kayden offered to make the process easy",
+    "resistance_moments": "Victor said 'I really don't remember distinctly' and seemed apologetic about not remembering | He said 'I feel bad that I don't remember you and that I don't have you in my database' | Initial confusion about who Kayden was created some friction at the start",
+    "script_moment": "When Victor said 'I saw a whole bunch of pieces of shit' - Kayden should have asked: 'What areas were those in? Were they in our price range of 150-350k?' This would have gathered valuable market intel and potentially identified immediate opportunities.",
+    "on_leaderboard": "yes"
   }
 ]
