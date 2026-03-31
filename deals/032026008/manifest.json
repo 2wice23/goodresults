@@ -12,9 +12,57 @@
     "order": 1
   },
   {
-    "name": "Fully_Signed_Marketing_Fee_Agreement.pdf",
-    "type": "doc",
-    "visibility": "private",
-    "order": 999
+    "name": "media_7__6_.jpg",
+    "type": "photo",
+    "visibility": "public",
+    "order": 3
+  },
+  {
+    "name": "media_2__7_.jpg",
+    "type": "photo",
+    "visibility": "public",
+    "order": 4
+  },
+  {
+    "name": "media_6__6_.jpg",
+    "type": "photo",
+    "visibility": "public",
+    "order": 5
+  },
+  {
+    "name": "media_4__6_.jpg",
+    "type": "photo",
+    "visibility": "public",
+    "order": 6
+  },
+  {
+    "name": "media_3__5_.jpg",
+    "type": "photo",
+    "visibility": "public",
+    "order": 7
+  },
+  {
+    "name": "media_1__12_.jpg",
+    "type": "photo",
+    "visibility": "public",
+    "order": 8
+  },
+  {
+    "name": "media_8__4_.jpg",
+    "type": "photo",
+    "visibility": "public",
+    "order": 9
+  },
+  {
+    "name": "media_10__3_.jpg",
+    "type": "photo",
+    "visibility": "public",
+    "order": 10
+  },
+  {
+    "name": "media_9__5_.jpg",
+    "type": "photo",
+    "visibility": "public",
+    "order": 11
   }
 ]
