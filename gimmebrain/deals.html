@@ -4,8 +4,9 @@
 <script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deal Dashboard — Good Results</title>
+<title>Deals — Good Results</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
 :root{
   --black:#0D0F14;--surface:#11141A;--surface2:#161B24;--surface3:#0A0C10;
@@ -193,24 +194,307 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
   .header{padding:14px 20px;}
   .detail-grid{grid-template-columns:1fr;}
 }
+
+/* ═══ GENERATOR PANEL STYLES ═══ */
+.new-deal-toggle{max-width:1100px;margin:0 auto;padding:0 44px 16px;}
+.new-deal-toggle-btn{width:100%;padding:14px 20px;background:var(--surface);border:1px solid var(--orange-border);border-radius:6px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all 0.2s;}
+.new-deal-toggle-btn:hover{background:var(--orange-glow);border-color:var(--orange);}
+.new-deal-toggle-btn .toggle-label{font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:700;color:var(--orange);letter-spacing:0.06em;text-transform:uppercase;}
+.new-deal-toggle-btn .toggle-arrow{color:var(--orange);font-size:0.8rem;transition:transform 0.3s;}
+.new-deal-toggle-btn.open .toggle-arrow{transform:rotate(180deg);}
+
+.new-deal-panel{max-width:1100px;margin:0 auto;padding:0 44px 32px;display:none;}
+.new-deal-panel.open{display:block;}
+
+.gen-app{display:grid;grid-template-columns:380px 1fr;gap:24px;align-items:start;}
+@media(max-width:900px){.gen-app{grid-template-columns:1fr;}}
+
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;position:sticky;top:88px;}
+.panel-hdr{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;background:var(--orange-glow);}
+.panel-hdr h2{font-family:'Inter',sans-serif;font-size:0.78rem;color:var(--white);font-weight:700;letter-spacing:0.05em;}
+.panel-body{padding:18px;}
+
+.step-label{font-family:'Inter',sans-serif;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;margin-top:18px;font-weight:600;}
+.step-label:first-child{margin-top:0;}
+.step-hint{font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--dim);line-height:1.6;margin-bottom:8px;font-weight:400;}
+
+.upload-zone{border:1.5px dashed var(--orange-border);border-radius:4px;padding:20px 12px;text-align:center;cursor:pointer;transition:all 0.2s;background:transparent;position:relative;}
+.upload-zone:hover,.upload-zone.drag-over{border-color:var(--orange);background:var(--orange-glow);}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.upload-icon{font-size:1.4rem;margin-bottom:6px;}
+.upload-label{font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--muted);letter-spacing:0.06em;line-height:1.6;font-weight:400;}
+.upload-label span{color:var(--orange);}
+.file-tag{font-family:'Inter',sans-serif;font-size:0.6rem;padding:5px 8px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:3px;color:var(--green);margin-top:8px;display:none;word-break:break-all;line-height:1.5;font-weight:500;}
+
+.field-row{margin-bottom:10px;}
+.field-label{font-family:'Inter',sans-serif;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;font-weight:600;}
+.field-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:9px 12px;font-family:'Inter',sans-serif;font-size:0.72rem;color:var(--white);letter-spacing:0.02em;outline:none;transition:border-color 0.2s;font-weight:400;}
+.field-input:focus{border-color:var(--orange);}
+.field-input::placeholder{color:var(--dim);}
+.field-input[readonly]{color:var(--orange);border-color:var(--orange-border);}
+
+.extract-btn{width:100%;padding:11px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);border-radius:3px;font-family:'Inter',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.05em;cursor:pointer;transition:all 0.2s;text-transform:uppercase;margin-top:4px;}
+.extract-btn:hover:not(:disabled){background:rgba(34,197,94,0.2);border-color:var(--green);}
+.extract-btn:disabled{opacity:0.35;cursor:not-allowed;}
+
+.launch-btn{width:100%;padding:15px;background:var(--orange);color:var(--white);border:none;border-radius:4px;font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:800;letter-spacing:0.06em;cursor:pointer;transition:all 0.2s;text-transform:uppercase;margin-top:12px;}
+.launch-btn:hover:not(:disabled){background:#ff6d3a;transform:translateY(-1px);box-shadow:0 4px 20px rgba(255,92,26,0.3);}
+.launch-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.launch-btn.success{background:rgba(34,197,94,0.2);color:var(--green);border:1px solid var(--green-border);}
+
+.status-line{font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--muted);text-align:center;padding:8px 0 0;letter-spacing:0.02em;min-height:22px;font-weight:400;}
+.status-line.active{color:var(--green);}
+.status-line.error{color:var(--red);}
+
+.panel-sep{border:none;border-top:1px solid var(--border);margin:16px 0;}
+
+.output-panel{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;min-height:400px;}
+.output-hdr{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--orange-glow);}
+.output-hdr-left{display:flex;align-items:center;gap:8px;}
+.output-hdr h2{font-family:'Inter',sans-serif;font-size:0.78rem;color:var(--white);font-weight:700;letter-spacing:0.05em;}
+.badge{font-family:'Inter',sans-serif;font-size:0.52rem;padding:2px 7px;border-radius:2px;border:1px solid;letter-spacing:0.06em;font-weight:600;}
+.badge-ready{color:var(--green);border-color:var(--green-border);background:var(--green-bg);}
+.badge-empty{color:var(--dim);border-color:var(--dim);}
+
+.extracted-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:16px;}
+.ext-field{background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:8px 10px;}
+.ext-key{font-family:'Inter',sans-serif;font-size:0.52rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;font-weight:600;}
+.ext-val{font-family:'Inter',sans-serif;font-size:0.68rem;color:var(--orange);font-weight:500;}
+.ext-val.empty{color:var(--dim);}
+.ext-input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:5px 7px;font-family:'Inter',sans-serif;font-size:0.68rem;color:var(--orange);font-weight:500;outline:none;transition:border-color 0.2s;}
+.ext-input:focus{border-color:var(--orange);}
+.ext-input::placeholder{color:var(--dim);font-weight:400;}
+
+.output-empty{padding:60px 40px;text-align:center;}
+.output-empty-icon{font-size:2.5rem;margin-bottom:16px;opacity:0.3;}
+.output-empty-text{font-family:'Inter',sans-serif;font-size:0.65rem;color:var(--muted);letter-spacing:0.02em;line-height:1.8;font-weight:400;}
+
+.progress-log{padding:16px;display:none;}
+.progress-log .log-entry{font-family:'Inter',sans-serif;font-size:0.6rem;padding:5px 0;color:var(--cream);letter-spacing:0.02em;display:flex;align-items:center;gap:8px;line-height:1.5;}
+.progress-log .log-entry .log-icon{width:16px;text-align:center;flex-shrink:0;}
+.progress-log .log-entry.done .log-icon{color:var(--green);}
+.progress-log .log-entry.active .log-icon{color:var(--orange);}
+.progress-log .log-entry.error .log-icon{color:var(--red);}
+.progress-log .log-entry.pending{color:var(--dim);}
+
+.success-banner{margin:16px;padding:20px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:4px;display:none;text-align:center;}
+.success-banner h3{font-family:'Inter',sans-serif;font-size:0.85rem;color:var(--green);margin-bottom:8px;font-weight:700;}
+.success-banner .live-url{font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:600;}
+.success-banner .live-url a{color:var(--orange);text-decoration:underline;}
+.success-banner .success-details{font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--cream);margin-top:10px;line-height:1.8;}
+
+.gen-photo-zone{border:1.5px dashed rgba(168,85,247,0.25);border-radius:4px;padding:16px 12px;text-align:center;cursor:pointer;transition:all 0.2s;background:transparent;position:relative;}
+.gen-photo-zone:hover,.gen-photo-zone.drag-over{border-color:var(--purple);background:var(--purple-bg);}
+.gen-photo-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.photo-count{font-family:'Inter',sans-serif;font-size:0.58rem;color:var(--green);margin-top:8px;display:none;font-weight:500;}
+.photo-thumbs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.photo-thumb{width:56px;height:56px;border-radius:3px;overflow:hidden;position:relative;border:2px solid transparent;cursor:grab;transition:all 0.15s;flex-shrink:0;}
+.photo-thumb:active{cursor:grabbing;}
+.photo-thumb.drag-over-thumb{border-color:var(--orange);transform:scale(1.08);}
+.photo-thumb.dragging{opacity:0.4;}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;}
+.photo-thumb .thumb-num{position:absolute;top:2px;left:2px;background:rgba(0,0,0,0.7);color:var(--white);font-family:'Inter',sans-serif;font-size:0.48rem;font-weight:700;padding:1px 4px;border-radius:2px;}
+.photo-thumb .thumb-remove{position:absolute;top:2px;right:2px;background:rgba(239,68,68,0.85);color:white;border:none;font-size:0.5rem;width:14px;height:14px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.15s;}
+.photo-thumb:hover .thumb-remove{opacity:1;}
+
+.green-border{border-color:rgba(34,197,94,0.25);}
 </style>
 </head>
 <body>
 
 <header class="header">
-  <div class="logo">Good Results // Deal Dashboard</div>
+  <div class="logo">Good Results // Deals</div>
   <div class="header-right">
-    <a href="/gimmebrain/deal-generator" class="header-link">Deal Generator</a>
     <a href="/gimmebrain/" class="header-link">&larr; Hub</a>
   </div>
 </header>
 
 <section class="hero">
   <div class="eyebrow">All Deals &mdash; Live from GitHub</div>
-  <h1>Deal <em>Dashboard</em></h1>
-  <p class="hero-sub">Every deal page on the site, pulled live. Click to expand, edit inline, manage photos — changes save straight to GitHub.</p>
+  <h1>Deal <em>Command Center</em></h1>
+  <p class="hero-sub">Every deal page on the site, pulled live. Create new deals from contracts, edit inline, manage photos — everything in one place.</p>
 </section>
 
+<!-- ═══ COLLAPSIBLE GENERATOR PANEL ═══ -->
+<div class="new-deal-toggle">
+  <div class="new-deal-toggle-btn" id="newDealToggle" onclick="toggleNewDealPanel()">
+    <span class="toggle-label">+ Process New Contract</span>
+    <span class="toggle-arrow" id="toggleArrow">▾</span>
+  </div>
+</div>
+
+<div class="new-deal-panel" id="newDealPanel">
+  <div class="gen-app">
+
+    <!-- LEFT: Deal Inputs -->
+    <div class="panel">
+      <div class="panel-hdr"><h2>Deal Inputs</h2></div>
+      <div class="panel-body">
+
+        <div class="step-label">Step 1 — Contract PDF</div>
+        <div class="step-hint">Drop the signed contract here. Claude reads it and pulls out address, beds/baths, sqft, COE date, etc.</div>
+        <div class="upload-zone" id="pdfZone">
+          <input type="file" id="pdfInput" accept=".pdf">
+          <div class="upload-icon">📄</div>
+          <div class="upload-label">Drop contract PDF here<br><span>Click to browse</span></div>
+        </div>
+        <div class="file-tag" id="pdfTag"></div>
+
+        <div class="step-label">Step 2 — Extract from PDF</div>
+        <div class="step-hint">Hit extract and the property details auto-fill on the right. If the PDF is a scanned image, skip this and the page will still work — just less data shown.</div>
+        <button class="extract-btn" id="extractBtn" disabled>⚡ Extract Property Data</button>
+        <div class="status-line" id="statusLine">Upload a PDF to begin</div>
+
+        <hr class="panel-sep">
+
+        <div class="step-label">Step 3 — Your Numbers</div>
+        <div class="step-hint">These show up on the deal page for buyers. Leave blank if you don't have them yet — you can update later below.</div>
+        <div class="field-row">
+          <div class="field-label">Wholesale Price</div>
+          <input class="field-input" type="text" id="fAsking" placeholder="e.g. $210,000">
+        </div>
+        <div class="field-row">
+          <div class="field-label">ARV</div>
+          <input class="field-input" type="text" id="fArv" placeholder="e.g. $380,000">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Est. Repairs ($/sqft)</div>
+          <input class="field-input" type="text" id="fRepairs" placeholder="e.g. 35">
+        </div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--muted);margin-top:-4px;margin-bottom:10px;">Usually $20–60/sqft. Total: <span style="color:var(--orange);font-weight:600;" id="repairsTotal">—</span></div>
+
+        <hr class="panel-sep">
+
+        <div class="step-label">Listing Status</div>
+        <div class="step-hint">Off-market shows the "off-market" badge on the deal page. Active shows "active listing."</div>
+        <div style="display:flex;gap:0;border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-bottom:4px;">
+          <button id="btnOffMarket" onclick="setMarket('off')" style="flex:1;padding:9px;background:var(--orange);color:var(--white);border:none;font-family:'Inter',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.05em;cursor:pointer;text-transform:uppercase;transition:all 0.2s;">Off-Market</button>
+          <button id="btnOnMarket" onclick="setMarket('on')" style="flex:1;padding:9px;background:var(--surface2);color:var(--muted);border:none;font-family:'Inter',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.05em;cursor:pointer;text-transform:uppercase;transition:all 0.2s;">Active</button>
+        </div>
+
+        <hr class="panel-sep">
+
+        <div class="step-label">Step 4 — Deal Page ID</div>
+        <div class="step-hint">Auto-generated from the month + year + deal number. This is the folder name and URL slug for the deal page.</div>
+        <div class="field-row">
+          <div class="field-label">Deal # This Month</div>
+          <input class="field-input" type="number" id="fDealNum" value="8" min="1">
+        </div>
+        <div class="field-row">
+          <div class="field-label">Deal Page ID</div>
+          <input class="field-input" type="text" id="fDealId" readonly placeholder="e.g. 0420268">
+        </div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.55rem;color:var(--muted);margin-top:-4px;margin-bottom:10px;">Live URL: <span style="color:var(--orange);font-weight:600;" id="dealUrlPreview">goodresults.org/deals/...</span></div>
+
+        <hr class="panel-sep">
+
+        <div class="step-label">Step 5 — Photos</div>
+        <div class="step-hint">Upload your deal photos. Drag thumbnails to reorder — photo #1 is the hero image on the deal page. Click the X to remove any.</div>
+        <div class="gen-photo-zone" id="photoDrop">
+          <input type="file" id="photoInput" accept="image/*" multiple>
+          <div class="upload-icon">📸</div>
+          <div class="upload-label">Drop photos here or <span>click to browse</span><br>JPG, PNG — any number of photos</div>
+        </div>
+        <div class="photo-count" id="photoCountLabel"></div>
+        <div class="photo-thumbs" id="photoThumbs"></div>
+
+        <hr class="panel-sep">
+
+        <div class="step-label">Actions</div>
+        <div class="step-hint">Each button does one thing. Run them in order, or skip what you don't need.</div>
+
+        <button class="launch-btn" id="btnCreateFolder" disabled style="background:var(--orange);margin-top:4px;font-size:0.72rem;padding:12px;">📁 Create Deal Folder</button>
+        <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Pushes template + deal data to GitHub → auto-deploys to site</div>
+
+        <button class="launch-btn" id="btnPushPhotos" disabled style="background:var(--purple);margin-top:10px;font-size:0.72rem;padding:12px;">📸 Push Photos</button>
+        <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Uploads photos to the deal folder on GitHub</div>
+
+        <button class="launch-btn" id="btnPushClose" disabled style="background:#2563EB;margin-top:10px;font-size:0.72rem;padding:12px;">📊 Push to Close</button>
+        <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Updates the Close CRM opportunity with deal data</div>
+
+        <button class="launch-btn" id="btnCreateWorkflow" disabled style="background:var(--green);color:var(--white);margin-top:10px;font-size:0.72rem;padding:12px;">⚡ Create Dispo Workflow</button>
+        <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Creates 6-step SMS + email dispo workflow in Close</div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Output Panel -->
+    <div class="output-panel" id="outputPanel">
+      <div class="output-hdr">
+        <div class="output-hdr-left">
+          <h2>Output</h2>
+          <span class="badge badge-empty" id="outputBadge">WAITING</span>
+        </div>
+      </div>
+
+      <div class="extracted-grid" id="extractedGrid" style="display:none;">
+        <div class="ext-field" style="grid-column:1/-1;"><div class="ext-key">Address</div><input class="ext-input" id="eAddress" data-field="address" placeholder="Street address" style="font-size:0.82rem;font-weight:700;"></div>
+        <div class="ext-field"><div class="ext-key">City</div><input class="ext-input" id="eCity" data-field="city" placeholder="City"></div>
+        <div class="ext-field"><div class="ext-key">State</div><input class="ext-input" id="eState" data-field="state" placeholder="ST"></div>
+        <div class="ext-field"><div class="ext-key">ZIP</div><input class="ext-input" id="eZip" data-field="zip" placeholder="Zip"></div>
+        <div class="ext-field"><div class="ext-key">Market</div><input class="ext-input" id="eMarket" data-field="market" placeholder="Las Vegas / Reno / Houston"></div>
+
+        <div style="grid-column:1/-1;font-family:'Inter',sans-serif;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);font-weight:700;padding:8px 0 2px;border-top:1px solid var(--border);margin-top:4px;">Contract Details</div>
+        <div class="ext-field"><div class="ext-key">Contract Price</div><input class="ext-input" id="eContractPrice" data-field="contractPrice" placeholder="$000,000"></div>
+        <div class="ext-field"><div class="ext-key">Executed Date</div><input class="ext-input" id="eExecutedDate" data-field="executedDate" placeholder="MM/DD/YYYY"></div>
+        <div class="ext-field"><div class="ext-key">COE / Closing Date</div><input class="ext-input" id="eCoe" data-field="coeDate" placeholder="MM/DD/YYYY"></div>
+        <div class="ext-field"><div class="ext-key">DD Days</div><input class="ext-input" id="eDdDays" data-field="ddDays" placeholder="e.g. 10"></div>
+        <div class="ext-field"><div class="ext-key">DD End Date</div><input class="ext-input" id="eDdEnd" data-field="_ddEnd" placeholder="Auto-calculated" readonly style="color:var(--muted);"></div>
+        <div class="ext-field"><div class="ext-key">EMD Amount</div><input class="ext-input" id="eEmd" data-field="emdAmount" placeholder="$0,000"></div>
+        <div class="ext-field"><div class="ext-key">EMD Days</div><input class="ext-input" id="eEmdDays" data-field="emdDays" placeholder="e.g. 10"></div>
+        <div class="ext-field"><div class="ext-key">EMD Due Date</div><input class="ext-input" id="eEmdDue" data-field="_emdDue" placeholder="Auto-calculated" readonly style="color:var(--muted);"></div>
+        <div class="ext-field"><div class="ext-key">Seller</div><input class="ext-input" id="eSeller" data-field="seller" placeholder="Seller name"></div>
+        <div class="ext-field"><div class="ext-key">Buyer / Entity</div><input class="ext-input" id="eBuyer" data-field="buyer" placeholder="Buyer entity"></div>
+        <div class="ext-field"><div class="ext-key">On Market?</div><input class="ext-input" id="eOnMarket" data-field="onMarket" placeholder="Yes / No / Unknown"></div>
+
+        <div style="grid-column:1/-1;font-family:'Inter',sans-serif;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);font-weight:700;padding:8px 0 2px;border-top:1px solid var(--border);margin-top:4px;">Realtor / Agent</div>
+        <div class="ext-field"><div class="ext-key">Agent Name</div><input class="ext-input" id="eAgentName" data-field="agentName" placeholder="Agent name"></div>
+        <div class="ext-field"><div class="ext-key">Phone</div><input class="ext-input" id="eAgentPhone" data-field="agentPhone" placeholder="Phone"></div>
+        <div class="ext-field"><div class="ext-key">Email</div><input class="ext-input" id="eAgentEmail" data-field="agentEmail" placeholder="Email"></div>
+        <div class="ext-field"><div class="ext-key">Brokerage</div><input class="ext-input" id="eAgentBrokerage" data-field="agentBrokerage" placeholder="Brokerage"></div>
+
+        <div style="grid-column:1/-1;font-family:'Inter',sans-serif;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);font-weight:700;padding:8px 0 2px;border-top:1px solid var(--border);margin-top:4px;">Property Specs <span style="color:var(--muted);font-weight:400;">(from RentCast)</span></div>
+        <div class="ext-field"><div class="ext-key">Beds</div><input class="ext-input" id="eBeds" data-field="beds" placeholder="e.g. 3"></div>
+        <div class="ext-field"><div class="ext-key">Baths</div><input class="ext-input" id="eBaths" data-field="baths" placeholder="e.g. 2"></div>
+        <div class="ext-field"><div class="ext-key">Sqft</div><input class="ext-input" id="eSqft" data-field="sqft" placeholder="e.g. 1500"></div>
+        <div class="ext-field"><div class="ext-key">Lot Size</div><input class="ext-input" id="eLot" data-field="lotSize" placeholder="e.g. 7,500 sqft"></div>
+        <div class="ext-field"><div class="ext-key">Year Built</div><input class="ext-input" id="eYear" data-field="yearBuilt" placeholder="e.g. 1995"></div>
+        <div class="ext-field"><div class="ext-key">Garage</div><input class="ext-input" id="eGarage" data-field="garage" placeholder="e.g. 2-car"></div>
+        <div class="ext-field"><div class="ext-key">Basement</div><input class="ext-input" id="eBasement" data-field="basementSqft" placeholder="e.g. 800 sqft"></div>
+        <div class="ext-field"><div class="ext-key">Pool</div><input class="ext-input" id="ePool" data-field="pool" placeholder="Yes / No"></div>
+        <div class="ext-field"><div class="ext-key">Solar</div><input class="ext-input" id="eSolar" data-field="solar" placeholder="Yes / No"></div>
+        <div class="ext-field" style="grid-column:1/-1;background:var(--orange-glow);border-color:var(--orange-border);"><div class="ext-key" style="color:var(--orange);">Manual Entry Reminder</div><div style="font-family:'Inter',sans-serif;font-size:0.6rem;color:var(--cream);line-height:1.7;">Basement, pool, and solar info is rarely in the contract. Enter manually if relevant — these show on the public deal page.</div></div>
+      </div>
+
+      <div id="dealSummary" style="display:none;padding:12px 16px;margin:0 16px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;">
+        <div style="font-family:'Inter',sans-serif;font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px;">Deal Numbers</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;" id="dealNumbersGrid">
+          <div class="ext-field"><div class="ext-key">Wholesale Price</div><div class="ext-val" id="nWholesale">—</div></div>
+          <div class="ext-field"><div class="ext-key">ARV</div><div class="ext-val" id="nArv">—</div></div>
+          <div class="ext-field"><div class="ext-key">Est. Repairs</div><div class="ext-val" id="nRepairs">—</div></div>
+          <div class="ext-field"><div class="ext-key">Profit Potential</div><div class="ext-val" id="nProfit">—</div></div>
+          <div class="ext-field" style="grid-column:1/-1;"><div class="ext-key">Deal Page URL</div><div class="ext-val" id="nDealUrl" style="font-size:0.62rem;">—</div></div>
+        </div>
+      </div>
+
+      <div class="progress-log" id="progressLog"></div>
+
+      <div class="success-banner" id="successBanner">
+        <h3>Deal Launched</h3>
+        <div class="live-url" id="liveUrlLink"></div>
+        <div class="success-details" id="successDetails"></div>
+      </div>
+
+      <div class="output-empty" id="outputEmpty">
+        <div class="output-empty-icon">📦</div>
+        <div class="output-empty-text">Upload contract → Extract → Fill numbers → Add photos → Launch Deal<br><br>Each button pushes one piece live.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ DASHBOARD ═══ -->
 <div class="stats-bar" id="statsBar"></div>
 <div class="filters" id="filters">
   <button class="filter-btn active" data-filter="all">All</button>
@@ -223,11 +507,41 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 </div>
 
 <script>
+const ANTHROPIC_PROXY = '/.netlify/functions/anthropic-proxy';
 const GITHUB_REPO = '2wice23/goodresults';
 const GITHUB_PROXY = '/.netlify/functions/github-proxy';
+const RENTCAST_PROXY = '/.netlify/functions/rentcast-proxy';
 const SITE_BASE = 'https://www.goodresults.org';
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
 let allDeals = [];
 let currentFilter = 'all';
+
+// Generator state
+let currentPDF = null;
+let extractedDeal = {};
+let marketStatus = 'off';
+let lastDealId = '';
+const dealPhotos = [];
+
+// ═══ TOGGLE NEW DEAL PANEL ═══
+function toggleNewDealPanel() {
+  const panel = document.getElementById('newDealPanel');
+  const btn = document.getElementById('newDealToggle');
+  const arrow = document.getElementById('toggleArrow');
+  const isOpen = panel.classList.contains('open');
+  if (isOpen) {
+    panel.classList.remove('open');
+    panel.style.display = 'none';
+    btn.classList.remove('open');
+    btn.querySelector('.toggle-label').textContent = '+ Process New Contract';
+  } else {
+    panel.classList.add('open');
+    panel.style.display = 'block';
+    btn.classList.add('open');
+    btn.querySelector('.toggle-label').textContent = '− Process New Contract';
+  }
+}
 
 // ── Helpers ──
 
@@ -298,6 +612,7 @@ const CF = {
   ask:                  'cf_vjCMz4xV8VVONcfII1tqKNbrw4WhRCU80PmVBYdHvdv',
   arv:                  'cf_I31MKYiLvGaKZIifqfVQxkjMjhpkrImNP1q7DQOQxUZ',
   mao:                  'cf_BKzKEuNx4uGjjJpV78goMM7Duovz630H3Hse3z4mjZC',
+  onMarket:             'cf_deI0gLpduQLEzquwHGcsaOcwJfxsLmDOszUCkP7r2yU',
   closingCosts:         'cf_I382twtiVhhsQ57v5x0ZoQ65zESufG7qM6FOQvoTbFp',
   officialOfferPrice:   'cf_geYAfr1h8XVC3x0bzMIEf0Aj6580oaFQ39wdLAJ2Gqe',
   emdAmount:            'cf_SOdFoDCrSlKj3uJlxR1Yv0vP1LrlyGatZVmtgDOqIcj',
@@ -341,6 +656,8 @@ function addDaysToDate(dateStr, days) {
   d.setDate(d.getDate() + Number(days));
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
+
+function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 // ── Load deals ──
 
@@ -444,7 +761,7 @@ async function loadDeals() {
       const folders = items.filter(i => i.type === 'dir');
 
       if (!folders.length) {
-        grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No deal pages found yet.<br>Use the Deal Processor to create one.</div></div>';
+        grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No deal pages found yet.<br>Use "Process New Contract" above to create one.</div></div>';
         return;
       }
 
@@ -1397,6 +1714,1012 @@ document.getElementById('filters').addEventListener('click', e => {
 
 // Boot
 loadDeals();
+
+// ============================================================
+// ═══ GENERATOR FUNCTIONS ═══
+// ============================================================
+
+// ============================================================
+// DEAL ID
+// ============================================================
+function updateDealId() {
+  const now = new Date();
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const yyyy = now.getFullYear();
+  const n = document.getElementById('fDealNum').value || '8';
+  lastDealId = `${mm}${yyyy}${n}`;
+  document.getElementById('fDealId').value = lastDealId;
+  document.getElementById('dealUrlPreview').textContent = 'goodresults.org/deals/' + lastDealId;
+}
+document.getElementById('fDealNum').addEventListener('input', updateDealId);
+updateDealId();
+
+// ============================================================
+// REPAIRS $/SQFT CALCULATOR
+// ============================================================
+function updateRepairsTotal() {
+  const perSqft = parseFloat(document.getElementById('fRepairs').value) || 0;
+  const sqft = parseFloat(extractedDeal.sqft) || 0;
+  const el = document.getElementById('repairsTotal');
+  if (perSqft > 0 && sqft > 0) {
+    el.textContent = '$' + Math.round(perSqft * sqft).toLocaleString() + ' (' + sqft.toLocaleString() + ' sqft × $' + perSqft + ')';
+  } else if (perSqft > 0) {
+    el.textContent = '$' + perSqft + '/sqft (no sqft extracted yet)';
+  } else {
+    el.textContent = '—';
+  }
+}
+document.getElementById('fRepairs').addEventListener('input', () => { updateRepairsTotal(); updateDealNumbers(); });
+document.getElementById('fAsking').addEventListener('input', updateDealNumbers);
+document.getElementById('fArv').addEventListener('input', updateDealNumbers);
+
+// ============================================================
+// MARKET TOGGLE
+// ============================================================
+function setMarket(val) {
+  marketStatus = val;
+  const off = document.getElementById('btnOffMarket');
+  const on = document.getElementById('btnOnMarket');
+  if (val === 'off') {
+    off.style.background = 'var(--orange)'; off.style.color = 'var(--white)';
+    on.style.background = 'var(--surface2)'; on.style.color = 'var(--muted)';
+  } else {
+    on.style.background = 'var(--green)'; on.style.color = 'var(--white)';
+    off.style.background = 'var(--surface2)'; off.style.color = 'var(--muted)';
+  }
+}
+
+// (Folder slug removed — deal ID is the slug now)
+
+// ============================================================
+// PDF UPLOAD
+// ============================================================
+const pdfInput = document.getElementById('pdfInput');
+const pdfZone = document.getElementById('pdfZone');
+pdfInput.addEventListener('change', e => {
+  if (e.target.files[0]) {
+    currentPDF = e.target.files[0];
+    const tag = document.getElementById('pdfTag');
+    tag.textContent = '✓ ' + currentPDF.name;
+    tag.style.display = 'block';
+    document.getElementById('extractBtn').disabled = false;
+    setStatus('PDF loaded — ready to extract', '');
+  }
+});
+['dragover','dragleave','drop'].forEach(evt => {
+  pdfZone.addEventListener(evt, e => {
+    e.preventDefault();
+    if (evt === 'dragover') pdfZone.classList.add('drag-over');
+    else pdfZone.classList.remove('drag-over');
+    if (evt === 'drop' && e.dataTransfer.files[0]?.type === 'application/pdf') {
+      currentPDF = e.dataTransfer.files[0];
+      const tag = document.getElementById('pdfTag');
+      tag.textContent = '✓ ' + currentPDF.name;
+      tag.style.display = 'block';
+      document.getElementById('extractBtn').disabled = false;
+      setStatus('PDF loaded — ready to extract', '');
+    }
+  });
+});
+
+// ============================================================
+// PDF PAGE RENDERING — renders pages as images for Claude vision
+// ============================================================
+async function renderPDFPages(file) {
+  const ab = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: ab }).promise;
+  const pageImages = [];
+  const MAX_PAGES = 15; // Safety cap — purchase agreement + signatures
+  const pagesToRender = Math.min(pdf.numPages, MAX_PAGES);
+
+  // Start at scale 1.2 / quality 0.72 — keeps payload under Netlify limits
+  // while still perfectly readable for Claude vision
+  let scale = 1.2;
+  let quality = 0.72;
+
+  for (let i = 1; i <= pagesToRender; i++) {
+    const page = await pdf.getPage(i);
+    const viewport = page.getViewport({ scale });
+    const canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const ctx = canvas.getContext('2d');
+    await page.render({ canvasContext: ctx, viewport }).promise;
+    const dataUrl = canvas.toDataURL('image/jpeg', quality);
+    const base64 = dataUrl.split(',')[1];
+    pageImages.push({ pageNum: i, base64, mediaType: 'image/jpeg' });
+  }
+
+  // Check total payload size — if over 4MB, re-render at lower quality
+  const totalBytes = pageImages.reduce((sum, p) => sum + p.base64.length * 0.75, 0);
+  if (totalBytes > 4 * 1024 * 1024) {
+    console.log('Payload too large (' + (totalBytes / 1024 / 1024).toFixed(1) + 'MB), re-rendering at lower quality...');
+    pageImages.length = 0;
+    scale = 1.0;
+    quality = 0.6;
+    for (let i = 1; i <= pagesToRender; i++) {
+      const page = await pdf.getPage(i);
+      const viewport = page.getViewport({ scale });
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      const ctx = canvas.getContext('2d');
+      await page.render({ canvasContext: ctx, viewport }).promise;
+      const dataUrl = canvas.toDataURL('image/jpeg', quality);
+      const base64 = dataUrl.split(',')[1];
+      pageImages.push({ pageNum: i, base64, mediaType: 'image/jpeg' });
+    }
+  }
+
+  if (pdf.numPages > MAX_PAGES) {
+    console.log('PDF has ' + pdf.numPages + ' pages — rendered first ' + MAX_PAGES + ' only');
+  }
+  return pageImages;
+}
+
+// Also extract text as fallback (for PDFs where text IS available)
+async function extractPDFText(file) {
+  const ab = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: ab }).promise;
+  const pages = [];
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    pages.push(content.items.map(item => item.str).join(' '));
+  }
+  return pages.join('\n');
+}
+
+// ============================================================
+// EXTRACT HANDLER — uses vision (page images) for extraction
+// ============================================================
+document.getElementById('extractBtn').addEventListener('click', async () => {
+  if (!currentPDF) return;
+  setStatus('Rendering PDF pages...', 'active');
+  document.getElementById('extractBtn').disabled = true;
+  try {
+    // Render all pages as images
+    const pageImages = await renderPDFPages(currentPDF);
+    if (!pageImages.length) {
+      setStatus('Could not render PDF — fill fields manually', 'error');
+      document.getElementById('extractBtn').disabled = false;
+      enableActionButtons();
+      return;
+    }
+
+    setStatus('Sending ' + pageImages.length + ' pages to Claude (vision)...', 'active');
+
+    // Build message content: text prompt + all page images
+    const content = [];
+
+    // Add the prompt as text
+    content.push({ type: 'text', text: `You are a real estate contract analyst. You are looking at images of a real estate contract PDF. Extract deal information and return a single valid JSON object. Use null for any field you cannot find. Return ONLY the JSON — no explanation, no markdown.
+
+CRITICAL — IDENTIFYING THE PURCHASE AGREEMENT:
+These pages may include the purchase agreement PLUS disclosures, addenda, lead paint forms, broker agreements, wire fraud advisories, SRPD, etc. Find the actual purchase agreement and extract ONLY from it. Look for:
+- Nevada ROA: "RESIDENTIAL OFFER AND ACCEPTANCE AGREEMENT" — SNR (Sierra Nevada Realtors) form
+- Nevada RPA: "RESIDENTIAL PURCHASE AGREEMENT" — GLVAR form
+- Texas TREC: "ONE TO FOUR FAMILY RESIDENTIAL CONTRACT (RESALE)"
+- Any other state purchase agreement with purchase price, EMD, closing date, signature blocks
+IGNORE pages labeled DISCLOSURE, ADVISORY, LEAD PAINT, BUYER BROKER, or WIRE FRAUD.
+
+FIELD EXTRACTION RULES:
+
+FOR NEVADA ROA (SNR — Reno/Carson City/Northern NV):
+- address/city/state/zip: Page 1, after buyer name. The filled-in address, city, state, zip.
+- contractPrice: "TOTAL PURCHASE PRICE" or "PURCHASE PRICE" — the final dollar amount filled in.
+- executedDate: The SELLER'S ACCEPTANCE section (last pages). Find the LATEST signature date among ALL signers. For DocuSign: dates appear as "MM/DD/YYYY | HH:MM AM/PM PDT". Return as MM/DD/YYYY.
+- coeDate: "Close of Escrow (COE)" or "CLOSING" section — a specific calendar date filled in. Return as MM/DD/YYYY.
+- ddDays: "Investigation Period" or "Inspection" — "within ___ days from Acceptance." Return integer only. If "once access is provided" with no number, return null.
+- emdDays: Earnest money timing — "within ___ days" or "upon acceptance" (= 0). If tied to DD period, use same as ddDays.
+- emdAmount: "EARNEST MONEY DEPOSIT" or "EMD" dollar amount filled in.
+- seller: Full name(s) from signature block. Include "Trustee" or "Executor" if applicable.
+- buyer: Entity name (usually "Good Results LLC").
+- agent: SELLER'S/LISTING agent. "Licensee" or "Broker" for Seller/Landlord side. Good Results is always the buyer — extract the OTHER side's agent.
+
+FOR NEVADA RPA (GLVAR — Las Vegas/Henderson/Southern NV):
+- Same fields, may use different section numbering.
+
+FOR TEXAS TREC:
+- address: Paragraph 2. contractPrice: Paragraph 3 "Sales Price". executedDate: Final page latest signature date. coeDate: Paragraph 9 "Closing Date". ddDays: Paragraph 23 "Option Period". emdDays: Paragraph 5 "within ___ days". emdAmount: Paragraph 5 dollar amount.
+
+FOR ALL FORMS:
+- market: Las Vegas/North Las Vegas/Henderson/Boulder City = "Las Vegas". Reno/Sparks/Carson City = "Reno". Texas cities = "Houston".
+- onMarket: Different buyer and seller agents/brokerages = "Yes". Same or no listing agent = "No".
+
+Return this exact JSON structure:
+{
+  "address": "street address only",
+  "city": "city name",
+  "state": "2-letter abbreviation",
+  "zip": "5-digit zip",
+  "contractPrice": "dollar amount with $ sign",
+  "executedDate": "MM/DD/YYYY or null",
+  "coeDate": "MM/DD/YYYY or null",
+  "ddDays": integer_or_null,
+  "emdDays": integer_or_null,
+  "emdAmount": "dollar amount or null",
+  "seller": "full name(s) or null",
+  "buyer": "buyer entity name or null",
+  "market": "Las Vegas / Reno / Houston",
+  "onMarket": "Yes / No / Unknown",
+  "agentName": "listing/seller agent full name or null",
+  "agentPhone": "phone or null",
+  "agentEmail": "email or null",
+  "agentBrokerage": "brokerage name or null"
+}` });
+
+    // Add each page as an image
+    for (const pg of pageImages) {
+      content.push({
+        type: 'image',
+        source: { type: 'base64', media_type: pg.mediaType, data: pg.base64 }
+      });
+    }
+
+    const payload = JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 4000,
+      messages: [{ role: 'user', content }]
+    });
+    console.log('Vision payload size: ' + (payload.length / 1024 / 1024).toFixed(2) + ' MB (' + pageImages.length + ' pages)');
+
+    const resp = await fetch(ANTHROPIC_PROXY, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: payload
+    });
+
+    if (resp.status === 413) throw new Error('Payload too large — PDF has too many pages. Try a shorter contract.');
+    const result = await resp.json();
+    if (result.error) throw new Error('API error: ' + (result.error.message || result.error));
+    if (!result.content || !result.content[0]) throw new Error('Empty response from Claude');
+    const raw = result.content[0].text;
+    const jsonStr = raw.match(/\{[\s\S]*\}/)?.[0];
+    if (!jsonStr) throw new Error('No JSON in response');
+    extractedDeal = JSON.parse(jsonStr);
+    renderExtracted(extractedDeal);
+    updateRepairsTotal();
+    setStatus('Contract extracted ✓ — looking up property specs...', 'active');
+    enableActionButtons();
+
+    // Step 2: Pull property specs from RentCast
+    if (extractedDeal.address) {
+      try {
+        const propData = await fetchFromRentCast(
+          extractedDeal.address,
+          extractedDeal.city,
+          extractedDeal.state,
+          extractedDeal.zip
+        );
+        // Merge into extractedDeal
+        extractedDeal = { ...extractedDeal, ...propData };
+        // RentCast merge logged only in dev
+        renderExtracted(extractedDeal);
+        updateRepairsTotal();
+        setStatus('Done ✓ — contract + property data loaded. Fill your numbers and launch.', 'active');
+      } catch(rcErr) {
+        console.warn('RentCast lookup failed:', rcErr);
+        setStatus('Contract extracted ✓ — RentCast lookup failed, property specs may be missing', 'error');
+      }
+    } else {
+      setStatus('Extracted ✓ — fill in your numbers and launch', 'active');
+    }
+  } catch(e) {
+    setStatus('Extraction failed: ' + e.message + ' — fill fields manually', 'error');
+    console.error('Extraction error:', e);
+    document.getElementById('extractBtn').disabled = false;
+    enableActionButtons();
+  }
+});
+
+function renderExtracted(d) {
+  const set = (id, val) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = val || '';
+  };
+  // Address fields (now separate inputs)
+  set('eAddress', d.address);
+  set('eCity', d.city);
+  set('eState', d.state);
+  set('eZip', d.zip);
+  set('eMarket', d.market);
+
+  // Contract details
+  set('eContractPrice', d.contractPrice);
+  set('eExecutedDate', d.executedDate);
+  set('eCoe', d.coeDate);
+  set('eDdDays', d.ddDays);
+  set('eEmd', d.emdAmount);
+  set('eEmdDays', d.emdDays);
+  set('eSeller', d.seller);
+  set('eBuyer', d.buyer);
+  set('eOnMarket', d.onMarket);
+
+  // Auto-calculate DD end and EMD due dates
+  recalcDates();
+
+  // Agent
+  set('eAgentName', d.agentName);
+  set('eAgentPhone', d.agentPhone);
+  set('eAgentEmail', d.agentEmail);
+  set('eAgentBrokerage', d.agentBrokerage);
+
+  // Property specs (from RentCast merge) — now individual fields
+  set('eBeds', d.beds);
+  set('eBaths', d.baths);
+  set('eSqft', d.sqft);
+  set('eLot', d.lotSize);
+  set('eYear', d.yearBuilt);
+  set('eGarage', d.garage);
+  set('eBasement', d.basementSqft);
+  set('ePool', d.pool);
+  set('eSolar', d.solar);
+
+  document.getElementById('extractedGrid').style.display = 'grid';
+  document.getElementById('outputEmpty').style.display = 'none';
+  document.getElementById('dealSummary').style.display = 'block';
+  updateDealNumbers();
+}
+
+// Recalculate DD end date and EMD due date from editable fields
+function recalcDates() {
+  const execDate = document.getElementById('eExecutedDate').value;
+  const ddDays = document.getElementById('eDdDays').value;
+  const emdDays = document.getElementById('eEmdDays').value;
+  const ddEnd = (execDate && ddDays) ? addDaysToDate(execDate, parseInt(ddDays)) : '';
+  const emdDue = (execDate && emdDays) ? addDaysToDate(execDate, parseInt(emdDays)) : '';
+  document.getElementById('eDdEnd').value = ddEnd || '';
+  document.getElementById('eEmdDue').value = emdDue || '';
+}
+
+// Sync all editable inputs back to extractedDeal on change
+function syncFieldsToExtracted() {
+  document.querySelectorAll('#extractedGrid .ext-input').forEach(input => {
+    const field = input.dataset.field;
+    if (!field || field.startsWith('_')) return; // skip calculated fields
+    extractedDeal[field] = input.value || null;
+  });
+  // Recalculate sqft-dependent stuff
+  updateRepairsTotal();
+  updateDealNumbers();
+}
+
+// Wire up all extracted field inputs
+document.getElementById('extractedGrid').addEventListener('input', e => {
+  if (e.target.classList.contains('ext-input')) {
+    syncFieldsToExtracted();
+    // Recalculate dates if executed date or day counts changed
+    const f = e.target.dataset.field;
+    if (f === 'executedDate' || f === 'ddDays' || f === 'emdDays') recalcDates();
+  }
+});
+
+function updateDealNumbers() {
+  const set = (id, val) => {
+    const el = document.getElementById(id);
+    el.textContent = val || '—';
+    el.className = 'ext-val' + (val ? '' : ' empty');
+  };
+  const askingN = parseDollar(document.getElementById('fAsking').value);
+  const arvN = parseDollar(document.getElementById('fArv').value);
+  const repairsPerSqft = parseFloat(document.getElementById('fRepairs').value) || 0;
+  const sqft = parseFloat(extractedDeal.sqft) || 0;
+  const repairsN = (repairsPerSqft > 0 && sqft > 0) ? Math.round(repairsPerSqft * sqft) : null;
+  const profitN = (arvN && repairsN && askingN) ? arvN - repairsN - askingN : null;
+
+  set('nWholesale', askingN ? '$' + askingN.toLocaleString() : null);
+  set('nArv', arvN ? '$' + arvN.toLocaleString() : null);
+  set('nRepairs', repairsN ? '$' + repairsN.toLocaleString() + ' (' + repairsPerSqft + '/sqft)' : null);
+
+  const profitEl = document.getElementById('nProfit');
+  if (profitN !== null) {
+    profitEl.textContent = '$' + Math.abs(profitN).toLocaleString();
+    profitEl.className = 'ext-val';
+    profitEl.style.color = profitN >= 0 ? 'var(--green)' : 'var(--red)';
+  } else {
+    profitEl.textContent = '—';
+    profitEl.className = 'ext-val empty';
+    profitEl.style.color = '';
+  }
+
+  const dealId = document.getElementById('fDealId').value;
+  set('nDealUrl', dealId ? 'goodresults.org/deals/' + dealId : null);
+}
+
+function setStatus(msg, cls) {
+  const el = document.getElementById('statusLine');
+  el.textContent = msg;
+  el.className = 'status-line' + (cls ? ' ' + cls : '');
+}
+
+// ============================================================
+// RENTCAST PROPERTY LOOKUP
+// ============================================================
+async function fetchFromRentCast(address, city, state, zip) {
+  const resp = await fetch(RENTCAST_PROXY, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      address: address || '',
+      city:    city    || '',
+      state:   state   || '',
+      zipCode: zip     || ''
+    })
+  });
+
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({}));
+    throw new Error('Rentcast error: ' + (err.message || resp.status));
+  }
+
+  const data = await resp.json();
+  const p = Array.isArray(data) ? data[0] : data;
+  if (!p) throw new Error('Property not found in Rentcast');
+
+  return {
+    beds:      p.bedrooms    != null ? String(p.bedrooms)  : null,
+    baths:     p.bathrooms   != null ? String(p.bathrooms) : null,
+    sqft:      p.squareFootage ? String(p.squareFootage)   : null,
+    yearBuilt: p.yearBuilt   != null ? String(p.yearBuilt) : null,
+    lotSize:   p.lotSize ? Number(p.lotSize).toLocaleString() + ' sqft' : null,
+    garage:    p.garage || null
+  };
+}
+
+// ============================================================
+// PHOTO UPLOAD + DRAG-TO-REORDER
+// ============================================================
+const photoInput = document.getElementById('photoInput');
+photoInput.addEventListener('change', e => {
+  if (e.target.files.length) handlePhotos(e.target.files);
+});
+
+// Drop zone
+const photoDrop = document.getElementById('photoDrop');
+['dragenter','dragover'].forEach(evt => {
+  photoDrop.addEventListener(evt, e => { e.preventDefault(); photoDrop.classList.add('drag-over'); });
+});
+['dragleave','drop'].forEach(evt => {
+  photoDrop.addEventListener(evt, e => { e.preventDefault(); photoDrop.classList.remove('drag-over'); });
+});
+photoDrop.addEventListener('drop', e => {
+  if (e.dataTransfer.files.length) handlePhotos(e.dataTransfer.files);
+});
+
+function handlePhotos(fileList) {
+  Array.from(fileList).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      const base64 = dataUrl.split(',')[1];
+      const ext = file.name.split('.').pop().toLowerCase();
+      const num = String(dealPhotos.length + 1).padStart(2, '0');
+      dealPhotos.push({ name: num + '.' + ext, originalName: file.name, dataUrl, base64, type: file.type });
+      renumberPhotos();
+      renderPhotoThumbs();
+    };
+    reader.readAsDataURL(file);
+  });
+  photoInput.value = '';
+}
+
+function renumberPhotos() {
+  dealPhotos.forEach((p, i) => {
+    const ext = p.originalName.split('.').pop().toLowerCase();
+    p.name = String(i + 1).padStart(2, '0') + '.' + ext;
+  });
+}
+
+function removePhoto(idx) {
+  dealPhotos.splice(idx, 1);
+  renumberPhotos();
+  renderPhotoThumbs();
+}
+
+// Drag reorder state
+let dragIdx = null;
+
+function renderPhotoThumbs() {
+  const container = document.getElementById('photoThumbs');
+  const countLabel = document.getElementById('photoCountLabel');
+  if (!dealPhotos.length) {
+    container.innerHTML = '';
+    countLabel.style.display = 'none';
+    return;
+  }
+  countLabel.style.display = 'block';
+  countLabel.textContent = dealPhotos.length + ' photo' + (dealPhotos.length !== 1 ? 's' : '') + ' — drag to reorder, #1 is the hero image';
+
+  container.innerHTML = dealPhotos.map((p, i) =>
+    '<div class="photo-thumb" draggable="true" data-idx="' + i + '">' +
+      '<img src="' + p.dataUrl + '" alt="' + p.name + '">' +
+      '<span class="thumb-num">' + (i + 1) + '</span>' +
+      '<button class="thumb-remove" onclick="event.stopPropagation();removePhoto(' + i + ')">✕</button>' +
+    '</div>'
+  ).join('');
+
+  // Wire up drag events on each thumb
+  container.querySelectorAll('.photo-thumb').forEach(thumb => {
+    thumb.addEventListener('dragstart', e => {
+      dragIdx = parseInt(thumb.dataset.idx);
+      thumb.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    thumb.addEventListener('dragend', () => {
+      thumb.classList.remove('dragging');
+      dragIdx = null;
+      container.querySelectorAll('.photo-thumb').forEach(t => t.classList.remove('drag-over-thumb'));
+    });
+    thumb.addEventListener('dragover', e => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      thumb.classList.add('drag-over-thumb');
+    });
+    thumb.addEventListener('dragleave', () => {
+      thumb.classList.remove('drag-over-thumb');
+    });
+    thumb.addEventListener('drop', e => {
+      e.preventDefault();
+      const dropIdx = parseInt(thumb.dataset.idx);
+      if (dragIdx !== null && dragIdx !== dropIdx) {
+        // Move the dragged photo to the drop position
+        const [moved] = dealPhotos.splice(dragIdx, 1);
+        dealPhotos.splice(dropIdx, 0, moved);
+        renumberPhotos();
+        renderPhotoThumbs();
+      }
+    });
+  });
+}
+
+// ============================================================
+// GITHUB API HELPER
+// ============================================================
+async function githubAPI(repoPath, method, body) {
+  const resp = await fetch(GITHUB_PROXY, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      path: '/repos/' + GITHUB_REPO + '/contents/' + repoPath,
+      method: method || 'GET',
+      body: body || undefined
+    })
+  });
+  const data = await resp.json();
+  if (!resp.ok && resp.status !== 404) {
+    throw new Error(data.message || 'GitHub API error ' + resp.status);
+  }
+  return { ok: resp.ok, status: resp.status, data };
+}
+
+async function pushFile(filePath, contentBase64, commitMsg) {
+  let sha = null;
+  try {
+    const checkResult = await githubAPI(filePath, 'GET');
+    if (checkResult.ok) sha = checkResult.data.sha;
+  } catch(e) {}
+  const body = { message: commitMsg, content: contentBase64 };
+  if (sha) body.sha = sha;
+  const putResult = await githubAPI(filePath, 'PUT', body);
+  if (!putResult.ok) throw new Error(putResult.data.message || 'Push failed');
+  return putResult;
+}
+
+// ============================================================
+// PROGRESS LOG
+// ============================================================
+function initLog(steps) {
+  const log = document.getElementById('progressLog');
+  log.style.display = 'block';
+  log.innerHTML = steps.map((s, i) =>
+    '<div class="log-entry pending" id="log' + i + '">' +
+      '<span class="log-icon">○</span> ' + s +
+    '</div>'
+  ).join('');
+}
+function setLogStep(idx, state, label) {
+  const el = document.getElementById('log' + idx);
+  if (!el) return;
+  el.className = 'log-entry ' + state;
+  const icons = { active: '◉', done: '✓', error: '✗', pending: '○' };
+  el.innerHTML = '<span class="log-icon">' + (icons[state] || '○') + '</span> ' + (label || el.textContent.trim());
+}
+
+// ============================================================
+// ENABLE ACTION BUTTONS (called after extract or manual fill)
+// ============================================================
+function enableActionButtons() {
+  document.getElementById('btnCreateFolder').disabled = false;
+  document.getElementById('btnPushPhotos').disabled = false;
+  document.getElementById('btnPushClose').disabled = false;
+  document.getElementById('btnCreateWorkflow').disabled = false;
+}
+
+// Helper: gather current deal data from all editable fields
+function gatherDealJson() {
+  syncFieldsToExtracted();
+  const dealId = document.getElementById('fDealId').value.trim();
+  const askingN = parseDollar(document.getElementById('fAsking').value);
+  const arvN = parseDollar(document.getElementById('fArv').value);
+  const repairsPerSqft = parseFloat(document.getElementById('fRepairs').value) || 0;
+  const sqft = parseFloat(extractedDeal.sqft) || 0;
+  const repairsN = (repairsPerSqft > 0 && sqft > 0) ? Math.round(repairsPerSqft * sqft) : null;
+  const profitN = (arvN && repairsN && askingN) ? arvN - repairsN - askingN : null;
+  return {
+    dealId,
+    market: marketStatus,
+    address: extractedDeal.address || null,
+    city: extractedDeal.city || null,
+    state: extractedDeal.state || null,
+    zip: extractedDeal.zip || null,
+    beds: extractedDeal.beds || null,
+    baths: extractedDeal.baths || null,
+    sqft: extractedDeal.sqft || null,
+    lotSize: extractedDeal.lotSize || null,
+    yearBuilt: extractedDeal.yearBuilt || null,
+    garage: extractedDeal.garage || null,
+    basementSqft: extractedDeal.basementSqft || null,
+    pool: extractedDeal.pool || null,
+    solar: extractedDeal.solar || null,
+    coeDate: extractedDeal.coeDate || null,
+    executedDate: extractedDeal.executedDate || null,
+    ddDays: extractedDeal.ddDays || null,
+    emdDays: extractedDeal.emdDays || null,
+    emdAmount: extractedDeal.emdAmount || null,
+    seller: extractedDeal.seller || null,
+    buyer: extractedDeal.buyer || null,
+    onMarket: extractedDeal.onMarket || null,
+    contractPrice: extractedDeal.contractPrice || null,
+    agentName: extractedDeal.agentName || null,
+    agentPhone: extractedDeal.agentPhone || null,
+    agentEmail: extractedDeal.agentEmail || null,
+    agentBrokerage: extractedDeal.agentBrokerage || null,
+    wholesalePrice: askingN,
+    arv: arvN,
+    repairsPerSqft: repairsPerSqft || null,
+    estRepairs: repairsN,
+    profitPotential: profitN
+  };
+}
+
+// ============================================================
+// BUTTON 1: CREATE DEAL FOLDER (GitHub template + deal-doc.txt)
+// ============================================================
+document.getElementById('btnCreateFolder').addEventListener('click', async () => {
+  const btn = document.getElementById('btnCreateFolder');
+  const dealId = document.getElementById('fDealId').value.trim();
+  if (!dealId) { setStatus('Enter a deal number first', 'error'); return; }
+
+  btn.disabled = true;
+  btn.textContent = '📁 Creating...';
+  document.getElementById('outputEmpty').style.display = 'none';
+
+  const dealJson = gatherDealJson();
+  const slug = dealId;
+  const address = dealJson.address || 'Unknown Address';
+  const dealUrl = 'https://goodresults.org/deals/' + slug + '/';
+
+  initLog([
+    'Fetching deal page template...',
+    'Pushing deal page to GitHub...',
+    'Pushing deal data to GitHub...',
+    'Uploading contract PDF (private)...',
+    'Pushing manifest (visibility)...'
+  ]);
+
+  try {
+    // Fetch template
+    setLogStep(0, 'active');
+    let templateContent;
+    try {
+      const siteResp = await fetch('/deals/_template.html');
+      if (!siteResp.ok) throw new Error('site fetch failed');
+      const tplText = await siteResp.text();
+      templateContent = btoa(unescape(encodeURIComponent(tplText)));
+    } catch(e) {
+      const tplResult = await githubAPI('deals/_template.html', 'GET');
+      if (!tplResult.ok) throw new Error('Could not fetch template');
+      templateContent = tplResult.data.content.replace(/\n/g, '');
+    }
+    setLogStep(0, 'done', 'Template fetched');
+
+    // Push index.html
+    await wait(600);
+    setLogStep(1, 'active');
+    await pushFile('deals/' + slug + '/index.html', templateContent, 'Deal page: ' + address + ' (template)');
+    setLogStep(1, 'done', 'Deal page template pushed');
+
+    // Push deal-doc.txt
+    await wait(600);
+    setLogStep(2, 'active');
+    const jsonB64 = btoa(unescape(encodeURIComponent(JSON.stringify(dealJson, null, 2))));
+    await pushFile('deals/' + slug + '/deal-doc.txt', jsonB64, 'Deal page: ' + address + ' (data)');
+    setLogStep(2, 'done', 'Deal data pushed');
+
+    // Auto-upload contract PDF as private file
+    if (currentPDF && currentPDF.type === 'application/pdf') {
+      await wait(600);
+      setLogStep(3, 'active');
+      try {
+        const contractB64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = e => resolve(e.target.result.split(',')[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(currentPDF);
+        });
+        await pushFile('deals/' + slug + '/contract.pdf', contractB64, 'Deal page: ' + address + ' (contract)');
+        setLogStep(3, 'done', 'Contract PDF uploaded (private)');
+      } catch(e) {
+        setLogStep(3, 'error', 'Contract upload failed — continue manually');
+      }
+    } else {
+      setLogStep(3, 'done', 'No contract PDF to upload');
+    }
+
+    // Push manifest.json with contract set to private
+    await wait(600);
+    setLogStep(4, 'active');
+    const manifest = { private: ['contract.pdf'] };
+    const manifestB64 = btoa(unescape(encodeURIComponent(JSON.stringify(manifest, null, 2))));
+    await pushFile('deals/' + slug + '/manifest.json', manifestB64, 'Deal page: ' + address + ' (manifest)');
+    setLogStep(4, 'done', 'Manifest pushed');
+
+    btn.textContent = '✓ Folder Created';
+    btn.className = 'launch-btn success';
+    setStatus('Deal folder created ✓ — ' + dealUrl, 'active');
+
+    const banner = document.getElementById('successBanner');
+    banner.style.display = 'block';
+    document.getElementById('liveUrlLink').innerHTML = '<a href="' + dealUrl + '" target="_blank">' + dealUrl + '</a>';
+    document.getElementById('successDetails').innerHTML = 'Deal page is deploying now (takes ~30 seconds).<br>GitHub: template + deal-doc.txt pushed.';
+    document.getElementById('outputBadge').textContent = 'LIVE';
+    document.getElementById('outputBadge').className = 'badge badge-ready';
+
+    // Refresh the dashboard grid so the new deal appears
+    setTimeout(() => loadDeals(), 2000);
+
+  } catch(err) {
+    console.error('Create folder failed:', err);
+    setStatus('Create folder failed: ' + err.message, 'error');
+    btn.textContent = '📁 Retry Create Folder';
+    btn.disabled = false;
+  }
+});
+
+// ============================================================
+// BUTTON 2: PUSH PHOTOS TO GITHUB
+// ============================================================
+document.getElementById('btnPushPhotos').addEventListener('click', async () => {
+  const btn = document.getElementById('btnPushPhotos');
+  const dealId = document.getElementById('fDealId').value.trim();
+  if (!dealId) { setStatus('Enter a deal number first', 'error'); return; }
+  if (!dealPhotos.length) { setStatus('No photos to push — upload some first', 'error'); return; }
+
+  btn.disabled = true;
+  btn.textContent = '📸 Pushing...';
+
+  const slug = dealId;
+  const address = extractedDeal.address || 'Unknown Address';
+
+  initLog(['Uploading ' + dealPhotos.length + ' photos to GitHub...']);
+
+  try {
+    setLogStep(0, 'active');
+    for (let i = 0; i < dealPhotos.length; i++) {
+      const photo = dealPhotos[i];
+      setLogStep(0, 'active', 'Uploading photo ' + (i + 1) + ' of ' + dealPhotos.length + '...');
+      await pushFile('deals/' + slug + '/' + photo.name, photo.base64, 'Deal page: ' + address + ' (photo ' + photo.name + ')');
+      if (i < dealPhotos.length - 1) await wait(400);
+    }
+    setLogStep(0, 'done', dealPhotos.length + ' photos uploaded');
+
+    btn.textContent = '✓ Photos Pushed';
+    btn.className = 'launch-btn success';
+    setStatus(dealPhotos.length + ' photos pushed to GitHub ✓', 'active');
+
+  } catch(err) {
+    console.error('Photo push failed:', err);
+    setStatus('Photo push failed: ' + err.message, 'error');
+    btn.textContent = '📸 Retry Photos';
+    btn.disabled = false;
+  }
+});
+
+// ============================================================
+// BUTTON 3: PUSH TO CLOSE CRM
+// ============================================================
+document.getElementById('btnPushClose').addEventListener('click', async () => {
+  const btn = document.getElementById('btnPushClose');
+  const dealId = document.getElementById('fDealId').value.trim();
+  if (!dealId) { setStatus('Enter a deal number first', 'error'); return; }
+
+  btn.disabled = true;
+  btn.textContent = '📊 Pushing...';
+
+  syncFieldsToExtracted();
+  const address = extractedDeal.address || 'Unknown Address';
+  const askingN = parseDollar(document.getElementById('fAsking').value);
+  const arvN = parseDollar(document.getElementById('fArv').value);
+  const dealUrl = 'https://goodresults.org/deals/' + dealId + '/';
+
+  initLog([
+    'Searching for lead in Close...',
+    'Updating opportunity in Close...'
+  ]);
+
+  try {
+    // Find lead + opportunity
+    setLogStep(0, 'active');
+    let targetOpp = null;
+    let matchedLead = null;
+    const searchData = await closeAPI(
+      '/lead/?query=' + encodeURIComponent(address) + '&_fields=id,display_name,opportunities&_limit=5',
+      'GET'
+    );
+    const leads = searchData.data || [];
+    for (const lead of leads) {
+      const opps = lead.opportunities || [];
+      const pipelineOpp = opps.find(o => o.pipeline_id === CLOSE_PIPELINE);
+      if (pipelineOpp) { targetOpp = pipelineOpp; matchedLead = lead; break; }
+      if (!targetOpp && opps.length > 0) { targetOpp = opps[0]; matchedLead = lead; }
+    }
+
+    if (!targetOpp) {
+      setLogStep(0, 'done', 'No matching lead found');
+      setLogStep(1, 'done', 'Skipped — no opportunity to update');
+      btn.textContent = '📊 No Lead Found';
+      btn.disabled = false;
+      setStatus('No matching lead found in Close for "' + address + '"', 'error');
+      return;
+    }
+    setLogStep(0, 'done', 'Found opp on "' + matchedLead.display_name + '"');
+
+    // Update opportunity (only fill blank fields)
+    await wait(800);
+    setLogStep(1, 'active');
+    const existingOpp = await closeAPI('/opportunity/' + targetOpp.id + '/', 'GET');
+    const existing = existingOpp.custom || {};
+
+    const updatePayload = {};
+    function setCF(key, val) {
+      if (!val) return;
+      const fieldId = CF[key];
+      const current = existing[fieldId];
+      if (!current || current === '' || current === null) {
+        updatePayload['custom.' + fieldId] = val;
+      }
+    }
+
+    const fullAddr = [address, extractedDeal.city, extractedDeal.state, extractedDeal.zip].filter(Boolean).join(', ');
+    setCF('address', fullAddr);
+    setCF('dealId', dealId);
+
+    const contractPriceN = parseDollar(extractedDeal.contractPrice);
+    if (contractPriceN) setCF('currentContractPrice', '$' + contractPriceN.toLocaleString());
+    if (askingN) setCF('wholesalePrice', '$' + askingN.toLocaleString());
+    if (askingN && !existingOpp.value) {
+      updatePayload.value = Math.round(askingN * 100);
+    }
+    if (arvN) setCF('arv', '$' + arvN.toLocaleString());
+    if (extractedDeal.coeDate) setCF('coeDate', extractedDeal.coeDate);
+    if (extractedDeal.executedDate) setCF('acceptedDate', extractedDeal.executedDate);
+    if (extractedDeal.emdAmount) setCF('emdAmount', extractedDeal.emdAmount);
+    // onMarket skipped for now — Close choice field needs valid option mapping
+
+    if (extractedDeal.executedDate && extractedDeal.ddDays) {
+      const ddEnd = addDaysToDate(extractedDeal.executedDate, extractedDeal.ddDays);
+      if (ddEnd) setCF('ddEndDate', ddEnd);
+    }
+    if (extractedDeal.executedDate && extractedDeal.emdDays) {
+      const emdDue = addDaysToDate(extractedDeal.executedDate, extractedDeal.emdDays);
+      if (emdDue) setCF('emdDueDate', emdDue);
+    }
+
+    const noteLines = [address];
+    const propDetails = [
+      extractedDeal.beds ? extractedDeal.beds + ' bd' : null,
+      extractedDeal.baths ? extractedDeal.baths + ' ba' : null,
+      extractedDeal.sqft ? Number(extractedDeal.sqft).toLocaleString() + ' sqft' : null
+    ].filter(Boolean).join(' / ');
+    if (propDetails) noteLines.push(propDetails);
+    if (extractedDeal.yearBuilt) noteLines.push('Year: ' + extractedDeal.yearBuilt);
+    if (extractedDeal.lotSize) noteLines.push('Lot: ' + extractedDeal.lotSize);
+    if (extractedDeal.basementSqft) noteLines.push('Basement: ' + extractedDeal.basementSqft);
+    if (extractedDeal.pool && extractedDeal.pool !== 'No') noteLines.push('Pool: ' + extractedDeal.pool);
+    if (extractedDeal.solar && extractedDeal.solar !== 'No') noteLines.push('Solar: ' + extractedDeal.solar);
+    noteLines.push('Deal page: ' + dealUrl);
+    updatePayload.note = noteLines.join('\n');
+
+    const fieldCount = Object.keys(updatePayload).length;
+    await closeAPI('/opportunity/' + targetOpp.id + '/', 'PUT', updatePayload);
+    setLogStep(1, 'done', 'Opportunity updated (' + (fieldCount - 1) + ' fields filled)');
+
+    btn.textContent = '✓ Close Updated';
+    btn.className = 'launch-btn success';
+    setStatus('Close opportunity updated ✓ on "' + matchedLead.display_name + '"', 'active');
+
+  } catch(err) {
+    console.error('Close push failed:', err);
+    setStatus('Close push failed: ' + err.message, 'error');
+    btn.textContent = '📊 Retry Close';
+    btn.disabled = false;
+  }
+});
+
+// ============================================================
+// BUTTON 4: CREATE DISPO WORKFLOW
+// ============================================================
+document.getElementById('btnCreateWorkflow').addEventListener('click', async () => {
+  const btn = document.getElementById('btnCreateWorkflow');
+  const dealId = document.getElementById('fDealId').value.trim();
+  if (!dealId) { setStatus('Enter a deal number first', 'error'); return; }
+
+  btn.disabled = true;
+  btn.textContent = '⚡ Creating...';
+
+  syncFieldsToExtracted();
+  const address = extractedDeal.address || 'Unknown Address';
+  const dealUrl = 'https://goodresults.org/deals/' + dealId + '/';
+
+  initLog([
+    'Creating deal-link SMS template...',
+    'Creating deal email template...',
+    'Creating 6-step dispo workflow...'
+  ]);
+
+  try {
+    // Deal-link SMS template
+    setLogStep(0, 'active');
+    const linkSmsTmpl = await closeAPI('/sms_template/', 'POST', {
+      name: address + ' - Deal Link',
+      text: 'Here are the details on that deal I mentioned... check it out and let me know if you have any questions\n' + dealUrl,
+      is_shared: true
+    });
+    setLogStep(0, 'done', 'Deal-link SMS template created');
+
+    // Deal email template
+    await wait(600);
+    setLogStep(1, 'active');
+    const emailTmpl = await closeAPI('/email_template/', 'POST', {
+      name: address + ' - Deal Email',
+      subject: 'Deal details — ' + address,
+      body: '<p>Hey {{ contact.first_name }},</p><p>Here are the details on that deal I mentioned...</p><p><a href="' + dealUrl + '">' + dealUrl + '</a></p><p>Let me know if you have any questions or want to take a look at it.</p><p>{{ user.first_name }}<br>Good Results Home Buyers</p>',
+      is_shared: true
+    });
+    setLogStep(1, 'done', 'Deal email template created');
+
+    // 6-step workflow
+    await wait(600);
+    setLogStep(2, 'active');
+    const workflow = await closeAPI('/sequence/', 'POST', {
+      name: address + ' - Dispo',
+      timezone: 'America/Los_Angeles',
+      steps: [
+        { step_type: 'sms',   delay: 0,     sms_template_id: TEASER_TMPL },
+        { step_type: 'email', delay: 0,     email_template_id: emailTmpl.id, threading: 'new_thread' },
+        { step_type: 'sms',   delay: 2760,  sms_template_id: linkSmsTmpl.id },
+        { step_type: 'sms',   delay: 86400, sms_template_id: FOLLOWUP_TMPL },
+        { step_type: 'email', delay: 0,     email_template_id: emailTmpl.id, threading: 'new_thread' },
+        { step_type: 'sms',   delay: 7200,  sms_template_id: NUDGE_TMPL }
+      ]
+    });
+    setLogStep(2, 'done', 'Workflow "' + workflow.name + '" created (6-step draft)');
+
+    btn.textContent = '✓ Workflow Created';
+    btn.className = 'launch-btn success';
+    setStatus('Dispo workflow created ✓ — activate it and enroll contacts', 'active');
+
+  } catch(err) {
+    console.error('Workflow creation failed:', err);
+    setStatus('Workflow failed: ' + err.message, 'error');
+    btn.textContent = '⚡ Retry Workflow';
+    btn.disabled = false;
+  }
+});
+
 </script>
 <footer style="padding:24px 44px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.07);">
   <span style="font-size:.72rem;font-weight:800;color:#FF5C1A;letter-spacing:.04em;">GOOD RESULTS</span>
