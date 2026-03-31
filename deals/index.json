@@ -1,0 +1,599 @@
+{
+  "updated": "2026-03-31T04:34:42.078Z",
+  "deals": [
+    {
+      "slug": "3759-glen-avenue",
+      "docSha": "d0eb8ed752da3c1119b2b25f675bcac633b5c0ca",
+      "data": {
+        "dealId": "0320261",
+        "market": "off",
+        "address": "3759 Glen Avenue",
+        "city": "Las Vegas",
+        "state": "NV",
+        "zip": "89121",
+        "beds": 5,
+        "baths": 5,
+        "sqft": 3867,
+        "lotSize": "10,454 sqft",
+        "yearBuilt": 1953,
+        "garage": null,
+        "coeDate": "March 31, 2026",
+        "arv": null
+      },
+      "manifest": [
+        {
+          "name": "01.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 0
+        },
+        {
+          "name": "02.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 1
+        },
+        {
+          "name": "03.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 2
+        },
+        {
+          "name": "04.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 3
+        },
+        {
+          "name": "05.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 4
+        },
+        {
+          "name": "06.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 5
+        },
+        {
+          "name": "07.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 6
+        },
+        {
+          "name": "08.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 7
+        },
+        {
+          "name": "09.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 8
+        },
+        {
+          "name": "10.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 9
+        },
+        {
+          "name": "11.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 10
+        },
+        {
+          "name": "12.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 11
+        },
+        {
+          "name": "13.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 12
+        },
+        {
+          "name": "14.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 13
+        },
+        {
+          "name": "15.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 14
+        },
+        {
+          "name": "16.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 15
+        },
+        {
+          "name": "17.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 16
+        },
+        {
+          "name": "18.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 17
+        },
+        {
+          "name": "19.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 18
+        },
+        {
+          "name": "20.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 19
+        },
+        {
+          "name": "21.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 20
+        },
+        {
+          "name": "22.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 21
+        },
+        {
+          "name": "23.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 22
+        },
+        {
+          "name": "24.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 23
+        },
+        {
+          "name": "25.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 24
+        }
+      ]
+    },
+    {
+      "slug": "03202614",
+      "docSha": "f7d075d2accb7eefb6c24b6d7ad26f2753c6b0b6",
+      "data": {
+        "dealId": "03202614",
+        "market": "off",
+        "address": "2550 Melody Ln",
+        "city": "Reno",
+        "state": "NV",
+        "zip": "89512",
+        "beds": 4,
+        "baths": 3,
+        "sqft": 2714,
+        "lotSize": "7231",
+        "yearBuilt": 1977,
+        "garage": "420ft attached ",
+        "coeDate": "",
+        "executedDate": "3/30/2026",
+        "ddDays": 7,
+        "emdDays": 7,
+        "emdAmount": "$10,000.00",
+        "seller": "Florence Waneva Pearce, Trustee",
+        "buyer": "Good Results, LLC",
+        "onMarket": "No",
+        "contractPrice": "$380,000.00",
+        "agentName": "Karen A Degney",
+        "agentPhone": "7752335521",
+        "agentEmail": "Karen@Degney.com",
+        "agentBrokerage": "Sierra Sotheby's Intl. Realty",
+        "wholesalePrice": 404000,
+        "arv": 545000,
+        "repairsPerSqft": 30,
+        "profitPotential": 90030,
+        "realtorName": "",
+        "realtorPhone": "",
+        "ddEndDate": "2026-04-06",
+        "emdDueDate": "2026-04-06",
+        "acceptedDate": "",
+        "basementSqft": "",
+        "publicNotes": "Slight foundation issues. reach out for copies of documents and inspection.",
+        "privateNotes": "Has Foundation issue and some moisture stuff.... I have documents for this\n"
+      },
+      "manifest": [
+        {
+          "name": "01.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 0
+        },
+        {
+          "name": "02.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 1
+        },
+        {
+          "name": "03.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 2
+        },
+        {
+          "name": "04.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 3
+        },
+        {
+          "name": "05.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 4
+        },
+        {
+          "name": "06.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 5
+        },
+        {
+          "name": "07.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 6
+        },
+        {
+          "name": "08.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 7
+        },
+        {
+          "name": "09.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 8
+        },
+        {
+          "name": "10.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 9
+        },
+        {
+          "name": "11.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 10
+        },
+        {
+          "name": "12.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 11
+        },
+        {
+          "name": "13.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 12
+        },
+        {
+          "name": "14.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 13
+        },
+        {
+          "name": "15.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 14
+        },
+        {
+          "name": "16.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 15
+        },
+        {
+          "name": "17.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 16
+        },
+        {
+          "name": "18.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 17
+        },
+        {
+          "name": "19.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 18
+        },
+        {
+          "name": "20.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 19
+        },
+        {
+          "name": "21.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 20
+        },
+        {
+          "name": "22.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 21
+        },
+        {
+          "name": "23.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 22
+        },
+        {
+          "name": "24.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 23
+        },
+        {
+          "name": "25.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 24
+        },
+        {
+          "name": "26.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 25
+        },
+        {
+          "name": "27.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 26
+        },
+        {
+          "name": "28.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 27
+        },
+        {
+          "name": "29.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 28
+        },
+        {
+          "name": "30.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 29
+        },
+        {
+          "name": "31.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 30
+        },
+        {
+          "name": "32.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 31
+        },
+        {
+          "name": "33.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 32
+        },
+        {
+          "name": "34.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 33
+        },
+        {
+          "name": "35.jpeg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 34
+        }
+      ]
+    },
+    {
+      "slug": "3202-melbourne-st",
+      "docSha": "e4d3d350f2006c0f9f584828e3208798f52cc7c3",
+      "data": {
+        "dealId": "0320265",
+        "market": "off",
+        "address": "3202 Melbourne St",
+        "city": "Houston",
+        "state": "TX",
+        "zip": "77026",
+        "beds": 4,
+        "baths": 2,
+        "sqft": 1700,
+        "lotSize": "8,782 sqft",
+        "yearBuilt": 1949,
+        "garage": "Detached garage",
+        "coeDate": "",
+        "arv": 265000,
+        "realtorName": "",
+        "realtorPhone": "",
+        "ddEndDate": "",
+        "emdDueDate": "",
+        "acceptedDate": "",
+        "wholesalePrice": 160000,
+        "repairsPerSqft": 35
+      },
+      "manifest": [
+        {
+          "name": "01.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 0
+        },
+        {
+          "name": "02.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 1
+        },
+        {
+          "name": "03.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 2
+        },
+        {
+          "name": "04.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 3
+        },
+        {
+          "name": "05.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 4
+        },
+        {
+          "name": "06.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 5
+        },
+        {
+          "name": "07.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 6
+        },
+        {
+          "name": "08.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 7
+        },
+        {
+          "name": "09.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 8
+        },
+        {
+          "name": "10.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 9
+        },
+        {
+          "name": "11.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 10
+        },
+        {
+          "name": "12.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 11
+        },
+        {
+          "name": "13.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 12
+        },
+        {
+          "name": "14.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 13
+        },
+        {
+          "name": "15.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 14
+        },
+        {
+          "name": "16.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 15
+        },
+        {
+          "name": "17.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 16
+        },
+        {
+          "name": "18.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 17
+        },
+        {
+          "name": "19.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 18
+        },
+        {
+          "name": "20.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 19
+        },
+        {
+          "name": "21.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 20
+        },
+        {
+          "name": "22.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 21
+        },
+        {
+          "name": "23.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 22
+        }
+      ]
+    }
+  ]
+}
