@@ -382,6 +382,16 @@ exports.handler = async (event) => {
         const result = await checkAccess(GITHUB_TOKEN, params.email);
         return { statusCode: 200, headers, body: JSON.stringify(result) };
       }
+      if (action === 'getNotes') {
+        const key = params.key || 'dashboard-notes';
+        const filePath = `training-data/${key}.json`;
+        try {
+          const { data } = await ghRead(GITHUB_TOKEN, filePath);
+          return { statusCode: 200, headers, body: JSON.stringify({ notes: data || [] }) };
+        } catch(e) {
+          return { statusCode: 200, headers, body: JSON.stringify({ notes: [] }) };
+        }
+      }
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown GET action: ' + action }) };
     }
 
@@ -405,6 +415,32 @@ exports.handler = async (event) => {
       if (postAction === 'requestAccess') {
         const result = await requestAccess(GITHUB_TOKEN, body, SLACK_TECH);
         return { statusCode: 200, headers, body: JSON.stringify(result) };
+      }
+      if (postAction === 'saveNote') {
+        const key = body.key || 'dashboard-notes';
+        const filePath = `training-data/${key}.json`;
+        let notes = [];
+        let sha = null;
+        try {
+          const existing = await ghRead(GITHUB_TOKEN, filePath);
+          notes = existing.data || [];
+          sha = existing.sha;
+        } catch(e) {}
+        notes.unshift(body.note);
+        await ghWrite(GITHUB_TOKEN, filePath, notes, sha, `Add dashboard note from ${body.note.author || 'unknown'}`);
+        return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
+      }
+      if (postAction === 'deleteNote') {
+        const key = body.key || 'dashboard-notes';
+        const filePath = `training-data/${key}.json`;
+        const { data, sha } = await ghRead(GITHUB_TOKEN, filePath);
+        const notes = data || [];
+        const idx = body.index;
+        if (idx >= 0 && idx < notes.length) {
+          notes.splice(idx, 1);
+          await ghWrite(GITHUB_TOKEN, filePath, notes, sha, `Remove dashboard note #${idx}`);
+        }
+        return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown action: ' + postAction }) };
     }

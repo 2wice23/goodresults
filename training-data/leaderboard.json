@@ -1,44 +1,26 @@
 [
   {
-    "agent_name": "Anthony Cruz",
-    "total_calls": 13,
-    "total_score": 824,
-    "avg": 63
+    "agent_name": "Franklin Ladaga",
+    "total_calls": 14,
+    "total_score": 911,
+    "avg": 65
   },
   {
-    "agent_name": "Franklin Ladaga",
-    "total_calls": 9,
-    "total_score": 566,
-    "avg": 63
+    "agent_name": "Anthony Cruz",
+    "total_calls": 11,
+    "total_score": 705,
+    "avg": 64
+  },
+  {
+    "agent_name": "Gayden Rosales",
+    "total_calls": 10,
+    "total_score": 764,
+    "avg": 76
   },
   {
     "agent_name": "Dan VanMatre",
     "total_calls": 6,
     "total_score": 462,
     "avg": 77
-  },
-  {
-    "agent_name": "Gayden Rosales",
-    "total_calls": 10,
-    "total_score": 764,
-    "avg": 76
-  },
-  {
-    "agent_name": "Gayden Rosales",
-    "total_calls": 10,
-    "total_score": 764,
-    "avg": 76
-  },
-  {
-    "agent_name": "Gayden Rosales",
-    "total_calls": 10,
-    "total_score": 764,
-    "avg": 76
-  },
-  {
-    "agent_name": "Gayden Rosales",
-    "total_calls": 10,
-    "total_score": 764,
-    "avg": 76
   }
 ]

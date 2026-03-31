@@ -9,7 +9,7 @@
 })()</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Good Results Gimme Brain Back Door Terminal Dash Board Extradoaire For People Who Cant Read Good</title>
+<title>The Good Results Gimme Brain Back Door Terminal Dash Board Extradoaire For Owners Who Cant Read Good</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -106,6 +106,28 @@ body>*{position:relative;z-index:1;}
 .task-meta-value{color:var(--cream);font-family:var(--mono);font-weight:500;margin-top:2px;}
 .task-desc{font-size:0.75rem;color:var(--cream);line-height:1.6;background:var(--surface3);padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--border2);}
 
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.feature-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;}
+.feature-icon{font-size:1.2rem;margin-bottom:8px;}
+.feature-name{font-size:0.78rem;font-weight:700;color:var(--white);margin-bottom:6px;}
+.feature-desc{font-size:0.72rem;color:var(--cream);line-height:1.65;opacity:0.85;}
+
+/* NOTES */
+.notes-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;}
+.notes-input-wrap{display:flex;gap:8px;margin-bottom:16px;}
+.note-input{flex:1;background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;color:var(--white);font-family:'Inter',sans-serif;font-size:0.8rem;outline:none;}
+.note-input:focus{border-color:var(--orange-border);}
+.note-btn{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 20px;font-family:'Inter',sans-serif;font-size:0.75rem;font-weight:700;cursor:pointer;white-space:nowrap;}
+.note-btn:hover{opacity:0.85;}
+.notes-list{display:flex;flex-direction:column;gap:6px;}
+.note-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--surface3);border:1px solid var(--border2);border-radius:var(--radius-sm);}
+.note-text{flex:1;font-size:0.78rem;color:var(--cream);line-height:1.55;}
+.note-meta{font-size:0.6rem;color:var(--dim);white-space:nowrap;margin-top:2px;}
+.note-delete{background:none;border:none;color:var(--dim);cursor:pointer;font-size:0.7rem;padding:2px 6px;border-radius:3px;}
+.note-delete:hover{color:var(--red);background:var(--red-bg);}
+.note-empty{font-size:0.75rem;color:var(--dim);text-align:center;padding:16px;}
+
 /* FOOTER */
 .footer{max-width:1200px;margin:0 auto;padding:24px 32px 40px;display:flex;align-items:center;justify-content:space-between;}
 .footer-text{font-size:0.7rem;color:var(--dim);font-weight:500;}
@@ -117,6 +139,7 @@ body>*{position:relative;z-index:1;}
   .health-grid{grid-template-columns:1fr 1fr;}
   .stat-strip{grid-template-columns:1fr 1fr;}
   .task-meta{grid-template-columns:1fr;}
+  .features-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -134,7 +157,7 @@ body>*{position:relative;z-index:1;}
 </header>
 
 <section class="hero">
-  <h1>The Good Results Gimme Brain <em>Back Door Terminal Dash Board Extradoaire For People Who Cant Read Good</em></h1>
+  <h1>The Good Results Gimme Brain <em>Back Door Terminal Dash Board Extradoaire For Owners Who Cant Read Good</em></h1>
   <p class="hero-sub">It's absurd, because it is. System health, automations, leaderboards, and everything under the hood. Owners only.</p>
 </section>
 
@@ -180,10 +203,81 @@ body>*{position:relative;z-index:1;}
   <div id="taskList"></div>
 </div>
 
+<!-- SYSTEM FEATURES -->
+<div class="section">
+  <div class="section-title">What This System Does</div>
+  <div id="featuresGrid" class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🎓</div>
+      <div class="feature-name">Academy — 12 Training Modules</div>
+      <div class="feature-desc">Full onboarding curriculum covering pipeline, cold calling, offers, contracts, financing, due diligence, foreclosures, SMS playbooks, and more. Each module has a quiz pool that tracks which questions you have already mastered — once you prove you know it, you stop seeing it. Notes box on every module lets agents flag mistakes or suggest content, and Gayden reviews them daily.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎙</div>
+      <div class="feature-name">Call Analyzer — AI Call Scoring</div>
+      <div class="feature-desc">Paste any call transcript and AI scores it across 7 criteria using the Good Results playbook — buy box delivery, objection handling, tone, forbidden language, closing attempt, and follow-up. Shows exactly what you missed and the script you should have used at each point. Every analyzed call feeds back into the knowledge base, so scoring improves over time. The leaderboard tracks daily, weekly, and all-time averages per agent.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🧠</div>
+      <div class="feature-name">Self-Learning Knowledge Base</div>
+      <div class="feature-desc">Five interconnected KBs (Master, Analyzer, Chloe Voice Agent, SMS, Academy) that sync automatically. New call data gets pulled daily from the Google Sheet, compared against existing knowledge, and proposed as updates — nothing changes without Gayden's approval. Sunday master merges push new knowledge down to every small brain. The system literally gets smarter every week without anyone writing documentation.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-name">Chloe — AI Voice Agent</div>
+      <div class="feature-desc">AI-powered phone agent in Close CRM that handles inbound and outbound calls using the same playbook the human agents train on. Chloe's knowledge base stays in sync with the master KB through the weekly merge cycle, so when the team learns something new, Chloe learns it too.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🚀</div>
+      <div class="feature-name">Deal Launcher — One-Click Deal Setup</div>
+      <div class="feature-desc">Upload a signed contract and property photos, fill in deal details, hit Launch. It creates the deal page on the website, updates the opportunity in Close CRM, and generates a full disposition workflow with AI-written texts and emails from the SMS playbook. Replaces 45 minutes of manual setup across three systems with one button.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <div class="feature-name">KB Search — Cross-Brain Search</div>
+      <div class="feature-desc">Search every knowledge base at once — Academy modules, analyzer playbook, Chloe scripts, and SMS cadences. Results are color-coded by source so you know where the info lives. If your search comes up short, the question box at the bottom sends it to the Slack Q&A channel and tags Joe and Gayden automatically.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <div class="feature-name">Deal Dashboard — Live Pipeline View</div>
+      <div class="feature-desc">Real-time view of every active deal across Las Vegas, Reno, and Houston. Pipeline status, contract dates, EMD deadlines, and disposition progress. Check it every morning to know what needs attention — which deals are approaching deadlines, which dispositions need follow-up, and where the pipeline stands across all three markets.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-name">Automated Daily Operations</div>
+      <div class="feature-desc">8 scheduled automations run without any computer being on — morning briefings, hourly call target tracking with agent tagging, weekly coaching reports, KB learning cycles, and master merges. Slack gets the right message in the right channel at the right time. Leadership is shown on scoreboards but never tagged. Everything that needs approval pauses and waits.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-name">Secrets Proxy Architecture</div>
+      <div class="feature-desc">Zero API keys in the source code. Every external API call (Close CRM, Slack, OpenAI, GitHub) goes through Netlify serverless proxy functions with keys stored in environment variables. The repo is public and safe to share — no credentials are exposed anywhere in the codebase.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏗</div>
+      <div class="feature-name">Auto-Deploy Pipeline</div>
+      <div class="feature-desc">Push to GitHub, Netlify builds and deploys automatically. No FTP, no manual uploads, no drag-and-drop. Every deployment is version-controlled with full commit history. One standardized push method (git clone/push) across every project and scheduled task — learned the hard way after two sessions using different methods overwrote each other.</div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTES / IDEAS -->
+<div class="section">
+  <div class="section-title">Ideas & Feature Requests</div>
+  <div class="notes-container">
+    <div class="notes-input-wrap">
+      <input type="text" id="noteInput" class="note-input" placeholder="Add an idea, feature request, or note..." />
+      <button class="note-btn" onclick="addNote()">Add</button>
+    </div>
+    <div id="notesList" class="notes-list">
+      <div class="note-empty">Loading notes...</div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <div class="footer">
   <a href="/gimmebrain/academy" class="hub-link">← Back to Hub</a>
-  <div class="footer-text">The Good Results Gimme Brain Back Door Terminal Dash Board Extradoaire For People Who Cant Read Good v1.0 — if you're reading this, you're either Gayden or Joe</div>
+  <div class="footer-text">The Good Results Gimme Brain Back Door Terminal Dash Board Extradoaire For Owners Who Cant Read Good v1.0 — if you're reading this, you're either Gayden or Joe</div>
 </div>
 
 <script>
@@ -430,12 +524,82 @@ function toggleTask(id) {
 }
 
 // ============================================================
+// NOTES / IDEAS
+// ============================================================
+
+const NOTES_KEY = 'dashboard-notes';
+
+async function loadNotes() {
+  const el = document.getElementById('notesList');
+  try {
+    const res = await fetch(`${API}?action=getNotes&key=${NOTES_KEY}&cachebust=${Date.now()}`);
+    const data = await res.json();
+    const notes = data.notes || [];
+    if (notes.length === 0) {
+      el.innerHTML = '<div class="note-empty">No notes yet. Add an idea above.</div>';
+      return;
+    }
+    el.innerHTML = notes.map((n, i) => `
+      <div class="note-item">
+        <div class="note-text">${escHtml(n.text)}</div>
+        <div class="note-meta">${n.author || 'Unknown'}<br>${n.date || ''}</div>
+        <button class="note-delete" onclick="deleteNote(${i})" title="Remove">✕</button>
+      </div>
+    `).join('');
+  } catch(e) {
+    el.innerHTML = '<div class="note-empty">Could not load notes.</div>';
+  }
+}
+
+async function addNote() {
+  const input = document.getElementById('noteInput');
+  const text = input.value.trim();
+  if (!text) return;
+  const author = sessionStorage.getItem('gr_name') || sessionStorage.getItem('gr_agent') || 'Unknown';
+  const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  try {
+    await fetch(API, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'saveNote', key: NOTES_KEY, note: { text, author, date } })
+    });
+    input.value = '';
+    loadNotes();
+  } catch(e) {
+    alert('Failed to save note');
+  }
+}
+
+async function deleteNote(index) {
+  try {
+    await fetch(API, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'deleteNote', key: NOTES_KEY, index })
+    });
+    loadNotes();
+  } catch(e) {
+    alert('Failed to delete note');
+  }
+}
+
+function escHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+// Enter key to submit
+document.getElementById('noteInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') addNote();
+});
+
+// ============================================================
 // INIT
 // ============================================================
 
 checkHealth();
 loadLeaderboard();
 renderTasks();
+loadNotes();
 
 // Auto-refresh health every 60s
 setInterval(checkHealth, 60000);

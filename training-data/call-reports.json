@@ -260,26 +260,6 @@
     "on_leaderboard": "yes"
   },
   {
-    "id": "",
-    "timestamp": "",
-    "agent": "",
-    "realtor": "",
-    "call_type": "",
-    "duration": "",
-    "call_date": "",
-    "score": "",
-    "realtor_engagement": "",
-    "summary": "",
-    "what_worked": "",
-    "what_to_tighten": "",
-    "language_flags": "",
-    "missed_opportunities": "",
-    "positive_moments": "",
-    "resistance_moments": "",
-    "script_moment": "",
-    "on_leaderboard": ""
-  },
-  {
     "id": "1774886066775",
     "timestamp": "2026-03-30T15:54:26.775Z",
     "agent": "Dan VanMatre",
