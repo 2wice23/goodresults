@@ -1178,5 +1178,25 @@
     "resistance_moments": "Initial confusion when call went to main office number | Brief 'it just depends' responses showing cautious approach to committing",
     "script_moment": "When Trevor mentioned 'in office exclusives,' Franklin should have asked: 'What do those in-office exclusives typically look like in terms of property type and price range?' This would have gathered more specific intel about their pipeline.",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774987563969",
+    "timestamp": "2026-03-31T20:06:03.969Z",
+    "agent": "Joe Kruse",
+    "realtor": "Luis",
+    "call_type": "DEAL DISCUSSION",
+    "duration": "Not specified",
+    "call_date": "Not specified",
+    "score": 82,
+    "realtor_engagement": 88,
+    "summary": "Joe discussed a specific property offering at $160k with $60k rehab needs, confirmed flexible deal structure allowing assignment fees, and set up property viewing access with next-day follow-up call.",
+    "what_worked": "Provided comprehensive property details including condition, layout, and specific work needed | Offered flexible deal structure accommodating assignment fees | Set up immediate property access via lockbox | Established clear next-day follow-up timeline | Positioned as volume-focused relationship builder",
+    "what_to_tighten": "Could have delivered explicit buy box criteria to help Luis understand what other properties would interest Good Results | Could have asked more qualifying questions about Luis's investment criteria or network",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about Luis's typical investment criteria to understand future deal fit | Could have inquired about his investor network size/type to gauge referral potential",
+    "positive_moments": "Luis asked clarifying questions about rehab estimates showing he was analyzing the deal seriously | Luis inquired about assignment fee structure indicating he has investor network access | Luis confirmed he would review property details that evening showing genuine interest | Luis asked about financing options showing he's thinking through deal logistics",
+    "resistance_moments": "Luis indicated he may market to other investors before considering it personally, showing he's not committed to purchasing directly",
+    "script_moment": "When Luis mentioned he might market to other investors first, Joe should have said: 'That's great - what type of investors do you typically work with? I'd love to understand what deals usually interest them so I can keep you in mind for future properties that fit their criteria too.'",
+    "on_leaderboard": "yes"
   }
 ]
