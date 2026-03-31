@@ -1158,5 +1158,25 @@
     "resistance_moments": "Immediately asked 'Who are you?' showing no recognition | Said 'I don't work with investors' as flat rejection | Listed all the spam calls he gets (22 per week) | Said 'nobody's giving their houses away' showing market skepticism",
     "script_moment": "After Raymond asked 'Who are you?' should have said: 'I apologize - this is Kayden Rogers with Good Results Home Buyers. I believe we may have spoken before, but let me reintroduce myself properly since there seems to be some confusion.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774986722883",
+    "timestamp": "2026-03-31T19:52:02.883Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Trevor Anderson",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "4m 23s",
+    "call_date": "03/31/2026",
+    "score": 85,
+    "realtor_engagement": 82,
+    "summary": "Franklin re-engaged Trevor after a 6-month gap, delivered complete buy box criteria, and learned about their office's process for handling off-market deals. Trevor was receptive and agreed to keep Franklin in mind for future opportunities.",
+    "what_worked": "Strong re-engagement opener acknowledging the 6-month gap | Complete buy box delivery with memorable imagery | Good volume positioning (40 properties across 3 markets) | Let Trevor explain their office process extensively | Secured direct phone number for future contact | Set specific follow-up timeline with clear progression",
+    "what_to_tighten": "Could have asked more specifically about what types of properties typically come through their office meetings | Minor initial confusion with office number could be avoided by confirming direct lines first",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked what price ranges typically come through their office meetings | Could have explored what 'in office exclusives' typically look like in their market",
+    "positive_moments": "Said 'Yes, we do' immediately when asked about off-market properties | Explained detailed office meeting process for sharing upcoming listings | Provided his direct phone number proactively | Said 'we can keep you in mind for something like that' | Requested the text with criteria to keep Franklin's information | Agreed enthusiastically to the follow-up timeline",
+    "resistance_moments": "Initial confusion when call went to main office number | Brief 'it just depends' responses showing cautious approach to committing",
+    "script_moment": "When Trevor mentioned 'in office exclusives,' Franklin should have asked: 'What do those in-office exclusives typically look like in terms of property type and price range?' This would have gathered more specific intel about their pipeline.",
+    "on_leaderboard": "yes"
   }
 ]
