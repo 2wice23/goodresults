@@ -958,5 +958,25 @@
     "resistance_moments": "Initial confusion about Franklin's identity due to audio issues | Brief 'Unfortunately, I don't have anything at the moment' response",
     "script_moment": "When she said 'I do' get investment deals, Franklin should have asked 'What types of situations do you typically see - probates, downsizing, inherited properties?' to understand her pipeline better.",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774984398983",
+    "timestamp": "2026-03-31T19:13:18.983Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Fernando Mendoza",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "2m 38s",
+    "call_date": "03/31/2026",
+    "score": 79,
+    "realtor_engagement": 75,
+    "summary": "Anthony followed up on Fernando's previous message about providing a list. Fernando confirmed he sometimes gets distressed properties and showed willingness to help. Anthony delivered buy box and set one-month follow-up.",
+    "what_worked": "Complete buy box delivery with specific criteria | Positioned as low-maintenance partner | Clear commission structure discussion | Set specific follow-up timeline",
+    "what_to_tighten": "Could have been more specific about the message reference in opener | Could have explored his network or sources beyond MLS",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about his specific areas of expertise or network | Could have explored what types of distressed properties he typically sees",
+    "positive_moments": "Asked 'doesn't matter the condition of the home or has to be in livable condition' showing he understood the criteria | Said 'I might be able to find you something' indicating genuine interest | Agreed to one-month follow-up willingly | Said 'that'd be fine' when asked about future contact",
+    "resistance_moments": "Initial 'sometimes I do, sometimes I don't' response showed limited expectations | Mentioned looking through MLS which suggests he may not have unique off-market access",
+    "script_moment": "When Fernando said 'sometimes I do, sometimes I don't' about distressed properties, Anthony could have asked 'What areas do you work most in? I find different neighborhoods have different types of opportunities.'",
+    "on_leaderboard": "yes"
   }
 ]
