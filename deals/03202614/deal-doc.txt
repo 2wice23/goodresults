@@ -34,6 +34,6 @@
   "emdDueDate": "",
   "acceptedDate": "",
   "basementSqft": "",
-  "publicNotes": "",
+  "publicNotes": "Slight foundation issues. reach out for copies of documents and inspection.",
   "privateNotes": "Has Foundation issue and some moisture stuff.... I have documents for this\n"
 }
