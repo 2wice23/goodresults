@@ -66,7 +66,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q12 - actualy, the too nice template is for when they send you a proeprty that is too nice, maybe its already rehabbed, or doesnt need a full remodel. for whatever reason, it is \"too nice\" to make an investment deal or be sold by a wholesaler. fix this question and answer - and add a new question to the pool as well",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T19:13:55.039Z",
@@ -75,7 +76,8 @@
     "agent": "Joe",
     "email": "joe@goodresults.org",
     "update": "\"Float the deal first\" has the wrong answer in it. After they say \"let me ask the seller,\" you should wait for a response from them (with consistent and daily follow up) until you get the price you need, or move on. \nAlso, Pool Q16. How should you respond if a seller pushes back on a $1 option fee? Has the incorrect answer.",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T21:03:52.092Z",
@@ -84,7 +86,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q25 - always call/contact whoever is closest to the money first. offer out, terms sent, clear inbox, then your follow up lists",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T21:08:17.017Z",
@@ -93,7 +96,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q24 - we tell the realtor we need to get the contractors in - then explain how that works - but what is actualy happenign on our end is that we are waiting to send our buyers in after we have it in contract and hopefuly get a deal sold",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T21:09:46.273Z",
@@ -102,7 +106,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q4 - wheneevr making a google drive - it should be visible to anyone in good results - editor. it used to be anyone with link - we have updated this process - this is a big change in the system and a lot of dsections will change possibly",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T21:10:16.885Z",
@@ -111,7 +116,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q11 - joe is now in charge of dispo - adjust the modules and knowlege bases accordingly",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T21:15:08.487Z",
@@ -120,7 +126,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q17 - when a deal is all said and done jump on a call with them thank them for everything - congratulate them on getting this deals done - even though you are the reason this shit works, still make them feel like they're the one - then start working on the next deal - what do they have???",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T21:21:45.831Z",
@@ -129,7 +136,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q19 - model match means identical - same squasre footage, bed/bath, everythign IDENTICAL",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T21:22:36.891Z",
@@ -138,7 +146,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "Q11 - WHAT DOES THIS MEAN",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T21:23:11.814Z",
@@ -147,7 +156,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "Q16 - ELEaborate on this question and answer - its too vague",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T21:34:15.655Z",
@@ -156,7 +166,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q11 - doesnt make sense",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T21:34:44.822Z",
@@ -165,7 +176,8 @@
     "agent": "Joe",
     "email": "joe@goodresults.org",
     "update": "Some of the questions relating to rehab costs don't specify whether it's NV or TX",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T21:49:56.591Z",
@@ -174,7 +186,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q11 makes no sense.... tradition realtors arent pitching to us - we are pursuing them",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T21:50:34.787Z",
@@ -183,7 +196,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q7 this makes no sense as a question. realtors get paid at close of escrow - they have enevr once worried about when theyre gettign p[aid as long as the deal is closing",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-30T22:46:08.795Z",
@@ -192,7 +206,8 @@
     "agent": "Joe",
     "email": "joe@goodresults.org",
     "update": "Q12 doesn't make sense. If the owner has limited equity, they don't have the authority to seller finance. They can potentially sell it as a subject-to or an assumable loan.",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-31T04:05:33.812Z",
@@ -201,7 +216,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q16 doesnt make sense",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-31T04:06:20.405Z",
@@ -210,7 +226,8 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q23 makes no sense also",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   },
   {
     "timestamp": "2026-03-31T04:07:08.282Z",
@@ -219,6 +236,7 @@
     "agent": "Gayden",
     "email": "gayden@goodresults.org",
     "update": "q11 - question is irrelevent. i dont care if they know that - it also changes between contracts. bad question",
-    "status": "pending"
+    "status": "processed",
+    "processedNote": "Fix already deployed 2026-03-30 23:31 CDT (batch of 17 quiz fixes). Queue status updated 2026-03-31."
   }
 ]
