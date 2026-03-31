@@ -1,5 +1,15 @@
 {
   "positive": [
+    "[Anthony Cruz — RE-ENGAGEMENT — Score 80/100]: Excellent buy box delivery with specific, memorable criteria",
+    "[Anthony Cruz — RE-ENGAGEMENT — Score 80/100]: Good recovery from initial text confusion",
+    "[Anthony Cruz — RE-ENGAGEMENT — Score 80/100]: Let Bertina ask questions and drive conversation naturally",
+    "[Anthony Cruz — RE-ENGAGEMENT — Score 80/100]: Positioned as flexible on price which engaged her interest",
+    "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Asked 'Is there a certain price point you're looking at or area that you're looking in?' showing genuine interest",
+    "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Said 'I need to save your number' and 'I'm going to save your number' multiple times",
+    "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Volunteered details about recent $90k deal closing tomorrow",
+    "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Said 'That's very doable' after hearing his criteria",
+    "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Proactively asked for his email address to send properties",
+    "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Committed to 'check around' and 'see what I can find for you'",
     "[Franklin Ladaga — RE-ENGAGEMENT — Score 88/100]: Strong re-engagement opener with specific timeframe reference",
     "[Franklin Ladaga — RE-ENGAGEMENT — Score 88/100]: Complete buy box delivery that resonated immediately",
     "[Franklin Ladaga — RE-ENGAGEMENT — Score 88/100]: Excellent positioning against 'TV guy' stereotype",
@@ -49,17 +59,7 @@
     "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Shared detailed personal history and established credibility (40+ years experience, native to area)",
     "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Proactively asked for his criteria and price range",
     "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Agreed enthusiastically to follow-up timeline",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Called him back despite being on vacation in Arizona",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 87/100]: Complete buy box delivery with memorable imagery",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 87/100]: Strong re-engagement opener referencing prior contact",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 87/100]: Clear rejection reasoning for offered property",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 87/100]: Specific follow-up timeline set",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 87/100]: Jo's immediate property offer shows criteria resonated",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Immediately offered specific property (144 Keystone) when asked about investment deals",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Asked detailed questions about yield requirements and investment formula",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Requested preferred communication method for future properties",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Stayed engaged despite being under review",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Asked clarifying questions about square footage vs total purchase price"
+    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Called him back despite being on vacation in Arizona"
   ],
   "negative": [
     "[Anthony Cruz — WARM FOLLOW-UP]: Initial 'sometimes I do, sometimes I don't' response showed limited expectations",
@@ -124,10 +124,6 @@
     "[Franklin Ladaga — WARM FOLLOW-UP]: Mentioned she focuses on vacant land primarily rather than houses"
   ],
   "reknowledge": [
-    "[RE Knowledge — Anthony Cruz — 03/31/2026]: Bertina Purifoy actively works distressed properties and just closed a $90k deal with land and small home",
-    "[RE Knowledge — Anthony Cruz — 03/31/2026]: She doesn't have Anthony's work number saved, suggesting contact management opportunity",
-    "[RE Knowledge — Anthony Cruz — 03/31/2026]: She's receptive to Anthony's criteria and committed to actively searching for matching properties",
-    "[RE Knowledge — Anthony Cruz — 03/31/2026]: Houston market has sub-$100k distressed deals available with land included",
     "[RE Knowledge — Anthony Cruz — 03/31/2026]: Fernando Mendoza sometimes gets distressed properties across his desk but availability varies",
     "[RE Knowledge — Anthony Cruz — 03/31/2026]: He's willing to search MLS for distressed properties and provide market insight on specific areas",
     "[RE Knowledge — Anthony Cruz — 03/31/2026]: He's open to both buyer's agent arrangements and sending his own listings when available",
@@ -203,6 +199,10 @@
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: She prefers larger title companies like Capital or Fidelity over smaller ones",
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: Spartan Title may have lending-side issues that concern some realtors",
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: Stacy Rogers has a marketing campaign launching next week that should generate additional property leads",
-    "[RE Knowledge — Anthony Cruz — 03/30/2026]: She expects properties to start coming in mid next week from this campaign"
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: She expects properties to start coming in mid next week from this campaign",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: She's proactive about staying in touch with investors and encourages them to reach out",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Kristi Ramsey works with multiple investor buyers and has established relationships",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Houston market has active flippers doing their own property evaluations",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Inherited properties often lack detailed condition information"
   ]
 }
