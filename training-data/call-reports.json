@@ -1398,5 +1398,25 @@
     "resistance_moments": "Initial confusion from opener about 'Anthony Cruz told me to email you' | Redirected away from monthly follow-up calls to her preferred contact method",
     "script_moment": "Instead of 'Anthony Cruz told me to email you' should have said 'Hey Diana, this is Anthony Cruz with Good Results. You mentioned I should email you, but I figured I'd give you a quick call to introduce myself properly.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774998386838",
+    "timestamp": "2026-03-31T23:06:26.838Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Laura Reyes",
+    "call_type": "DEAL DISCUSSION",
+    "duration": "4m 2s",
+    "call_date": "03/31/2026",
+    "score": 83,
+    "realtor_engagement": 75,
+    "summary": "Anthony called about a property Laura sent him at 6715 La Puente. The property was too renovated for his buy box, so he pivoted to explaining his criteria for distressed properties. Laura doesn't typically encounter heavily distressed properties but agreed to act as buyer's agent if she finds something suitable.",
+    "what_worked": "Strong opener referencing specific property established immediate credibility | Complete buy box delivery with all key criteria | Good pivot from rejected property to future opportunities | Professional BBA discussion | Set concrete next steps with multiple contact methods",
+    "what_to_tighten": "Could have asked more specifically about her MLS search habits or typical property types she encounters",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked if she knows other agents in her office who might work with more distressed properties",
+    "positive_moments": "Asked 'What price range do you usually look for' showing genuine interest in his criteria | Asked about his work area (Houston/Katy) to understand geographic fit | Requested text with specific details about what he's looking for | Agreed enthusiastically to one-month follow-up contact",
+    "resistance_moments": "Said 'Not really' when asked about distressed properties - indicated this isn't her typical business | Explained she usually works with occupied homes, not distressed properties",
+    "script_moment": "After she said she doesn't encounter distressed properties, Anthony could have said: 'That makes sense - do you have any colleagues in your office who might work more with estate sales, divorces, or properties that need significant work? I'd love an introduction if you're comfortable with that.'",
+    "on_leaderboard": "yes"
   }
 ]
