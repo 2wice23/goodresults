@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-31T19:53:54.930Z",
+  "updated": "2026-03-31T20:02:19.844Z",
   "deals": [
     {
       "slug": "032026001",
@@ -191,65 +191,6 @@
           "type": "photo",
           "visibility": "public",
           "order": 24
-        }
-      ]
-    },
-    {
-      "slug": "032026008",
-      "docSha": "0e2ca49ffa28df734817a09a3337ea746e2af981",
-      "data": {
-        "dealId": "032026008",
-        "market": "off",
-        "address": "1803 N Nevada St",
-        "city": "Carson City",
-        "state": "NV",
-        "zip": "89703",
-        "beds": 3,
-        "baths": 1,
-        "sqft": 1112,
-        "lotSize": "5,227 sqft",
-        "yearBuilt": 1983,
-        "garage": "",
-        "basementSqft": "",
-        "pool": null,
-        "solar": null,
-        "coeDate": "",
-        "executedDate": "03/30/2026",
-        "ddDays": "",
-        "emdDays": 2,
-        "emdAmount": "$3,000.00",
-        "seller": "John Gustafson, Susan Gustafson",
-        "buyer": "Good Results LLC",
-        "onMarket": "Yes",
-        "contractPrice": "$285,000.00",
-        "agentName": "Alicia Gonzalez",
-        "agentPhone": "(775)400-6632",
-        "agentEmail": "alicia.repro@gmail.com",
-        "agentBrokerage": "Dickson Realty-Gardnerville",
-        "wholesalePrice": 304000,
-        "arv": 420000,
-        "repairsPerSqft": 30,
-        "profitPotential": null,
-        "emdDueDate": "2026-04-01",
-        "realtorName": "",
-        "realtorPhone": "",
-        "ddEndDate": "",
-        "acceptedDate": "",
-        "publicNotes": "",
-        "privateNotes": ""
-      },
-      "manifest": [
-        {
-          "name": "01.webp",
-          "type": "photo",
-          "visibility": "public",
-          "order": 0
-        },
-        {
-          "name": "contract.pdf",
-          "type": "doc",
-          "visibility": "private",
-          "order": 1
         }
       ]
     },
@@ -504,6 +445,65 @@
           "type": "photo",
           "visibility": "public",
           "order": 34
+        }
+      ]
+    },
+    {
+      "slug": "032026008",
+      "docSha": "0e2ca49ffa28df734817a09a3337ea746e2af981",
+      "data": {
+        "dealId": "032026008",
+        "market": "off",
+        "address": "1803 N Nevada St",
+        "city": "Carson City",
+        "state": "NV",
+        "zip": "89703",
+        "beds": 3,
+        "baths": 1,
+        "sqft": 1112,
+        "lotSize": "5,227 sqft",
+        "yearBuilt": 1983,
+        "garage": "",
+        "basementSqft": "",
+        "pool": null,
+        "solar": null,
+        "coeDate": "",
+        "executedDate": "03/30/2026",
+        "ddDays": "",
+        "emdDays": 2,
+        "emdAmount": "$3,000.00",
+        "seller": "John Gustafson, Susan Gustafson",
+        "buyer": "Good Results LLC",
+        "onMarket": "Yes",
+        "contractPrice": "$285,000.00",
+        "agentName": "Alicia Gonzalez",
+        "agentPhone": "(775)400-6632",
+        "agentEmail": "alicia.repro@gmail.com",
+        "agentBrokerage": "Dickson Realty-Gardnerville",
+        "wholesalePrice": 304000,
+        "arv": 420000,
+        "repairsPerSqft": 30,
+        "profitPotential": null,
+        "emdDueDate": "2026-04-01",
+        "realtorName": "",
+        "realtorPhone": "",
+        "ddEndDate": "",
+        "acceptedDate": "",
+        "publicNotes": "",
+        "privateNotes": ""
+      },
+      "manifest": [
+        {
+          "name": "01.webp",
+          "type": "photo",
+          "visibility": "public",
+          "order": 0
+        },
+        {
+          "name": "contract.pdf",
+          "type": "doc",
+          "visibility": "private",
+          "order": 1
         }
       ]
     },
