@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-31T20:45:44.563Z",
+  "updated": "2026-03-31T20:47:51.944Z",
   "deals": [
     {
       "slug": "032026001",
@@ -508,7 +508,7 @@
         {
           "name": "Fully_Signed_Marketing_Fee_Agreement.pdf",
           "type": "doc",
-          "visibility": "public",
+          "visibility": "private",
           "order": 999
         }
       ]
