@@ -378,7 +378,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
         <div class="step-hint">Auto-generated from the month + year + deal number. This is the folder name and URL slug for the deal page.</div>
         <div class="field-row">
           <div class="field-label">Deal # This Month</div>
-          <input class="field-input" type="number" id="fDealNum" value="8" min="1">
+          <input class="field-input" type="number" id="fDealNum" value="7" min="1">
         </div>
         <div class="field-row">
           <div class="field-label">Deal Page ID</div>
@@ -1730,7 +1730,7 @@ function updateDealId() {
   const now = new Date();
   const mm = String(now.getMonth() + 1).padStart(2, '0');
   const yyyy = now.getFullYear();
-  const n = String(document.getElementById('fDealNum').value || '8').padStart(2, '0');
+  const n = String(document.getElementById('fDealNum').value || '7').padStart(3, '0');
   lastDealId = `${mm}${yyyy}${n}`;
   document.getElementById('fDealId').value = lastDealId;
   document.getElementById('dealUrlPreview').textContent = 'goodresults.org/deals/' + lastDealId;
