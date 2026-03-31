@@ -1358,5 +1358,25 @@
     "resistance_moments": "Had to report no suitable inventory currently available",
     "script_moment": "When she mentioned seller expectations making flipping unviable, Joe should have asked: 'What are they expecting versus what would make it work for a flip? Help me understand the gap so I know what to look for.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774997557366",
+    "timestamp": "2026-03-31T22:52:37.366Z",
+    "agent": "Gayden Rosales",
+    "realtor": "Ann Delfin",
+    "call_type": "NEGOTIATION",
+    "duration": "4m 43s",
+    "call_date": "03/31/2026",
+    "score": 81,
+    "realtor_engagement": 82,
+    "summary": "Gayden discussed a specific property Ann brought him, offering $325k against her $375k listing, which was already rejected at $355k by another investor. He set a follow-up strategy to revisit in 10 days and discovered Ann also has access to pre-HUD manufactured homes.",
+    "what_worked": "Strategic approach to pricing gap - didn't push unrealistic offer but stayed in the game | Discovered new opportunity with pre-HUD manufactured homes | Balanced professionalism with personal support during her difficult time | Set multiple specific follow-up strategies",
+    "what_to_tighten": "More professional opener even with established relationships | Could have asked more about her typical deal flow and pipeline",
+    "language_flags": "",
+    "missed_opportunities": "Could have explored what other types of properties she typically encounters | Could have asked about her office or team for potential referrals",
+    "positive_moments": "Volunteered information about competing $355k cash offer that was rejected | Said 'I love your attitude' showing appreciation for his approach | Proactively asked about pre-HUD properties showing she's thinking of inventory for him | Shared personal situation and commitment to resume active searching",
+    "resistance_moments": "Brief responses during negotiation discussion, but this was natural given the price gap rather than disengagement",
+    "script_moment": "After she mentioned personal issues: 'I'm glad you're getting back to it. When you do start looking again, remind me what areas you typically work in? I'd love to know what neighborhoods you're seeing most opportunities in.'",
+    "on_leaderboard": "yes"
   }
 ]
