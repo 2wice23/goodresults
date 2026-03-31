@@ -1562,7 +1562,23 @@ async function createDealPage() {
       'Deal page: ' + streetAddr + ' (data)'
     );
 
-    // Step 4: Push photos (if any) into deals/{slug}/
+    // Step 4a: Auto-add contract PDF to dealDocs (private) if not already there
+    if (currentFile && currentFile.type === 'application/pdf') {
+      const contractName = 'contract.pdf';
+      const alreadyAdded = dealDocs.some(d => d.name === contractName);
+      if (!alreadyAdded) {
+        status.textContent = 'Reading contract PDF...';
+        const contractB64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = e => resolve(e.target.result.split(',')[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(currentFile);
+        });
+        dealDocs.push({ name: contractName, originalName: currentFile.name, base64: contractB64, type: 'application/pdf', isImage: false });
+      }
+    }
+
+    // Step 4b: Push photos (if any) into deals/{slug}/
     if (dealPhotos.length) {
       for (let i = 0; i < dealPhotos.length; i++) {
         const photo = dealPhotos[i];
