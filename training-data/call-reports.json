@@ -1278,5 +1278,25 @@
     "resistance_moments": "Initial confusion about who Franklin was | Brief 'I don't at this moment' response about current inventory",
     "script_moment": "When Octavio said he sees good flip properties while driving, Franklin could have said: 'That's perfect - you've got eyes on the street every day. Even if it's just a quick text with an address, I can drive by and take a look.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774990414651",
+    "timestamp": "2026-03-31T20:53:34.651Z",
+    "agent": "Joe Kruse",
+    "realtor": "Timothy",
+    "call_type": "DEAL DISCUSSION",
+    "duration": "Not specified",
+    "call_date": "Not specified",
+    "score": 84,
+    "realtor_engagement": 92,
+    "summary": "Joe pitched an off-market Houston property that Timothy declined due to focus on Victoria deals. They discussed deal parameters, Timothy's lending services, and Timothy's own property at 108 Russell Road which Joe will analyze.",
+    "what_worked": "Strong established relationship allowed immediate property discussion | Excellent two-way dialogue that uncovered Timothy's business model | Good pivot from rejection to Timothy's opportunity | Clear next steps with specific timeline",
+    "what_to_tighten": "Could have explored Houston criteria more before pitching specific property | Missed opportunity to get more specific ARV discussion on Russell Road property",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked more about Timothy's investor network | Didn't explore what makes Victoria deals more attractive than Houston",
+    "positive_moments": "Timothy immediately offered bridge financing at 7.75% | Timothy volunteered his own property at 108 Russell Road for Joe to analyze | Timothy provided detailed buy box criteria ($20k-26k range, Victoria focus) | Timothy discussed profit-sharing structure for future deals | Timothy stayed engaged despite declining the Houston property",
+    "resistance_moments": "Timothy expressed concern that exterior looked worse than photos | Timothy declined Houston property due to project management concerns",
+    "script_moment": "When Timothy declined the Houston deal, Joe could have said: 'I understand Victoria is your focus - what specifically makes those deals work better for you? Square footage, price range, or the local contractor network?' This would have gathered more actionable buy box intelligence.",
+    "on_leaderboard": "yes"
   }
 ]
