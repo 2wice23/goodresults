@@ -878,5 +878,25 @@
     "resistance_moments": "Asked if he was human or AI due to suspicious call quality | Questioned why he was whispering | Said she doesn't give out information to people she doesn't know | Became defensive when he asked about her listings | Treated him as a potential security threat rather than business contact",
     "script_moment": "When she asked 'Is this a human or this AI?' - 'Yes ma'am, this is Franklin Ladaga with Good Results Home Buyers. We're a cash home buying company here in Nevada. I believe we texted about 6 months ago and you mentioned I should check back. I specialize in homes from the 1960s to early 2000s, around 2,000 square feet in subdivision neighborhoods that need some work.'",
     "on_leaderboard": "no"
+  },
+  {
+    "id": "1774976518968",
+    "timestamp": "2026-03-31T17:01:58.968Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Vanessa Ponce",
+    "call_type": "DEAL DISCUSSION",
+    "duration": "3m 14s",
+    "call_date": "03/31/2026",
+    "score": 76,
+    "realtor_engagement": 82,
+    "summary": "Anthony called to discuss a Wheeler Street property Vanessa sent him, asking detailed questions about condition and needed repairs. After determining it's cosmetic only, they discussed their working relationship and Anthony delivered his buy box criteria.",
+    "what_worked": "Strong property-focused conversation with detailed condition questions | Complete buy box delivery with all key elements | Set specific follow-up timeline | Explained commission structure clearly | Built rapport around the specific property",
+    "what_to_tighten": "Used forbidden language 'me and my partner' early in call | Could have asked more about her pipeline or typical deal flow",
+    "language_flags": "Used 'me and my partner' which is forbidden language",
+    "missed_opportunities": "",
+    "positive_moments": "Asked 'Do you work with other real estate agents?' showing interest in his business | Said 'I'll go ahead and save your number' and committed to sending future properties | Proactively offered for him to drive by the property | Shared details about a recent deal that fell through, indicating she gets distressed properties",
+    "resistance_moments": "",
+    "script_moment": "When she mentioned getting distressed properties 'once in a while' and losing one recently, Anthony could have asked: 'What types of situations do those typically come from - are they probates, divorces, people behind on payments?' This would help her recognize more opportunities.",
+    "on_leaderboard": "yes"
   }
 ]
