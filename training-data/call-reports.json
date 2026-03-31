@@ -938,5 +938,25 @@
     "resistance_moments": "Initial confusion about who Franklin was | Firm stance against dual representation | Hesitation about giving property address at this early stage | Clarified this is not her typical market demographic",
     "script_moment": "When Holly said 'generally speaking, I don't do it' Franklin could have asked 'What type of properties do you typically work with?' to understand her primary market and identify future opportunities outside this special case.",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774984013312",
+    "timestamp": "2026-03-31T19:06:53.312Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Sonja Leonard",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "2m 13s",
+    "call_date": "03/31/2026",
+    "score": 74,
+    "realtor_engagement": 75,
+    "summary": "Franklin re-engaged Sonja after 6 months of no contact via text. She confirmed she gets investment deals but has nothing currently, and they set a follow-up for 3 weeks due to her upcoming vacation.",
+    "what_worked": "Complete buy box delivery with memorable imagery about subdivision homes | Accommodated her schedule by adjusting to 3 weeks | Showed genuine interest in her vacation plans | Set clear expectation about texting",
+    "what_to_tighten": "Audio quality caused initial confusion | Could have asked one follow-up question about what types of investment deals she typically sees",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked what price range or areas she typically works | Could have asked if she has any coming up in 3+ weeks",
+    "positive_moments": "Said 'I do' when asked about off-market investment properties | Adjusted timeline to 3 weeks and explained her vacation | Said 'that would be great' when asked about follow-up | Stayed engaged despite initial audio issues",
+    "resistance_moments": "Initial confusion about Franklin's identity due to audio issues | Brief 'Unfortunately, I don't have anything at the moment' response",
+    "script_moment": "When she said 'I do' get investment deals, Franklin should have asked 'What types of situations do you typically see - probates, downsizing, inherited properties?' to understand her pipeline better.",
+    "on_leaderboard": "yes"
   }
 ]
