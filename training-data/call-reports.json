@@ -1338,5 +1338,25 @@
     "resistance_moments": "Some initial audio confusion but not resistance | The buyer/wholesaler question showed some skepticism but was reasonable due diligence",
     "script_moment": "After Marques said 'let me check some app', Kayden could have added: 'And just so you know, I work both on-market through MLS and off-market if you ever get anything before it hits the market - either way works great for us.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774995952758",
+    "timestamp": "2026-03-31T22:25:52.758Z",
+    "agent": "Joe Kruse",
+    "realtor": "Coco Pettaway",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "Not specified",
+    "call_date": "Not specified",
+    "score": 70,
+    "realtor_engagement": 65,
+    "summary": "Joe followed up with Coco about flip opportunities discussed a month ago. She currently has no suitable properties due to seller expectations making flipping unviable. Joe will resend buy box and follow up in 2-3 weeks.",
+    "what_worked": "Referenced specific prior conversation | Set concrete follow-up timeline | Got honest market feedback",
+    "what_to_tighten": "Should deliver buy box verbally rather than just promising to resend | Could have probed deeper into what makes seller expectations unviable",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about other agents in her office who might have suitable properties | Could have explored what price point would make the current listing work",
+    "positive_moments": "Coco provided specific feedback about why current listing won't work for flipping | She acknowledged their prior relationship and conversation",
+    "resistance_moments": "Had to report no suitable inventory currently available",
+    "script_moment": "When she mentioned seller expectations making flipping unviable, Joe should have asked: 'What are they expecting versus what would make it work for a flip? Help me understand the gap so I know what to look for.'",
+    "on_leaderboard": "yes"
   }
 ]
