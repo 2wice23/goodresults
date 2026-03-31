@@ -909,21 +909,35 @@ function renderDeals() {
       '</div>';
     }).join('');
 
+    // Build property specs string
+    const specs = [d.beds ? d.beds + 'bd' : null, d.baths ? d.baths + 'ba' : null, d.sqft ? Number(d.sqft).toLocaleString() + 'sf' : null, d.yearBuilt ? 'Yr ' + d.yearBuilt : null].filter(Boolean).join(' · ');
+    const ddDays = daysUntil(d.ddEndDate);
+    const emdDays = daysUntil(d.emdDueDate);
+    const contractN = parseDollar(d.contractPrice);
+
     return '<div class="deal-card" data-slug="' + d._slug + '" data-index="' + i + '">' +
       '<div class="card-top" onclick="toggleCard(this.parentElement)">' +
         '<div class="card-thumb">' + thumbHtml + '</div>' +
         '<div class="card-main">' +
           '<div class="card-address">' + (d.address || d._slug) + coeBadge + '</div>' +
-          '<div class="card-location">' + ([d.city, d.state, d.zip].filter(Boolean).join(', ') || '—') + '</div>' +
+          '<div class="card-location">' + ([d.city, d.state, d.zip].filter(Boolean).join(', ') || '—') +
+            (specs ? ' <span style="color:var(--cream);font-weight:600;">· ' + specs + '</span>' : '') +
+          '</div>' +
+          '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;align-items:center;">' +
+            (d.dealId ? '<span style="font-size:0.5rem;color:var(--dim);font-weight:600;letter-spacing:0.06em;background:var(--surface2);padding:2px 6px;border-radius:2px;border:1px solid var(--border);">#' + d.dealId + '</span>' : '') +
+            '<span class="card-badge ' + (d.market === 'on' ? 'badge-on' : 'badge-off') + '">' + (d.market === 'on' ? 'Active' : 'Off-Market') + '</span>' +
+            (d._photoCount ? '<span style="font-size:0.48rem;color:var(--muted);font-weight:600;">📷 ' + d._photoCount + '</span>' : '') +
+            (d.coeDate ? '<span style="font-size:0.48rem;font-weight:600;color:' + (coeDays !== null && coeDays <= 7 && coeDays >= 0 ? 'var(--red)' : 'var(--muted)') + ';">COE: ' + d.coeDate + (coeDays !== null ? ' (' + dateLabel(coeDays) + ')' : '') + '</span>' : '') +
+            (ddDays !== null ? '<span style="font-size:0.48rem;font-weight:600;color:' + (ddDays <= 3 && ddDays >= 0 ? 'var(--red)' : 'var(--muted)') + ';">DD: ' + dateLabel(ddDays) + '</span>' : '') +
+            (emdDays !== null ? '<span style="font-size:0.48rem;font-weight:600;color:' + (emdDays <= 3 && emdDays >= 0 ? 'var(--red)' : 'var(--muted)') + ';">EMD: ' + dateLabel(emdDays) + '</span>' : '') +
+          '</div>' +
         '</div>' +
         '<div class="card-numbers">' +
+          (contractN ? '<div class="card-num"><div class="card-num-label">Contract</div><div class="card-num-val">' + fmt$(contractN) + '</div></div>' : '') +
           '<div class="card-num"><div class="card-num-label">Ask</div><div class="card-num-val orange">' + fmt$(d.wholesalePrice) + '</div></div>' +
           '<div class="card-num"><div class="card-num-label">ARV</div><div class="card-num-val">' + fmt$(d.arv) + '</div></div>' +
-          (totalRepairs != null ? '<div class="card-num"><div class="card-num-label">Repairs <span style="font-size:0.45rem;opacity:0.7;">(' + d.repairsPerSqft + '/sqft × ' + Number(d.sqft).toLocaleString() + ')</span></div><div class="card-num-val red">' + fmt$(totalRepairs) + '</div></div>' : '') +
-          (profit !== null ? '<div class="card-num"><div class="card-num-label">Gross Profit</div><div class="card-num-val green">' + fmt$(profit) + '</div></div>' : '') +
-          '<div class="card-badges">' +
-            '<span class="card-badge ' + (d.market === 'on' ? 'badge-on' : 'badge-off') + '">' + (d.market === 'on' ? 'Active' : 'Off-Market') + '</span>' +
-          '</div>' +
+          (totalRepairs != null ? '<div class="card-num"><div class="card-num-label">Repairs <span style="font-size:0.45rem;opacity:0.7;">(' + d.repairsPerSqft + '/sqft)</span></div><div class="card-num-val red">' + fmt$(totalRepairs) + '</div></div>' : '') +
+          (profit !== null ? '<div class="card-num"><div class="card-num-label">Profit</div><div class="card-num-val green">' + fmt$(profit) + '</div></div>' : '') +
           '<span class="card-expand-icon">▾</span>' +
         '</div>' +
       '</div>' +
