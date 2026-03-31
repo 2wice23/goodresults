@@ -1435,28 +1435,81 @@ async function createDealPage() {
       return (t === 'N/A' || t === '—' || t === '') ? null : t;
     }
 
+    const c = d.contract || {};
+    const a = d.agent || {};
+    const cond = d.condition || {};
+    const sol = d.solar || {};
+
     const asking  = parseDollar(document.getElementById('dpAsking')?.value);
     const arv     = parseDollar(document.getElementById('dpARV')?.value);
     const repairs = parseDollar(document.getElementById('dpRepairs')?.value);
 
-    // Build deal-doc.txt JSON
+    // Build deal-doc.txt JSON — ALL extracted + manual fields
     const dealJson = {
-      dealId:       document.getElementById('dpDealId')?.value || '',
-      market:       marketToggle,
-      address:      p.address || null,
-      city:         p.city || null,
-      state:        p.state || null,
-      zip:          p.zip || null,
-      beds:         p.beds ? Number(p.beds) : null,
-      baths:        p.baths ? Number(p.baths) : null,
-      sqft:         p.sqft ? Number(String(p.sqft).replace(/,/g,'')) : null,
-      lotSize:      p.lotSize || null,
-      yearBuilt:    p.yearBuilt ? Number(p.yearBuilt) : null,
-      garage:       p.garage || null,
-      coeDate:      fmtDate(getVal('dsCOE')) || null,
-      askingPrice:  asking,
-      arv:          arv,
-      estRepairs:   repairs
+      // Identity
+      dealId:             document.getElementById('dpDealId')?.value || '',
+      market:             marketToggle,
+
+      // Property
+      address:            p.address || null,
+      city:               p.city || null,
+      state:              p.state || null,
+      zip:                p.zip || null,
+      beds:               p.beds ? Number(p.beds) : null,
+      baths:              p.baths ? Number(p.baths) : null,
+      sqft:               p.sqft ? Number(String(p.sqft).replace(/,/g,'')) : null,
+      basementSqft:       p.basementSqft ? Number(String(p.basementSqft).replace(/,/g,'')) : null,
+      lotSize:            p.lotSize || null,
+      yearBuilt:          p.yearBuilt ? Number(p.yearBuilt) : null,
+      garage:             p.garage || null,
+      pool:               p.pool || null,
+      solar:              p.solar || null,
+      propertyType:       p.type || null,
+
+      // Contract
+      seller:             getVal('dsSeller') || c.sellerNames || null,
+      buyerEntity:        c.buyerEntity || null,
+      contractPrice:      parseDollar(getVal('dsCurrentContractPrice')) || null,
+      onMarket:           c.onMarket || null,
+      executedDate:       c.executedDate || null,
+      acceptedDate:       fmtDate(getVal('dsAcceptedDate')) || null,
+      coeDate:            fmtDate(getVal('dsCOE')) || null,
+      ddDays:             c.ddDays != null ? Number(c.ddDays) : null,
+      ddEndDate:          fmtDate(getVal('dsDDEnd')?.split('(')[0].trim()) || null,
+      emdAmount:          parseDollar(getVal('dsEMDAmount')) || null,
+      emdDays:            c.emdDays != null ? Number(c.emdDays) : null,
+      emdDueDate:         fmtDate(getVal('dsEMDDue')?.split('(')[0].trim()) || null,
+
+      // Financials (manual entry fields)
+      askingPrice:        asking,
+      arv:                arv,
+      estRepairs:         repairs,
+      wholesalePrice:     parseDollar(getVal('dsWholesalePrice')) || null,
+      officialOfferPrice: parseDollar(getVal('dsOfficialOfferPrice')) || null,
+      closingCosts:       parseDollar(getVal('dsClosingCosts')) || null,
+      mao:                parseDollar(getVal('dsMAO')) || null,
+
+      // Agent
+      agentName:          getVal('dsAgentName') || a.name || null,
+      agentPhone:         getVal('dsAgentPhone') || a.phone || null,
+      agentEmail:         getVal('dsAgentEmail') || a.email || null,
+      agentBrokerage:     getVal('dsAgentBrokerage') || a.brokerage || null,
+
+      // Condition
+      hvac:               cond.hvac || null,
+      roof:               cond.roof || null,
+      foundation:         cond.foundation || null,
+      plumbing:           cond.plumbing || null,
+      electrical:         cond.electrical || null,
+
+      // Solar
+      solarLoanBalance:   sol.loanBalance || null,
+      solarRemainingTerm: sol.remainingTerm || null,
+      solarTotalPayoff:   sol.totalPayoff || null,
+
+      // Notes
+      publicNotes:        document.getElementById('dsNotes')?.value.trim() || null,
+      privateNotes:       null
     };
 
     status.textContent = 'Fetching template...';

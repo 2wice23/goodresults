@@ -344,110 +344,138 @@ function addDaysToDate(dateStr, days) {
 
 // ── Load deals ──
 
+// Normalize a deal object (backfill, date compute, etc.)
+function normalizeDeal(json, slug) {
+  json._slug = slug;
+  if (json.askingPrice && !json.wholesalePrice) json.wholesalePrice = json.askingPrice;
+  if (json.estRepairs && !json.repairsPerSqft) json.repairsPerSqft = json.estRepairs;
+  if (json.profit && !json.profitPotential) json.profitPotential = json.profit;
+  if (json.notes && !json.publicNotes) json.publicNotes = json.notes;
+  delete json.notes; delete json.askingPrice; delete json.estRepairs; delete json.profit;
+  const baseDate = json.acceptedDate || json.executedDate;
+  if (baseDate) {
+    if (json.ddDays && !json.ddEndDate) json.ddEndDate = addDaysToDate(baseDate, json.ddDays);
+    if (json.emdDays && !json.emdDueDate) json.emdDueDate = addDaysToDate(baseDate, json.emdDays);
+  }
+  return json;
+}
+
+// Build file metadata for a deal from folder listing + manifest
+function buildFileList(slug, folderFiles, manifest) {
+  const IMG_RE = /\.(jpe?g|png|webp|gif)$/i;
+  const DOC_RE = /\.(pdf|docx?|xlsx?|csv|txt)$/i;
+  const SKIP = ['deal-doc.txt', 'manifest.json', 'index.html'];
+
+  const allFiles = folderFiles.filter(f => f.type === 'file' && !SKIP.includes(f.name)).map(f => ({
+    name: f.name, sha: f.sha,
+    url: SITE_BASE + '/deals/' + slug + '/' + f.name,
+    path: 'deals/' + slug + '/' + f.name,
+    type: IMG_RE.test(f.name) ? 'photo' : (DOC_RE.test(f.name) ? 'doc' : 'file'),
+  }));
+
+  if (manifest && Array.isArray(manifest)) {
+    allFiles.forEach(f => {
+      const entry = manifest.find(m => m.name === f.name);
+      if (entry) { f.visibility = entry.visibility || 'public'; f.order = entry.order != null ? entry.order : 999; }
+      else { f.visibility = f.type === 'photo' ? 'public' : 'private'; f.order = 999; }
+    });
+  } else {
+    allFiles.forEach((f, i) => { f.visibility = f.type === 'photo' ? 'public' : 'private'; f.order = i; });
+  }
+  allFiles.sort((a, b) => a.order - b.order);
+  return allFiles;
+}
+
+// Attach file metadata to a deal object
+function attachFiles(json, allFiles) {
+  const publicPhotos = allFiles.filter(f => f.type === 'photo' && f.visibility === 'public');
+  json._allFiles = allFiles;
+  json._thumb = publicPhotos.length ? publicPhotos[0].url : null;
+  json._photos = allFiles.filter(f => f.type === 'photo');
+  json._docs = allFiles.filter(f => f.type !== 'photo');
+  json._photoCount = allFiles.filter(f => f.type === 'photo').length;
+  json._publicPhotoCount = publicPhotos.length;
+}
+
 async function loadDeals() {
   const grid = document.getElementById('dealGrid');
   try {
-    const items = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals');
-    const folders = items.filter(i => i.type === 'dir');
+    // FAST PATH: Try index.json first (1 API call for all deals)
+    let useIndex = false;
+    try {
+      const idx = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/index.json');
+      if (idx && idx.content) {
+        const index = JSON.parse(atob(idx.content.replace(/\n/g, '')));
+        if (index.deals && index.deals.length) {
+          // Load deals from index — still need folder listings for file SHAs
+          const promises = index.deals.map(async entry => {
+            try {
+              const json = normalizeDeal(Object.assign({}, entry.data), entry.slug);
+              json._docSha = entry.docSha;
 
-    if (!folders.length) {
-      grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No deal pages found yet.<br>Use the Deal Processor to create one.</div></div>';
-      return;
+              // Get folder listing for current file SHAs
+              const files = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + entry.slug).catch(() => []);
+              const manifestFile = (files || []).find(f => f.name === 'manifest.json');
+              let manifest = entry.manifest || null;
+              if (manifestFile) {
+                try {
+                  const mf = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + entry.slug + '/manifest.json');
+                  manifest = JSON.parse(atob(mf.content.replace(/\n/g, '')));
+                  json._manifestSha = mf.sha;
+                } catch(e) {}
+              }
+
+              const allFiles = buildFileList(entry.slug, files || [], manifest);
+              attachFiles(json, allFiles);
+              return json;
+            } catch(e) { return null; }
+          });
+
+          const results = await Promise.all(promises);
+          allDeals = results.filter(Boolean);
+          useIndex = true;
+        }
+      }
+    } catch(e) { /* index doesn't exist yet, fall back to per-deal loading */ }
+
+    // SLOW PATH: No index — load each deal individually (backward compatible)
+    if (!useIndex) {
+      const items = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals');
+      const folders = items.filter(i => i.type === 'dir');
+
+      if (!folders.length) {
+        grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No deal pages found yet.<br>Use the Deal Processor to create one.</div></div>';
+        return;
+      }
+
+      const promises = folders.map(async folder => {
+        try {
+          const file = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name + '/deal-doc.txt');
+          if (!file || file.error || !file.content) return null;
+          const json = JSON.parse(atob(file.content.replace(/\n/g, '')));
+          normalizeDeal(json, folder.name);
+          json._docSha = file.sha;
+
+          const files = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name).catch(() => []);
+          const manifestFile = (files || []).find(f => f.name === 'manifest.json');
+          let manifest = null;
+          if (manifestFile) {
+            try {
+              const mf = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name + '/manifest.json');
+              manifest = JSON.parse(atob(mf.content.replace(/\n/g, '')));
+              json._manifestSha = mf.sha;
+            } catch(e) {}
+          }
+
+          const allFiles = buildFileList(folder.name, files || [], manifest);
+          attachFiles(json, allFiles);
+          return json;
+        } catch(e) { return null; }
+      });
+
+      const results = await Promise.all(promises);
+      allDeals = results.filter(Boolean);
     }
-
-    const promises = folders.map(async folder => {
-      try {
-        const file = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name + '/deal-doc.txt');
-        if (!file || file.error) return null;
-        if (!file || !file.content) return null;
-        const json = JSON.parse(atob(file.content.replace(/\n/g, '')));
-        json._slug = folder.name;
-        json._docSha = file.sha;
-        // Backfill old field names → unified names (wholesalePrice, repairsPerSqft, profitPotential)
-        if (json.askingPrice && !json.wholesalePrice) json.wholesalePrice = json.askingPrice;
-        if (json.estRepairs && !json.repairsPerSqft) json.repairsPerSqft = json.estRepairs;
-        if (json.profit && !json.profitPotential) json.profitPotential = json.profit;
-        // Migrate old notes field → publicNotes
-        if (json.notes && !json.publicNotes) json.publicNotes = json.notes;
-        delete json.notes;
-        // Remove old aliases so they don't persist on next save
-        delete json.askingPrice; delete json.estRepairs; delete json.profit;
-
-        // Auto-compute dates from accepted/executed date + days
-        const baseDate = json.acceptedDate || json.executedDate;
-        if (baseDate) {
-          if (json.ddDays && !json.ddEndDate) json.ddEndDate = addDaysToDate(baseDate, json.ddDays);
-          if (json.emdDays && !json.emdDueDate) json.emdDueDate = addDaysToDate(baseDate, json.emdDays);
-        }
-
-        // Get all files in deal folder
-        const files = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name).catch(() => []);
-        const IMG_RE = /\.(jpe?g|png|webp|gif)$/i;
-        const DOC_RE = /\.(pdf|docx?|xlsx?|csv|txt)$/i;
-        const SKIP = ['deal-doc.txt', 'manifest.json', 'index.html'];
-
-        // Check for existing manifest
-        const manifestFile = files.find(f => f.name === 'manifest.json');
-        let manifest = null;
-        if (manifestFile) {
-          try {
-            const mf = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name + '/manifest.json');
-            manifest = JSON.parse(atob(mf.content.replace(/\n/g, '')));
-            json._manifestSha = mf.sha;
-          } catch(e) { manifest = null; }
-        }
-
-        // Build file list from folder contents
-        const allFiles = files.filter(f => f.type === 'file' && !SKIP.includes(f.name)).map(f => ({
-          name: f.name,
-          sha: f.sha,
-          url: SITE_BASE + '/deals/' + folder.name + '/' + f.name,
-          path: 'deals/' + folder.name + '/' + f.name,
-          type: IMG_RE.test(f.name) ? 'photo' : (DOC_RE.test(f.name) ? 'doc' : 'file'),
-        }));
-
-        // If manifest exists, merge it with actual files (in case files were added/removed outside dashboard)
-        if (manifest && Array.isArray(manifest)) {
-          // Add order/visibility from manifest to matching files
-          allFiles.forEach(f => {
-            const entry = manifest.find(m => m.name === f.name);
-            if (entry) {
-              f.visibility = entry.visibility || 'public';
-              f.order = entry.order != null ? entry.order : 999;
-            } else {
-              // New file not in manifest yet — default to public for photos, private for docs
-              f.visibility = f.type === 'photo' ? 'public' : 'private';
-              f.order = 999;
-            }
-          });
-        } else {
-          // No manifest — all existing photos are public, docs default private
-          allFiles.forEach((f, i) => {
-            f.visibility = f.type === 'photo' ? 'public' : 'private';
-            f.order = i;
-          });
-        }
-
-        // Sort by order
-        allFiles.sort((a, b) => a.order - b.order);
-
-        // Split into categories for rendering
-        const publicPhotos = allFiles.filter(f => f.type === 'photo' && f.visibility === 'public');
-        const privateFiles = allFiles.filter(f => f.visibility === 'private');
-        const docs = allFiles.filter(f => f.type !== 'photo');
-
-        json._allFiles = allFiles;
-        json._thumb = publicPhotos.length ? publicPhotos[0].url : null;
-        json._photos = allFiles.filter(f => f.type === 'photo');
-        json._docs = docs;
-        json._photoCount = allFiles.filter(f => f.type === 'photo').length;
-        json._publicPhotoCount = publicPhotos.length;
-        return json;
-      } catch(e) { return null; }
-    });
-
-    const results = await Promise.all(promises);
-    allDeals = results.filter(Boolean);
 
     allDeals.sort((a, b) => {
       const da = daysUntil(a.coeDate), db = daysUntil(b.coeDate);
@@ -462,6 +490,30 @@ async function loadDeals() {
   } catch(err) {
     grid.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><div class="empty-text">Error loading deals: ' + err.message + '</div></div>';
   }
+}
+
+// ── Build/update deals/index.json (master index of all deals) ──
+
+async function updateDealIndex() {
+  const indexData = {
+    updated: new Date().toISOString(),
+    deals: allDeals.map(d => {
+      const clean = {};
+      Object.keys(d).forEach(k => { if (!k.startsWith('_')) clean[k] = d[k]; });
+      const manifest = (d._allFiles || []).map(f => ({ name: f.name, type: f.type, visibility: f.visibility, order: f.order }));
+      return { slug: d._slug, docSha: d._docSha, data: clean, manifest: manifest };
+    })
+  };
+  const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(indexData, null, 2))));
+  // Check for existing index
+  let sha;
+  try {
+    const existing = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/index.json');
+    if (existing && existing.sha) sha = existing.sha;
+  } catch(e) {}
+  const body = { message: 'Update deal index', content: b64 };
+  if (sha) body.sha = sha;
+  await ghPut('/repos/' + GITHUB_REPO + '/contents/deals/index.json', body);
 }
 
 function renderStats() {
@@ -814,6 +866,9 @@ async function saveDeal(btn) {
           if (mResult.content) deal._manifestSha = mResult.content.sha;
         } catch(e) { console.warn('Manifest save failed:', e); }
       }
+
+      // Update deals/index.json in background
+      updateDealIndex().catch(e => console.warn('Index update failed:', e));
 
       status.className = 'save-status saved';
       status.textContent = 'Saved!';
