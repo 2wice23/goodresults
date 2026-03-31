@@ -1438,5 +1438,25 @@
     "resistance_moments": "Very brief responses suggesting limited enthusiasm | Only had one property and didn't volunteer information about future deal sources",
     "script_moment": "After Erik said he only had the one property, Anthony should have asked: 'Where do you typically find properties like this? Do you work with sellers directly or do you have other sources for distressed properties?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774998825441",
+    "timestamp": "2026-03-31T23:13:45.441Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Saraim Gonzalez",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "1m 43s",
+    "call_date": "03/31/2026",
+    "score": 75,
+    "realtor_engagement": 75,
+    "summary": "Anthony re-engaged with Saraim who he spoke to in January about fix and flip properties. She currently has distressed properties but they're all under contract, and she proactively offered to add him to her buyer list for text notifications when new properties come available.",
+    "what_worked": "Complete buy box delivery with all key criteria | She proactively offered to add him to her buyer notification system | Discovered she regularly gets distressed properties | Good positioning as renovation project buyer",
+    "what_to_tighten": "Stronger opener with full name and company context | Could have asked more about her deal flow and typical properties | Could have positioned volume or value proposition better",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about her typical deal volume or timeline | Could have asked what areas she typically works in | Could have mentioned commission structure since she's clearly receptive",
+    "positive_moments": "Said 'Yeah, all the time' when asked about distressed properties showing she has regular deal flow | Proactively offered 'I'm gonna add your number as buyer, and I usually text my buyers whenever I get properties' | Confirmed she understood his criteria with 'I definitely want the attorney'",
+    "resistance_moments": "Initial confusion about how they had connected and where he got her information | Only has land currently available which doesn't fit his needs",
+    "script_moment": "When she said 'Yeah, all the time' about distressed properties, Anthony should have asked: 'That's great to hear - what areas do you typically see these in, and how often would you say you come across them?' This would have gathered valuable market intelligence.",
+    "on_leaderboard": "yes"
   }
 ]
