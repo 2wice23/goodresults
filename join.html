@@ -1,16 +1,14 @@
-<!-- DEPRECATED: Redirects to /join -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="refresh" content="0;url=/join">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Redirecting to Join Good Results...</title>
-<meta name="description" content="Partner with Good Results Home Buyers. Submit a property lead and get paid $2,000+ at closing, or connect with Gayden about fix-and-flip, JV deals, financing, and mentorship.">
-<link rel="canonical" href="https://www.goodresults.org/partner-with-good-results">
-<meta property="og:title" content="Partner With Good Results Home Buyers">
-<meta property="og:description" content="Know someone who wants to sell? Get paid at closing. Want to flip houses? Let's talk deal structures.">
-<meta property="og:url" content="https://www.goodresults.org/partner-with-good-results">
+<title>Join Good Results | Work With Us</title>
+<meta name="description" content="Work with Good Results Home Buyers. Submit a deal and get paid $2,000+ at closing, partner on a fix-and-flip, lend capital, join the team, or just bring an idea.">
+<link rel="canonical" href="https://www.goodresults.org/join">
+<meta property="og:title" content="Join Good Results | Deals, Partnerships, Lending, Team">
+<meta property="og:description" content="Got a deal? Got capital? Got an idea? Good Results is always open to the right conversation.">
+<meta property="og:url" content="https://www.goodresults.org/join">
 <meta property="og:type" content="website">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,9 +44,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ════════════════════════════════
-   NAV
-════════════════════════════════ */
+/* NAV */
 nav{
   background:rgba(8,8,8,0.92);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
@@ -59,11 +55,6 @@ nav{
 }
 .nav-brand{display:flex;align-items:center;gap:13px;text-decoration:none}
 .nav-logo{width:48px;height:48px;display:block;object-fit:contain;flex-shrink:0;border-radius:4px}
-/* Fallback if logo.png not found — hidden */
-.nav-logo-fallback{
-  width:40px;height:40px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-}
 .nav-wordmark{line-height:1.15}
 .nav-wordmark-top{display:block;font-size:9px;font-weight:700;color:var(--gold);letter-spacing:3px;text-transform:uppercase}
 .nav-wordmark-name{display:block;font-size:15px;font-weight:800;color:var(--cream);letter-spacing:-0.2px}
@@ -82,27 +73,20 @@ nav{
 .nav-cta:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
 @media(max-width:700px){.nav-links{display:none}.nav-cta{display:none}nav{padding:0 20px}}
 
-/* ════════════════════════════════
-   HERO
-════════════════════════════════ */
+/* HERO */
 .hero{
   background:var(--dark);
   min-height:92vh;display:flex;flex-direction:column;justify-content:center;
   padding:120px 40px 80px;
   position:relative;overflow:hidden;
 }
-/* Grain texture overlay */
 .hero::before{
-  content:'';
-  position:absolute;inset:0;
+  content:'';position:absolute;inset:0;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  background-size:200px 200px;
-  pointer-events:none;z-index:0;opacity:0.6;
+  background-size:200px 200px;pointer-events:none;z-index:0;opacity:0.6;
 }
-/* Radial gold glow */
 .hero::after{
-  content:'';
-  position:absolute;top:-30%;right:-15%;
+  content:'';position:absolute;top:-30%;right:-15%;
   width:70vw;height:70vw;max-width:900px;
   background:radial-gradient(ellipse, rgba(232,176,32,0.10) 0%, transparent 65%);
   pointer-events:none;z-index:0;
@@ -114,73 +98,40 @@ nav{
   margin-bottom:32px;
 }
 .hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
-
 .hero-h1{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(48px,7.5vw,96px);
-  line-height:0.97;
-  letter-spacing:-2px;
-  color:var(--cream);
-  margin-bottom:32px;
-  max-width:820px;
+  font-size:clamp(48px,7.5vw,96px);line-height:0.97;letter-spacing:-2px;
+  color:var(--cream);margin-bottom:32px;max-width:820px;
 }
 .hero-h1 .line-italic{
   font-style:italic;
-  /* Gold gradient text */
   background:linear-gradient(95deg, #E8B020 0%, #FFD060 45%, #E8B020 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-  display:inline;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline;
 }
 .hero-h1 .line-small{
   font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:clamp(18px,2.8vw,34px);
-  font-weight:400;
-  color:var(--cream-70);
-  letter-spacing:0;
-  display:block;
-  margin-top:10px;
-  font-style:normal;
-  -webkit-text-fill-color:var(--cream-70);
+  font-size:clamp(18px,2.8vw,34px);font-weight:400;color:var(--cream-70);
+  letter-spacing:0;display:block;margin-top:10px;font-style:normal;-webkit-text-fill-color:var(--cream-70);
 }
+.hero-sub{font-size:clamp(17px,2vw,21px);color:var(--cream-70);max-width:620px;line-height:1.7;margin-bottom:48px}
 
-.hero-sub{
-  font-size:clamp(17px,2vw,21px);
-  color:var(--cream-70);
-  max-width:560px;
-  line-height:1.7;
-  margin-bottom:48px;
-}
-
-/* Marquee strip */
+/* Marquee */
 .marquee-wrap{
   position:relative;overflow:hidden;
-  border-top:1px solid var(--gold-border);
-  border-bottom:1px solid var(--gold-border);
-  padding:14px 0;
-  margin-top:12px;
-  background:var(--gold-dim);
+  border-top:1px solid var(--gold-border);border-bottom:1px solid var(--gold-border);
+  padding:14px 0;margin-top:12px;background:var(--gold-dim);
 }
-.marquee-track{
-  display:flex;gap:0;
-  animation:marquee 22s linear infinite;
-  width:max-content;
-}
+.marquee-track{display:flex;gap:0;animation:marquee 28s linear infinite;width:max-content}
 .marquee-track:hover{animation-play-state:paused}
 .marquee-item{
-  white-space:nowrap;
-  font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--gold);padding:0 32px;
-  display:flex;align-items:center;gap:14px;
+  white-space:nowrap;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);padding:0 32px;display:flex;align-items:center;gap:14px;
 }
-.marquee-item::after{content:'⚡';color:var(--gold-lt);font-size:10px}
+.marquee-item::after{content:'';font-size:10px}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
 @media(max-width:600px){.hero{padding:100px 20px 60px;min-height:auto}}
 
-/* ════════════════════════════════
-   SECTION BASE
-════════════════════════════════ */
+/* SECTION BASE */
 .section{padding:100px 40px;position:relative}
 .container{max-width:1060px;margin:0 auto}
 .eyebrow{
@@ -190,242 +141,169 @@ nav{
 .eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--gold)}
 .section-h2{
   font-family:'DM Serif Display',serif;
-  font-size:clamp(34px,5vw,58px);
-  font-weight:400;color:var(--cream);letter-spacing:-1.5px;line-height:1.08;
+  font-size:clamp(34px,5vw,58px);font-weight:400;color:var(--cream);letter-spacing:-1.5px;line-height:1.08;
   margin-bottom:20px;
 }
 .section-h2 em{font-style:italic;color:var(--gold)}
 .section-sub{font-size:19px;color:var(--cream-70);line-height:1.75;max-width:560px;margin-bottom:0}
 
-/* Diagonal clip cut */
-.clip-top{
-  clip-path:polygon(0 3%, 100% 0, 100% 100%, 0 100%);
-  margin-top:-2%;padding-top:calc(100px + 2%);
-}
-.clip-both{
-  clip-path:polygon(0 3%, 100% 0, 100% 97%, 0 100%);
-  margin-top:-2%;padding-top:calc(100px + 2%);
-  padding-bottom:calc(100px + 2%);
-}
-
+/* Diagonal clip cuts */
+.clip-top{clip-path:polygon(0 3%, 100% 0, 100% 100%, 0 100%);margin-top:-2%;padding-top:calc(100px + 2%)}
+.clip-both{clip-path:polygon(0 3%, 100% 0, 100% 97%, 0 100%);margin-top:-2%;padding-top:calc(100px + 2%);padding-bottom:calc(100px + 2%)}
 @media(max-width:600px){.section{padding:72px 20px}}
 
-/* ════════════════════════════════
-   REFERRAL SECTION
-════════════════════════════════ */
+/* REFERRAL SECTION */
 .referral-section{background:var(--dark2)}
-
-.referral-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;
-  margin-top:56px;
-}
+.referral-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-top:56px}
 @media(max-width:900px){.referral-grid{grid-template-columns:1fr;gap:48px}}
 
-/* Payout stamp */
 .payout-stamp{
-  position:relative;
-  border:2px solid var(--gold-border-hi);
-  border-radius:2px;
-  padding:24px 28px;
-  margin-bottom:36px;
-  background:var(--gold-dim);
-  display:flex;align-items:center;gap:20px;
-  overflow:hidden;
+  position:relative;border:2px solid var(--gold-border-hi);border-radius:2px;
+  padding:24px 28px;margin-bottom:36px;background:var(--gold-dim);
+  display:flex;align-items:center;gap:20px;overflow:hidden;
 }
 .payout-stamp::before{
-  content:'GUARANTEED';
-  position:absolute;top:8px;right:-18px;
+  content:'GUARANTEED';position:absolute;top:8px;right:-18px;
   font-size:9px;font-weight:800;letter-spacing:2px;color:var(--gold);
-  background:var(--dark2);padding:2px 24px;
-  transform:rotate(30deg);opacity:0.5;
+  background:var(--dark2);padding:2px 24px;transform:rotate(30deg);opacity:0.5;
 }
 .payout-amount{
-  font-family:'DM Serif Display',serif;
-  font-size:52px;letter-spacing:-2px;line-height:1;
+  font-family:'DM Serif Display',serif;font-size:52px;letter-spacing:-2px;line-height:1;
   background:linear-gradient(135deg, #C9960C, #F0C040, #C9960C);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:shimmer 3s ease-in-out infinite;
-  background-size:200% auto;
+  animation:shimmer 3s ease-in-out infinite;background-size:200% auto;
 }
 @keyframes shimmer{0%,100%{background-position:0% center}50%{background-position:100% center}}
-.payout-meta{}
 .payout-meta-top{font-size:16px;font-weight:700;color:var(--cream);margin-bottom:6px}
 .payout-meta-sub{font-size:14px;color:var(--cream-70);line-height:1.5}
 
-/* Steps */
 .steps{display:flex;flex-direction:column;gap:0}
-.step{
-  display:grid;grid-template-columns:48px 1fr;gap:16px;
-  padding-bottom:28px;position:relative;
-}
+.step{display:grid;grid-template-columns:48px 1fr;gap:16px;padding-bottom:28px;position:relative}
 .step:not(:last-child)::before{
-  content:'';position:absolute;left:23px;top:48px;
-  width:1px;height:calc(100% - 18px);
+  content:'';position:absolute;left:23px;top:48px;width:1px;height:calc(100% - 18px);
   background:linear-gradient(to bottom, var(--gold-border-hi), transparent);
 }
 .step-num{
-  width:50px;height:50px;border-radius:50%;
-  border:none;
-  background:var(--gold);
-  color:#000;
-  font-size:15px;font-weight:800;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  width:50px;height:50px;border-radius:50%;border:none;background:var(--gold);color:#000;
+  font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
 .step-body h4{font-size:18px;font-weight:700;color:var(--cream);margin-bottom:6px;margin-top:12px}
 .step-body p{font-size:16px;color:var(--cream-70);line-height:1.65}
-
 .escrow-note{
-  border-left:2px solid var(--gold);
-  padding:16px 20px;
-  background:var(--gold-dim);
-  border-radius:0 6px 6px 0;
-  font-size:15px;color:var(--cream-70);line-height:1.7;
-  margin-top:8px;
+  border-left:2px solid var(--gold);padding:16px 20px;background:var(--gold-dim);
+  border-radius:0 6px 6px 0;font-size:15px;color:var(--cream-70);line-height:1.7;margin-top:8px;
 }
 .escrow-note strong{color:var(--gold);font-weight:700}
 
-/* ── Form card ── */
+/* Form card */
 .form-card{
-  background:var(--dark3);
-  border-radius:8px;
-  padding:36px 32px;
-  position:sticky;top:88px;
-  /* Animated gold border */
-  border:1px solid transparent;
-  background-clip:padding-box;
-  position:relative;
+  background:var(--dark3);border-radius:8px;padding:36px 32px;
+  position:sticky;top:88px;border:1px solid transparent;
+  background-clip:padding-box;position:relative;
 }
 .form-card::before{
-  content:'';
-  position:absolute;inset:-1px;
-  border-radius:9px;
+  content:'';position:absolute;inset:-1px;border-radius:9px;
   background:linear-gradient(135deg, var(--gold-border-hi), transparent 40%, transparent 60%, var(--gold-border));
-  z-index:-1;
-  animation:border-spin 6s linear infinite;
-  background-size:200% 200%;
+  z-index:-1;animation:border-spin 6s linear infinite;background-size:200% 200%;
 }
 @keyframes border-spin{0%{background-position:0% 0%}50%{background-position:100% 100%}100%{background-position:0% 0%}}
-
-.form-card-label{
-  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:14px;
-}
-.form-card-title{
-  font-family:'DM Serif Display',serif;
-  font-size:24px;color:var(--cream);letter-spacing:-0.5px;margin-bottom:8px;line-height:1.2;
-}
+.form-card-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.form-card-title{font-family:'DM Serif Display',serif;font-size:24px;color:var(--cream);letter-spacing:-0.5px;margin-bottom:8px;line-height:1.2}
 .form-card-sub{font-size:15px;color:var(--cream-70);line-height:1.65;margin-bottom:24px}
-.form-rule{border:none;border-top:1px solid var(--cream-08);margin:20px 0}
-.form-or{
-  display:flex;align-items:center;gap:14px;margin:18px 0 14px;
-}
+.form-or{display:flex;align-items:center;gap:14px;margin:18px 0 14px}
 .form-or::before,.form-or::after{content:'';flex:1;border-top:1px solid var(--cream-08)}
 .form-or-text{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cream-40)}
 .form-call{text-align:center;font-size:15px;color:var(--cream-70)}
 .form-call a{color:var(--gold);text-decoration:none;font-weight:700;border-bottom:1px solid var(--gold-border)}
 .form-call a:hover{color:var(--gold-lt)}
 .form-privacy{text-align:center;font-size:11px;color:rgba(245,240,232,0.25);margin-top:14px;letter-spacing:0.3px}
-
 @media(max-width:900px){.form-card{position:static}}
 @media(max-width:500px){.form-card{padding:24px 18px}}
 
-/* ════════════════════════════════
-   FIX & FLIP SECTION
-════════════════════════════════ */
+/* FIX & FLIP SECTION */
 .flip-section{background:var(--black)}
-
-/* Structure cards */
 .structures{
   display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-  border:1px solid var(--cream-08);border-radius:8px;overflow:hidden;
-  margin:52px 0 64px;
+  border:1px solid var(--cream-08);border-radius:8px;overflow:hidden;margin:52px 0 64px;
 }
 @media(max-width:840px){.structures{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.structures{grid-template-columns:1fr}}
-
 .structure{
-  background:var(--dark2);
-  padding:28px 26px;
-  border-right:1px solid var(--cream-08);
-  border-bottom:1px solid var(--cream-08);
-  transition:background .25s;
-  cursor:default;
-  position:relative;overflow:hidden;
+  background:var(--dark2);padding:28px 26px;
+  border-right:1px solid var(--cream-08);border-bottom:1px solid var(--cream-08);
+  transition:background .25s;cursor:default;position:relative;overflow:hidden;
 }
 .structure:hover{background:var(--dark3)}
 .structure::after{
-  content:'';
-  position:absolute;inset:0;
+  content:'';position:absolute;inset:0;
   background:linear-gradient(135deg, var(--gold-dim) 0%, transparent 60%);
   opacity:0;transition:opacity .3s;
 }
 .structure:hover::after{opacity:1}
 .structure-icon{font-size:22px;margin-bottom:14px;display:block}
-.structure-name{
-  font-size:14px;font-weight:800;color:var(--cream);
-  letter-spacing:0.5px;text-transform:uppercase;
-  margin-bottom:10px;
-}
+.structure-name{font-size:14px;font-weight:800;color:var(--cream);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:10px}
 .structure-desc{font-size:15px;color:var(--cream-70);line-height:1.65}
 
 /* Bottom CTA row */
-.flip-cta-row{
-  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
-  border-top:1px solid var(--cream-08);padding-top:56px;
-}
+.flip-cta-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;border-top:1px solid var(--cream-08);padding-top:56px}
 @media(max-width:720px){.flip-cta-row{grid-template-columns:1fr}}
-
 .flip-cta-h3{
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(24px,3.5vw,40px);
-  color:var(--cream);letter-spacing:-1px;line-height:1.1;
-  margin-bottom:16px;
+  font-family:'DM Serif Display',serif;font-size:clamp(24px,3.5vw,40px);
+  color:var(--cream);letter-spacing:-1px;line-height:1.1;margin-bottom:16px;
 }
 .flip-cta-h3 em{font-style:italic;color:var(--gold)}
 .flip-cta-p{font-size:17px;color:var(--cream-70);line-height:1.75;margin-bottom:28px}
 .btn-gold{
-  display:inline-block;
-  background:var(--gold);color:var(--black);
+  display:inline-block;background:var(--gold);color:var(--black);
   font-family:inherit;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-  padding:15px 36px;border-radius:4px;
-  text-decoration:none;border:none;cursor:pointer;
+  padding:15px 36px;border-radius:4px;text-decoration:none;border:none;cursor:pointer;
   transition:background .2s,transform .15s,box-shadow .2s;
 }
 .btn-gold:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,150,12,0.25)}
 
 .flip-quote-card{
-  background:var(--dark2);
-  border:1px solid var(--gold-border);
-  border-radius:8px;
-  padding:32px 28px;
-  position:relative;
+  background:var(--dark2);border:1px solid var(--gold-border);border-radius:8px;
+  padding:32px 28px;position:relative;
 }
 .flip-quote-card::before{
-  content:'\201C';
-  font-family:'DM Serif Display',serif;
-  font-size:80px;line-height:0.7;
-  color:var(--gold);opacity:0.3;
-  position:absolute;top:20px;left:22px;
-  pointer-events:none;
+  content:'\201C';font-family:'DM Serif Display',serif;font-size:80px;line-height:0.7;
+  color:var(--gold);opacity:0.3;position:absolute;top:20px;left:22px;pointer-events:none;
 }
 .flip-quote-text{
-  font-family:'DM Serif Display',serif;
-  font-style:italic;
-  font-size:21px;color:var(--cream);line-height:1.6;
-  margin-bottom:24px;padding-top:28px;
+  font-family:'DM Serif Display',serif;font-style:italic;font-size:21px;color:var(--cream);
+  line-height:1.6;margin-bottom:24px;padding-top:28px;
 }
 .flip-quote-attr{display:flex;flex-direction:column;gap:4px}
 .flip-quote-name{font-size:13px;font-weight:800;color:var(--gold);letter-spacing:1px;text-transform:uppercase}
 .flip-quote-role{font-size:13px;color:var(--cream-70);letter-spacing:0.3px}
 
-/* ════════════════════════════════
-   FOOTER
-════════════════════════════════ */
+/* OPEN DOOR SECTION */
+.open-section{background:var(--dark2)}
+.open-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:52px;align-items:start;
+}
+@media(max-width:800px){.open-grid{grid-template-columns:1fr}}
+.open-card{
+  background:var(--dark3);border:1px solid var(--cream-08);border-radius:8px;
+  padding:32px 28px;transition:border-color .3s,transform .2s;
+}
+.open-card:hover{border-color:var(--gold-border);transform:translateY(-3px)}
+.open-card-icon{font-size:28px;margin-bottom:16px;display:block}
+.open-card-title{font-size:18px;font-weight:800;color:var(--cream);margin-bottom:10px;letter-spacing:-0.3px}
+.open-card-text{font-size:16px;color:var(--cream-70);line-height:1.7}
+.open-cta{
+  margin-top:48px;padding:32px;background:var(--gold-dim);
+  border:1px solid var(--gold-border);border-radius:8px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+@media(max-width:600px){.open-cta{flex-direction:column;text-align:center}}
+.open-cta-text{font-size:19px;color:var(--cream);font-weight:600;line-height:1.5}
+.open-cta-text span{color:var(--gold)}
+
+/* FOOTER */
 footer{
-  background:var(--dark);
-  border-top:1px solid var(--gold-border);
-  padding:52px 40px 36px;
-  text-align:center;
+  background:var(--dark);border-top:1px solid var(--gold-border);
+  padding:52px 40px 36px;text-align:center;
 }
 .footer-brand-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px}
 .footer-logo{width:40px;height:40px;object-fit:contain;border-radius:4px}
@@ -436,78 +314,75 @@ footer{
 .footer-links a{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cream-40);text-decoration:none;transition:color .2s}
 .footer-links a:hover{color:var(--gold)}
 .footer-copy{font-size:11px;color:rgba(245,240,232,0.2);letter-spacing:0.5px}
-
 @media(max-width:600px){footer{padding:40px 20px 28px}}
 
-/* ════════════════════════════════
-   CLOSE FORM SKIN
-   (overrides the white Close widget background)
-════════════════════════════════ */
 close-form{display:block}
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
   <a href="/" class="nav-brand">
     <img src="logo.jpg" alt="Good Results Home Buyers" class="nav-logo">
     <div class="nav-wordmark">
-      <span class="nav-wordmark-top">Partner With</span>
+      <span class="nav-wordmark-top">Join</span>
       <span class="nav-wordmark-name">Good Results <b>Home Buyers</b></span>
     </div>
   </a>
   <div class="nav-links">
     <a href="/">Home</a>
     <a href="/#get-your-offer">Sell Fast</a>
-    <a href="/partner-with-good-results" class="active">Partner</a>
+    <a href="/join" class="active">Join</a>
   </div>
   <a href="#partner-form" class="nav-cta">Get In Touch</a>
 </nav>
 
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <p class="hero-eyebrow">Good Results Partner Program</p>
+    <p class="hero-eyebrow">Good Results Is Open</p>
     <h1 class="hero-h1">
-      Know a Deal.<br>
-      <span class="line-italic">Get Paid.</span>
-      <span class="line-small">Or let's build something bigger together.</span>
+      Got a Deal.<br>
+      <span class="line-italic">Got an Idea.</span>
+      <span class="line-small">There is always room for the right people and the right conversation.</span>
     </h1>
-    <p class="hero-sub">Two ways in — refer a property and collect $2K+ at closing, or link up with Gayden to flip, fund, and grow.</p>
+    <p class="hero-sub">Refer a property and collect $2,000+ at closing. Partner on a flip. Lend capital. Join the team. Or just bring something to the table we have not thought of yet. Good Results was built on one phone call at a time &mdash; this page is the next one.</p>
   </div>
 
   <!-- Marquee strip -->
   <div class="marquee-wrap">
     <div class="marquee-track">
       <span class="marquee-item">$2,000+ Referral Payout</span>
-      <span class="marquee-item">JV Contract to Escrow</span>
-      <span class="marquee-item">50/50 Fix &amp; Flip JV</span>
+      <span class="marquee-item">JV Partnership</span>
+      <span class="marquee-item">50/50 Fix and Flip</span>
       <span class="marquee-item">Private Lending</span>
       <span class="marquee-item">Creative Financing</span>
-      <span class="marquee-item">Mentorship Available</span>
-      <span class="marquee-item">Nevada &amp; Texas Markets</span>
+      <span class="marquee-item">Join the Team</span>
+      <span class="marquee-item">Bring an Idea</span>
+      <span class="marquee-item">Nevada and Texas Markets</span>
       <span class="marquee-item">Fast Decisions</span>
       <span class="marquee-item">$2,000+ Referral Payout</span>
-      <span class="marquee-item">JV Contract to Escrow</span>
-      <span class="marquee-item">50/50 Fix &amp; Flip JV</span>
+      <span class="marquee-item">JV Partnership</span>
+      <span class="marquee-item">50/50 Fix and Flip</span>
       <span class="marquee-item">Private Lending</span>
       <span class="marquee-item">Creative Financing</span>
-      <span class="marquee-item">Mentorship Available</span>
-      <span class="marquee-item">Nevada &amp; Texas Markets</span>
+      <span class="marquee-item">Join the Team</span>
+      <span class="marquee-item">Bring an Idea</span>
+      <span class="marquee-item">Nevada and Texas Markets</span>
       <span class="marquee-item">Fast Decisions</span>
     </div>
   </div>
 </section>
 
 
-<!-- ── SECTION 1: REFERRAL PARTNER ── -->
+<!-- SECTION 1: REFERRAL -->
 <section class="section referral-section clip-top" id="referral-partner">
   <div class="container">
-    <p class="eyebrow">01 — Referral Partner</p>
+    <p class="eyebrow">01 &mdash; Submit a Deal</p>
     <h2 class="section-h2">Know someone who wants to sell?<br><em>You get paid at closing.</em></h2>
-    <p class="section-sub">A neighbor, a coworker, a family member — if they might want out, send the lead. You collect $2,000 or more when the deal closes, locked into a real contract before we make a single call.</p>
+    <p class="section-sub">A neighbor, a coworker, a family member &mdash; if they might want out, send the lead. You collect $2,000 or more when the deal closes, locked into a real contract before we make a single call.</p>
 
     <div class="referral-grid">
 
@@ -517,7 +392,7 @@ close-form{display:block}
           <div class="payout-amount">$2K+</div>
           <div class="payout-meta">
             <div class="payout-meta-top">Paid to you at closing</div>
-            <div class="payout-meta-sub">Locked in a ratified JV agreement<br>and sent to escrow — before we start</div>
+            <div class="payout-meta-sub">Locked in a ratified JV agreement<br>and sent to escrow &mdash; before we start</div>
           </div>
         </div>
 
@@ -526,7 +401,7 @@ close-form{display:block}
             <div class="step-num">1</div>
             <div class="step-body">
               <h4>Submit the lead below</h4>
-              <p>Drop the address and what you know. Takes under two minutes — you don't need all the details.</p>
+              <p>Drop the address and what you know. Takes under two minutes &mdash; you do not need all the details.</p>
             </div>
           </div>
           <div class="step">
@@ -546,19 +421,19 @@ close-form{display:block}
         </div>
 
         <div class="escrow-note">
-          <strong>Not a handshake deal.</strong> Your referral fee is protected by a legally ratified JV contract sent to escrow before anyone picks up the phone. You're covered in writing.
+          <strong>Not a handshake deal.</strong> Your referral fee is protected by a legally ratified JV contract sent to escrow before anyone picks up the phone. You are covered in writing.
         </div>
       </div>
 
       <!-- Right: Form -->
       <div class="form-card" id="partner-form">
-        <p class="form-card-label">Submit a Referral</p>
-        <h3 class="form-card-title">Drop What You Know</h3>
-        <p class="form-card-sub">Good Results takes it from here. You don't need all the details — just enough to get the conversation started.</p>
+        <p class="form-card-label">Get In Touch</p>
+        <h3 class="form-card-title">Drop What You Have Got</h3>
+        <p class="form-card-sub">Submitting a deal, pitching an idea, asking about partnerships &mdash; this is the form. Good Results takes it from here.</p>
         <close-form id="form_032mgHm2XRRuWKalD7qwLx"></close-form>
         <div class="form-or"><span class="form-or-text">or</span></div>
         <p class="form-call">Prefer to talk? <a href="/contact">Reach out directly.</a></p>
-        <p class="form-privacy">🔒 Your info stays private. Good Results never sells or shares your data.</p>
+        <p class="form-privacy">Your info stays private. Good Results never sells or shares your data.</p>
       </div>
 
     </div>
@@ -566,57 +441,57 @@ close-form{display:block}
 </section>
 
 
-<!-- ── SECTION 2: FIX & FLIP ── -->
+<!-- SECTION 2: FIX & FLIP -->
 <section class="section flip-section clip-both" id="fix-and-flip-partner">
   <div class="container">
-    <p class="eyebrow">02 — Fix &amp; Flip Partner</p>
-    <h2 class="section-h2">Want to flip houses?<br><em>Let's build a deal.</em></h2>
-    <p class="section-sub">First flip or hundredth — Good Results is open to any structure that makes sense. Bring capital, hustle, market knowledge, or all three.</p>
+    <p class="eyebrow">02 &mdash; Partner on a Deal</p>
+    <h2 class="section-h2">Want to flip houses?<br><em>Let us build a deal.</em></h2>
+    <p class="section-sub">First flip or hundredth &mdash; Good Results is open to any structure that makes sense. Bring capital, hustle, market knowledge, or all three.</p>
 
     <div class="structures">
       <div class="structure">
-        <span class="structure-icon">⚡</span>
+        <span class="structure-icon">&#9889;</span>
         <div class="structure-name">50 / 50 JV</div>
         <div class="structure-desc">Good Results funds and runs the deal. You learn the process. Profits split down the middle.</div>
       </div>
       <div class="structure">
-        <span class="structure-icon">💰</span>
+        <span class="structure-icon">&#128176;</span>
         <div class="structure-name">Private Lending</div>
         <div class="structure-desc">Have capital sitting? Good Results puts it to work on flips and pays a fixed return, secured by the property.</div>
       </div>
       <div class="structure">
-        <span class="structure-icon">🧠</span>
+        <span class="structure-icon">&#129504;</span>
         <div class="structure-name">Mentorship</div>
         <div class="structure-desc">Want to learn the game? Gayden can walk you through deal analysis, contractors, timelines, and disposition.</div>
       </div>
       <div class="structure">
-        <span class="structure-icon">🏗️</span>
+        <span class="structure-icon">&#127959;&#65039;</span>
         <div class="structure-name">You Fund, We Operate</div>
         <div class="structure-desc">Bring the capital. Good Results handles acquisition, rehab, and sale. You stay hands-off and collect at closing.</div>
       </div>
       <div class="structure">
-        <span class="structure-icon">🔗</span>
+        <span class="structure-icon">&#128279;</span>
         <div class="structure-name">Creative Financing</div>
-        <div class="structure-desc">Sub-to, seller finance, hard money, DSCR — if there's a structure that makes the math work, let's talk.</div>
+        <div class="structure-desc">Subject-to, seller finance, hard money, DSCR &mdash; if there is a structure that makes the math work, let us talk.</div>
       </div>
       <div class="structure">
-        <span class="structure-icon">📍</span>
+        <span class="structure-icon">&#128205;</span>
         <div class="structure-name">You Know the Market</div>
-        <div class="structure-desc">Boots on the ground in a market we're not in? Bring the deal and local knowledge. We'll find a structure.</div>
+        <div class="structure-desc">Boots on the ground in a market we are not in? Bring the deal and local knowledge. We will find a structure.</div>
       </div>
     </div>
 
     <div class="flip-cta-row">
       <div>
         <h3 class="flip-cta-h3">No rigid programs.<br><em>Just real talk.</em></h3>
-        <p class="flip-cta-p">Use the form above — tell Gayden what you're working with and what you're looking for. He'll get back to you directly.</p>
-        <a href="#partner-form" class="btn-gold">Start the Conversation →</a>
+        <p class="flip-cta-p">Use the form above &mdash; tell Gayden what you are working with and what you are looking for. He will get back to you directly.</p>
+        <a href="#partner-form" class="btn-gold">Start the Conversation</a>
       </div>
       <div class="flip-quote-card">
         <p class="flip-quote-text">If you want to go fast, go alone. If you want to go far, go together.</p>
         <div class="flip-quote-attr">
-          <span class="flip-quote-name">— Someone who went pretty far</span>
-          <span class="flip-quote-role">Gayden says it all the time · Good Results Home Buyers</span>
+          <span class="flip-quote-name">&mdash; Someone who went pretty far</span>
+          <span class="flip-quote-role">Gayden says it all the time &middot; Good Results Home Buyers</span>
         </div>
       </div>
     </div>
@@ -624,20 +499,58 @@ close-form{display:block}
 </section>
 
 
-<!-- ── FOOTER ── -->
+<!-- SECTION 3: OPEN DOOR -->
+<section class="section open-section clip-top" id="open-door">
+  <div class="container">
+    <p class="eyebrow">03 &mdash; The Open Door</p>
+    <h2 class="section-h2">Not sure where you fit?<br><em>That is fine. Talk to us anyway.</em></h2>
+    <p class="section-sub">Good Results was not built from a business plan. It was built from conversations. If you have something &mdash; an idea, a skill, a connection, a property, time, or money &mdash; there might be a way to work together.</p>
+
+    <div class="open-grid">
+      <div class="open-card">
+        <span class="open-card-icon">&#128640;</span>
+        <div class="open-card-title">Join the Team</div>
+        <div class="open-card-text">Good Results is growing in Las Vegas, Reno, and Houston. If you want to learn the real estate game from the inside &mdash; cold calling, deal analysis, dispositions, marketing &mdash; reach out. No experience required. Just work ethic and coachability.</div>
+      </div>
+      <div class="open-card">
+        <span class="open-card-icon">&#128161;</span>
+        <div class="open-card-title">Bring an Idea</div>
+        <div class="open-card-text">Have a service, a tool, a partnership model, or a market opportunity that could benefit both sides? Gayden is always open to hearing it. The worst that happens is a good conversation.</div>
+      </div>
+      <div class="open-card">
+        <span class="open-card-icon">&#128218;</span>
+        <div class="open-card-title">Learn the Business</div>
+        <div class="open-card-text">Not ready to jump in yet? Good Results publishes training materials, market breakdowns, and deal case studies. Start learning now and reach out when you are ready to move.</div>
+      </div>
+      <div class="open-card">
+        <span class="open-card-icon">&#129309;</span>
+        <div class="open-card-title">Already in Real Estate</div>
+        <div class="open-card-text">Agent, investor, contractor, lender, title rep &mdash; if our worlds overlap and there is a way to create value together, Good Results wants to hear about it. Cross-referrals, co-marketing, deal flow &mdash; all on the table.</div>
+      </div>
+    </div>
+
+    <div class="open-cta">
+      <div class="open-cta-text">The form is right up there. <span>Use it.</span><br>Gayden reads every single submission personally.</div>
+      <a href="#partner-form" class="btn-gold">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-brand-row">
     <img src="logo.jpg" alt="" class="footer-logo">
     <div class="footer-name">Good Results <b>Home Buyers</b></div>
   </div>
-  <p class="footer-tagline">Nevada &amp; Texas · Cash Offers · Fix &amp; Flip Partnerships · Referral Program</p>
+  <p class="footer-tagline">Nevada and Texas &middot; Cash Offers &middot; Fix and Flip Partnerships &middot; Referral Program &middot; Join the Team</p>
   <div class="footer-links">
     <a href="/">Home</a>
     <a href="/#get-your-offer">Get a Cash Offer</a>
-    <a href="/partner-with-good-results">Partner With Us</a>
+    <a href="/join">Work With Us</a>
     <a href="/privacy-policy">Privacy Policy</a>
   </div>
-  <p class="footer-copy">© 2026 Good Results Home Buyers. All rights reserved. · goodresults.org</p>
+  <p class="footer-copy">&copy; 2026 Good Results Home Buyers. All rights reserved. &middot; goodresults.org</p>
 </footer>
 
 </body>
