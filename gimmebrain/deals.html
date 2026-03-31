@@ -714,12 +714,13 @@ function attachFiles(json, allFiles) {
   json._publicPhotoCount = publicPhotos.length;
 }
 
-async function loadDeals() {
+async function loadDeals(skipIndex) {
   const grid = document.getElementById('dealGrid');
   try {
     // FAST PATH: Try index.json first (1 API call for all deals)
     let useIndex = false;
     try {
+      if (skipIndex) throw new Error('skip');
       const idx = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/index.json');
       if (idx && idx.content) {
         const index = JSON.parse(atob(idx.content.replace(/\n/g, '')));
@@ -804,6 +805,9 @@ async function loadDeals() {
 
     renderStats();
     renderDeals();
+
+    // If we used the slow path, rebuild index.json so future loads are fast
+    if (skipIndex) updateDealIndex().catch(e => console.warn('Index rebuild failed:', e));
   } catch(err) {
     grid.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><div class="empty-text">Error loading deals: ' + err.message + '</div></div>';
   }
@@ -1726,7 +1730,7 @@ function updateDealId() {
   const now = new Date();
   const mm = String(now.getMonth() + 1).padStart(2, '0');
   const yyyy = now.getFullYear();
-  const n = document.getElementById('fDealNum').value || '8';
+  const n = String(document.getElementById('fDealNum').value || '8').padStart(2, '0');
   lastDealId = `${mm}${yyyy}${n}`;
   document.getElementById('fDealId').value = lastDealId;
   document.getElementById('dealUrlPreview').textContent = 'goodresults.org/deals/' + lastDealId;
@@ -2479,7 +2483,8 @@ document.getElementById('btnCreateFolder').addEventListener('click', async () =>
     document.getElementById('outputBadge').className = 'badge badge-ready';
 
     // Refresh the dashboard grid so the new deal appears
-    setTimeout(() => loadDeals(), 2000);
+    // Use slow path (skipIndex) since index.json hasn't been updated yet
+    setTimeout(() => loadDeals(true), 2000);
 
   } catch(err) {
     console.error('Create folder failed:', err);
