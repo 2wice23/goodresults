@@ -1418,5 +1418,25 @@
     "resistance_moments": "Said 'Not really' when asked about distressed properties - indicated this isn't her typical business | Explained she usually works with occupied homes, not distressed properties",
     "script_moment": "After she said she doesn't encounter distressed properties, Anthony could have said: 'That makes sense - do you have any colleagues in your office who might work more with estate sales, divorces, or properties that need significant work? I'd love an introduction if you're comfortable with that.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774998460965",
+    "timestamp": "2026-03-31T23:07:40.965Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Erik Portillo",
+    "call_type": "DEAL DISCUSSION",
+    "duration": "1m 36s",
+    "call_date": "03/31/2026",
+    "score": 72,
+    "realtor_engagement": 65,
+    "summary": "Anthony discussed a specific Baytown property Erik sent him, determined it was too old for his criteria (built before 1960s), and delivered his buy box for future opportunities. Erik was receptive but only had the one property currently.",
+    "what_worked": "Complete buy box delivery with specific criteria | Good property qualifying questions about condition and age | Clear timeline rejection with specific reasoning | Concrete next step with one-month follow-up",
+    "what_to_tighten": "Should have introduced himself by name since this seemed like a newer relationship | Could have asked about Erik's typical deal sources or where he gets properties | Missed opportunity to discuss commission structure or value proposition",
+    "language_flags": "",
+    "missed_opportunities": "Could have explored where Erik typically finds distressed properties | Could have asked about his office or other agents who might have similar deals",
+    "positive_moments": "Said 'Perfect. Yep, no problem' when Anthony explained his criteria and follow-up plan | Confirmed property details when asked about condition",
+    "resistance_moments": "Very brief responses suggesting limited enthusiasm | Only had one property and didn't volunteer information about future deal sources",
+    "script_moment": "After Erik said he only had the one property, Anthony should have asked: 'Where do you typically find properties like this? Do you work with sellers directly or do you have other sources for distressed properties?'",
+    "on_leaderboard": "yes"
   }
 ]
