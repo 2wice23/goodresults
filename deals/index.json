@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-31T19:53:27.785Z",
+  "updated": "2026-03-31T19:53:54.930Z",
   "deals": [
     {
       "slug": "032026001",
@@ -509,6 +509,7 @@
     },
     {
       "slug": "032026005",
+      "docSha": "30a2fb5660711b0785184a6bc797ebae7b7ea3e9",
       "data": {
         "dealId": "032026005",
         "market": "off",
@@ -530,7 +531,21 @@
         "emdDueDate": "",
         "acceptedDate": "",
         "wholesalePrice": 160000,
-        "repairsPerSqft": 35
+        "repairsPerSqft": 35,
+        "basementSqft": "",
+        "seller": "",
+        "buyer": "",
+        "contractPrice": "157000",
+        "emdAmount": "",
+        "ddDays": "",
+        "emdDays": "",
+        "executedDate": "",
+        "agentName": "",
+        "agentPhone": "",
+        "agentEmail": "",
+        "agentBrokerage": "",
+        "publicNotes": "",
+        "privateNotes": ""
       },
       "manifest": [
         {
