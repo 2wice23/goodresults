@@ -334,6 +334,9 @@ async function loadDeals() {
         if (json.askingPrice && !json.wholesalePrice) json.wholesalePrice = json.askingPrice;
         if (json.estRepairs && !json.repairsPerSqft) json.repairsPerSqft = json.estRepairs;
         if (json.profit && !json.profitPotential) json.profitPotential = json.profit;
+        // Migrate old notes field → publicNotes
+        if (json.notes && !json.publicNotes) json.publicNotes = json.notes;
+        delete json.notes;
         // Remove old aliases so they don't persist on next save
         delete json.askingPrice; delete json.estRepairs; delete json.profit;
 
@@ -497,10 +500,15 @@ function renderDeals() {
             field('yearBuilt', 'Year Built', d.yearBuilt) +
             field('garage', 'Garage', d.garage) +
           '</div>' +
-          // NOTES
-          '<div class="detail-section" style="grid-column:span 2;">' +
-            '<div class="detail-section-title">Notes</div>' +
-            '<div class="detail-val" data-field="notes" data-type="textarea" style="text-align:left;font-size:0.72rem;line-height:1.6;white-space:pre-wrap;">' + (d.notes || 'No notes yet.') + '</div>' +
+          // PUBLIC NOTES
+          '<div class="detail-section">' +
+            '<div class="detail-section-title">Public Notes <span style="font-size:0.45rem;opacity:0.5;font-weight:400;letter-spacing:0;">(visible on deal page)</span></div>' +
+            '<div class="detail-val" data-field="publicNotes" data-type="textarea" style="text-align:left;font-size:0.72rem;line-height:1.6;white-space:pre-wrap;">' + (d.publicNotes || d.notes || 'No public notes.') + '</div>' +
+          '</div>' +
+          // PRIVATE NOTES
+          '<div class="detail-section" style="border-color:rgba(239,68,68,0.15);background:rgba(239,68,68,0.03);">' +
+            '<div class="detail-section-title" style="color:var(--red);">Private Notes <span style="font-size:0.45rem;opacity:0.5;font-weight:400;letter-spacing:0;">(internal only — never on deal page)</span></div>' +
+            '<div class="detail-val" data-field="privateNotes" data-type="textarea" style="text-align:left;font-size:0.72rem;line-height:1.6;white-space:pre-wrap;">' + (d.privateNotes || 'No private notes.') + '</div>' +
           '</div>' +
         '</div>' +
 

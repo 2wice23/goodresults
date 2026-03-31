@@ -250,9 +250,13 @@ function renderDeal(d) {
     '<div class="term-row"><span class="term-key">Contingencies</span><span class="term-val">None</span></div>',
   ].filter(Boolean).join('');
 
+  var publicNotes = d.publicNotes || d.notes || '';
+  var notesHtml = publicNotes ? '<div class="detail-card" style="grid-column:1/-1;"><h3>Property Notes</h3><p style="font-size:14px;color:var(--text-muted);line-height:1.7;white-space:pre-wrap;">' + publicNotes + '</p></div>' : '';
+
   el('detailsSection').innerHTML =
     (specs ? '<div class="detail-card"><h3>Property Details</h3>' + specs + '</div>' : '') +
-    '<div class="detail-card"><h3>Deal Terms</h3>' + terms + '</div>';
+    '<div class="detail-card"><h3>Deal Terms</h3>' + terms + '</div>' +
+    notesHtml;
 }
 
 // ─── photo discovery (finds ALL images in this folder via GitHub API) ────────
