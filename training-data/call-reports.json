@@ -1058,5 +1058,25 @@
     "resistance_moments": "Initial confusion from text message issues | Said 'Nothing right now in the pipeline' indicating no immediate opportunities",
     "script_moment": "When Alexander said 'They're not always great rehabs' Anthony should have asked 'What makes a great rehab in your experience?' to better understand his inventory quality.",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774986079698",
+    "timestamp": "2026-03-31T19:41:19.698Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Aadil Murad",
+    "call_type": "DEAL DISCUSSION",
+    "duration": "5m 59s",
+    "call_date": "03/31/2026",
+    "score": 78,
+    "realtor_engagement": 90,
+    "summary": "Aadil pitched a Sugar Land property needing foundation and roof work at $245k with $305k ARV. Anthony showed strong interest, delivered his buy box criteria, and set up next day follow-up after reviewing materials.",
+    "what_worked": "Complete buy box delivery with memorable specific criteria | Strong positioning as relationship-focused cash buyer | Good follow-up questions about deal frequency and scope of work | Professional handling of seller contact concerns | Clear timeline for decision and follow-up",
+    "what_to_tighten": "Opener needs work - should state name and context upfront | Could have asked more about Aadil's other investor relationships for potential referrals",
+    "language_flags": "",
+    "missed_opportunities": "Could have explored Aadil's network of auction buyers for additional deal flow | Didn't ask about commission structure or how Aadil gets paid",
+    "positive_moments": "Aadil immediately offered a specific property with detailed specs | Provided extensive renovation cost breakdowns unprompted | Offered flexibility on roof repairs before closing | Asked qualifying questions to ensure good fit | Volunteered inspection report and full documentation | Mentioned working with other investors showing he understands the business",
+    "resistance_moments": "Brief hesitation about providing full address due to past issues with direct seller contact",
+    "script_moment": "At the start: 'Hey Aadil, this is Anthony Cruz with Good Results Home Buyers, thanks for reaching out about the Sugar Land property' - would have provided immediate context and professionalism.",
+    "on_leaderboard": "yes"
   }
 ]
