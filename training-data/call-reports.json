@@ -1218,5 +1218,25 @@
     "resistance_moments": "Initial distraction with son present during packing | Brief responses throughout due to being busy with travel preparation | Had to clarify that off-market properties are 'kind of hard to get'",
     "script_moment": "When she mentioned 'I'm gonna put one more on maybe at the end of April', Franklin should have said: 'Oh that's interesting - what kind of property is that? Does it fit the criteria I mentioned?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774988266236",
+    "timestamp": "2026-03-31T20:17:46.236Z",
+    "agent": "Kayden Rogers",
+    "realtor": "Winona Smith",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "2m 16s",
+    "call_date": "03/31/2026",
+    "score": 80,
+    "realtor_engagement": 78,
+    "summary": "Kayden re-engaged with Winona who initially didn't recognize him due to travel and medical issues. She explained her confusion about his texts, and he delivered the complete buy box verbally while setting up email follow-up.",
+    "what_worked": "Complete buy box delivery with all key elements | Professional handling of her confusion | Set up multiple follow-up channels | Maintained friendly tone throughout",
+    "what_to_tighten": "Should acknowledge time gaps or confusion upfront | Could show more empathy for medical situations | Set specific timeline for next contact",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about her current inventory once rapport was re-established | No specific follow-up timeline set",
+    "positive_moments": "Said 'I'll keep you on my database' showing willingness to work together | Asked for both text and email communication methods | Agreed to the follow-up process professionally",
+    "resistance_moments": "Initial confusion about who he was due to travel and medical issues | Name didn't ring a bell despite previous conversations | Had to explain her medical situation affected her ability to respond to texts",
+    "script_moment": "After she explained the medical issues: 'I completely understand - health comes first. No worries at all about not remembering. I'm just glad you're feeling better now.'",
+    "on_leaderboard": "yes"
   }
 ]
