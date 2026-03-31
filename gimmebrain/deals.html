@@ -501,6 +501,26 @@ function renderDeals() {
             field('garage', 'Garage', d.garage) +
             field('basementSqft', 'Basement Sqft', d.basementSqft) +
           '</div>' +
+          // CONTRACT
+          '<div class="detail-section">' +
+            '<div class="detail-section-title">Contract Details</div>' +
+            field('dealId', 'Deal ID', d.dealId) +
+            field('seller', 'Seller', d.seller) +
+            field('buyer', 'Buyer Entity', d.buyer) +
+            field('contractPrice', 'Contract Price', d.contractPrice) +
+            field('emdAmount', 'EMD Amount', d.emdAmount) +
+            field('ddDays', 'DD Days', d.ddDays) +
+            field('emdDays', 'EMD Days', d.emdDays) +
+            field('executedDate', 'Executed Date', d.executedDate) +
+          '</div>' +
+          // AGENT
+          '<div class="detail-section">' +
+            '<div class="detail-section-title">Listing Agent</div>' +
+            field('agentName', 'Agent Name', d.agentName) +
+            field('agentPhone', 'Agent Phone', d.agentPhone) +
+            field('agentEmail', 'Agent Email', d.agentEmail) +
+            field('agentBrokerage', 'Brokerage', d.agentBrokerage) +
+          '</div>' +
           // PUBLIC NOTES
           '<div class="detail-section">' +
             '<div class="detail-section-title">Public Notes <span style="font-size:0.45rem;opacity:0.5;font-weight:400;letter-spacing:0;">(visible on deal page)</span></div>' +
