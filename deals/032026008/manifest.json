@@ -1,5 +1,14 @@
-{
-  "private": [
-    "contract.pdf"
-  ]
-}
+[
+  {
+    "name": "01.webp",
+    "type": "photo",
+    "visibility": "public",
+    "order": 0
+  },
+  {
+    "name": "contract.pdf",
+    "type": "doc",
+    "visibility": "private",
+    "order": 1
+  }
+]
