@@ -75,7 +75,8 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .deal-card.open .card-detail{max-height:2000px;}
 .card-detail-inner{padding:0 20px 20px;border-top:1px solid var(--border);margin-top:0;padding-top:16px;}
 
-.detail-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.detail-section.full-width{grid-column:1/-1;}
 
 .detail-section{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px 14px;}
 .detail-section-title{font-size:0.52rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;font-weight:700;display:flex;align-items:center;gap:6px;}
@@ -138,6 +139,12 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .photo-vis.private:hover{background:rgba(239,68,68,1);}
 .photo-item.is-private{opacity:0.5;}
 .photo-item.is-private img{filter:grayscale(0.5);}
+.deal-card.editing .photo-item{cursor:grab;}
+.deal-card.editing .photo-item:active{cursor:grabbing;}
+.photo-item.dragging{opacity:0.3;border:2px dashed var(--orange);}
+.photo-item.drag-over-item{border:2px solid var(--orange);transform:scale(1.03);transition:transform 0.1s;}
+.photo-order-badge{position:absolute;top:4px;left:4px;background:rgba(0,0,0,0.7);color:var(--orange);font-size:0.5rem;font-weight:700;padding:2px 6px;border-radius:3px;display:none;pointer-events:none;}
+.deal-card.editing .photo-order-badge{display:block;}
 .photo-upload-zone{border:1.5px dashed var(--orange-border);border-radius:4px;padding:20px;text-align:center;cursor:pointer;background:var(--surface2);transition:all 0.15s;display:none;position:relative;}
 .deal-card.editing .photo-upload-zone{display:block;}
 .photo-upload-zone:hover,.photo-upload-zone.drag-over{border-color:var(--orange);background:var(--orange-glow);}
@@ -517,10 +524,12 @@ function renderDeals() {
       ? ' <span style="font-size:0.5rem;color:var(--red);font-weight:700;">COE ' + dateLabel(coeDays) + '</span>' : '';
 
     // Photo gallery — show all photos with visibility badges
-    const photoHtml = d._photos.map(p => {
+    const photoHtml = d._photos.map((p, pi) => {
       const vis = p.visibility || 'public';
       const privClass = vis === 'private' ? ' is-private' : '';
-      return '<div class="photo-item' + privClass + '" data-photo-path="' + p.path + '" data-photo-sha="' + p.sha + '" data-photo-name="' + p.name + '" data-slug="' + d._slug + '">' +
+      return '<div class="photo-item' + privClass + '" draggable="true" data-photo-path="' + p.path + '" data-photo-sha="' + p.sha + '" data-photo-name="' + p.name + '" data-slug="' + d._slug + '" data-order="' + pi + '" ' +
+        'ondragstart="photoDragStart(event)" ondragend="photoDragEnd(event)" ondragover="photoDragOver(event)" ondragleave="photoDragLeave(event)" ondrop="photoDrop(event)">' +
+        '<span class="photo-order-badge">' + (pi + 1) + '</span>' +
         '<img src="' + p.url + '" alt="' + p.name + '">' +
         '<button class="photo-delete" onclick="event.stopPropagation();deletePhoto(this)" title="Delete photo">&times;</button>' +
         '<button class="photo-vis ' + vis + '" onclick="event.stopPropagation();toggleVisibility(this)" title="Toggle public/private">' + (vis === 'public' ? '👁 Public' : '🔒 Private') + '</button>' +
@@ -609,12 +618,12 @@ function renderDeals() {
             field('agentBrokerage', 'Brokerage', d.agentBrokerage) +
           '</div>' +
           // PUBLIC NOTES
-          '<div class="detail-section">' +
+          '<div class="detail-section full-width">' +
             '<div class="detail-section-title">Public Notes <span style="font-size:0.45rem;opacity:0.5;font-weight:400;letter-spacing:0;">(visible on deal page)</span></div>' +
             '<div class="detail-val" data-field="publicNotes" data-type="textarea" style="text-align:left;font-size:0.72rem;line-height:1.6;white-space:pre-wrap;">' + (d.publicNotes || d.notes || 'No public notes.') + '</div>' +
           '</div>' +
           // PRIVATE NOTES
-          '<div class="detail-section" style="border-color:rgba(239,68,68,0.15);background:rgba(239,68,68,0.03);">' +
+          '<div class="detail-section full-width" style="border-color:rgba(239,68,68,0.15);background:rgba(239,68,68,0.03);">' +
             '<div class="detail-section-title" style="color:var(--red);">Private Notes <span style="font-size:0.45rem;opacity:0.5;font-weight:400;letter-spacing:0;">(internal only — never on deal page)</span></div>' +
             '<div class="detail-val" data-field="privateNotes" data-type="textarea" style="text-align:left;font-size:0.72rem;line-height:1.6;white-space:pre-wrap;">' + (d.privateNotes || 'No private notes.') + '</div>' +
           '</div>' +
@@ -853,6 +862,76 @@ function toggleVisibility(btn) {
 
   // Update photo counts
   deal._publicPhotoCount = deal._allFiles.filter(f => f.type === 'photo' && f.visibility === 'public').length;
+}
+
+// ── Photo drag-and-drop reorder ──
+
+let draggedPhoto = null;
+
+function photoDragStart(e) {
+  const card = e.target.closest('.deal-card');
+  if (!card || !card.classList.contains('editing')) { e.preventDefault(); return; }
+  draggedPhoto = e.target.closest('.photo-item');
+  draggedPhoto.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', ''); // Required for Firefox
+}
+
+function photoDragEnd(e) {
+  if (draggedPhoto) draggedPhoto.classList.remove('dragging');
+  document.querySelectorAll('.photo-item.drag-over-item').forEach(el => el.classList.remove('drag-over-item'));
+  draggedPhoto = null;
+}
+
+function photoDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const target = e.target.closest('.photo-item');
+  if (target && target !== draggedPhoto) {
+    target.classList.add('drag-over-item');
+  }
+}
+
+function photoDragLeave(e) {
+  const target = e.target.closest('.photo-item');
+  if (target) target.classList.remove('drag-over-item');
+}
+
+function photoDrop(e) {
+  e.preventDefault();
+  const target = e.target.closest('.photo-item');
+  if (!target || !draggedPhoto || target === draggedPhoto) return;
+  target.classList.remove('drag-over-item');
+
+  const slug = draggedPhoto.dataset.slug;
+  const grid = draggedPhoto.closest('.photo-grid');
+  const items = Array.from(grid.querySelectorAll('.photo-item'));
+  const fromIdx = items.indexOf(draggedPhoto);
+  const toIdx = items.indexOf(target);
+
+  // Move DOM element
+  if (fromIdx < toIdx) {
+    grid.insertBefore(draggedPhoto, target.nextSibling);
+  } else {
+    grid.insertBefore(draggedPhoto, target);
+  }
+
+  // Update order in data
+  const deal = allDeals.find(d => d._slug === slug);
+  if (deal && deal._photos) {
+    // Rebuild photo order from new DOM order
+    const newItems = Array.from(grid.querySelectorAll('.photo-item'));
+    newItems.forEach((el, i) => {
+      const name = el.dataset.photoName;
+      const photo = deal._photos.find(p => p.name === name);
+      if (photo) photo.order = i;
+      const file = (deal._allFiles || []).find(f => f.name === name);
+      if (file) file.order = i;
+      // Update order badge
+      const badge = el.querySelector('.photo-order-badge');
+      if (badge) badge.textContent = i + 1;
+    });
+  }
 }
 
 // ── Photo management ──
