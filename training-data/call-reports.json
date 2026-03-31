@@ -978,5 +978,25 @@
     "resistance_moments": "Initial 'sometimes I do, sometimes I don't' response showed limited expectations | Mentioned looking through MLS which suggests he may not have unique off-market access",
     "script_moment": "When Fernando said 'sometimes I do, sometimes I don't' about distressed properties, Anthony could have asked 'What areas do you work most in? I find different neighborhoods have different types of opportunities.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774984451167",
+    "timestamp": "2026-03-31T19:14:11.167Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Bertina Purifoy",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "3m 19s",
+    "call_date": "03/31/2026",
+    "score": 80,
+    "realtor_engagement": 88,
+    "summary": "Anthony reconnected with Bertina after January conversation, clarifying text message confusion. Bertina confirmed she still works distressed properties and just closed one tomorrow, asked for his criteria and email.",
+    "what_worked": "Excellent buy box delivery with specific, memorable criteria | Good recovery from initial text confusion | Let Bertina ask questions and drive conversation naturally | Positioned as flexible on price which engaged her interest",
+    "what_to_tighten": "Could have set more specific follow-up timeline | Could have dug deeper into her current pipeline beyond just asking if she has anything now",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about the $90k deal that's closing to understand her typical inventory better | Could have asked when she typically gets distressed properties or what her pipeline looks like",
+    "positive_moments": "Asked 'Is there a certain price point you're looking at or area that you're looking in?' showing genuine interest | Said 'I need to save your number' and 'I'm going to save your number' multiple times | Volunteered details about recent $90k deal closing tomorrow | Said 'That's very doable' after hearing his criteria | Proactively asked for his email address to send properties | Committed to 'check around' and 'see what I can find for you'",
+    "resistance_moments": "Initial confusion about who was texting her created some friction at the start",
+    "script_moment": "When she mentioned the $90k deal closing tomorrow, Anthony should have asked: 'That sounds like exactly what I'm looking for - how often do you typically come across deals like that one?'",
+    "on_leaderboard": "yes"
   }
 ]
