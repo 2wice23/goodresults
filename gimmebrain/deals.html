@@ -145,6 +145,20 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .photo-upload-label{font-size:0.65rem;color:var(--muted);letter-spacing:0.05em;}
 .photo-upload-label span{color:var(--orange);font-weight:600;}
 
+/* DOCUMENTS */
+.doc-section{margin-top:16px;}
+.doc-list{display:flex;flex-direction:column;gap:6px;}
+.doc-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;transition:border-color 0.15s;}
+.doc-item:hover{border-color:var(--orange-border);}
+.doc-icon{font-size:1.1rem;flex-shrink:0;}
+.doc-info{flex:1;min-width:0;}
+.doc-name{font-size:0.72rem;font-weight:600;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.doc-download{color:var(--green);font-size:0.8rem;font-weight:700;text-decoration:none;padding:4px 8px;border-radius:3px;background:var(--green-bg);border:1px solid rgba(34,197,94,0.2);transition:all 0.15s;}
+.doc-download:hover{background:rgba(34,197,94,0.2);}
+.doc-delete{background:none;border:none;color:var(--dim);cursor:pointer;font-size:0.7rem;padding:4px 8px;border-radius:3px;display:none;}
+.doc-delete:hover{color:var(--red);background:var(--red-bg);}
+.deal-card.editing .doc-delete{display:block;}
+
 /* SAVE STATUS */
 .save-status{font-size:0.6rem;font-weight:600;letter-spacing:0.05em;padding:6px 12px;border-radius:3px;display:none;align-items:center;gap:6px;}
 .save-status.saving{display:flex;background:rgba(59,130,246,0.1);color:#3B82F6;}
@@ -285,7 +299,8 @@ const CF = {
   ddEndDate:            'cf_dYuh3zK6om5wx7DazAPdoknMZI1083pJ9Xfon6vdmYf',
   emdDueDate:           'cf_v7RDgaN83GrYYyUPjwry71a2COpLSEhM0Dn7Lbs4Vn7',
   currentContractPrice: 'cf_lnzdav3LInFjRAbyUATuFShueu7pIaFebA988JE8H91',
-  wholesalePrice:       'cf_MDzK5zNGLLLUE9yYYWqubvC3hFzDeKA8m4ta6p8OPhx'
+  wholesalePrice:       'cf_MDzK5zNGLLLUE9yYYWqubvC3hFzDeKA8m4ta6p8OPhx',
+  dealId:               'cf_mtdd9aMAiHZ8NfSByhliIPFJ2AEkXMGDRCZabKHEI8T'
 };
 
 // Static dispo template IDs
@@ -350,6 +365,13 @@ async function loadDeals() {
         delete json.notes;
         // Remove old aliases so they don't persist on next save
         delete json.askingPrice; delete json.estRepairs; delete json.profit;
+
+        // Auto-compute dates from accepted/executed date + days
+        const baseDate = json.acceptedDate || json.executedDate;
+        if (baseDate) {
+          if (json.ddDays && !json.ddEndDate) json.ddEndDate = addDaysToDate(baseDate, json.ddDays);
+          if (json.emdDays && !json.emdDueDate) json.emdDueDate = addDaysToDate(baseDate, json.emdDays);
+        }
 
         // Get all files in deal folder
         const files = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name).catch(() => []);
@@ -613,11 +635,28 @@ function renderDeals() {
         '<div class="photo-section">' +
           '<div class="photo-section-title">Photos (' + d._photoCount + ')</div>' +
           '<div class="photo-grid" id="photos-' + d._slug + '">' + photoHtml + '</div>' +
-          '<div class="photo-upload-zone" ondragover="event.preventDefault();this.classList.add(\'drag-over\')" ondragleave="this.classList.remove(\'drag-over\')" ondrop="event.preventDefault();this.classList.remove(\'drag-over\');handlePhotoDrop(event,\'' + d._slug + '\')">' +
-            '<input type="file" accept="image/*" multiple onchange="handlePhotoSelect(event,\'' + d._slug + '\')">' +
-            '<div class="photo-upload-label">Drop photos here or <span>click to upload</span></div>' +
+          '<div class="photo-upload-zone" ondragover="event.preventDefault();this.classList.add(\'drag-over\')" ondragleave="this.classList.remove(\'drag-over\')" ondrop="event.preventDefault();this.classList.remove(\'drag-over\');handleFileDrop(event,\'' + d._slug + '\')">' +
+            '<input type="file" multiple onchange="handleFileSelect(event,\'' + d._slug + '\')">' +
+            '<div class="photo-upload-label">Drop photos, documents, or any files here — or <span>click to upload</span></div>' +
           '</div>' +
         '</div>' +
+
+        // DOCUMENTS
+        (d._docs && d._docs.length ? '<div class="doc-section">' +
+          '<div class="photo-section-title">Documents (' + d._docs.length + ')</div>' +
+          '<div class="doc-list">' + d._docs.map(function(f) {
+            var vis = f.visibility || 'private';
+            return '<div class="doc-item" data-doc-name="' + f.name + '" data-doc-path="' + f.path + '" data-doc-sha="' + f.sha + '" data-slug="' + d._slug + '">' +
+              '<div class="doc-icon">' + docIcon(f.name) + '</div>' +
+              '<div class="doc-info">' +
+                '<div class="doc-name">' + f.name + '</div>' +
+              '</div>' +
+              '<button class="photo-vis ' + vis + '" onclick="event.stopPropagation();toggleDocVisibility(this)" title="Toggle public/private">' + (vis === 'public' ? '👁 Public' : '🔒 Private') + '</button>' +
+              '<a href="' + f.url + '" target="_blank" class="doc-download" title="Download">↓</a>' +
+              '<button class="doc-delete" onclick="event.stopPropagation();deleteDoc(this)" title="Delete">✕</button>' +
+            '</div>';
+          }).join('') + '</div>' +
+        '</div>' : '') +
         '<button class="cloud-save cloud-save-bottom" onclick="event.stopPropagation();saveDeal(this)" style="margin-top:16px;">&#9729; Push to the Cloud — Save All Changes</button>' +
       '</div></div>' +
     '</div>';
@@ -719,6 +758,13 @@ async function saveDeal(btn) {
     }
     deal[key] = val;
   });
+
+  // Auto-compute dates from accepted/executed date + days
+  const baseDate = deal.acceptedDate || deal.executedDate;
+  if (baseDate) {
+    if (deal.ddDays) deal.ddEndDate = addDaysToDate(baseDate, deal.ddDays);
+    if (deal.emdDays) deal.emdDueDate = addDaysToDate(baseDate, deal.emdDays);
+  }
 
   // Build clean JSON (strip internal fields)
   const cleanDeal = {};
@@ -846,25 +892,46 @@ async function deletePhoto(btn) {
   }
 }
 
-async function handlePhotoSelect(event, slug) {
+// ── File icon helper ──
+
+function docIcon(name) {
+  const ext = (name.split('.').pop() || '').toLowerCase();
+  if (ext === 'pdf') return '📄';
+  if (['doc','docx'].includes(ext)) return '📝';
+  if (['xls','xlsx','csv'].includes(ext)) return '📊';
+  if (['txt'].includes(ext)) return '📃';
+  return '📎';
+}
+
+// ── File upload (photos + documents) ──
+
+async function handleFileSelect(event, slug) {
   const files = event.target.files;
   if (!files.length) return;
-  await uploadPhotos(slug, files);
+  await uploadFiles(slug, files);
   event.target.value = '';
 }
 
-async function handlePhotoDrop(event, slug) {
+async function handleFileDrop(event, slug) {
   const files = event.dataTransfer.files;
   if (!files.length) return;
-  await uploadPhotos(slug, files);
+  await uploadFiles(slug, files);
 }
 
-async function uploadPhotos(slug, files) {
+async function uploadFiles(slug, files) {
   const grid = document.getElementById('photos-' + slug);
   const deal = allDeals.find(d => d._slug === slug);
+  const IMG_RE = /\.(jpe?g|png|webp|gif)$/i;
+  const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB limit (GitHub max is 100MB)
 
   for (const file of files) {
-    if (!file.type.startsWith('image/')) continue;
+    if (file.size > MAX_FILE_SIZE) {
+      alert(file.name + ' is too large (' + Math.round(file.size / 1024 / 1024) + 'MB). Maximum is 50MB.');
+      continue;
+    }
+    const fileName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const isImage = IMG_RE.test(fileName);
+    const fileType = isImage ? 'photo' : 'doc';
 
     // Show uploading placeholder
     const placeholder = document.createElement('div');
@@ -874,16 +941,18 @@ async function uploadPhotos(slug, files) {
     placeholder.style.justifyContent = 'center';
     placeholder.style.fontSize = '0.6rem';
     placeholder.style.color = 'var(--orange)';
-    placeholder.textContent = 'Uploading...';
-    grid.appendChild(placeholder);
+    placeholder.textContent = 'Uploading ' + fileName + '...';
+    if (isImage) {
+      grid.appendChild(placeholder);
+    } else {
+      // For docs, append a temporary message near the upload zone
+      grid.parentElement.appendChild(placeholder);
+    }
 
     try {
-      // Read file as base64
       const base64 = await fileToBase64(file);
-      const fileName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
       const path = 'deals/' + slug + '/' + fileName;
 
-      // Check if file already exists (get SHA)
       let sha;
       try {
         const existing = await ghGet('/repos/' + GITHUB_REPO + '/contents/' + path);
@@ -891,7 +960,7 @@ async function uploadPhotos(slug, files) {
       } catch(e) {}
 
       const body = {
-        message: 'Add photo: ' + fileName,
+        message: 'Add ' + fileType + ': ' + fileName,
         content: base64
       };
       if (sha) body.sha = sha;
@@ -899,25 +968,107 @@ async function uploadPhotos(slug, files) {
       const result = await ghPut('/repos/' + GITHUB_REPO + '/contents/' + path, body);
 
       if (result.content) {
-        const photoUrl = SITE_BASE + '/' + path;
-        placeholder.innerHTML = '<img src="' + photoUrl + '" alt="' + fileName + '">' +
-          '<button class="photo-delete" style="display:flex;" onclick="event.stopPropagation();deletePhoto(this)" title="Delete photo">&times;</button>';
-        placeholder.dataset.photoPath = path;
-        placeholder.dataset.photoSha = result.content.sha;
+        const fileUrl = SITE_BASE + '/' + path;
+        const newFile = {
+          name: fileName,
+          sha: result.content.sha,
+          url: fileUrl,
+          path: path,
+          type: fileType,
+          visibility: isImage ? 'public' : 'private',
+          order: deal._allFiles ? deal._allFiles.length : 999
+        };
 
         if (deal) {
-          deal._photos.push({ name: fileName, sha: result.content.sha, url: photoUrl, path });
-          deal._photoCount = deal._photos.length;
-          if (!deal._thumb) deal._thumb = photoUrl;
+          if (!deal._allFiles) deal._allFiles = [];
+          deal._allFiles.push(newFile);
+          if (isImage) {
+            deal._photos.push(newFile);
+            deal._photoCount = deal._photos.length;
+            if (!deal._thumb) deal._thumb = fileUrl;
+          } else {
+            if (!deal._docs) deal._docs = [];
+            deal._docs.push(newFile);
+          }
+        }
+
+        if (isImage) {
+          placeholder.className = 'photo-item';
+          placeholder.innerHTML = '<img src="' + fileUrl + '" alt="' + fileName + '">' +
+            '<button class="photo-delete" style="display:flex;" onclick="event.stopPropagation();deletePhoto(this)" title="Delete photo">&times;</button>' +
+            '<button class="photo-vis public" onclick="event.stopPropagation();toggleVisibility(this)">👁 Public</button>';
+          placeholder.dataset.photoPath = path;
+          placeholder.dataset.photoSha = result.content.sha;
+          placeholder.dataset.photoName = fileName;
+          placeholder.dataset.slug = slug;
+        } else {
+          placeholder.textContent = '✓ ' + fileName + ' uploaded';
+          placeholder.style.color = 'var(--green)';
+          setTimeout(() => { placeholder.remove(); renderDeals(); }, 1500);
         }
       } else {
         throw new Error('Upload failed');
       }
     } catch(err) {
-      placeholder.textContent = 'Failed';
+      placeholder.textContent = 'Failed: ' + fileName;
       placeholder.style.color = 'var(--red)';
       setTimeout(() => placeholder.remove(), 2000);
     }
+  }
+}
+
+// ── Doc visibility toggle ──
+
+function toggleDocVisibility(btn) {
+  const item = btn.closest('.doc-item');
+  const slug = item.dataset.slug;
+  const name = item.dataset.docName;
+  const deal = allDeals.find(d => d._slug === slug);
+  if (!deal || !deal._allFiles) return;
+
+  const file = deal._allFiles.find(f => f.name === name);
+  if (!file) return;
+
+  const newVis = file.visibility === 'public' ? 'private' : 'public';
+  file.visibility = newVis;
+
+  const doc = deal._docs ? deal._docs.find(f => f.name === name) : null;
+  if (doc) doc.visibility = newVis;
+
+  btn.className = 'photo-vis ' + newVis;
+  btn.innerHTML = newVis === 'public' ? '👁 Public' : '🔒 Private';
+}
+
+// ── Doc delete ──
+
+async function deleteDoc(btn) {
+  if (!confirm('Delete this file? This removes it from GitHub.')) return;
+  const item = btn.closest('.doc-item');
+  const path = item.dataset.docPath;
+  const sha = item.dataset.docSha;
+  const slug = item.dataset.slug;
+
+  btn.textContent = '...';
+  btn.disabled = true;
+
+  try {
+    await ghDelete('/repos/' + GITHUB_REPO + '/contents/' + path, {
+      message: 'Delete file: ' + path.split('/').pop(),
+      sha: sha
+    });
+    item.style.opacity = '0';
+    item.style.transition = 'all 0.3s';
+    setTimeout(() => item.remove(), 300);
+
+    const deal = allDeals.find(d => d._slug === slug);
+    if (deal) {
+      deal._allFiles = (deal._allFiles || []).filter(f => f.path !== path);
+      deal._docs = (deal._docs || []).filter(f => f.path !== path);
+    }
+  } catch(err) {
+    alert('Delete failed: ' + err.message);
+    btn.textContent = '✕';
+    btn.disabled = false;
   }
 }
 
@@ -1007,6 +1158,7 @@ async function pushToClose(btn) {
     if (deal.emdAmount) setCF('emdAmount', deal.emdAmount);
     if (deal.ddEndDate) setCF('ddEndDate', deal.ddEndDate);
     if (deal.emdDueDate) setCF('emdDueDate', deal.emdDueDate);
+    if (deal.dealId) setCF('dealId', deal.dealId);
 
     // Note with property details + deal URL
     const noteLines = [address];

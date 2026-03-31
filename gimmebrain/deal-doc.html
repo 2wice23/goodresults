@@ -234,8 +234,8 @@
           <div class="dp-section-title">Deal Page Fields</div>
           <div class="dp-row">
             <span class="dp-label">Deal #</span>
-            <input class="dp-input" id="dpDealNum" type="text" placeholder="e.g. 8" style="max-width:50px;" oninput="updateDealId()">
-            <input class="dp-input" id="dpDealId" type="text" readonly style="flex:2;color:var(--dim);">
+            <input class="dp-input" id="dpDealId" type="text" readonly style="flex:1;color:var(--green);font-weight:600;letter-spacing:0.05em;">
+            <span style="font-size:0.55rem;color:var(--dim);letter-spacing:0.04em;">auto-assigned</span>
           </div>
           <div class="dp-row">
             <span class="dp-label">Asking Price</span>
@@ -279,16 +279,17 @@
         </button>
         <div class="status-line" id="closeStatus" style="min-height:18px;"></div>
 
-        <!-- PHOTO UPLOAD FOR DEAL PAGE -->
+        <!-- FILE UPLOAD FOR DEAL PAGE -->
         <div class="photo-upload-section" id="photoUploadSection">
-          <div class="photo-upload-title">Deal Page Photos</div>
+          <div class="photo-upload-title">Deal Page Files</div>
           <div class="photo-drop" id="photoDrop">
-            <input type="file" id="photoInput" accept="image/*" multiple onchange="handlePhotos(this.files)">
-            <div class="photo-drop-icon">📸</div>
-            <div class="photo-drop-label">Drop photos here or <span>click to browse</span><br>Any format — JPG, PNG, WebP, etc.</div>
+            <input type="file" id="photoInput" multiple onchange="handleFiles(this.files)">
+            <div class="photo-drop-icon">📁</div>
+            <div class="photo-drop-label">Drop photos, documents, or any files here — or <span>click to browse</span><br>Images, PDFs, contracts, inspections — anything</div>
           </div>
           <div class="photo-count-label" id="photoCountLabel" style="display:none;"></div>
           <div class="photo-thumbs" id="photoThumbs"></div>
+          <div id="docFileList" style="margin-bottom:10px;"></div>
           <div class="panel-divider"></div>
         </div>
 
@@ -450,7 +451,8 @@ const CF = {
   ddEndDate:            'cf_dYuh3zK6om5wx7DazAPdoknMZI1083pJ9Xfon6vdmYf',
   emdDueDate:           'cf_v7RDgaN83GrYYyUPjwry71a2COpLSEhM0Dn7Lbs4Vn7',
   currentContractPrice: 'cf_lnzdav3LInFjRAbyUATuFShueu7pIaFebA988JE8H91',
-  wholesalePrice:       'cf_MDzK5zNGLLLUE9yYYWqubvC3hFzDeKA8m4ta6p8OPhx'
+  wholesalePrice:       'cf_MDzK5zNGLLLUE9yYYWqubvC3hFzDeKA8m4ta6p8OPhx',
+  dealId:               'cf_mtdd9aMAiHZ8NfSByhliIPFJ2AEkXMGDRCZabKHEI8T'
 };
 
 // ============================================================
@@ -829,14 +831,49 @@ function setStatus(msg, type) {
 // DEAL PAGE FIELDS (merged from deal-generator)
 // ============================================================
 let marketToggle = 'off';
+let nextDealId = null; // Will be set by autoAssignDealId()
 
-function updateDealId() {
+// Auto-assign deal ID: MMYYYY### (3-digit, starting at 007)
+// Scans existing deals on GitHub to find the next available number
+async function autoAssignDealId() {
   const now = new Date();
   const mm = String(now.getMonth() + 1).padStart(2, '0');
   const yyyy = now.getFullYear();
-  const n = document.getElementById('dpDealNum').value || '1';
-  document.getElementById('dpDealId').value = mm + yyyy + n;
+  const prefix = mm + yyyy; // e.g. "032026"
+
+  try {
+    // List all deal folders on GitHub
+    const result = await githubAPI('deals', 'GET');
+    if (!result.ok) throw new Error('Could not list deals');
+
+    const folders = (result.data || []).filter(f => f.type === 'dir');
+    let maxNum = 6; // Start before 007 so first deal = 007
+
+    folders.forEach(f => {
+      const name = f.name;
+      // Match folders that start with current month prefix (e.g. "032026")
+      if (name.startsWith(prefix)) {
+        const numPart = name.slice(prefix.length);
+        const n = parseInt(numPart, 10);
+        if (!isNaN(n) && n > maxNum) maxNum = n;
+      }
+    });
+
+    const nextNum = String(maxNum + 1).padStart(3, '0');
+    nextDealId = prefix + nextNum;
+  } catch(e) {
+    // Fallback: use timestamp-based
+    const ts = Date.now().toString().slice(-3);
+    nextDealId = prefix + ts;
+  }
+
+  const el = document.getElementById('dpDealId');
+  if (el) el.value = nextDealId;
+  return nextDealId;
 }
+
+// Auto-assign runs after page load (githubAPI and GITHUB_REPO defined below)
+window.addEventListener('DOMContentLoaded', () => setTimeout(autoAssignDealId, 100));
 
 function setMarketToggle(val) {
   marketToggle = val;
@@ -1209,6 +1246,7 @@ async function pushToClose() {
     setCF('ddEndDate',            toISO(getVal('dsDDEnd')));
     setCF('emdAmount',            getVal('dsEMDAmount'));
     setCF('emdDueDate',           toISO(getVal('dsEMDDue')));
+    setCF('dealId',               document.getElementById('dpDealId')?.value || '');
 
     // Standard opportunity fields
     const price = getVal('dsCurrentContractPrice');
@@ -1248,58 +1286,100 @@ async function pushToClose() {
 // ============================================================
 // PHOTO UPLOADS FOR DEAL PAGE
 // ============================================================
-const dealPhotos = []; // Array of { name, dataUrl, base64, type }
+const dealPhotos = []; // Array of { name, dataUrl, base64, type, isImage }
+const dealDocs = [];   // Array of { name, originalName, base64, type }
+const IMG_EXTS = /\.(jpe?g|png|webp|gif)$/i;
 
-function handlePhotos(fileList) {
+const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB limit
+
+function handleFiles(fileList) {
   Array.from(fileList).forEach(file => {
-    if (!file.type.startsWith('image/')) return;
+    if (file.size > MAX_FILE_SIZE) {
+      alert(file.name + ' is too large (' + Math.round(file.size / 1024 / 1024) + 'MB). Maximum is 50MB.');
+      return;
+    }
+    const isImage = IMG_EXTS.test(file.name);
     const reader = new FileReader();
     reader.onload = function(e) {
       const dataUrl = e.target.result;
-      // Extract base64 content (strip "data:image/jpeg;base64," prefix)
       const base64 = dataUrl.split(',')[1];
-      // Generate a clean filename: pad to 2 digits based on order
-      const ext = file.name.split('.').pop().toLowerCase();
-      const num = String(dealPhotos.length + 1).padStart(2, '0');
-      const safeName = num + '.' + ext;
-      dealPhotos.push({ name: safeName, originalName: file.name, dataUrl, base64, type: file.type });
-      renderPhotoThumbs();
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+
+      if (isImage) {
+        const ext = file.name.split('.').pop().toLowerCase();
+        const num = String(dealPhotos.length + 1).padStart(2, '0');
+        const photoName = num + '.' + ext;
+        dealPhotos.push({ name: photoName, originalName: file.name, dataUrl, base64, type: file.type, isImage: true });
+      } else {
+        dealDocs.push({ name: safeName, originalName: file.name, base64, type: file.type, isImage: false });
+      }
+      renderFilePreview();
     };
     reader.readAsDataURL(file);
   });
-  // Reset the input so same files can be re-added
   document.getElementById('photoInput').value = '';
 }
 
 function removePhoto(idx) {
   dealPhotos.splice(idx, 1);
-  // Re-number remaining photos
   dealPhotos.forEach((p, i) => {
     const ext = p.originalName.split('.').pop().toLowerCase();
     p.name = String(i + 1).padStart(2, '0') + '.' + ext;
   });
-  renderPhotoThumbs();
+  renderFilePreview();
 }
 
-function renderPhotoThumbs() {
+function removeDoc(idx) {
+  dealDocs.splice(idx, 1);
+  renderFilePreview();
+}
+
+function docIconGen(name) {
+  const ext = (name.split('.').pop() || '').toLowerCase();
+  if (ext === 'pdf') return '📄';
+  if (['doc','docx'].includes(ext)) return '📝';
+  if (['xls','xlsx','csv'].includes(ext)) return '📊';
+  if (['txt'].includes(ext)) return '📃';
+  return '📎';
+}
+
+function renderFilePreview() {
+  // Photo thumbnails
   const container = document.getElementById('photoThumbs');
   const countLabel = document.getElementById('photoCountLabel');
-  if (!dealPhotos.length) {
+  const docList = document.getElementById('docFileList');
+
+  const totalFiles = dealPhotos.length + dealDocs.length;
+
+  if (!totalFiles) {
     container.innerHTML = '';
+    docList.innerHTML = '';
     countLabel.style.display = 'none';
     return;
   }
   countLabel.style.display = 'block';
-  countLabel.textContent = dealPhotos.length + ' photo' + (dealPhotos.length !== 1 ? 's' : '') + ' ready to upload';
+  const parts = [];
+  if (dealPhotos.length) parts.push(dealPhotos.length + ' photo' + (dealPhotos.length !== 1 ? 's' : ''));
+  if (dealDocs.length) parts.push(dealDocs.length + ' document' + (dealDocs.length !== 1 ? 's' : ''));
+  countLabel.textContent = parts.join(' + ') + ' ready to upload';
+
   container.innerHTML = dealPhotos.map((p, i) =>
     '<div class="photo-thumb">' +
       '<img src="' + p.dataUrl + '" alt="' + p.name + '">' +
       '<button class="photo-thumb-remove" onclick="removePhoto(' + i + ')">&#x2715;</button>' +
     '</div>'
   ).join('');
+
+  docList.innerHTML = dealDocs.map((d, i) =>
+    '<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;margin-bottom:4px;">' +
+      '<span>' + docIconGen(d.name) + '</span>' +
+      '<span style="flex:1;font-size:0.65rem;color:var(--cream);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + d.originalName + '</span>' +
+      '<button onclick="removeDoc(' + i + ')" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:0.7rem;padding:2px 6px;">&#x2715;</button>' +
+    '</div>'
+  ).join('');
 }
 
-// Drag & drop support for photo zone
+// Drag & drop support for file zone
 (function() {
   const drop = document.getElementById('photoDrop');
   if (!drop) return;
@@ -1310,7 +1390,7 @@ function renderPhotoThumbs() {
     drop.addEventListener(evt, function(e) { e.preventDefault(); drop.classList.remove('drag-over'); });
   });
   drop.addEventListener('drop', function(e) {
-    if (e.dataTransfer.files.length) handlePhotos(e.dataTransfer.files);
+    if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
   });
 })();
 
@@ -1329,9 +1409,10 @@ async function createDealPage() {
     if (!d) throw new Error('No deal data — extract a contract first');
     const p = d.property || {};
 
-    // Build slug from address
+    // Use auto-assigned deal ID as folder name
     const streetAddr = p.address || 'unknown-address';
-    const slug = streetAddr.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const slug = document.getElementById('dpDealId')?.value || nextDealId || 'unknown';
+    if (!slug || slug === 'unknown') throw new Error('No deal ID — wait for auto-assignment');
 
     // Helper to parse dollar strings to numbers
     function parseDollar(str) {
@@ -1442,12 +1523,45 @@ async function createDealPage() {
       }
     }
 
+    // Step 5: Push documents (if any) into deals/{slug}/
+    if (dealDocs.length) {
+      for (let i = 0; i < dealDocs.length; i++) {
+        const doc = dealDocs[i];
+        status.textContent = 'Uploading document ' + (i + 1) + ' of ' + dealDocs.length + '...';
+        await pushFile(
+          'deals/' + slug + '/' + doc.name,
+          doc.base64,
+          'Deal page: ' + streetAddr + ' (doc ' + doc.name + ')'
+        );
+      }
+    }
+
+    // Step 6: Push manifest.json with file metadata
+    const manifestFiles = [];
+    dealPhotos.forEach((p, i) => {
+      manifestFiles.push({ name: p.name, type: 'photo', visibility: 'public', order: i });
+    });
+    dealDocs.forEach((d, i) => {
+      manifestFiles.push({ name: d.name, type: 'doc', visibility: 'private', order: dealPhotos.length + i });
+    });
+    if (manifestFiles.length) {
+      status.textContent = 'Saving manifest...';
+      const manifestB64 = btoa(unescape(encodeURIComponent(JSON.stringify(manifestFiles, null, 2))));
+      await pushFile(
+        'deals/' + slug + '/manifest.json',
+        manifestB64,
+        'Deal page: ' + streetAddr + ' (manifest)'
+      );
+    }
+
     // Done!
     const liveUrl = 'https://www.goodresults.org/deals/' + slug + '/';
     btn.innerHTML = '&#x2713; Deal Page Created';
     btn.style.background = 'rgba(168,85,247,0.2)';
-    const photoNote = dealPhotos.length ? ' &middot; ' + dealPhotos.length + ' photos' : '';
-    status.innerHTML = '<a href="' + liveUrl + '" target="_blank" style="color:var(--green);text-decoration:underline;">' + liveUrl + '</a>' + photoNote;
+    const fileNote = [];
+    if (dealPhotos.length) fileNote.push(dealPhotos.length + ' photos');
+    if (dealDocs.length) fileNote.push(dealDocs.length + ' docs');
+    status.innerHTML = '<a href="' + liveUrl + '" target="_blank" style="color:var(--green);text-decoration:underline;">' + liveUrl + '</a>' + (fileNote.length ? ' &middot; ' + fileNote.join(', ') : '');
     status.className = 'status-line active';
 
   } catch(err) {
