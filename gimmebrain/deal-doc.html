@@ -371,8 +371,10 @@
           <div class="ds-row"><span class="ds-label">Lot Size</span><span class="ds-val" id="dsLotSize">—</span></div>
           <div class="ds-row"><span class="ds-label">Year Built</span><span class="ds-val" id="dsYearBuilt">—</span></div>
           <div class="ds-row"><span class="ds-label">Garage</span><span class="ds-val" id="dsGarage">—</span></div>
+          <div class="ds-row"><span class="ds-label">Basement</span><span class="ds-val" id="dsBasement">—</span></div>
           <div class="ds-row"><span class="ds-label">Pool</span><span class="ds-val" id="dsPool">—</span></div>
           <div class="ds-row"><span class="ds-label">Solar</span><span class="ds-val" id="dsSolar">—</span></div>
+          <div style="margin-top:8px;padding:8px 10px;background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:4px;font-size:0.58rem;color:var(--orange);letter-spacing:0.04em;line-height:1.6;font-weight:500;">Enter basement, pool, and solar info manually if relevant — these are rarely in the contract.</div>
         </div>
         <div class="ds-block">
           <div class="ds-block-title">Agent / Realtor</div>
@@ -760,6 +762,7 @@ function renderDealSheet(d) {
   set('dsLotSize', p.lotSize);
   set('dsYearBuilt', p.yearBuilt);
   set('dsGarage', p.garage);
+  set('dsBasement', p.basementSqft ? p.basementSqft + ' sqft' : null);
   set('dsPool', p.pool);
   set('dsSolar', p.solar);
 
@@ -1079,6 +1082,7 @@ async function pushToGitHub() {
       'Lot Size:                 ' + (getVal('dsLotSize') || '—'),
       'Year Built:               ' + (getVal('dsYearBuilt') || '—'),
       'Garage:                   ' + (getVal('dsGarage') || '—'),
+      'Basement:                 ' + (getVal('dsBasement') || '—'),
       'Pool:                     ' + (getVal('dsPool') || '—'),
       'Solar:                    ' + (getVal('dsSolar') || '—'),
       '',
@@ -1263,7 +1267,7 @@ async function pushToClose() {
     noteLines.push('');
     noteLines.push([getVal('dsPropType'), getVal('dsBedsAndBaths'), getVal('dsSqft')].filter(Boolean).join(' | '));
     noteLines.push(['Year: ' + (getVal('dsYearBuilt') || '—'), 'Lot: ' + (getVal('dsLotSize') || '—')].join(' | '));
-    noteLines.push(['Pool: ' + (getVal('dsPool') || '—'), 'Solar: ' + (getVal('dsSolar') || '—'), 'Garage: ' + (getVal('dsGarage') || '—')].join(' | '));
+    noteLines.push(['Pool: ' + (getVal('dsPool') || '—'), 'Solar: ' + (getVal('dsSolar') || '—'), 'Garage: ' + (getVal('dsGarage') || '—'), 'Basement: ' + (getVal('dsBasement') || '—')].join(' | '));
     const agentName = getVal('dsAgentName');
     if (agentName) noteLines.push('Agent: ' + agentName + ' | ' + (getVal('dsAgentPhone') || '—'));
     updatePayload.note = noteLines.join('\n');
@@ -1458,7 +1462,7 @@ async function createDealPage() {
       beds:               p.beds ? Number(p.beds) : null,
       baths:              p.baths ? Number(p.baths) : null,
       sqft:               p.sqft ? Number(String(p.sqft).replace(/,/g,'')) : null,
-      basementSqft:       p.basementSqft ? Number(String(p.basementSqft).replace(/,/g,'')) : null,
+      basementSqft:       parseDollar(getVal('dsBasement')) || (p.basementSqft ? Number(String(p.basementSqft).replace(/,/g,'')) : null),
       lotSize:            p.lotSize || null,
       yearBuilt:          p.yearBuilt ? Number(p.yearBuilt) : null,
       garage:             p.garage || null,
