@@ -898,5 +898,25 @@
     "resistance_moments": "",
     "script_moment": "When she mentioned getting distressed properties 'once in a while' and losing one recently, Anthony could have asked: 'What types of situations do those typically come from - are they probates, divorces, people behind on payments?' This would help her recognize more opportunities.",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774977417984",
+    "timestamp": "2026-03-31T17:16:57.984Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Alexandria Brown",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "4m 49s",
+    "call_date": "03/31/2026",
+    "score": 88,
+    "realtor_engagement": 95,
+    "summary": "Franklin reconnected with Alexandria after 6 months, immediately offering a property that matched his buy box. Alexandria brought in her partner Dina with detailed property information, leading to concrete next steps for photos and follow-up.",
+    "what_worked": "Strong re-engagement opener with specific timeframe reference | Complete buy box delivery with memorable imagery | Alexandria immediately offered relevant property | Excellent conversation flow with partner introduction | Clear next steps established",
+    "what_to_tighten": "Could have asked about other potential properties in pipeline | Could have explored commission structure",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked if they handle other probate properties | Could have inquired about their typical inventory flow",
+    "positive_moments": "Immediately said 'We do have one potentially coming up' when asked about off-market properties | Brought in partner Dina to provide detailed property specifications | Proactively offered to send photos next week before listing | Asked qualifying questions about investment vs flip strategy | Agreed enthusiastically to one-week follow-up timeline",
+    "resistance_moments": "",
+    "script_moment": "When Alexandria offered the property, Franklin could have said: 'This sounds promising - do you typically handle probate sales, or is this more of a one-off situation?' to understand their pipeline better.",
+    "on_leaderboard": "yes"
   }
 ]
