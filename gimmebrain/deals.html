@@ -513,6 +513,8 @@ const GITHUB_REPO = '2wice23/goodresults';
 const GITHUB_PROXY = '/.netlify/functions/github-proxy';
 const RENTCAST_PROXY = '/.netlify/functions/rentcast-proxy';
 const SITE_BASE = 'https://www.goodresults.org';
+const BLOB_API = '/api/blob';
+const DEAL_API = '/api/deals';
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
 let allDeals = [];
@@ -602,6 +604,69 @@ async function ghDelete(path, body) {
     body: JSON.stringify({ path, method: 'DELETE', body })
   });
   return r.json();
+}
+
+// ── Blob helpers (Netlify Blobs — no GitHub needed) ──
+
+async function blobSet(storeName, key, value, type) {
+  const r = await fetch(BLOB_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'set', store: storeName, key, value, type: type || 'json' })
+  });
+  return r.json();
+}
+
+async function blobGet(storeName, key, type) {
+  const r = await fetch(BLOB_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'get', store: storeName, key, type: type || 'json' })
+  });
+  return r.json();
+}
+
+async function blobDelete(storeName, key) {
+  const r = await fetch(BLOB_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'delete', store: storeName, key })
+  });
+  return r.json();
+}
+
+async function blobList(storeName, prefix) {
+  const r = await fetch(BLOB_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'list', store: storeName, key: prefix || '*' })
+  });
+  return r.json();
+}
+
+// Build file list from blob keys (replaces GitHub-based buildFileList)
+function buildFileListFromBlobs(slug, fileNames, manifest) {
+  const IMG_RE = /\.(jpe?g|png|webp|gif)$/i;
+  const DOC_RE = /\.(pdf|docx?|xlsx?|csv|txt)$/i;
+
+  const allFiles = fileNames.map(name => ({
+    name: name,
+    url: DEAL_API + '/' + slug + '/files/' + name,
+    path: slug + '/files/' + name,
+    type: IMG_RE.test(name) ? 'photo' : (DOC_RE.test(name) ? 'doc' : 'file'),
+  }));
+
+  if (manifest && Array.isArray(manifest)) {
+    allFiles.forEach(f => {
+      const entry = manifest.find(m => m.name === f.name);
+      if (entry) { f.visibility = entry.visibility || 'public'; f.order = entry.order != null ? entry.order : 999; }
+      else { f.visibility = f.type === 'photo' ? 'public' : 'private'; f.order = 999; }
+    });
+  } else {
+    allFiles.forEach((f, i) => { f.visibility = f.type === 'photo' ? 'public' : 'private'; f.order = i; });
+  }
+  allFiles.sort((a, b) => a.order - b.order);
+  return allFiles;
 }
 
 // ── Close CRM proxy + custom fields ──
@@ -715,85 +780,44 @@ function attachFiles(json, allFiles) {
   json._publicPhotoCount = publicPhotos.length;
 }
 
-async function loadDeals(skipIndex) {
+async function loadDeals() {
   const grid = document.getElementById('dealGrid');
   try {
-    // FAST PATH: Try index.json first (1 API call for all deals)
-    let useIndex = false;
-    try {
-      if (skipIndex) throw new Error('skip');
-      const idx = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/index.json');
-      if (idx && idx.content) {
-        const index = JSON.parse(atob(idx.content.replace(/\n/g, '')));
-        if (index.deals && index.deals.length) {
-          // Load deals from index — still need folder listings for file SHAs
-          const promises = index.deals.map(async entry => {
-            try {
-              const json = normalizeDeal(Object.assign({}, entry.data), entry.slug);
-              json._docSha = entry.docSha;
+    // Load deal index from Netlify Blobs
+    const indexResult = await blobGet('deals', 'index', 'json');
 
-              // Get folder listing for current file SHAs
-              const files = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + entry.slug).catch(() => []);
-              const manifestFile = (files || []).find(f => f.name === 'manifest.json');
-              let manifest = entry.manifest || null;
-              if (manifestFile) {
-                try {
-                  const mf = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + entry.slug + '/manifest.json');
-                  manifest = JSON.parse(atob(mf.content.replace(/\n/g, '')));
-                  json._manifestSha = mf.sha;
-                } catch(e) {}
-              }
+    if (indexResult.ok && indexResult.data && indexResult.data.deals && indexResult.data.deals.length) {
+      const slugs = indexResult.data.deals;
 
-              const allFiles = buildFileList(entry.slug, files || [], manifest);
-              attachFiles(json, allFiles);
-              return json;
-            } catch(e) { return null; }
-          });
-
-          const results = await Promise.all(promises);
-          allDeals = results.filter(Boolean);
-          useIndex = true;
-        }
-      }
-    } catch(e) { /* index doesn't exist yet, fall back to per-deal loading */ }
-
-    // SLOW PATH: No index — load each deal individually (backward compatible)
-    if (!useIndex) {
-      const items = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals');
-      const folders = items.filter(i => i.type === 'dir');
-
-      if (!folders.length) {
-        grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No deal pages found yet.<br>Use "Process New Contract" above to create one.</div></div>';
-        return;
-      }
-
-      const promises = folders.map(async folder => {
+      const promises = slugs.map(async slug => {
         try {
-          const file = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name + '/deal-doc.txt');
-          if (!file || file.error || !file.content) return null;
-          const json = JSON.parse(atob(file.content.replace(/\n/g, '')));
-          normalizeDeal(json, folder.name);
-          json._docSha = file.sha;
+          // Get deal data from blobs
+          const dataResult = await blobGet('deals', slug + '/data', 'json');
+          if (!dataResult.ok) return null;
+          const json = normalizeDeal(Object.assign({}, dataResult.data), slug);
 
-          const files = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name).catch(() => []);
-          const manifestFile = (files || []).find(f => f.name === 'manifest.json');
+          // Get manifest from blobs
           let manifest = null;
-          if (manifestFile) {
-            try {
-              const mf = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + folder.name + '/manifest.json');
-              manifest = JSON.parse(atob(mf.content.replace(/\n/g, '')));
-              json._manifestSha = mf.sha;
-            } catch(e) {}
-          }
+          try {
+            const mResult = await blobGet('deals', slug + '/manifest', 'json');
+            if (mResult.ok) manifest = mResult.data;
+          } catch(e) {}
 
-          const allFiles = buildFileList(folder.name, files || [], manifest);
+          // Get file list from blobs
+          const filesResult = await blobList('deals', slug + '/files/');
+          const fileNames = (filesResult.ok && filesResult.blobs) ? filesResult.blobs.map(b => b.key.replace(slug + '/files/', '')) : [];
+
+          const allFiles = buildFileListFromBlobs(slug, fileNames, manifest);
           attachFiles(json, allFiles);
           return json;
-        } catch(e) { return null; }
+        } catch(e) { console.warn('Load deal failed:', slug, e); return null; }
       });
 
       const results = await Promise.all(promises);
       allDeals = results.filter(Boolean);
+    } else {
+      grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No deal pages found yet.<br>Use "Process New Contract" above to create one.</div></div>';
+      return;
     }
 
     allDeals.sort((a, b) => {
@@ -806,36 +830,19 @@ async function loadDeals(skipIndex) {
 
     renderStats();
     renderDeals();
-
-    // If we used the slow path, rebuild index.json so future loads are fast
-    if (skipIndex) updateDealIndex().catch(e => console.warn('Index rebuild failed:', e));
   } catch(err) {
     grid.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><div class="empty-text">Error loading deals: ' + err.message + '</div></div>';
   }
 }
 
-// ── Build/update deals/index.json (master index of all deals) ──
+// ── Build/update deal index in Netlify Blobs ──
 
 async function updateDealIndex() {
   const indexData = {
     updated: new Date().toISOString(),
-    deals: allDeals.map(d => {
-      const clean = {};
-      Object.keys(d).forEach(k => { if (!k.startsWith('_')) clean[k] = d[k]; });
-      const manifest = (d._allFiles || []).map(f => ({ name: f.name, type: f.type, visibility: f.visibility, order: f.order }));
-      return { slug: d._slug, docSha: d._docSha, data: clean, manifest: manifest };
-    })
+    deals: allDeals.map(d => d._slug)
   };
-  const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(indexData, null, 2))));
-  // Check for existing index
-  let sha;
-  try {
-    const existing = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/index.json');
-    if (existing && existing.sha) sha = existing.sha;
-  } catch(e) {}
-  const body = { message: 'Update deal index', content: b64 };
-  if (sha) body.sha = sha;
-  await ghPut('/repos/' + GITHUB_REPO + '/contents/deals/index.json', body);
+  await blobSet('deals', 'index', indexData, 'json');
 }
 
 function renderStats() {
@@ -1177,51 +1184,31 @@ async function saveDeal(btn) {
   });
 
   try {
-    // Get current SHA
-    const current = await ghGet('/repos/' + GITHUB_REPO + '/contents/deals/' + slug + '/deal-doc.txt');
-    const sha = current.sha || deal._docSha;
+    // Save deal data to Netlify Blobs (no SHA needed!)
+    await blobSet('deals', slug + '/data', cleanDeal, 'json');
 
-    // PUT updated file
-    const result = await ghPut('/repos/' + GITHUB_REPO + '/contents/deals/' + slug + '/deal-doc.txt', {
-      message: 'Update deal: ' + (deal.address || slug),
-      content: btoa(unescape(encodeURIComponent(JSON.stringify(cleanDeal, null, 2)))),
-      sha: sha
-    });
-
-    if (result.content) {
-      deal._docSha = result.content.sha;
-
-      // Also save manifest.json with current file visibility/order
-      if (deal._allFiles && deal._allFiles.length) {
-        const manifestData = deal._allFiles.map(f => ({
-          name: f.name,
-          type: f.type,
-          visibility: f.visibility,
-          order: f.order
-        }));
-        const manifestBody = {
-          message: 'Update manifest: ' + (deal.address || slug),
-          content: btoa(unescape(encodeURIComponent(JSON.stringify(manifestData, null, 2)))),
-        };
-        if (deal._manifestSha) manifestBody.sha = deal._manifestSha;
-        try {
-          const mResult = await ghPut('/repos/' + GITHUB_REPO + '/contents/deals/' + slug + '/manifest.json', manifestBody);
-          if (mResult.content) deal._manifestSha = mResult.content.sha;
-        } catch(e) { console.warn('Manifest save failed:', e); }
-      }
-
-      // Update deals/index.json in background
-      updateDealIndex().catch(e => console.warn('Index update failed:', e));
-
-      status.className = 'save-status saved';
-      status.textContent = 'Saved!';
-      setTimeout(() => {
-        renderDeals();
-        renderStats();
-      }, 1200);
-    } else {
-      throw new Error(result.message || 'GitHub write failed');
+    // Also save manifest with current file visibility/order
+    if (deal._allFiles && deal._allFiles.length) {
+      const manifestData = deal._allFiles.map(f => ({
+        name: f.name,
+        type: f.type,
+        visibility: f.visibility,
+        order: f.order
+      }));
+      try {
+        await blobSet('deals', slug + '/manifest', manifestData, 'json');
+      } catch(e) { console.warn('Manifest save failed:', e); }
     }
+
+    // Update deal index in background
+    updateDealIndex().catch(e => console.warn('Index update failed:', e));
+
+    status.className = 'save-status saved';
+    status.textContent = 'Saved!';
+    setTimeout(() => {
+      renderDeals();
+      renderStats();
+    }, 1200);
   } catch(err) {
     status.className = 'save-status error';
     status.textContent = 'Error: ' + err.message;
@@ -1335,30 +1322,29 @@ function photoDrop(e) {
 // ── Photo management ──
 
 async function deletePhoto(btn) {
-  if (!confirm('Delete this photo? This removes it from GitHub.')) return;
+  if (!confirm('Delete this photo?')) return;
 
   const item = btn.closest('.photo-item');
   const path = item.dataset.photoPath;
-  const sha = item.dataset.photoSha;
+  const slug = item.dataset.slug;
+  const name = item.dataset.photoName;
 
   btn.textContent = '...';
   btn.disabled = true;
 
   try {
-    const result = await ghDelete('/repos/' + GITHUB_REPO + '/contents/' + path, {
-      message: 'Delete photo: ' + path.split('/').pop(),
-      sha: sha
-    });
+    // Delete from Netlify Blobs
+    await blobDelete('deals', slug + '/files/' + name);
     item.style.opacity = '0';
     item.style.transform = 'scale(0.8)';
     item.style.transition = 'all 0.3s';
     setTimeout(() => item.remove(), 300);
 
     // Update deal photo count
-    const slug = path.split('/')[1];
     const deal = allDeals.find(d => d._slug === slug);
     if (deal) {
-      deal._photos = deal._photos.filter(p => p.path !== path);
+      deal._allFiles = (deal._allFiles || []).filter(f => f.name !== name);
+      deal._photos = deal._photos.filter(p => p.name !== name);
       deal._photoCount = deal._photos.length;
       deal._thumb = deal._photos.length ? deal._photos[0].url : null;
     }
@@ -1399,7 +1385,7 @@ async function uploadFiles(slug, files) {
   const grid = document.getElementById('photos-' + slug);
   const deal = allDeals.find(d => d._slug === slug);
   const IMG_RE = /\.(jpe?g|png|webp|gif)$/i;
-  const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB limit (GitHub max is 100MB)
+  const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB limit
 
   for (const file of files) {
     if (file.size > MAX_FILE_SIZE) {
@@ -1422,35 +1408,22 @@ async function uploadFiles(slug, files) {
     if (isImage) {
       grid.appendChild(placeholder);
     } else {
-      // For docs, append a temporary message near the upload zone
       grid.parentElement.appendChild(placeholder);
     }
 
     try {
       const base64 = await fileToBase64(file);
-      const path = 'deals/' + slug + '/' + fileName;
+      const blobKey = slug + '/files/' + fileName;
 
-      let sha;
-      try {
-        const existing = await ghGet('/repos/' + GITHUB_REPO + '/contents/' + path);
-        sha = existing.sha;
-      } catch(e) {}
+      // Upload binary to Netlify Blobs (no SHA needed!)
+      const result = await blobSet('deals', blobKey, base64, 'binary');
 
-      const body = {
-        message: 'Add ' + fileType + ': ' + fileName,
-        content: base64
-      };
-      if (sha) body.sha = sha;
-
-      const result = await ghPut('/repos/' + GITHUB_REPO + '/contents/' + path, body);
-
-      if (result.content) {
-        const fileUrl = SITE_BASE + '/' + path;
+      if (result.ok) {
+        const fileUrl = DEAL_API + '/' + slug + '/files/' + fileName;
         const newFile = {
           name: fileName,
-          sha: result.content.sha,
           url: fileUrl,
-          path: path,
+          path: blobKey,
           type: fileType,
           visibility: isImage ? 'public' : 'private',
           order: deal._allFiles ? deal._allFiles.length : 999
@@ -1474,8 +1447,7 @@ async function uploadFiles(slug, files) {
           placeholder.innerHTML = '<img src="' + fileUrl + '" alt="' + fileName + '">' +
             '<button class="photo-delete" style="display:flex;" onclick="event.stopPropagation();deletePhoto(this)" title="Delete photo">&times;</button>' +
             '<button class="photo-vis public" onclick="event.stopPropagation();toggleVisibility(this)">👁 Public</button>';
-          placeholder.dataset.photoPath = path;
-          placeholder.dataset.photoSha = result.content.sha;
+          placeholder.dataset.photoPath = blobKey;
           placeholder.dataset.photoName = fileName;
           placeholder.dataset.slug = slug;
         } else {
@@ -1519,28 +1491,24 @@ function toggleDocVisibility(btn) {
 // ── Doc delete ──
 
 async function deleteDoc(btn) {
-  if (!confirm('Delete this file? This removes it from GitHub.')) return;
+  if (!confirm('Delete this file?')) return;
   const item = btn.closest('.doc-item');
-  const path = item.dataset.docPath;
-  const sha = item.dataset.docSha;
   const slug = item.dataset.slug;
+  const name = item.dataset.docName;
 
   btn.textContent = '...';
   btn.disabled = true;
 
   try {
-    await ghDelete('/repos/' + GITHUB_REPO + '/contents/' + path, {
-      message: 'Delete file: ' + path.split('/').pop(),
-      sha: sha
-    });
+    await blobDelete('deals', slug + '/files/' + name);
     item.style.opacity = '0';
     item.style.transition = 'all 0.3s';
     setTimeout(() => item.remove(), 300);
 
     const deal = allDeals.find(d => d._slug === slug);
     if (deal) {
-      deal._allFiles = (deal._allFiles || []).filter(f => f.path !== path);
-      deal._docs = (deal._docs || []).filter(f => f.path !== path);
+      deal._allFiles = (deal._allFiles || []).filter(f => f.name !== name);
+      deal._docs = (deal._docs || []).filter(f => f.name !== name);
     }
   } catch(err) {
     alert('Delete failed: ' + err.message);
@@ -2429,15 +2397,15 @@ document.getElementById('btnCreateFolder').addEventListener('click', async () =>
   const dealUrl = 'https://goodresults.org/deals/' + slug + '/';
 
   initLog([
-    'Fetching deal page template...',
-    'Pushing deal page to GitHub...',
-    'Pushing deal data to GitHub...',
+    'Pushing deal page template to GitHub...',
+    'Saving deal data to cloud...',
     'Uploading contract PDF (private)...',
-    'Pushing manifest (visibility)...'
+    'Saving manifest...',
+    'Updating deal index...'
   ]);
 
   try {
-    // Fetch template
+    // Step 0: Push template index.html to GitHub (needed for URL routing)
     setLogStep(0, 'active');
     let templateContent;
     try {
@@ -2450,25 +2418,20 @@ document.getElementById('btnCreateFolder').addEventListener('click', async () =>
       if (!tplResult.ok) throw new Error('Could not fetch template');
       templateContent = tplResult.data.content.replace(/\n/g, '');
     }
-    setLogStep(0, 'done', 'Template fetched');
-
-    // Push index.html
-    await wait(600);
-    setLogStep(1, 'active');
     await pushFile('deals/' + slug + '/index.html', templateContent, 'Deal page: ' + address + ' (template)');
-    setLogStep(1, 'done', 'Deal page template pushed');
+    setLogStep(0, 'done', 'Deal page template pushed');
 
-    // Push deal-doc.txt
-    await wait(600);
-    setLogStep(2, 'active');
-    const jsonB64 = btoa(unescape(encodeURIComponent(JSON.stringify(dealJson, null, 2))));
-    await pushFile('deals/' + slug + '/deal-doc.txt', jsonB64, 'Deal page: ' + address + ' (data)');
-    setLogStep(2, 'done', 'Deal data pushed');
+    // Step 1: Save deal data to Netlify Blobs
+    await wait(300);
+    setLogStep(1, 'active');
+    await blobSet('deals', slug + '/data', dealJson, 'json');
+    setLogStep(1, 'done', 'Deal data saved to cloud');
 
-    // Auto-upload contract PDF as private file
+    // Step 2: Auto-upload contract PDF as private file to Blobs
+    const manifestEntries = [];
     if (currentPDF && currentPDF.type === 'application/pdf') {
-      await wait(600);
-      setLogStep(3, 'active');
+      await wait(300);
+      setLogStep(2, 'active');
       try {
         const contractB64 = await new Promise((resolve, reject) => {
           const reader = new FileReader();
@@ -2476,22 +2439,33 @@ document.getElementById('btnCreateFolder').addEventListener('click', async () =>
           reader.onerror = reject;
           reader.readAsDataURL(currentPDF);
         });
-        await pushFile('deals/' + slug + '/contract.pdf', contractB64, 'Deal page: ' + address + ' (contract)');
-        setLogStep(3, 'done', 'Contract PDF uploaded (private)');
+        await blobSet('deals', slug + '/files/contract.pdf', contractB64, 'binary');
+        manifestEntries.push({ name: 'contract.pdf', type: 'doc', visibility: 'private', order: 0 });
+        setLogStep(2, 'done', 'Contract PDF uploaded (private)');
       } catch(e) {
-        setLogStep(3, 'error', 'Contract upload failed — continue manually');
+        setLogStep(2, 'error', 'Contract upload failed — continue manually');
       }
     } else {
-      setLogStep(3, 'done', 'No contract PDF to upload');
+      setLogStep(2, 'done', 'No contract PDF to upload');
     }
 
-    // Push manifest.json with contract set to private
-    await wait(600);
+    // Step 3: Save manifest to Blobs
+    await wait(300);
+    setLogStep(3, 'active');
+    await blobSet('deals', slug + '/manifest', manifestEntries, 'json');
+    setLogStep(3, 'done', 'Manifest saved');
+
+    // Step 4: Update deal index
     setLogStep(4, 'active');
-    const manifest = { private: ['contract.pdf'] };
-    const manifestB64 = btoa(unescape(encodeURIComponent(JSON.stringify(manifest, null, 2))));
-    await pushFile('deals/' + slug + '/manifest.json', manifestB64, 'Deal page: ' + address + ' (manifest)');
-    setLogStep(4, 'done', 'Manifest pushed');
+    // Add new slug to index
+    const indexResult = await blobGet('deals', 'index', 'json');
+    let currentSlugs = [];
+    if (indexResult.ok && indexResult.data && indexResult.data.deals) {
+      currentSlugs = indexResult.data.deals;
+    }
+    if (!currentSlugs.includes(slug)) currentSlugs.push(slug);
+    await blobSet('deals', 'index', { updated: new Date().toISOString(), deals: currentSlugs }, 'json');
+    setLogStep(4, 'done', 'Deal index updated');
 
     btn.textContent = '✓ Folder Created';
     btn.className = 'launch-btn success';
@@ -2500,13 +2474,12 @@ document.getElementById('btnCreateFolder').addEventListener('click', async () =>
     const banner = document.getElementById('successBanner');
     banner.style.display = 'block';
     document.getElementById('liveUrlLink').innerHTML = '<a href="' + dealUrl + '" target="_blank">' + dealUrl + '</a>';
-    document.getElementById('successDetails').innerHTML = 'Deal page is deploying now (takes ~30 seconds).<br>GitHub: template + deal-doc.txt pushed.';
+    document.getElementById('successDetails').innerHTML = 'Deal page is live! Data saved to cloud storage (no build needed).<br>Template page deploying now (~30s).';
     document.getElementById('outputBadge').textContent = 'LIVE';
     document.getElementById('outputBadge').className = 'badge badge-ready';
 
-    // Refresh the dashboard grid so the new deal appears
-    // Use slow path (skipIndex) since index.json hasn't been updated yet
-    setTimeout(() => loadDeals(true), 2000);
+    // Refresh the dashboard grid
+    setTimeout(() => loadDeals(), 2000);
 
   } catch(err) {
     console.error('Create folder failed:', err);
@@ -2517,7 +2490,7 @@ document.getElementById('btnCreateFolder').addEventListener('click', async () =>
 });
 
 // ============================================================
-// BUTTON 2: PUSH PHOTOS TO GITHUB
+// BUTTON 2: PUSH PHOTOS TO CLOUD
 // ============================================================
 document.getElementById('btnPushPhotos').addEventListener('click', async () => {
   const btn = document.getElementById('btnPushPhotos');
@@ -2531,21 +2504,34 @@ document.getElementById('btnPushPhotos').addEventListener('click', async () => {
   const slug = dealId;
   const address = extractedDeal.address || 'Unknown Address';
 
-  initLog(['Uploading ' + dealPhotos.length + ' photos to GitHub...']);
+  initLog(['Uploading ' + dealPhotos.length + ' photos to cloud storage...']);
 
   try {
     setLogStep(0, 'active');
     for (let i = 0; i < dealPhotos.length; i++) {
       const photo = dealPhotos[i];
       setLogStep(0, 'active', 'Uploading photo ' + (i + 1) + ' of ' + dealPhotos.length + '...');
-      await pushFile('deals/' + slug + '/' + photo.name, photo.base64, 'Deal page: ' + address + ' (photo ' + photo.name + ')');
-      if (i < dealPhotos.length - 1) await wait(400);
+      await blobSet('deals', slug + '/files/' + photo.name, photo.base64, 'binary');
+      if (i < dealPhotos.length - 1) await wait(200);
     }
     setLogStep(0, 'done', dealPhotos.length + ' photos uploaded');
 
+    // Update manifest with new photos
+    let manifest = [];
+    try {
+      const mResult = await blobGet('deals', slug + '/manifest', 'json');
+      if (mResult.ok && Array.isArray(mResult.data)) manifest = mResult.data;
+    } catch(e) {}
+    for (const photo of dealPhotos) {
+      if (!manifest.find(m => m.name === photo.name)) {
+        manifest.push({ name: photo.name, type: 'photo', visibility: 'public', order: manifest.length });
+      }
+    }
+    await blobSet('deals', slug + '/manifest', manifest, 'json');
+
     btn.textContent = '✓ Photos Pushed';
     btn.className = 'launch-btn success';
-    setStatus(dealPhotos.length + ' photos pushed to GitHub ✓', 'active');
+    setStatus(dealPhotos.length + ' photos uploaded to cloud ✓', 'active');
 
   } catch(err) {
     console.error('Photo push failed:', err);

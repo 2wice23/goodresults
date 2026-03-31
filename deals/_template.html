@@ -156,6 +156,11 @@ footer p{font-size:12px;color:rgba(255,255,255,.3);}
   <div class="gallery-grid" id="galleryGrid"></div>
 </div>
 
+<div class="docs-section reveal" id="docsSection" style="display:none;max-width:1060px;margin:0 auto 48px;padding:0 32px;">
+  <div class="gallery-label">Documents</div>
+  <div id="docsGrid" style="display:grid;grid-template-columns:1fr;gap:16px;"></div>
+</div>
+
 <div class="cta-section">
   <div class="cta-inner">
     <div class="cta-text">
@@ -184,12 +189,19 @@ footer p{font-size:12px;color:rgba(255,255,255,.3);}
 function fmt$(n){ return n != null ? '$' + Number(n).toLocaleString() : ''; }
 function el(id) { return document.getElementById(id); }
 
+// Get deal slug from URL path (e.g., /deals/3202-melbourne-st/ → 3202-melbourne-st)
+var DEAL_SLUG = window.location.pathname.replace(/^\/deals\//, '').replace(/\/.*$/, '');
+var DEAL_API = '/api/deals/' + DEAL_SLUG;
+
 // ─── render ───────────────────────────────────────────────────────────────────
 function renderDeal(d) {
-  const totalRepairs = (d.estRepairs && d.sqft) ? d.estRepairs * d.sqft : null;
-  const profit = (d.arv && totalRepairs != null && d.askingPrice) ? d.arv - totalRepairs - d.askingPrice : null;
-  const fullAddr = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
-  const heroTitle = [
+  var askPrice = d.wholesalePrice || d.askingPrice || null;
+  var repPerSf = d.repairsPerSqft || d.estRepairs || null;
+  var totalRepairs = (repPerSf && d.sqft) ? repPerSf * d.sqft : null;
+  var askN = askPrice ? Number(String(askPrice).replace(/[^0-9.-]/g,'')) : null;
+  var buyerProfit = (d.arv && totalRepairs != null && askN) ? d.arv - totalRepairs - askN : null;
+  var fullAddr = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
+  var heroTitle = [
     d.zip  || '',
     (d.beds && d.baths) ? d.beds + 'bd / ' + d.baths + 'ba' : '',
     d.sqft ? Number(d.sqft).toLocaleString() + ' sf' : ''
@@ -224,11 +236,11 @@ function renderDeal(d) {
 
   // Numbers bar
   var cards = [];
-  if (d.askingPrice != null) cards.push('<div class="num-card num-asking"><div class="num-label">Asking Price</div><div class="num-val">' + fmt$(d.askingPrice) + '</div></div>');
+  if (askN != null) cards.push('<div class="num-card num-asking"><div class="num-label">Wholesale Price</div><div class="num-val">' + fmt$(askN) + '</div></div>');
   if (d.arv != null) cards.push('<div class="num-card"><div class="num-label">ARV</div><div class="num-val">' + fmt$(d.arv) + '</div></div>');
-  if (totalRepairs != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs (' + d.estRepairs + '/sqft &times; ' + Number(d.sqft).toLocaleString() + ' sf)</div><div class="num-val">' + fmt$(totalRepairs) + '</div></div>');
-  else if (d.estRepairs != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs ($/sf)</div><div class="num-val">' + fmt$(d.estRepairs) + '</div></div>');
-  if (profit != null) cards.push('<div class="num-card num-profit"><div class="num-label">Gross Profit (Before Holding Costs)</div><div class="num-val">' + fmt$(profit) + '</div></div>');
+  if (totalRepairs != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs (' + repPerSf + '/sqft &times; ' + Number(d.sqft).toLocaleString() + ' sf)</div><div class="num-val">' + fmt$(totalRepairs) + '</div></div>');
+  else if (repPerSf != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs ($/sf)</div><div class="num-val">' + fmt$(repPerSf) + '</div></div>');
+  if (buyerProfit != null) cards.push('<div class="num-card num-profit"><div class="num-label">Projected Buyer Profit</div><div class="num-val">' + fmt$(buyerProfit) + '</div></div>');
   if (cards.length) { el('numbersSection').style.display = 'block'; el('numbersInner').innerHTML = cards.join(''); }
 
   // Detail cards
@@ -243,7 +255,7 @@ function renderDeal(d) {
   ].filter(Boolean).join('');
 
   var terms = [
-    d.askingPrice != null ? '<div class="term-row"><span class="term-key">Asking Price</span><span class="term-val hi">' + fmt$(d.askingPrice) + '</span></div>' : '',
+    askN != null ? '<div class="term-row"><span class="term-key">Wholesale Price</span><span class="term-val hi">' + fmt$(askN) + '</span></div>' : '',
     '<div class="term-row"><span class="term-key">EMD</span><span class="term-val">$5,000 non-refundable</span></div>',
     d.coeDate ? '<div class="term-row"><span class="term-key">Close of Escrow</span><span class="term-val">' + d.coeDate + '</span></div>' : '',
     '<div class="term-row"><span class="term-key">Financing</span><span class="term-val">Cash only</span></div>',
@@ -260,99 +272,85 @@ function renderDeal(d) {
     notesHtml;
 }
 
-// ─── photo discovery (finds ALL images in this folder via GitHub API) ────────
+// ─── photo + doc discovery from Netlify Blobs ────────────────────────────────
 var photos = [];
 var lbIdx = 0;
 var IMG_RE = /\.(jpe?g|png|webp|gif|avif|heic|bmp|tiff?)$/i;
-var GITHUB_REPO = '2wice23/goodresults';
 
-// Natural sort: "2.jpg" before "10.jpg", "photo-a" before "photo-b"
-function naturalSort(a, b) {
-  return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
-}
-
-// Primary: check for manifest.json first, then fall back to GitHub API listing
-function discoverPhotos() {
-  var path = window.location.pathname.replace(/^\/|\/$/g, '');
-
-  // Try manifest first — it controls visibility and order
-  fetch('manifest.json')
+function discoverPhotosAndDocs() {
+  // Fetch manifest from Blobs API
+  fetch(DEAL_API + '/manifest.json')
     .then(function(r) {
       if (!r.ok) throw new Error('No manifest');
       return r.json();
     })
     .then(function(manifest) {
-      // Only show public photos, sorted by order
+      if (!Array.isArray(manifest)) { el('galleryEmpty').style.display = 'block'; return; }
+
+      // Public photos sorted by order
       var publicPhotos = manifest
         .filter(function(m) { return m.type === 'photo' && m.visibility === 'public'; })
         .sort(function(a, b) { return (a.order || 0) - (b.order || 0); })
-        .map(function(m) { return m.name; });
+        .map(function(m) { return DEAL_API + '/files/' + m.name; });
 
       if (publicPhotos.length) {
         photos = publicPhotos;
-        finish();
+        finishPhotos();
       } else {
         el('galleryEmpty').style.display = 'block';
       }
-    })
-    .catch(function() {
-      // No manifest — fall back to GitHub API (show all images)
-      discoverPhotosFromAPI(path);
-    });
-}
 
-function discoverPhotosFromAPI(path) {
-  var apiUrl = 'https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + path;
+      // Public documents
+      var publicDocs = manifest
+        .filter(function(m) { return m.type === 'doc' && m.visibility === 'public'; })
+        .sort(function(a, b) { return (a.order || 0) - (b.order || 0); });
 
-  fetch(apiUrl)
-    .then(function(r) {
-      if (!r.ok) throw new Error('GitHub API ' + r.status);
-      return r.json();
-    })
-    .then(function(files) {
-      var imageFiles = files
-        .filter(function(f) { return f.type === 'file' && IMG_RE.test(f.name); })
-        .map(function(f) { return f.name; })
-        .sort(naturalSort);
-
-      if (imageFiles.length) {
-        photos = imageFiles;
-        finish();
-      } else {
-        el('galleryEmpty').style.display = 'block';
+      if (publicDocs.length) {
+        renderDocs(publicDocs);
       }
     })
     .catch(function() {
-      probeFallback();
+      // No manifest — try listing files from blob API
+      fetch(DEAL_API + '/list')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.files && data.files.length) {
+            var imageFiles = data.files.filter(function(f) { return IMG_RE.test(f); });
+            if (imageFiles.length) {
+              photos = imageFiles.map(function(f) { return DEAL_API + '/files/' + f; });
+              finishPhotos();
+            } else {
+              el('galleryEmpty').style.display = 'block';
+            }
+          } else {
+            el('galleryEmpty').style.display = 'block';
+          }
+        })
+        .catch(function() {
+          el('galleryEmpty').style.display = 'block';
+        });
     });
 }
 
-// Fallback: old-school numbered probe (01.jpg–99.jpg) for when API is unavailable
-var probeN = 1, probeFails = 0;
-var probeExts = ['jpg','jpeg','png','webp','gif'];
-function probeFallback() {
-  if (probeN > 99 || probeFails >= 3) { finish(); return; }
-  var padded = String(probeN).padStart(2,'0');
-  var plain  = String(probeN);
-  var names = [];
-  probeExts.forEach(function(ext) { names.push(padded + '.' + ext); });
-  probeExts.forEach(function(ext) { names.push(plain + '.' + ext); });
-  var tried = 0;
-  function tryNext(found, src) {
-    if (found) { probeFails = 0; photos.push(src); probeN++; probeFallback(); return; }
-    if (++tried < names.length) { load(names[tried]); }
-    else { probeFails++; probeN++; probeFallback(); }
-  }
-  function load(name) {
-    var img = new Image();
-    img.onload  = function() { tryNext(true, name); };
-    img.onerror = function() { tryNext(false, ''); };
-    img.src = name;
-  }
-  load(names[0]);
+function renderDocs(docs) {
+  var html = '';
+  docs.forEach(function(doc) {
+    var fileUrl = DEAL_API + '/files/' + doc.name;
+    var isPdf = /\.pdf$/i.test(doc.name);
+    html += '<div style="background:var(--white);border:1px solid var(--border);border-radius:16px;padding:20px;overflow:hidden;">';
+    html += '<div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">' + doc.name + '</div>';
+    if (isPdf) {
+      html += '<iframe src="' + fileUrl + '#toolbar=1&navpanes=0" style="width:100%;height:600px;border:1px solid var(--border);border-radius:8px;" loading="lazy"></iframe>';
+    } else {
+      html += '<a href="' + fileUrl + '" download style="color:var(--orange);font-weight:600;text-decoration:none;">Download File</a>';
+    }
+    html += '</div>';
+  });
+  el('docsGrid').innerHTML = html;
+  el('docsSection').style.display = 'block';
 }
 
-function finish() {
+function finishPhotos() {
   if (!photos.length) { el('galleryEmpty').style.display = 'block'; return; }
   el('galleryLabel').style.display = 'block';
   el('galleryHero').style.display = 'block';
@@ -386,13 +384,17 @@ var observer = new IntersectionObserver(function(entries) {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
 
-// ─── boot ────────────────────────────────────────────────────────────────────
-fetch('./deal-doc.txt')
-  .then(function(r) { return r.json(); })
-  .then(function(d) { renderDeal(d); discoverPhotos(); })
-  .catch(function() {
-    el('heroTitle').textContent = 'deal-doc.txt not found';
+// ─── boot (load from Netlify Blobs) ─────────────────────────────────────────
+fetch(DEAL_API + '/data.json')
+  .then(function(r) {
+    if (!r.ok) throw new Error('Deal not found');
+    return r.json();
+  })
+  .then(function(d) { renderDeal(d); discoverPhotosAndDocs(); })
+  .catch(function(err) {
+    el('heroTitle').textContent = 'Deal data not found';
     el('galleryEmpty').style.display = 'block';
+    console.error('Boot error:', err);
   });
 </script>
 </body>

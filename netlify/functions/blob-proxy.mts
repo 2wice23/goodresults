@@ -1,10 +1,23 @@
 // V2 Netlify function — read/write to Netlify Blobs
+// Supports text, JSON, and binary (base64) storage
 // No PAT needed — Blobs are natively available in V2 functions
 
 import { getStore } from "@netlify/blobs";
 import type { Context, Config } from "@netlify/functions";
 
 export default async (req: Request, context: Context) => {
+  // Handle CORS preflight
+  if (req.method === 'OPTIONS') {
+    return new Response('', {
+      status: 204,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      }
+    });
+  }
+
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
   }
@@ -21,17 +34,33 @@ export default async (req: Request, context: Context) => {
     if (action === "set") {
       if (type === "json") {
         await store.setJSON(key, value);
+      } else if (type === "binary") {
+        // value is base64 string — decode to binary and store
+        const binaryStr = atob(value);
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) {
+          bytes[i] = binaryStr.charCodeAt(i);
+        }
+        await store.set(key, bytes);
       } else {
         await store.set(key, typeof value === "string" ? value : JSON.stringify(value));
       }
       return new Response(JSON.stringify({ ok: true, action: "set", store: storeName, key }));
 
     } else if (action === "get") {
-      const data = await store.get(key, { type: type || "text" });
-      if (data === null) {
-        return new Response(JSON.stringify({ error: "Not found", store: storeName, key }), { status: 404 });
+      if (type === "json") {
+        const data = await store.get(key, { type: "json" });
+        if (data === null) {
+          return new Response(JSON.stringify({ error: "Not found", store: storeName, key }), { status: 404 });
+        }
+        return new Response(JSON.stringify({ ok: true, data }));
+      } else {
+        const data = await store.get(key, { type: type || "text" });
+        if (data === null) {
+          return new Response(JSON.stringify({ error: "Not found", store: storeName, key }), { status: 404 });
+        }
+        return new Response(JSON.stringify({ ok: true, data }));
       }
-      return new Response(JSON.stringify({ ok: true, data }));
 
     } else if (action === "delete") {
       await store.delete(key);

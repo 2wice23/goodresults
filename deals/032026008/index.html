@@ -81,20 +81,6 @@ nav{background:var(--navy);padding:0 32px;display:flex;align-items:center;justif
 .spec-val,.term-val{font-size:14px;font-weight:700;color:var(--navy);}
 .term-val.hi{color:var(--orange);font-size:15px;}
 
-/* ── DOCUMENTS ── */
-.docs-section{max-width:1060px;margin:0 auto 48px;padding:0 32px;}
-.docs-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;}
-.doc-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:16px;transition:box-shadow 0.3s;}
-.doc-card:hover{box-shadow:0 4px 24px rgba(0,0,0,0.06);}
-.doc-card-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.doc-card-title::before{content:'📄';font-size:16px;}
-.doc-embed{width:100%;height:600px;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
-.doc-embed iframe{width:100%;height:100%;border:none;}
-.doc-embed-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;background:var(--cream);color:var(--text-muted);font-size:14px;gap:12px;}
-.doc-embed-fallback a{color:var(--orange);font-weight:600;text-decoration:none;padding:10px 24px;border:2px solid var(--orange);border-radius:24px;transition:all 0.2s;}
-.doc-embed-fallback a:hover{background:var(--orange);color:#fff;}
-@media(max-width:640px){.doc-embed{height:400px;}.docs-section{padding:0 16px;}}
-
 /* ── CTA ── */
 .cta-section{background:linear-gradient(135deg, #1A2744 0%, #0F1A2E 100%);padding:72px 32px;position:relative;overflow:hidden;}
 .cta-section::before{content:'';position:absolute;right:10%;top:50%;transform:translateY(-50%);width:300px;height:300px;background:radial-gradient(circle,rgba(232,104,10,0.12) 0%,transparent 65%);pointer-events:none;}
@@ -170,11 +156,9 @@ footer p{font-size:12px;color:rgba(255,255,255,.3);}
   <div class="gallery-grid" id="galleryGrid"></div>
 </div>
 
-<div class="docs-section reveal" id="docsSection" style="display:none;">
-  <div class="docs-inner">
-    <div class="docs-label">Documents</div>
-    <div id="docsList"></div>
-  </div>
+<div class="docs-section reveal" id="docsSection" style="display:none;max-width:1060px;margin:0 auto 48px;padding:0 32px;">
+  <div class="gallery-label">Documents</div>
+  <div id="docsGrid" style="display:grid;grid-template-columns:1fr;gap:16px;"></div>
 </div>
 
 <div class="cta-section">
@@ -205,16 +189,19 @@ footer p{font-size:12px;color:rgba(255,255,255,.3);}
 function fmt$(n){ return n != null ? '$' + Number(n).toLocaleString() : ''; }
 function el(id) { return document.getElementById(id); }
 
+// Get deal slug from URL path (e.g., /deals/3202-melbourne-st/ → 3202-melbourne-st)
+var DEAL_SLUG = window.location.pathname.replace(/^\/deals\//, '').replace(/\/.*$/, '');
+var DEAL_API = '/api/deals/' + DEAL_SLUG;
+
 // ─── render ───────────────────────────────────────────────────────────────────
 function renderDeal(d) {
-  const askPrice = d.wholesalePrice || d.askingPrice || null;
-  const repPerSf = d.repairsPerSqft || d.estRepairs || null;
-  const totalRepairs = (repPerSf && d.sqft) ? repPerSf * d.sqft : null;
-  const contractN = d.contractPrice ? Number(String(d.contractPrice).replace(/[^0-9.-]/g,'')) : null;
-  const askN = askPrice ? Number(String(askPrice).replace(/[^0-9.-]/g,'')) : null;
-  const buyerProfit = (d.arv && totalRepairs != null && askN) ? d.arv - totalRepairs - askN : null;
-  const fullAddr = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
-  const heroTitle = [
+  var askPrice = d.wholesalePrice || d.askingPrice || null;
+  var repPerSf = d.repairsPerSqft || d.estRepairs || null;
+  var totalRepairs = (repPerSf && d.sqft) ? repPerSf * d.sqft : null;
+  var askN = askPrice ? Number(String(askPrice).replace(/[^0-9.-]/g,'')) : null;
+  var buyerProfit = (d.arv && totalRepairs != null && askN) ? d.arv - totalRepairs - askN : null;
+  var fullAddr = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
+  var heroTitle = [
     d.zip  || '',
     (d.beds && d.baths) ? d.beds + 'bd / ' + d.baths + 'ba' : '',
     d.sqft ? Number(d.sqft).toLocaleString() + ' sf' : ''
@@ -285,105 +272,85 @@ function renderDeal(d) {
     notesHtml;
 }
 
-// ─── photo discovery (finds ALL images in this folder via GitHub API) ────────
+// ─── photo + doc discovery from Netlify Blobs ────────────────────────────────
 var photos = [];
 var lbIdx = 0;
 var IMG_RE = /\.(jpe?g|png|webp|gif|avif|heic|bmp|tiff?)$/i;
-var GITHUB_REPO = '2wice23/goodresults';
 
-// Natural sort: "2.jpg" before "10.jpg", "photo-a" before "photo-b"
-function naturalSort(a, b) {
-  return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
-}
-
-// Primary: check for manifest.json first, then fall back to GitHub API listing
-function discoverPhotos() {
-  var path = window.location.pathname.replace(/^\/|\/$/g, '');
-
-  // Try manifest first — it controls visibility and order
-  fetch('manifest.json')
+function discoverPhotosAndDocs() {
+  // Fetch manifest from Blobs API
+  fetch(DEAL_API + '/manifest.json')
     .then(function(r) {
       if (!r.ok) throw new Error('No manifest');
       return r.json();
     })
     .then(function(manifest) {
-      // Only show public photos, sorted by order
+      if (!Array.isArray(manifest)) { el('galleryEmpty').style.display = 'block'; return; }
+
+      // Public photos sorted by order
       var publicPhotos = manifest
         .filter(function(m) { return m.type === 'photo' && m.visibility === 'public'; })
         .sort(function(a, b) { return (a.order || 0) - (b.order || 0); })
-        .map(function(m) { return m.name; });
+        .map(function(m) { return DEAL_API + '/files/' + m.name; });
 
       if (publicPhotos.length) {
         photos = publicPhotos;
-        finish();
+        finishPhotos();
       } else {
         el('galleryEmpty').style.display = 'block';
       }
 
-      // Discover public documents
+      // Public documents
       var publicDocs = manifest
-        .filter(function(m) { return m.type !== 'photo' && m.visibility === 'public'; })
+        .filter(function(m) { return m.type === 'doc' && m.visibility === 'public'; })
         .sort(function(a, b) { return (a.order || 0) - (b.order || 0); });
-      if (publicDocs.length) renderDocs(publicDocs);
-    })
-    .catch(function() {
-      // No manifest — fall back to GitHub API (show all images)
-      discoverPhotosFromAPI(path);
-    });
-}
 
-function discoverPhotosFromAPI(path) {
-  var apiUrl = 'https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + path;
-
-  fetch(apiUrl)
-    .then(function(r) {
-      if (!r.ok) throw new Error('GitHub API ' + r.status);
-      return r.json();
-    })
-    .then(function(files) {
-      var imageFiles = files
-        .filter(function(f) { return f.type === 'file' && IMG_RE.test(f.name); })
-        .map(function(f) { return f.name; })
-        .sort(naturalSort);
-
-      if (imageFiles.length) {
-        photos = imageFiles;
-        finish();
-      } else {
-        el('galleryEmpty').style.display = 'block';
+      if (publicDocs.length) {
+        renderDocs(publicDocs);
       }
     })
     .catch(function() {
-      probeFallback();
+      // No manifest — try listing files from blob API
+      fetch(DEAL_API + '/list')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.files && data.files.length) {
+            var imageFiles = data.files.filter(function(f) { return IMG_RE.test(f); });
+            if (imageFiles.length) {
+              photos = imageFiles.map(function(f) { return DEAL_API + '/files/' + f; });
+              finishPhotos();
+            } else {
+              el('galleryEmpty').style.display = 'block';
+            }
+          } else {
+            el('galleryEmpty').style.display = 'block';
+          }
+        })
+        .catch(function() {
+          el('galleryEmpty').style.display = 'block';
+        });
     });
 }
 
-// Fallback: old-school numbered probe (01.jpg–99.jpg) for when API is unavailable
-var probeN = 1, probeFails = 0;
-var probeExts = ['jpg','jpeg','png','webp','gif'];
-function probeFallback() {
-  if (probeN > 99 || probeFails >= 3) { finish(); return; }
-  var padded = String(probeN).padStart(2,'0');
-  var plain  = String(probeN);
-  var names = [];
-  probeExts.forEach(function(ext) { names.push(padded + '.' + ext); });
-  probeExts.forEach(function(ext) { names.push(plain + '.' + ext); });
-  var tried = 0;
-  function tryNext(found, src) {
-    if (found) { probeFails = 0; photos.push(src); probeN++; probeFallback(); return; }
-    if (++tried < names.length) { load(names[tried]); }
-    else { probeFails++; probeN++; probeFallback(); }
-  }
-  function load(name) {
-    var img = new Image();
-    img.onload  = function() { tryNext(true, name); };
-    img.onerror = function() { tryNext(false, ''); };
-    img.src = name;
-  }
-  load(names[0]);
+function renderDocs(docs) {
+  var html = '';
+  docs.forEach(function(doc) {
+    var fileUrl = DEAL_API + '/files/' + doc.name;
+    var isPdf = /\.pdf$/i.test(doc.name);
+    html += '<div style="background:var(--white);border:1px solid var(--border);border-radius:16px;padding:20px;overflow:hidden;">';
+    html += '<div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">' + doc.name + '</div>';
+    if (isPdf) {
+      html += '<iframe src="' + fileUrl + '#toolbar=1&navpanes=0" style="width:100%;height:600px;border:1px solid var(--border);border-radius:8px;" loading="lazy"></iframe>';
+    } else {
+      html += '<a href="' + fileUrl + '" download style="color:var(--orange);font-weight:600;text-decoration:none;">Download File</a>';
+    }
+    html += '</div>';
+  });
+  el('docsGrid').innerHTML = html;
+  el('docsSection').style.display = 'block';
 }
 
-function finish() {
+function finishPhotos() {
   if (!photos.length) { el('galleryEmpty').style.display = 'block'; return; }
   el('galleryLabel').style.display = 'block';
   el('galleryHero').style.display = 'block';
@@ -417,39 +384,17 @@ var observer = new IntersectionObserver(function(entries) {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
 
-// ─── render documents ──────────────────────────────────────────────────────
-function renderDocs(docs) {
-  var container = el('docsList');
-  var html = '';
-  docs.forEach(function(doc) {
-    var isPdf = /\.pdf$/i.test(doc.name);
-    var displayName = doc.name.replace(/[-_]/g, ' ').replace(/\.\w+$/, '');
-    displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1);
-
-    html += '<div class="doc-card">';
-    html += '<div class="doc-card-title">' + displayName + '</div>';
-    html += '<div class="doc-embed">';
-    if (isPdf) {
-      html += '<iframe src="' + doc.name + '#toolbar=1&navpanes=0" title="' + displayName + '"></iframe>';
-    } else {
-      html += '<div class="doc-embed-fallback">';
-      html += '<span>' + doc.name + '</span>';
-      html += '<a href="' + doc.name + '" target="_blank" download>Download File</a>';
-      html += '</div>';
-    }
-    html += '</div></div>';
-  });
-  container.innerHTML = html;
-  el('docsSection').style.display = 'block';
-}
-
-// ─── boot ────────────────────────────────────────────────────────────────────
-fetch('./deal-doc.txt')
-  .then(function(r) { return r.json(); })
-  .then(function(d) { renderDeal(d); discoverPhotos(); })
-  .catch(function() {
-    el('heroTitle').textContent = 'deal-doc.txt not found';
+// ─── boot (load from Netlify Blobs) ─────────────────────────────────────────
+fetch(DEAL_API + '/data.json')
+  .then(function(r) {
+    if (!r.ok) throw new Error('Deal not found');
+    return r.json();
+  })
+  .then(function(d) { renderDeal(d); discoverPhotosAndDocs(); })
+  .catch(function(err) {
+    el('heroTitle').textContent = 'Deal data not found';
     el('galleryEmpty').style.display = 'block';
+    console.error('Boot error:', err);
   });
 </script>
 </body>
