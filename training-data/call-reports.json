@@ -918,5 +918,25 @@
     "resistance_moments": "",
     "script_moment": "When Alexandria offered the property, Franklin could have said: 'This sounds promising - do you typically handle probate sales, or is this more of a one-off situation?' to understand their pipeline better.",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774980694138",
+    "timestamp": "2026-03-31T18:11:34.138Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Holly O'Driscoll",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "10m 14s",
+    "call_date": "03/31/2026",
+    "score": 88,
+    "realtor_engagement": 92,
+    "summary": "Franklin re-engaged Holly after 6 months, referencing their prior text exchange. Holly immediately offered a potential Carson City property (1984, manufactured on foundation) for a cancer patient client in distressed situation. Strong business model discussion and commission structure clarification.",
+    "what_worked": "Strong re-engagement opener with specific timeframe reference | Complete buy box delivery that resonated immediately | Excellent positioning against 'TV guy' stereotype | Outstanding listening skills and conversation flow | Professional handling of representation discussion | Clear next step with specific timeline",
+    "what_to_tighten": "Could have probed more about her typical market to understand future opportunities",
+    "language_flags": "",
+    "missed_opportunities": "",
+    "positive_moments": "Asked 'What are you looking for specifically?' showing immediate interest | Volunteered Carson City property details unprompted | Shared extensive client situation and property condition details | Asked about manufactured homes showing she was thinking of inventory | Engaged in detailed discussion about business ethics and representation | Asked 'How far below market do you come in?' showing genuine interest in working together | Said 'she did ask if I knew anybody' indicating client need | Agreed to follow-up timeline and said she'd know more next week",
+    "resistance_moments": "Initial confusion about who Franklin was | Firm stance against dual representation | Hesitation about giving property address at this early stage | Clarified this is not her typical market demographic",
+    "script_moment": "When Holly said 'generally speaking, I don't do it' Franklin could have asked 'What type of properties do you typically work with?' to understand her primary market and identify future opportunities outside this special case.",
+    "on_leaderboard": "yes"
   }
 ]
