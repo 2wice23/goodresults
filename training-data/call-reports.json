@@ -1018,5 +1018,25 @@
     "resistance_moments": "Initial uncertainty about when/how they had connected before | Explained she's 'given up' on finding lower-end distressed properties | Acknowledged his smaller square footage requirements aren't her usual focus | Realistic about limited expectations for finding inventory in his range",
     "script_moment": "When she mentioned having 'a couple of sources that give me off market', Anthony should have asked: 'That sounds promising - what kind of properties do those sources typically have? Are they other agents, or direct seller relationships?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774985059870",
+    "timestamp": "2026-03-31T19:24:19.870Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Alma Chilson",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "1m 37s",
+    "call_date": "03/31/2026",
+    "score": 54,
+    "realtor_engagement": 35,
+    "summary": "Franklin re-engaged with Alma after six months, referencing prior texts. She confirmed seeing investment properties on MLS needing work but had to end the call due to being on another call when he reached her.",
+    "what_worked": "Strong re-engagement opener with specific timeframe reference | Complete buy box delivery despite short window | Professional positioning as cash investors | Good clarifying question about frequency of deals",
+    "what_to_tighten": "No fault of Franklin's - timing was poor as she was on another call | No next step established due to call interruption",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked for better time to call back before she ended the call",
+    "positive_moments": "Said 'all the time we see' investment properties when asked about frequency | Confirmed they see properties on MLS that need extra work",
+    "resistance_moments": "Had to end call immediately due to being on another phone call | Very brief responses due to being distracted by other call",
+    "script_moment": "When she said 'I'm in the middle of another phone call,' Franklin should have immediately said: 'Of course! Would tomorrow morning or afternoon work better for a quick 3-minute conversation?'",
+    "on_leaderboard": "yes"
   }
 ]
