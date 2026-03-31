@@ -998,5 +998,25 @@
     "resistance_moments": "Initial confusion about who was texting her created some friction at the start",
     "script_moment": "When she mentioned the $90k deal closing tomorrow, Anthony should have asked: 'That sounds like exactly what I'm looking for - how often do you typically come across deals like that one?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774984507150",
+    "timestamp": "2026-03-31T19:15:07.150Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Rezvan Seied Azimi",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "7m 7s",
+    "call_date": "03/31/2026",
+    "score": 76,
+    "realtor_engagement": 72,
+    "summary": "Anthony followed up on a text exchange where Rezvan asked about his price point. Rezvan explained the distressed property market has dried up as cash buyers approach sellers directly before properties reach agents. She offered high-end properties ($1.6M range) but Anthony clarified his buy box for smaller renovation projects.",
+    "what_worked": "Complete buy box delivery with all key criteria | Let Rezvan share extensive market knowledge naturally | Offered multiple commission arrangements to add value | Set specific one-month follow-up timeline | Acknowledged her expertise while staying focused on his needs",
+    "what_to_tighten": "Opener could have been clearer about the purpose of the call initially | Could have asked more specific questions about her off-market sources",
+    "language_flags": "",
+    "missed_opportunities": "Could have probed deeper into her off-market network and specific sources she mentioned",
+    "positive_moments": "Shared detailed market insight about why distressed properties aren't reaching agents anymore | Volunteered information about her construction engineering background and investment experience | Mentioned specific zip codes she knows well (77021, 77004) | Agreed to search her off-market sources specifically for his criteria | Asked for specific area preferences to help target her search",
+    "resistance_moments": "Initial uncertainty about when/how they had connected before | Explained she's 'given up' on finding lower-end distressed properties | Acknowledged his smaller square footage requirements aren't her usual focus | Realistic about limited expectations for finding inventory in his range",
+    "script_moment": "When she mentioned having 'a couple of sources that give me off market', Anthony should have asked: 'That sounds promising - what kind of properties do those sources typically have? Are they other agents, or direct seller relationships?'",
+    "on_leaderboard": "yes"
   }
 ]
