@@ -444,133 +444,125 @@ pdfInput.addEventListener('change', e => {
 });
 
 // ============================================================
-// PDF TEXT EXTRACTION — finds and isolates the RPA/ROA/TREC
+// PDF PAGE RENDERING — renders pages as images for Claude vision
 // ============================================================
+async function renderPDFPages(file) {
+  const ab = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: ab }).promise;
+  const pageImages = [];
+  const MAX_PAGES = 15; // Safety cap — purchase agreement + signatures
+  const pagesToRender = Math.min(pdf.numPages, MAX_PAGES);
+
+  // Start at scale 1.2 / quality 0.72 — keeps payload under Netlify limits
+  // while still perfectly readable for Claude vision
+  let scale = 1.2;
+  let quality = 0.72;
+
+  for (let i = 1; i <= pagesToRender; i++) {
+    const page = await pdf.getPage(i);
+    const viewport = page.getViewport({ scale });
+    const canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const ctx = canvas.getContext('2d');
+    await page.render({ canvasContext: ctx, viewport }).promise;
+    const dataUrl = canvas.toDataURL('image/jpeg', quality);
+    const base64 = dataUrl.split(',')[1];
+    pageImages.push({ pageNum: i, base64, mediaType: 'image/jpeg' });
+  }
+
+  // Check total payload size — if over 4MB, re-render at lower quality
+  const totalBytes = pageImages.reduce((sum, p) => sum + p.base64.length * 0.75, 0);
+  if (totalBytes > 4 * 1024 * 1024) {
+    console.log('Payload too large (' + (totalBytes / 1024 / 1024).toFixed(1) + 'MB), re-rendering at lower quality...');
+    pageImages.length = 0;
+    scale = 1.0;
+    quality = 0.6;
+    for (let i = 1; i <= pagesToRender; i++) {
+      const page = await pdf.getPage(i);
+      const viewport = page.getViewport({ scale });
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      const ctx = canvas.getContext('2d');
+      await page.render({ canvasContext: ctx, viewport }).promise;
+      const dataUrl = canvas.toDataURL('image/jpeg', quality);
+      const base64 = dataUrl.split(',')[1];
+      pageImages.push({ pageNum: i, base64, mediaType: 'image/jpeg' });
+    }
+  }
+
+  if (pdf.numPages > MAX_PAGES) {
+    console.log('PDF has ' + pdf.numPages + ' pages — rendered first ' + MAX_PAGES + ' only');
+  }
+  return pageImages;
+}
+
+// Also extract text as fallback (for PDFs where text IS available)
 async function extractPDFText(file) {
   const ab = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: ab }).promise;
-
-  // Extract each page separately so we can identify the contract
   const pages = [];
   for (let i = 1; i <= pdf.numPages; i++) {
     const page = await pdf.getPage(i);
     const content = await page.getTextContent();
     pages.push(content.items.map(item => item.str).join(' '));
   }
-
-  // Identify which pages are the actual purchase agreement
-  const CONTRACT_MARKERS = [
-    /RESIDENTIAL OFFER AND ACCEPTANCE/i,
-    /RESIDENTIAL PURCHASE AGREEMENT/i,
-    /ONE TO FOUR FAMILY RESIDENTIAL CONTRACT/i,
-    /PROMULGATED BY THE TEXAS REAL ESTATE COMMISSION/i,
-    /ROA\s+\d+\s*(?:of|\/)\s*\d+/i,    // "ROA 1 of 12" or "ROA 1/12"
-    /RPA\s+\d+\s*(?:of|\/)\s*\d+/i,    // "RPA 1 of 12" or "RPA 1/12"
-    /PURCHASE PRICE.*EARNEST MONEY/is,   // Generic contract pattern
-    /BUYER.*SELLER.*PROPERTY/is          // Generic contract pattern
-  ];
-
-  // Non-contract pages to skip
-  const SKIP_MARKERS = [
-    /DUTIES OWED BY A NEVADA REAL ESTATE LICENSEE/i,
-    /UNREPRESENTED PARTY ACKNOWLEDGEMENT/i,
-    /LEAD.BASED PAINT/i,
-    /SELLER.S REAL PROPERTY DISCLOSURE/i,
-    /WIRE FRAUD ADVISORY/i,
-    /CONSENT TO ACT/i,
-    /COMMON.INTEREST COMMUNITY DISCLOSURE FORM/i,
-    /SOLAR POWER SYSTEM DISCLOSURE/i,
-    /BUYER.?BROKER.*AGREEMENT/i,
-    /AGENCY DISCLOSURE/i,
-    /CONFIRMATION OF REPRESENTATION/i
-  ];
-
-  let contractPages = [];
-
-  // First pass: find pages that ARE the contract
-  let inContract = false;
-  for (let i = 0; i < pages.length; i++) {
-    const txt = pages[i];
-    const isContractPage = CONTRACT_MARKERS.some(rx => rx.test(txt));
-    const isSkipPage = SKIP_MARKERS.some(rx => rx.test(txt));
-
-    if (isContractPage && !isSkipPage) {
-      inContract = true;
-      contractPages.push(txt);
-    } else if (inContract && !isSkipPage) {
-      // Keep going as long as we don't hit a skip marker.
-      // Contract pages often don't repeat the title — check for footers OR
-      // just keep including pages until we hit a known non-contract section.
-      const footerMatch = txt.match(/(?:ROA|RPA|Page)\s+\d+\s*(?:of|\/)\s*\d+/i);
-      const hasSignature = /(?:SELLER|BUYER|ACCEPTANCE|SIGNATURE|DATE|DocuSign)/i.test(txt);
-      const hasContractContent = /(?:EARNEST|ESCROW|CLOSING|INSPECTION|CONTINGENC|PURCHASE PRICE|ADDITIONAL TERMS|DEFAULT|MEDIATION)/i.test(txt);
-      if (footerMatch || hasSignature || hasContractContent) {
-        contractPages.push(txt);
-      } else {
-        // Left the contract section
-        inContract = false;
-      }
-    }
-  }
-
-  // If we found contract pages, use only those. Otherwise fall back to full PDF.
-  if (contractPages.length >= 2) {
-    return contractPages.join('\n--- PAGE BREAK ---\n');
-  }
   return pages.join('\n');
 }
 
 // ============================================================
-// EXTRACT HANDLER
+// EXTRACT HANDLER — uses vision (page images) for extraction
 // ============================================================
 document.getElementById('extractBtn').addEventListener('click', async () => {
   if (!currentPDF) return;
-  setStatus('Reading PDF...', 'active');
+  setStatus('Rendering PDF pages...', 'active');
   document.getElementById('extractBtn').disabled = true;
   try {
-    const text = await extractPDFText(currentPDF);
-    if (text.trim().length < 100) {
-      setStatus('PDF appears to be a scanned image — fill fields manually', 'error');
+    // Render all pages as images
+    const pageImages = await renderPDFPages(currentPDF);
+    if (!pageImages.length) {
+      setStatus('Could not render PDF — fill fields manually', 'error');
       document.getElementById('extractBtn').disabled = false;
       enableActionButtons();
       return;
     }
-    setStatus('Sending to Claude...', 'active');
-    const prompt = `You are a real estate contract analyst. Extract deal information and return a single valid JSON object. Use null for any field you cannot find. Return ONLY the JSON — no explanation, no markdown.
+
+    setStatus('Sending ' + pageImages.length + ' pages to Claude (vision)...', 'active');
+
+    // Build message content: text prompt + all page images
+    const content = [];
+
+    // Add the prompt as text
+    content.push({ type: 'text', text: `You are a real estate contract analyst. You are looking at images of a real estate contract PDF. Extract deal information and return a single valid JSON object. Use null for any field you cannot find. Return ONLY the JSON — no explanation, no markdown.
 
 CRITICAL — IDENTIFYING THE PURCHASE AGREEMENT:
-This text may contain the purchase agreement PLUS other documents (disclosures, addenda, lead paint forms, broker agreements, wire fraud advisories, SRPD, etc.). You MUST find the actual purchase agreement first and extract ONLY from it. Look for:
-- Nevada ROA: "RESIDENTIAL OFFER AND ACCEPTANCE AGREEMENT" — created by SNR (Sierra Nevada Realtors), references NRS, numbered lines, BUYER/SELLER sections
-- Nevada RPA: "RESIDENTIAL PURCHASE AGREEMENT" — GLVAR form, similar structure, references NRS
-- Texas TREC: "ONE TO FOUR FAMILY RESIDENTIAL CONTRACT (RESALE)" or TREC form number, numbered paragraphs
-- Any other state purchase agreement: Look for the main document with purchase price, EMD, closing date, and signature blocks
-IGNORE anything labeled DISCLOSURE, ADVISORY, LEAD PAINT, BUYER BROKER, or WIRE FRAUD.
+These pages may include the purchase agreement PLUS disclosures, addenda, lead paint forms, broker agreements, wire fraud advisories, SRPD, etc. Find the actual purchase agreement and extract ONLY from it. Look for:
+- Nevada ROA: "RESIDENTIAL OFFER AND ACCEPTANCE AGREEMENT" — SNR (Sierra Nevada Realtors) form
+- Nevada RPA: "RESIDENTIAL PURCHASE AGREEMENT" — GLVAR form
+- Texas TREC: "ONE TO FOUR FAMILY RESIDENTIAL CONTRACT (RESALE)"
+- Any other state purchase agreement with purchase price, EMD, closing date, signature blocks
+IGNORE pages labeled DISCLOSURE, ADVISORY, LEAD PAINT, BUYER BROKER, or WIRE FRAUD.
 
 FIELD EXTRACTION RULES:
 
 FOR NEVADA ROA (SNR — Reno/Carson City/Northern NV):
-- address/city/state/zip: Near top of first page, after buyer name. Look for street address, city, state, zip on consecutive lines.
-- contractPrice: Look for "TOTAL PURCHASE PRICE" or "PURCHASE PRICE" — the final dollar amount.
-- executedDate: The date the LAST person physically signed. Go to the SELLER'S ACCEPTANCE section at the very end of the ROA. Find ALL signature dates (buyer AND seller) and return the LATEST one. For DocuSign: dates appear as "MM/DD/YYYY | HH:MM AM/PM" next to signatures. Return as MM/DD/YYYY.
-- coeDate: Look for "Close of Escrow (COE)" or "CLOSING" section — a specific calendar date. Return as MM/DD/YYYY.
-- ddDays: Look for "Investigation Period" or "Inspection" section — "within ___ days from Acceptance." Return integer only. If it says "once access is provided" with no number, return null.
-- emdDays: Look for earnest money timing — "within ___ days" or "upon acceptance" (= 0). If EMD is due "at end of due diligence period," use the same number as ddDays.
-- emdAmount: Look for "EARNEST MONEY DEPOSIT" or "EMD" with a dollar amount.
+- address/city/state/zip: Page 1, after buyer name. The filled-in address, city, state, zip.
+- contractPrice: "TOTAL PURCHASE PRICE" or "PURCHASE PRICE" — the final dollar amount filled in.
+- executedDate: The SELLER'S ACCEPTANCE section (last pages). Find the LATEST signature date among ALL signers. For DocuSign: dates appear as "MM/DD/YYYY | HH:MM AM/PM PDT". Return as MM/DD/YYYY.
+- coeDate: "Close of Escrow (COE)" or "CLOSING" section — a specific calendar date filled in. Return as MM/DD/YYYY.
+- ddDays: "Investigation Period" or "Inspection" — "within ___ days from Acceptance." Return integer only. If "once access is provided" with no number, return null.
+- emdDays: Earnest money timing — "within ___ days" or "upon acceptance" (= 0). If tied to DD period, use same as ddDays.
+- emdAmount: "EARNEST MONEY DEPOSIT" or "EMD" dollar amount filled in.
 - seller: Full name(s) from signature block. Include "Trustee" or "Executor" if applicable.
-- buyer: Entity name from buyer section (usually "Good Results LLC").
-- agent: Look for SELLER'S/LISTING agent info. "Licensee" or "Broker" acting for Seller/Landlord. Good Results is always the buyer — we want the OTHER side's agent.
+- buyer: Entity name (usually "Good Results LLC").
+- agent: SELLER'S/LISTING agent. "Licensee" or "Broker" for Seller/Landlord side. Good Results is always the buyer — extract the OTHER side's agent.
 
 FOR NEVADA RPA (GLVAR — Las Vegas/Henderson/Southern NV):
-- Same field locations as ROA but may use different section numbering.
+- Same fields, may use different section numbering.
 
 FOR TEXAS TREC:
-- address: Paragraph 2 — property address
-- contractPrice: Paragraph 3 — "Sales Price"
-- executedDate: Final page — latest signature date among all parties
-- coeDate: Paragraph 9 — "Closing Date"
-- ddDays: Paragraph 23 — "Option Period" days
-- emdDays: Paragraph 5 — "within ___ days" for earnest money
-- emdAmount: Paragraph 5 — earnest money dollar amount
+- address: Paragraph 2. contractPrice: Paragraph 3 "Sales Price". executedDate: Final page latest signature date. coeDate: Paragraph 9 "Closing Date". ddDays: Paragraph 23 "Option Period". emdDays: Paragraph 5 "within ___ days". emdAmount: Paragraph 5 dollar amount.
 
 FOR ALL FORMS:
 - market: Las Vegas/North Las Vegas/Henderson/Boulder City = "Las Vegas". Reno/Sparks/Carson City = "Reno". Texas cities = "Houston".
@@ -596,25 +588,37 @@ Return this exact JSON structure:
   "agentPhone": "phone or null",
   "agentEmail": "email or null",
   "agentBrokerage": "brokerage name or null"
-}
+}` });
 
-CONTRACT TEXT:
-${text.slice(0, 120000)}`;
+    // Add each page as an image
+    for (const pg of pageImages) {
+      content.push({
+        type: 'image',
+        source: { type: 'base64', media_type: pg.mediaType, data: pg.base64 }
+      });
+    }
+
+    const payload = JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 4000,
+      messages: [{ role: 'user', content }]
+    });
+    console.log('Vision payload size: ' + (payload.length / 1024 / 1024).toFixed(2) + ' MB (' + pageImages.length + ' pages)');
 
     const resp = await fetch(ANTHROPIC_PROXY, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 4000, messages: [{ role: 'user', content: prompt }] })
+      body: payload
     });
+
+    if (resp.status === 413) throw new Error('Payload too large — PDF has too many pages. Try a shorter contract.');
     const result = await resp.json();
     if (result.error) throw new Error('API error: ' + (result.error.message || result.error));
     if (!result.content || !result.content[0]) throw new Error('Empty response from Claude');
     const raw = result.content[0].text;
-    // raw response logged only in dev
     const jsonStr = raw.match(/\{[\s\S]*\}/)?.[0];
     if (!jsonStr) throw new Error('No JSON in response');
     extractedDeal = JSON.parse(jsonStr);
-    // extracted deal logged only in dev
     renderExtracted(extractedDeal);
     updateRepairsTotal();
     setStatus('Contract extracted ✓ — looking up property specs...', 'active');
