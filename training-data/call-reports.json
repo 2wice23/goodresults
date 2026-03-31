@@ -858,5 +858,25 @@
     "resistance_moments": "Had to clarify family health issues are consuming considerable time | Mentioned wife's current illness limiting availability",
     "script_moment": "When discussing the deal timeline, Joe could have said: 'How quickly do you think you'll hear back from your buyers? Should I expect feedback by end of week or do you need more time given the family situation?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774975709833",
+    "timestamp": "2026-03-31T16:48:29.833Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Sonia Johnson",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "1m 50s",
+    "call_date": "03/31/2026",
+    "score": 11,
+    "realtor_engagement": 5,
+    "summary": "Franklin attempted to re-engage with a realtor he'd texted 6 months prior. The realtor was extremely suspicious, thought he was AI, questioned his whispering, and became defensive when he asked about her listings, ultimately treating him as a potential security threat.",
+    "what_worked": "Acknowledged they hadn't spoken before but had texted | Referenced the 6-month timeframe from prior contact",
+    "what_to_tighten": "Pronounce your own name correctly - said 'Ladalga' then 'Ladoga' | Deliver a complete buy box instead of vague 'investment type deals' | Establish credibility early to overcome AI suspicion | Address audio quality issues that made her think he was AI | Have a recovery strategy when realtor becomes suspicious | Don't ask about her business without first establishing who you are and why",
+    "language_flags": "",
+    "missed_opportunities": "When she asked if he was AI, perfect opportunity to give full name, company name, and establish credibility | When she questioned his legitimacy, could have referenced specific prior text conversation details | Never delivered buy box to show he's a legitimate cash buyer with specific criteria | When she said everything is listed, could have positioned himself for future off-market opportunities",
+    "positive_moments": "",
+    "resistance_moments": "Asked if he was human or AI due to suspicious call quality | Questioned why he was whispering | Said she doesn't give out information to people she doesn't know | Became defensive when he asked about her listings | Treated him as a potential security threat rather than business contact",
+    "script_moment": "When she asked 'Is this a human or this AI?' - 'Yes ma'am, this is Franklin Ladaga with Good Results Home Buyers. We're a cash home buying company here in Nevada. I believe we texted about 6 months ago and you mentioned I should check back. I specialize in homes from the 1960s to early 2000s, around 2,000 square feet in subdivision neighborhoods that need some work.'",
+    "on_leaderboard": "no"
   }
 ]
