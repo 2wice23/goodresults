@@ -1,6 +1,6 @@
-GR CALL ANALYZER Ã¢ÂÂ KNOWLEDGE BASE Good Results Home Buyers Last Updated: March 29, 2026
+GR CALL ANALYZER Ã¢ÂÂ KNOWLEDGE BASE Good Results Home Buyers Last Updated: March 31, 2026
 
-WHAT CHANGED THIS CYCLE (2026-03-27 â Cycle 2): â¢ Added weekly performance data from Google Sheet (14 calls analyzed) â¢ Updated agent coaching flags with real call data for Frank Ladaga, Anthony Cruz, and Kayden Rogers â¢ Added coaching insights from 120 KB patterns (60 positive, 60 negative) â¢ Scoring scale confirmed as 0-100 integer system (not 1-10)
+WHAT CHANGED THIS CYCLE (2026-03-31 — Cycle 3): • Updated performance snapshot: Gayden 10 calls/71.2 avg (up from 6/69.2), Anthony 4 calls/18.9 avg (down from 2/30.6) • Added title insurance vs closing costs coaching note from Slack Q&A • Updated Anthony Cruz agent-specific insights to reflect downward trend and urgency
 
 # **\==================================== SECTION 1: COMPANY CONTEXT**
 
@@ -203,13 +203,13 @@ The analyzer must return ONLY valid JSON in this exact structure. No markdown, n
 
 # **==================================== SECTION 11: WEEKLY LEARNINGS FROM CALL DATA**
 
-Last updated: 2026-03-27 (Saturday KB Learn Phase — Cycle 2)
+Last updated: 2026-03-31 (Daily KB Learn Phase — Cycle 2)
 
-## PERFORMANCE SNAPSHOT (as of 2026-03-27)
+## PERFORMANCE SNAPSHOT (as of 2026-03-31)
 * Dan VanMatre: 1 call, avg 89.0/100 — Top performer. Strong buy box delivery, excellent conversation flow, positions well as low-maintenance partner.
-* Gayden Rosales: 6 calls, avg 69.2/100 — Solid but flagged for tone issues in non-realtor calls.
+* Gayden Rosales: 10 calls, avg 71.2/100 — Trending upward. Solid but flagged for tone issues in non-realtor calls.
 * Franklin Ladaga: 5 calls, avg 31.4/100 — In early training, struggling with fundamentals.
-* Anthony Cruz: 2 calls, avg 30.6/100 — Mixed results. 30 positive and 19 negative KB patterns.
+* Anthony Cruz: 4 calls, avg 18.9/100 — Significant downward trend. Avg dropped from 30.6 to 18.9 with 2 new scored calls. Needs urgent 1-on-1 coaching focus on fundamentals.
 
 ## TOP POSITIVE PATTERNS ACROSS ALL AGENTS
 1. Strong buy box delivery with specific criteria (year range, sq ft, subdivision style)
@@ -230,7 +230,7 @@ Last updated: 2026-03-27 (Saturday KB Learn Phase — Cycle 2)
 
 ## AGENT-SPECIFIC INSIGHTS FROM CALL DATA
 * **Dan VanMatre**: 1 call scored 89. Lets realtors talk, delivers buy box with specifics, discusses commission naturally. Low negative count (2).
-* **Anthony Cruz**: 30 positive but 19 negative patterns. Initial confusion on calls. Needs tighter call structure. Strengths: builds good rapport once past the opener.
+* **Anthony Cruz**: 4 calls, avg 18.9 — significant downward trend from 30.6. Initial confusion on calls persists. Needs tighter call structure and urgent fundamentals coaching. Also confused title insurance costs with total closing costs (March 25 Slack Q&A) — knowledge gap to address. Strengths: builds good rapport once past the opener.
 * **Kayden Rogers**: 18 positive, 33 negative — highest ratio of negatives. May need 1-on-1 coaching focus.
 * **Gayden Rosales**: 6 calls, all negative KB entries relate to a single title officer incident. In realtor calls, performs well. Flag: tone management.
 * **Franklin Ladaga**: 5 calls, 31.4 avg, no KB pattern entries yet. Focus: stating name, delivering buy box, setting next steps.
@@ -254,3 +254,5 @@ Last updated: 2026-03-27 (Saturday KB Learn Phase — Cycle 2)
 \*\*Investor-Realtor Identification:\*\* When realtor identifies as primarily an investor, agent should route to Gayden. Score positively if routed. Score negatively if agent tries to manage solo.
 
 \*\*Direct-to-Seller Calls:\*\* New agents should collaborate with Joe on D2S leads. If a new agent handles D2S solo, flag for coaching.
+
+\*\*Title Insurance vs Closing Costs (added 2026-03-31):\*\* Agents must understand the difference. Title insurance costs are only one component of total closing costs. If an agent offers to have sellers "cover all closing costs" when they mean title insurance, this creates misaligned expectations and potential deal issues. Flag if an agent conflates these on a call or in deal terms.
