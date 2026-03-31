@@ -1,8 +1,9 @@
 {
-  "updated": "2026-03-31T19:50:46.017Z",
+  "updated": "2026-03-31T19:53:27.785Z",
   "deals": [
     {
       "slug": "032026001",
+      "docSha": "cce0cf363697e68dafb79c67949c48edb5864053",
       "data": {
         "dealId": "032026001",
         "market": "off",
@@ -15,9 +16,30 @@
         "sqft": 3867,
         "lotSize": "10,454 sqft",
         "yearBuilt": 1953,
-        "garage": null,
-        "coeDate": "March 31, 2026",
-        "arv": null
+        "garage": "",
+        "coeDate": "",
+        "arv": 850000,
+        "realtorName": "",
+        "realtorPhone": "",
+        "ddEndDate": "",
+        "emdDueDate": "",
+        "acceptedDate": "",
+        "wholesalePrice": 515000,
+        "repairsPerSqft": 65,
+        "basementSqft": "",
+        "seller": "",
+        "buyer": "",
+        "contractPrice": "480000",
+        "emdAmount": "",
+        "ddDays": "",
+        "emdDays": "",
+        "executedDate": "",
+        "agentName": "",
+        "agentPhone": "",
+        "agentEmail": "",
+        "agentBrokerage": "",
+        "publicNotes": "",
+        "privateNotes": ""
       },
       "manifest": [
         {
