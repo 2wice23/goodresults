@@ -36,6 +36,6 @@
   "realtorPhone": "",
   "ddEndDate": "",
   "acceptedDate": "",
-  "publicNotes": "",
+  "publicNotes": "Roof, furnace, tankless water heater, sewer line from house to street has all been been replaced.",
   "privateNotes": ""
 }
