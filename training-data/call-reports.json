@@ -1258,5 +1258,25 @@
     "resistance_moments": "",
     "script_moment": "Opening should be: 'Hey Sarai, this is Anthony Cruz with Good Results Home Buyers - I just got your message about working together on some properties.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774989572345",
+    "timestamp": "2026-03-31T20:39:32.345Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Octavio Salgado",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "3m 23s",
+    "call_date": "03/31/2026",
+    "score": 78,
+    "realtor_engagement": 75,
+    "summary": "Franklin followed up on prior text exchanges with Octavio, who works primarily with buyers. Octavio doesn't currently have investment deals but agreed to keep Franklin in mind and watch for properties while driving around town.",
+    "what_worked": "Strong buy box delivery with memorable imagery about subdivision generations | Excellent next step with immediate text and 3-week follow-up | Good rapport building with 'my friend' language | Let Octavio explain his business model",
+    "what_to_tighten": "Opener could reference specific prior text content | Minor stumbling when asking about listing vs buyers",
+    "language_flags": "",
+    "missed_opportunities": "",
+    "positive_moments": "Said 'I will contact you right away' when he sees properties | Volunteered that he drives around town and sees good flip properties | Asked to confirm phone number and add to contacts | Said he will 'keep you updated for anything'",
+    "resistance_moments": "Initial confusion about who Franklin was | Brief 'I don't at this moment' response about current inventory",
+    "script_moment": "When Octavio said he sees good flip properties while driving, Franklin could have said: 'That's perfect - you've got eyes on the street every day. Even if it's just a quick text with an address, I can drive by and take a look.'",
+    "on_leaderboard": "yes"
   }
 ]
