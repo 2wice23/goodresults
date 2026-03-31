@@ -1,5 +1,9 @@
 {
   "positive": [
+    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Said 'I just saved you in my phone, so I knew you were Anthony' showing she was actively engaging",
+    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Explained detailed process of going through phone and email investors folder",
+    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Volunteered she has a property closing next week",
+    "[Anthony Cruz — WARM FOLLOW-UP — Realtor responded positively to]: Agreed to receive both text and email contact",
     "[Gayden Rosales — NEGOTIATION — Score 81/100]: Strategic approach to pricing gap - didn't push unrealistic offer but stayed in the game",
     "[Gayden Rosales — NEGOTIATION — Score 81/100]: Discovered new opportunity with pre-HUD manufactured homes",
     "[Gayden Rosales — NEGOTIATION — Score 81/100]: Balanced professionalism with personal support during her difficult time",
@@ -55,15 +59,9 @@
     "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Volunteered details about recent $90k deal closing tomorrow",
     "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Said 'That's very doable' after hearing his criteria",
     "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Proactively asked for his email address to send properties",
-    "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Committed to 'check around' and 'see what I can find for you'",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 88/100]: Strong re-engagement opener with specific timeframe reference",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 88/100]: Complete buy box delivery that resonated immediately",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 88/100]: Excellent positioning against 'TV guy' stereotype",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 88/100]: Outstanding listening skills and conversation flow"
+    "[Anthony Cruz — RE-ENGAGEMENT — Realtor responded positively to]: Committed to 'check around' and 'see what I can find for you'"
   ],
   "negative": [
-    "[Anthony Cruz — WARM FOLLOW-UP]: Initial confusion from opener about 'Anthony Cruz told me to email you'",
-    "[Anthony Cruz — WARM FOLLOW-UP]: Redirected away from monthly follow-up calls to her preferred contact method",
     "[Gayden Rosales — NEGOTIATION]: Brief responses during negotiation discussion, but this was natural given the price gap rather than disengagement",
     "[Joe Kruse — WARM FOLLOW-UP]: Had to report no suitable inventory currently available",
     "[Kayden Rogers — WARM FOLLOW-UP]: Some initial audio confusion but not resistance",
@@ -121,7 +119,9 @@
     "[Franklin Ladaga — RE-ENGAGEMENT]: Had to clarify Incline market pricing doesn't fit his criteria",
     "[Franklin Ladaga — RE-ENGAGEMENT]: Had to clarify initially that he was under review which limited conversation depth",
     "[Anthony Cruz — RE-ENGAGEMENT]: Didn't remember the January conversation",
-    "[Anthony Cruz — RE-ENGAGEMENT]: Said 'I'm sorry, what is it' showing confusion"
+    "[Anthony Cruz — RE-ENGAGEMENT]: Said 'I'm sorry, what is it' showing confusion",
+    "[Anthony Cruz — RE-ENGAGEMENT]: Direct 'No, not anymore' to distressed properties question",
+    "[Anthony Cruz — RE-ENGAGEMENT]: Uncertain 'I don't know yet' about future plans"
   ],
   "reknowledge": [
     "[RE Knowledge — Anthony Cruz — 03/31/2026]: Diana Mulder has established investor network process - maintains phone contacts and email folder for investors",
