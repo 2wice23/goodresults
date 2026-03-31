@@ -504,16 +504,6 @@ function renderDeals() {
           '</div>' +
         '</div>' +
 
-        // PHOTOS
-        '<div class="photo-section">' +
-          '<div class="photo-section-title">Photos (' + d._photoCount + ')</div>' +
-          '<div class="photo-grid" id="photos-' + d._slug + '">' + photoHtml + '</div>' +
-          '<div class="photo-upload-zone" ondragover="event.preventDefault();this.classList.add(\'drag-over\')" ondragleave="this.classList.remove(\'drag-over\')" ondrop="event.preventDefault();this.classList.remove(\'drag-over\');handlePhotoDrop(event,\'' + d._slug + '\')">' +
-            '<input type="file" accept="image/*" multiple onchange="handlePhotoSelect(event,\'' + d._slug + '\')">' +
-            '<div class="photo-upload-label">Drop photos here or <span>click to upload</span></div>' +
-          '</div>' +
-        '</div>' +
-
         // ACTIONS
         '<div class="card-actions">' +
           '<a href="' + liveUrl + '" target="_blank" class="card-action-btn btn-view" onclick="event.stopPropagation()">View Deal Page &rarr;</a>' +
@@ -523,6 +513,16 @@ function renderDeals() {
           '<button class="card-action-btn btn-close" onclick="event.stopPropagation();pushToClose(this)">Push to Close</button>' +
           '<button class="card-action-btn btn-workflow" onclick="event.stopPropagation();createWorkflow(this)">Create Workflow</button>' +
           '<div class="save-status" id="status-' + d._slug + '"></div>' +
+        '</div>' +
+
+        // PHOTOS
+        '<div class="photo-section">' +
+          '<div class="photo-section-title">Photos (' + d._photoCount + ')</div>' +
+          '<div class="photo-grid" id="photos-' + d._slug + '">' + photoHtml + '</div>' +
+          '<div class="photo-upload-zone" ondragover="event.preventDefault();this.classList.add(\'drag-over\')" ondragleave="this.classList.remove(\'drag-over\')" ondrop="event.preventDefault();this.classList.remove(\'drag-over\');handlePhotoDrop(event,\'' + d._slug + '\')">' +
+            '<input type="file" accept="image/*" multiple onchange="handlePhotoSelect(event,\'' + d._slug + '\')">' +
+            '<div class="photo-upload-label">Drop photos here or <span>click to upload</span></div>' +
+          '</div>' +
         '</div>' +
       '</div></div>' +
     '</div>';
