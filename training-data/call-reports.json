@@ -1378,5 +1378,25 @@
     "resistance_moments": "Brief responses during negotiation discussion, but this was natural given the price gap rather than disengagement",
     "script_moment": "After she mentioned personal issues: 'I'm glad you're getting back to it. When you do start looking again, remind me what areas you typically work in? I'd love to know what neighborhoods you're seeing most opportunities in.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774997587585",
+    "timestamp": "2026-03-31T22:53:07.585Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Diana Mulder",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "2m 21s",
+    "call_date": "03/31/2026",
+    "score": 72,
+    "realtor_engagement": 85,
+    "summary": "Anthony followed up with Diana who had previously requested email contact. She confirmed she gets distressed properties and has an established investor network process. Strong buy box delivery and good rapport building with concrete next steps established.",
+    "what_worked": "Complete buy box delivery with memorable language | Let Diana explain her investor process thoroughly | Adapted to her preferred communication method | Good volume positioning about seeing too much vs too little",
+    "what_to_tighten": "Opener was confusing - saying 'Anthony Cruz told me to email you' when he IS Anthony Cruz | Could have asked more specific questions about her current pipeline or deal frequency",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about the property closing next week | Could have explored what makes her suggest going off-market vs on-market",
+    "positive_moments": "Said 'I just saved you in my phone, so I knew you were Anthony' showing she was actively engaging | Explained detailed process of going through phone and email investors folder | Volunteered she has a property closing next week | Agreed to receive both text and email contact",
+    "resistance_moments": "Initial confusion from opener about 'Anthony Cruz told me to email you' | Redirected away from monthly follow-up calls to her preferred contact method",
+    "script_moment": "Instead of 'Anthony Cruz told me to email you' should have said 'Hey Diana, this is Anthony Cruz with Good Results. You mentioned I should email you, but I figured I'd give you a quick call to introduce myself properly.'",
+    "on_leaderboard": "yes"
   }
 ]
