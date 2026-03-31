@@ -17,7 +17,7 @@
   "coeDate": "04/20/2026",
   "executedDate": "03/30/2026",
   "ddDays": null,
-  "emdDays": "3",
+  "emdDays": "2",
   "emdAmount": "$3,000.00",
   "seller": "John Gustafson, Susan Gustafson",
   "buyer": "Good Results LLC",
@@ -27,9 +27,9 @@
   "agentPhone": "(775)400-6632",
   "agentEmail": "alicia.repro@gmail.com",
   "agentBrokerage": "Dickson Realty-Gardnerville",
-  "wholesalePrice": 304000,
-  "arv": 410000,
-  "repairsPerSqft": 25,
-  "estRepairs": 27800,
-  "profitPotential": 78200
+  "wholesalePrice": null,
+  "arv": null,
+  "repairsPerSqft": null,
+  "estRepairs": null,
+  "profitPotential": null
 }
