@@ -1,5 +1,14 @@
 {
   "positive": [
+    "[Joe Kruse — DEAL DISCUSSION — Score 84/100]: Strong established relationship allowed immediate property discussion",
+    "[Joe Kruse — DEAL DISCUSSION — Score 84/100]: Excellent two-way dialogue that uncovered Timothy's business model",
+    "[Joe Kruse — DEAL DISCUSSION — Score 84/100]: Good pivot from rejection to Timothy's opportunity",
+    "[Joe Kruse — DEAL DISCUSSION — Score 84/100]: Clear next steps with specific timeline",
+    "[Joe Kruse — DEAL DISCUSSION — Realtor responded positively to]: Timothy immediately offered bridge financing at 7.75%",
+    "[Joe Kruse — DEAL DISCUSSION — Realtor responded positively to]: Timothy volunteered his own property at 108 Russell Road for Joe to analyze",
+    "[Joe Kruse — DEAL DISCUSSION — Realtor responded positively to]: Timothy provided detailed buy box criteria ($20k-26k range, Victoria focus)",
+    "[Joe Kruse — DEAL DISCUSSION — Realtor responded positively to]: Timothy discussed profit-sharing structure for future deals",
+    "[Joe Kruse — DEAL DISCUSSION — Realtor responded positively to]: Timothy stayed engaged despite declining the Houston property",
     "[Anthony Cruz — WARM FOLLOW-UP — Score 80/100]: Complete buy box delivery with all key elements and memorable imagery",
     "[Anthony Cruz — WARM FOLLOW-UP — Score 80/100]: Excellent conversation flow that let Sarai share her expertise and deal sources",
     "[Anthony Cruz — WARM FOLLOW-UP — Score 80/100]: Strong positioning as high-volume cash buyer (10-15 deals/month)",
@@ -50,16 +59,7 @@
     "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Shared extensive client situation and property condition details",
     "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Asked about manufactured homes showing she was thinking of inventory",
     "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Engaged in detailed discussion about business ethics and representation",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Asked 'How far below market do you come in?' showing genuine interest in working together",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Said 'she did ask if I knew anybody' indicating client need",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Agreed to follow-up timeline and said she'd know more next week",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 88/100]: Strong re-engagement opener with specific timeframe reference",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 88/100]: Complete buy box delivery with memorable imagery",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 88/100]: Alexandria immediately offered relevant property",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 88/100]: Excellent conversation flow with partner introduction",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Score 88/100]: Clear next steps established",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Immediately said 'We do have one potentially coming up' when asked about off-market properties",
-    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Brought in partner Dina to provide detailed property specifications"
+    "[Franklin Ladaga — RE-ENGAGEMENT — Realtor responded positively to]: Asked 'How far below market do you come in?' showing genuine interest in working together"
   ],
   "negative": [
     "[Franklin Ladaga — WARM FOLLOW-UP]: Initial confusion about who Franklin was",
@@ -124,12 +124,6 @@
     "[Anthony Cruz — RE-ENGAGEMENT]: Stated 'I don't have anything at the moment'"
   ],
   "reknowledge": [
-    "[RE Knowledge — Joe Kruse — Not specified]: Timothy targets $20k-26k deals in Victoria TX with minimal renovation (1-2 weeks max)",
-    "[RE Knowledge — Joe Kruse — Not specified]: Timothy offers bridge financing at 7.75% for fix-and-flip deals",
-    "[RE Knowledge — Joe Kruse — Not specified]: Investment rates have come down recently according to local lenders",
-    "[RE Knowledge — Joe Kruse — Not specified]: Timothy owns 108 Russell Road Victoria TX - 2,300 sqft on 1 acre outside city limits",
-    "[RE Knowledge — Joe Kruse — Not specified]: Timothy prefers $10k wholesale profit margins on deals",
-    "[RE Knowledge — Joe Kruse — Not specified]: Victoria market has active investors who avoid major project management",
     "[RE Knowledge — Franklin Ladaga — 03/31/2026]: Octavio Salgado works primarily with buyers, not listings",
     "[RE Knowledge — Franklin Ladaga — 03/31/2026]: He drives around town regularly and notices investment properties good for flipping",
     "[RE Knowledge — Franklin Ladaga — 03/31/2026]: He was initially confused about Franklin's identity but remembered after context",
@@ -203,6 +197,12 @@
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Scott understands the numbers game aspect of real estate investing",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Scott was walking into an office during this call limiting his availability",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Scott requested text contact to save Franklin's information properly",
-    "[RE Knowledge — Dan VanMatre — 03/30/2026]: Flor Velasquez specializes in land development and townhome projects rather than individual distressed properties"
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: Flor Velasquez specializes in land development and townhome projects rather than individual distressed properties",
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: She works with investors on larger development deals involving land purchase and construction",
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: She's currently invested in two bigger projects which limits her availability for smaller deals",
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: She's willing to network within her company to find agents who handle distressed properties",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Sylvester Garcia represents sellers and negotiates directly on price",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Property was built in 1998 with original title issue from Stewart Title that needs correction",
+    "[RE Knowledge — Anthony Cruz — 03/30/2026]: Other buyers in Jefferson County market are offering significantly higher ($120k vs $100k)"
   ]
 }
