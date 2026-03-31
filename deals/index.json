@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-31T20:59:46.935Z",
+  "updated": "2026-03-31T21:00:43.637Z",
   "deals": [
     {
       "slug": "032026001",
@@ -450,7 +450,7 @@
     },
     {
       "slug": "032026008",
-      "docSha": "0e2ca49ffa28df734817a09a3337ea746e2af981",
+      "docSha": "4a16c29a30473a092a4fd800db6188ce3937631b",
       "data": {
         "dealId": "032026008",
         "market": "off",
@@ -489,7 +489,7 @@
         "realtorPhone": "",
         "ddEndDate": "",
         "acceptedDate": "",
-        "publicNotes": "",
+        "publicNotes": "Roof, furnace, tankless water heater, sewer line from house to street has all been been replaced.",
         "privateNotes": ""
       },
       "manifest": [
