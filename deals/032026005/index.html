@@ -81,6 +81,20 @@ nav{background:var(--navy);padding:0 32px;display:flex;align-items:center;justif
 .spec-val,.term-val{font-size:14px;font-weight:700;color:var(--navy);}
 .term-val.hi{color:var(--orange);font-size:15px;}
 
+/* ── DOCUMENTS ── */
+.docs-section{max-width:1060px;margin:0 auto 48px;padding:0 32px;}
+.docs-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;}
+.doc-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:16px;transition:box-shadow 0.3s;}
+.doc-card:hover{box-shadow:0 4px 24px rgba(0,0,0,0.06);}
+.doc-card-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.doc-card-title::before{content:'📄';font-size:16px;}
+.doc-embed{width:100%;height:600px;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.doc-embed iframe{width:100%;height:100%;border:none;}
+.doc-embed-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;background:var(--cream);color:var(--text-muted);font-size:14px;gap:12px;}
+.doc-embed-fallback a{color:var(--orange);font-weight:600;text-decoration:none;padding:10px 24px;border:2px solid var(--orange);border-radius:24px;transition:all 0.2s;}
+.doc-embed-fallback a:hover{background:var(--orange);color:#fff;}
+@media(max-width:640px){.doc-embed{height:400px;}.docs-section{padding:0 16px;}}
+
 /* ── CTA ── */
 .cta-section{background:linear-gradient(135deg, #1A2744 0%, #0F1A2E 100%);padding:72px 32px;position:relative;overflow:hidden;}
 .cta-section::before{content:'';position:absolute;right:10%;top:50%;transform:translateY(-50%);width:300px;height:300px;background:radial-gradient(circle,rgba(232,104,10,0.12) 0%,transparent 65%);pointer-events:none;}
@@ -154,6 +168,13 @@ footer p{font-size:12px;color:rgba(255,255,255,.3);}
   <div class="gallery-empty" id="galleryEmpty" style="display:none;">Photos coming soon — check back shortly.</div>
   <div class="gallery-hero" id="galleryHero" style="display:none;"></div>
   <div class="gallery-grid" id="galleryGrid"></div>
+</div>
+
+<div class="docs-section reveal" id="docsSection" style="display:none;">
+  <div class="docs-inner">
+    <div class="docs-label">Documents</div>
+    <div id="docsList"></div>
+  </div>
 </div>
 
 <div class="cta-section">
@@ -298,6 +319,12 @@ function discoverPhotos() {
       } else {
         el('galleryEmpty').style.display = 'block';
       }
+
+      // Discover public documents
+      var publicDocs = manifest
+        .filter(function(m) { return m.type !== 'photo' && m.visibility === 'public'; })
+        .sort(function(a, b) { return (a.order || 0) - (b.order || 0); });
+      if (publicDocs.length) renderDocs(publicDocs);
     })
     .catch(function() {
       // No manifest — fall back to GitHub API (show all images)
@@ -389,6 +416,32 @@ var observer = new IntersectionObserver(function(entries) {
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+// ─── render documents ──────────────────────────────────────────────────────
+function renderDocs(docs) {
+  var container = el('docsList');
+  var html = '';
+  docs.forEach(function(doc) {
+    var isPdf = /\.pdf$/i.test(doc.name);
+    var displayName = doc.name.replace(/[-_]/g, ' ').replace(/\.\w+$/, '');
+    displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1);
+
+    html += '<div class="doc-card">';
+    html += '<div class="doc-card-title">' + displayName + '</div>';
+    html += '<div class="doc-embed">';
+    if (isPdf) {
+      html += '<iframe src="' + doc.name + '#toolbar=1&navpanes=0" title="' + displayName + '"></iframe>';
+    } else {
+      html += '<div class="doc-embed-fallback">';
+      html += '<span>' + doc.name + '</span>';
+      html += '<a href="' + doc.name + '" target="_blank" download>Download File</a>';
+      html += '</div>';
+    }
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+  el('docsSection').style.display = 'block';
+}
 
 // ─── boot ────────────────────────────────────────────────────────────────────
 fetch('./deal-doc.txt')
