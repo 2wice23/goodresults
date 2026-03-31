@@ -1,8 +1,9 @@
 {
-  "updated": "2026-03-31T19:44:10.893591Z",
+  "updated": "2026-03-31T19:53:54.930Z",
   "deals": [
     {
       "slug": "032026001",
+      "docSha": "cce0cf363697e68dafb79c67949c48edb5864053",
       "data": {
         "dealId": "032026001",
         "market": "off",
@@ -15,11 +16,30 @@
         "sqft": 3867,
         "lotSize": "10,454 sqft",
         "yearBuilt": 1953,
-        "garage": null,
-        "coeDate": "March 31, 2026",
-        "askingPrice": null,
-        "arv": null,
-        "estRepairs": null
+        "garage": "",
+        "coeDate": "",
+        "arv": 850000,
+        "realtorName": "",
+        "realtorPhone": "",
+        "ddEndDate": "",
+        "emdDueDate": "",
+        "acceptedDate": "",
+        "wholesalePrice": 515000,
+        "repairsPerSqft": 65,
+        "basementSqft": "",
+        "seller": "",
+        "buyer": "",
+        "contractPrice": "480000",
+        "emdAmount": "",
+        "ddDays": "",
+        "emdDays": "",
+        "executedDate": "",
+        "agentName": "",
+        "agentPhone": "",
+        "agentEmail": "",
+        "agentBrokerage": "",
+        "publicNotes": "",
+        "privateNotes": ""
       },
       "manifest": [
         {
@@ -175,174 +195,8 @@
       ]
     },
     {
-      "slug": "032026005",
-      "data": {
-        "dealId": "032026005",
-        "market": "off",
-        "address": "3202 Melbourne St",
-        "city": "Houston",
-        "state": "TX",
-        "zip": "77026",
-        "beds": 4,
-        "baths": 2,
-        "sqft": 1700,
-        "lotSize": "8,782 sqft",
-        "yearBuilt": 1949,
-        "garage": "Detached garage",
-        "coeDate": "",
-        "askingPrice": 160000,
-        "arv": 265000,
-        "estRepairs": 35,
-        "realtorName": "",
-        "realtorPhone": "",
-        "ddEndDate": "",
-        "emdDueDate": "",
-        "acceptedDate": "",
-        "notes": ""
-      },
-      "manifest": [
-        {
-          "name": "01.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 0
-        },
-        {
-          "name": "02.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 1
-        },
-        {
-          "name": "03.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 2
-        },
-        {
-          "name": "04.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 3
-        },
-        {
-          "name": "05.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 4
-        },
-        {
-          "name": "06.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 5
-        },
-        {
-          "name": "07.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 6
-        },
-        {
-          "name": "08.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 7
-        },
-        {
-          "name": "09.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 8
-        },
-        {
-          "name": "10.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 9
-        },
-        {
-          "name": "11.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 10
-        },
-        {
-          "name": "12.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 11
-        },
-        {
-          "name": "13.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 12
-        },
-        {
-          "name": "14.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 13
-        },
-        {
-          "name": "15.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 14
-        },
-        {
-          "name": "16.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 15
-        },
-        {
-          "name": "17.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 16
-        },
-        {
-          "name": "18.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 17
-        },
-        {
-          "name": "19.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 18
-        },
-        {
-          "name": "20.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 19
-        },
-        {
-          "name": "21.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 20
-        },
-        {
-          "name": "22.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 21
-        },
-        {
-          "name": "23.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 22
-        }
-      ]
-    },
-    {
       "slug": "032026008",
+      "docSha": "0e2ca49ffa28df734817a09a3337ea746e2af981",
       "data": {
         "dealId": "032026008",
         "market": "off",
@@ -350,19 +204,19 @@
         "city": "Carson City",
         "state": "NV",
         "zip": "89703",
-        "beds": "3",
-        "baths": "1",
-        "sqft": "1112",
+        "beds": 3,
+        "baths": 1,
+        "sqft": 1112,
         "lotSize": "5,227 sqft",
-        "yearBuilt": "1983",
-        "garage": null,
-        "basementSqft": null,
+        "yearBuilt": 1983,
+        "garage": "",
+        "basementSqft": "",
         "pool": null,
         "solar": null,
-        "coeDate": "04/20/2026",
+        "coeDate": "",
         "executedDate": "03/30/2026",
-        "ddDays": null,
-        "emdDays": "2",
+        "ddDays": "",
+        "emdDays": 2,
         "emdAmount": "$3,000.00",
         "seller": "John Gustafson, Susan Gustafson",
         "buyer": "Good Results LLC",
@@ -372,11 +226,17 @@
         "agentPhone": "(775)400-6632",
         "agentEmail": "alicia.repro@gmail.com",
         "agentBrokerage": "Dickson Realty-Gardnerville",
-        "wholesalePrice": null,
-        "arv": null,
-        "repairsPerSqft": null,
-        "estRepairs": null,
-        "profitPotential": null
+        "wholesalePrice": 304000,
+        "arv": 420000,
+        "repairsPerSqft": 30,
+        "profitPotential": null,
+        "emdDueDate": "2026-04-01",
+        "realtorName": "",
+        "realtorPhone": "",
+        "ddEndDate": "",
+        "acceptedDate": "",
+        "publicNotes": "",
+        "privateNotes": ""
       },
       "manifest": [
         {
@@ -644,6 +504,187 @@
           "type": "photo",
           "visibility": "public",
           "order": 34
+        }
+      ]
+    },
+    {
+      "slug": "032026005",
+      "docSha": "30a2fb5660711b0785184a6bc797ebae7b7ea3e9",
+      "data": {
+        "dealId": "032026005",
+        "market": "off",
+        "address": "3202 Melbourne St",
+        "city": "Houston",
+        "state": "TX",
+        "zip": "77026",
+        "beds": 4,
+        "baths": 2,
+        "sqft": 1700,
+        "lotSize": "8,782 sqft",
+        "yearBuilt": 1949,
+        "garage": "Detached garage",
+        "coeDate": "",
+        "arv": 265000,
+        "realtorName": "",
+        "realtorPhone": "",
+        "ddEndDate": "",
+        "emdDueDate": "",
+        "acceptedDate": "",
+        "wholesalePrice": 160000,
+        "repairsPerSqft": 35,
+        "basementSqft": "",
+        "seller": "",
+        "buyer": "",
+        "contractPrice": "157000",
+        "emdAmount": "",
+        "ddDays": "",
+        "emdDays": "",
+        "executedDate": "",
+        "agentName": "",
+        "agentPhone": "",
+        "agentEmail": "",
+        "agentBrokerage": "",
+        "publicNotes": "",
+        "privateNotes": ""
+      },
+      "manifest": [
+        {
+          "name": "01.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 0
+        },
+        {
+          "name": "02.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 1
+        },
+        {
+          "name": "03.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 2
+        },
+        {
+          "name": "04.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 3
+        },
+        {
+          "name": "05.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 4
+        },
+        {
+          "name": "06.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 5
+        },
+        {
+          "name": "07.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 6
+        },
+        {
+          "name": "08.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 7
+        },
+        {
+          "name": "09.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 8
+        },
+        {
+          "name": "10.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 9
+        },
+        {
+          "name": "11.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 10
+        },
+        {
+          "name": "12.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 11
+        },
+        {
+          "name": "13.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 12
+        },
+        {
+          "name": "14.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 13
+        },
+        {
+          "name": "15.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 14
+        },
+        {
+          "name": "16.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 15
+        },
+        {
+          "name": "17.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 16
+        },
+        {
+          "name": "18.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 17
+        },
+        {
+          "name": "19.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 18
+        },
+        {
+          "name": "20.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 19
+        },
+        {
+          "name": "21.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 20
+        },
+        {
+          "name": "22.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 21
+        },
+        {
+          "name": "23.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 22
         }
       ]
     }
