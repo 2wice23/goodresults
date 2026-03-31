@@ -186,8 +186,12 @@ function el(id) { return document.getElementById(id); }
 
 // ─── render ───────────────────────────────────────────────────────────────────
 function renderDeal(d) {
-  const totalRepairs = (d.estRepairs && d.sqft) ? d.estRepairs * d.sqft : null;
-  const profit = (d.arv && totalRepairs != null && d.askingPrice) ? d.arv - totalRepairs - d.askingPrice : null;
+  const askPrice = d.wholesalePrice || d.askingPrice || null;
+  const repPerSf = d.repairsPerSqft || d.estRepairs || null;
+  const totalRepairs = (repPerSf && d.sqft) ? repPerSf * d.sqft : null;
+  const contractN = d.contractPrice ? Number(String(d.contractPrice).replace(/[^0-9.-]/g,'')) : null;
+  const askN = askPrice ? Number(String(askPrice).replace(/[^0-9.-]/g,'')) : null;
+  const buyerProfit = (d.arv && totalRepairs != null && askN) ? d.arv - totalRepairs - askN : null;
   const fullAddr = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
   const heroTitle = [
     d.zip  || '',
@@ -224,11 +228,11 @@ function renderDeal(d) {
 
   // Numbers bar
   var cards = [];
-  if (d.askingPrice != null) cards.push('<div class="num-card num-asking"><div class="num-label">Asking Price</div><div class="num-val">' + fmt$(d.askingPrice) + '</div></div>');
+  if (askN != null) cards.push('<div class="num-card num-asking"><div class="num-label">Wholesale Price</div><div class="num-val">' + fmt$(askN) + '</div></div>');
   if (d.arv != null) cards.push('<div class="num-card"><div class="num-label">ARV</div><div class="num-val">' + fmt$(d.arv) + '</div></div>');
-  if (totalRepairs != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs (' + d.estRepairs + '/sqft &times; ' + Number(d.sqft).toLocaleString() + ' sf)</div><div class="num-val">' + fmt$(totalRepairs) + '</div></div>');
-  else if (d.estRepairs != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs ($/sf)</div><div class="num-val">' + fmt$(d.estRepairs) + '</div></div>');
-  if (profit != null) cards.push('<div class="num-card num-profit"><div class="num-label">Gross Profit (Before Holding Costs)</div><div class="num-val">' + fmt$(profit) + '</div></div>');
+  if (totalRepairs != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs (' + repPerSf + '/sqft &times; ' + Number(d.sqft).toLocaleString() + ' sf)</div><div class="num-val">' + fmt$(totalRepairs) + '</div></div>');
+  else if (repPerSf != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs ($/sf)</div><div class="num-val">' + fmt$(repPerSf) + '</div></div>');
+  if (buyerProfit != null) cards.push('<div class="num-card num-profit"><div class="num-label">Projected Buyer Profit</div><div class="num-val">' + fmt$(buyerProfit) + '</div></div>');
   if (cards.length) { el('numbersSection').style.display = 'block'; el('numbersInner').innerHTML = cards.join(''); }
 
   // Detail cards
@@ -243,7 +247,7 @@ function renderDeal(d) {
   ].filter(Boolean).join('');
 
   var terms = [
-    d.askingPrice != null ? '<div class="term-row"><span class="term-key">Asking Price</span><span class="term-val hi">' + fmt$(d.askingPrice) + '</span></div>' : '',
+    askN != null ? '<div class="term-row"><span class="term-key">Wholesale Price</span><span class="term-val hi">' + fmt$(askN) + '</span></div>' : '',
     '<div class="term-row"><span class="term-key">EMD</span><span class="term-val">$5,000 non-refundable</span></div>',
     d.coeDate ? '<div class="term-row"><span class="term-key">Close of Escrow</span><span class="term-val">' + d.coeDate + '</span></div>' : '',
     '<div class="term-row"><span class="term-key">Financing</span><span class="term-val">Cash only</span></div>',

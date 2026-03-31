@@ -57,7 +57,7 @@ nav{background:var(--navy);padding:0 32px;display:flex;align-items:center;justif
 .num-profit{background:rgba(26,122,74,0.04);}
 
 /* ── GALLERY ── */
-.gallery-section{max-width:1060px;margin:48px auto;padding:0 32px;}
+.gallery-section{max-width:1060px;margin:0 auto 48px;padding:0 32px;}
 .gallery-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;}
 .gallery-empty{background:var(--white);border:2px dashed var(--border);border-radius:16px;padding:56px 32px;text-align:center;color:var(--text-muted);font-size:14px;}
 .gallery-hero{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.12);}
@@ -69,7 +69,7 @@ nav{background:var(--navy);padding:0 32px;display:flex;align-items:center;justif
 .gallery-grid img:hover{opacity:.9;border-color:var(--orange);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.1);}
 
 /* ── DETAILS ── */
-.details-section{max-width:1060px;margin:0 auto 48px;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.details-section{max-width:1060px;margin:48px auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:24px;}
 @media(max-width:700px){.details-section{grid-template-columns:1fr;}}
 .detail-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:28px;transition:box-shadow 0.3s;}
 .detail-card:hover{box-shadow:0 4px 24px rgba(0,0,0,0.06);}
@@ -127,7 +127,7 @@ footer p{font-size:12px;color:rgba(255,255,255,.3);}
 <body>
 
 <nav>
-  <a href="https://www.goodresults.org" class="nav-brand">
+  <a href="/" class="nav-brand">
     <span class="nav-brand-top">Good Results</span>
     <span class="nav-brand-name">Home <span>Buyers</span></span>
   </a>
@@ -147,14 +147,14 @@ footer p{font-size:12px;color:rgba(255,255,255,.3);}
   <div class="numbers-inner" id="numbersInner"></div>
 </div>
 
+<div class="details-section reveal" id="detailsSection"></div>
+
 <div class="gallery-section reveal">
   <div class="gallery-label" id="galleryLabel" style="display:none;">Property Photos</div>
   <div class="gallery-empty" id="galleryEmpty" style="display:none;">Photos coming soon — check back shortly.</div>
   <div class="gallery-hero" id="galleryHero" style="display:none;"></div>
   <div class="gallery-grid" id="galleryGrid"></div>
 </div>
-
-<div class="details-section reveal" id="detailsSection"></div>
 
 <div class="cta-section">
   <div class="cta-inner">
@@ -186,8 +186,12 @@ function el(id) { return document.getElementById(id); }
 
 // ─── render ───────────────────────────────────────────────────────────────────
 function renderDeal(d) {
-  const totalRepairs = (d.estRepairs && d.sqft) ? d.estRepairs * d.sqft : null;
-  const profit = (d.arv && totalRepairs != null && d.askingPrice) ? d.arv - totalRepairs - d.askingPrice : null;
+  const askPrice = d.wholesalePrice || d.askingPrice || null;
+  const repPerSf = d.repairsPerSqft || d.estRepairs || null;
+  const totalRepairs = (repPerSf && d.sqft) ? repPerSf * d.sqft : null;
+  const contractN = d.contractPrice ? Number(String(d.contractPrice).replace(/[^0-9.-]/g,'')) : null;
+  const askN = askPrice ? Number(String(askPrice).replace(/[^0-9.-]/g,'')) : null;
+  const buyerProfit = (d.arv && totalRepairs != null && askN) ? d.arv - totalRepairs - askN : null;
   const fullAddr = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
   const heroTitle = [
     d.zip  || '',
@@ -224,11 +228,11 @@ function renderDeal(d) {
 
   // Numbers bar
   var cards = [];
-  if (d.askingPrice != null) cards.push('<div class="num-card num-asking"><div class="num-label">Asking Price</div><div class="num-val">' + fmt$(d.askingPrice) + '</div></div>');
+  if (askN != null) cards.push('<div class="num-card num-asking"><div class="num-label">Wholesale Price</div><div class="num-val">' + fmt$(askN) + '</div></div>');
   if (d.arv != null) cards.push('<div class="num-card"><div class="num-label">ARV</div><div class="num-val">' + fmt$(d.arv) + '</div></div>');
-  if (totalRepairs != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs (' + d.estRepairs + '/sqft &times; ' + Number(d.sqft).toLocaleString() + ' sf)</div><div class="num-val">' + fmt$(totalRepairs) + '</div></div>');
-  else if (d.estRepairs != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs ($/sf)</div><div class="num-val">' + fmt$(d.estRepairs) + '</div></div>');
-  if (profit != null) cards.push('<div class="num-card num-profit"><div class="num-label">Gross Profit (Before Holding Costs)</div><div class="num-val">' + fmt$(profit) + '</div></div>');
+  if (totalRepairs != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs (' + repPerSf + '/sqft &times; ' + Number(d.sqft).toLocaleString() + ' sf)</div><div class="num-val">' + fmt$(totalRepairs) + '</div></div>');
+  else if (repPerSf != null) cards.push('<div class="num-card"><div class="num-label">Est. Repairs ($/sf)</div><div class="num-val">' + fmt$(repPerSf) + '</div></div>');
+  if (buyerProfit != null) cards.push('<div class="num-card num-profit"><div class="num-label">Projected Buyer Profit</div><div class="num-val">' + fmt$(buyerProfit) + '</div></div>');
   if (cards.length) { el('numbersSection').style.display = 'block'; el('numbersInner').innerHTML = cards.join(''); }
 
   // Detail cards
@@ -239,10 +243,11 @@ function renderDeal(d) {
     d.lotSize   ? '<div class="spec-row"><span class="spec-key">Lot Size</span><span class="spec-val">'     + d.lotSize + '</span></div>' : '',
     d.yearBuilt ? '<div class="spec-row"><span class="spec-key">Year Built</span><span class="spec-val">'   + d.yearBuilt + '</span></div>' : '',
     d.garage    ? '<div class="spec-row"><span class="spec-key">Garage</span><span class="spec-val">'       + d.garage + '</span></div>' : '',
+    d.basementSqft ? '<div class="spec-row"><span class="spec-key">Basement</span><span class="spec-val">' + Number(d.basementSqft).toLocaleString() + ' sf</span></div>' : '',
   ].filter(Boolean).join('');
 
   var terms = [
-    d.askingPrice != null ? '<div class="term-row"><span class="term-key">Asking Price</span><span class="term-val hi">' + fmt$(d.askingPrice) + '</span></div>' : '',
+    askN != null ? '<div class="term-row"><span class="term-key">Wholesale Price</span><span class="term-val hi">' + fmt$(askN) + '</span></div>' : '',
     '<div class="term-row"><span class="term-key">EMD</span><span class="term-val">$5,000 non-refundable</span></div>',
     d.coeDate ? '<div class="term-row"><span class="term-key">Close of Escrow</span><span class="term-val">' + d.coeDate + '</span></div>' : '',
     '<div class="term-row"><span class="term-key">Financing</span><span class="term-val">Cash only</span></div>',
@@ -250,9 +255,13 @@ function renderDeal(d) {
     '<div class="term-row"><span class="term-key">Contingencies</span><span class="term-val">None</span></div>',
   ].filter(Boolean).join('');
 
+  var publicNotes = d.publicNotes || d.notes || '';
+  var notesHtml = publicNotes ? '<div class="detail-card" style="grid-column:1/-1;"><h3>Property Notes</h3><p style="font-size:14px;color:var(--text-muted);line-height:1.7;white-space:pre-wrap;">' + publicNotes + '</p></div>' : '';
+
   el('detailsSection').innerHTML =
     (specs ? '<div class="detail-card"><h3>Property Details</h3>' + specs + '</div>' : '') +
-    '<div class="detail-card"><h3>Deal Terms</h3>' + terms + '</div>';
+    '<div class="detail-card"><h3>Deal Terms</h3>' + terms + '</div>' +
+    notesHtml;
 }
 
 // ─── photo discovery (finds ALL images in this folder via GitHub API) ────────
@@ -266,10 +275,37 @@ function naturalSort(a, b) {
   return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
 }
 
-// Primary: fetch folder contents from GitHub API (works for any filename)
+// Primary: check for manifest.json first, then fall back to GitHub API listing
 function discoverPhotos() {
-  // Derive the folder path from the current URL: /deals/some-slug/ → deals/some-slug
   var path = window.location.pathname.replace(/^\/|\/$/g, '');
+
+  // Try manifest first — it controls visibility and order
+  fetch('manifest.json')
+    .then(function(r) {
+      if (!r.ok) throw new Error('No manifest');
+      return r.json();
+    })
+    .then(function(manifest) {
+      // Only show public photos, sorted by order
+      var publicPhotos = manifest
+        .filter(function(m) { return m.type === 'photo' && m.visibility === 'public'; })
+        .sort(function(a, b) { return (a.order || 0) - (b.order || 0); })
+        .map(function(m) { return m.name; });
+
+      if (publicPhotos.length) {
+        photos = publicPhotos;
+        finish();
+      } else {
+        el('galleryEmpty').style.display = 'block';
+      }
+    })
+    .catch(function() {
+      // No manifest — fall back to GitHub API (show all images)
+      discoverPhotosFromAPI(path);
+    });
+}
+
+function discoverPhotosFromAPI(path) {
   var apiUrl = 'https://api.github.com/repos/' + GITHUB_REPO + '/contents/' + path;
 
   fetch(apiUrl)
@@ -278,7 +314,6 @@ function discoverPhotos() {
       return r.json();
     })
     .then(function(files) {
-      // Filter to image files, sort naturally, use relative paths
       var imageFiles = files
         .filter(function(f) { return f.type === 'file' && IMG_RE.test(f.name); })
         .map(function(f) { return f.name; })
@@ -288,12 +323,10 @@ function discoverPhotos() {
         photos = imageFiles;
         finish();
       } else {
-        // No images found in API listing
         el('galleryEmpty').style.display = 'block';
       }
     })
     .catch(function() {
-      // GitHub API failed (rate limit, private repo, etc.) — fall back to numbered probe
       probeFallback();
     });
 }

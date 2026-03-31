@@ -888,7 +888,8 @@ function renderDeals() {
 
   grid.innerHTML = filtered.map((d, i) => {
     const totalRepairs = (d.repairsPerSqft && d.sqft) ? d.repairsPerSqft * d.sqft : null;
-    const profit = (d.arv && totalRepairs != null && d.wholesalePrice) ? d.arv - totalRepairs - d.wholesalePrice : null;
+    const buyerProfit = (d.arv && totalRepairs != null && d.wholesalePrice) ? d.arv - totalRepairs - d.wholesalePrice : null;
+    const wholesaleProfit = (d.wholesalePrice && contractN) ? parseDollar(d.wholesalePrice) - contractN : null;
     const coeDays = daysUntil(d.coeDate);
     const liveUrl = SITE_BASE + '/deals/' + d._slug + '/';
     const thumbHtml = d._thumb ? '<img src="' + d._thumb + '" alt="">' : '🏠';
@@ -937,7 +938,8 @@ function renderDeals() {
           '<div class="card-num"><div class="card-num-label">Ask</div><div class="card-num-val orange">' + fmt$(d.wholesalePrice) + '</div></div>' +
           '<div class="card-num"><div class="card-num-label">ARV</div><div class="card-num-val">' + fmt$(d.arv) + '</div></div>' +
           (totalRepairs != null ? '<div class="card-num"><div class="card-num-label">Repairs <span style="font-size:0.45rem;opacity:0.7;">(' + d.repairsPerSqft + '/sqft)</span></div><div class="card-num-val red">' + fmt$(totalRepairs) + '</div></div>' : '') +
-          (profit !== null ? '<div class="card-num"><div class="card-num-label">Profit</div><div class="card-num-val green">' + fmt$(profit) + '</div></div>' : '') +
+          (wholesaleProfit !== null ? '<div class="card-num"><div class="card-num-label">WS Profit</div><div class="card-num-val green">' + fmt$(wholesaleProfit) + '</div></div>' : '') +
+          (buyerProfit !== null ? '<div class="card-num"><div class="card-num-label">Buyer Profit</div><div class="card-num-val green">' + fmt$(buyerProfit) + '</div></div>' : '') +
           '<span class="card-expand-icon">▾</span>' +
         '</div>' +
       '</div>' +
@@ -971,7 +973,8 @@ function renderDeals() {
             field('arv', 'ARV', d.arv, 'money') +
             field('repairsPerSqft', 'Repairs $/sqft', d.repairsPerSqft) +
             (totalRepairs != null ? '<div class="detail-row"><span class="detail-key">Total Repairs (' + d.repairsPerSqft + ' × ' + Number(d.sqft).toLocaleString() + ')</span><span class="detail-val hi">' + fmt$(totalRepairs) + '</span></div>' : '') +
-            (profit !== null ? '<div class="detail-row"><span class="detail-key">Gross Profit</span><span class="detail-val green">' + fmt$(profit) + '</span></div>' : '') +
+            (wholesaleProfit !== null ? '<div class="detail-row"><span class="detail-key">Wholesale Profit</span><span class="detail-val green">' + fmt$(wholesaleProfit) + '</span></div>' : '') +
+            (buyerProfit !== null ? '<div class="detail-row"><span class="detail-key">Buyer Profit</span><span class="detail-val green">' + fmt$(buyerProfit) + '</span></div>' : '') +
           '</div>' +
           // PROPERTY
           '<div class="detail-section">' +
