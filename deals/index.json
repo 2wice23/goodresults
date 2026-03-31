@@ -1,10 +1,402 @@
 {
-  "updated": "2026-03-31T19:23:41.920188Z",
+  "updated": "2026-03-31T19:44:10.893591Z",
   "deals": [
     {
-      "slug": "03202614",
+      "slug": "032026001",
       "data": {
-        "dealId": "03202614",
+        "dealId": "032026001",
+        "market": "off",
+        "address": "3759 Glen Avenue",
+        "city": "Las Vegas",
+        "state": "NV",
+        "zip": "89121",
+        "beds": 5,
+        "baths": 5,
+        "sqft": 3867,
+        "lotSize": "10,454 sqft",
+        "yearBuilt": 1953,
+        "garage": null,
+        "coeDate": "March 31, 2026",
+        "askingPrice": null,
+        "arv": null,
+        "estRepairs": null
+      },
+      "manifest": [
+        {
+          "name": "01.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 0
+        },
+        {
+          "name": "02.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 1
+        },
+        {
+          "name": "03.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 2
+        },
+        {
+          "name": "04.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 3
+        },
+        {
+          "name": "05.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 4
+        },
+        {
+          "name": "06.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 5
+        },
+        {
+          "name": "07.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 6
+        },
+        {
+          "name": "08.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 7
+        },
+        {
+          "name": "09.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 8
+        },
+        {
+          "name": "10.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 9
+        },
+        {
+          "name": "11.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 10
+        },
+        {
+          "name": "12.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 11
+        },
+        {
+          "name": "13.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 12
+        },
+        {
+          "name": "14.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 13
+        },
+        {
+          "name": "15.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 14
+        },
+        {
+          "name": "16.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 15
+        },
+        {
+          "name": "17.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 16
+        },
+        {
+          "name": "18.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 17
+        },
+        {
+          "name": "19.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 18
+        },
+        {
+          "name": "20.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 19
+        },
+        {
+          "name": "21.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 20
+        },
+        {
+          "name": "22.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 21
+        },
+        {
+          "name": "23.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 22
+        },
+        {
+          "name": "24.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 23
+        },
+        {
+          "name": "25.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 24
+        }
+      ]
+    },
+    {
+      "slug": "032026005",
+      "data": {
+        "dealId": "032026005",
+        "market": "off",
+        "address": "3202 Melbourne St",
+        "city": "Houston",
+        "state": "TX",
+        "zip": "77026",
+        "beds": 4,
+        "baths": 2,
+        "sqft": 1700,
+        "lotSize": "8,782 sqft",
+        "yearBuilt": 1949,
+        "garage": "Detached garage",
+        "coeDate": "",
+        "askingPrice": 160000,
+        "arv": 265000,
+        "estRepairs": 35,
+        "realtorName": "",
+        "realtorPhone": "",
+        "ddEndDate": "",
+        "emdDueDate": "",
+        "acceptedDate": "",
+        "notes": ""
+      },
+      "manifest": [
+        {
+          "name": "01.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 0
+        },
+        {
+          "name": "02.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 1
+        },
+        {
+          "name": "03.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 2
+        },
+        {
+          "name": "04.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 3
+        },
+        {
+          "name": "05.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 4
+        },
+        {
+          "name": "06.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 5
+        },
+        {
+          "name": "07.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 6
+        },
+        {
+          "name": "08.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 7
+        },
+        {
+          "name": "09.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 8
+        },
+        {
+          "name": "10.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 9
+        },
+        {
+          "name": "11.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 10
+        },
+        {
+          "name": "12.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 11
+        },
+        {
+          "name": "13.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 12
+        },
+        {
+          "name": "14.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 13
+        },
+        {
+          "name": "15.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 14
+        },
+        {
+          "name": "16.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 15
+        },
+        {
+          "name": "17.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 16
+        },
+        {
+          "name": "18.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 17
+        },
+        {
+          "name": "19.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 18
+        },
+        {
+          "name": "20.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 19
+        },
+        {
+          "name": "21.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 20
+        },
+        {
+          "name": "22.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 21
+        },
+        {
+          "name": "23.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 22
+        }
+      ]
+    },
+    {
+      "slug": "032026008",
+      "data": {
+        "dealId": "032026008",
+        "market": "off",
+        "address": "1803 N Nevada St",
+        "city": "Carson City",
+        "state": "NV",
+        "zip": "89703",
+        "beds": "3",
+        "baths": "1",
+        "sqft": "1112",
+        "lotSize": "5,227 sqft",
+        "yearBuilt": "1983",
+        "garage": null,
+        "basementSqft": null,
+        "pool": null,
+        "solar": null,
+        "coeDate": "04/20/2026",
+        "executedDate": "03/30/2026",
+        "ddDays": null,
+        "emdDays": "2",
+        "emdAmount": "$3,000.00",
+        "seller": "John Gustafson, Susan Gustafson",
+        "buyer": "Good Results LLC",
+        "onMarket": "Yes",
+        "contractPrice": "$285,000.00",
+        "agentName": "Alicia Gonzalez",
+        "agentPhone": "(775)400-6632",
+        "agentEmail": "alicia.repro@gmail.com",
+        "agentBrokerage": "Dickson Realty-Gardnerville",
+        "wholesalePrice": null,
+        "arv": null,
+        "repairsPerSqft": null,
+        "estRepairs": null,
+        "profitPotential": null
+      },
+      "manifest": [
+        {
+          "name": "01.webp",
+          "type": "photo",
+          "visibility": "public",
+          "order": 0
+        },
+        {
+          "name": "contract.pdf",
+          "type": "doc",
+          "visibility": "private",
+          "order": 1
+        }
+      ]
+    },
+    {
+      "slug": "032026014",
+      "data": {
+        "dealId": "032026014",
         "market": "off",
         "address": "2550 Melody Ln",
         "city": "Reno",
@@ -252,398 +644,6 @@
           "type": "photo",
           "visibility": "public",
           "order": 34
-        }
-      ]
-    },
-    {
-      "slug": "0320268",
-      "data": {
-        "dealId": "0320268",
-        "market": "off",
-        "address": "1803 N Nevada St",
-        "city": "Carson City",
-        "state": "NV",
-        "zip": "89703",
-        "beds": "3",
-        "baths": "1",
-        "sqft": "1112",
-        "lotSize": "5,227 sqft",
-        "yearBuilt": "1983",
-        "garage": null,
-        "basementSqft": null,
-        "pool": null,
-        "solar": null,
-        "coeDate": "04/20/2026",
-        "executedDate": "03/30/2026",
-        "ddDays": null,
-        "emdDays": "2",
-        "emdAmount": "$3,000.00",
-        "seller": "John Gustafson, Susan Gustafson",
-        "buyer": "Good Results LLC",
-        "onMarket": "Yes",
-        "contractPrice": "$285,000.00",
-        "agentName": "Alicia Gonzalez",
-        "agentPhone": "(775)400-6632",
-        "agentEmail": "alicia.repro@gmail.com",
-        "agentBrokerage": "Dickson Realty-Gardnerville",
-        "wholesalePrice": null,
-        "arv": null,
-        "repairsPerSqft": null,
-        "estRepairs": null,
-        "profitPotential": null
-      },
-      "manifest": [
-        {
-          "name": "01.webp",
-          "type": "photo",
-          "visibility": "public",
-          "order": 0
-        },
-        {
-          "name": "contract.pdf",
-          "type": "doc",
-          "visibility": "private",
-          "order": 1
-        }
-      ]
-    },
-    {
-      "slug": "3202-melbourne-st",
-      "data": {
-        "dealId": "0320265",
-        "market": "off",
-        "address": "3202 Melbourne St",
-        "city": "Houston",
-        "state": "TX",
-        "zip": "77026",
-        "beds": 4,
-        "baths": 2,
-        "sqft": 1700,
-        "lotSize": "8,782 sqft",
-        "yearBuilt": 1949,
-        "garage": "Detached garage",
-        "coeDate": "",
-        "askingPrice": 160000,
-        "arv": 265000,
-        "estRepairs": 35,
-        "realtorName": "",
-        "realtorPhone": "",
-        "ddEndDate": "",
-        "emdDueDate": "",
-        "acceptedDate": "",
-        "notes": ""
-      },
-      "manifest": [
-        {
-          "name": "01.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 0
-        },
-        {
-          "name": "02.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 1
-        },
-        {
-          "name": "03.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 2
-        },
-        {
-          "name": "04.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 3
-        },
-        {
-          "name": "05.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 4
-        },
-        {
-          "name": "06.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 5
-        },
-        {
-          "name": "07.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 6
-        },
-        {
-          "name": "08.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 7
-        },
-        {
-          "name": "09.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 8
-        },
-        {
-          "name": "10.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 9
-        },
-        {
-          "name": "11.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 10
-        },
-        {
-          "name": "12.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 11
-        },
-        {
-          "name": "13.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 12
-        },
-        {
-          "name": "14.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 13
-        },
-        {
-          "name": "15.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 14
-        },
-        {
-          "name": "16.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 15
-        },
-        {
-          "name": "17.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 16
-        },
-        {
-          "name": "18.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 17
-        },
-        {
-          "name": "19.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 18
-        },
-        {
-          "name": "20.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 19
-        },
-        {
-          "name": "21.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 20
-        },
-        {
-          "name": "22.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 21
-        },
-        {
-          "name": "23.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 22
-        }
-      ]
-    },
-    {
-      "slug": "3759-glen-avenue",
-      "data": {
-        "dealId": "0320261",
-        "market": "off",
-        "address": "3759 Glen Avenue",
-        "city": "Las Vegas",
-        "state": "NV",
-        "zip": "89121",
-        "beds": 5,
-        "baths": 5,
-        "sqft": 3867,
-        "lotSize": "10,454 sqft",
-        "yearBuilt": 1953,
-        "garage": null,
-        "coeDate": "March 31, 2026",
-        "askingPrice": null,
-        "arv": null,
-        "estRepairs": null
-      },
-      "manifest": [
-        {
-          "name": "01.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 0
-        },
-        {
-          "name": "02.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 1
-        },
-        {
-          "name": "03.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 2
-        },
-        {
-          "name": "04.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 3
-        },
-        {
-          "name": "05.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 4
-        },
-        {
-          "name": "06.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 5
-        },
-        {
-          "name": "07.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 6
-        },
-        {
-          "name": "08.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 7
-        },
-        {
-          "name": "09.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 8
-        },
-        {
-          "name": "10.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 9
-        },
-        {
-          "name": "11.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 10
-        },
-        {
-          "name": "12.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 11
-        },
-        {
-          "name": "13.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 12
-        },
-        {
-          "name": "14.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 13
-        },
-        {
-          "name": "15.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 14
-        },
-        {
-          "name": "16.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 15
-        },
-        {
-          "name": "17.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 16
-        },
-        {
-          "name": "18.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 17
-        },
-        {
-          "name": "19.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 18
-        },
-        {
-          "name": "20.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 19
-        },
-        {
-          "name": "21.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 20
-        },
-        {
-          "name": "22.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 21
-        },
-        {
-          "name": "23.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 22
-        },
-        {
-          "name": "24.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 23
-        },
-        {
-          "name": "25.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 24
         }
       ]
     }
