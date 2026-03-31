@@ -838,5 +838,25 @@
     "resistance_moments": "Initial concern about wholesale deal language in contract",
     "script_moment": "When Jon mentioned the assignment language concern, could have said: 'That's just standard language I keep in all contracts for flexibility, but this is definitely me as the end buyer - I'm not wholesaling this.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774973686105",
+    "timestamp": "2026-03-31T16:14:46.105Z",
+    "agent": "Joe Kruse",
+    "realtor": "Joseph",
+    "call_type": "ESTABLISHED RELATIONSHIP CHECK-IN",
+    "duration": "Not specified",
+    "call_date": "Not specified",
+    "score": 75,
+    "realtor_engagement": 88,
+    "summary": "Joe checked in on Joseph's health recovery and discussed a wholesale deal opportunity. Joseph has 3-5 active buyers ready and agreed to distribute the deal to his network for compensation.",
+    "what_worked": "Strong personal relationship maintenance with health check-in | Clear deal structure and compensation discussion | Joseph's immediate engagement with multiple buyer options | Geographic coordination shows relationship depth",
+    "what_to_tighten": "Could have been more specific about timeline expectations for buyer feedback | Meeting timeline left vague pending health recovery",
+    "language_flags": "Mentioned 'wholesale deal' - while this appears to be legitimate deal sharing rather than assignment of contract, monitor usage",
+    "missed_opportunities": "",
+    "positive_moments": "Joseph immediately volunteered he has 3-5 active buyers ready | Proactively mentioned Hugo partnership as backup option | Discussed high-net-worth contacts as escalation strategy | Expressed genuine interest in meeting in person once health improves",
+    "resistance_moments": "Had to clarify family health issues are consuming considerable time | Mentioned wife's current illness limiting availability",
+    "script_moment": "When discussing the deal timeline, Joe could have said: 'How quickly do you think you'll hear back from your buyers? Should I expect feedback by end of week or do you need more time given the family situation?'",
+    "on_leaderboard": "yes"
   }
 ]
