@@ -2176,15 +2176,15 @@ photoInput.addEventListener('change', e => {
   if (e.target.files.length) handlePhotos(e.target.files);
 });
 
-// Drop zone
-const photoDrop = document.getElementById('photoDrop');
+// Drop zone (generator)
+const genPhotoDrop = document.getElementById('photoDrop');
 ['dragenter','dragover'].forEach(evt => {
-  photoDrop.addEventListener(evt, e => { e.preventDefault(); photoDrop.classList.add('drag-over'); });
+  genPhotoDrop.addEventListener(evt, e => { e.preventDefault(); genPhotoDrop.classList.add('drag-over'); });
 });
 ['dragleave','drop'].forEach(evt => {
-  photoDrop.addEventListener(evt, e => { e.preventDefault(); photoDrop.classList.remove('drag-over'); });
+  genPhotoDrop.addEventListener(evt, e => { e.preventDefault(); genPhotoDrop.classList.remove('drag-over'); });
 });
-photoDrop.addEventListener('drop', e => {
+genPhotoDrop.addEventListener('drop', e => {
   if (e.dataTransfer.files.length) handlePhotos(e.dataTransfer.files);
 });
 
