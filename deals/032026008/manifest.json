@@ -10,5 +10,11 @@
     "type": "doc",
     "visibility": "private",
     "order": 1
+  },
+  {
+    "name": "Fully_Signed_Marketing_Fee_Agreement.pdf",
+    "type": "doc",
+    "visibility": "public",
+    "order": 999
   }
 ]
