@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-31T20:33:10.190Z",
+  "updated": "2026-03-31T20:45:44.563Z",
   "deals": [
     {
       "slug": "032026001",
@@ -508,7 +508,7 @@
         {
           "name": "Fully_Signed_Marketing_Fee_Agreement.pdf",
           "type": "doc",
-          "visibility": "private",
+          "visibility": "public",
           "order": 999
         }
       ]
@@ -555,16 +555,52 @@
       },
       "manifest": [
         {
-          "name": "01.jpg",
+          "name": "21.jpg",
           "type": "photo",
           "visibility": "public",
-          "order": 7
+          "order": 0
+        },
+        {
+          "name": "19.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 1
+        },
+        {
+          "name": "20.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 2
+        },
+        {
+          "name": "22.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 3
+        },
+        {
+          "name": "23.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 4
+        },
+        {
+          "name": "IMG_5555.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 5
         },
         {
           "name": "02.jpg",
           "type": "photo",
           "visibility": "public",
           "order": 6
+        },
+        {
+          "name": "01.jpg",
+          "type": "photo",
+          "visibility": "public",
+          "order": 7
         },
         {
           "name": "03.jpg",
@@ -663,36 +699,6 @@
           "order": 23
         },
         {
-          "name": "19.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 1
-        },
-        {
-          "name": "20.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 2
-        },
-        {
-          "name": "21.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 0
-        },
-        {
-          "name": "22.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 3
-        },
-        {
-          "name": "23.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 4
-        },
-        {
           "name": "IMG_5546.jpg",
           "type": "photo",
           "visibility": "public",
@@ -745,12 +751,6 @@
           "type": "photo",
           "visibility": "public",
           "order": 32
-        },
-        {
-          "name": "IMG_5555.jpg",
-          "type": "photo",
-          "visibility": "public",
-          "order": 5
         },
         {
           "name": "IMG_5540.jpg",
