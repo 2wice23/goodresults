@@ -1198,5 +1198,25 @@
     "resistance_moments": "Luis indicated he may market to other investors before considering it personally, showing he's not committed to purchasing directly",
     "script_moment": "When Luis mentioned he might market to other investors first, Joe should have said: 'That's great - what type of investors do you typically work with? I'd love to understand what deals usually interest them so I can keep you in mind for future properties that fit their criteria too.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774988123008",
+    "timestamp": "2026-03-31T20:15:23.008Z",
+    "agent": "Franklin Ladaga",
+    "realtor": "Flor Interiano",
+    "call_type": "RE-ENGAGEMENT",
+    "duration": "3m 47s",
+    "call_date": "03/31/2026",
+    "score": 75,
+    "realtor_engagement": 72,
+    "summary": "Franklin reconnected with Flor after 6 months of no contact. She mentioned having more buyers than sellers and having a listing fall through due to low appraisal. She's leaving for a 3-week vacation to El Salvador, so Franklin adjusted follow-up timing accordingly.",
+    "what_worked": "Complete buy box delivery with memorable imagery | Good adaptation to her vacation timeline | Strong rapport building around personal situation | Clear positioning as cash investors",
+    "what_to_tighten": "Audio connection issues at start | Could have explored the April listing opportunity more deeply | Missed opportunity to discuss the listing that fell through",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked more about the April listing she mentioned | Could have explored what happened with the listing that fell through due to appraisal",
+    "positive_moments": "Said 'I will keep in mind if something come up' showing openness to future opportunities | Shared details about upcoming listing at end of April | Engaged in personal conversation about El Salvador vacation | Agreed enthusiastically to one-month follow-up timeline",
+    "resistance_moments": "Initial distraction with son present during packing | Brief responses throughout due to being busy with travel preparation | Had to clarify that off-market properties are 'kind of hard to get'",
+    "script_moment": "When she mentioned 'I'm gonna put one more on maybe at the end of April', Franklin should have said: 'Oh that's interesting - what kind of property is that? Does it fit the criteria I mentioned?'",
+    "on_leaderboard": "yes"
   }
 ]
