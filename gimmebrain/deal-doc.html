@@ -539,15 +539,23 @@ async function runExtraction() {
 
   const prompt = `You are a real estate contract analyst specializing in both Nevada RPA and Texas TREC contracts. Extract all available deal information from the contract text below and return it as a single valid JSON object. Use null for any field you cannot find. Do not include any explanation or text outside the JSON.
 
+CRITICAL — MULTI-DOCUMENT PDF HANDLING:
+This PDF likely contains MANY documents bundled together — the purchase agreement plus disclosures, addenda, lead paint forms, buyer broker agreements, wire fraud advisories, SRPD, etc. You MUST:
+1. First scan the FULL text to locate the actual purchase agreement (Nevada RPA or Texas TREC 1-4 form)
+2. Nevada RPA: Look for "RESIDENTIAL PURCHASE AGREEMENT" header, numbered paragraphs (1. PROPERTY, 2. PRICE), references to NRS
+3. Texas TREC: Look for "ONE TO FOUR FAMILY RESIDENTIAL CONTRACT (RESALE)" or TREC form number, numbered paragraphs (1. PARTIES, 2. PROPERTY)
+4. Extract data ONLY from the purchase agreement section — NOT from disclosure forms, broker agreements, or advisory documents
+5. If there are counteroffers, use the FINAL/most recent counteroffer price, not the original
+
 IMPORTANT FIELD GUIDANCE:
-- executedDate: The date all parties signed — look for "Effective Date," "Date of Acceptance," or the latest signature date. Return as MM/DD/YYYY.
-- coeDate: The closing date. In TREC look for "Closing Date" (paragraph 9 or financing section). In RPA look for "Close of Escrow." Return as MM/DD/YYYY.
-- ddDays: THE NUMBER OF DAYS in the due diligence / option period — return as an integer only (e.g. 10). In TREC look for "Option Period" — it will say something like "X days after the Effective Date." In RPA look for "Investigation Period" or "Due Diligence Period" — it will say "X days." Extract just the number.
-- emdDays: THE NUMBER OF DAYS after the Effective Date that earnest money is due — return as an integer only. In TREC look in the Earnest Money paragraph (paragraph 5) for "within ___ days." In RPA look for "within ___ days of acceptance." Extract just the number.
+- executedDate: The date the LAST PERSON physically signed the purchase agreement. This is Day 0 for all date calculations. Look at ALL signature date fields in the purchase agreement's signature/acceptance section and take the LATEST (most recent) one. Do NOT use a pre-printed "Effective Date" field unless it matches the last signature date. Do NOT use dates from disclosure signatures, addenda signatures, or broker signatures — ONLY the purchase agreement buyer/seller signatures. Return as MM/DD/YYYY.
+- coeDate: The closing date — this is a SPECIFIC DATE written in the contract, NOT calculated from any day count. In TREC look for "Closing Date" (paragraph 9 or financing section). In RPA look for "Close of Escrow." Return as MM/DD/YYYY.
+- ddDays: THE NUMBER OF DAYS in the due diligence / option period — return as an integer only (e.g. 10). In TREC look for "Option Period" — it will say something like "X days after the Effective Date." In RPA look for "Investigation Period" or "Due Diligence Period" — it will say "X days." Extract just the number. ALWAYS calendar days, never business days.
+- emdDays: THE NUMBER OF DAYS after the Effective Date that earnest money is due — return as an integer only. In TREC look in the Earnest Money paragraph (paragraph 5) for "within ___ days." In RPA look for "within ___ days of acceptance." Extract just the number. If EMD is due "upon execution" return 0. ALWAYS calendar days.
 - emdAmount: The earnest money / option fee deposit amount.
-- sellerNames: All seller names. In estate situations include the executor name too.
+- sellerNames: All seller names. In estate situations include the executor name too. Get this from the purchase agreement, not from disclosure forms.
 - onMarket: Whether the property was listed on MLS. Look for MLS number, listing agent, or "listed" references. If buyer's agent and seller's agent are different companies, likely on-market.
-- property beds/baths/sqft/lotSize/yearBuilt/garage: These are often NOT in the contract body — check any attached addenda, property description sections, or MLS data references. Use null if truly not present.
+- property beds/baths/sqft/lotSize/yearBuilt/garage: These are often NOT in the contract body — check any attached addenda, property description sections, or MLS data references. Use null if truly not present. Do not guess.
 - condition fields: Condition info is rarely in a purchase contract. Use null unless explicitly mentioned.
 - agent: Look for buyer's agent AND seller's/listing agent sections. Prefer the listing/seller's agent details since that's who Good Results works with.
 
@@ -601,7 +609,7 @@ Return this exact structure:
 }
 
 CONTRACT TEXT:
-${contractText.substring(0, 50000)}`;
+${contractText.substring(0, 120000)}`;
 
   try {
     const resp = await fetch(ANTHROPIC_PROXY, {
