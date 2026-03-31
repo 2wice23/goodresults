@@ -841,14 +841,18 @@ function renderStats() {
   const total = allDeals.length;
   const offMarket = allDeals.filter(d => d.market !== 'on').length;
   const onMarket = total - offMarket;
-  const totalValue = allDeals.reduce((sum, d) => sum + (d.wholesalePrice || 0), 0);
+  const totalWSProfit = allDeals.reduce((sum, d) => {
+    const ws = parseDollar(d.wholesalePrice);
+    const cp = parseDollar(d.contractPrice);
+    return sum + ((ws && cp) ? ws - cp : 0);
+  }, 0);
   const urgentDates = allDeals.filter(d => { const days = daysUntil(d.coeDate); return days !== null && days >= 0 && days <= 7; }).length;
 
   let html = '';
   html += '<div class="stat-pill"><span class="num">' + total + '</span> Total Deals</div>';
   html += '<div class="stat-pill"><span class="num">' + offMarket + '</span> Off-Market</div>';
   html += '<div class="stat-pill green"><span class="num">' + onMarket + '</span> On-Market</div>';
-  html += '<div class="stat-pill"><span class="num">' + fmt$(totalValue) + '</span> Pipeline Value</div>';
+  html += '<div class="stat-pill"><span class="num">' + fmt$(totalWSProfit) + '</span> Wholesale Profit</div>';
   if (urgentDates > 0) html += '<div class="stat-pill red"><span class="num">' + urgentDates + '</span> Closing in 7 Days</div>';
   document.getElementById('statsBar').innerHTML = html;
 }
