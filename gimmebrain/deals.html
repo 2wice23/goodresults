@@ -131,6 +131,13 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .photo-delete{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;background:rgba(239,68,68,0.9);color:white;border:none;font-size:0.7rem;font-weight:700;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1;transition:transform 0.1s;}
 .photo-delete:hover{transform:scale(1.15);}
 .deal-card.editing .photo-delete{display:flex;}
+.photo-vis{position:absolute;bottom:4px;left:4px;padding:3px 8px;border-radius:10px;font-size:0.5rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.15s;line-height:1.2;}
+.photo-vis.public{background:rgba(34,197,94,0.85);color:#fff;}
+.photo-vis.public:hover{background:rgba(34,197,94,1);}
+.photo-vis.private{background:rgba(239,68,68,0.85);color:#fff;}
+.photo-vis.private:hover{background:rgba(239,68,68,1);}
+.photo-item.is-private{opacity:0.5;}
+.photo-item.is-private img{filter:grayscale(0.5);}
 .photo-upload-zone{border:1.5px dashed var(--orange-border);border-radius:4px;padding:20px;text-align:center;cursor:pointer;background:var(--surface2);transition:all 0.15s;display:none;position:relative;}
 .deal-card.editing .photo-upload-zone{display:block;}
 .photo-upload-zone:hover,.photo-upload-zone.drag-over{border-color:var(--orange);background:var(--orange-glow);}
@@ -487,13 +494,16 @@ function renderDeals() {
     const coeBadge = (coeDays !== null && coeDays >= 0 && coeDays <= 7)
       ? ' <span style="font-size:0.5rem;color:var(--red);font-weight:700;">COE ' + dateLabel(coeDays) + '</span>' : '';
 
-    // Photo gallery
-    const photoHtml = d._photos.map(p =>
-      '<div class="photo-item" data-photo-path="' + p.path + '" data-photo-sha="' + p.sha + '">' +
+    // Photo gallery — show all photos with visibility badges
+    const photoHtml = d._photos.map(p => {
+      const vis = p.visibility || 'public';
+      const privClass = vis === 'private' ? ' is-private' : '';
+      return '<div class="photo-item' + privClass + '" data-photo-path="' + p.path + '" data-photo-sha="' + p.sha + '" data-photo-name="' + p.name + '" data-slug="' + d._slug + '">' +
         '<img src="' + p.url + '" alt="' + p.name + '">' +
         '<button class="photo-delete" onclick="event.stopPropagation();deletePhoto(this)" title="Delete photo">&times;</button>' +
-      '</div>'
-    ).join('');
+        '<button class="photo-vis ' + vis + '" onclick="event.stopPropagation();toggleVisibility(this)" title="Toggle public/private">' + (vis === 'public' ? '👁 Public' : '🔒 Private') + '</button>' +
+      '</div>';
+    }).join('');
 
     return '<div class="deal-card" data-slug="' + d._slug + '" data-index="' + i + '">' +
       '<div class="card-top" onclick="toggleCard(this.parentElement)">' +
@@ -764,6 +774,39 @@ async function saveDeal(btn) {
     status.textContent = 'Error: ' + err.message;
     btn.disabled = false;
   }
+}
+
+// ── Visibility toggle ──
+
+function toggleVisibility(btn) {
+  const item = btn.closest('.photo-item');
+  const slug = item.dataset.slug;
+  const name = item.dataset.photoName;
+  const deal = allDeals.find(d => d._slug === slug);
+  if (!deal || !deal._allFiles) return;
+
+  const file = deal._allFiles.find(f => f.name === name);
+  if (!file) return;
+
+  // Toggle
+  const newVis = file.visibility === 'public' ? 'private' : 'public';
+  file.visibility = newVis;
+
+  // Also update _photos array
+  const photo = deal._photos.find(f => f.name === name);
+  if (photo) photo.visibility = newVis;
+
+  // Update UI immediately
+  btn.className = 'photo-vis ' + newVis;
+  btn.innerHTML = newVis === 'public' ? '👁 Public' : '🔒 Private';
+  if (newVis === 'private') {
+    item.classList.add('is-private');
+  } else {
+    item.classList.remove('is-private');
+  }
+
+  // Update photo counts
+  deal._publicPhotoCount = deal._allFiles.filter(f => f.type === 'photo' && f.visibility === 'public').length;
 }
 
 // ── Photo management ──
