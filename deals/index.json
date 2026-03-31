@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-31T04:34:42.078Z",
+  "updated": "2026-03-31T04:35:43.839Z",
   "deals": [
     {
       "slug": "3759-glen-avenue",
@@ -175,7 +175,7 @@
     },
     {
       "slug": "03202614",
-      "docSha": "f7d075d2accb7eefb6c24b6d7ad26f2753c6b0b6",
+      "docSha": "d129158a50ae609538794014753e09d27e0207c2",
       "data": {
         "dealId": "03202614",
         "market": "off",
@@ -212,7 +212,7 @@
         "emdDueDate": "2026-04-06",
         "acceptedDate": "",
         "basementSqft": "",
-        "publicNotes": "Slight foundation issues. reach out for copies of documents and inspection.",
+        "publicNotes": "Foundation issues. Reach out for copies of documents and inspection.",
         "privateNotes": "Has Foundation issue and some moisture stuff.... I have documents for this\n"
       },
       "manifest": [
