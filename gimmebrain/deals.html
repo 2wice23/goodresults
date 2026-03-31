@@ -117,6 +117,10 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 .btn-workflow:hover{background:rgba(34,197,94,0.15);}
 .btn-close:disabled,.btn-workflow:disabled{opacity:0.4;cursor:not-allowed;}
 .btn-close.done,.btn-workflow.done{opacity:0.6;cursor:default;}
+.cloud-save{display:none;width:100%;padding:14px;border:2px solid var(--green);border-radius:6px;background:var(--green-bg);color:var(--green);font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all 0.15s;text-align:center;}
+.cloud-save:hover{background:rgba(34,197,94,0.2);transform:translateY(-1px);}
+.cloud-save:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+.deal-card.editing .cloud-save{display:block;}
 
 /* PHOTO GALLERY */
 .photo-section{margin-top:16px;}
@@ -460,7 +464,8 @@ function renderDeals() {
         '</div>' +
       '</div>' +
       '<div class="card-detail"><div class="card-detail-inner">' +
-        '<div class="detail-grid">' +
+        '<button class="cloud-save cloud-save-top" onclick="event.stopPropagation();saveDeal(this)">&#9729; Push to the Cloud — Save All Changes</button>' +
+        '<div class="detail-grid" style="margin-top:12px;">' +
           // ADDRESS
           '<div class="detail-section">' +
             '<div class="detail-section-title">Address & Info</div>' +
@@ -553,6 +558,7 @@ function renderDeals() {
             '<div class="photo-upload-label">Drop photos here or <span>click to upload</span></div>' +
           '</div>' +
         '</div>' +
+        '<button class="cloud-save cloud-save-bottom" onclick="event.stopPropagation();saveDeal(this)" style="margin-top:16px;">&#9729; Push to the Cloud — Save All Changes</button>' +
       '</div></div>' +
     '</div>';
   }).join('');
@@ -640,6 +646,7 @@ async function saveDeal(btn) {
   status.className = 'save-status saving';
   status.textContent = 'Saving...';
   btn.disabled = true;
+  card.querySelectorAll('.cloud-save').forEach(b => { b.disabled = true; b.textContent = 'Saving...'; });
 
   // Collect edited values
   card.querySelectorAll('[data-field]').forEach(el => {
