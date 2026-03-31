@@ -1238,5 +1238,25 @@
     "resistance_moments": "Initial confusion about who he was due to travel and medical issues | Name didn't ring a bell despite previous conversations | Had to explain her medical situation affected her ability to respond to texts",
     "script_moment": "After she explained the medical issues: 'I completely understand - health comes first. No worries at all about not remembering. I'm just glad you're feeling better now.'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774989306154",
+    "timestamp": "2026-03-31T20:35:06.154Z",
+    "agent": "Anthony Cruz",
+    "realtor": "Sarai Rumph",
+    "call_type": "WARM FOLLOW-UP",
+    "duration": "13m 15s",
+    "call_date": "03/31/2026",
+    "score": 80,
+    "realtor_engagement": 95,
+    "summary": "Anthony followed up on Sarai's message about working together. Sarai explained she encounters distressed properties weekly while searching for other clients and wants to represent Anthony as buyer's agent on property-specific BBAs. She demonstrated strong market knowledge and deal flow.",
+    "what_worked": "Complete buy box delivery with all key elements and memorable imagery | Excellent conversation flow that let Sarai share her expertise and deal sources | Strong positioning as high-volume cash buyer (10-15 deals/month) | Good questions about her property sources and deal flow",
+    "what_to_tighten": "Opener should state name clearly and give brief context about his business | Could have been more specific about follow-up timeline rather than 'within a month'",
+    "language_flags": "",
+    "missed_opportunities": "Could have asked about her brokerage or other agents who might have similar deals",
+    "positive_moments": "Asked if he's open to on-market distressed properties showing genuine interest | Volunteered she encounters properties 'every week' that could fit | Asked detailed questions about areas, financing, HOA preferences, and volume | Shared specific deal examples ($260k buy for $340k property, $530k Dallas deal) | Proactively offered to send multiple properties and requested his contact info | Agreed enthusiastically to one-month follow-up",
+    "resistance_moments": "",
+    "script_moment": "Opening should be: 'Hey Sarai, this is Anthony Cruz with Good Results Home Buyers - I just got your message about working together on some properties.'",
+    "on_leaderboard": "yes"
   }
 ]
