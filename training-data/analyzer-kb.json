@@ -1,5 +1,9 @@
 {
   "positive": [
+    "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Asked 'Do you work with other real estate agents?' showing interest in his business",
+    "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Said 'I'll go ahead and save your number' and committed to sending future properties",
+    "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Proactively offered for him to drive by the property",
+    "[Anthony Cruz — DEAL DISCUSSION — Realtor responded positively to]: Shared details about a recent deal that fell through, indicating she gets distressed properties",
     "[Joe Kruse — ESTABLISHED RELATIONSHIP CHECK-IN — Realtor responded positively to]: Joseph immediately volunteered he has 3-5 active buyers ready",
     "[Joe Kruse — ESTABLISHED RELATIONSHIP CHECK-IN — Realtor responded positively to]: Proactively mentioned Hugo partnership as backup option",
     "[Joe Kruse — ESTABLISHED RELATIONSHIP CHECK-IN — Realtor responded positively to]: Discussed high-net-worth contacts as escalation strategy",
@@ -55,11 +59,7 @@
     "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Realtor responded positively to]: Asked specific questions about price range and property types to refine search",
     "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Realtor responded positively to]: Offered multiple communication options (email, text, MLS access)",
     "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Realtor responded positively to]: Provided detailed explanation of current distressed deal status",
-    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Realtor responded positively to]: Took initiative to set up comprehensive MLS searches",
-    "[Franklin Ladaga — WARM FOLLOW-UP — Score 82/100]: Strong opener referencing prior meeting",
-    "[Franklin Ladaga — WARM FOLLOW-UP — Score 82/100]: Complete buy box delivery with all elements",
-    "[Franklin Ladaga — WARM FOLLOW-UP — Score 82/100]: Excellent conversation flow that let Dana share extensively",
-    "[Franklin Ladaga — WARM FOLLOW-UP — Score 82/100]: Genuine interest in her business model"
+    "[Gayden Rosales — ESTABLISHED RELATIONSHIP CHECK-IN — Realtor responded positively to]: Took initiative to set up comprehensive MLS searches"
   ],
   "negative": [
     "[Franklin Ladaga — RE-ENGAGEMENT]: Asked if he was human or AI due to suspicious call quality",
@@ -124,10 +124,6 @@
     "[Gayden Rosales — CONTRACT WALKTHROUGH]: Had to end call when title company called"
   ],
   "reknowledge": [
-    "[RE Knowledge — Anthony Cruz — 03/31/2026]: Vanessa Ponce gets distressed properties occasionally in Houston market",
-    "[RE Knowledge — Anthony Cruz — 03/31/2026]: She had a recent deal fall through at 45/249 intersection due to timing - owners came too late",
-    "[RE Knowledge — Anthony Cruz — 03/31/2026]: Wheeler Street property (off La Branche/Almeida) is cosmetic rehab only with replaced roof, no foundation issues, no central AC",
-    "[RE Knowledge — Anthony Cruz — 03/31/2026]: She's receptive to both property-specific BBA and buyer's agent arrangements",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: Taylor Stoker gets off-market deals occasionally from sellers who can't maintain their homes anymore but need to sell",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: She had a specific property in mind immediately after hearing Franklin's buy box",
     "[RE Knowledge — Franklin Ladaga — 03/30/2026]: She's proactive about requesting contact information to send property details",
@@ -203,6 +199,10 @@
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: She's receptive to working with investors and proactively requests contact information",
     "[RE Knowledge — Anthony Cruz — 03/30/2026]: She asks qualifying questions about location specifics showing professional approach",
     "[RE Knowledge — Gayden Rosales — 03/30/2026]: the analyzer appears to be taking the n/a and including them in average score... if a score has any n/a in it, do not include them in the average.\nalso, does the filler words affect the score? if so, let's make the filler word thing way better. or remove its affect on score",
-    "[RE Knowledge — Dan VanMatre — 03/30/2026]: Yunyue Wang works Houston market and has current on-market inventory"
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: Yunyue Wang works Houston market and has current on-market inventory",
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: She's receptive to working with investors and asks qualifying questions",
+    "[RE Knowledge — Dan VanMatre — 03/30/2026]: She proactively offers properties when criteria matches",
+    "[RE Knowledge — Anthony Cruz — 2024-12-17]: Marcus works Houston market but currently has limited off-market inventory",
+    "[RE Knowledge — Anthony Cruz — 2024-12-17]: He's receptive to working with investors and asks qualifying questions about budget and location"
   ]
 }
