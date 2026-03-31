@@ -818,5 +818,25 @@
     "resistance_moments": "Had to clarify initially that he was under review which limited conversation depth",
     "script_moment": "When Jo asked about yield requirements, Franklin could have said: 'Great question - we typically pay around 70% of ARV minus repairs. So on a $500k property, we'd be looking at offers in the $340-360k range depending on condition. What kinds of price points do you typically see in distressed properties?'",
     "on_leaderboard": "yes"
+  },
+  {
+    "id": "1774929815625",
+    "timestamp": "2026-03-31T04:03:35.625Z",
+    "agent": "Gayden Rosales",
+    "realtor": "Jon Ryan",
+    "call_type": "DEAL DISCUSSION",
+    "duration": "9m 21s",
+    "call_date": "03/27/2026",
+    "score": 81,
+    "realtor_engagement": 82,
+    "summary": "Jon Ryan called to verify Gayden's offer isn't a wholesale deal before presenting to seller. Gayden explained his fix-and-flip business model and discussed why this property is outside his typical buy box but still considering it for scrape-and-build.",
+    "what_worked": "Strong positioning as legitimate end buyer with clear credentials | Detailed buy box explanation that educated the realtor | Flexible approach to contract terms and process | Good technical discussion about property challenges",
+    "what_to_tighten": "Could have been clearer upfront about assignment clause being standard boilerplate",
+    "language_flags": "",
+    "missed_opportunities": "",
+    "positive_moments": "Asked clarifying questions about wholesale vs end-buyer | Offered suggestion about Historic Heights salvage company | Expressed appreciation for Gayden's legitimate end-buyer approach | Engaged in detailed discussion about property moving and demo costs",
+    "resistance_moments": "Initial concern about wholesale deal language in contract",
+    "script_moment": "When Jon mentioned the assignment language concern, could have said: 'That's just standard language I keep in all contracts for flexibility, but this is definitely me as the end buyer - I'm not wholesaling this.'",
+    "on_leaderboard": "yes"
   }
 ]
