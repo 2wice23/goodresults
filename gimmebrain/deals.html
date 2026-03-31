@@ -887,8 +887,9 @@ function renderDeals() {
   }
 
   grid.innerHTML = filtered.map((d, i) => {
+    const contractN = parseDollar(d.contractPrice);
     const totalRepairs = (d.repairsPerSqft && d.sqft) ? d.repairsPerSqft * d.sqft : null;
-    const buyerProfit = (d.arv && totalRepairs != null && d.wholesalePrice) ? d.arv - totalRepairs - d.wholesalePrice : null;
+    const buyerProfit = (d.arv && totalRepairs != null && d.wholesalePrice) ? d.arv - totalRepairs - parseDollar(d.wholesalePrice) : null;
     const wholesaleProfit = (d.wholesalePrice && contractN) ? parseDollar(d.wholesalePrice) - contractN : null;
     const coeDays = daysUntil(d.coeDate);
     const liveUrl = SITE_BASE + '/deals/' + d._slug + '/';
@@ -914,7 +915,6 @@ function renderDeals() {
     const specs = [d.beds ? d.beds + 'bd' : null, d.baths ? d.baths + 'ba' : null, d.sqft ? Number(d.sqft).toLocaleString() + 'sf' : null, d.yearBuilt ? 'Yr ' + d.yearBuilt : null].filter(Boolean).join(' · ');
     const ddDays = daysUntil(d.ddEndDate);
     const emdDays = daysUntil(d.emdDueDate);
-    const contractN = parseDollar(d.contractPrice);
 
     return '<div class="deal-card" data-slug="' + d._slug + '" data-index="' + i + '">' +
       '<div class="card-top" onclick="toggleCard(this.parentElement)">' +
