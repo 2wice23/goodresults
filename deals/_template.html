@@ -239,6 +239,7 @@ function renderDeal(d) {
     d.lotSize   ? '<div class="spec-row"><span class="spec-key">Lot Size</span><span class="spec-val">'     + d.lotSize + '</span></div>' : '',
     d.yearBuilt ? '<div class="spec-row"><span class="spec-key">Year Built</span><span class="spec-val">'   + d.yearBuilt + '</span></div>' : '',
     d.garage    ? '<div class="spec-row"><span class="spec-key">Garage</span><span class="spec-val">'       + d.garage + '</span></div>' : '',
+    d.basementSqft ? '<div class="spec-row"><span class="spec-key">Basement</span><span class="spec-val">' + Number(d.basementSqft).toLocaleString() + ' sf</span></div>' : '',
   ].filter(Boolean).join('');
 
   var terms = [

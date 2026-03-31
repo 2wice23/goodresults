@@ -499,6 +499,7 @@ function renderDeals() {
             field('lotSize', 'Lot', d.lotSize) +
             field('yearBuilt', 'Year Built', d.yearBuilt) +
             field('garage', 'Garage', d.garage) +
+            field('basementSqft', 'Basement Sqft', d.basementSqft) +
           '</div>' +
           // PUBLIC NOTES
           '<div class="detail-section">' +
@@ -625,7 +626,7 @@ async function saveDeal(btn) {
     const key = el.dataset.field;
     let val = el.value;
     // Convert numeric fields (strip $ and commas, preserve decimals)
-    if (['wholesalePrice','arv','repairsPerSqft','beds','baths','sqft','yearBuilt','ddDays','emdDays'].includes(key)) {
+    if (['wholesalePrice','arv','repairsPerSqft','beds','baths','sqft','yearBuilt','ddDays','emdDays','basementSqft'].includes(key)) {
       const num = parseFloat(String(val).replace(/[$,]/g, ''));
       val = isNaN(num) ? '' : num;
     }
