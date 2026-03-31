@@ -537,27 +537,28 @@ async function runExtraction() {
 
   setStatus('Sending to AI for extraction...', 'active');
 
-  const prompt = `You are a real estate contract analyst specializing in both Nevada RPA and Texas TREC contracts. Extract all available deal information from the contract text below and return it as a single valid JSON object. Use null for any field you cannot find. Do not include any explanation or text outside the JSON.
+  const prompt = `You are a real estate contract analyst. Extract all available deal information from the contract text below and return it as a single valid JSON object. Use null for any field you cannot find. Do not include any explanation or text outside the JSON.
 
-CRITICAL — MULTI-DOCUMENT PDF HANDLING:
-This PDF likely contains MANY documents bundled together — the purchase agreement plus disclosures, addenda, lead paint forms, buyer broker agreements, wire fraud advisories, SRPD, etc. You MUST:
-1. First scan the FULL text to locate the actual purchase agreement (Nevada RPA or Texas TREC 1-4 form)
-2. Nevada RPA: Look for "RESIDENTIAL PURCHASE AGREEMENT" header, numbered paragraphs (1. PROPERTY, 2. PRICE), references to NRS
-3. Texas TREC: Look for "ONE TO FOUR FAMILY RESIDENTIAL CONTRACT (RESALE)" or TREC form number, numbered paragraphs (1. PARTIES, 2. PROPERTY)
-4. Extract data ONLY from the purchase agreement section — NOT from disclosure forms, broker agreements, or advisory documents
-5. If there are counteroffers, use the FINAL/most recent counteroffer price, not the original
+CRITICAL — IDENTIFYING THE PURCHASE AGREEMENT:
+This PDF may contain MANY documents bundled together — the purchase agreement plus disclosures, addenda, lead paint forms, buyer broker agreements, wire fraud advisories, SRPD, etc. You MUST find the actual purchase agreement first. It could be ANY of these forms:
+- Nevada ROA: "RESIDENTIAL OFFER AND ACCEPTANCE AGREEMENT" — created by SNR (Sierra Nevada Realtors), references NRS, has numbered lines, BUYER/SELLER sections, EMD section, CLOSING section with COE date
+- Nevada RPA: "RESIDENTIAL PURCHASE AGREEMENT" — similar structure, references NRS
+- Texas TREC: "ONE TO FOUR FAMILY RESIDENTIAL CONTRACT (RESALE)" or TREC form number, numbered paragraphs (1. PARTIES, 2. PROPERTY)
+- Other state forms: Look for the main document with purchase price, EMD, closing date, and buyer/seller signature blocks
+
+Extract data ONLY from the purchase agreement — NOT from disclosure forms, broker agreements, or advisory documents. If there are counteroffers, use the FINAL/most recent counteroffer price.
 
 IMPORTANT FIELD GUIDANCE:
-- executedDate: The date the LAST PERSON physically signed the purchase agreement. This is Day 0 for all date calculations. Look at ALL signature date fields in the purchase agreement's signature/acceptance section and take the LATEST (most recent) one. Do NOT use a pre-printed "Effective Date" field unless it matches the last signature date. Do NOT use dates from disclosure signatures, addenda signatures, or broker signatures — ONLY the purchase agreement buyer/seller signatures. Return as MM/DD/YYYY.
-- coeDate: The closing date — this is a SPECIFIC DATE written in the contract, NOT calculated from any day count. In TREC look for "Closing Date" (paragraph 9 or financing section). In RPA look for "Close of Escrow." Return as MM/DD/YYYY.
-- ddDays: THE NUMBER OF DAYS in the due diligence / option period — return as an integer only (e.g. 10). In TREC look for "Option Period" — it will say something like "X days after the Effective Date." In RPA look for "Investigation Period" or "Due Diligence Period" — it will say "X days." Extract just the number. ALWAYS calendar days, never business days.
-- emdDays: THE NUMBER OF DAYS after the Effective Date that earnest money is due — return as an integer only. In TREC look in the Earnest Money paragraph (paragraph 5) for "within ___ days." In RPA look for "within ___ days of acceptance." Extract just the number. If EMD is due "upon execution" return 0. ALWAYS calendar days.
-- emdAmount: The earnest money / option fee deposit amount.
-- sellerNames: All seller names. In estate situations include the executor name too. Get this from the purchase agreement, not from disclosure forms.
-- onMarket: Whether the property was listed on MLS. Look for MLS number, listing agent, or "listed" references. If buyer's agent and seller's agent are different companies, likely on-market.
-- property beds/baths/sqft/lotSize/yearBuilt/garage: These are often NOT in the contract body — check any attached addenda, property description sections, or MLS data references. Use null if truly not present. Do not guess.
-- condition fields: Condition info is rarely in a purchase contract. Use null unless explicitly mentioned.
-- agent: Look for buyer's agent AND seller's/listing agent sections. Prefer the listing/seller's agent details since that's who Good Results works with.
+- executedDate: The date the LAST PERSON physically signed the purchase agreement. This is Day 0 for all date calculations. Look at the SELLER'S ACCEPTANCE section at the end of the agreement — find ALL seller and buyer signature dates and take the LATEST one. For DocuSign documents, dates appear next to each signature as "DATE MM/DD/YYYY" or "3/30/2026 | 12:31 PM PDT". Compare all signature dates and return the most recent. Do NOT use dates from disclosure signatures, addenda signatures, or broker signatures. Return as MM/DD/YYYY.
+- coeDate: The closing date — a SPECIFIC DATE written in the contract, NOT calculated. Look for "Close of Escrow (COE) will occur on" or "CLOSING" section. Return as MM/DD/YYYY.
+- ddDays: THE NUMBER OF DAYS in the due diligence / option / inspection period — return as an integer only. In TREC look for "Option Period." In Nevada forms look for "Investigation Period," "Due Diligence Period," or inspection days. If the contract says DD begins "once access is provided" with no fixed day count, return null. ALWAYS calendar days, never business days.
+- emdDays: THE NUMBER OF DAYS after acceptance that earnest money is due — return as an integer only. Look for "within ___ days" near the EMD section. If EMD is due "upon execution" or "upon acceptance" return 0. If EMD is tied to another event (like "end of due diligence period") with no fixed day count, return null. ALWAYS calendar days.
+- emdAmount: The earnest money deposit amount. Look for "EARNEST MONEY DEPOSIT (EMD)" section with a dollar amount.
+- sellerNames: All seller names from the SELLER'S ACCEPTANCE section or signature block. Include all signers.
+- onMarket: If buyer's agent/brokerage and seller's agent/brokerage are DIFFERENT companies, the property is on-market. Return "Yes" or "No."
+- property beds/baths/sqft/lotSize/yearBuilt/garage: These are often NOT in the contract body. Use null if not present. Do not guess.
+- condition fields: Rarely in a purchase contract. Use null unless explicitly mentioned.
+- agent: Look for SELLER'S Representation / Listing Agent section (NOT buyer's agent). Extract the seller's/listing agent name, phone, email, and brokerage. Good Results is always the buyer, so we want the OTHER side's agent info.
 
 Return this exact structure:
 {
