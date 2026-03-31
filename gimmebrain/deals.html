@@ -311,7 +311,7 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 </header>
 
 <section class="hero">
-  <div class="eyebrow">All Deals &mdash; Live from GitHub</div>
+  <div class="eyebrow">All Deals &mdash; Live from Cloud</div>
   <h1>Deal <em>Command Center</em></h1>
   <p class="hero-sub">Every deal page on the site, pulled live. Create new deals from contracts, edit inline, manage photos — everything in one place.</p>
 </section>
@@ -405,10 +405,10 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
         <div class="step-hint">Each button does one thing. Run them in order, or skip what you don't need.</div>
 
         <button class="launch-btn" id="btnCreateFolder" disabled style="background:var(--orange);margin-top:4px;font-size:0.72rem;padding:12px;">📁 Create Deal Folder</button>
-        <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Pushes template + deal data to GitHub → auto-deploys to site</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Creates deal page + saves data to cloud</div>
 
         <button class="launch-btn" id="btnPushPhotos" disabled style="background:var(--purple);margin-top:10px;font-size:0.72rem;padding:12px;">📸 Push Photos</button>
-        <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Uploads photos to the deal folder on GitHub</div>
+        <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Uploads photos to cloud storage</div>
 
         <button class="launch-btn" id="btnPushClose" disabled style="background:#2563EB;margin-top:10px;font-size:0.72rem;padding:12px;">📊 Push to Close</button>
         <div style="font-family:'Inter',sans-serif;font-size:0.5rem;color:var(--dim);text-align:center;margin-top:4px;line-height:1.5;">Updates the Close CRM opportunity with deal data</div>
@@ -504,13 +504,12 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 </div>
 
 <div class="deal-grid" id="dealGrid">
-  <div class="loading"><div class="loading-spinner"></div><br>Loading deals from GitHub&hellip;</div>
+  <div class="loading"><div class="loading-spinner"></div><br>Loading deals&hellip;</div>
 </div>
 
 <script>
 const ANTHROPIC_PROXY = '/.netlify/functions/anthropic-proxy';
-const GITHUB_REPO = '2wice23/goodresults';
-const GITHUB_PROXY = '/.netlify/functions/github-proxy';
+const GITHUB_PROXY = '/.netlify/functions/github-proxy'; // Only used for new deal template push
 const RENTCAST_PROXY = '/.netlify/functions/rentcast-proxy';
 const SITE_BASE = 'https://www.goodresults.org';
 const BLOB_API = '/api/blob';
@@ -577,34 +576,6 @@ function dateLabel(days) {
   return days + 'd';
 }
 
-// ── GitHub proxy calls ──
-
-async function ghGet(path) {
-  const r = await fetch(GITHUB_PROXY, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ path, method: 'GET' })
-  });
-  return r.json();
-}
-
-async function ghPut(path, body) {
-  const r = await fetch(GITHUB_PROXY, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ path, method: 'PUT', body })
-  });
-  return r.json();
-}
-
-async function ghDelete(path, body) {
-  const r = await fetch(GITHUB_PROXY, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ path, method: 'DELETE', body })
-  });
-  return r.json();
-}
 
 // ── Blob helpers (Netlify Blobs — no GitHub needed) ──
 
@@ -741,32 +712,6 @@ function normalizeDeal(json, slug) {
     if (json.emdDays && !json.emdDueDate) json.emdDueDate = addDaysToDate(baseDate, json.emdDays);
   }
   return json;
-}
-
-// Build file metadata for a deal from folder listing + manifest
-function buildFileList(slug, folderFiles, manifest) {
-  const IMG_RE = /\.(jpe?g|png|webp|gif)$/i;
-  const DOC_RE = /\.(pdf|docx?|xlsx?|csv|txt)$/i;
-  const SKIP = ['deal-doc.txt', 'manifest.json', 'index.html'];
-
-  const allFiles = folderFiles.filter(f => f.type === 'file' && !SKIP.includes(f.name)).map(f => ({
-    name: f.name, sha: f.sha,
-    url: SITE_BASE + '/deals/' + slug + '/' + f.name,
-    path: 'deals/' + slug + '/' + f.name,
-    type: IMG_RE.test(f.name) ? 'photo' : (DOC_RE.test(f.name) ? 'doc' : 'file'),
-  }));
-
-  if (manifest && Array.isArray(manifest)) {
-    allFiles.forEach(f => {
-      const entry = manifest.find(m => m.name === f.name);
-      if (entry) { f.visibility = entry.visibility || 'public'; f.order = entry.order != null ? entry.order : 999; }
-      else { f.visibility = f.type === 'photo' ? 'public' : 'private'; f.order = 999; }
-    });
-  } else {
-    allFiles.forEach((f, i) => { f.visibility = f.type === 'photo' ? 'public' : 'private'; f.order = i; });
-  }
-  allFiles.sort((a, b) => a.order - b.order);
-  return allFiles;
 }
 
 // Attach file metadata to a deal object
@@ -914,7 +859,7 @@ function renderDeals() {
     const photoHtml = d._photos.map((p, pi) => {
       const vis = p.visibility || 'public';
       const privClass = vis === 'private' ? ' is-private' : '';
-      return '<div class="photo-item' + privClass + '" draggable="true" data-photo-path="' + p.path + '" data-photo-sha="' + p.sha + '" data-photo-name="' + p.name + '" data-slug="' + d._slug + '" data-order="' + pi + '" ' +
+      return '<div class="photo-item' + privClass + '" draggable="true" data-photo-path="' + p.path + '" data-photo-name="' + p.name + '" data-slug="' + d._slug + '" data-order="' + pi + '" ' +
         'ondragstart="photoDragStart(event)" ondragend="photoDragEnd(event)" ondragover="photoDragOver(event)" ondragleave="photoDragLeave(event)" ondrop="photoDrop(event)">' +
         '<span class="photo-order-badge">' + (pi + 1) + '</span>' +
         '<img src="' + p.url + '" alt="' + p.name + '">' +
@@ -1057,7 +1002,7 @@ function renderDeals() {
           '<div class="photo-section-title">Documents (' + d._docs.length + ')</div>' +
           '<div class="doc-list">' + d._docs.map(function(f) {
             var vis = f.visibility || 'private';
-            return '<div class="doc-item" data-doc-name="' + f.name + '" data-doc-path="' + f.path + '" data-doc-sha="' + f.sha + '" data-slug="' + d._slug + '">' +
+            return '<div class="doc-item" data-doc-name="' + f.name + '" data-doc-path="' + f.path + '" data-slug="' + d._slug + '">' +
               '<div class="doc-icon">' + docIcon(f.name) + '</div>' +
               '<div class="doc-info">' +
                 '<div class="doc-name">' + f.name + '</div>' +
@@ -2277,7 +2222,7 @@ async function githubAPI(repoPath, method, body) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      path: '/repos/' + GITHUB_REPO + '/contents/' + repoPath,
+      path: '/repos/2wice23/goodresults/contents/' + repoPath,
       method: method || 'GET',
       body: body || undefined
     })
@@ -2380,7 +2325,7 @@ function gatherDealJson() {
 }
 
 // ============================================================
-// BUTTON 1: CREATE DEAL FOLDER (GitHub template + deal-doc.txt)
+// BUTTON 1: CREATE DEAL FOLDER (template to GitHub + data to Blobs)
 // ============================================================
 document.getElementById('btnCreateFolder').addEventListener('click', async () => {
   const btn = document.getElementById('btnCreateFolder');
