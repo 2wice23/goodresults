@@ -1165,5 +1165,30 @@
       26,
       0
     ]
+  },
+  {
+    "timestamp": "2026-04-01T04:25:25.087Z",
+    "agent": "Unknown",
+    "email": "",
+    "module": 5,
+    "moduleTitle": "SMS Playbook",
+    "scorePct": 100,
+    "correct": 10,
+    "total": 10,
+    "xp": 120,
+    "poolSize": 24,
+    "correctIndices": [
+      23,
+      20,
+      9,
+      6,
+      18,
+      2,
+      22,
+      1,
+      7,
+      16
+    ],
+    "wrongAnswers": []
   }
 ]
