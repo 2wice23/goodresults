@@ -1,8 +1,6 @@
-// Netlify serverless function — fetches ALL Good Results knowledge bases from
-// GitHub and returns ranked search results with context snippets.
-// Searches: modules-kb, analyzer-kb, chloe-kb, sms-kb (skips master-kb to
-// avoid duplicates since master is a merge of the others).
-// Caches all KBs in memory for 5 min so repeated searches are instant.
+// Netlify serverless function — searches ALL Good Results knowledge bases
+// PRIMARY: Netlify Blobs (training store) — no external API calls
+// FALLBACK: GitHub API — for KBs not yet in Blobs
 //
 // POST { query: "earnest money" }
 // Returns { results: [ { heading, brain, breadcrumb, snippet, score }, ... ] }
@@ -10,7 +8,9 @@
 // POST { action: "question", question: "...", agent: "Dan", email: "..." }
 // Sends the question to #questions-and-answers in Slack, tagging Joe & Gayden
 //
-// Env vars: GitHubToken, slack_the_group_chat (fallback), slack_questions_answers
+// Env vars: GitHubToken (fallback), slack_the_group_chat, slack_questions_answers
+
+const { getStore, connectLambda } = require("@netlify/blobs");
 
 const GITHUB_API = 'https://api.github.com';
 const REPO = '/repos/2wice23/goodresults/contents';
@@ -18,33 +18,51 @@ const CACHE_TTL = 5 * 60 * 1000; // 5 min
 
 // Each "brain" — the individual KBs that make up Good Results knowledge
 const BRAINS = [
-  { file: 'modules-kb.md',  label: 'Academy',       icon: '🎓', color: '#FF5C1A' },
-  { file: 'analyzer-kb.md', label: 'Call Analyzer',  icon: '🎙', color: '#22C55E' },
-  { file: 'chloe-kb.md',    label: 'Chloe (Voice)',  icon: '🤖', color: '#60A5FA' },
-  { file: 'sms-kb.md',      label: 'SMS Playbook',   icon: '💬', color: '#F59E0B' }
+  { file: 'modules-kb.md',  blobKey: 'kb-modules',   label: 'Academy',       icon: '🎓', color: '#FF5C1A' },
+  { file: 'analyzer-kb.md', blobKey: 'analyzer-kb',   label: 'Call Analyzer',  icon: '🎙', color: '#22C55E' },
+  { file: 'chloe-kb.md',    blobKey: 'kb-chloe',      label: 'Chloe (Voice)',  icon: '🤖', color: '#60A5FA' },
+  { file: 'sms-kb.md',      blobKey: 'kb-sms',        label: 'SMS Playbook',   icon: '💬', color: '#F59E0B' }
 ];
 
-let cache = {}; // { [file]: { text, ts } }
+let cache = {}; // { [key]: { text, ts } }
 
-async function fetchFile(token, file) {
-  const cached = cache[file];
+async function fetchFile(token, brain) {
+  const cacheKey = brain.blobKey;
+  const cached = cache[cacheKey];
   if (cached && Date.now() - cached.ts < CACHE_TTL) return cached.text;
 
-  const resp = await fetch(`${GITHUB_API}${REPO}/${file}`, {
-    headers: {
-      'Accept': 'application/vnd.github+json',
-      'Authorization': `Bearer ${token}`,
-      'X-GitHub-Api-Version': '2022-11-28'
+  // Try Blobs first
+  try {
+    const store = getStore({ name: 'training', consistency: 'eventual' });
+    const text = await store.get(brain.blobKey);
+    if (text && text.length > 0) {
+      cache[cacheKey] = { text, ts: Date.now() };
+      return text;
     }
-  });
-  if (!resp.ok) {
-    console.error(`Failed to fetch ${file}: ${resp.status}`);
+  } catch(e) { /* fall through */ }
+
+  // Fallback: GitHub
+  if (!token) return null;
+  try {
+    const resp = await fetch(`${GITHUB_API}${REPO}/${brain.file}`, {
+      headers: {
+        'Accept': 'application/vnd.github+json',
+        'Authorization': `Bearer ${token}`,
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    });
+    if (!resp.ok) {
+      console.error(`Failed to fetch ${brain.file}: ${resp.status}`);
+      return null;
+    }
+    const json = await resp.json();
+    const text = Buffer.from(json.content, 'base64').toString('utf-8');
+    cache[cacheKey] = { text, ts: Date.now() };
+    return text;
+  } catch(e) {
+    console.error(`GitHub fetch error for ${brain.file}:`, e.message);
     return null;
   }
-  const json = await resp.json();
-  const text = Buffer.from(json.content, 'base64').toString('utf-8');
-  cache[file] = { text, ts: Date.now() };
-  return text;
 }
 
 // Parse a KB into sections by heading hierarchy
@@ -173,8 +191,14 @@ async function sendQuestion(webhook, body) {
 }
 
 exports.handler = async (event) => {
+  connectLambda(event);
+
+  const origin = (event.headers || {}).origin || '';
+  const allowedOrigins = ['https://goodresults.org', 'https://www.goodresults.org', 'http://localhost:8888'];
+  const corsOrigin = allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+
   const cors = {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': corsOrigin,
     'Access-Control-Allow-Headers': 'Content-Type',
     'Content-Type': 'application/json'
   };
@@ -182,8 +206,7 @@ exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
   if (event.httpMethod !== 'POST') return { statusCode: 405, headers: cors, body: JSON.stringify({ error: 'POST only' }) };
 
-  const token = process.env.GitHubToken;
-  if (!token) return { statusCode: 500, headers: cors, body: JSON.stringify({ error: 'GitHubToken not configured' }) };
+  const token = process.env.GitHubToken; // optional fallback
 
   try {
     const body = JSON.parse(event.body);
@@ -202,8 +225,8 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers: cors, body: JSON.stringify({ error: 'Query too short' }) };
     }
 
-    // Fetch all KBs in parallel
-    const fetches = BRAINS.map(b => fetchFile(token, b.file).then(text => ({ brain: b, text })));
+    // Fetch all KBs in parallel (Blobs first, GitHub fallback)
+    const fetches = BRAINS.map(b => fetchFile(token, b).then(text => ({ brain: b, text })));
     const results = await Promise.all(fetches);
 
     // Parse all into sections

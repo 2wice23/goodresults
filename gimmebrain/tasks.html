@@ -1,47 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>(function(){
-  const a=sessionStorage.getItem('gr_authed');
-  const u=(sessionStorage.getItem('gr_email')||'').toLowerCase();
-  const ok=['gayden@goodresults.org','joe@goodresults.org'];
-  if(a!=='1'||!ok.includes(u)){sessionStorage.setItem('gr_brain_bounce','1');window.location.href='/gimmebrain/login.html';}
-})()</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Good Results Gimme Brain Back Door Terminal Dash Board Extradoaire For Owners Who Cant Read Good</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/gimmebrain/gr-common.css">
 <style>
-:root{
-  --black:#0D0F14;--surface:#11141A;--surface2:#161B24;--surface3:#0A0C10;
-  --white:#F0F4FF;--cream:#C8D4E4;--muted:#8A95A8;--dim:#555A66;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.04);
-  --orange:#FF5C1A;--orange-glow:rgba(255,92,26,0.12);--orange-border:rgba(255,92,26,0.25);
-  --green:#22C55E;--green-bg:rgba(34,197,94,0.08);--green-border:rgba(34,197,94,0.25);
-  --red:#EF4444;--red-bg:rgba(239,68,68,0.08);--red-border:rgba(239,68,68,0.25);
-  --gold:#F59E0B;--gold-bg:rgba(245,158,11,0.08);--gold-border:rgba(245,158,11,0.25);
-  --blue:#3B82F6;--blue-bg:rgba(59,130,246,0.08);--blue-border:rgba(59,130,246,0.25);
-  --radius:8px;--radius-sm:5px;--radius-lg:12px;
-  --mono:'JetBrains Mono',monospace;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{font-size:16px;scroll-behavior:smooth;}
-body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;background:
-  radial-gradient(ellipse 80% 45% at 50% -10%,rgba(255,92,26,0.07) 0%,transparent 55%),
-  repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px),
-  repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px);z-index:0;}
-body>*{position:relative;z-index:1;}
-
-/* HEADER */
-.header{padding:14px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,.97);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;}
-.header-left{display:flex;align-items:center;gap:12px;}
-.hub-link{display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--cream);text-decoration:none;font-weight:600;padding:6px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);transition:all 0.2s;}
-.hub-link:hover{color:var(--orange);border-color:var(--orange-border);background:var(--orange-glow);}
-.logo{font-size:0.9rem;color:var(--orange);font-weight:800;letter-spacing:0.04em;}
-.header-right{display:flex;align-items:center;gap:10px;}
-.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s ease infinite;}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(34,197,94,0)}}
 .header-status{font-size:0.7rem;color:var(--muted);font-weight:600;letter-spacing:0.05em;text-transform:uppercase;}
 
 /* HERO */
@@ -203,60 +168,19 @@ body>*{position:relative;z-index:1;}
   <div id="taskList"></div>
 </div>
 
-<!-- SYSTEM FEATURES -->
+<!-- DEAL DEADLINES -->
 <div class="section">
-  <div class="section-title">What This System Does</div>
-  <div id="featuresGrid" class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">🎓</div>
-      <div class="feature-name">Academy — 12 Training Modules</div>
-      <div class="feature-desc">Full onboarding curriculum covering pipeline, cold calling, offers, contracts, financing, due diligence, foreclosures, SMS playbooks, and more. Each module has a quiz pool that tracks which questions you have already mastered — once you prove you know it, you stop seeing it. Notes box on every module lets agents flag mistakes or suggest content, and Gayden reviews them daily.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🎙</div>
-      <div class="feature-name">Call Analyzer — AI Call Scoring</div>
-      <div class="feature-desc">Paste any call transcript and AI scores it across 7 criteria using the Good Results playbook — buy box delivery, objection handling, tone, forbidden language, closing attempt, and follow-up. Shows exactly what you missed and the script you should have used at each point. Every analyzed call feeds back into the knowledge base, so scoring improves over time. The leaderboard tracks daily, weekly, and all-time averages per agent.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🧠</div>
-      <div class="feature-name">Self-Learning Knowledge Base</div>
-      <div class="feature-desc">Five interconnected KBs (Master, Analyzer, Chloe Voice Agent, SMS, Academy) that sync automatically. New call data gets pulled daily from the Google Sheet, compared against existing knowledge, and proposed as updates — nothing changes without Gayden's approval. Sunday master merges push new knowledge down to every small brain. The system literally gets smarter every week without anyone writing documentation.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🤖</div>
-      <div class="feature-name">Chloe — AI Voice Agent</div>
-      <div class="feature-desc">AI-powered phone agent in Close CRM that handles inbound and outbound calls using the same playbook the human agents train on. Chloe's knowledge base stays in sync with the master KB through the weekly merge cycle, so when the team learns something new, Chloe learns it too.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🚀</div>
-      <div class="feature-name">Deal Launcher — One-Click Deal Setup</div>
-      <div class="feature-desc">Upload a signed contract and property photos, fill in deal details, hit Launch. It creates the deal page on the website, updates the opportunity in Close CRM, and generates a full disposition workflow with AI-written texts and emails from the SMS playbook. Replaces 45 minutes of manual setup across three systems with one button.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔍</div>
-      <div class="feature-name">KB Search — Cross-Brain Search</div>
-      <div class="feature-desc">Search every knowledge base at once — Academy modules, analyzer playbook, Chloe scripts, and SMS cadences. Results are color-coded by source so you know where the info lives. If your search comes up short, the question box at the bottom sends it to the Slack Q&A channel and tags Joe and Gayden automatically.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📊</div>
-      <div class="feature-name">Deal Dashboard — Live Pipeline View</div>
-      <div class="feature-desc">Real-time view of every active deal across Las Vegas, Reno, and Houston. Pipeline status, contract dates, EMD deadlines, and disposition progress. Check it every morning to know what needs attention — which deals are approaching deadlines, which dispositions need follow-up, and where the pipeline stands across all three markets.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">⚡</div>
-      <div class="feature-name">Automated Daily Operations</div>
-      <div class="feature-desc">8 scheduled automations run without any computer being on — morning briefings, hourly call target tracking with agent tagging, weekly coaching reports, KB learning cycles, and master merges. Slack gets the right message in the right channel at the right time. Leadership is shown on scoreboards but never tagged. Everything that needs approval pauses and waits.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔒</div>
-      <div class="feature-name">Secrets Proxy Architecture</div>
-      <div class="feature-desc">Zero API keys in the source code. Every external API call (Close CRM, Slack, OpenAI, GitHub) goes through Netlify serverless proxy functions with keys stored in environment variables. The repo is public and safe to share — no credentials are exposed anywhere in the codebase.</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🏗</div>
-      <div class="feature-name">Auto-Deploy Pipeline</div>
-      <div class="feature-desc">Push to GitHub, Netlify builds and deploys automatically. No FTP, no manual uploads, no drag-and-drop. Every deployment is version-controlled with full commit history. One standardized push method (git clone/push) across every project and scheduled task — learned the hard way after two sessions using different methods overwrote each other.</div>
-    </div>
+  <div class="section-title">Deal Deadlines</div>
+  <div id="deadlinesWidget" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;">
+    <div style="color:var(--dim);font-size:0.8rem;">Loading deadlines...</div>
+  </div>
+</div>
+
+<!-- ERROR LOG -->
+<div class="section">
+  <div class="section-title">Error Log</div>
+  <div id="errorLogWidget" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;">
+    <div style="color:var(--dim);font-size:0.8rem;">Loading errors...</div>
   </div>
 </div>
 
@@ -280,7 +204,10 @@ body>*{position:relative;z-index:1;}
   <div class="footer-text">The Good Results Gimme Brain Back Door Terminal Dash Board Extradoaire For Owners Who Cant Read Good v1.0 — if you're reading this, you're either Gayden or Joe</div>
 </div>
 
+<script src="/gimmebrain/gr-utils.js"></script>
 <script>
+grAuthOwner();
+
 const API = '/.netlify/functions/analyzer-api';
 
 // ============================================================
@@ -294,7 +221,7 @@ const endpoints = [
   { name: 'Deals', url: '/gimmebrain/deals', label: 'Deal Dashboard' },
   { name: 'API', url: '/.netlify/functions/analyzer-api?action=dailyStats', label: 'Analyzer API' },
   { name: 'KB Reader', url: '/.netlify/functions/kb-reader?file=analyzer-kb', label: 'KB Reader' },
-  { name: 'GitHub Proxy', url: '/.netlify/functions/github-proxy', label: 'GitHub Proxy', expectPost: true },
+  { name: 'Repo Proxy', url: '/.netlify/functions/github-proxy', label: 'Repo Proxy', expectPost: true },
 ];
 
 async function checkHealth() {
@@ -355,12 +282,14 @@ function scorePill(val) {
 
 async function loadLeaderboard() {
   try {
+    grSkeleton('lbBody', 5);
     const [statsRes, boardRes] = await Promise.all([
-      fetch(`${API}?action=dailyStats&cachebust=${Date.now()}`),
-      fetch(`${API}?action=get&cachebust=${Date.now()}`)
+      grFetch(`${API}?action=dailyStats&cachebust=${Date.now()}`, { _label: 'Daily Stats' }),
+      grFetch(`${API}?action=get&cachebust=${Date.now()}`, { _label: 'Leaderboard Data' })
     ]);
-    const statsData = await statsRes.json();
-    const board = await boardRes.json();
+    if (!statsRes || !boardRes) return;
+    const statsData = statsRes;
+    const board = boardRes;
     const stats = statsData.stats || [];
     const agents = [...new Set([
       ...stats.map(s => s.agent),
@@ -430,14 +359,14 @@ const tasks = [
     name: 'Daily KB Learn',
     schedule: 'Every day at 7:00 AM',
     enabled: true,
-    desc: 'Pulls new call data from Google Sheet, Slack, and Close. Compares against current analyzer-kb.md on GitHub. Proposes changes and waits for Gayden approval before writing. Posts summary to #hack-the-planet.'
+    desc: 'Pulls new call data from Google Sheet, Slack, and Close. Compares against current analyzer-kb.md in the knowledge base. Proposes changes and waits for Gayden approval before writing. Posts summary to #hack-the-planet.'
   },
   {
     id: 'module-update-queue-processor',
     name: 'Module Update Queue',
     schedule: 'Every day at 7:30 AM',
     enabled: true,
-    desc: 'Processes pending module update submissions from training-data/updates.json on GitHub. Discards test entries, drafts proposed KB/module changes for real submissions, waits for approval. Posts to #hack-the-planet.'
+    desc: 'Processes pending module update submissions from training-data/updates.json. Discards test entries, drafts proposed KB/module changes for real submissions, waits for approval. Posts to #hack-the-planet.'
   },
   {
     id: 'weekly-gr-coaching-report',
@@ -458,7 +387,7 @@ const tasks = [
     name: 'Weekly KB Sync (Master Merge)',
     schedule: 'Sundays at 9:00 AM',
     enabled: true,
-    desc: 'Hub-and-spoke KB sync. Reads all 5 KBs from GitHub, diffs small brains against Master, merges new knowledge up, pushes updates back down preserving formats. Requires Gayden approval before pushing. Posts to #hack-the-planet.'
+    desc: 'Hub-and-spoke KB sync. Reads all 5 KBs from the repo, diffs small brains against Master, merges new knowledge up, pushes updates back down preserving formats. Requires Gayden approval before pushing. Posts to #hack-the-planet.'
   },
   {
     id: 'call-target-tracker',
@@ -505,7 +434,7 @@ function renderTasks() {
           </div>
           <div class="task-meta-item">
             <div class="task-meta-label">Push Method</div>
-            <div class="task-meta-value">${t.enabled && t.id !== 'call-target-tracker' && t.id !== 'daily-gr-morning-briefing' && t.id !== 'weekly-gr-coaching-report' ? 'git clone/push' : 'N/A (no GitHub writes)'}</div>
+            <div class="task-meta-value">${t.enabled && t.id !== 'call-target-tracker' && t.id !== 'daily-gr-morning-briefing' && t.id !== 'weekly-gr-coaching-report' ? 'git clone/push' : 'N/A (no repo writes)'}</div>
           </div>
           <div class="task-meta-item">
             <div class="task-meta-label">Approval Required</div>
@@ -532,8 +461,8 @@ const NOTES_KEY = 'dashboard-notes';
 async function loadNotes() {
   const el = document.getElementById('notesList');
   try {
-    const res = await fetch(`${API}?action=getNotes&key=${NOTES_KEY}&cachebust=${Date.now()}`);
-    const data = await res.json();
+    const data = await grFetch(`${API}?action=getNotes&key=${NOTES_KEY}&cachebust=${Date.now()}`, { _label: 'Load Notes' });
+    if (!data) return;
     const notes = data.notes || [];
     if (notes.length === 0) {
       el.innerHTML = '<div class="note-empty">No notes yet. Add an idea above.</div>';
@@ -555,29 +484,33 @@ async function addNote() {
   const input = document.getElementById('noteInput');
   const text = input.value.trim();
   if (!text) return;
-  const author = sessionStorage.getItem('gr_name') || sessionStorage.getItem('gr_agent') || 'Unknown';
+  const author = grSession.name || grSession.agent || 'Unknown';
   const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   try {
-    await fetch(API, {
+    const result = await grFetch(API, {
       method: 'POST',
-      body: JSON.stringify({ action: 'saveNote', key: NOTES_KEY, note: { text, author, date } })
+      body: JSON.stringify({ action: 'saveNote', key: NOTES_KEY, note: { text, author, date } }),
+      _label: 'Save Note'
     });
-    input.value = '';
-    loadNotes();
+    if (result) {
+      input.value = '';
+      loadNotes();
+    }
   } catch(e) {
-    alert('Failed to save note');
+    grToast('error', 'Save Failed', 'Could not save note');
   }
 }
 
 async function deleteNote(index) {
   try {
-    await fetch(API, {
+    const result = await grFetch(API, {
       method: 'POST',
-      body: JSON.stringify({ action: 'deleteNote', key: NOTES_KEY, index })
+      body: JSON.stringify({ action: 'deleteNote', key: NOTES_KEY, index }),
+      _label: 'Delete Note'
     });
-    loadNotes();
+    if (result) loadNotes();
   } catch(e) {
-    alert('Failed to delete note');
+    grToast('error', 'Delete Failed', 'Could not delete note');
   }
 }
 
@@ -593,16 +526,89 @@ document.getElementById('noteInput').addEventListener('keydown', function(e) {
 });
 
 // ============================================================
+// DEAL DEADLINES WIDGET
+// ============================================================
+
+async function loadDeadlines() {
+  const el = document.getElementById('deadlinesWidget');
+  try {
+    const data = await grFetch('/.netlify/functions/deal-deadlines?days=7', { _label: 'Deal Deadlines' });
+    if (!data) { el.innerHTML = '<div style="color:var(--dim);font-size:0.8rem;">Could not load deadlines.</div>'; return; }
+    const dl = data.deadlines || [];
+    if (dl.length === 0) {
+      el.innerHTML = '<div style="color:var(--green);font-size:0.8rem;font-weight:600;">No deadlines in the next 7 days.</div>';
+      return;
+    }
+    el.innerHTML = dl.map(d => {
+      const urgent = d.daysUntil <= 1;
+      const pastDue = d.daysUntil < 0;
+      const color = pastDue ? 'var(--red)' : urgent ? 'var(--gold)' : 'var(--cream)';
+      const badge = pastDue ? `<span style="color:var(--red);font-weight:800;">PAST DUE</span>` :
+        d.daysUntil === 0 ? `<span style="color:var(--gold);font-weight:800;">TODAY</span>` :
+        d.daysUntil === 1 ? `<span style="color:var(--gold);font-weight:700;">TOMORROW</span>` :
+        `<span style="color:var(--muted);">${d.daysUntil} days</span>`;
+      return `<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border2);">
+        <div style="width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0;"></div>
+        <div style="flex:1;">
+          <div style="font-size:0.8rem;font-weight:700;color:${color};">${escHtml(d.type)} — ${escHtml(d.address)}</div>
+          <div style="font-size:0.68rem;color:var(--muted);">${d.date}</div>
+        </div>
+        <div>${badge}</div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    el.innerHTML = '<div style="color:var(--dim);font-size:0.8rem;">Deadline check failed.</div>';
+  }
+}
+
+// ============================================================
+// ERROR LOG WIDGET
+// ============================================================
+
+async function loadErrorLog() {
+  const el = document.getElementById('errorLogWidget');
+  try {
+    const data = await grFetch('/.netlify/functions/error-log', { _label: 'Error Log' });
+    if (!data) { el.innerHTML = '<div style="color:var(--dim);font-size:0.8rem;">Could not load error log.</div>'; return; }
+    if (data.today === 0 && data.total === 0) {
+      el.innerHTML = '<div style="color:var(--green);font-size:0.8rem;font-weight:600;">No errors logged.</div>';
+      return;
+    }
+    let html = `<div style="display:flex;gap:16px;margin-bottom:12px;">
+      <div style="font-size:0.75rem;"><span style="font-weight:800;color:${data.today > 0 ? 'var(--red)' : 'var(--green)'};">${data.today}</span> <span style="color:var(--muted);">today</span></div>
+      <div style="font-size:0.75rem;"><span style="font-weight:800;color:var(--cream);">${data.total}</span> <span style="color:var(--muted);">total</span></div>
+    </div>`;
+    if (data.today > 0 && data.byPage) {
+      html += '<div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:6px;">Today by page</div>';
+      html += Object.entries(data.byPage).map(([page, count]) =>
+        `<div style="font-size:0.75rem;color:var(--cream);padding:2px 0;">${escHtml(page)}: <span style="font-weight:700;color:var(--red);">${count}</span></div>`
+      ).join('');
+    }
+    if (data.errors && data.errors.length > 0) {
+      html += '<div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;font-weight:700;margin:10px 0 6px;">Recent</div>';
+      html += data.errors.slice(-5).reverse().map(e =>
+        `<div style="font-size:0.72rem;padding:4px 0;border-bottom:1px solid var(--border2);color:var(--cream);">
+          <span style="color:var(--red);font-weight:600;">${escHtml(e.title || 'Error')}</span>
+          <span style="color:var(--dim);font-size:0.65rem;margin-left:6px;">${e.page || ''} · ${new Date(e.timestamp).toLocaleString()}</span>
+        </div>`
+      ).join('');
+    }
+    el.innerHTML = html;
+  } catch(e) {
+    el.innerHTML = '<div style="color:var(--dim);font-size:0.8rem;">Error log check failed.</div>';
+  }
+}
+
+// ============================================================
 // INIT
 // ============================================================
 
 checkHealth();
-loadLeaderboard();
+grAutoRefresh(loadLeaderboard, 60000);
 renderTasks();
 loadNotes();
-
-// Auto-refresh health every 60s
-setInterval(checkHealth, 60000);
+loadDeadlines();
+loadErrorLog();
 </script>
 <footer style="padding:24px 44px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.07);">
   <span style="font-size:.72rem;font-weight:800;color:#FF5C1A;letter-spacing:.04em;">GOOD RESULTS</span>

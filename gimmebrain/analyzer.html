@@ -158,9 +158,10 @@
   .coaching-missed{border-color:var(--blue);background:var(--blue-bg);color:var(--white);}
   .coaching-missed .coaching-label{color:var(--blue);}
 
-  /* SCORE BARS */
-  .scores-section{margin:20px 0;}
-  .score-item{margin-bottom:14px;}
+  /* SCORE BARS — 2-column grid for compact side-by-side layout */
+  .scores-section{margin:20px 0;display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;}
+  @media(max-width:600px){.scores-section{grid-template-columns:1fr;}}
+  .score-item{margin-bottom:0;}
   .score-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
   .score-name{font-size:0.75rem;font-weight:700;text-transform:uppercase;color:var(--muted);}
   .score-val{font-size:0.75rem;font-weight:700;color:var(--white);}
@@ -189,22 +190,10 @@
   .detail-item{font-size:0.85rem;color:var(--cream);line-height:1.5;padding-left:12px;position:relative;font-weight:500;}
   .detail-item::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;}
 
-  /* FILLER WORD COUNTERS */
-  .filler-section{background:var(--surface2);border-radius:var(--radius-sm);padding:14px 16px;margin:16px 0;}
-  .filler-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-  .filler-title{font-size:0.7rem;text-transform:uppercase;font-weight:700;color:var(--gold);display:flex;align-items:center;gap:6px;}
-  .filler-total{font-size:0.75rem;font-weight:800;color:var(--gold);background:var(--gold-bg);border:1px solid var(--gold-border);padding:2px 10px;border-radius:20px;}
-  .filler-grid{display:flex;flex-wrap:wrap;gap:6px;}
-  .filler-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;border:1px solid var(--border);background:var(--surface3);color:var(--cream);transition:all 0.2s;}
-  .filler-pill .fp-word{opacity:0.7;}
-  .filler-pill .fp-count{font-weight:800;color:var(--white);}
-  .filler-pill.high{border-color:var(--red-border);background:var(--red-bg);color:var(--red);}
-  .filler-pill.high .fp-word{opacity:1;}
-  .filler-pill.high .fp-count{color:var(--red);}
-  .filler-pill.med{border-color:var(--gold-border);background:var(--gold-bg);color:var(--gold);}
-  .filler-pill.med .fp-word{opacity:1;}
-  .filler-pill.med .fp-count{color:var(--gold);}
-  .filler-none{font-size:0.8rem;color:var(--green);font-weight:600;}
+  /* MAIN COACHING TAKEAWAY — the one thing to remember */
+  .main-takeaway{background:linear-gradient(135deg,rgba(255,92,26,0.12),rgba(255,92,26,0.04));border:2px solid var(--orange);border-radius:var(--radius-lg);padding:20px 24px;margin:24px 0;text-align:center;}
+  .main-takeaway-label{font-size:0.65rem;text-transform:uppercase;font-weight:800;color:var(--orange);letter-spacing:0.12em;margin-bottom:10px;}
+  .main-takeaway-text{font-size:1.05rem;color:var(--white);line-height:1.7;font-weight:600;}
 
   /* CUSTOM KNOWLEDGE BOX */
   .custom-kb-box{margin-top:20px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);}
@@ -649,13 +638,13 @@ RESPONSE FORMAT: Return ONLY valid JSON, no markdown, no backticks:
   "extracted_knowledge": ["Any real estate market insights, seller situations, neighborhood dynamics, pricing patterns, title/financing issues, or deal structures that came up in this call that would help future calls. Extract only genuinely useful field knowledge — omit generic advice. Examples: 'Sellers in Henderson NV are holding firm above 80% ARV right now', 'This realtor mentioned their office does a lot of probate in 77084 zip', 'Agents in Summerlin are seeing 60-day escrows as standard'. Empty array if nothing notable was surfaced."]
 }
 
-WEEKLY LEARNINGS FROM CALL DATA (updated 2026-03-31 — Cycle 2):
+WEEKLY LEARNINGS FROM CALL DATA (updated 2026-03-27 — Cycle 2):
 
 PERFORMANCE SNAPSHOT:
 - Dan VanMatre: 1 call, avg 89.0/100 — Top performer. Strong buy box delivery, excellent conversation flow, positions well as low-maintenance partner.
-- Gayden Rosales: 10 calls, avg 71.2/100 — Trending upward. Solid but flagged for tone issues in non-realtor calls.
+- Gayden Rosales: 6 calls, avg 69.2/100 — Solid but flagged for tone issues in non-realtor calls.
 - Franklin Ladaga: 5 calls, avg 31.4/100 — In early training, struggling with fundamentals.
-- Anthony Cruz: 4 calls, avg 18.9/100 — Significant downward trend. Avg dropped from 30.6 to 18.9 with 2 new scored calls. Needs urgent 1-on-1 coaching focus on fundamentals.
+- Anthony Cruz: 2 calls, avg 30.6/100 — Mixed results. 30 positive and 19 negative KB patterns.
 
 TOP POSITIVE PATTERNS ACROSS ALL AGENTS:
 1. Strong buy box delivery with specific criteria (year range, sq ft, subdivision style)
@@ -676,7 +665,7 @@ TOP NEGATIVE PATTERNS TO COACH AGAINST:
 
 AGENT-SPECIFIC INSIGHTS FROM CALL DATA:
 - Dan VanMatre: 1 call scored 89. Lets realtors talk, delivers buy box with specifics, discusses commission naturally. Low negative count (2).
-- Anthony Cruz: 4 calls, avg 18.9 — significant downward trend from 30.6. Initial confusion on calls persists. Needs tighter call structure and urgent fundamentals coaching. Also confused title insurance costs with total closing costs (March 25 Slack Q&A) — knowledge gap to address. Strengths: builds good rapport once past the opener.
+- Anthony Cruz: 30 positive but 19 negative patterns. Initial confusion on calls. Needs tighter call structure. Strengths: builds good rapport once past the opener.
 - Kayden Rogers: 18 positive, 33 negative — highest ratio of negatives. May need 1-on-1 coaching focus.
 - Gayden Rosales: 6 calls, all negative KB entries relate to a single title officer incident. In realtor calls, performs well. Flag: tone management.
 - Franklin Ladaga: 5 calls, 31.4 avg, no KB pattern entries yet. Focus: stating name, delivering buy box, setting next steps.
@@ -1060,7 +1049,7 @@ async function analyze() {
     result.id = Date.now();
     result.timestamp = new Date().toISOString();
     result.onLeaderboard = addToLB;
-    result.filler_words = countFillerWords(transcript);
+    // Filler word counter removed — focus on coaching takeaways instead
 
     reports.unshift(result);
     localStorage.setItem('gr_reports', JSON.stringify(reports.slice(0, 100)));
@@ -1099,45 +1088,6 @@ async function analyze() {
   }
 
   btn.disabled = false;
-}
-
-// ============================================================
-// FILLER WORD COUNTER
-// ============================================================
-
-function countFillerWords(text) {
-  // Normalize — lowercase, collapse whitespace
-  const t = text.toLowerCase().replace(/\s+/g, ' ');
-
-  // Filler phrases (check multi-word first)
-  const fillers = [
-    { label: 'you know', regex: /\byou know\b/g },
-    { label: 'I mean', regex: /\bi mean\b/g },
-    { label: 'kind of', regex: /\bkind of\b/g },
-    { label: 'sort of', regex: /\bsort of\b/g },
-    { label: 'at the end of the day', regex: /\bat the end of the day\b/g },
-    { label: 'to be honest', regex: /\bto be honest\b/g },
-    { label: 'um', regex: /\bum+\b/g },
-    { label: 'uh', regex: /\buh+\b/g },
-    { label: 'like', regex: /\b(?:,\s*like\s*,|,\s*like\b|\blike,)\b/g },
-    { label: 'basically', regex: /\bbasically\b/g },
-    { label: 'actually', regex: /\bactually\b/g },
-    { label: 'honestly', regex: /\bhonestly\b/g },
-    { label: 'literally', regex: /\bliterally\b/g },
-    { label: 'right', regex: /\bright\?/g },
-    { label: 'so', regex: /(?:^|\.\s+)so\b/g },
-    { label: 'just', regex: /\bjust\b/g },
-  ];
-
-  const counts = {};
-  let total = 0;
-  fillers.forEach(f => {
-    const matches = t.match(f.regex);
-    const c = matches ? matches.length : 0;
-    if (c > 0) { counts[f.label] = c; total += c; }
-  });
-
-  return { counts, total };
 }
 
 // ============================================================
@@ -1222,13 +1172,12 @@ function renderDetail(r) {
     const isNA = s.score === 'N/A' || s.note === 'N/A';
     const pct = isNA ? 0 : val;
     const color = val >= 85 ? 'var(--green)' : val >= 70 ? 'var(--gold)' : val >= 50 ? 'var(--blue)' : 'var(--red)';
-    return `<div class="score-item">
+    return `<div class="score-item" title="${(s.note || '').replace(/"/g, '&quot;')}">
       <div class="score-label">
         <span class="score-name">${label}</span>
         <span class="score-val">${isNA ? 'N/A' : val + '/100'}</span>
       </div>
       <div class="score-bar"><div class="score-fill" style="width:${pct}%;background:${color}"></div></div>
-      <div style="font-size:0.8rem;color:var(--cream);line-height:1.5;margin-top:4px;">${s.note || ''}</div>
     </div>`;
   }).join('');
 
@@ -1254,7 +1203,13 @@ function renderDetail(r) {
   // Summary callout
   html += `<div style="border-left:4px solid var(--orange);background:var(--orange-glow);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:20px;font-size:0.85rem;color:var(--cream);line-height:1.6;">${r.summary}</div>`;
 
-  // === COACHING SECTION (BEFORE scores) ===
+  // === SCORE BREAKDOWN — side-by-side grid (moved above coaching) ===
+  html += `<div class="detail-section">
+    <div class="detail-title">Score Breakdown</div>
+    <div class="scores-section">${scoreHTML}</div>
+  </div>`;
+
+  // === COACHING SECTION ===
   if (r.what_worked && r.what_worked.length) {
     html += `<div class="coaching-box coaching-worked">
       <div class="coaching-label">✓ What Worked</div>
@@ -1283,29 +1238,6 @@ function renderDetail(r) {
     </div>`;
   }
 
-  // === FILLER WORD COUNTERS ===
-  if (r.filler_words) {
-    const fw = r.filler_words;
-    html += `<div class="filler-section">
-      <div class="filler-header">
-        <div class="filler-title">🗣 Filler Words</div>
-        <div class="filler-total">${fw.total} total</div>
-      </div>`;
-    if (fw.total === 0) {
-      html += `<div class="filler-none">Clean call — no filler words detected</div>`;
-    } else {
-      html += `<div class="filler-grid">`;
-      // Sort by count descending
-      const sorted = Object.entries(fw.counts).sort((a, b) => b[1] - a[1]);
-      sorted.forEach(([word, count]) => {
-        const cls = count >= 8 ? 'high' : count >= 4 ? 'med' : '';
-        html += `<div class="filler-pill ${cls}"><span class="fp-word">${word}</span><span class="fp-count">×${count}</span></div>`;
-      });
-      html += `</div>`;
-    }
-    html += `</div>`;
-  }
-
   // === SCRIPT MOMENT — THE STAR ===
   if (r.recommended_script_moment) {
     html += `<div class="script-moment-box">
@@ -1314,12 +1246,6 @@ function renderDetail(r) {
       <div class="script-moment-text">${r.recommended_script_moment}</div>
     </div>`;
   }
-
-  // === SCORE BREAKDOWN ===
-  html += `<div class="detail-section">
-    <div class="detail-title">Score Breakdown</div>
-    <div class="scores-section">${scoreHTML}</div>
-  </div>`;
 
   // === REALTOR ENGAGEMENT ===
   if (r.realtor_engagement) {
@@ -1347,6 +1273,19 @@ function renderDetail(r) {
       </div>`;
     }
     html += `</div>`;
+  }
+
+  // === MAIN COACHING TAKEAWAY — the one thing to remember ===
+  // Derive from: script_moment > first what_to_tighten > first missed_opportunity
+  const takeaway = r.main_takeaway
+    || r.recommended_script_moment
+    || (r.what_to_tighten && r.what_to_tighten.length ? r.what_to_tighten[0] : '')
+    || (r.missed_opportunities && r.missed_opportunities.length ? r.missed_opportunities[0] : '');
+  if (takeaway) {
+    html += `<div class="main-takeaway">
+      <div class="main-takeaway-label">The One Thing</div>
+      <div class="main-takeaway-text">${takeaway}</div>
+    </div>`;
   }
 
   // === CUSTOM KNOWLEDGE INPUT ===

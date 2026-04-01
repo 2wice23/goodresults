@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loading Module… — Good Results Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/gimmebrain/gr-common.css">
+<style>
+.hero{padding:48px 44px 32px;max-width:820px;margin:0 auto;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--orange-glow);border:1px solid var(--orange-border);color:var(--orange);font-size:.67rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 13px;border-radius:3px;margin-bottom:18px;}
+.hero h1{font-size:2.4rem;font-weight:800;line-height:1.1;color:var(--white);margin-bottom:10px;}
+.hero h1 span{color:var(--orange);}
+.hero-desc{font-size:.93rem;color:var(--muted);line-height:1.7;max-width:600px;}
+.progress-wrap{max-width:820px;margin:0 auto;padding:0 44px 36px;}
+.progress-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.progress-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);}
+.progress-count{font-size:.78rem;font-weight:700;color:var(--orange);}
+.progress-track{width:100%;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--orange),#FF8A50);border-radius:3px;transition:width .4s ease;width:0%;}
+.progress-time{font-size:.68rem;color:var(--dim);margin-top:8px;text-align:right;}
+.controls{max-width:820px;margin:0 auto;padding:0 44px 16px;display:flex;gap:10px;}
+.ctrl-btn{background:var(--surface);border:1px solid var(--border);color:var(--dim);font-size:.7rem;font-weight:600;letter-spacing:.06em;padding:6px 14px;border-radius:var(--radius-sm);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;}
+.ctrl-btn:hover{color:var(--cream);border-color:var(--orange-border);}
+.accordion-stack{max-width:820px;margin:0 auto;padding:0 44px 40px;display:flex;flex-direction:column;gap:6px;}
+.acc-item{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .25s;}
+.acc-item.open{border-color:var(--orange-border);}
+.acc-item.completed{border-color:rgba(34,197,94,0.25);}
+.acc-item.completed .acc-check{background:var(--green);border-color:var(--green);color:#fff;}
+.acc-item.completed .acc-title{color:var(--green);}
+.acc-header{padding:16px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;background:var(--surface);transition:background .18s;user-select:none;}
+.acc-header:hover{background:var(--surface2);}
+.acc-num{font-size:.6rem;font-weight:800;letter-spacing:.14em;color:var(--dim);min-width:24px;}
+.acc-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--dim);display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;transition:all .3s;}
+.acc-info{flex:1;}
+.acc-title{font-size:.9rem;font-weight:600;color:var(--cream);line-height:1.3;transition:color .3s;}
+.acc-sub{font-size:.7rem;color:var(--dim);margin-top:2px;}
+.acc-meta{display:flex;align-items:center;gap:8px;}
+.acc-time{font-size:.65rem;color:var(--dim);font-weight:600;letter-spacing:.04em;background:var(--surface2);padding:3px 8px;border-radius:10px;}
+.acc-arrow{font-size:.7rem;color:var(--dim);transition:transform .25s;flex-shrink:0;}
+.acc-item.open .acc-arrow{transform:rotate(180deg);}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.acc-item.open .acc-body{max-height:3000px;}
+.acc-inner{padding:0 20px 24px;border-top:1px solid var(--border);padding-top:20px;}
+.acc-inner p{font-size:.9rem;color:var(--muted);line-height:1.78;margin-bottom:12px;}
+.acc-inner p:last-of-type{margin-bottom:0;}
+.acc-inner strong{color:var(--cream);font-weight:600;}
+.callout{background:var(--orange-glow);border:1px solid var(--orange-border);border-radius:var(--radius);padding:16px 20px;margin:16px 0;}
+.callout-label{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;}
+.callout p{font-size:.87rem;color:#C8D4E4;line-height:1.68;margin:0;}
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.83rem;}
+.data-table th{text-align:left;padding:8px 12px;font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:var(--surface2);border-bottom:1px solid var(--border);}
+.data-table td{padding:9px 12px;border-bottom:1px solid var(--border2);color:var(--muted);vertical-align:top;line-height:1.5;}
+.data-table td strong{color:var(--cream);font-weight:600;}
+.data-table tr:last-child td{border-bottom:none;}
+.kc-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-top:20px;}
+.kc-label{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.kc-question{font-size:.88rem;font-weight:600;color:var(--cream);margin-bottom:12px;line-height:1.4;}
+.kc-opts{display:flex;flex-direction:column;gap:5px;}
+.kc-opt{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid rgba(255,255,255,.07);border-radius:5px;background:rgba(255,255,255,.02);cursor:pointer;transition:all .18s;font-size:.84rem;color:var(--muted);}
+.kc-opt:hover{background:rgba(255,255,255,.05);color:var(--cream);}
+.kc-opt:focus-visible{outline:2px solid var(--orange);outline-offset:2px;}
+.kc-opt.kc-correct{background:var(--green-bg);border-color:var(--green-border);color:#86EFAC;pointer-events:none;}
+.kc-opt.kc-wrong{background:var(--red-bg);border-color:var(--red-border);color:#FCA5A5;pointer-events:none;}
+.kc-opt.kc-disabled{pointer-events:none;opacity:.4;}
+.kc-opt-letter{width:18px;height:18px;border-radius:3px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:800;color:var(--dim);flex-shrink:0;}
+.kc-feedback{display:none;font-size:.82rem;padding:10px 12px;border-radius:5px;margin-top:10px;line-height:1.6;}
+.kc-feedback.show{display:block;}
+.kc-feedback.fb-correct{background:var(--green-bg);border:1px solid var(--green-border);color:#86EFAC;}
+.kc-feedback.fb-wrong{background:var(--red-bg);border:1px solid var(--red-border);color:#FCA5A5;}
+.section-done{display:none;align-items:center;gap:8px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--radius);padding:12px 16px;margin-top:16px;font-size:.8rem;font-weight:600;color:#86EFAC;}
+.section-done.show{display:flex;}
+.section-done-icon{font-size:1rem;}
+.quiz-wrap{max-width:820px;margin:0 auto;padding:0 44px 40px;}
+.quiz-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;}
+.quiz-section h3{font-size:1.05rem;font-weight:700;color:var(--cream);margin-bottom:4px;}
+.quiz-section>p{font-size:.84rem;color:var(--dim);margin-bottom:20px;}
+#quiz-area{display:flex;flex-direction:column;gap:10px;}
+.quiz-q{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;}
+.quiz-q-text{font-size:.93rem;font-weight:600;color:var(--cream);margin-bottom:12px;line-height:1.4;}
+.quiz-q-opts{display:flex;flex-direction:column;gap:6px;}
+.quiz-opt{display:flex;align-items:center;gap:10px;padding:9px 13px;border:1px solid rgba(255,255,255,.07);border-radius:5px;background:rgba(255,255,255,.02);cursor:pointer;transition:all .18s;font-size:.86rem;color:var(--muted);}
+.quiz-opt:hover{background:rgba(255,255,255,.05);color:var(--cream);}
+.quiz-opt:focus-visible{outline:2px solid var(--orange);outline-offset:2px;}
+.quiz-opt.correct{background:var(--green-bg);border-color:var(--green-border);color:#86EFAC;pointer-events:none;}
+.quiz-opt.wrong{background:var(--red-bg);border-color:var(--red-border);color:#FCA5A5;pointer-events:none;}
+.quiz-opt.disabled{pointer-events:none;opacity:.4;}
+.quiz-opt-letter{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--dim);flex-shrink:0;}
+.quiz-score-bar{margin-top:20px;padding:18px 22px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);display:none;align-items:center;justify-content:space-between;}
+.score-text{font-size:1rem;font-weight:700;color:var(--cream);}
+.score-sub{font-size:.78rem;color:var(--dim);margin-top:2px;}
+.submit-quiz-btn{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .2s;}
+.submit-quiz-btn:hover{opacity:.88;}
+.submit-quiz-btn:disabled{opacity:.4;pointer-events:none;}
+.qfb{display:none;font-size:.82rem;padding:11px 14px;border-radius:5px;margin-top:8px;line-height:1.65;}
+.qfb.show{display:block;}
+.qfb.fb-correct{background:var(--green-bg);border:1px solid var(--green-border);color:#86EFAC;}
+.qfb.fb-wrong{background:var(--red-bg);border:1px solid var(--red-border);color:#FCA5A5;}
+.notes-wrap{max-width:820px;margin:0 auto;padding:0 44px 40px;}
+.module-update-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;}
+.module-update-box h3{font-size:.95rem;font-weight:700;color:var(--cream);margin-bottom:4px;}
+.module-update-box p{font-size:.78rem;color:var(--dim);margin-bottom:14px;}
+.module-update-textarea{width:100%;min-height:100px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--cream);font-family:'Inter',sans-serif;font-size:.88rem;padding:14px;resize:vertical;line-height:1.6;}
+.module-update-textarea:focus{outline:none;border-color:var(--orange-border);}
+.module-update-textarea::placeholder{color:var(--dim);}
+.module-update-submit{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 26px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:10px;letter-spacing:.04em;}
+.module-update-submit:hover{opacity:.88;}
+.bottom-nav{border-top:1px solid var(--border);padding:18px 44px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,15,20,.97);}
+.bn-prev,.bn-next{display:flex;align-items:center;gap:7px;font-size:.82rem;color:var(--dim);text-decoration:none;padding:9px 18px;border:1px solid var(--border);border-radius:var(--radius-sm);transition:all .2s;}
+.bn-prev:hover,.bn-next:hover{border-color:var(--orange-border);color:var(--orange);}
+.loading-state{max-width:820px;margin:80px auto;text-align:center;color:var(--dim);font-size:.9rem;}
+.loading-state .spinner{margin-bottom:16px;}
+/* ═══════════════════════════════════════════════════════
+   MOBILE IMPROVEMENTS — Phone-first, tap-friendly, readable
+   ═══════════════════════════════════════════════════════ */
+
+@media(max-width:700px){
+  /* ─── Header ─── */
+  .header{padding:10px 16px;}
+  .logo{font-size:.65rem;}
+
+  /* ─── Hero ─── */
+  .hero{padding:28px 16px 20px;}
+  .hero h1{font-size:1.7rem;line-height:1.2;}
+  .hero-eyebrow{font-size:.6rem;padding:4px 10px;}
+  .hero-desc{font-size:.87rem;line-height:1.8;}
+
+  /* ─── Progress & Controls ─── */
+  .progress-wrap,.controls,.accordion-stack,.quiz-wrap,.notes-wrap{padding-left:16px;padding-right:16px;}
+  .progress-label{font-size:.68rem;}
+  .controls{flex-wrap:wrap;gap:8px;}
+  .ctrl-btn{padding:8px 12px;font-size:.68rem;min-height:40px;}
+
+  /* ─── Accordion — Fat fingers ─── */
+  .acc-header{padding:14px 16px;min-height:48px;gap:12px;}
+  .acc-title{font-size:.87rem;line-height:1.5;}
+  .acc-time{font-size:.62rem;padding:2px 7px;}
+  .acc-inner{padding:0 16px 20px;padding-top:16px;}
+  .acc-inner p{font-size:.87rem;line-height:1.85;margin-bottom:14px;}
+
+  /* ─── Knowledge Check ─── */
+  .kc-box{padding:16px 14px;margin-top:16px;}
+  .kc-question{font-size:.85rem;margin-bottom:10px;}
+  .kc-opt{padding:10px 12px;min-height:44px;font-size:.82rem;gap:9px;}
+
+  /* ─── Quiz ─── */
+  .quiz-section{padding:20px 18px;}
+  .quiz-section h3{font-size:.97rem;margin-bottom:10px;}
+  .quiz-section>p{font-size:.8rem;margin-bottom:16px;}
+  .quiz-q{padding:16px 14px;}
+  .quiz-q-text{font-size:.87rem;margin-bottom:12px;line-height:1.5;}
+  .quiz-opt{padding:10px 12px;min-height:44px;font-size:.82rem;}
+  .quiz-opt-letter{width:18px;height:18px;font-size:.6rem;}
+  .submit-quiz-btn{padding:10px 20px;font-size:.82rem;}
+
+  /* ─── Notes/Textarea ─── */
+  .module-update-box{padding:20px 18px;}
+  .module-update-textarea{min-height:120px;font-size:.87rem;padding:12px;line-height:1.7;}
+  .module-update-submit{padding:10px 20px;font-size:.78rem;}
+
+  /* ─── Bottom Nav — Thumb-accessible ─── */
+  .bottom-nav{padding:12px 16px;gap:8px;background:rgba(13,15,20,.99);border-top:2px solid var(--border);}
+  .bn-prev,.bn-next{padding:10px 12px;font-size:.78rem;min-height:40px;}
+  .bn-module-info{flex:1;text-align:center;font-size:.68rem;}
+
+  /* ─── Data Tables — Scroll on mobile ─── */
+  .data-table{font-size:.78rem;}
+  .data-table th{padding:7px 10px;font-size:.58rem;}
+  .data-table td{padding:8px 10px;font-size:.78rem;}
+
+  /* ─── Callout ─── */
+  .callout{padding:14px 16px;margin:12px 0;}
+  .callout p{font-size:.83rem;line-height:1.7;}
+}
+
+@media(max-width:480px){
+  /* ─── Compact Header ─── */
+  .header{padding:8px 12px;}
+  .logo{font-size:.62rem;}
+  .header-right{gap:10px;}
+  .back-link{font-size:.7rem;}
+
+  /* ─── Hero — Minimal padding ─── */
+  .hero{padding:20px 12px 16px;}
+  .hero h1{font-size:1.3rem;line-height:1.15;}
+  .hero-eyebrow{font-size:.57rem;padding:3px 9px;}
+  .hero-desc{font-size:.82rem;line-height:1.75;}
+
+  /* ─── Progress — Full width ─── */
+  .progress-wrap{padding:0 12px 28px;}
+  .progress-header{margin-bottom:8px;}
+  .progress-label{font-size:.65rem;}
+  .progress-count{font-size:.75rem;}
+
+  /* ─── Controls ─── */
+  .controls{padding:0 12px 12px;gap:6px;}
+  .ctrl-btn{flex:1;padding:8px 10px;font-size:.65rem;min-height:38px;}
+
+  /* ─── Accordion ─── */
+  .accordion-stack{padding:0 12px 32px;gap:4px;}
+  .acc-header{padding:12px 12px;min-height:48px;}
+  .acc-title{font-size:.82rem;line-height:1.4;}
+  .acc-sub{font-size:.67rem;}
+  .acc-time{font-size:.6rem;padding:2px 6px;}
+  .acc-arrow{font-size:.65rem;}
+  .acc-inner{padding:0 12px 16px;padding-top:14px;}
+  .acc-inner p{font-size:.82rem;line-height:1.8;margin-bottom:12px;}
+
+  /* ─── Knowledge Check ─── */
+  .kc-box{padding:14px 12px;margin-top:12px;}
+  .kc-label{font-size:.57rem;}
+  .kc-question{font-size:.8rem;margin-bottom:10px;line-height:1.35;}
+  .kc-opt{padding:9px 10px;min-height:42px;font-size:.78rem;gap:8px;}
+  .kc-opt-letter{width:17px;height:17px;font-size:.58rem;}
+  .kc-feedback{font-size:.78rem;padding:9px 10px;margin-top:8px;}
+
+  /* ─── Quiz — Tall options ─── */
+  .quiz-wrap{padding:0 12px 32px;}
+  .quiz-section{padding:18px 14px;border-radius:var(--radius);}
+  .quiz-section h3{font-size:.9rem;}
+  .quiz-section>p{font-size:.77rem;margin-bottom:14px;}
+  #quiz-area{gap:8px;}
+  .quiz-q{padding:14px 12px;margin-bottom:2px;}
+  .quiz-q-text{font-size:.82rem;margin-bottom:10px;line-height:1.45;}
+  .quiz-q-opts{gap:4px;}
+  .quiz-opt{padding:9px 10px;min-height:42px;font-size:.78rem;gap:8px;}
+  .quiz-opt-letter{width:17px;height:17px;font-size:.58rem;}
+  .quiz-score-bar{padding:14px 12px;margin-top:12px;}
+  .score-text{font-size:.92rem;}
+  .score-sub{font-size:.7rem;}
+  .submit-quiz-btn{padding:9px 16px;font-size:.78rem;}
+
+  /* ─── Notes — Larger textarea ─── */
+  .notes-wrap{padding:0 12px 32px;}
+  .module-update-box{padding:18px 14px;}
+  .module-update-box h3{font-size:.88rem;margin-bottom:6px;}
+  .module-update-box p{font-size:.75rem;margin-bottom:12px;}
+  .module-update-textarea{min-height:140px;font-size:16px;padding:11px;} /* 16px prevents iOS auto-zoom on focus */
+  .module-update-submit{padding:9px 16px;font-size:.75rem;min-height:38px;}
+
+  /* ─── Bottom Nav — Fixed, thumb-friendly ─── */
+  .bottom-nav{position:fixed;bottom:0;left:0;right:0;padding:10px 12px;gap:6px;background:rgba(13,15,20,.99);border-top:2px solid var(--border);z-index:99;}
+  .bn-prev,.bn-next{padding:8px 10px;font-size:.75rem;min-height:38px;flex:1;justify-content:center;}
+  .bn-module-info{flex:1;font-size:.65rem;}
+
+  /* ─── Data Tables — Make scrollable ─── */
+  .data-table{font-size:.72rem;}
+  .data-table th{padding:6px 8px;font-size:.55rem;}
+  .data-table td{padding:7px 8px;}
+
+  /* ─── Callout ─── */
+  .callout{padding:12px 12px;margin:10px 0;}
+  .callout-label{font-size:.57rem;}
+  .callout p{font-size:.78rem;line-height:1.65;}
+
+  /* ─── Loading State ─── */
+  .loading-state{margin:60px auto;font-size:.85rem;}
+
+  /* ─── Add safe bottom padding so content isn't hidden behind fixed nav ─── */
+  body::after{content:'';display:block;height:60px;}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo">Good Results</div>
+  <div class="header-right">
+    <div class="streak-pill"><span class="streak-fire">🔥</span> <span id="streak-count">Start your streak</span></div>
+    <a href="/gimmebrain/academy" class="back-link">← Back to Academy</a>
+  </div>
+</div>
+
+<!-- Loading state (shown until data loads) -->
+<div class="loading-state" id="loadingState">
+  <div class="spinner"></div>
+  <div>Loading module…</div>
+</div>
+
+<!-- All content below is hidden until data loads -->
+<div id="moduleContent" style="display:none;">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-eyebrow" id="heroEyebrow"></div>
+  <h1 id="heroTitle"></h1>
+  <p class="hero-desc" id="heroDesc"></p>
+</div>
+
+<!-- Progress -->
+<div class="progress-wrap">
+  <div class="progress-header">
+    <span class="progress-label">Your Progress</span>
+    <span class="progress-count" id="progress-count"></span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="progress-time" id="progress-time"></div>
+</div>
+
+<!-- Controls -->
+<div class="controls">
+  <button class="ctrl-btn" onclick="expandAll()">▼ Expand All</button>
+  <button class="ctrl-btn" onclick="collapseAll()">▲ Collapse All</button>
+</div>
+
+<!-- Accordion sections (built dynamically) -->
+<div class="accordion-stack" id="accordionStack"></div>
+
+<!-- Quiz -->
+<div class="quiz-wrap">
+  <div class="quiz-section">
+    <h3>🧠 Module Quiz</h3>
+    <p id="quiz-status">Loading questions…</p>
+    <div id="quiz-area"></div>
+    <div class="quiz-score-bar" id="score-bar">
+      <div>
+        <div class="score-text" id="score-text">0 / 0</div>
+        <div class="score-sub" id="score-sub">0 of 0 answered</div>
+      </div>
+      <button class="submit-quiz-btn" id="submit-btn" disabled onclick="submitScore()">Submit Score</button>
+    </div>
+  </div>
+</div>
+
+<!-- Module Update -->
+<div class="notes-wrap">
+  <div class="module-update-box">
+    <h3>💬 Questions or Feedback?</h3>
+    <p>Drop your thoughts here — anything you want leadership to know about this module.</p>
+    <textarea class="module-update-textarea" id="moduleUpdateInput" placeholder="What's on your mind?"></textarea>
+    <button class="module-update-submit" id="moduleUpdateBtn">Submit To Me Foo</button>
+  </div>
+</div>
+
+<!-- Bottom Nav (built dynamically) -->
+<div class="bottom-nav" id="bottomNav"></div>
+
+</div><!-- end moduleContent -->
+
+<!-- Module data script (loaded dynamically based on ?m= param) -->
+<script src="/gimmebrain/gr-utils.js"></script>
+<script>
+(function() {
+  // ─── Auth guard ───
+  grAuth();
+
+  // ─── Get module number from URL ───
+  var params = new URLSearchParams(window.location.search);
+  var moduleNum = parseInt(params.get('m')) || 0;
+
+  if (moduleNum < 1 || moduleNum > 12) {
+    document.getElementById('loadingState').innerHTML = '<div style="color:var(--red);font-size:1.1rem;font-weight:600;">Invalid module number.</div><p style="margin-top:12px;"><a href="/gimmebrain/academy" style="color:var(--orange);">← Back to Academy</a></p>';
+    return;
+  }
+
+  // Load the module data file
+  var script = document.createElement('script');
+  script.src = '/gimmebrain/module-data/module-' + moduleNum + '.js';
+  script.onload = function() {
+    if (window.MODULE_DATA) {
+      initModule(window.MODULE_DATA);
+    } else {
+      document.getElementById('loadingState').innerHTML = '<div style="color:var(--red);">Failed to load module data.</div>';
+    }
+  };
+  script.onerror = function() {
+    document.getElementById('loadingState').innerHTML = '<div style="color:var(--red);">Module ' + moduleNum + ' not found.</div><p style="margin-top:12px;"><a href="/gimmebrain/academy" style="color:var(--orange);">← Back to Academy</a></p>';
+  };
+  document.head.appendChild(script);
+})();
+
+// ─── Module titles for nav links ───
+var MODULE_TITLES = {
+  1: 'Pipeline & CRM',
+  2: 'Realtor Outreach & Calls',
+  3: 'The Offer Process',
+  4: 'Post-Contract SOP',
+  5: 'SMS Playbook',
+  6: 'Buy Box, Markets & Company',
+  7: 'Comps & Deal Analysis',
+  8: 'Closing, Title & Escrow',
+  9: 'Nevada RPA vs Texas TREC',
+  10: 'Investor Vocabulary',
+  11: 'Due Diligence Deep Dive',
+  12: 'Foreclosures & Distressed Deals'
+};
+
+// ─── State ───
+var MODULE_NUM, MODULE_TITLE, TOTAL_SECTIONS, sectionTimes, QUIZ_POOL;
+var completedSections = new Set();
+var kcAnswered = {};
+var kcExplanations = {};
+var quizQuestions = [];
+var userAnswers = {};
+var quizDone = false;
+var masteredIndices = [];
+var wrongAnswerLog = []; // NEW: track every wrong answer for remediation
+var APPS_SCRIPT_URL = '/.netlify/functions/module-api';
+
+// ─── Initialize ───
+function initModule(d) {
+  MODULE_NUM = d.num;
+  MODULE_TITLE = d.title;
+  TOTAL_SECTIONS = d.totalSections;
+  sectionTimes = d.sectionTimes;
+  QUIZ_POOL = d.quizPool;
+
+  // Build kcExplanations map from sections
+  d.sections.forEach(function(s, i) {
+    kcExplanations[i + 1] = s.kc.explanation;
+  });
+
+  // Set page title
+  document.title = d.title + ' — Good Results Training';
+
+  // Build hero
+  document.getElementById('heroEyebrow').textContent = 'Module ' + d.num + ' of 12';
+  var h1 = document.getElementById('heroTitle');
+  if (d.titleAccent) {
+    var parts = d.title.split(d.titleAccent);
+    h1.innerHTML = parts[0] + '<span>' + d.titleAccent + '</span>';
+  } else {
+    h1.textContent = d.title;
+  }
+  document.getElementById('heroDesc').textContent = d.desc;
+
+  // Build progress
+  document.getElementById('progress-count').textContent = '0 of ' + TOTAL_SECTIONS + ' sections';
+
+  // Build accordion
+  var stack = document.getElementById('accordionStack');
+  stack.innerHTML = '';
+  d.sections.forEach(function(sec, i) {
+    var n = i + 1;
+    var time = sectionTimes[i] || 3;
+
+    // Build KC options HTML
+    var kcHtml = '';
+    if (sec.kc && sec.kc.question) {
+      var optsHtml = sec.kc.options.map(function(opt, oi) {
+        var letter = String.fromCharCode(65 + oi);
+        return '<button type="button" class="kc-opt" role="radio" aria-checked="false" onclick="answerKC(' + n + ',' + oi + ',' + opt.correct + ')"><div class="kc-opt-letter" aria-hidden="true">' + letter + '</div>' + opt.t + '</button>';
+      }).join('');
+
+      kcHtml = '<div class="kc-box" id="kc-' + n + '">' +
+        '<div class="kc-label">✦ Quick Check</div>' +
+        '<div class="kc-question">' + sec.kc.question + '</div>' +
+        '<div class="kc-opts">' + optsHtml + '</div>' +
+        '<div class="kc-feedback" id="kcfb-' + n + '"></div>' +
+        '</div>';
+    }
+
+    var itemHtml = '<div class="acc-item" data-section="' + n + '">' +
+      '<div class="acc-header" onclick="toggleSection(' + n + ')">' +
+        '<div class="acc-check" id="check-' + n + '"><span></span></div>' +
+        '<div class="acc-info">' +
+          '<div class="acc-title">' + sec.title + '</div>' +
+          '<div class="acc-sub">' + (sec.sub || '') + '</div>' +
+        '</div>' +
+        '<div class="acc-meta">' +
+          '<span class="acc-time">' + time + ' min</span>' +
+          '<span class="acc-arrow">▼</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="acc-body"><div class="acc-inner">' +
+        sec.html +
+        kcHtml +
+        '<div class="section-done" id="done-' + n + '"><span class="section-done-icon">✓</span> Section complete</div>' +
+      '</div></div>' +
+    '</div>';
+
+    stack.innerHTML += itemHtml;
+  });
+
+  // Build bottom nav
+  var nav = document.getElementById('bottomNav');
+  var prevLink, nextLink;
+  if (d.num === 1) {
+    prevLink = '<a href="/gimmebrain/academy" class="bn-prev">← Academy</a>';
+  } else {
+    prevLink = '<a href="/gimmebrain/module.html?m=' + (d.num - 1) + '" class="bn-prev">← Module ' + (d.num - 1) + '</a>';
+  }
+  if (d.num === 12) {
+    nextLink = '<a href="/gimmebrain/academy" class="bn-next">Academy →</a>';
+  } else {
+    nextLink = '<a href="/gimmebrain/module.html?m=' + (d.num + 1) + '" class="bn-next">Next →</a>';
+  }
+  nav.innerHTML = prevLink + '<div class="bn-module-info" style="font-size:.72rem;color:var(--dim);text-align:center;">Module ' + d.num + ' of 12</div>' + nextLink;
+
+  // Show content, hide loading
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('moduleContent').style.display = 'block';
+
+  // Open first section
+  var first = document.querySelector('.acc-item[data-section="1"]');
+  if (first) first.classList.add('open');
+
+  // Update progress
+  updateProgress();
+
+  // Init streak
+  grStreak();
+
+  // Load mastered questions then init quiz
+  loadMasteredAndInit();
+
+  // Wire up module update button
+  initModuleUpdate();
+}
+
+// ─── Accordion ───
+function toggleSection(n) {
+  var item = document.querySelector('.acc-item[data-section="' + n + '"]');
+  if (item) item.classList.toggle('open');
+}
+function expandAll() {
+  document.querySelectorAll('.acc-item').forEach(function(el) { el.classList.add('open'); });
+}
+function collapseAll() {
+  document.querySelectorAll('.acc-item').forEach(function(el) { el.classList.remove('open'); });
+}
+
+// ─── Knowledge Checks ───
+function answerKC(section, optIdx, isCorrect) {
+  if (kcAnswered[section] !== undefined) return;
+  kcAnswered[section] = isCorrect;
+  var box = document.getElementById('kc-' + section);
+  var opts = box.querySelectorAll('.kc-opt');
+  opts.forEach(function(opt, i) {
+    if (i === optIdx) {
+      opt.classList.add(isCorrect ? 'kc-correct' : 'kc-wrong');
+    } else {
+      if (opt.getAttribute('onclick') && opt.getAttribute('onclick').indexOf('true)') !== -1) {
+        opt.classList.add('kc-correct');
+      } else {
+        opt.classList.add('kc-disabled');
+      }
+    }
+  });
+  var fb = document.getElementById('kcfb-' + section);
+  fb.textContent = (isCorrect ? '✓ ' : '✗ ') + kcExplanations[section];
+  fb.className = 'kc-feedback show ' + (isCorrect ? 'fb-correct' : 'fb-wrong');
+  completeSection(section);
+}
+
+function completeSection(n) {
+  completedSections.add(n);
+  var item = document.querySelector('.acc-item[data-section="' + n + '"]');
+  item.classList.add('completed');
+  var check = document.getElementById('check-' + n);
+  check.innerHTML = '<span>✓</span>';
+  var done = document.getElementById('done-' + n);
+  done.classList.add('show');
+  updateProgress();
+  if (n < TOTAL_SECTIONS) {
+    setTimeout(function() {
+      var next = document.querySelector('.acc-item[data-section="' + (n + 1) + '"]');
+      if (next && !next.classList.contains('open')) {
+        next.classList.add('open');
+        next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 800);
+  }
+}
+
+function updateProgress() {
+  var count = completedSections.size;
+  var pct = Math.round((count / TOTAL_SECTIONS) * 100);
+  document.getElementById('progress-count').textContent = count + ' of ' + TOTAL_SECTIONS + ' sections';
+  document.getElementById('progress-fill').style.width = pct + '%';
+  var remaining = 0;
+  for (var i = 1; i <= TOTAL_SECTIONS; i++) {
+    if (!completedSections.has(i)) remaining += (sectionTimes[i - 1] || 3);
+  }
+  document.getElementById('progress-time').textContent = remaining > 0 ? '~' + remaining + ' min remaining' : 'All sections complete!';
+}
+
+// ─── Quiz Engine ───
+function initQuiz() {
+  var area = document.getElementById('quiz-area');
+  var status = document.getElementById('quiz-status');
+  if (!QUIZ_POOL || !QUIZ_POOL.length) {
+    if (status) status.textContent = 'No questions loaded yet.';
+    return;
+  }
+
+  // Tag each question with its pool index
+  var indexed = QUIZ_POOL.map(function(q, i) { return Object.assign({ poolIdx: i }, q); });
+
+  // ─── UNANSWERED-ONLY: filter out mastered questions ───
+  var unmastered = indexed.filter(function(q) {
+    return masteredIndices.indexOf(q.poolIdx) === -1;
+  });
+
+  // If all mastered, show congratulations
+  if (unmastered.length === 0) {
+    if (status) status.innerHTML = '🎉 <strong>You\'ve mastered all ' + QUIZ_POOL.length + ' questions in this module!</strong> Come back after new questions are added.';
+    return;
+  }
+
+  // Shuffle and pick up to 10 unmastered questions
+  var shuffled = unmastered.sort(function() { return Math.random() - 0.5; });
+  quizQuestions = shuffled.slice(0, Math.min(10, shuffled.length));
+
+  if (status) status.textContent = quizQuestions.length + ' questions · Pick the best answer for each.';
+
+  quizQuestions.forEach(function(q, qi) {
+    var opts = q.opts.map(function(o, oi) {
+      return '<button type="button" class="quiz-opt" id="qo-' + qi + '-' + oi + '" role="radio" aria-checked="false" onclick="answerQuiz(' + qi + ',' + oi + ')"><div class="quiz-opt-letter" aria-hidden="true">' + String.fromCharCode(65 + oi) + '</div>' + o.t + '</button>';
+    }).join('');
+
+    area.innerHTML += '<div class="quiz-q" id="qq-' + qi + '">' +
+      '<div class="quiz-q-text">' + (qi + 1) + '. ' + q.q + '</div>' +
+      '<div class="quiz-q-opts" id="qopts-' + qi + '">' + opts + '</div>' +
+      '<div class="kc-feedback" id="qfb-' + qi + '"></div>' +
+    '</div>';
+  });
+
+  var sb = document.getElementById('score-bar');
+  if (sb) sb.style.display = 'flex';
+  updateScore();
+}
+
+function answerQuiz(qi, oi) {
+  if (userAnswers[qi] !== undefined) return;
+  userAnswers[qi] = oi;
+  var q = quizQuestions[qi];
+  var opts = document.querySelectorAll('#qopts-' + qi + ' .quiz-opt');
+  var isCorrect = q.opts[oi].correct;
+
+  opts.forEach(function(opt, i) {
+    if (i === oi) opt.classList.add(isCorrect ? 'correct' : 'wrong');
+    else if (q.opts[i].correct) opt.classList.add('correct');
+    else opt.classList.add('disabled');
+  });
+
+  var fb = document.getElementById('qfb-' + qi);
+  fb.textContent = (isCorrect ? '✓ ' : '✗ ') + q.explanation;
+  fb.className = 'kc-feedback show ' + (isCorrect ? 'fb-correct' : 'fb-wrong');
+
+  // ─── Track wrong answers for remediation ───
+  if (!isCorrect) {
+    wrongAnswerLog.push({
+      poolIdx: q.poolIdx,
+      question: q.q,
+      picked: oi,
+      pickedText: q.opts[oi].t,
+      correctIdx: q.opts.findIndex(function(o) { return o.correct; }),
+      correctText: q.opts.find(function(o) { return o.correct; }).t
+    });
+  }
+
+  updateScore();
+}
+
+function updateScore() {
+  var total = quizQuestions.length;
+  var answered = Object.keys(userAnswers).length;
+  var correct = Object.entries(userAnswers).filter(function(e) {
+    return quizQuestions[e[0]] && quizQuestions[e[0]].opts[e[1]].correct;
+  }).length;
+  var scoreText = document.getElementById('score-text');
+  var scoreSub = document.getElementById('score-sub');
+  var submitBtn = document.getElementById('submit-btn');
+  if (scoreText) scoreText.textContent = correct + ' / ' + total;
+  if (scoreSub) scoreSub.textContent = answered + ' of ' + total + ' answered';
+  if (submitBtn) submitBtn.disabled = answered < total;
+  quizDone = answered === total;
+}
+
+function submitScore() {
+  if (!quizDone) return;
+  var total = quizQuestions.length;
+  var correct = Object.entries(userAnswers).filter(function(e) {
+    return quizQuestions[e[0]] && quizQuestions[e[0]].opts[e[1]].correct;
+  }).length;
+  var pct = Math.round(correct / total * 100);
+  var agent = sessionStorage.getItem('gr_agent') || 'Unknown';
+  var email = sessionStorage.getItem('gr_email') || '';
+  var xp = Math.round(pct * 1.2);
+
+  var correctPoolIndices = Object.entries(userAnswers)
+    .filter(function(e) { return quizQuestions[e[0]] && quizQuestions[e[0]].opts[e[1]].correct; })
+    .map(function(e) { return quizQuestions[e[0]].poolIdx; });
+  var allMastered = [];
+  var seen = {};
+  masteredIndices.concat(correctPoolIndices).forEach(function(idx) {
+    if (!seen[idx]) { seen[idx] = true; allMastered.push(idx); }
+  });
+
+  var body = {
+    action: 'moduleComplete',
+    agent: agent,
+    email: email,
+    module: MODULE_NUM,
+    moduleTitle: MODULE_TITLE,
+    score: pct,
+    xp: xp,
+    correct: correct,
+    total: total,
+    poolSize: QUIZ_POOL.length,
+    correctIndices: allMastered,
+    wrongAnswers: wrongAnswerLog, // NEW: send wrong answer data
+    date: new Date().toISOString()
+  };
+
+  fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(body) })
+    .then(function() {
+      var btn = document.getElementById('submit-btn');
+      if (btn) { btn.textContent = '✓ Score Saved!'; btn.style.background = '#22C55E'; btn.disabled = true; }
+      masteredIndices = allMastered;
+
+      // Update streak
+      var today = new Date().toDateString();
+      var lastDay = localStorage.getItem('gr_streak_day');
+      var streak = parseInt(localStorage.getItem('gr_streak') || '0');
+      if (lastDay !== today) {
+        var yesterday = new Date(Date.now() - 86400000).toDateString();
+        streak = lastDay === yesterday ? streak + 1 : 1;
+        localStorage.setItem('gr_streak', streak);
+        localStorage.setItem('gr_streak_day', today);
+        var sc = document.getElementById('streak-count');
+        if (sc) sc.textContent = streak + '-day streak';
+      }
+    })
+    .catch(function() {
+      var btn = document.getElementById('submit-btn');
+      if (btn) { btn.textContent = 'Retry'; btn.disabled = false; }
+    });
+}
+
+// ─── Load mastered questions ───
+async function loadMasteredAndInit() {
+  var agent = sessionStorage.getItem('gr_agent') || '';
+  if (agent) {
+    try {
+      var res = await fetch(APPS_SCRIPT_URL + '?action=getModuleProgress&agent=' + encodeURIComponent(agent) + '&module=' + MODULE_NUM);
+      var data = await res.json();
+      masteredIndices = data.mastered || [];
+    } catch (e) {}
+  }
+  initQuiz();
+}
+
+// ─── Module Update ───
+function initModuleUpdate() {
+  var btn = document.getElementById('moduleUpdateBtn');
+  var textarea = document.getElementById('moduleUpdateInput');
+  if (btn && textarea) {
+    btn.addEventListener('click', function() {
+      var text = textarea.value.trim();
+      if (!text) { alert('Please type an update before submitting.'); return; }
+      var agent = sessionStorage.getItem('gr_agent') || 'Unknown';
+      var email = sessionStorage.getItem('gr_email') || '';
+      var body = {
+        action: 'moduleUpdate',
+        agent: agent,
+        email: email,
+        module: MODULE_NUM,
+        moduleTitle: MODULE_TITLE,
+        update: text,
+        date: new Date().toISOString()
+      };
+      fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(body) })
+        .then(function() {
+          btn.textContent = '✓ Submitted!';
+          btn.style.background = '#22C55E';
+          setTimeout(function() {
+            btn.textContent = 'Submit To Me Foo';
+            btn.style.background = 'var(--orange)';
+            textarea.value = '';
+          }, 2000);
+        })
+        .catch(function() { alert('Failed to submit. Try again.'); });
+    });
+  }
+}
+</script>
+</body>
+</html>

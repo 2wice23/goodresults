@@ -16,14 +16,19 @@ exports.handler = async (event) => {
   try {
     const { action, path, method, body } = JSON.parse(event.body);
 
-    // Whitelist allowed paths to prevent abuse
+    // Validate path is a string and normalize to prevent traversal attacks
+    if (typeof path !== 'string' || path.length > 200) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Invalid path' }) };
+    }
+    // Strip query params, resolve '..' traversals, and enforce strict prefix match
+    const cleanPath = path.split('?')[0].replace(/\/\.+\//g, '/');
     const allowed = ['/lead/', '/opportunity/', '/sms_template/', '/sequence/', '/email_template/'];
-    const isAllowed = allowed.some(prefix => path.startsWith(prefix));
+    const isAllowed = allowed.some(prefix => cleanPath.startsWith(prefix) && !cleanPath.includes('..'));
     if (!isAllowed) {
-      return { statusCode: 403, body: JSON.stringify({ error: 'Path not allowed: ' + path }) };
+      return { statusCode: 403, body: JSON.stringify({ error: 'Path not allowed' }) };
     }
 
-    const url = CLOSE_BASE + path;
+    const url = CLOSE_BASE + cleanPath;
     const fetchMethod = (method || 'GET').toUpperCase();
 
     const headers = {

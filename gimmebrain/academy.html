@@ -1,61 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>(function(){if(sessionStorage.getItem('gr_authed')!=='1')window.location.href='/gimmebrain/login.html';})()</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Good Results Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/gimmebrain/gr-common.css">
 <style>
-:root{
-  --black:#0D0F14;--surface:#11141A;--surface2:#161B24;--surface3:#0A0C10;
-  --white:#F0F4FF;--cream:#C8D4E4;--muted:#8A95A8;--dim:#555A66;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.04);
-  --orange:#FF5C1A;--orange-glow:rgba(255,92,26,0.12);--orange-border:rgba(255,92,26,0.25);
-  --green:#22C55E;--green-bg:rgba(34,197,94,0.08);--green-border:rgba(34,197,94,0.25);
-  --red:#EF4444;--gold:#F59E0B;--silver:#9CA3AF;--bronze:#CD7F32;
-  --radius:8px;--radius-sm:5px;--radius-lg:12px;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{font-size:16px;scroll-behavior:smooth;}
-body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
-
-/* Top progress bar */
-#rpbar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:linear-gradient(90deg,#FF5C1A,#FF8A50,#FF5C1A);background-size:200% 100%;animation:rpShimmer 2.5s linear infinite;transition:width .06s linear;box-shadow:0 0 10px rgba(255,92,26,.55);}
-@keyframes rpShimmer{from{background-position:0%}to{background-position:200%}}
-
-/* Background texture */
-body::before{content:'';position:fixed;inset:0;pointer-events:none;background:
-  radial-gradient(ellipse 80% 45% at 50% -10%, rgba(255,92,26,0.07) 0%, transparent 55%),
-  repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px),
-  repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px);
-  z-index:0;}
-body>*{position:relative;z-index:1;}
-
-/* ─── HEADER ─── */
-.header{
-  padding:14px 44px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(13,15,20,.97);backdrop-filter:blur(20px);
-  position:sticky;top:0;z-index:100;
-}
-.logo-mark{display:flex;align-items:center;gap:10px;}
-.logo-icon{
-  width:30px;height:30px;background:var(--orange-glow);
-  border:1px solid var(--orange-border);border-radius:5px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.65rem;font-weight:900;color:var(--orange);
-}
-.logo-name{font-size:.8rem;font-weight:800;color:var(--white);letter-spacing:.04em;}
-.logo-sub{font-size:.58rem;color:var(--dim);font-weight:500;}
-.header-right{display:flex;align-items:center;gap:12px;}
-.back-link{
-  font-size:.78rem;color:var(--muted);text-decoration:none;
-  transition:color .2s;display:flex;align-items:center;gap:5px;font-weight:500;
-}
-.back-link:hover{color:var(--orange);}
-
 /* ─── HERO ─── */
 .hero{
   padding:48px 44px 36px;
@@ -74,14 +26,6 @@ body>*{position:relative;z-index:1;}
 
 /* ─── MAIN ─── */
 .main{max-width:1160px;margin:0 auto;padding:0 44px 100px;}
-
-.sec-label{
-  display:flex;align-items:center;gap:14px;
-  font-size:.62rem;font-weight:800;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--muted);
-  margin-bottom:20px;margin-top:48px;
-}
-.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
 
 /* ─── QUICK-START STRIP ─── */
 .quickstart{
@@ -259,17 +203,14 @@ body>*{position:relative;z-index:1;}
 .footer-brand{font-size:.78rem;font-weight:900;color:var(--orange);letter-spacing:.04em;}
 .footer-info{font-size:.62rem;color:var(--dim);font-weight:500;letter-spacing:.08em;text-transform:uppercase;}
 
-/* ─── FADE IN ─── */
-.fade-in{opacity:0;transform:translateY(8px);transition:opacity .38s ease,transform .38s ease;}
-.fade-in.visible{opacity:1;transform:none;}
-
 /* ─── RESPONSIVE ─── */
 @media(max-width:960px){
   .hero{padding:36px 24px 28px;}
   .main{padding:0 24px 80px;}
   .quickstart{grid-template-columns:1fr;}
-  .module-item{grid-template-columns:1fr;gap:12px;}
-  .mod-num-col{flex-direction:row;gap:8px;}
+  .module-item{grid-template-columns:1fr;gap:12px;padding:16px 18px;}
+  .mod-num-col{flex-direction:row;gap:8px;align-items:center;}
+  .module-content{min-width:0;}
   .notes-body{grid-template-columns:1fr;}
   .footer{padding:0 24px 40px;}
   .lb-header-row,.lb-row{grid-template-columns:40px 1fr;gap:10px;}
@@ -279,11 +220,17 @@ body>*{position:relative;z-index:1;}
   .header{padding:12px 20px;}
   .hero h1{font-size:1.7rem;}
   .hero-eyebrow{font-size:.56rem;padding:3px 10px;}
-  .module-item{padding:18px 16px;}
+  .module-item{padding:14px 14px;gap:10px;}
+  .mod-num-col{gap:6px;font-size:.9rem;}
+  .mod-num-big{font-size:1.4rem;}
   .module-title{font-size:.95rem;}
   .notes-header,.notes-body,.notes-footer{padding-left:18px;padding-right:18px;}
+  .quickstart{gap:10px;}
+  .qs-card{padding:16px 14px;gap:10px;}
+  .lb-row{padding:12px 16px;font-size:.85rem;}
 }
 </style>
+<script src="/gimmebrain/gr-utils.js"></script>
 </head>
 <body>
 <div id="rpbar"></div>
@@ -309,29 +256,11 @@ body>*{position:relative;z-index:1;}
 
 <main class="main">
 
-  <!-- ── HOW IT WORKS ── -->
+  <!-- ── HOW IT WORKS — compact ── -->
   <div class="quickstart fade-in">
-    <div class="qs-card">
-      <div class="qs-num">1</div>
-      <div>
-        <div class="qs-title">Read the Module</div>
-        <div class="qs-desc">Open each section and read through it carefully. Each module covers one core topic with real scripts, real workflows, and real deal examples. Do not skim — the quizzes pull directly from this material, and so do your actual calls.</div>
-      </div>
-    </div>
-    <div class="qs-card">
-      <div class="qs-num">2</div>
-      <div>
-        <div class="qs-title">Take the Quiz</div>
-        <div class="qs-desc">Each attempt draws 10 random questions from a pool of 15 to 25. When you get a question right, it is marked as mastered and will not come back. Keep retaking until every question in the pool is mastered. Your score and mastery progress show on the leaderboard.</div>
-      </div>
-    </div>
-    <div class="qs-card">
-      <div class="qs-num">3</div>
-      <div>
-        <div class="qs-title">Submit Notes</div>
-        <div class="qs-desc">Every module has a notes box at the bottom. If something is wrong, unclear, outdated, or missing — write it there. Gayden reviews notes every morning and updates the training, the quiz pools, and the knowledge bases together. This is how the training stays current.</div>
-      </div>
-    </div>
+    <div class="qs-card"><div class="qs-num">1</div><div><div class="qs-title">Read</div><div class="qs-desc">Open the module. Read every section. The quizzes and your calls pull from this material.</div></div></div>
+    <div class="qs-card"><div class="qs-num">2</div><div><div class="qs-title">Quiz</div><div class="qs-desc">10 random questions per attempt. Master them all to complete the module.</div></div></div>
+    <div class="qs-card"><div class="qs-num">3</div><div><div class="qs-title">Flag</div><div class="qs-desc">Something wrong or missing? Use the notes box. Gayden reviews daily.</div></div></div>
   </div>
 
   <!-- ── LEADERBOARD ── -->
@@ -395,7 +324,7 @@ body>*{position:relative;z-index:1;}
   <div class="sec-label fade-in">All 12 Modules</div>
   <div class="module-list fade-in">
 
-    <a href="/gimmebrain/module1" class="module-item">
+    <a href="/gimmebrain/module.html?m=1" class="module-item">
       <div class="mod-num-col"><div class="mod-num-big">01</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Pipeline &amp; CRM</div>
@@ -404,7 +333,7 @@ body>*{position:relative;z-index:1;}
       <span class="module-link">Start →</span>
     </a>
 
-    <a href="/gimmebrain/module2" class="module-item">
+    <a href="/gimmebrain/module.html?m=2" class="module-item">
       <div class="mod-num-col"><div class="mod-num-big">02</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Realtor Outreach &amp; Calls</div>
@@ -413,7 +342,7 @@ body>*{position:relative;z-index:1;}
       <span class="module-link">Start →</span>
     </a>
 
-    <a href="/gimmebrain/module3" class="module-item">
+    <a href="/gimmebrain/module.html?m=3" class="module-item">
       <div class="mod-num-col"><div class="mod-num-big">03</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">The Offer Process</div>
@@ -422,7 +351,7 @@ body>*{position:relative;z-index:1;}
       <span class="module-link">Start →</span>
     </a>
 
-    <a href="/gimmebrain/module4" class="module-item">
+    <a href="/gimmebrain/module.html?m=4" class="module-item">
       <div class="mod-num-col"><div class="mod-num-big">04</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Post-Contract SOP</div>
@@ -431,7 +360,7 @@ body>*{position:relative;z-index:1;}
       <span class="module-link">Start →</span>
     </a>
 
-    <a href="/gimmebrain/module5" class="module-item">
+    <a href="/gimmebrain/module.html?m=5" class="module-item">
       <div class="mod-num-col"><div class="mod-num-big">05</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">SMS Playbook</div>
@@ -440,7 +369,7 @@ body>*{position:relative;z-index:1;}
       <span class="module-link">Start →</span>
     </a>
 
-    <a href="/gimmebrain/module6" class="module-item">
+    <a href="/gimmebrain/module.html?m=6" class="module-item">
       <div class="mod-num-col"><div class="mod-num-big">06</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Buy Box, Markets &amp; Company</div>
@@ -449,7 +378,7 @@ body>*{position:relative;z-index:1;}
       <span class="module-link">Start →</span>
     </a>
 
-    <a href="/gimmebrain/module7" class="module-item">
+    <a href="/gimmebrain/module.html?m=7" class="module-item">
       <div class="mod-num-col"><div class="mod-num-big">07</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Comps &amp; Deal Analysis</div>
@@ -458,7 +387,7 @@ body>*{position:relative;z-index:1;}
       <span class="module-link">Start →</span>
     </a>
 
-    <a href="/gimmebrain/module8" class="module-item">
+    <a href="/gimmebrain/module.html?m=8" class="module-item">
       <div class="mod-num-col"><div class="mod-num-big">08</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Closing, Title &amp; Escrow</div>
@@ -467,7 +396,7 @@ body>*{position:relative;z-index:1;}
       <span class="module-link">Start →</span>
     </a>
 
-    <a href="/gimmebrain/module9" class="module-item">
+    <a href="/gimmebrain/module.html?m=9" class="module-item">
       <div class="mod-num-col"><div class="mod-num-big">09</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Nevada RPA vs Texas TREC</div>
@@ -476,7 +405,7 @@ body>*{position:relative;z-index:1;}
       <span class="module-link">Start →</span>
     </a>
 
-    <a href="/gimmebrain/module10" class="module-item">
+    <a href="/gimmebrain/module.html?m=10" class="module-item">
       <div class="mod-num-col"><div class="mod-num-big">10</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Investor Vocabulary</div>
@@ -485,7 +414,7 @@ body>*{position:relative;z-index:1;}
       <span class="module-link">Start →</span>
     </a>
 
-    <a href="/gimmebrain/module11" class="module-item">
+    <a href="/gimmebrain/module.html?m=11" class="module-item">
       <div class="mod-num-col"><div class="mod-num-big">11</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Due Diligence Deep Dive</div>
@@ -494,7 +423,7 @@ body>*{position:relative;z-index:1;}
       <span class="module-link">Start →</span>
     </a>
 
-    <a href="/gimmebrain/module12" class="module-item">
+    <a href="/gimmebrain/module.html?m=12" class="module-item">
       <div class="mod-num-col"><div class="mod-num-big">12</div><div class="mod-num-label">Module</div></div>
       <div class="module-content">
         <div class="module-title">Foreclosures &amp; Distressed Deals</div>
@@ -513,18 +442,14 @@ body>*{position:relative;z-index:1;}
 </footer>
 
 <script>
-// Progress bar
-function updateProgressBar(){
-  const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;
-  document.getElementById('rpbar').style.width=(s/d*100)+'%';
-}
-window.addEventListener('scroll',updateProgressBar);
+// Auth guard
+grAuth();
 
-// Fade-in
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
-},{threshold:0.1});
-document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+// Scroll progress bar
+grScrollBar();
+
+// Fade-in animation
+grFadeIn();
 
 // Session
 const agentName=sessionStorage.getItem('gr_agent')||'';

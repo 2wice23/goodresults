@@ -1,73 +1,24 @@
 // Netlify serverless function — replaces dead Google Apps Script for the Call Analyzer
 // Handles: leaderboard, KB sync, call reports, Slack notifications, access control
-// Storage: GitHub JSON files in training-data/ folder (2wice23/goodresults repo)
+// Storage: Netlify Blobs (training store)
 //
 // Env vars used:
-//   GitHubToken       — GitHub PAT for reading/writing to repo
 //   slack_the_group_chat    — Slack incoming webhook for #the-group-chat (call scores)
 //   slack_hack_the_planet   — Slack incoming webhook for #hack-the-planet (access requests, tech alerts)
 
-const GITHUB_API = 'https://api.github.com';
-const REPO_PATH = '/repos/2wice23/goodresults/contents';
+const { getStore, connectLambda } = require("@netlify/blobs");
 
-// ── GitHub helpers ──────────────────────────────────────────
+// ── Blob store helpers ──────────────────────────────────────────
 
-async function ghRead(token, filePath) {
-  const resp = await fetch(`${GITHUB_API}${REPO_PATH}/${filePath}`, {
-    headers: {
-      'Accept': 'application/vnd.github+json',
-      'Authorization': `Bearer ${token}`,
-      'X-GitHub-Api-Version': '2022-11-28'
-    }
-  });
-  if (resp.status === 404) return { data: null, sha: null };
-  if (!resp.ok) throw new Error(`GitHub GET ${filePath}: ${resp.status}`);
-  const json = await resp.json();
-  const decoded = Buffer.from(json.content, 'base64').toString('utf-8');
-  return { data: JSON.parse(decoded), sha: json.sha };
+async function blobRead(key) {
+  const store = getStore({ name: 'training', consistency: 'eventual' });
+  const data = await store.get(key, { type: 'json' });
+  return data || null;
 }
 
-async function ghWrite(token, filePath, data, sha, message) {
-  const encoded = Buffer.from(JSON.stringify(data, null, 2)).toString('base64');
-  const body = { message, content: encoded };
-  if (sha) body.sha = sha;
-
-  const resp = await fetch(`${GITHUB_API}${REPO_PATH}/${filePath}`, {
-    method: 'PUT',
-    headers: {
-      'Accept': 'application/vnd.github+json',
-      'Authorization': `Bearer ${token}`,
-      'X-GitHub-Api-Version': '2022-11-28',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  });
-
-  if (resp.status === 409) {
-    const fresh = await ghRead(token, filePath);
-    let merged = fresh.data;
-    if (Array.isArray(fresh.data) && Array.isArray(data)) {
-      const lastEntry = data[data.length - 1];
-      merged = [...fresh.data, lastEntry];
-    } else if (typeof fresh.data === 'object' && typeof data === 'object') {
-      merged = { ...fresh.data, ...data };
-    }
-    const encoded2 = Buffer.from(JSON.stringify(merged, null, 2)).toString('base64');
-    const retry = await fetch(`${GITHUB_API}${REPO_PATH}/${filePath}`, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/vnd.github+json',
-        'Authorization': `Bearer ${token}`,
-        'X-GitHub-Api-Version': '2022-11-28',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ message, content: encoded2, sha: fresh.sha })
-    });
-    if (!retry.ok) throw new Error(`GitHub PUT retry ${filePath}: ${retry.status}`);
-    return;
-  }
-
-  if (!resp.ok) throw new Error(`GitHub PUT ${filePath}: ${resp.status}`);
+async function blobWrite(key, data) {
+  const store = getStore({ name: 'training', consistency: 'eventual' });
+  await store.setJSON(key, data);
 }
 
 // ── Slack helper ────────────────────────────────────────────
@@ -83,15 +34,13 @@ async function pingSlack(webhook, text) {
 
 // ── Leaderboard ─────────────────────────────────────────────
 
-async function getLeaderboard(token) {
-  const { data } = await ghRead(token, 'training-data/leaderboard.json');
+async function getLeaderboard() {
+  const data = await blobRead('leaderboard');
   return Array.isArray(data) ? data : [];
 }
 
-async function updateLeaderboard(token, agent, score) {
-  const filePath = 'training-data/leaderboard.json';
-  const { data, sha } = await ghRead(token, filePath);
-  const board = Array.isArray(data) ? data : [];
+async function updateLeaderboard(agent, score) {
+  const board = (await blobRead('leaderboard')) || [];
 
   const existing = board.find(a => a.agent_name.toLowerCase() === agent.toLowerCase());
   if (existing) {
@@ -107,22 +56,20 @@ async function updateLeaderboard(token, agent, score) {
     });
   }
 
-  await ghWrite(token, filePath, board, sha, `Leaderboard: ${agent} ${score}`);
+  await blobWrite('leaderboard', board);
   return board;
 }
 
 // ── Knowledge Base ──────────────────────────────────────────
 
-async function getKB(token) {
-  const { data } = await ghRead(token, 'training-data/analyzer-kb.json');
+async function getKB() {
+  const data = await blobRead('analyzer-kb');
   if (!data) return { positive: [], negative: [], reknowledge: [] };
   return data;
 }
 
-async function addKBBatch(token, params) {
-  const filePath = 'training-data/analyzer-kb.json';
-  const { data, sha } = await ghRead(token, filePath);
-  const kb = data || { positive: [], negative: [], reknowledge: [] };
+async function addKBBatch(params) {
+  const kb = (await blobRead('analyzer-kb')) || { positive: [], negative: [], reknowledge: [] };
 
   const examples = JSON.parse(params.examples || '[]');
   const sentiment = params.sentiment || 'positive';
@@ -130,13 +77,11 @@ async function addKBBatch(token, params) {
 
   kb[bucket] = [...examples, ...(kb[bucket] || [])].slice(0, 60);
 
-  await ghWrite(token, filePath, kb, sha, `KB ${sentiment}: ${params.agent || 'unknown'}`);
+  await blobWrite('analyzer-kb', kb);
 }
 
-async function addKnowledge(token, body) {
-  const filePath = 'training-data/analyzer-kb.json';
-  const { data, sha } = await ghRead(token, filePath);
-  const kb = data || { positive: [], negative: [], reknowledge: [] };
+async function addKnowledge(body) {
+  const kb = (await blobRead('analyzer-kb')) || { positive: [], negative: [], reknowledge: [] };
 
   const items = body.items || [];
   const tagged = items.map(i =>
@@ -144,15 +89,13 @@ async function addKnowledge(token, body) {
   );
   kb.reknowledge = [...tagged, ...(kb.reknowledge || [])].slice(0, 80);
 
-  await ghWrite(token, filePath, kb, sha, `Knowledge: ${body.agent || 'unknown'}`);
+  await blobWrite('analyzer-kb', kb);
 }
 
 // ── Call Reports ────────────────────────────────────────────
 
-async function addCallReport(token, body) {
-  const filePath = 'training-data/call-reports.json';
-  const { data, sha } = await ghRead(token, filePath);
-  const reports = Array.isArray(data) ? data : [];
+async function addCallReport(body) {
+  const reports = (await blobRead('call-reports')) || [];
 
   reports.push({
     id: body.id,
@@ -178,7 +121,7 @@ async function addCallReport(token, body) {
   // Keep last 500 reports max
   if (reports.length > 500) reports.splice(0, reports.length - 500);
 
-  await ghWrite(token, filePath, reports, sha, `Call report: ${body.agent} — ${body.score}`);
+  await blobWrite('call-reports', reports);
 }
 
 // ── Slack post ──────────────────────────────────────────────
@@ -228,8 +171,8 @@ async function postToSlack(webhook, body) {
 
 // ── Access Control (for login.html) ─────────────────────────
 
-async function checkAccess(token, email) {
-  const { data } = await ghRead(token, 'training-data/access-list.json');
+async function checkAccess(email) {
+  const data = await blobRead('access-list');
   const list = data || { approved: [], pending: [] };
 
   if (list.approved.some(e => e.toLowerCase() === email.toLowerCase())) {
@@ -241,10 +184,8 @@ async function checkAccess(token, email) {
   return { allowed: false };
 }
 
-async function requestAccess(token, body, slackWebhook) {
-  const filePath = 'training-data/access-list.json';
-  const { data, sha } = await ghRead(token, filePath);
-  const list = data || { approved: [], pending: [] };
+async function requestAccess(body, slackWebhook) {
+  const list = (await blobRead('access-list')) || { approved: [], pending: [] };
 
   const email = (body.email || '').toLowerCase();
 
@@ -261,16 +202,16 @@ async function requestAccess(token, body, slackWebhook) {
     requested: new Date().toISOString()
   });
 
-  await ghWrite(token, filePath, list, sha, `Access request: ${email}`);
-  await pingSlack(slackWebhook, `*AUTH REQUEST* — \`requestAccess\` triggered at ${new Date().toISOString()}\nUser: \`${body.name || email}\` | Email: \`${email}\`\nEndpoint: \`POST /netlify/functions/analyzer-api\`\nPending entry written to \`training-data/access-list.json\` on GitHub.\nApprove by adding email to the \`approved[]\` array and pushing.`);
+  await blobWrite('access-list', list);
+  await pingSlack(slackWebhook, `*AUTH REQUEST* — \`requestAccess\` triggered at ${new Date().toISOString()}\nUser: \`${body.name || email}\` | Email: \`${email}\`\nEndpoint: \`POST /netlify/functions/analyzer-api\`\nPending entry written to Netlify Blobs (training store).\nApprove by adding email to the \`approved[]\` array in the blob store.`);
   return { status: 'sent' };
 }
 
 // ── Daily Stats (for scheduled call-target tracker) ────────
 
-async function getDailyStats(token) {
-  const { data: reports } = await ghRead(token, 'training-data/call-reports.json');
-  const { data: board } = await ghRead(token, 'training-data/leaderboard.json');
+async function getDailyStats() {
+  const reports = await blobRead('call-reports');
+  const board = await blobRead('leaderboard');
   const allReports = Array.isArray(reports) ? reports : [];
   const leaderboard = Array.isArray(board) ? board : [];
 
@@ -333,9 +274,14 @@ async function getDailyStats(token) {
 // ── Main handler ────────────────────────────────────────────
 
 exports.handler = async (event) => {
+  // Restrict CORS to our domain only (prevents cross-origin data theft)
+  const origin = (event.headers || {}).origin || (event.headers || {}).Origin || '';
+  const allowedOrigins = ['https://goodresults.org', 'https://www.goodresults.org', 'http://localhost:8888'];
+  const corsOrigin = allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+
   const headers = {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': corsOrigin,
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type'
   };
@@ -344,13 +290,11 @@ exports.handler = async (event) => {
     return { statusCode: 200, headers, body: '' };
   }
 
-  const GITHUB_TOKEN = process.env.GitHubToken;
+  // Initialize Blobs for Lambda-compat functions
+  connectLambda(event);
+
   const SLACK_GROUP_CHAT = process.env.slack_the_group_chat;
   const SLACK_TECH = process.env.slack_hack_the_planet || SLACK_GROUP_CHAT;
-
-  if (!GITHUB_TOKEN) {
-    return { statusCode: 500, headers, body: JSON.stringify({ error: 'GitHubToken not configured' }) };
-  }
 
   try {
     const params = event.queryStringParameters || {};
@@ -359,40 +303,39 @@ exports.handler = async (event) => {
     // ── GET ──
     if (event.httpMethod === 'GET') {
       if (action === 'get') {
-        const board = await getLeaderboard(GITHUB_TOKEN);
+        const board = await getLeaderboard();
         return { statusCode: 200, headers, body: JSON.stringify(board) };
       }
       if (action === 'update') {
-        await updateLeaderboard(GITHUB_TOKEN, params.agent, params.score);
+        await updateLeaderboard(params.agent, params.score);
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
       if (action === 'getKB') {
-        const kb = await getKB(GITHUB_TOKEN);
+        const kb = await getKB();
         return { statusCode: 200, headers, body: JSON.stringify(kb) };
       }
       if (action === 'addKBBatch') {
-        await addKBBatch(GITHUB_TOKEN, params);
+        await addKBBatch(params);
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
       if (action === 'dailyStats') {
-        const stats = await getDailyStats(GITHUB_TOKEN);
+        const stats = await getDailyStats();
         return { statusCode: 200, headers, body: JSON.stringify(stats) };
       }
       if (action === 'checkAccess') {
-        const result = await checkAccess(GITHUB_TOKEN, params.email);
+        const result = await checkAccess(params.email);
         return { statusCode: 200, headers, body: JSON.stringify(result) };
       }
       if (action === 'getNotes') {
         const key = params.key || 'dashboard-notes';
-        const filePath = `training-data/${key}.json`;
         try {
-          const { data } = await ghRead(GITHUB_TOKEN, filePath);
+          const data = await blobRead(key);
           return { statusCode: 200, headers, body: JSON.stringify({ notes: data || [] }) };
         } catch(e) {
           return { statusCode: 200, headers, body: JSON.stringify({ notes: [] }) };
         }
       }
-      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown GET action: ' + action }) };
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown GET action' }) };
     }
 
     // ── POST ──
@@ -401,7 +344,7 @@ exports.handler = async (event) => {
       const postAction = body.action || action;
 
       if (postAction === 'addKnowledge') {
-        await addKnowledge(GITHUB_TOKEN, body);
+        await addKnowledge(body);
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
       if (postAction === 'postToSlack') {
@@ -409,40 +352,31 @@ exports.handler = async (event) => {
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
       if (postAction === 'addCallReport') {
-        await addCallReport(GITHUB_TOKEN, body);
+        await addCallReport(body);
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
       if (postAction === 'requestAccess') {
-        const result = await requestAccess(GITHUB_TOKEN, body, SLACK_TECH);
+        const result = await requestAccess(body, SLACK_TECH);
         return { statusCode: 200, headers, body: JSON.stringify(result) };
       }
       if (postAction === 'saveNote') {
         const key = body.key || 'dashboard-notes';
-        const filePath = `training-data/${key}.json`;
-        let notes = [];
-        let sha = null;
-        try {
-          const existing = await ghRead(GITHUB_TOKEN, filePath);
-          notes = existing.data || [];
-          sha = existing.sha;
-        } catch(e) {}
+        let notes = (await blobRead(key)) || [];
         notes.unshift(body.note);
-        await ghWrite(GITHUB_TOKEN, filePath, notes, sha, `Add dashboard note from ${body.note.author || 'unknown'}`);
+        await blobWrite(key, notes);
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
       if (postAction === 'deleteNote') {
         const key = body.key || 'dashboard-notes';
-        const filePath = `training-data/${key}.json`;
-        const { data, sha } = await ghRead(GITHUB_TOKEN, filePath);
-        const notes = data || [];
+        let notes = (await blobRead(key)) || [];
         const idx = body.index;
         if (idx >= 0 && idx < notes.length) {
           notes.splice(idx, 1);
-          await ghWrite(GITHUB_TOKEN, filePath, notes, sha, `Remove dashboard note #${idx}`);
+          await blobWrite(key, notes);
         }
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
-      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown action: ' + postAction }) };
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown action' }) };
     }
 
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
