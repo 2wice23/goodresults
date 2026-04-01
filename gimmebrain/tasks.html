@@ -184,32 +184,68 @@
   </div>
 </div>
 
-<!-- EDIT HISTORY -->
+<!-- BUILD LOG -->
 <div class="section">
-  <div class="section-title">Recent Changes</div>
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;">
-    <div style="font-size:0.7rem;color:var(--orange);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">April 1-2, 2026 — Overnight Session</div>
-    <div style="display:grid;gap:8px;">
-      <div style="font-size:0.78rem;color:var(--cream);line-height:1.6;padding:8px 12px;background:var(--surface2);border-radius:var(--radius-sm);border-left:3px solid var(--red);">
-        <span style="font-weight:700;color:var(--white);">5 Security Fixes</span> — XSS in toasts/hero (innerHTML removed), path traversal in close-proxy, CORS locked to goodresults.org on 3 functions
-      </div>
-      <div style="font-size:0.78rem;color:var(--cream);line-height:1.6;padding:8px 12px;background:var(--surface2);border-radius:var(--radius-sm);border-left:3px solid var(--orange);">
-        <span style="font-weight:700;color:var(--white);">Analyzer Redesign</span> — Side-by-side score bars, filler word counter removed, "The One Thing" coaching takeaway added
-      </div>
-      <div style="font-size:0.78rem;color:var(--cream);line-height:1.6;padding:8px 12px;background:var(--surface2);border-radius:var(--radius-sm);border-left:3px solid var(--green);">
-        <span style="font-weight:700;color:var(--white);">Accessibility</span> — Focus styles, contrast bumped to 4.7:1, quiz buttons now keyboard-accessible, iOS zoom fix
-      </div>
-      <div style="font-size:0.78rem;color:var(--cream);line-height:1.6;padding:8px 12px;background:var(--surface2);border-radius:var(--radius-sm);border-left:3px solid var(--blue);">
-        <span style="font-weight:700;color:var(--white);">Deal Deadline System</span> — New function queries Close CRM for upcoming dates. Scheduled task creates Google Calendar reminders weekdays at 8AM
-      </div>
-      <div style="font-size:0.78rem;color:var(--cream);line-height:1.6;padding:8px 12px;background:var(--surface2);border-radius:var(--radius-sm);border-left:3px solid var(--gold);">
-        <span style="font-weight:700;color:var(--white);">KB Migration</span> — kb-reader and kb-search now use Netlify Blobs (GitHub is fallback only). Auto-migrates on first read
-      </div>
-      <div style="font-size:0.78rem;color:var(--cream);line-height:1.6;padding:8px 12px;background:var(--surface2);border-radius:var(--radius-sm);border-left:3px solid var(--muted);">
-        <span style="font-weight:700;color:var(--white);">UX Trim</span> — ~450 words of verbose copy cut from hub + academy. Dashboard feature cards replaced with live widgets
-      </div>
-    </div>
-    <div style="font-size:0.65rem;color:var(--dim);margin-top:12px;">13 files changed · +1918 / -647 lines · Full report in workspace</div>
+  <div class="section-title">Build Log</div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;font-size:0.78rem;color:var(--cream);line-height:1.6;">
+    <div style="font-size:0.65rem;color:var(--dim);margin-bottom:16px;">884 commits since Mar 27 · goodresults.org</div>
+
+    <div style="font-weight:700;color:var(--orange);margin-bottom:6px;">Apr 1-2 — Security + Polish</div>
+    <div style="margin-bottom:4px;">Fix 5 critical security bugs (XSS, path traversal, CORS hardening)</div>
+    <div style="margin-bottom:4px;">Analyzer: 2-col scores, removed filler counter, added "The One Thing" takeaway</div>
+    <div style="margin-bottom:4px;">Accessibility: focus styles, contrast fix, semantic quiz buttons, iOS zoom</div>
+    <div style="margin-bottom:4px;">Deal deadline system — queries Close dates, scheduled Google Calendar reminders</div>
+    <div style="margin-bottom:4px;">Dashboard: killed feature cards, added deadline + error log widgets</div>
+    <div style="margin-bottom:4px;">KB migrated to Netlify Blobs (GitHub fallback only now)</div>
+    <div style="margin-bottom:12px;">Trimmed ~450 words of verbose UX copy across hub + academy</div>
+
+    <div style="font-weight:700;color:var(--orange);margin-bottom:6px;">Apr 1 — Shared Code + Cleanup</div>
+    <div style="margin-bottom:4px;">Created gr-common.css + gr-utils.js (shared across all pages)</div>
+    <div style="margin-bottom:4px;">Refactored 7 pages to use shared files, removed ~300 lines duplicate code</div>
+    <div style="margin-bottom:4px;">Created error-log.js (persistent error tracking in Blobs)</div>
+    <div style="margin-bottom:4px;">Deleted quote-proxy.js (dead code)</div>
+    <div style="margin-bottom:12px;">Installed Sales, Data, Design, Brand Voice plugins</div>
+
+    <div style="font-weight:700;color:var(--orange);margin-bottom:6px;">Mar 31 — Site Consistency</div>
+    <div style="margin-bottom:4px;">Standardized headers/footers/links across 25 files</div>
+    <div style="margin-bottom:4px;">Added /join partner page</div>
+    <div style="margin-bottom:4px;">Fixed module nav formats, analyzer back link, hub dashboard link</div>
+    <div style="margin-bottom:12px;">Module 9 quiz fixes (replaced Q16, added Q25)</div>
+
+    <div style="font-weight:700;color:var(--orange);margin-bottom:6px;">Mar 30 — Deal Command Center</div>
+    <div style="margin-bottom:4px;">Merged deal generator + deal dashboard into one page</div>
+    <div style="margin-bottom:4px;">Deduplicated shared code (CF map, closeAPI, template IDs)</div>
+    <div style="margin-bottom:4px;">New deals auto-refresh grid after creation</div>
+    <div style="margin-bottom:4px;">Contract extraction: vision-based (PDF→image→Claude) for DocuSign/zipForm</div>
+    <div style="margin-bottom:4px;">Multi-doc PDF handling, last-signature date rule</div>
+    <div style="margin-bottom:4px;">Fix 17 quiz pool complaints from Slack</div>
+    <div style="margin-bottom:12px;">Module update boxes added to all 12 modules</div>
+
+    <div style="font-weight:700;color:var(--orange);margin-bottom:6px;">Mar 29 — Deal System + Dashboard</div>
+    <div style="margin-bottom:4px;">Deal dashboard: inline editing, photo management, delete/upload</div>
+    <div style="margin-bottom:4px;">Photo drag-and-drop reorder + visibility toggle (public/private)</div>
+    <div style="margin-bottom:4px;">File uploads, auto-numbering, date calc, Close dealId sync</div>
+    <div style="margin-bottom:4px;">Push to Close + Create Workflow buttons</div>
+    <div style="margin-bottom:4px;">Split notes into public + private</div>
+    <div style="margin-bottom:4px;">Embedded PDF viewer for public documents on deal pages</div>
+    <div style="margin-bottom:4px;">Wholesale profit + buyer profit on dashboard cards</div>
+    <div style="margin-bottom:12px;">Deal folder rename to mmyyyy+3-digit format</div>
+
+    <div style="font-weight:700;color:var(--orange);margin-bottom:6px;">Mar 28 — Security + Proxies</div>
+    <div style="margin-bottom:4px;">Moved ALL secrets to Netlify env vars (analyzer, deal-gen, deal-doc, proxies)</div>
+    <div style="margin-bottom:4px;">Created close-proxy.js, anthropic-proxy.js, github-proxy.js</div>
+    <div style="margin-bottom:4px;">Zero API keys in source code</div>
+    <div style="margin-bottom:12px;">Deal dashboard v1 live</div>
+
+    <div style="font-weight:700;color:var(--orange);margin-bottom:6px;">Mar 27 — Foundation</div>
+    <div style="margin-bottom:4px;">Repo created, initial file upload</div>
+    <div style="margin-bottom:4px;">12 training modules (HTML with quiz pools)</div>
+    <div style="margin-bottom:4px;">Call analyzer with 7-criteria scoring</div>
+    <div style="margin-bottom:4px;">Login/auth system, academy hub, KB search</div>
+    <div style="margin-bottom:4px;">Gimme Brain owners dashboard v1</div>
+    <div style="margin-bottom:4px;">Leaderboard: today/week/all-time with dedup fix</div>
+    <div style="margin-bottom:4px;">First deal: 3202 Melbourne St</div>
+    <div style="margin-bottom:0;">Public site: index, about, how-it-works, contact, privacy</div>
   </div>
 </div>
 
