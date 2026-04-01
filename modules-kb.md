@@ -76,7 +76,7 @@
 
 ---
 
-WHAT CHANGED THIS CYCLE (2026-03-29 — Cycle 2): DD task corrected (Joe handles dispo, not Gayden). Deal Page Creator tool documented. Module quiz pools expanded (M1: 21 Qs, M2: 23 Qs). Photo request escalation added. Agents-send-terms/realtors-write-contracts distinction. Disapproved deal handling expanded. Call Analyzer usage guidance for new agents. Workflow approval clarification. Academy landing page documented.
+WHAT CHANGED THIS CYCLE (2026-04-01 — Cycle 3): Follow-ups are ALWAYS calls, never texts (Joe confirmed). Blast number (SMS) vs personal number (calls) clarified. Office number backoff protocol added (set status to "Service"). Contact phone editing via pencil icon documented. Deleted workflows cannot be recovered — must recreate. Realtor qualification for distressed properties added (don't push if they say never). Facial expressions coaching tip added for tonality. Module 4 Google Drive deprioritized — Deal Page Creator now handles everything. Module 2 follow-up protocols updated.
 \# Good Results — Curriculum Knowledge Base
 \*\*Version:\*\* 2.3 — Weekly sync with Slack knowledge and module expansions (March 29, 2026\)  
 \*\*Source of truth for:\*\* All training modules. When modules and this KB conflict, this KB wins.  
@@ -287,12 +287,40 @@ When an opportunity moves to Due Diligence, the agent must complete:
 \- EMD Due Date  
 \- Accepted Date
 
-\#\#\# Working the System  
-1\. When a realtor is first added: assign yourself as Lead Owner  
-2\. Set a follow-up task for 1 week (call it "First Follow-Up")  
-3\. After every call, log the call in Close and update Lead Stage  
-4\. When a deal moves to Send Terms: fill ALL remaining custom fields immediately  
+\#\#\# Working the System
+1\. When a realtor is first added: assign yourself as Lead Owner
+2\. Set a follow-up task for 1 week (call it "First Follow-Up")
+3\. After every call, log the call in Close and update Lead Stage
+4\. When a deal moves to Send Terms: fill ALL remaining custom fields immediately
 5\. All contracts sent to you → forward to \*\*contracts@goodresults.org\*\*
+
+\#\#\# CRITICAL — Follow-Ups Are ALWAYS Calls, Never Texts
+\*\*Joe confirmed:\*\* When you need to follow up with a realtor, \*\*default to calling always.\*\* Texts are for initial outreach or deal logistics. Follow-ups require voice conversations to build relationships and move deals forward. If a realtor doesn't respond to texts → pick up the phone.
+
+\*\*Rule:\*\* Every follow-up attempt should gravitate toward a live call. Texts open pathways. Calls get deals.
+
+\#\#\# Blast Number vs Personal Number
+\*\*Joe confirmed:\*\* We use two different numbers in Close:
+\- \*\*Blast number:\*\* Used for mass SMS outreach and workflows (cold texts, relationship checks, automated sequences)
+\- \*\*Personal number:\*\* Used for calls and deal-stage SMS (live conversations, offer updates, logistics)
+
+Both numbers exist in the Close system. When setting up an SMS workflow or cold blast → use the blast number. When calling or sending deal-specific texts → use your personal number. This distinction keeps your personal number from getting burned out on automated sequences.
+
+\#\#\# Office Number Backoff Protocol
+If an agent keeps reaching office numbers instead of the realtor's personal mobile:
+\- The property may not be the right fit for contact initially
+\- \*\*Set the lead status back to "Service"\*\* — the system will eventually correct or update the phone number
+\- Continue calling but expect gatekeepers
+\- If the realtor seems to be avoiding you through office screening → escalate outreach differently or move on
+
+\#\#\# Editing Contact Phone in Close
+To update a realtor's phone number (if you got a personal mobile):
+1\. Go to the Lead record
+2\. Look for the \*\*pencil icon next to "Contacts"\*\* in the sidebar
+3\. Click the pencil → edit phone/email directly
+4\. Save
+
+No need to create a new contact — just update the existing one. This keeps your activity log clean and preserves the relationship history.
 
 \#\#\# Close CRM Email Templates
 
@@ -346,13 +374,29 @@ Get them to trust you enough to send you a deal. That's it. Don't pitch too hard
 
 \*\*Do NOT proactively mention commission.\*\* If they ask, confirm it — don't lead with it.
 
-\#\#\# Making Realtors Feel Seen  
+\#\#\# Making Realtors Feel Seen
 This is the \#1 skill. Realtors who feel understood bring repeat deals.
 
-\- Remember something from the last call and reference it: "Hey, how did that listing go?"  
-\- Schedule a follow-up text 3 days after a good call. Just "Hey, hope your week's going well" — no pitch.  
-\- If they mention something personal (dog, trip, stressful listing), acknowledge it. It costs nothing.  
+\- Remember something from the last call and reference it: "Hey, how did that listing go?"
+\- Schedule a follow-up text 3 days after a good call. Just "Hey, hope your week's going well" — no pitch.
+\- If they mention something personal (dog, trip, stressful listing), acknowledge it. It costs nothing.
 \- "Hey, I hope you get a million bucks this weekend for you and your sellers. If not, I'll hit you up Tuesday."
+\- \*\*CRITICAL — Always follow up with a CALL, not a text.\*\* Joe confirmed: "Default to calling always." Texts open pathways. Calls get deals and build relationships.
+
+\#\#\# Facial Expressions = Tonality on Calls
+\*\*Team coaching tip:\*\* Your face affects how you sound on the phone. Make the face of the emotion you want to convey:
+\- \*\*Confused?:\*\* Make a confused face while asking the question. Your tone will match.
+\- \*\*Fair/reasonable?:\*\* Make a fair, thoughtful face. The realtor will feel it.
+\- \*\*Interested?:\*\* Smile while listening. They'll hear the genuine curiosity.
+
+It sounds weird, but it works. Your facial muscles wire directly to your vocal cords. Before the call, think about the energy you want to project, then make that face. The tonality will follow naturally. \*\*(YouTube link shared in team Slack — search "facial expressions phone calls")\*\*
+
+\#\#\# Qualifying Realtors on Distressed Property Access
+When a realtor says they never get distressed properties or off-market deals:
+\*\*Don't push to be their first.\*\* Instead, qualify with this question:
+\> "Did you qualify them as someone that would be a good fit for bringing us deals?"
+
+If their answer is NO or uncertain → it's not a good fit. Move on. There are realtors who specialize in the type of deals we need. Realtors who've never worked investor deals may not know how to source them, even if they wanted to. Respect their specialty and find realtors who already work in our space.
 
 \#\#\# Calling Through a List  
 \- Use a smart view like \*\*Reno Warm\*\* or \*\*Houston Warm\*\*  
@@ -483,31 +527,40 @@ When a property goes under contract, complete these steps \*\*immediately after 
 \*\*Step 1: Fill All Close Fields\*\*  
 Every custom field in the Opportunity must be filled: address, ARV, repair estimate, realtor, purchase price, DD end date, etc. Do this first before moving forward.
 
-\*\*Step 2: Create Google Drive Folder\*\*  
-\- Use your Good Results email account  
-\- \*\*Naming convention (Required):\*\* \[Street Address\] \- $\[Price\] \- \[Realtor Full Name\]  
-  \- Example: 123 Main Street \- $125,500 \- John Smith  
-\- \*\*Folder settings:\*\* Set access to "Anyone with the link → Viewer"  
-\- \*\*Copy the sharing link\*\*  
-\- \*\*Paste the link into the Notes section of the opportunity in Close CRM\*\*
+\*\*Step 2: Use the Deal Page Creator Tool\*\*
+The \*\*Deal Page Creator\*\* workflow handles all property documentation, photos, and deal organization. This replaced Google Drive for most deal management. Use Deal Page Creator to:
+\- Organize all property photos (from realtor, listing agent, or $40 runner)
+\- Store contracts (RPA/TREC), assignment agreements, and amendments
+\- Create a single source of truth for buyer coordination
 
-\*\*Step 3: Upload Property Photos\*\*  
-\- Photos are the priority. Buyers make decisions based on them. Get as many as possible.  
-\- Request from the realtor/seller immediately  
-\- If they can't provide: ask the listing agent (the buyer's agent should earn their commission)  
-\- If still can't get them: talk to Gayden — he may send a $40 runner  
-\- \*\*Never\*\* drive out yourself to take photos. Half a day lost \= a deal missed.  
-\- Upload all photos to the main Google Drive folder
+\*\*To use Deal Page Creator:\*\*
+1\. Complete Step 1 (fill all Close fields) first
+2\. Trigger the Deal Page Creator workflow from the opportunity record
+3\. Upload photos and documents as prompted
+4\. Paste any resulting links into the Close Notes section
 
-\*\*Step 4: Create Documents Subfolder\*\*  
-\- Inside the main Drive folder, create a subfolder named \*\*Documents\*\*  
-\- Upload the following:  
-  \- Purchase Agreement (RPA for Nevada, TREC contract for Texas)  
-  \- Assignment Agreement (if applicable)  
+\*\*Google Drive (Legacy):\*\* If you prefer Google Drive or need it for client sharing:
+\- Naming: \[Street Address\] \- $\[Price\] \- \[Realtor Full Name\]
+\- Access: "Anyone with the link → Viewer"
+\- Paste the link into Close Notes
+\- However, Deal Page Creator is now the primary tool — Google Drive is supplementary
+
+\*\*Step 3: Get Property Photos\*\*
+\- Photos are the priority. Buyers make decisions based on them. Get as many as possible.
+\- Request from the realtor/seller immediately
+\- If they can't provide: ask the listing agent (the buyer's agent should earn their commission)
+\- If still can't get them: talk to Gayden — he may send a $40 runner
+\- \*\*Never\*\* drive out yourself to take photos. Half a day lost \= a deal missed.
+\- Upload all photos via Deal Page Creator (or Google Drive if you're using it)
+
+\*\*Step 4: Upload Documents\*\*
+\- Upload the following via Deal Page Creator (or Drive):
+  \- Purchase Agreement (RPA for Nevada, TREC contract for Texas)
+  \- Assignment Agreement (if applicable)
   \- Any amendments or supporting documents
 
-\*\*Step 5: Create Deal Basics Document\*\*  
-Inside the main Drive folder, create a Google Doc titled \*\*Deal Basics – \[Property Address\]\*\* containing:
+\*\*Step 5: Document Deal Basics\*\*
+Via Deal Page Creator, ensure the following information is captured:
 
 \*\*Property Information:\*\*  
 \- Property Address  
@@ -550,15 +603,15 @@ In the Notes section of the opportunity in Close CRM, clearly document:
 
 Include enough detail so access and property conditions are fully understood even if you are unavailable.
 
-\#\#\# Completion Checklist  
-Before you are done, confirm every item:  
-\- ✓ Google Drive folder created and link pasted into Close Notes  
-\- ✓ All property photos uploaded  
-\- ✓ Purchase Agreement and supporting documents uploaded to Documents subfolder  
-\- ✓ Deal Basics Google Doc created with all sections filled out  
-\- ✓ Opportunity status moved to Due Diligence Period  
-\- ✓ All required fields completed in Close CRM  
-\- ✓ Access information and property condition clearly documented in Notes
+\#\#\# Completion Checklist
+Before you are done, confirm every item:
+\- ✓ All required Close CRM fields completed (Step 1)
+\- ✓ Deal Page Creator workflow triggered and organized (Step 2)
+\- ✓ All property photos uploaded and organized (Step 3)
+\- ✓ Purchase Agreement and supporting documents uploaded (Step 4)
+\- ✓ Deal basics documented (property specs, contract details, agent info) (Step 5)
+\- ✓ Opportunity status moved to Due Diligence Period (Step 6)
+\- ✓ Access information and property condition clearly documented in Close Notes (Step 7)
 
 \#\#\# What Happens Next (Awareness Only)  
 Moving to Due Diligence Period triggers a task for Joe (he handles dispo). The disposition process begins immediately. You are encouraged to maintain communication with the seller/agent, but leadership takes over primary coordination from this point forward.
@@ -628,6 +681,25 @@ These are the real templates saved in Close. Know them — use them:
 | \*\*Bub Cold\*\* | Cold outreach template for a specific style of approach. |
 
 \*\*CRITICAL on cold SMS workflows:\*\* Each agent builds their OWN workflow with their own voice. Must confirm with Gayden BEFORE deploying — deploying incorrectly can burn your phone number, requiring a new one.
+
+\#\#\# Blast Number vs Personal Number for SMS
+\*\*Joe confirmed:\*\* Close has two phone numbers configured per agent:
+\- \*\*Blast number:\*\* For mass SMS workflows, automated cold outreach, and bulk texting. Use this when setting up automated sequences or sending to multiple contacts from a workflow.
+\- \*\*Personal number:\*\* For individual calls, deal-stage SMS, and relationship texts. Use this for one-on-one conversations and active deal coordination.
+
+\*\*Rule:\*\* When setting up an SMS workflow → confirm you're using the BLAST number, not your personal number. Using your personal number for high-volume workflows will burn it out quickly, requiring a new one. Your personal number should be reserved for calls and direct realtor relationships.
+
+\#\#\# WARNING — Deleted Workflows Cannot Be Recovered
+\*\*CRITICAL:\*\* If you delete a workflow in Close, it is \*\*GONE FOREVER.\*\* There is no undo, no archive, no recovery option. You must recreate it from scratch.
+
+\*\*What to do before deleting:\*\*
+1\. Write down all the steps, templates, timing, and logic
+2\. Consider pausing the workflow instead of deleting (ask Gayden)
+3\. Only delete if you are 100% certain it will never be needed again
+
+\*\*If a workflow is deleted and you need it back:\*\* Gayden can create a template quickly, but you will be the one rebuilding the workflow with steps, timings, and logic. It's lost time. Be careful.
+
+\*\*Best practice:\*\* When you stop using a workflow, don't delete it — pause it or rename it to "ARCHIVE — [Workflow Name]" so it stays accessible if needed later.
 
 \#\#\# Post-Call SMS (MANDATORY)  
 Send the \*\*"0 Great Talk \- Buy Box"\*\* template same day while the call is fresh. Don't wait until the next morning.
