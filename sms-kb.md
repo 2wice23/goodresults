@@ -1,4 +1,12 @@
-=== WHAT CHANGED THIS CYCLE (2026-03-28) ===
+=== WHAT CHANGED THIS CYCLE (2026-04-01) ===
+VERSION: v2.3 → v2.4
+
+ADDED (2026-04-01):
+- Blast number vs personal number clarified (blast for SMS workflows, personal for calls/deal SMS)
+- Deleted workflows warning: cannot be recovered, must recreate from scratch
+- Pause workflows instead of deleting them — archive naming convention added
+
+PREVIOUS UPDATES (2026-03-28) ===
 VERSION: v2.2 → v2.3
 
 ADDED:
@@ -68,6 +76,28 @@ SMS at Good Results serves three distinct purposes, each with different rules, t
 A fourth emerging category from the data:
 
 4. **Relationship Maintenance** — Keep warm realtors engaged between deals. Goal: be top of mind when the next deal appears.
+
+---
+
+## BLAST NUMBER vs PERSONAL NUMBER
+
+**Critical distinction:** Good Results uses two separate phone numbers per agent in Close CRM:
+
+**Blast Number** — For SMS workflows, automated sequences, and mass outreach
+- Used when setting up automated cold SMS workflows
+- Used for bulk SMS to multiple contacts
+- Protects your personal number from being burned out
+- Example: "Blast 1", "Blast 2", "Blast 3" sequences fire from this number
+- Higher volume, lower relationship investment
+
+**Personal Number** — For individual calls, deal-stage SMS, and direct relationships
+- Used for live phone calls with realtors
+- Used for deal-specific texts (offer sent, contract negotiations, logistics)
+- Used for relationship maintenance between active deals
+- This is the number that builds real relationships
+- Protected from high-volume workflows
+
+**RULE:** When building or deploying an SMS workflow → confirm you're using the BLAST number. If you accidentally use your personal number for a high-volume workflow, it will burn out the number, requiring a replacement.
 
 ---
 
@@ -624,6 +654,21 @@ Volume still equals relationship depth equals deal flow. But the DATA now shows 
 **Source:** Master KB v2.2 + full CRM export analysis (34,811 messages, 1,147 contacts)
 **Next update:** Sunday consolidation cycle
 
+
+\---
+
+\#\# WARNING — Deleted SMS Workflows Cannot Be Recovered
+
+\*\*CRITICAL:\*\* If you delete an SMS workflow in Close, it is \*\*GONE FOREVER.\*\* There is no undo, no archive, no recovery option. You must recreate it from scratch.
+
+\*\*What to do before deleting:\*\*
+1\. Write down all the steps, SMS templates, timing delays, and trigger logic
+2\. Consider pausing the workflow instead of deleting (ask Gayden)
+3\. Only delete if you are 100% certain it will never be needed again
+
+\*\*If a workflow is deleted and you need it back:\*\* Gayden can create a template quickly, but you will be the one rebuilding the workflow step-by-step with timings, templates, and logic. It's lost time and effort.
+
+\*\*Best practice:\*\* When you stop using a workflow, don't delete it — pause it or rename it to "ARCHIVE — [Workflow Name]" so it stays accessible if needed later. This preserves the work and avoids accidental recreation.
 
 \---
 
