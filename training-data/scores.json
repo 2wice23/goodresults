@@ -1144,8 +1144,8 @@
   },
   {
     "timestamp": "2026-04-01T04:02:40.583Z",
-    "agent": "Unknown",
-    "email": "",
+    "agent": "Gayden",
+    "email": "gayden@goodresults.org",
     "module": 1,
     "moduleTitle": "Pipeline & CRM",
     "scorePct": 100,
@@ -1168,8 +1168,8 @@
   },
   {
     "timestamp": "2026-04-01T04:25:25.087Z",
-    "agent": "Unknown",
-    "email": "",
+    "agent": "Gayden",
+    "email": "gayden@goodresults.org",
     "module": 5,
     "moduleTitle": "SMS Playbook",
     "scorePct": 100,
