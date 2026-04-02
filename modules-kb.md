@@ -422,6 +422,7 @@ This is the #1 skill. Realtors who feel understood bring repeat deals.
 - Remember something from the last call and reference it: "Hey, how did that listing go?"
 - Schedule a follow-up text 3 days after a good call. Just "Hey, hope your week's going well" — no pitch.
 - If they mention something personal (dog, trip, stressful listing), acknowledge it. It costs nothing.
+- **Personal conversations are GOOD.** If a realtor starts talking about fishing, cruises, their weekend — lean into it. That's real rapport. But here's the play: set a scheduled message for 2-3 days later referencing something personal from the call that ISN'T about real estate. Example: they talked about a fishing trip → text them "hey did you end up catching anything this weekend?" a few days later. That personal follow-up is what separates you from every other investor who calls and forgets them.
 - "Hey, I hope you get a million bucks this weekend for you and your sellers. If not, I'll hit you up Tuesday."
 - **CRITICAL — Always follow up with a CALL, not a text.** Joe confirmed: "Default to calling always." Texts open pathways. Calls get deals and build relationships.
 
@@ -456,6 +457,7 @@ If their answer is NO or uncertain → it's not a good fit. Move on. There are r
 | "I only work with owner-occupants" | Acknowledge, get permission to reach out if they get something investor-friendly, and move on. |
 | "What's your offer based on?" | Share your reasoning (ARV, repair estimate, market data). Never share MAO. |
 | "I've been burned by investors before" | "I completely understand — and I don't want to waste your time either. Here's how we work: you bring me a deal, I run my numbers, and then I'll just ask you to verbally float the price to your seller. If they come back and say they need more, no problem — no contract gets written. But if they're close, we move forward. No wasted paperwork unless it's worth it for everyone." |
+| "I'm burned out on investors" / "Investors never close" | "I hear you — most investors ARE a pain. Here's what makes us different: we're direct cash buyers. No financing, no contingencies, no offers that fall through. We close in 10–21 days. When we say we're buying, we're buying." Validate their frustration, then differentiate with specifics. |
 
 ### Float a Verbal Before Writing
 Before writing any contract, always **float the verbal** first.
