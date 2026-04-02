@@ -259,3 +259,67 @@ Last updated: 2026-04-01 (Daily KB Learn Phase — Cycle 3)
 \*\*Direct-to-Seller Calls:\*\* New agents should collaborate with Joe on D2S leads. If a new agent handles D2S solo, flag for coaching.
 
 \*\*Title Insurance vs Closing Costs (added 2026-03-31):\*\* Agents must understand the difference. Title insurance costs are only one component of total closing costs. If an agent offers to have sellers "cover all closing costs" when they mean title insurance, this creates misaligned expectations and potential deal issues. Flag if an agent conflates these on a call or in deal terms.
+
+\#\# SECTION 12: CHLOE VOICE AGENT FEEDBACK COLLECTION (added 2026-04-01)
+
+The Call Analyzer serves a dual purpose: scoring agent performance AND collecting data that feeds back to improve Chloe, the AI voice agent. When analyzing Chloe's calls specifically, track the following additional data points.
+
+\#\#\# Objection Tracking for Chloe
+
+When reviewing Chloe's calls, log every objection or pushback the realtor gives. Categorize as:
+
+1. \*\*Handled well\*\* — Chloe had a script and used it effectively
+2. \*\*Handled poorly\*\* — Chloe had a script but the delivery was off or the script didn't land
+3. \*\*Unhandled\*\* — Chloe encountered an objection she had no script for and stumbled or deflected
+
+For UNHANDLED objections, capture:
+\- The exact objection language from the realtor
+\- What Chloe said in response (if anything)
+\- What the ideal response should have been
+\- Whether this is a one-off or recurring pattern
+
+\#\#\# Scenario Gap Detection
+
+Flag any call situation where Chloe didn't have clear guidance. Common gap types:
+
+\- \*\*Unexpected questions\*\* — Realtor asks something not covered in the prompt (e.g., "what's your track record?", "how many homes have you closed?", "do you have references?")
+\- \*\*Complex deal structures\*\* — Short sales, subject-to, loan assumptions, probate, estate sales, pre-foreclosure
+\- \*\*Emotional situations\*\* — Realtor is angry, frustrated, grieving (inherited property), or hostile
+\- \*\*Competitive situations\*\* — Realtor already has a cash buyer, mentions competing offers
+\- \*\*Technical questions\*\* — Title company, escrow process, inspection timelines, contract specifics
+
+\#\#\# Transfer Decision Quality
+
+Track whether Chloe makes the right call on transfers:
+\- \*\*Good transfer\*\* — Realtor had a deal, Chloe transferred to Joe/Gayden
+\- \*\*Missed transfer\*\* — Realtor had a deal or strong interest but Chloe didn't transfer
+\- \*\*Premature transfer\*\* — Chloe transferred before qualifying (wasted team's time)
+\- \*\*Correct non-transfer\*\* — Realtor wasn't interested, Chloe correctly ended the call
+
+\#\#\# Language Pattern Tracking
+
+Beyond forbidden language checks, track:
+\- \*\*Phrases that build rapport\*\* — What specific language made realtors open up?
+\- \*\*Phrases that shut down conversations\*\* — What did Chloe say right before a realtor went cold?
+\- \*\*Successful pivots\*\* — How did Chloe recover from a tough moment?
+\- \*\*Credibility builders\*\* — What statements made realtors take Chloe seriously?
+
+\#\#\# Weekly Chloe Feedback Summary
+
+At the end of each weekly analysis batch, produce a "Chloe Improvement Brief" with:
+
+1. \*\*Top 3 unhandled objections\*\* (with recommended scripts)
+2. \*\*Top 2 scenario gaps\*\* (with recommended handling)
+3. \*\*Transfer accuracy rate\*\* (good transfers / total transfer opportunities)
+4. \*\*Language wins\*\* (phrases to keep/amplify)
+5. \*\*Language flags\*\* (phrases to remove/modify)
+
+Format each recommendation as scenario + desired outcome:
+
+Scenario: [What happened on the call]
+Current behavior: [What Chloe did]
+Desired outcome: [What Chloe should do instead]
+Recommended script: [Exact language if applicable]
+Priority: [High/Medium/Low based on frequency]
+
+This brief feeds directly into the Chloe Feedback Loop skill, which routes improvements to either the Close prompt editor (for behavior changes) or the GitHub knowledge base (for reference data).
