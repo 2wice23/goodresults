@@ -221,17 +221,15 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
         <thead><tr><th>Step</th><th>What Happens</th><th>Time</th></tr></thead>
         <tbody>
           <tr><td><strong>1</strong></td><td>Fill all Close fields (address, ARV, repair estimate, realtor, price, DD date, etc.)</td><td>30 min</td></tr>
-          <tr><td><strong>2</strong></td><td>Create Google Drive folder with standard naming</td><td>15 min</td></tr>
-          <tr><td><strong>3</strong></td><td>Upload property photos (request immediately from realtor)</td><td>1–2 hrs</td></tr>
-          <tr><td><strong>4</strong></td><td>Create Documents subfolder, upload contract and amendments</td><td>10 min</td></tr>
-          <tr><td><strong>5</strong></td><td>Build deal page using Deal Page Creator tool</td><td>15 min</td></tr>
-          <tr><td><strong>6</strong></td><td>Move opportunity to "Due Diligence Period" status</td><td>5 min</td></tr>
-          <tr><td><strong>7</strong></td><td>Document access info in Close Notes (lockbox, codes, contacts)</td><td>10 min</td></tr>
+          <tr><td><strong>2</strong></td><td>Request property photos from realtor immediately</td><td>15 min</td></tr>
+          <tr><td><strong>3</strong></td><td>Use Deal Page Creator tool on the GR Hub (uploads photos, creates deal page, pushes to Close)</td><td>1–2 hrs</td></tr>
+          <tr><td><strong>4</strong></td><td>Move opportunity to "Due Diligence Period" status</td><td>5 min</td></tr>
+          <tr><td><strong>5</strong></td><td>Document access info in Close Notes (lockbox, codes, contacts)</td><td>10 min</td></tr>
         </tbody>
       </table>
       <div class="callout">
         <div class="callout-label">Non-Negotiable</div>
-        <p>If it's not documented, it doesn't exist. Missing information slows deals and kills buyer confidence. Do all seven steps before moving to Due Diligence — this is the requirement.</p>
+        <p>If it's not documented in Close CRM, it doesn't exist. Missing information slows deals and kills buyer confidence. Do all five steps before moving to Due Diligence — this is the requirement.</p>
       </div>
 
       <div class="kc-box" id="kc-1">
@@ -265,18 +263,16 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
     <div class="acc-body"><div class="acc-inner">
       <p><strong>Step 1: Fill All Close Fields.</strong> Every custom field in the Opportunity must be filled before moving forward: address, ARV, repair estimate, realtor, purchase price, DD end date, market, property type, HVAC age, roof condition, electrical status, plumbing status, solar details (if any), pool status (if any). The Close Opportunity record is the source of truth.</p>
 
-      <p><strong>Step 2: Create Google Drive Folder.</strong> Use your Good Results email account. Naming convention (required): <code>[Street Address] - $[Price] - [Realtor Full Name]</code>. Example: <code>123 Main Street - $125,500 - John Smith</code>. Set access to "Anyone with the link → Viewer". Copy the sharing link and paste it into the Notes section of the opportunity in Close.</p>
-
-      <p><strong>Step 3: Upload Property Photos.</strong> Photos are the priority. Buyers decide before visiting — clean photos signal organization. Request immediately from the realtor/seller. If they haven't provided: politely but firmly ask — "How can I make decisions without pictures at least?" If the temperature starts rising, let Gayden handle it. If still no photos, talk to Gayden — he may send a $40 runner. <strong>Never</strong> drive out yourself to take photos. Half a day lost = a deal missed.</p>
+      <p><strong>Step 2: Request Property Photos.</strong> Photos are the priority. Buyers decide before visiting — clean photos signal organization. Request immediately from the realtor/seller. If they haven't provided: politely but firmly ask — "How can I make decisions without pictures at least?" If the temperature starts rising, let Gayden handle it. If still no photos, talk to Gayden — he may send a $40 runner. <strong>Never</strong> drive out yourself to take photos. Half a day lost = a deal missed.</p>
 
       <div class="kc-box" id="kc-2">
         <div class="kc-label">✦ Quick Check</div>
-        <div class="kc-question">What should the Google Drive folder naming convention be?</div>
+        <div class="kc-question">What is the first step in the post-contract checklist?</div>
         <div class="kc-opts">
-          <div class="kc-opt" onclick="answerKC(2,0,false)"><div class="kc-opt-letter">A</div>Just the property address</div>
-          <div class="kc-opt" onclick="answerKC(2,1,true)"><div class="kc-opt-letter">B</div>[Street Address] - $[Price] - [Realtor Full Name]</div>
-          <div class="kc-opt" onclick="answerKC(2,2,false)"><div class="kc-opt-letter">C</div>Deal-[Date]-[Address]</div>
-          <div class="kc-opt" onclick="answerKC(2,3,false)"><div class="kc-opt-letter">D</div>[Address]-[County]</div>
+          <div class="kc-opt" onclick="answerKC(2,0,false)"><div class="kc-opt-letter">A</div>Create a Google Drive folder</div>
+          <div class="kc-opt" onclick="answerKC(2,1,false)"><div class="kc-opt-letter">B</div>Request property photos</div>
+          <div class="kc-opt" onclick="answerKC(2,2,true)"><div class="kc-opt-letter">C</div>Fill all Close custom fields</div>
+          <div class="kc-opt" onclick="answerKC(2,3,false)"><div class="kc-opt-letter">D</div>Document access information</div>
         </div>
         <div class="kc-feedback" id="kcfb-2"></div>
       </div>
@@ -284,23 +280,21 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
     </div></div>
   </div>
 
-  <!-- S3: Steps 4-5: Documents & Deal Page Creator -->
+  <!-- S3: Step 3: Deal Page Creator -->
   <div class="acc-item" data-section="3">
     <div class="acc-header" onclick="toggleSection(3)">
       <div class="acc-check" id="check-3"><span></span></div>
       <div class="acc-info">
-        <div class="acc-title">Steps 4–5: Documents & Deal Page</div>
-        <div class="acc-sub">Organizing contracts and building the deal page</div>
+        <div class="acc-title">Step 3: Use Deal Page Creator Tool</div>
+        <div class="acc-sub">Unified tool that handles deal page, documents, and Close updates</div>
       </div>
       <div class="acc-meta">
-        <span class="acc-time">4 min</span>
+        <span class="acc-time">1–2 hrs</span>
         <span class="acc-arrow">▼</span>
       </div>
     </div>
     <div class="acc-body"><div class="acc-inner">
-      <p><strong>Step 4: Create Documents Subfolder.</strong> Inside the main Drive folder, create a subfolder named <strong>Documents</strong>. Upload the following: Purchase Agreement (RPA for Nevada, TREC contract for Texas), Assignment Agreement (if applicable), any amendments or supporting documents.</p>
-
-      <p><strong>Step 5: Create Deal Page Using Deal Page Creator.</strong> Use the Deal Page Creator tool on the GR Hub. Enter the contract info, upload photos, and the tool builds the deal page, pushes data to Close, and creates the Google Drive automatically. The deal page includes:</p>
+      <p><strong>Step 3: Use Deal Page Creator.</strong> Use the Deal Page Creator tool on the GR Hub. Enter the contract info, upload property photos, upload the Purchase Agreement (RPA for Nevada, TREC contract for Texas), and any amendments or supporting documents. The tool automatically builds the deal page, creates the documentation in Close CRM, and pushes all data to Close. The deal page includes:</p>
 
       <p><strong>Property Information:</strong> Address, Property Type (Single Family, Multi-Family, Condo, Apartment), Bedrooms, Bathrooms, Garage, Square Footage, Lot Size, Year Built</p>
 
@@ -325,12 +319,12 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
     </div></div>
   </div>
 
-  <!-- S4: Steps 6-7: Due Diligence & Access Info -->
+  <!-- S4: Steps 4-5: Due Diligence & Access Info -->
   <div class="acc-item" data-section="4">
     <div class="acc-header" onclick="toggleSection(4)">
       <div class="acc-check" id="check-4"><span></span></div>
       <div class="acc-info">
-        <div class="acc-title">Steps 6–7: Due Diligence & Access</div>
+        <div class="acc-title">Steps 4–5: Due Diligence & Access</div>
         <div class="acc-sub">Moving status and documenting property access</div>
       </div>
       <div class="acc-meta">
@@ -339,9 +333,9 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
       </div>
     </div>
     <div class="acc-body"><div class="acc-inner">
-      <p><strong>Step 6: Move Opportunity to Due Diligence Period.</strong> Once the contract is signed and accepted, update the opportunity status in Close CRM to <strong>Due Diligence Period</strong>. This is a Won status. Moving here signals the deal is locked and disposition begins. A task is automatically created for Joe (he handles dispo).</p>
+      <p><strong>Step 4: Move Opportunity to Due Diligence Period.</strong> Once the contract is signed and accepted, update the opportunity status in Close CRM to <strong>Due Diligence Period</strong>. This is a Won status. Moving here signals the deal is locked and disposition begins. A task is automatically created for Joe (he handles dispo).</p>
 
-      <p><strong>Step 7: Document Access Information in Notes.</strong> In the Notes section of the opportunity in Close CRM, clearly document:</p>
+      <p><strong>Step 5: Document Access Information in Notes.</strong> In the Notes section of the opportunity in Close CRM, clearly document:</p>
       <ul>
         <li>Exact access instructions for the property</li>
         <li>Lockbox location and code (if applicable)</li>
@@ -389,11 +383,11 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
       <table class="data-table">
         <thead><tr><th>Field</th><th>Purpose</th></tr></thead>
         <tbody>
-          <tr><td><strong>Address</strong></td><td>Property location — used in Google Drive naming and deal page</td></tr>
+          <tr><td><strong>Address</strong></td><td>Property location — used in deal page and Close records</td></tr>
           <tr><td><strong>Purchase Price</strong></td><td>Offer price submitted to seller</td></tr>
           <tr><td><strong>ARV (After Repair Value)</strong></td><td>Expected property value after renovation</td></tr>
           <tr><td><strong>Repair Estimate</strong></td><td>Total expected renovation cost</td></tr>
-          <tr><td><strong>Realtor Name</strong></td><td>Used for Google Drive folder naming and deal tracking</td></tr>
+          <tr><td><strong>Realtor Name</strong></td><td>Used for deal tracking and communication</td></tr>
           <tr><td><strong>DD End Date</strong></td><td>Due Diligence period end date — critical timeline</td></tr>
           <tr><td><strong>Market</strong></td><td>Nevada or Texas (affects legal entities and escrow contacts)</td></tr>
           <tr><td><strong>Property Type</strong></td><td>Single Family, Multi-Family, Condo, Apartment</td></tr>
@@ -439,13 +433,11 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
       <table class="data-table">
         <thead><tr><th>Item</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td><strong>Google Drive folder created and link pasted into Close Notes</strong></td><td>☐</td></tr>
-          <tr><td><strong>All property photos uploaded</strong></td><td>☐</td></tr>
-          <tr><td><strong>Purchase Agreement and supporting documents uploaded to Documents subfolder</strong></td><td>☐</td></tr>
-          <tr><td><strong>Deal Basics Google Doc created with all sections filled out</strong></td><td>☐</td></tr>
-          <tr><td><strong>Opportunity status moved to Due Diligence Period</strong></td><td>☐</td></tr>
           <tr><td><strong>All required fields completed in Close CRM</strong></td><td>☐</td></tr>
-          <tr><td><strong>Access information and property condition clearly documented in Notes</strong></td><td>☐</td></tr>
+          <tr><td><strong>Property photos requested from realtor</strong></td><td>☐</td></tr>
+          <tr><td><strong>Deal Page Creator tool completed (photos, documents, deal page uploaded)</strong></td><td>☐</td></tr>
+          <tr><td><strong>Opportunity status moved to Due Diligence Period</strong></td><td>☐</td></tr>
+          <tr><td><strong>Access information clearly documented in Close Notes</strong></td><td>☐</td></tr>
         </tbody>
       </table>
 
@@ -582,7 +574,7 @@ const QUIZ_POOL = [
   {q:'What is the source of truth for deal information?', opts:[{t:'Google Drive',correct:false},{t:'Email thread with realtor',correct:false},{t:'Close Opportunity record',correct:true},{t:'Personal notes',correct:false}], explanation:'The Close Opportunity record is the source of truth. Every custom field must be filled with deal data.'},
   {q:'Which fields are required in the Close Opportunity record?', opts:[{t:'Only the address',correct:false},{t:'Address, offer price, and EMD amount',correct:false},{t:'All custom fields: address, ARV, repair estimate, realtor, price, DD date, market, systems info',correct:true},{t:'Just the contract price',correct:false}], explanation:'Every custom field must be completed: address, ARV, repair estimate, realtor, purchase price, DD end date, market, property type, HVAC age, roof condition, electrical, plumbing, solar details.'},
   {q:'How should you organize and name your deal information in the Deal Page Creator?', opts:[{t:'Just the property address',correct:false},{t:'[Street Address] - $[Price] - [Realtor Full Name] for consistency',correct:true},{t:'Deal-[Date]-[Address]',correct:false},{t:'[Address]-[County]',correct:false}], explanation:'The Deal Page Creator auto-generates standardized naming: [Street Address] - $[Price] - [Realtor Name]. This standard makes it easy for the entire team to find and reference deals.'},
-  {q:'Who should have access to the deal documentation created by the Deal Page Creator?', opts:[{t:'Only you',correct:false},{t:'Only Gayden',correct:false},{t:'The entire Good Results team',correct:true},{t:'"Restricted to realtor only"',correct:false}], explanation:'The Deal Page Creator auto-generates the Google Drive folder and Close CRM record with Good Results team access. This ensures the entire team can reference deal documentation and track progress.'},
+  {q:'Who should have access to the deal documentation created by the Deal Page Creator?', opts:[{t:'Only you',correct:false},{t:'Only Gayden',correct:false},{t:'The entire Good Results team',correct:true},{t:'"Restricted to realtor only"',correct:false}], explanation:'The Deal Page Creator auto-generates the Close CRM record and deal page with Good Results team access. This ensures the entire team can reference deal documentation and track progress.'},
   {q:'What should you do if the realtor hasn\'t provided property photos?', opts:[{t:'Drive out yourself to photograph the property',correct:false},{t:'Politely but firmly ask them to get photos — "How can I make decisions without pictures?" — ask if they\'d go take some. If the temperature rises, let Gayden handle it.',correct:true},{t:'Skip photos and move forward based on comps alone',correct:false},{t:'Wait for the seller to upload photos to the MLS',correct:false}], explanation:'Photos are critical for buyer decisions. Ask your realtor directly and firmly — you need pictures to move forward. If they push back or things get tense, hand it off to Gayden before it damages the relationship.'},
   {q:'What key information should be stored in the Close Opportunity record?', opts:[{t:'Just the address',correct:false},{t:'Address and offer price only',correct:false},{t:'All deal details: address, ARV, repairs, custom fields',correct:true},{t:'Only the realtor contact info',correct:false}], explanation:'The Close Opportunity record is your source of truth. Every custom field must be filled: address, ARV, repair estimate, realtor, purchase price, DD end date, market, property type, systems info. The Deal Page Creator pulls from these fields to auto-generate everything.'},
   {q:'What auto-generates when you use the Deal Page Creator tool?', opts:[{t:'Only a Google Drive folder',correct:false},{t:'Only a Close Opportunity record',correct:false},{t:'The deal page, Google Drive folder, and Close CRM record all at once',correct:true},{t:'A spreadsheet for team tracking',correct:false}], explanation:'The Deal Page Creator is a unified tool: enter contract info once and it auto-generates the deal page, Google Drive folder, and Close CRM updates. This eliminates manual duplication and keeps everything in sync.'},
