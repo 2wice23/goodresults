@@ -1,7 +1,7 @@
 # GOOD RESULTS — MASTER KNOWLEDGE BASE v2.3
 
 **Version:** 2.3 — Weekly sync consolidation (March 29, 2026)
-**Purpose:** Single source of truth. Weekly consolidation of changes from all 4 projects. Sliced into 4 native-format KBs for deployment.
+**Purpose:** Single source of truth. Weekly consolidation of changes from all 4 projects. Sliced into 4 native-format KBs for deployment. See also: close-kb.md (Close CRM platform reference — not part of weekly sync, updated manually when platform config changes).
 **Status:** COMPLETE & TESTED
 **All Conflicts:** RESOLVED
 **All Content:** FULLY INCLUDED (nothing abbreviated)
