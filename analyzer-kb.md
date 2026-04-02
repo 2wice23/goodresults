@@ -1,6 +1,6 @@
-GR CALL ANALYZER Ã¢ÂÂ KNOWLEDGE BASE Good Results Home Buyers Last Updated: March 31, 2026
+GR CALL ANALYZER Ã¢ÂÂ KNOWLEDGE BASE Good Results Home Buyers Last Updated: April 1, 2026
 
-WHAT CHANGED THIS CYCLE (2026-03-31 — Cycle 3): • Updated performance snapshot: Gayden 10 calls/71.2 avg (up from 6/69.2), Anthony 4 calls/18.9 avg (down from 2/30.6) • Added title insurance vs closing costs coaching note from Slack Q&A • Updated Anthony Cruz agent-specific insights to reflect downward trend and urgency
+WHAT CHANGED THIS CYCLE (2026-04-01 — Cycle 4): • Major performance snapshot refresh: 33 new scored calls across 5 agents • Anthony Cruz avg 76.2 on 14 new calls (up from 18.9 — coaching working) • Franklin Ladaga avg 69.1 on 8 new calls (up from 31.4, high variance) • Added Joe Kruse (4 calls, 85.8 avg) and Kayden Rogers (6 calls, 75.2 avg) first entries • Updated all agent-specific insights and coaching flags to reflect current trajectories
 
 # **\==================================== SECTION 1: COMPANY CONTEXT**
 
@@ -135,11 +135,11 @@ POSITIVE PATTERNS (praise these):
 
 **AGENT-SPECIFIC COACHING FLAGS:**
 
-**Frank Ladaga â Frank now has 5 analyzed calls with an average score of 31.4/100. He is still in early training and struggling with fundamentals. Continue scoring with emphasis on basics: stating his name, delivering the buy box, avoiding forbidden language, and setting a next step. His low average suggests he needs focused coaching on call structure and confidence. Praise any correct structural execution. Flag core issues (forbidden language, no buy box, no next step) and frame coaching as building habits. As more calls come in, track whether his scores trend upward week over week.**
+**Frank Ladaga â Frank now has 13 analyzed calls with an average score of 55.5/100. He has shown significant improvement from his early 31.4 avg. His last 8 calls average 69.1 with peaks at 85-88. The fundamentals are clicking on his better calls: he states his name, delivers the buy box, references prior contact, and sets next steps. His coaching priority has shifted from fundamentals to consistency. His range spans 11 to 88, with lows triggered by hostile realtors or pressure situations. Praise structural execution when present. On low-scoring calls, identify what broke down (usually composure under hostility or rushing when caught off guard). Track variance reduction week over week.**
 
 Gayden Rosales Ã¢ÂÂ Flag any instances where Gayden talks over the realtor, interrupts mid-sentence, or speaks for extended stretches without letting the realtor respond. Gayden's natural energy and knowledge can lead to over-talking. If the transcript shows him cutting in before the realtor finishes a thought, flag it directly. This is a priority coaching point for him and should be called out even on otherwise excellent calls. Score it under CONVERSATION QUALITY.
 
-Anthony Cruz Ã¢ÂÂ Flag any use of "are you still a realtor?" as an opener. Flag any call where the buy box is not delivered verbally. Flag any call that ends with "keep me posted" or no specific follow-up timeline. Flag any instance where a realtor says they have properties or deals available and Anthony does not ask about a specific property on that call. Flag use of "me and my partner are trying to do" or "I just moved here" Ã¢ÂÂ these undermine credibility. Anthony's activity level is strong and his tone is consistently polite Ã¢ÂÂ praise that when warranted, but the structural gaps above are priority coaching points.
+Anthony Cruz Ã¢ÂÂ Flag any use of "are you still a realtor?" as an opener. Flag any call where the buy box is not delivered verbally. Flag any call that ends with "keep me posted" or no specific follow-up timeline. Flag any instance where a realtor says they have properties or deals available and Anthony does not ask about a specific property on that call. Flag use of "me and my partner are trying to do" or "I just moved here" Ã¢ÂÂ these undermine credibility. Anthony has shown dramatic improvement this cycle (14 new calls averaging 76.2). His activity level is strong and his tone is consistently polite Ã¢ÂÂ praise that when warranted, but the structural gaps above are priority coaching points.
 
 Dan VanMatre Ã¢ÂÂ Flag any call where the buy box is deferred entirely to email without being delivered verbally on the call. Flag any mention of "just moved here," "just got here," "took time off," or "took a break" Ã¢ÂÂ Dan tends to volunteer backstory about relocating or being inactive, which undermines credibility with realtors. Flag any call that ends without a specific follow-up timeline. Dan's conversational instincts, listening skills, and rapport building are genuine strengths Ã¢ÂÂ praise those. His priority coaching points are: deliver the buy box verbally on every call, stop volunteering the move/break story, and lock in a specific next step before hanging up.
 
@@ -203,13 +203,15 @@ The analyzer must return ONLY valid JSON in this exact structure. No markdown, n
 
 # **==================================== SECTION 11: WEEKLY LEARNINGS FROM CALL DATA**
 
-Last updated: 2026-03-31 (Daily KB Learn Phase — Cycle 2)
+Last updated: 2026-04-01 (Daily KB Learn Phase — Cycle 3)
 
-## PERFORMANCE SNAPSHOT (as of 2026-03-31)
-* Dan VanMatre: 1 call, avg 89.0/100 — Top performer. Strong buy box delivery, excellent conversation flow, positions well as low-maintenance partner.
-* Gayden Rosales: 10 calls, avg 71.2/100 — Trending upward. Solid but flagged for tone issues in non-realtor calls.
-* Franklin Ladaga: 5 calls, avg 31.4/100 — In early training, struggling with fundamentals.
-* Anthony Cruz: 4 calls, avg 18.9/100 — Significant downward trend. Avg dropped from 30.6 to 18.9 with 2 new scored calls. Needs urgent 1-on-1 coaching focus on fundamentals.
+## PERFORMANCE SNAPSHOT (as of 2026-04-01)
+* Joe Kruse: 4 calls, avg 85.8/100 — Top performer. Scores: 83, 90, 92, 78. Strong deal discussions, excellent property-specific conversations, sets concrete next steps.
+* Gayden Rosales: 11 calls, avg 72.8/100 — Consistent. 1 new call scored 89. Solid realtor rapport and deal mechanics.
+* Dan VanMatre: 1 call, avg 89.0/100 — Strong buy box delivery, excellent conversation flow, positions well as low-maintenance partner. No new calls scored this cycle.
+* Anthony Cruz: 18 calls, avg 62.7/100 — Major upward trend. 14 new calls this cycle averaging 76.2 (range: 65-83). Early calls dragged overall avg down from what is now consistent B+/A- performance. Coaching is working.
+* Kayden Rogers: 6 calls, avg 75.2/100 — First scored entries. Scores: 82, 79, 68, 68, 80, 74. Solid re-engagement calls with good buy box delivery.
+* Franklin Ladaga: 13 calls, avg 55.5/100 — Improving with high variance. 8 new calls this cycle (11, 88, 88, 74, 54, 85, 78, 75). Peaks at 85-88 show capability; lows (11, 54) show inconsistency under pressure.
 
 ## TOP POSITIVE PATTERNS ACROSS ALL AGENTS
 1. Strong buy box delivery with specific criteria (year range, sq ft, subdivision style)
@@ -229,11 +231,12 @@ Last updated: 2026-03-31 (Daily KB Learn Phase — Cycle 2)
 6. Over-talking and not letting the realtor share
 
 ## AGENT-SPECIFIC INSIGHTS FROM CALL DATA
-* **Dan VanMatre**: 1 call scored 89. Lets realtors talk, delivers buy box with specifics, discusses commission naturally. Low negative count (2).
-* **Anthony Cruz**: 4 calls, avg 18.9 — significant downward trend from 30.6. Initial confusion on calls persists. Needs tighter call structure and urgent fundamentals coaching. Also confused title insurance costs with total closing costs (March 25 Slack Q&A) — knowledge gap to address. Strengths: builds good rapport once past the opener.
-* **Kayden Rogers**: 18 positive, 33 negative — highest ratio of negatives. May need 1-on-1 coaching focus.
-* **Gayden Rosales**: 6 calls, all negative KB entries relate to a single title officer incident. In realtor calls, performs well. Flag: tone management.
-* **Franklin Ladaga**: 5 calls, 31.4 avg, no KB pattern entries yet. Focus: stating name, delivering buy box, setting next steps.
+* **Joe Kruse**: 4 calls, avg 85.8. Top performer this cycle. Strong on deal-specific conversations — discusses property details, pricing, and deal structure confidently. Sets clear next steps. Scored 92 on a Houston property pitch with concrete follow-up.
+* **Dan VanMatre**: 1 call scored 89. Lets realtors talk, delivers buy box with specifics, discusses commission naturally. No new scored calls this cycle — monitor for activity.
+* **Anthony Cruz**: 18 calls, avg 62.7 — dramatic improvement from early 18.9 avg. Last 14 calls average 76.2 with scores ranging 65-83. Early confusion on calls has resolved. Now consistently delivers buy box, sets follow-ups, and builds rapport. Title insurance vs closing costs knowledge gap flagged (March 25 Slack Q&A) — still to be verified on calls. Coaching is clearly taking hold.
+* **Kayden Rogers**: 6 calls, avg 75.2. Strong re-engagement calls. Scored 82 on budget/criteria update call with Teri. Handles hostile realtors with composure (68 on Raymond call despite immediate hostility). Delivers buy box consistently. Area to watch: some calls with realtors who don't remember him — may need stronger opener anchoring.
+* **Gayden Rosales**: 11 calls, avg 72.8. 1 new call scored 89 — property discussion with Ann, discovered pre-HUD manufactured home pipeline. Realtor calls consistently strong. Flag: tone management in non-realtor contexts. Completed all 12 training modules with mostly perfect scores.
+* **Franklin Ladaga**: 13 calls, avg 55.5 — improving but high variance. Peaks: 88 on Holly call (Carson City property lead from cancer patient client) and 88 on Alexandria call (immediate deal opportunity). Lows: 11 when realtor thought he was AI and became hostile, 54 when realtor ended call quickly. Fundamentals are clicking on good calls — buy box delivery, referencing prior contact, setting next steps. Inconsistency is the coaching priority now, not fundamentals.
 
 \---
 
