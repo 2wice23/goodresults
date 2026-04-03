@@ -1,74 +1,28 @@
 // Netlify serverless function — replaces Google Apps Script for training modules
 // Handles: quiz score saves, module update notes, mastery progress lookups
-// Storage: GitHub JSON files in training-data/ folder (2wice23/goodresults repo)
+// Storage: Netlify Blobs (training store)
 // Notifications: Quiz scores with leaderboard trash talk + module update pings to Slack
 //
 // Env vars used:
-//   GitHubToken            — GitHub PAT for reading/writing to repo
 //   slack_the_group_chat   — Slack incoming webhook for #the-group-chat (team scores, trash talk)
 //   slack_questions_answers — Slack incoming webhook for #questions-and-answers (module update notes)
 
-const GITHUB_API = 'https://api.github.com';
-const REPO_PATH = '/repos/2wice23/goodresults/contents';
+const { getStore, connectLambda } = require("@netlify/blobs");
+
 const CANVAS_URL = 'https://goodresultshomebuyers.slack.com/docs/T0976VBJV6Y/F0AQDUPSAQY';
 
-// ── GitHub helpers ──────────────────────────────────────────
+// ── Blob store helpers ──────────────────────────────────────────
+// Note: connectLambda(event) must be called before these in the handler
 
-async function ghRead(token, filePath) {
-  const resp = await fetch(`${GITHUB_API}${REPO_PATH}/${filePath}`, {
-    headers: {
-      'Accept': 'application/vnd.github+json',
-      'Authorization': `Bearer ${token}`,
-      'X-GitHub-Api-Version': '2022-11-28'
-    }
-  });
-  if (resp.status === 404) return { data: null, sha: null };
-  if (!resp.ok) throw new Error(`GitHub GET ${filePath}: ${resp.status}`);
-  const json = await resp.json();
-  const decoded = Buffer.from(json.content, 'base64').toString('utf-8');
-  return { data: JSON.parse(decoded), sha: json.sha };
+async function blobRead(key) {
+  const store = getStore({ name: 'training', consistency: 'eventual' });
+  const data = await store.get(key, { type: 'json' });
+  return data || null;
 }
 
-async function ghWrite(token, filePath, data, sha, message) {
-  const encoded = Buffer.from(JSON.stringify(data, null, 2)).toString('base64');
-  const body = { message, content: encoded };
-  if (sha) body.sha = sha;
-
-  const resp = await fetch(`${GITHUB_API}${REPO_PATH}/${filePath}`, {
-    method: 'PUT',
-    headers: {
-      'Accept': 'application/vnd.github+json',
-      'Authorization': `Bearer ${token}`,
-      'X-GitHub-Api-Version': '2022-11-28',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  });
-
-  if (resp.status === 409) {
-    // SHA conflict — re-read and retry once
-    const fresh = await ghRead(token, filePath);
-    const merged = Array.isArray(fresh.data) ? fresh.data : [];
-    if (Array.isArray(data)) {
-      const newEntry = data[data.length - 1];
-      merged.push(newEntry);
-    }
-    const encoded2 = Buffer.from(JSON.stringify(merged, null, 2)).toString('base64');
-    const retry = await fetch(`${GITHUB_API}${REPO_PATH}/${filePath}`, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/vnd.github+json',
-        'Authorization': `Bearer ${token}`,
-        'X-GitHub-Api-Version': '2022-11-28',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ message, content: encoded2, sha: fresh.sha })
-    });
-    if (!retry.ok) throw new Error(`GitHub PUT retry ${filePath}: ${retry.status}`);
-    return;
-  }
-
-  if (!resp.ok) throw new Error(`GitHub PUT ${filePath}: ${resp.status}`);
+async function blobWrite(key, data) {
+  const store = getStore({ name: 'training', consistency: 'eventual' });
+  await store.setJSON(key, data);
 }
 
 // ── Slack helper — short pings only ─────────────────────────
@@ -84,11 +38,7 @@ async function pingSlack(webhook, text) {
 
 // ── Action handlers ─────────────────────────────────────────
 
-async function saveScore(token, body, slackWebhook) {
-  const filePath = 'training-data/scores.json';
-  const { data, sha } = await ghRead(token, filePath);
-  const scores = Array.isArray(data) ? data : [];
-
+async function saveScore(body, slackWebhook) {
   const record = {
     timestamp: body.date || new Date().toISOString(),
     agent: body.agent || 'Unknown',
@@ -100,11 +50,50 @@ async function saveScore(token, body, slackWebhook) {
     total: parseInt(body.total) || 0,
     xp: parseInt(body.xp) || 0,
     poolSize: parseInt(body.poolSize) || 0,
-    correctIndices: body.correctIndices || []
+    correctIndices: body.correctIndices || [],
+    wrongAnswers: body.wrongAnswers || []
   };
 
-  scores.push(record);
-  await ghWrite(token, filePath, scores, sha, `Module ${record.module} score: ${record.agent} ${record.scorePct}%`);
+  // ── Write score with retry to guard against eventual-consistency races ──
+  // Each score also gets its own individual blob key as a backup
+  const scoreKey = `score-${Date.now()}-${record.agent.toLowerCase().replace(/\s+/g,'-')}`;
+  await blobWrite(scoreKey, record);
+
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const scores = (await blobRead('scores')) || [];
+    scores.push(record);
+    await blobWrite('scores', scores);
+    // Brief pause then verify the write stuck
+    await new Promise(r => setTimeout(r, 300));
+    const verify = (await blobRead('scores')) || [];
+    const found = verify.some(s =>
+      s.timestamp === record.timestamp &&
+      (s.agent || '').toLowerCase() === record.agent.toLowerCase() &&
+      s.module === record.module
+    );
+    if (found) break;
+    console.warn(`Score write verify failed for ${record.agent} mod ${record.module}, attempt ${attempt + 1}`);
+  }
+
+  // ── Save wrong answers to separate blob for remediation tracking ──
+  if (record.wrongAnswers.length > 0) {
+    try {
+      const wrongs = (await blobRead('wrong-answers')) || [];
+      for (const wa of record.wrongAnswers) {
+        wrongs.push({
+          timestamp: record.timestamp,
+          agent: record.agent,
+          module: record.module,
+          moduleTitle: record.moduleTitle,
+          poolIdx: wa.poolIdx,
+          question: wa.question,
+          pickedText: wa.pickedText,
+          correctText: wa.correctText
+        });
+      }
+      await blobWrite('wrong-answers', wrongs);
+    } catch (e) { /* Don't fail the score save if wrong-answer tracking fails */ }
+  }
 
   // ── Build Slack message with leaderboard trash talk ──
 
@@ -185,10 +174,8 @@ async function saveScore(token, body, slackWebhook) {
   await pingSlack(slackWebhook, slackMsg);
 }
 
-async function saveUpdate(token, body, slackWebhook) {
-  const filePath = 'training-data/updates.json';
-  const { data, sha } = await ghRead(token, filePath);
-  const updates = Array.isArray(data) ? data : [];
+async function saveUpdate(body, slackWebhook) {
+  const updates = (await blobRead('updates')) || [];
 
   const record = {
     timestamp: body.date || new Date().toISOString(),
@@ -196,21 +183,42 @@ async function saveUpdate(token, body, slackWebhook) {
     moduleTitle: body.moduleTitle || '',
     agent: body.agent || 'Unknown',
     email: body.email || '',
-    update: body.update || '',
+    update: body.text || body.update || '',
     status: 'pending'
   };
 
   updates.push(record);
-  await ghWrite(token, filePath, updates, sha, `Module ${record.module} update from ${record.agent}`);
+  await blobWrite('updates', updates);
 
   // Clean Q&A ping — no fluff
   await pingSlack(slackWebhook, `*${record.agent}* — Module ${record.module} (${record.moduleTitle}) note:\n> ${record.update}`);
 }
 
-async function getTrainingProgress(token) {
-  const filePath = 'training-data/scores.json';
-  const { data } = await ghRead(token, filePath);
-  if (!Array.isArray(data)) return [];
+async function getTrainingProgress() {
+  const mainScores = await blobRead('scores');
+  const data = Array.isArray(mainScores) ? mainScores : [];
+
+  // Also check for individual score backup keys
+  try {
+    const store = getStore({ name: 'training', consistency: 'eventual' });
+    const { blobs } = await store.list({ prefix: 'score-' });
+    if (blobs && blobs.length > 0) {
+      // Build a set of existing score signatures to avoid duplicates
+      const existing = new Set(data.map(s => `${s.timestamp}|${(s.agent||'').toLowerCase()}|${s.module}`));
+      for (const blob of blobs) {
+        try {
+          const record = await store.get(blob.key, { type: 'json' });
+          if (record && record.agent) {
+            const sig = `${record.timestamp}|${record.agent.toLowerCase()}|${record.module}`;
+            if (!existing.has(sig)) {
+              data.push(record);
+              existing.add(sig);
+            }
+          }
+        } catch (e) { /* skip unreadable backup keys */ }
+      }
+    }
+  } catch (e) { /* If list fails, just use main scores array */ }
 
   const agents = {};
   for (const s of data) {
@@ -231,11 +239,10 @@ async function getTrainingProgress(token) {
   return Object.values(agents);
 }
 
-async function getModuleProgress(token, agent, moduleNum) {
+async function getModuleProgress(agent, moduleNum) {
   if (!agent || !moduleNum) return { mastered: [] };
 
-  const filePath = 'training-data/scores.json';
-  const { data } = await ghRead(token, filePath);
+  const data = await blobRead('scores');
   if (!Array.isArray(data)) return { mastered: [] };
 
   const agentLow = agent.trim().toLowerCase();
@@ -266,24 +273,22 @@ exports.handler = async (event) => {
     return { statusCode: 200, headers, body: '' };
   }
 
-  const GITHUB_TOKEN = process.env.GitHubToken;
   const SLACK_GROUP_CHAT = process.env.slack_the_group_chat;
   const SLACK_QA = process.env.slack_questions_answers || SLACK_GROUP_CHAT;
 
-  if (!GITHUB_TOKEN) {
-    return { statusCode: 500, headers, body: JSON.stringify({ error: 'GitHubToken not configured' }) };
-  }
+  // Initialize Blobs for Lambda-compat functions
+  connectLambda(event);
 
   try {
     // GET — module progress lookup
     if (event.httpMethod === 'GET') {
       const params = event.queryStringParameters || {};
       if (params.action === 'getModuleProgress') {
-        const result = await getModuleProgress(GITHUB_TOKEN, params.agent, parseInt(params.module));
+        const result = await getModuleProgress(params.agent, parseInt(params.module));
         return { statusCode: 200, headers, body: JSON.stringify(result) };
       }
       if (params.action === 'gettrainingprogress') {
-        const result = await getTrainingProgress(GITHUB_TOKEN);
+        const result = await getTrainingProgress();
         return { statusCode: 200, headers, body: JSON.stringify(result) };
       }
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown GET action' }) };
@@ -295,12 +300,36 @@ exports.handler = async (event) => {
       const action = body.action;
 
       if (action === 'moduleComplete') {
-        await saveScore(GITHUB_TOKEN, body, SLACK_GROUP_CHAT);
+        await saveScore(body, body.silent ? null : SLACK_GROUP_CHAT);
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
 
+      if (action === 'backfillScores') {
+        // Bulk inject score records without Slack notifications
+        const records = body.records || [];
+        const scores = (await blobRead('scores')) || [];
+        for (const r of records) {
+          scores.push({
+            timestamp: r.date || new Date().toISOString(),
+            agent: r.agent || 'Unknown',
+            email: r.email || '',
+            module: parseInt(r.module) || 0,
+            moduleTitle: r.moduleTitle || '',
+            scorePct: parseFloat(r.score) || 0,
+            correct: parseInt(r.correct) || 0,
+            total: parseInt(r.total) || 0,
+            xp: parseInt(r.xp) || 0,
+            poolSize: parseInt(r.poolSize) || 0,
+            correctIndices: r.correctIndices || [],
+            wrongAnswers: r.wrongAnswers || []
+          });
+        }
+        await blobWrite('scores', scores);
+        return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok', injected: records.length }) };
+      }
+
       if (action === 'moduleUpdate') {
-        await saveUpdate(GITHUB_TOKEN, body, SLACK_QA);
+        await saveUpdate(body, SLACK_QA);
         return { statusCode: 200, headers, body: JSON.stringify({ status: 'ok' }) };
       }
 
