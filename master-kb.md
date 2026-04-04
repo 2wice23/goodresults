@@ -1,14 +1,45 @@
-# GOOD RESULTS — MASTER KNOWLEDGE BASE v2.3
+# GOOD RESULTS — MASTER KNOWLEDGE BASE v3.0
 
-**Version:** 2.3 — Weekly sync consolidation (March 29, 2026)
-**Purpose:** Single source of truth. Weekly consolidation of changes from all 4 projects. Sliced into 4 native-format KBs for deployment. See also: close-kb.md (Close CRM platform reference — not part of weekly sync, updated manually when platform config changes).
-**Status:** COMPLETE & TESTED
-**All Conflicts:** RESOLVED
-**All Content:** FULLY INCLUDED (nothing abbreviated)
+**Version:** 3.0 — Tagged routing system (April 4, 2026)
+**Purpose:** Single source of truth. Content lives HERE once, tagged with routing destinations. Small brains are GENERATED from these tags — never edited directly.
+**See also:** close-kb.md (Close CRM platform reference — not part of weekly sync, updated manually)
+
+---
+
+## ROUTING SYSTEM
+
+### How Tags Work
+Every section has a route tag: `<!-- @route: brain:section, brain:section -->`
+
+The slicer reads these tags and distributes content mechanically. No interpretation needed.
+
+### Brain Codes
+| Code | Brain | Purpose | Output Format |
+|------|-------|---------|---------------|
+| `A` | analyzer-kb.md | Call Analyzer (scores phone calls) | Numbered sections (SECTION 1, 2...), scoring rubrics, JSON output schema, agent coaching flags |
+| `S` | sms-kb.md | SMS Playbook (texting strategy) | Numbered sections (SECTION 1, 2...), template libraries, reply rate data, agent voice DNA |
+| `C` | chloe-kb.md | Chloe Voice Agent (AI cold-caller) | System prompt format — no section numbers, decision trees, if/then logic, escaped markdown for Close |
+| `M` | modules-kb.md | Training Curriculum (Good Results Academy) | MODULE 1, MODULE 2... format, quiz pools, narrative teaching style |
+
+### Route Tag Examples
+- `<!-- @route: A:S2, C:buybox, S:S1, M:M6 -->` — goes to 4 brains
+- `<!-- @route: C:callflow -->` — Chloe only
+- `<!-- @route: A:S12 -->` — Analyzer only
+- `<!-- @route: ALL -->` — every brain gets this
+
+### Slicer Rules
+1. Read all `@route` tags
+2. For each brain, collect tagged content in order
+3. Apply that brain's output format (see table above)
+4. Chloe gets escaped markdown (`\#\#` instead of `##`)
+5. Each brain gets a CHANGE LOG header pulled from master's change log
+6. Content tagged `ALL` goes to every brain
+7. If a section says `@route: NONE` — it's master-only (meta/instructions)
 
 ---
 
 ## CHANGE LOG
+<!-- @route: NONE — master-only meta. Slicer generates per-brain change logs from this. -->
 
 ### Week of March 29, 2026 (v2.3)
 
@@ -60,6 +91,7 @@
 ---
 
 ## DEPLOYMENT DESTINATIONS
+<!-- @route: NONE — master-only meta -->
 
 - **Call Analyzer KB** → GitHub (2wice23/goodresults) + goodresults.org/gimmebrain/analyzer
 - **SMS Playbook KB** → GitHub (2wice23/goodresults)
@@ -69,6 +101,7 @@
 ---
 
 ## MASTER KB INSTRUCTIONS FOR PROJECT TEAMS
+<!-- @route: NONE — master-only meta. These instructions are REPLACED by the routing system in v3.0. Kept for reference. -->
 
 ⚠️ **CRITICAL — READ THIS FIRST**
 
@@ -111,8 +144,7 @@ This MASTER KB is updated on **Sundays** by consolidating changes from all 4 pro
 ---
 
 ## SECTION 0: CORE COMPANY CONTEXT
-
-[SOURCE: All 4 KBs — consolidated]
+<!-- @route: ALL -->
 
 ### Company Overview
 
@@ -139,8 +171,7 @@ This MASTER KB is updated on **Sundays** by consolidating changes from all 4 pro
 ---
 
 ## SECTION 1: THE BUY BOX
-
-[SOURCE: All 4 KBs — identical across all]
+<!-- @route: A:S1, S:S1, C:buybox, M:M6 -->
 
 Every realtor should hear this within the first 30 seconds of a call.
 
@@ -173,8 +204,7 @@ Every realtor should hear this within the first 30 seconds of a call.
 ---
 
 ## SECTION 2: FORBIDDEN LANGUAGE (CRITICAL)
-
-[SOURCE: All 4 KBs — MUST be identical]
+<!-- @route: A:S2, S:S2, C:forbidden, M:M2 -->
 
 ### NEVER Use in ANY Communication (calls, SMS, email, text):
 - "Wholesale" / "wholesaling" / "wholesaler"
@@ -216,8 +246,7 @@ Don't bring it up. If they ask, confirm they can still earn theirs — but don't
 ---
 
 ## SECTION 3: OBJECTION HANDLING & RESPONSE SCRIPTS
-
-[SOURCE: All 4 KBs — consolidated]
+<!-- @route: A:S3, C:objections, M:M2 -->
 
 ### The Walkthrough Objection (CANONICAL VERSION - Use This)
 
@@ -288,8 +317,7 @@ Don't send offers as gambles — talk to listing agent first. For agents who won
 ---
 
 ## SECTION 4: COLD CALL OPENERS & FOLLOW-UP SCRIPTS
-
-[SOURCE: Curriculum KB + Call Analyzer KB]
+<!-- @route: A:S4, C:calltypes, M:M2 -->
 
 ### Cold Open (First Time Contact)
 
@@ -341,8 +369,7 @@ Schedule a relationship text 3 days after a good call:
 ---
 
 ## SECTION 5: POST-CALL SMS RULES & TEMPLATES
-
-[SOURCE: SMS Playbook KB + Curriculum KB + Call Analyzer KB — COMPLETE]
+<!-- @route: S:S3-S13, M:M5 -->
 
 ### Post-Call SMS Timing (CRITICAL)
 
@@ -567,8 +594,8 @@ Why it works: Deal comes from being top of mind when right property appears, not
 ---
 
 ## SECTION 6: VOICE AGENT (CHLOE) — COMPLETE CALL FLOW & DECISION TREES
-
-[SOURCE: Voice Agent Prompt KB — AI-specific system prompt format]
+<!-- @route: C:callflow -->
+<!-- @note: Chloe also inherits S0 (company), S1 (buy box), S2 (forbidden), S3 (objections) via their own route tags. Duplicated buy box, forbidden language, objections, company details, and key numbers below are CHLOE-FORMATTED VERSIONS for her system prompt. The slicer uses S1/S2/S3 as the canonical source — Section 6 versions are formatting overrides for Chloe's prompt style. -->
 
 ### USER INSTRUCTIONS
 
@@ -621,34 +648,9 @@ Speak naturally with human-like patterns:
 ---
 
 ### THE BUY BOX (Deliver Within First 60 Seconds if They Say Yes)
+<!-- @inherit: S1 — slicer pulls full buy box from SECTION 1 and formats for Chloe prompt -->
 
-**You must deliver this verbally on every call where they express interest:**
-
-**"We're cash buyers. We close as fast as possible — usually 10 to 21 days — no bank, no appraisal, no conditions. We buy as-is — any condition, any situation. We're in [market]. One contract, one check."**
-
-**Key criteria to hit:**
-- Cash buyer (always lead with this)
-- 10–21 day close (as fast as possible)
-- As-is, any condition
-- No appraisal contingency, no contingencies at all
-- Easy relationship (no tours, no hand-holding)
-
-**What we actually buy:**
-- Single-family homes
-- Built: 1960s through early 2000s
-- Square footage: ~2,000 sq ft (give or take 500 — roughly 1,500 to 2,500)
-- Neighborhood: Subdivision-style — cookie-cutter streets where surrounding homes are similar in age and style
-- Condition: As-is, distressed, dated — any condition
-- Situations: Off-market preferred; MLS listings are fine too
-
-**What we DON'T buy:**
-- Properties that need zero renovation (no margin)
-- Multi-unit manufactured homes
-- Unique/custom-built homes
-- Rural properties
-- Commercial
-
-**Never mention these details upfront — only if they ask for specifics.**
+**Chloe-specific delivery rule:** Deliver the buy box verbally on every call where they express interest. Key criteria to hit: cash buyer (lead with this), 10-21 day close, as-is any condition, no contingencies, easy relationship. Never mention detailed criteria upfront — only if they ask for specifics.
 
 ---
 
@@ -696,70 +698,20 @@ Question 1: Do you work with investors or have deals right now?
 ---
 
 ### FORBIDDEN LANGUAGE (CRITICAL)
+<!-- @inherit: S2 — slicer pulls forbidden language from SECTION 2 and formats for Chloe prompt -->
 
-**NEVER use these words on any call:**
-- "Wholesale" / "wholesaling" / "wholesaler"
-- "Assignment of contract" / "assign" / "assigning"
-
-**Exception: "Flip" / "fix and flip" is OK to use conversationally on calls** — but never as your main pitch
-
-**NEVER say these (they undermine credibility):**
-- "Just moved here" or "just got here"
-- "Took time off" or "took a break"
-- "Me and my partner are trying to do..."
-
-**DO say these:**
-- "Cash buyer" — preferred positioning
-- "Investor" — acceptable
-- "Homes that need renovation" — good phrasing
-- "Properties that aren't ready for retail" — good phrasing
+**Chloe-specific additions (voice calls only):**
+- "Cash buyer" and "Investor" ARE acceptable on calls (forbidden in SMS only)
+- "Fix and flip" OK conversationally on calls — never as main pitch
+- ALSO never say: "Just moved here," "Took time off," "Me and my partner are trying to do..."
+- DO say: "Homes that need renovation," "Properties that aren't ready for retail"
 
 ---
 
 ### OBJECTION HANDLING
+<!-- @inherit: S3 — slicer pulls objection scripts from SECTION 3 and formats for Chloe prompt (if/then decision tree style) -->
 
-#### "I need you to walk the property first"
-
-**Your response:**
-"I'm not a contractor. I barely own a hammer. Me walking through the property doesn't tell me anything useful. My contractors charge $600–800 a day. In order to send my contractor, I need to be in contract first — otherwise I'm spending a thousand bucks on inspections to find out we can't even agree on a price. That doesn't make sense at the volume I operate. Give me a 5-day DD and my contractor is there the next morning."
-
-**Why this works:** It reframes the issue (you need contract first), builds credibility (you have contractors), sets clear expectations.
-
----
-
-#### "My seller wants a higher price"
-
-**Your response:**
-"I totally get it. I hope they get it. Let me know if it doesn't work out — I'll be here."
-
-**Why this works:** Respectful, non-pushy, keeps door open.
-
----
-
-#### "I've been burned by investors before"
-
-**Your response:**
-"I completely understand — and I don't want to waste your time either. Here's how we work: you bring me a deal, I run my numbers, and then I'll just ask you to verbally float the price to your seller. If they come back and say they need a lot more, no problem — no contract gets written, no one's time gets wasted. But if they say they're close, we move forward and make it official. No wasted paperwork unless it's worth it for everyone."
-
-**Why this works:** Shows you respect their time, explains your process clearly, removes risk of wasted effort.
-
----
-
-#### "What's your offer based on?"
-
-**Your response:**
-"I run comps on similar homes in the area that sold recently. I look at the condition and what repairs are needed, and I work backward from what the house will sell for after renovation. That's where my number comes from."
-
-**Why this works:** Shows you're analytical, not desperate. Never share your MAO formula — just explain reasoning.
-
----
-
-#### "I only work with owner-occupants"
-
-**Your response:**
-"Totally understand. If you ever get something that's investor-friendly or needs some work, keep me in mind. I'd love a shot at it."
-
-**Why this works:** Respectful, keeps door open, no pushback.
+**Chloe-specific note:** All objection scripts from Section 3 apply. Chloe should deliver them conversationally, not read them verbatim. If an objection comes up that isn't covered, use the "Questions Beyond Your Scope" handler: "Great question — let me have one of the team follow up with you on the specifics."
 
 ---
 
@@ -895,38 +847,16 @@ Then transfer. Don't do a warm handoff if it's a transfer skill — just complet
 
 ---
 
-### COMPANY DETAILS (For Reference)
+### COMPANY DETAILS & KEY NUMBERS
+<!-- @inherit: S0, S13 — slicer pulls company context from SECTION 0 and key numbers from SECTION 13, formats for Chloe prompt -->
 
-**Good Results Co.** is a real estate investment company buying homes in Reno NV, Las Vegas NV, and Houston TX. We buy distressed or off-market properties as-is with cash, close in 10–21 days, and partner with local realtors to source deals.
-
-We buy fast because we:
-- Have cash on hand (no bank approval needed)
-- Buy as-is (no repairs required from seller)
-- Close with certainty (no financing contingencies)
-
-We are NOT hard money, private money, or anything other than true cash buyers.
-
----
-
-### KEY NUMBERS TO KNOW
-
-- **Close timeline:** 10–21 days (15-day average), as fast as possible
-- **EMD standard:** 1% of purchase price (typically $3,000–$5,000)
-- **Repair range if asked:** $20–$60 per square foot depending on condition
-- **Markets we're in:** Reno NV, Las Vegas NV, Houston TX
-- **Nevada entity:** Good Results LLC (signer: Gayden Rosales)
-- **Texas entity:** Good Results TX LLC (signer: Gayden Rosales)
+**Chloe-specific note:** Chloe says company name in opening greeting only — do not repeat. Key numbers Chloe needs on-call: close timeline (10-21 days), EMD (1% / $3-5K), repair range ($20-60/sqft if asked), markets (Reno, Las Vegas, Houston). Entity names only if directly asked.
 
 ---
 
 ### TONE & ENERGY
-
-- Warm and friendly, but professional
-- Conversational — like you're chatting with a colleague
-- Low-pressure — you're not desperate for their deal
-- Curious — ask follow-up questions like you actually care
-- Honest — if you don't know something, say so
-- Quick — respect their time; calls should be 3–7 minutes max
+<!-- @note: Duplicates SPEECH STYLE above — slicer should merge into one block in Chloe's output. Kept here as a quick-reference fallback. -->
+<!-- See SPEECH STYLE section above for the canonical version. -->
 
 ---
 
@@ -945,8 +875,7 @@ We are NOT hard money, private money, or anything other than true cash buyers.
 ---
 
 ## SECTION 7: CLOSE CRM WORKFLOW — COMPLETE
-
-[SOURCE: Curriculum KB MODULE 1 — PIPELINE & CRM]
+<!-- @route: M:M1 -->
 
 ### Close CRM Overview
 
@@ -1220,8 +1149,7 @@ The power dialer is the fastest way to call through a list.
 ---
 
 ## SECTION 8: OFFER PROCESS & CONTRACTS — COMPLETE
-
-[SOURCE: Curriculum KB MODULE 3, MODULE 9]
+<!-- @route: M:M3, M:M9 -->
 
 ### Step 1: Run a Soft Comp (3 minutes max)
 
@@ -1354,8 +1282,7 @@ If assignment language was removed but you need to assign: escalate to Gayden. H
 ---
 
 ## SECTION 9: POST-CONTRACT SOP — COMPLETE
-
-[SOURCE: Curriculum KB MODULE 4]
+<!-- @route: M:M4 -->
 
 When a property goes under contract, complete these steps **immediately after signing.** All of this happens the same day or within 24 hours.
 
@@ -1469,8 +1396,7 @@ Moving to Due Diligence Period triggers a task for Joe (he handles dispo). The d
 ---
 
 ## SECTION 10: DEAL ANALYSIS & COMPS — COMPLETE
-
-[SOURCE: Curriculum KB MODULE 7]
+<!-- @route: M:M7 -->
 
 ### What Is a Comp?
 
@@ -1575,8 +1501,7 @@ If a realtor continues to push: get Gayden on the phone.
 ---
 
 ## SECTION 11: NEVADA RPA vs TEXAS TREC — COMPLETE
-
-[SOURCE: Curriculum KB MODULE 9]
+<!-- @route: M:M9 -->
 
 ### Why Contracts Look Different By State
 
@@ -1643,8 +1568,7 @@ Both the option fee AND earnest money are due at end of the option/DD period (no
 ---
 
 ## SECTION 12: CALL SCORING CRITERIA — COMPLETE
-
-[SOURCE: Call Analyzer KB SECTION 4, SECTION 5]
+<!-- @route: A:S5-S9 -->
 
 ### Scoring Categories (1-100 scale):
 
@@ -1773,8 +1697,7 @@ Different types of calls get different expectations. A deal discussion is scored
 ---
 
 ## SECTION 13: QUICK REFERENCE TABLES & FACTS
-
-[SOURCE: All KBs — consolidated]
+<!-- @route: ALL -->
 
 ### Key Numbers & Facts
 
@@ -1828,8 +1751,7 @@ Different types of calls get different expectations. A deal discussion is scored
 ---
 
 ## SECTION 14: THINGS TO NEVER DO
-
-[SOURCE: Curriculum KB]
+<!-- @route: ALL -->
 
 1. Never share your MAO.
 2. Never say "wholesaler," "wholesaling," "assignment of contract," "assign/assigning" in any communication.
@@ -1847,107 +1769,58 @@ Different types of calls get different expectations. A deal discussion is scored
 
 ---
 
-## SLICING INSTRUCTIONS FOR SUNDAY DEPLOYMENTS
+## SLICING INSTRUCTIONS — v3.0 (TAG-BASED)
+<!-- @route: NONE — master-only meta -->
 
-These instructions tell Claude exactly which SECTIONS go to which KB when slicing.
+**v3.0 replaces the old per-brain recipe lists.** The slicer now reads `@route` tags inline on each section.
 
-### To Build Call Analyzer KB:
-1. Take SECTION 0 (Company Context)
-2. Take SECTION 1 (Buy Box)
-3. Take SECTION 2 (Forbidden Language)
-4. Take SECTION 3 (Objection Scripts)
-5. Take SECTION 4 (Cold Call Openers & Scripts)
-6. Add SECTION 12 (Call Scoring Criteria)
-7. Add SECTION 13 (Quick Reference Tables — all of it)
-8. Add SECTION 14 (Never Do)
-9. Add CHANGE LOG at top
-10. Add INSTRUCTIONS FOR CALL ANALYZER PROJECT at top
-11. Maintain Call Analyzer KB's current format/feel (sections numbered, scoring rubrics, agent-specific coaching)
-12. Deploy to: GitHub (2wice23/goodresults) → gimmebrain/analyzer web tool
+### How the Slicer Works Now
 
----
+1. Scan every `<!-- @route: ... -->` tag in this file
+2. For each brain, collect all sections tagged for it (in document order)
+3. Apply that brain's output format (see Brain Codes table at top)
+4. For `@inherit` tags: pull canonical content from the referenced section and format for the target brain
+5. Sections tagged `ALL` go to every brain
+6. Sections tagged `NONE` stay in master only
+7. Each brain gets a CHANGE LOG header generated from master's change log (only changes relevant to that brain)
 
-### To Build SMS Playbook KB:
-1. Take SECTION 0 (Company Context)
-2. Take SECTION 1 (Buy Box)
-3. Take SECTION 2 (Forbidden Language)
-4. Take SECTION 5 (Post-Call SMS Rules, Cold SMS Rules, SMS Sequences, Proven Patterns, Deal-Stage SMS — FULL)
-5. Add SECTION 13 (Quick Reference Tables — SMS-relevant parts only: Markets, Common Realtor Q&A)
-6. Add CHANGE LOG at top
-7. Add INSTRUCTIONS FOR SMS PLAYBOOK PROJECT at top
-8. Maintain SMS Playbook KB's current format/feel (section numbering, strategy-first, template-heavy, pattern-documentation)
-9. Deploy to: GitHub (2wice23/goodresults)
+### Routing Summary (derived from tags above)
 
----
+| Section | A | S | C | M |
+|---------|---|---|---|---|
+| S0: Company Context | ✓ | ✓ | ✓ | ✓ |
+| S1: Buy Box | ✓ | ✓ | ✓ (inherit) | ✓ |
+| S2: Forbidden Language | ✓ | ✓ | ✓ (inherit + additions) | ✓ |
+| S3: Objection Handling | ✓ | — | ✓ (inherit) | ✓ |
+| S4: Cold Call Scripts | ✓ | — | ✓ | ✓ |
+| S5: SMS Rules & Templates | — | ✓ | — | ✓ |
+| S6: Chloe Voice Agent | — | — | ✓ | — |
+| S7: Close CRM Workflow | — | — | — | ✓ |
+| S8: Offer Process | — | — | — | ✓ |
+| S9: Post-Contract SOP | — | — | — | ✓ |
+| S10: Deal Analysis | — | — | — | ✓ |
+| S11: NV RPA vs TX TREC | — | — | — | ✓ |
+| S12: Call Scoring | ✓ | — | — | — |
+| S13: Quick Reference | ✓ | ✓ | ✓ | ✓ |
+| S14: Never Do | ✓ | ✓ | ✓ | ✓ |
 
-### To Build Voice Agent (Chloe) KB:
-1. Take SECTION 0 (Company Context)
-2. Take SECTION 1 (Buy Box)
-3. Take SECTION 2 (Forbidden Language)
-4. Take SECTION 6 (Voice Agent — COMPLETE — all call flow, decision tree, objection handling, scenarios)
-5. Add SECTION 3 (Objection Handling Scripts) — use for reference
-6. Add SECTION 13 (Quick Reference Tables — key numbers, common Q&A)
-7. Add SECTION 14 (Never Do)
-8. Add CHANGE LOG at top
-9. Add INSTRUCTIONS FOR VOICE AGENT PROJECT at top
-10. Maintain Voice Agent Prompt's current system-prompt format/feel (user instructions, call context, decision trees, exact word-tracks, if/then logic)
-11. Deploy to: GitHub (2wice23/goodresults) + Close CRM Chloe setup
+### Format Rules Per Brain
 
----
+- **A (analyzer):** Numbered SECTION headers, scoring rubrics, JSON output schema at end
+- **S (sms):** Numbered SECTION headers, template libraries, reply rate data, voice DNA
+- **C (chloe):** System prompt format — no numbered sections, decision trees, if/then logic, escaped markdown (`\#\#`)
+- **M (modules):** MODULE X headers, narrative teaching style, quiz pools
 
-### To Build Curriculum KB:
-1. Take ALL OF SECTION 0-14 (the entire consolidated content)
-2. Reorganize into 12-MODULE format per original Curriculum KB:
-   - MODULE 1: Take Close CRM content from SECTION 7
-   - MODULE 2: Take Realtor Outreach content from SECTION 4
-   - MODULE 3: Take Offer Process content from SECTION 8
-   - MODULE 4: Take Post-Contract SOP from SECTION 9
-   - MODULE 5: Take SMS content from SECTION 5
-   - MODULE 6: Take Buy Box & Markets from SECTION 1 + SECTION 13 (Markets table)
-   - MODULE 7: Take Comps content from SECTION 10
-   - MODULE 8: Not in MASTER (specialized content — keep as-is from original if exists, or create from domain knowledge)
-   - MODULE 9: Take Contract comparison from SECTION 11
-   - MODULE 10: Not in MASTER (Investor Vocabulary — specialized content)
-   - MODULE 11: Not in MASTER (Due Diligence Deep Dive — specialized content)
-   - MODULE 12: Not in MASTER (Foreclosures & Distressed Deals — specialized content)
-3. Add SECTION 13 (Quick Reference Tables — all tables)
-4. Add SECTION 14 (Never Do)
-5. Add CHANGE LOG at top
-6. Add INSTRUCTIONS FOR CURRICULUM PROJECT at top
-7. Maintain Curriculum KB's current 12-module format/feel (narrative + reference hybrid, MODULE X headers, comprehensive)
-8. Deploy to: GitHub (2wice23/goodresults) → academy website
+### Modules KB Special Handling
 
----
+Modules 8, 10, 11, 12 are specialized training content not in master. On weekly slices, the slicer preserves these from the existing modules-kb.md as-is. When updates are needed, add them to master first.
 
-**NOTE ON MODULES 8, 10, 11, 12:** These specialized sections exist in the original Curriculum KB but were not consolidated into this MASTER because they are less frequently updated and more reference-level. On weekly slices, check if these modules exist in the original Curriculum KB. If they do, include them as-is in the slice. If updates are needed to these modules, add them to the MASTER and they'll flow through automatically.
+### Post-Slice Safety Checks
 
----
-
-## FINAL SAFETY CHECKS FOR SUNDAY SLICING
-
-Before deploying the 4 sliced KBs, Claude performs:
-
-**Check 1: Content Completeness**
-- Verify all sections required for each KB are included
-- Verify no critical section was accidentally omitted
-
-**Check 2: Format Preservation**
-- Call Analyzer: Still has numbered sections, scoring rubrics, agent-specific coaching?
-- SMS Playbook: Still has section numbering, strategy-focus, template references?
-- Voice Agent: Still has system-prompt format, decision trees, exact word-tracks?
-- Curriculum: Still has 12-module structure, MODULE X headers, narrative + reference hybrid?
-
-**Check 3: Contradiction Detection**
-- Direct contradictions only (not emphasis differences)
-- Flag for your approval before deploying
-
-**Check 4: Source Attribution Verification**
-- Each SECTION still has [SOURCE: ...] tags? (These get removed before deploying)
-- No sections missing source attribution?
-
-**Check 5: CHANGE LOG Review**
-- Did changes from each KB flow into CHANGE LOG correctly?
-- Is the CHANGE LOG section at the top of each sliced KB?
+1. **Content completeness** — every tagged section included for each brain?
+2. **Format preservation** — brain still looks like its native format?
+3. **Contradiction detection** — direct contradictions only, flag for approval
+4. **Change log accuracy** — per-brain changes match master log?
 
 ---
 
@@ -1959,15 +1832,10 @@ Before deploying the 4 sliced KBs, Claude performs:
 | 2.0 | March 26, 2026 | COMPLETE & READY | All 4 KBs fully consolidated, nothing abbreviated |
 | 2.2 | March 29, 2026 | COMPLETE | Slack-sourced knowledge added (sub2, commission, title, CRM tips) |
 | 2.3 | March 29, 2026 | COMPLETE | Module updates, SMS v2.3 CRM analysis, DD task fix, new tool docs |
+| 3.0 | April 4, 2026 | COMPLETE | Tagged routing system — inline @route tags replace old slicing recipes. Section 6 deduplicated (buy box, forbidden, objections now @inherit from canonical sections). Old slicing instructions replaced with routing summary table. |
 
 ---
 
-**END OF MASTER KB v2.3**
+**END OF MASTER KB v3.0**
 
-**READY FOR DEPLOYMENT & WEEKLY CONSOLIDATION PROCESS**
-
-This MASTER KB is complete, tested, and ready to be sliced into 4 native-format KBs every Sunday.
-
-All conflicts resolved. All content included. All instructions provided for slicing.
-
-Ready to build the weekly consolidation skill.
+**Tagged routing system active.** Content lives once, routes mechanically. Small brains are generated outputs — never edited directly.
