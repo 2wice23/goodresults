@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listing Photo Downloader — GR Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/gimmebrain/gr-common.css">
+<style>
+.page-wrap{max-width:820px;margin:0 auto;padding:52px 44px 100px;}
+.tool-hero{padding:40px 0 36px;border-bottom:1px solid var(--border);margin-bottom:44px;}
+.tool-hero-eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue);font-size:.6rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:4px 12px;border-radius:3px;margin-bottom:16px;}
+.tool-hero h1{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;line-height:1.15;margin-bottom:10px;letter-spacing:-.02em;}
+.tool-hero h1 span{color:var(--orange);}
+.tool-hero-sub{font-size:.92rem;color:var(--muted);line-height:1.72;max-width:560px;}
+.how-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:48px;}
+.how-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:22px 20px;}
+.how-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--orange-glow);border:1px solid var(--orange-border);color:var(--orange);font-size:.7rem;font-weight:800;margin-bottom:12px;}
+.how-title{font-size:.82rem;font-weight:700;color:var(--white);margin-bottom:6px;}
+.how-desc{font-size:.82rem;color:var(--muted);line-height:1.65;}
+.sites-row{display:flex;gap:10px;margin-bottom:48px;flex-wrap:wrap;}
+.site-chip{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px 20px;flex:1;min-width:160px;}
+.site-dot{width:8px;height:8px;border-radius:50%;}
+.site-dot.green{background:var(--green);box-shadow:0 0 6px var(--green);}
+.site-name{font-size:.82rem;font-weight:700;color:var(--white);}
+.site-note{font-size:.72rem;color:var(--dim);margin-top:1px;}
+.detail-block{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:28px;margin-bottom:48px;}
+.detail-title{font-size:.58rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:18px;}
+.detail-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;}
+.detail-row:last-child{margin-bottom:0;}
+.detail-icon{font-size:.9rem;flex-shrink:0;margin-top:2px;}
+.detail-text{font-size:.87rem;color:var(--cream);line-height:1.65;}
+.detail-text strong{color:var(--white);font-weight:700;}
+.usage-box{background:linear-gradient(135deg,var(--surface) 0%,rgba(255,92,26,0.04) 100%);border:1px solid var(--orange-border);border-radius:6px;padding:28px;margin-bottom:48px;}
+.usage-title{font-size:.82rem;font-weight:800;color:var(--white);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.usage-step{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;}
+.usage-step:last-child{margin-bottom:0;}
+.usage-num{font-size:.65rem;font-weight:800;color:var(--orange);background:var(--orange-glow);border:1px solid var(--orange-border);width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+.usage-text{font-size:.87rem;color:var(--cream);line-height:1.65;}
+.usage-text code{font-family:var(--mono);font-size:.78rem;background:rgba(255,255,255,.06);border:1px solid var(--border);padding:1px 6px;border-radius:3px;color:var(--white);}
+.pg-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:22px;}
+.ft{font-size:.62rem;color:var(--dim);}
+@media(max-width:768px){.page-wrap{padding:40px 24px 80px;}.how-grid{grid-template-columns:1fr;}.sites-row{flex-direction:column;}}
+</style>
+</head>
+<body>
+<div id="rpbar"></div>
+<header class="header">
+  <div class="header-left">
+    <div class="logo-mark">
+      <div class="logo-icon">GR</div>
+      <div>
+        <div class="logo-name">Good Results // Hub</div>
+        <div class="logo-sub">Internal Operations</div>
+      </div>
+    </div>
+  </div>
+  <div class="header-right">
+    <a href="/gimmebrain/" class="hub-link">← Hub</a>
+  </div>
+</header>
+<main class="page-wrap">
+  <section class="tool-hero fade-in">
+    <div class="tool-hero-eyebrow">Claude Tool</div>
+    <h1>Listing Photo<br><span>Downloader</span></h1>
+    <p class="tool-hero-sub">Paste a Zillow, Realtor.com, or Redfin listing URL into Claude — and every property photo gets downloaded to a named folder in seconds. No more right-click-saving 40 photos one by one.</p>
+  </section>
+  <div class="sec-label fade-in">How It Works</div>
+  <div class="how-grid fade-in">
+    <div class="how-card"><div class="how-num">1</div><div class="how-title">Share the URL</div><div class="how-desc">Paste any Zillow, Realtor.com, or Redfin listing link into Claude in Cowork.</div></div>
+    <div class="how-card"><div class="how-num">2</div><div class="how-title">Auto-Extraction</div><div class="how-desc">Claude navigates the listing, opens the gallery, and pulls every photo at max resolution from the page data.</div></div>
+    <div class="how-card"><div class="how-num">3</div><div class="how-title">Folder Ready</div><div class="how-desc">Photos download in parallel to a folder named after the property address. Numbered and verified.</div></div>
+  </div>
+  <div class="sec-label fade-in">Supported Sites</div>
+  <div class="sites-row fade-in">
+    <div class="site-chip"><div class="site-dot green"></div><div><div class="site-name">Zillow</div><div class="site-note">Full resolution (1536px)</div></div></div>
+    <div class="site-chip"><div class="site-dot green"></div><div><div class="site-name">Realtor.com</div><div class="site-note">Full resolution via CDN</div></div></div>
+    <div class="site-chip"><div class="site-dot green"></div><div><div class="site-name">Redfin</div><div class="site-note">Full resolution via CDN</div></div></div>
+  </div>
+  <div class="sec-label fade-in">What You Get</div>
+  <div class="detail-block fade-in">
+    <div class="detail-title">Output Details</div>
+    <div class="detail-row"><div class="detail-icon">📸</div><div class="detail-text"><strong>Every photo</strong> — not just the first few. Pulls from the page data so nothing gets missed, even if the gallery is lazy-loaded.</div></div>
+    <div class="detail-row"><div class="detail-icon">🔍</div><div class="detail-text"><strong>Highest resolution available</strong> — deduplicates by image hash and keeps the largest version (1536px on Zillow).</div></div>
+    <div class="detail-row"><div class="detail-icon">📁</div><div class="detail-text"><strong>Named folder</strong> — auto-creates a folder from the property address. Example: <code>3035 Everett Dr Reno NV</code></div></div>
+    <div class="detail-row"><div class="detail-icon">🔢</div><div class="detail-text"><strong>Numbered files</strong> — <code>photo_01.jpg</code>, <code>photo_02.jpg</code>, etc. Clean and sorted.</div></div>
+    <div class="detail-row"><div class="detail-icon">⚡</div><div class="detail-text"><strong>Parallel downloads</strong> — 10 images at a time. A 40-photo listing takes seconds, not minutes.</div></div>
+    <div class="detail-row"><div class="detail-icon">✅</div><div class="detail-text"><strong>Verified</strong> — checks file count, validates JPEG data, flags any failures. You’ll know immediately if something didn’t work.</div></div>
+  </div>
+  <div class="sec-label fade-in">How to Use</div>
+  <div class="usage-box fade-in">
+    <div class="usage-title">⚡ Quick Start</div>
+    <div class="usage-step"><div class="usage-num">1</div><div class="usage-text">Open <strong>Claude in Cowork</strong> (this runs through the Claude desktop app).</div></div>
+    <div class="usage-step"><div class="usage-num">2</div><div class="usage-text">Paste the listing URL and say something like <code>grab the pics from this listing</code> or <code>download photos from this</code>.</div></div>
+    <div class="usage-step"><div class="usage-num">3</div><div class="usage-text">Claude opens the listing in Chrome, extracts all photo URLs, and downloads them to your workspace folder.</div></div>
+    <div class="usage-step"><div class="usage-num">4</div><div class="usage-text">You’ll see a summary — total photos, folder name, and sample images to confirm everything pulled correctly.</div></div>
+  </div>
+  <footer class="pg-footer fade-in">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="font-size:.72rem;font-weight:800;color:var(--orange);letter-spacing:.04em;">GOOD RESULTS</span>
+      <span class="ft">Internal Use Only</span>
+    </div>
+    <span class="ft">Built for the deal pipeline</span>
+  </footer>
+</main>
+<script src="/gimmebrain/gr-utils.js"></script>
+<script>
+grAuth();
+grScrollBar();
+grFadeIn();
+</script>
+</body>
+</html>
