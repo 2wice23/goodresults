@@ -533,34 +533,7 @@ Anthony: "Heck yeah! Thanks man We'll talk soon"
 
 ---
 
-## SECTION 13: SMS EVALUATION CRITERIA
-
-### Cold SMS Sequences — Evaluate On:
-- **Response rate** — Did the realtor reply at all?
-- **Phone conversion** — Did the reply lead to a live phone call?
-- **Tone consistency** — Does the sequence feel like one person writing, not a bot?
-- **Escalation curve** — Does each text raise urgency/curiosity without being aggressive?
-
-### Post-Conversation SMS — Evaluate On:
-- Was the buy box included?
-- Was the agent's name and company included?
-- Was it sent promptly after the call (IMMEDIATELY/ASAP)?
-- Did it match the tone of the conversation?
-
-### Deal-Stage SMS — Evaluate On:
-- **Response time** — How fast did the agent reply to realtor texts during active deal?
-- **Deal velocity** — Time from first deal text to executed contract
-- **Logistics handling** — Did the agent handle title/addendum/EMD coordination proactively?
-- **Momentum maintenance** — Did the agent keep energy up throughout the deal process?
-
-### Relationship Maintenance SMS — Evaluate On:
-- **Cadence consistency** — Are check-ins happening every 2-4 weeks?
-- **Personalization** — Do texts reference specific past conversations or properties?
-- **Tone match** — Does the relationship feel genuine, not transactional?
-
----
-
-## SECTION 14: SMS TEMPLATES IN CLOSE CRM
+## SECTION 13: SMS TEMPLATES IN CLOSE CRM
 
 ### Template Reference
 - **"0 Great Talk - Buy Box"** — Post-call buy box delivery (gold standard)
@@ -576,7 +549,7 @@ Anthony: "Heck yeah! Thanks man We'll talk soon"
 
 ---
 
-## SECTION 15: KEY METRICS FROM FULL CRM DATA (March 2026)
+## SECTION 14: KEY METRICS FROM FULL CRM DATA (March 2026)
 
 ### Full CRM Overview (34,811 messages, 1,147 contacts)
 - Total outbound: 21,531 | Total inbound: 13,280

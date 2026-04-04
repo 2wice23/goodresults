@@ -324,9 +324,7 @@ Then transfer. Don't do a warm handoff if it's a transfer skill — just complet
 \- \*\*Close timeline:\*\* 10–21 days (15-day average), as fast as possible. Can accommodate longer timelines if seller requests — lead with speed, never volunteer longer timeline unless asked.  
 \- \*\*EMD standard:\*\* 1% of purchase price (typically $3,000–$5,000)  
 \- \*\*Repair range if asked:\*\* $20–$60 per square foot depending on condition  
-\- \*\*Markets we're in:\*\* Reno NV, Las Vegas NV, Houston TX  
-\- \*\*Nevada entity:\*\* Good Results LLC (signer: Gayden Rosales)  
-\- \*\*Texas entity:\*\* Good Results TX LLC (signer: Gayden Rosales)
+\- \*\*Markets we're in:\*\* Reno NV, Las Vegas NV, Houston TX
 
 \---
 
@@ -356,19 +354,6 @@ Then transfer. Don't do a warm handoff if it's a transfer skill — just complet
 
 \---
 
-\#\# Company Details (For Reference)
-
-\*\*Good Results Home Buyers\*\* is a real estate investment company buying homes in Reno NV, Las Vegas NV, and Houston TX. We buy distressed or off-market properties as-is with cash, close in 10–21 days, and partner with local realtors to source deals.
-
-We buy fast because we:  
-\- Have cash on hand (no bank approval needed)  
-\- Buy as-is (no repairs required from seller)  
-\- Close with certainty (no financing contingencies)
-
-We are NOT hard money, private money, or anything other than true cash buyers.
-
-\---
-
 \#\# Quick Reference: Common Responses
 
 | Situation | Response |  
@@ -389,22 +374,13 @@ We are NOT hard money, private money, or anything other than true cash buyers.
 
 \---
 
-\#\# SLACK-SOURCED UPDATES (2026-03-29)
+\#\# ADDITIONAL CALL SCENARIOS (2026-03-29)
 
 \#\#\# Short Sale Handling
 We work short sales. When a realtor mentions one: show interest and patience. Position our value: "We'll be here from start to finish. Most investors disappear when they hear short sale — we don't." Set follow-up every couple weeks.
 
-\#\#\# Sub2 vs Loan Assumption
-Sub2 = property into trust, no qualifying, flexible buy box. Loan assumption = must qualify (DTI, credit, income). If confused which applies: "Can you clarify — are we talking about assuming the existing loan or a subject-to arrangement?"
-
-\#\#\# Commission Handling Script
-"We love paying agents as much as possible. If you can fit your commission into the offer price, great. But we can't increase our offer to cover it." Then redirect to talk to listing agent first.
-
-\#\#\# Title Company Policy
-We ALWAYS insist on our title company — this is non-negotiable. We offer to pay 100% of closing costs, and in return we use our title company. If the seller or realtor refuses to use our title company, then the seller covers all title and escrow fees. If realtor pushes back: "We pay all closing costs, but we use our title company. They've done hundreds of deals with us." Do not argue back and forth — if there's resistance, bring the deal to Gayden and let him handle it. Escalation: "I'll have Gayden call you directly to work this out."
-
 \#\#\# Investor-Realtors
-If realtor says they're primarily an investor: "I'd love to connect you with Gayden, our owner. He handles investor relationships directly." Route to Gayden immediately.
+If realtor says they're primarily an investor: "I'd love to connect you with Gayden, our owner. He handles investor relationships directly." Transfer to Gayden immediately.
 
-\#\#\# Mold & Termite Properties
-Neither is a deal-killer. "That's not necessarily a problem for us. It really depends on the price." Don't reject without running numbers.
+\#\#\# Questions Beyond Your Scope
+If a realtor asks about commission structure, title company preferences, sub2 vs loan assumption, mold/termite pricing, or any deal-specific negotiation detail — don't try to answer. Say: "Great question — let me have one of the team follow up with you on the specifics." Transfer or get permission to have someone call back.

@@ -10,70 +10,11 @@
 - When you learn something new or make changes, propose updates back to this KB
 - Each module will eventually get its own dedicated KB (e.g., module1-kb.md, module2-kb.md, etc.)
 
-## GitHub Access
-- **Repo:** 2wice23/goodresults (main branch)
-- **This file:** modules-kb.md
-- **Auth:** Use the GitHub PAT stored in your project memory (ask Gayden if not available)
-- **Read:** GET https://api.github.com/repos/2wice23/goodresults/contents/modules-kb.md with Bearer token
-- **Write:** PUT same URL with {message, content: btoa(newContent), sha: currentSha}
-- **Raw read:** https://raw.githubusercontent.com/2wice23/goodresults/main/modules-kb.md
-
-## Weekly KB Cycle
-- **Saturday 9 AM CT:** Analyzer project pulls Google Sheet data → writes to analyzer-kb.md
-- **Sunday 9 AM CT:** Master KB project reads all KBs → merges into master-kb.md → redistributes updates back to individual KBs
-- **Monday 9 AM CT:** Individual projects read their updated KBs → rebuild as needed
-- **This project** should read modules-kb.md on Monday mornings and update module files accordingly
-
-## Site Architecture
-- **Hosting:** Netlify at goodresults.org (Gayden deploys manually)
-- **Stack:** Static HTML, vanilla JS, CSS — no build tools, no frameworks
-- **All module files live in:** /gimmebrain/ folder
-- **Good Results Academy:** Landing page at goodresults.org/gimmebrain/academy with module directory and how-to guide
-
-## Key Files
-| File | Purpose |
-|------|---------|
-| index.html | Login page + dashboard (terminal/hacker aesthetic) |
-| module1.html | Module 1: Introduction & Company Overview |
-| module2.html | Module 2: (in progress) |
-| analyzer.html | Call Analyzer tool (separate project — do NOT modify) |
-| styles.css | Shared styles |
-
-## Design System — Modules
-- **Colors:** Dark navy background (#0D0F14), Orange accent (#FF5C1A), white text
-- **Font:** Inter (Google Fonts)
-- **Layout:** Sidebar nav + main content area, responsive
-- **Components:** Cards with orange left-border, progress tracking, interactive quizzes
-- **Pattern:** Each module is a single self-contained HTML file with embedded CSS/JS
-
-## Design System — Login/Dashboard (index.html)
-- **Aesthetic:** Terminal/hacker theme
-- **Fonts:** Exo 2 + Orbitron (Google Fonts)
-- **Accent:** Gold (#FFD700)
-- **Note:** Different design language than modules — this is intentional
-
-## Google Sheet Integration
-- Backend: Google Apps Script (Web App deployment)
-- The Apps Script handles GET/POST for call data, scoring, leaderboard
-- Apps Script URL is stored in analyzer.html (line 643) — modules may need their own endpoints
-
-## Working Preferences (from Gayden)
-- Do NOT paste code for Gayden to insert — make all changes directly to files
-- Avoid Chrome extension usage when API/CLI alternatives exist
-- Gayden handles Netlify deploys manually — just update the files
-- Ask Gayden to paste tokens/IDs into chat rather than navigating to find them
-
-## Project Scope
-- **Own:** All module HTML files, module curriculum content, module quizzes/interactions
-- **Do NOT touch:** analyzer.html, analyzer-kb.md, login authentication logic
-- **Coordinate with:** Master KB project (Sunday merges), Analyzer project (separate)
-
-## Other KBs in the Repo
-- analyzer-kb.md — Call analyzer (separate project)
-- master-kb.md — Master knowledge base (separate project)
-- chloe-kb.md — Chloe assistant
-- close-kb/ — Close CRM related
-- sms-kb.md — SMS workflows
+## Technical Reference
+- **Repo:** 2wice23/goodresults (main branch) — this file is modules-kb.md
+- **Academy site:** goodresults.org/gimmebrain/academy
+- **Stack:** Static HTML, vanilla JS, CSS on Netlify
+- **For full project infrastructure details, see close-kb.md and the project memory files**
 
 ---
 
@@ -465,36 +406,8 @@ Before writing any contract, always **float the verbal** first.
 
 If they say no and won't budge — don't write the contract. Save everyone's time.
 
-### CRITICAL — Scoring Patterns on Calls (From Call Analyzer)
-
-**Negative patterns (flag these):**
-- Asking "are you still a realtor?" as a cold opener — wastes time, triggers suspicion. Can be used occasionally mid-call as provocation.
-- Using "wholesale," "wholesaler," "assign," or "flip/fix and flip"
-- Saying "just moved here" or "just got here" — undermines credibility
-- Saying "took time off" or "took a break" — undermines credibility
-- Saying "me and my partner are trying to do..." — sounds unestablished
-- Answering own questions or giving easy outs
-- Ending with "keep me posted" as the only next step — passive
-- Not delivering the buy box when the realtor has nothing — missed opportunity
-- Punting to email when a realtor says they have properties — dig in on the call
-
-**Positive patterns (praise these):**
-- Agent states their name clearly in first few seconds
-- References prior conversation with specific detail (month, topic, property)
-- Delivers buy box verbally on every call, even short ones
-- Differentiates from other investors ("I'm not just going to submit an offer for fun")
-- Runs comps live on the phone
-- Floats verbal numbers before any contract
-- Sets specific follow-up timeline ("Can I check back in two weeks?")
-- Asks "on market or off market?" as a qualifying question
-- Tells realtor to save their number with a label ("Save me as [Name], investor")
-- Lets the realtor talk and asks follow-up questions about their deals
-- Keeps tone warm, casual, low-pressure
-
 ### Call Analyzer Integration
-Use the Call Analyzer after every meaningful call, especially when new. Once experienced, less critical but always valuable. The Call Analyzer (accessible at `/gimmebrain/analyzer`) uses AI to score sales calls with key metrics: buy box delivery, rapport building, forbidden language check, objection handling, setting a clear next step, talking vs. listening ratio.
-
-Have your last call's analysis open on one screen while making your next call. It is the fastest way to improve. After analyzing a call: if something worked well, note it. If something failed ("Flag to KB: this didn't land"), bring it to Gayden to get it folded into training.
+Use the Call Analyzer after every meaningful call, especially when new. It scores your calls on buy box delivery, rapport building, forbidden language, objection handling, next steps, and listening ratio. Have your last analysis open while making your next call — fastest way to improve. Full scoring criteria are in analyzer-kb.md.
 
 ### Photo Requests
 Ask the realtor politely but firmly. If they push back or get heated, escalate to Gayden.
@@ -748,19 +661,8 @@ Close uses contact's area code timezone. Know "contact first name" vs "contact n
 ### Workflow Approval
 Approval from Gayden needed when CREATING or PUBLISHING workflows, not when sending. Training wheels until confident. This is critical — deploying incorrectly can burn your phone number, requiring a new one.
 
-### Actual SMS Templates in Close CRM
-
-These are the real templates saved in Close. Know them — use them:
-
-| Template Name | When to Use |
-|---------------|-------------|
-| **0 Great Talk - Buy Box** | After every live call where the realtor showed interest. Send same day. Includes buy box info, agent name, Good Results. This is the gold standard post-call text. |
-| **0 Too Nice** | Realtor was pleasant but clearly has nothing for us right now — they're too "polite busy." Acknowledges the call, keeps door open, low pressure. |
-| **0 Send it anyway** | When you're unsure whether to send an offer — a casual "sending it anyway" vibe to keep momentum. |
-| **Blast 1** | First in the blast cold outreach sequence. |
-| **Blast 2** | Second follow-up in the blast sequence. |
-| **Blast 3** | Third follow-up in the blast sequence. |
-| **Bub Cold** | Cold outreach template for a specific style of approach. |
+### SMS Templates
+Full template library and performance data are in sms-kb.md. Key template to know: **"0 Great Talk - Buy Box"** — send after every live call, same day.
 
 **CRITICAL on cold SMS workflows:** Each agent builds their OWN workflow with their own voice. Must confirm with Gayden BEFORE deploying — deploying incorrectly can burn your phone number, requiring a new one.
 
@@ -788,59 +690,8 @@ Send the **"0 Great Talk - Buy Box"** template same day while the call is fresh.
 
 This is the gold standard post-call text. Every agent should send this after every live conversation where the realtor showed interest. It delivers the buy box in text form so they have it for reference, and keeps your name/number saved.
 
-### Deal-Stage SMS
-
-**When you've sent an offer:**
-> "Hey [Name], just sent over the offer on [Address]. Text me when the contract's coming and we'll get it signed same day."
-
-**Follow-up when offer isn't moving (1 week later):**
-> "Hey [Name], just checking in on [Address] — any flexibility over there?"
-
-### Proven SMS Patterns From Closed Deals
-
-**PATTERN 1: The Playful Escalation Sequence**
-This arc works because each text raises emotional stakes slightly without ever crossing into aggressive territory:
-
-1. Friendly check-in: "How goes it [Name]? I hope '26 is off to a killer start for you... Any fresh listings current or coming up I can check out this week?"
-2. Playful guilt trip: "Come onnnnn lol... Is this your way of saying I'm not your favorite anymore?"
-3. Humor/fake hurt: "Well shoot... Just tell me you hate me if you want to ignore me 🥲"
-4. Light persistence: "I'm not trying to be annoying, it's just the squeaky wheel gets the grease lol."
-
-**PATTERN 2: "Help Me Spend Money"**
-This exact phrase appears across multiple closed deals and consistently generates replies:
-> "How's my very favorite realtor in the whole wide world doing? Help me spend some money before the end of [month] lol 🙏"
-
-Why it works: It's casual, funny, creates time urgency without pressure, and reframes the relationship so the realtor is doing YOU a favor.
-
-**PATTERN 3: Holiday and Personal Messages**
-Christmas messages, "hope you had a great break" texts, and personal check-ins appear in every closed deal thread. These aren't deal-seeking texts — they're pure relationship maintenance. Examples:
-- "Heyyyy [Name]! I just wanted to reach out and wish you a Happy Christmas and a Merry New Year.. I hope you're having the best time with your family"
-
-These keep the agent top of mind during periods when there's no active deal.
-
-**PATTERN 4: Post-Deal Re-Engagement**
-After a deal closes, successful threads immediately shift back to follow-up:
-- "Thank you my guy.... I appreciate the heck out of it...."
-- "1 down for January... just 11 more to go"
-
-The relationship doesn't end at closing — it resets.
-
-**PATTERN 5: Deals Come From Months of Texting**
-In every closed deal thread, there are months of casual back-and-forth before the deal surfaces. The deal comes from being top of mind when the right property appears, not from one magic text.
-
-### SMS Evaluation Criteria
-
-**Cold SMS sequences should be evaluated on:**
-- Response rate — did the realtor reply at all?
-- Phone conversion — did the reply lead to a live phone call?
-- Tone consistency — does the sequence feel like one person writing, not a bot?
-- Escalation curve — does each text raise urgency/curiosity without being aggressive?
-
-**Post-conversation SMS should be evaluated on:**
-- Was the buy box included?
-- Was the agent's name and company included?
-- Was it sent promptly after the call (same day)?
-- Did it match the tone of the conversation?
+### Deal-Stage and Follow-Up SMS
+Full deal-stage templates, proven patterns from closed deals, and reply rate data are in sms-kb.md. Key principles for training: deals come from months of consistent texting (not one magic text), holiday/personal messages appear in every closed deal thread, and the relationship resets after closing — never let the thread go cold.
 
 ### Module 5 Quiz Notes
 - Q13: Send Terms template purpose → gives realtor everything to write the contract
@@ -1430,16 +1281,7 @@ Gayden or Joe moves here after signing. Triggers: (1) automated SMS to realtor v
 Auto-task created for Joe (he handles dispo). Disposition process begins immediately.
 
 ### SMS Templates in Close
-
-| Template Name | Triggered By / Used When |
-|---------------|--------------------------|
-| **Terms Sent** | Auto-fires when opportunity moves to Send Terms. Tells realtor terms were emailed; asks them to text when they send the offer. |
-| **Offer Out** | Auto-fires when opportunity moves to Offer Out. Tells realtor signed offer sent back; asks for response timeline. |
-| **0 Great Talk - Buy Box** | Manual — send after every live call where realtor showed interest. Gold standard post-call text. |
-| **0 Too Nice** | Manual — when realtor was pleasant but clearly has nothing right now. |
-| **0 Send it anyway** | Manual — when you're on the fence about whether to reach out. |
-| **Blast 1 / Blast 2 / Blast 3** | Cold outreach blast sequence. |
-| **Bub Cold** | Cold outreach for a specific approach style. |
+Full template library is in sms-kb.md. Key ones to know: "0 Great Talk - Buy Box" (post-call, manual), "Terms Sent" (auto when opp → Send Terms), "Offer Out" (auto when opp → Offer Out).
 
 ### Using the Power Dialer
 The power dialer is the fastest way to call through a list.

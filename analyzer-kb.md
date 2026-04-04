@@ -257,32 +257,7 @@ Why this is a strong call:
 
 ---
 
-## SECTION 10: RECOMMENDED SCRIPTS
-
-**WARM FOLLOW-UP (Re-engagement):**
-"Hey [First Name], it's [Your Name]. We [talked/texted] back in [month] — just wanted to check in and see if anything off-market or distressed has come across your desk lately. We're actively buying in [Market] — subdivision homes, built roughly '60s to early 2000s, around 2,000 square feet, any condition. Cash, as-is, we close in two to three weeks, and you still earn your full commission. Got anything like that right now?"
-
-If YES: "Nice — what's the address? I can pull some numbers right now."
-If NO: "No worries at all. If something pops up, I'd love a shot at it. Mind if I check back in with you in a couple weeks?"
-
-**COLD OPEN (First Contact):**
-"Hey [First Name], it's [Your Name]. I came across your info online — I'm a cash buyer and I partner with realtors when they come across off-market or as-is situations. Sellers who need speed and certainty. Do you ever come across anything like that?"
-
-**"I'VE BEEN BURNED BY INVESTORS BEFORE":**
-"I completely hear you — and I don't want to waste your time either. Here's how we work: you bring me a deal, I run my numbers, and then I'll just ask you to verbally float the price to your seller or the listing agent. If they come back and say they need a lot more, no problem — no contract gets written, no one's time gets wasted. But if they say they're close, we move forward and make it official. No wasted paperwork unless it's worth it for everyone."
-
-**PRICE PUSHBACK / "CAN YOU COME UP?":**
-"I hear you. Let me take this back and see what room we have. Just know — the big-ticket repairs are what's driving our number, not us trying to squeeze anyone. The structural stuff — roof, foundation, HVAC — that all has to be fixed before the next buyer will touch it, and those costs come straight off the top. Let me see what I can do and I'll get back to you [today/tomorrow]."
-
-**"WHO IS THIS?" / SPAM RECOVERY:**
-"Totally fair — I should've called sooner instead of just texting. I'm [Your Name], I'm a cash buyer. I partner with realtors when they come across off-market or distressed properties. Just wanted to see if anything like that ever crosses your desk. Can I text you my info so you have it? And is it cool if I check back in a couple weeks?"
-
-**BAD TIMING / CAUGHT BUSY:**
-"Hey, sounds like I caught you at a bad time. Real quick — I'm [Your Name], I'm a cash buyer. If you ever come across something off-market or distressed, I'd love a shot at it. I'll shoot you a text with my info. Cool?"
-
----
-
-## SECTION 11: RESPONSE FORMAT
+## SECTION 10: RESPONSE FORMAT
 
 The analyzer must return ONLY valid JSON in this exact structure. No markdown, no backticks, no preamble:
 
