@@ -1,10 +1,13 @@
 # GR CALL ANALYZER — KNOWLEDGE BASE
 **Good Results Home Buyers**
-**Last Updated:** April 1, 2026 | **Version:** Cycle 4
+**Last Updated:** April 7, 2026 | **Version:** Cycle 5
 
 ---
 
 ## CHANGE LOG
+
+**Cycle 5 (2026-04-07):**
+- Added Nevada market radius for scoring: core markets are Reno, Sparks, Carson City, Dayton, Minden, South Lake. Stretch markets (Lovelock, Yerington) are only valid once the agent has consistent deal flow in the core. Agents chasing stretch geography before locking down the core should be flagged as a coaching issue, not rewarded.
 
 **Cycle 4 (2026-04-01):**
 - Major performance snapshot refresh: 33 new scored calls across 5 agents

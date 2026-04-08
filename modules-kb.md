@@ -21,12 +21,24 @@
 # CHANGE LOG
 
 ## Current Version
-**Version:** 2.3 — Weekly sync with Slack knowledge and module expansions
-**Updated:** April 1, 2026 (Cycle 3)
+**Version:** 2.4 — Weekly sync with Slack knowledge and module expansions
+**Updated:** April 7, 2026 (Cycle 4)
 **Source of truth for:** All training modules. When modules and this KB conflict, this KB wins.
 **How to update:** Tell Claude what changed and ask it to update this file. Claude rebuilds modules from here.
 
-## What Changed This Cycle (2026-04-01)
+## What Changed This Cycle (2026-04-07)
+- **Proof of Funds protocol:** Never send POF upfront. Script — "I'm glad you asked — we have proof of funds available. To keep things efficient for all sides, we provide it once we've reviewed a specific property that fits our buy box and are ready to move forward with a formal offer." Pivot to quick-close/all-cash. Extra caution when the requester smells like a wholesaler fishing for a funding letter.
+- **"They Know We're Wholesaling" objection:** Don't fold, don't play dumb. Lean into credentials — track record, closings, speed. Hard script — "We buy properties, close fast, and pay cash. How we exit the deal on the back end doesn't change the terms for your seller." Treat as a confidence test, not a deal-killer.
+- **Nevada Market Radius:** Core — Reno, Sparks, Carson City, Dayton, Minden, South Lake. Stretch (only after consistent deal flow in the core) — Lovelock, Yerington. Don't chase geography before locking down the core.
+- **Merging Contacts in Close:** 3 dots next to the lead name → Merge → pick the lead to merge into. For now, drop merge requests in #questions-and-answers and Gayden handles until the team is comfortable.
+- **Instagram Outreach Pipeline:** Use a separate *Creator* account (NOT Business) for professional outreach. Keep personal DMs on your main account. Never mix the two.
+- **$30K-Apart Negotiation:** Call, don't text. Acknowledge their movement, be straight about your max and why, tell them to keep you in mind, let it breathe 7-10 days. Banks often move once they realize no one else is stepping up.
+- **Carrier-Level Call Block Diagnostic:** If a contact's calls go straight to "busy or rejected" but they still text you, it's likely a carrier-level block or spam flag on your number for that contact. Try another line to confirm. If it persists, route calls through another team member.
+
+## Prior Version (v2.3)
+**Updated:** April 1, 2026 (Cycle 3)
+
+## What Changed Prior Cycle (2026-04-01)
 - Follow-ups are ALWAYS calls, never texts (Joe confirmed)
 - Blast number (SMS) vs personal number (calls) clarified
 - Office number backoff protocol added (set status to "Service")
@@ -40,7 +52,7 @@
 - Good Results Academy tool card added to hub with landing page
 - Quiz pool updates across all modules (68 questions total with clarifications)
 
-## Prior Version (v2.2)
+## Earlier Version (v2.2)
 Last updated: March 2026. Final comprehensive rewrite with all 68 assumption corrections applied.
 
 ---
@@ -1422,4 +1434,4 @@ A: Typically $3,000–$5,000 EMD (1% of purchase price) depending on the deal.
 
 ---
 
-*Last updated: April 1, 2026. Version 2.3. Cleaned markdown, integrated all Slack updates, reorganized for clarity. This is the authoritative version.*
+*Last updated: April 7, 2026. Version 2.4. Added Knowledge Drop items: POF protocol, wholesaling objection, Nevada radius, Close contact merging, Instagram pipeline, $30K-apart negotiation, carrier-level call block diagnostic. This is the authoritative version.*

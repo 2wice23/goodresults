@@ -1,6 +1,6 @@
-# GOOD RESULTS — MASTER KNOWLEDGE BASE v2.3
+# GOOD RESULTS — MASTER KNOWLEDGE BASE v2.4
 
-**Version:** 2.3 — Weekly sync consolidation (March 29, 2026)
+**Version:** 2.4 — Weekly sync consolidation (April 7, 2026)
 **Purpose:** Single source of truth. Weekly consolidation of changes from all 4 projects. Sliced into 4 native-format KBs for deployment. See also: close-kb.md (Close CRM platform reference — not part of weekly sync, updated manually when platform config changes).
 **Status:** COMPLETE & TESTED
 **All Conflicts:** RESOLVED
@@ -9,6 +9,22 @@
 ---
 
 ## CHANGE LOG
+
+### Week of April 7, 2026 (v2.4)
+
+**ADDED (from Gayden's Knowledge Drop in #questions-and-answers, 2026-03-30):**
+
+- **Proof of Funds Requests:** Never send POF upfront. Script: "I'm glad you asked — we have proof of funds available. To keep things efficient for all sides, we provide it once we've reviewed a specific property that fits our buy box and are ready to move forward with a formal offer." Then pivot to quick-close, all-cash pitch. Extra caution if the requester smells like a wholesaler fishing for a funding letter.
+- **"They Know We're Wholesaling" Objection:** Don't fold, don't play dumb. Lean into credentials — track record, closings, speed. If they press: "We buy properties, close fast, and pay cash. How we exit the deal on the back end doesn't change the terms for your seller." Treat this as a confidence test, not a deal-killer.
+- **Nevada Market Radius:** Core markets — Reno, Sparks, Carson City, Dayton, Minden, South Lake. Stretch markets (only after consistent deal flow in the core) — Lovelock, Yerington. Don't chase geography before locking down the core.
+- **Merging Contacts in Close:** Click the 3 dots next to the lead name → Merge → pick the lead to merge into. For now, drop merge requests in #questions-and-answers and Gayden will handle until the team is comfortable doing it themselves.
+- **Instagram Outreach Pipeline:** Create a separate *Creator* account (NOT Business) for professional outreach. Keep personal DMs on your main account. Don't mix the two.
+- **$30K-Apart Negotiation:** Call, don't text. Acknowledge their movement (e.g. "you came down from $98K to $90K"), be straight about your max and why, tell them to keep you in mind. Let it breathe 7-10 days. Banks often move once they realize no one else is stepping up.
+- **Carrier-Level Call Block Diagnostic:** If a contact's calls go straight to "busy or rejected" but they still text you, it's likely a carrier-level block or spam flag on your number for that contact. Try calling from a different line to confirm. If it persists, route calls through another team member.
+
+**DISCREPANCIES FOUND BETWEEN KBs:** 0 — all 5 KBs are internally consistent after Cycle 4/5 cleanup.
+
+---
 
 ### Week of March 29, 2026 (v2.3)
 
