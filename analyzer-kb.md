@@ -1,10 +1,15 @@
 # GR CALL ANALYZER — KNOWLEDGE BASE
 **Good Results Home Buyers**
-**Last Updated:** April 7, 2026 | **Version:** Cycle 5
+**Last Updated:** April 15, 2026 | **Version:** Cycle 6
 
 ---
 
 ## CHANGE LOG
+
+**Cycle 6 (2026-04-15):**
+- Added pre-scoring checks section: voicemail skip rule moved up and reinforced as a mandatory pre-check before any scoring begins. Triggered by analyzer scoring a voicemail at 8/100 when the KB already said not to score VMs.
+- Added explicit skip rule for prank calls, system tests, and junk calls with no identifiable agent or legitimate interaction. Triggered by a 0/100 "Unknown" prank call being scored.
+- Performance snapshot refresh: 8 new legitimate scored calls across 4 agents. Anthony Cruz at 22 calls (64.8 avg, sustained mid-70s recent), Kayden Rogers at 8 (66.3, mixed), Gayden at 12 (72.8, steady), Franklin at 14 (56.7, slow climb).
 
 **Cycle 5 (2026-04-07):**
 - Added Nevada market radius for scoring: core markets are Reno, Sparks, Carson City, Dayton, Minden, South Lake. Stretch markets (Lovelock, Yerington) are only valid once the agent has consistent deal flow in the core. Agents chasing stretch geography before locking down the core should be flagged as a coaching issue, not rewarded.
@@ -92,6 +97,10 @@ Did the agent make the value proposition clear? This is a bonus category, not a 
 **7. OBJECTION HANDLING**
 If any pushback or skepticism arose, did the agent handle it well? Did they reframe or address concerns? Score N/A if no objections came up.
 
+### Pre-Scoring Checks (run these BEFORE scoring any call)
+
+**Voicemail drops must not be scored.** If a call is clearly a voicemail drop with no live conversation, skip the analysis entirely and do not generate a score. This applies regardless of who left the voicemail or what was said. Short calls (under 2 minutes) with a live conversation should still be scored — a good call can happen in 60 seconds.
+
 ### Additional Scoring Context
 
 **Call type matters.** Different types of calls get different expectations. A deal discussion is scored differently than a cold open. The goal is always to get to talking about a potential deal, and if no deal exists right now, to build strong rapport so we're the first call when one comes up. Adjust scoring expectations based on call type.
@@ -104,11 +113,11 @@ If any pushback or skepticism arose, did the agent handle it well? Did they refr
 
 **Commission handling (if it comes up).** Agent should use Gayden's framework: love paying agents, fit commission into offer price, can't increase offer for it. If agent agrees to increase offer to cover commission, flag as red flag.
 
-**Voicemail drops should not be scored.** If a call is clearly a voicemail drop with no live conversation, skip the analysis entirely. Short calls (under 2 minutes) with a live conversation should still be scored — a good call can happen in 60 seconds.
-
 **Tone and energy are not scoring priorities right now.** Do not flag tone, energy level, or delivery style unless something is egregiously off. The current focus is structural: did the agent do the right things in the right order?
 
 **Score every call except internal services.** Score every call to any lead regardless of who is on it — including internal role plays and practice calls between team members. The only exception is calls to leads with a status of "SERVICES" — skip those entirely.
+
+**Skip prank calls, system tests, and junk calls.** If a call has no identifiable agent, no legitimate business interaction, or is clearly a prank or system test, skip it entirely. Do not assign a score or generate an analysis. These are not coaching moments.
 
 ### Call-Type-Specific Scoring Context
 
@@ -189,16 +198,16 @@ If any pushback or skepticism arose, did the agent handle it well? Did they refr
 
 ## SECTION 8: AGENT-SPECIFIC COACHING FLAGS & PERFORMANCE
 
-### Performance Snapshot (as of 2026-04-01)
+### Performance Snapshot (as of 2026-04-15)
 
 | Agent | Calls | Avg Score | Trend | Key Notes |
 |-------|-------|-----------|-------|-----------|
-| Joe Kruse | 4 | 85.8 | Top performer | Scores: 83, 90, 92, 78. Strong deal discussions, sets concrete next steps. |
+| Joe Kruse | 4 | 85.8 | Top performer | Scores: 83, 90, 92, 78. Strong deal discussions, sets concrete next steps. No new calls this cycle. |
 | Dan VanMatre | 1 | 89.0 | Stable | Excellent conversation flow, positions well. No new calls scored this cycle. |
-| Kayden Rogers | 6 | 75.2 | New entries | Scores: 82, 79, 68, 68, 80, 74. Solid re-engagement, good buy box delivery. |
-| Gayden Rosales | 11 | 72.8 | Consistent | 1 new call scored 89. Solid rapport and deal mechanics. |
-| Anthony Cruz | 18 | 62.7 | Major upward trend | Last 14 calls avg 76.2 (range: 65–83). Early calls dragged avg down. Coaching working. |
-| Franklin Ladaga | 13 | 55.5 | Improving, high variance | Last 8 calls: 11, 88, 88, 74, 54, 85, 78, 75. Peaks show capability; lows show inconsistency. |
+| Gayden Rosales | 12 | 72.8 | Consistent | 1 new call scored 73 (warm follow-up). Steady. Note: 1 VM was incorrectly scored at 8 — excluded per KB rules. |
+| Kayden Rogers | 8 | 66.3 | Mixed | 2 new calls: 72 (cold open, solid) and 7 (hostile inbound callback). The 7 was an angry realtor demanding removal — not a coaching failure, but avg takes a hit. |
+| Anthony Cruz | 22 | 64.8 | Sustained upward | 4 new calls: 73, 73, 68, 84. The 84 (Ariana referral) is his new high. Consistent mid-70s range. Coaching holding. |
+| Franklin Ladaga | 14 | 56.7 | Slow climb | 1 new call at 72 (Pamela re-engagement after 8 months). Structural execution present. Variance still the issue. |
 
 ### Agent Coaching Flags
 
@@ -292,4 +301,4 @@ The analyzer must return ONLY valid JSON in this exact structure. No markdown, n
 
 ---
 
-**END OF ANALYZER KB — Cycle 4**
+**END OF ANALYZER KB — Cycle 6**
