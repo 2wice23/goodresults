@@ -1,12 +1,16 @@
 # GR SMS PLAYBOOK — KNOWLEDGE BASE
 **Good Results Home Buyers**
-**Last Updated:** April 1, 2026 | **Version:** v2.4
+**Last Updated:** April 15, 2026 | **Version:** v2.5
 **Data Source:** 34,811 messages across 1,147 contacts
 **Purpose:** SMS strategy, templates, sequences, and evaluation criteria
 
 ---
 
 ## CHANGE LOG
+
+**v2.5 (2026-04-15):**
+- Blast vs personal number timers confirmed independent — no shared 10-minute cooldown
+- Post-terms follow-up cadence added: text at ~6h, text at ~12h, call at ~18h after sending terms
 
 **v2.4 (2026-04-01):**
 - Blast number vs personal number clarified (blast for SMS workflows, personal for calls/deal SMS)
@@ -69,6 +73,8 @@ Good Results uses two separate phone numbers per agent in Close CRM:
 - This is the number that builds real relationships
 
 **RULE:** When building or deploying an SMS workflow → confirm you're using the BLAST number. If you accidentally use your personal number for a high-volume workflow, it will burn out the number, requiring a replacement.
+
+**Blast vs Personal Number Timers:** The blast number and personal number have independent send timers. You do NOT have to wait 10 minutes between sending on your blast number and sending on your personal number — they're separate. (Joe confirmed, April 2026)
 
 ### Workflow Management
 
@@ -304,6 +310,12 @@ Once a deal is live, transactional texts should be SHORT. The data shows deal-st
 - "Just emailed my terms over for [Address] for [price]. Text me back when you send over the offer and I'll get it signed ASAP"
 - "Hey [Name], just sent over our offer terms.... Text Joe or I when you want me to sign. Thanks a bunch, looking forward to making some money together"
 - "Wanted to run an offer [Address] by ya, ring me when you get the chance"
+
+**Post-Terms Follow-Up Cadence (CRITICAL):** Don't let terms sit. Follow up aggressively:
+- ~6 hours after sending: Text follow-up
+- ~12 hours after sending: Another text
+- ~18 hours after sending: Phone call
+Use scheduled messages to stay on cadence. Terms that sit get cold. (Joe + Gayden, April 2026)
 
 ### Contract Negotiation via Text
 Real deal data shows significant contract negotiation happens over text. Key patterns:

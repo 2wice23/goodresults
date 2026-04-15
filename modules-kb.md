@@ -21,12 +21,23 @@
 # CHANGE LOG
 
 ## Current Version
-**Version:** 2.4 — Weekly sync with Slack knowledge and module expansions
-**Updated:** April 7, 2026 (Cycle 4)
+**Version:** 2.5 — Weekly sync with Slack knowledge
+**Updated:** April 15, 2026 (Cycle 5)
 **Source of truth for:** All training modules. When modules and this KB conflict, this KB wins.
 **How to update:** Tell Claude what changed and ask it to update this file. Claude rebuilds modules from here.
 
-## What Changed This Cycle (2026-04-07)
+## What Changed This Cycle (2026-04-15)
+- **Tear-Down Properties:** We're open to tear-down lots (buying for land value), but NOT fix-and-flipping homes on those lots. Case-by-case — let Joe run numbers. Don't auto-reject.
+- **Lowball/"F-You" Offer Framing (Shit Sandwich):** Acknowledge the offer is aggressive, throw it out with confidence, follow up consistently by CALL (not text). These offers come back around when framed right. (Joe, April 9)
+- **Post-Terms Follow-Up Cadence:** After sending terms — text at ~6h, text at ~12h, phone call at ~18h. Use scheduled messages. Don't let terms sit. (Joe + Gayden, April 14)
+- **"Allowance" in Contract Terms:** When a realtor says "allowance," ask "allowance towards what?" Usually means repairs, interest, or buyer-side commission workaround. Don't assume. (Gayden, April 13)
+- **Counter-Offer Transparency:** When close on a deal, be straight — tell them the highest you've been and where you're at now. (Gayden, April 8)
+- **D2S Contract E-Signing:** Agent writes contract (TX: TREC form with GR language), then Joe or Gayden sets up e-sign through Google. Agents don't handle e-sign yet. (April 13)
+- **Spartan Title (TX) Address:** 5080 Spectrum Dr Suite 1010W, Addison, TX 75001
+- **Driveway Issues:** Not a deal-killer, like mold/termite. (Joe, April 10)
+- **Realtor Comp Info in Notes:** If a realtor gives comp houses for ARV, include in opportunity notes. More info is always better. (Joe, April 8)
+
+## Prior Cycle (2026-04-07)
 - **Proof of Funds protocol:** Never send POF upfront. Script — "I'm glad you asked — we have proof of funds available. To keep things efficient for all sides, we provide it once we've reviewed a specific property that fits our buy box and are ready to move forward with a formal offer." Pivot to quick-close/all-cash. Extra caution when the requester smells like a wholesaler fishing for a funding letter.
 - **"They Know We're Wholesaling" objection:** Don't fold, don't play dumb. Lean into credentials — track record, closings, speed. Hard script — "We buy properties, close fast, and pay cash. How we exit the deal on the back end doesn't change the terms for your seller." Treat as a confidence test, not a deal-killer.
 - **Nevada Market Radius:** Core — Reno, Sparks, Carson City, Dayton, Minden, South Lake. Stretch (only after consistent deal flow in the core) — Lovelock, Yerington. Don't chase geography before locking down the core.
@@ -70,7 +81,6 @@ Last updated: March 2026. Final comprehensive rewrite with all 68 assumption cor
 **Team:**
 - Gayden Rosales — Owner, acquisitions, primary deal contact
 - Joe Kruse — Owner, acquisitions, comps & pricing
-- Dan VanMatre — Acquisition Agent
 - Kayden Rogers — Acquisition Agent
 - Anthony Cruz — Acquisition Agent
 - Frank Ladaga — Acquisition Agent (newest, in early training)
@@ -101,6 +111,11 @@ Every realtor should hear this within the first 30 seconds of a call.
 - Properties where seller insists on a pre-contract walkthrough (use the objection script below)
 - Multi-moved manufactured homes (limited buyer pool, financing issues — call Gayden)
 - Unique/custom-built homes, rural properties, commercial
+
+**Special Cases — Not Deal-Killers:**
+- **Tear-down lots:** Open to buying for land value, but NOT fix-and-flipping homes on those lots. Case-by-case — let Joe run numbers.
+- **Mold/termite/driveway issues:** None are deal-killers for the right price.
+- **HOA townhomes:** Cheaper rehab (HOA handles exterior), but longer days on market for resale.
 
 **Markets:**
 - Nevada: Reno/Sparks metro, Las Vegas/Henderson metro

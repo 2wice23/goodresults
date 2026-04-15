@@ -18,14 +18,13 @@ This is the comprehensive operational reference for Close CRM as used by Good Re
 | Name | Email | Role |
 |------|-------|------|
 | Gayden Rosales | gayden@goodresults.org | Owner/Admin |
-| Dan VanMatre | dan@goodresults.org | Acquisition Agent |
 | Franklin Ladaga | frank@goodresults.org | Acquisition Agent |
 | Anthony Cruz | anthony@goodresults.org | Acquisition Agent |
 | Kayden Rogers | kayden@goodresults.org | Acquisition Agent |
 | Joe Kruse | joe@goodresults.org | Acquisition Agent |
 
 ### 1.2 Inactive Users
-Ana Sanchez, Gabrielle Connelly, joe@goodresultstx.com, Joe Kruse (secondary)
+Ana Sanchez, Gabrielle Connelly, joe@goodresultstx.com, Joe Kruse (secondary), Dan VanMatre (dan@goodresults.org — departed April 2026)
 
 ---
 

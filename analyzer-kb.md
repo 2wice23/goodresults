@@ -10,6 +10,10 @@
 - Added pre-scoring checks section: voicemail skip rule moved up and reinforced as a mandatory pre-check before any scoring begins. Triggered by analyzer scoring a voicemail at 8/100 when the KB already said not to score VMs.
 - Added explicit skip rule for prank calls, system tests, and junk calls with no identifiable agent or legitimate interaction. Triggered by a 0/100 "Unknown" prank call being scored.
 - Performance snapshot refresh: 8 new legitimate scored calls across 4 agents. Anthony Cruz at 22 calls (64.8 avg, sustained mid-70s recent), Kayden Rogers at 8 (66.3, mixed), Gayden at 12 (72.8, steady), Franklin at 14 (56.7, slow climb).
+- Added tear-down properties as scoring context: we're open to tear-down lots (land value), but NOT fix-and-flipping homes on those lots. Case-by-case — agent should route to Joe for numbers. Don't penalize agents for engaging on tear-down leads; penalize if they auto-reject without checking.
+- Added lowball/"f-you" offer framing as positive pattern: acknowledge the offer is aggressive, throw it out with confidence, follow up consistently by CALL. Score positively when agents frame lowball offers with transparency and persistence.
+- Added driveway issues as non-issue: like mold/termite, driveway condition is not a deal-killer. If agent reflexively rejects over driveway, flag as coaching moment.
+- Dan VanMatre marked as departed
 
 **Cycle 5 (2026-04-07):**
 - Added Nevada market radius for scoring: core markets are Reno, Sparks, Carson City, Dayton, Minden, South Lake. Stretch markets (Lovelock, Yerington) are only valid once the agent has consistent deal flow in the core. Agents chasing stretch geography before locking down the core should be flagged as a coaching issue, not rewarded.
@@ -37,7 +41,6 @@ Good Results Home Buyers is a cash buyer that partners with realtors for off-mar
 **Team:**
 - Gayden Rosales — Owner, acquisitions, primary deal contact
 - Joe Kruse — Owner, comps & pricing, acquisitions
-- Dan VanMatre — Acquisition Agent
 - Kayden Rogers — Acquisition Agent
 - Anthony Cruz — Acquisition Agent
 - Frank Ladaga — Acquisition Agent
@@ -135,6 +138,12 @@ If any pushback or skepticism arose, did the agent handle it well? Did they refr
 
 **Title insurance vs closing costs:** Agents must understand the difference. Title insurance costs are only one component of total closing costs. If an agent offers to have sellers "cover all closing costs" when they mean title insurance, this creates misaligned expectations and potential deal issues. Flag if an agent conflates these on a call or in deal terms.
 
+**Tear-down properties:** We're open to buying tear-down lots for land value, but NOT fix-and-flipping homes on those lots. Case-by-case — agent should route to Joe for numbers. Don't penalize an agent for engaging on a tear-down lead; flag if they auto-reject without checking with Joe.
+
+**Driveway issues:** Not a deal-killer, similar to mold/termite. If agent reflexively rejects over driveway condition, flag as coaching moment.
+
+**Lowball/"f-you" offer framing:** Score positively when an agent acknowledges upfront that an offer is aggressive, delivers it with confidence, and commits to consistent follow-up. The "shit sandwich" approach (compliment, honest lowball, follow-up commitment) is the approved method. Score negatively if agent hedges or apologizes excessively without framing confidence.
+
 ---
 
 ## SECTION 5: GRADING SCALE
@@ -203,7 +212,7 @@ If any pushback or skepticism arose, did the agent handle it well? Did they refr
 | Agent | Calls | Avg Score | Trend | Key Notes |
 |-------|-------|-----------|-------|-----------|
 | Joe Kruse | 4 | 85.8 | Top performer | Scores: 83, 90, 92, 78. Strong deal discussions, sets concrete next steps. No new calls this cycle. |
-| Dan VanMatre | 1 | 89.0 | Stable | Excellent conversation flow, positions well. No new calls scored this cycle. |
+| Dan VanMatre | 1 | 89.0 | **Departed** | No longer with the team as of April 2026. Historical data retained. |
 | Gayden Rosales | 12 | 72.8 | Consistent | 1 new call scored 73 (warm follow-up). Steady. Note: 1 VM was incorrectly scored at 8 — excluded per KB rules. |
 | Kayden Rogers | 8 | 66.3 | Mixed | 2 new calls: 72 (cold open, solid) and 7 (hostile inbound callback). The 7 was an angry realtor demanding removal — not a coaching failure, but avg takes a hit. |
 | Anthony Cruz | 22 | 64.8 | Sustained upward | 4 new calls: 73, 73, 68, 84. The 84 (Ariana referral) is his new high. Consistent mid-70s range. Coaching holding. |
@@ -220,8 +229,8 @@ Flag any instances where Gayden talks over the realtor, interrupts mid-sentence,
 **Anthony Cruz:**
 Flag any use of "are you still a realtor?" as an opener. Flag any call where the buy box is not delivered verbally. Flag any call that ends with "keep me posted" or no specific follow-up timeline. Flag any instance where a realtor says they have properties or deals available and Anthony does not ask about a specific property on that call. Flag use of "me and my partner are trying to do" or "I just moved here" — these undermine credibility. Anthony has shown dramatic improvement this cycle (14 new calls averaging 76.2). His activity level is strong and his tone is consistently polite — praise that when warranted, but the structural gaps above are priority coaching points. Title insurance vs closing costs knowledge gap flagged (March 25 Slack Q&A) — still to be verified on calls.
 
-**Dan VanMatre:**
-Flag any call where the buy box is deferred entirely to email without being delivered verbally on the call. Flag any mention of "just moved here," "just got here," "took time off," or "took a break" — Dan tends to volunteer backstory about relocating or being inactive, which undermines credibility with realtors. Flag any call that ends without a specific follow-up timeline. Dan's conversational instincts, listening skills, and rapport building are genuine strengths — praise those. Priority coaching points: deliver the buy box verbally on every call, stop volunteering the move/break story, and lock in a specific next step before hanging up.
+**Dan VanMatre (DEPARTED):**
+No longer with the team as of April 2026. Historical call data and gold standard example (Michelle Hammond call) retained for training reference.
 
 **Joe Kruse:**
 Top performer this cycle. Strong on deal-specific conversations — discusses property details, pricing, and deal structure confidently. Sets clear next steps. Scored 92 on a Houston property pitch with concrete follow-up. No specific coaching flags at this time.

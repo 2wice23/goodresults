@@ -1,6 +1,6 @@
-# GOOD RESULTS — MASTER KNOWLEDGE BASE v2.4
+# GOOD RESULTS — MASTER KNOWLEDGE BASE v2.5
 
-**Version:** 2.4 — Weekly sync consolidation (April 7, 2026)
+**Version:** 2.5 — Weekly sync consolidation (April 15, 2026)
 **Purpose:** Single source of truth. Weekly consolidation of changes from all 4 projects. Sliced into 4 native-format KBs for deployment. See also: close-kb.md (Close CRM platform reference — not part of weekly sync, updated manually when platform config changes).
 **Status:** COMPLETE & TESTED
 **All Conflicts:** RESOLVED
@@ -9,6 +9,30 @@
 ---
 
 ## CHANGE LOG
+
+### Week of April 15, 2026 (v2.5)
+
+**ADDED (from #questions-and-answers scrape, April 8–15):**
+
+- **Tear-Down Properties:** We're open to tear-down lots (buying the lot for its land value), but NOT fix-and-flipping homes on those lots. Case-by-case basis — let Joe run the numbers. Don't automatically say no to tear downs.
+- **Lowball/"F-You" Offer Framing (Shit Sandwich Protocol):** Acknowledge upfront that the offer might be too low, throw it out anyway with confidence, and follow up consistently. These offers often come back around when framed by a competent cash investor who can close quickly. Plant the seed every time. Follow up by CALL, not text. (Joe, April 9)
+- **Post-Terms Follow-Up Cadence:** After sending terms, follow up aggressively and consistently: text ~6 hours later, text ~12 hours later, phone call ~18 hours later. Use scheduled messages. Don't let terms sit without follow-up. (Joe + Gayden, April 14)
+- **"Allowance" in Contract Terminology:** When a realtor mentions an "allowance," ask "allowance towards what?" Usually refers to repairs, interest, or agent commission (it's their way of getting around not being allowed to mention buyer-side commission). Could be anything — don't assume. (Gayden, April 13)
+- **Counter-Offer Transparency:** When close on a deal and they counter slightly higher, be transparent — tell them the highest you've been at and where you're at right now. (Gayden, April 8)
+- **D2S Contract E-Signing:** For direct-to-seller contracts, agent writes up the contract (may use TREC form with GR language). Joe or Gayden sets up e-sign through Google. Agents don't handle e-sign setup themselves yet. (Gayden + Joe, April 13)
+- **Spartan Title (TX) Address:** 5080 Spectrum Dr Suite 1010W, Addison, TX 75001
+- **Driveway Issues:** Not a big factor for deals — similar to mold/termite, driveway condition isn't a deal-killer. (Joe, April 10)
+- **Realtor Comp Info in Notes:** If a realtor provides comp houses they used for ARV, include that in the opportunity notes. More information is always better. (Joe, April 8)
+- **Blast vs Personal Number Timers Independent:** Blast number and personal number don't share the 10-minute cooldown. Can send from both without waiting. (Joe confirmed, April 14)
+
+**DISCREPANCIES FOUND:** 2 minor — both fixed this cycle:
+- Chloe KB footer said "Last updated: March 2026" — updated to April 2026
+- Analyzer KB footer said "Cycle 4" — updated to Cycle 5
+
+**FLAGGED FOR OWNER:**
+- Dan VanMatre confirmed departed — removed from team rosters across all KBs. Historical call data and gold standard examples retained.
+
+---
 
 ### Week of April 7, 2026 (v2.4)
 
@@ -141,7 +165,6 @@ This MASTER KB is updated on **Sundays** by consolidating changes from all 4 pro
 **Team:**
 - Gayden Rosales — Owner, acquisitions, primary deal contact
 - Joe Kruse — Owner, acquisitions, comps & pricing
-- Dan VanMatre — Acquisition Agent
 - Kayden Rogers — Acquisition Agent
 - Anthony Cruz — Acquisition Agent
 - Frank Ladaga — Acquisition Agent (newest, in early training)
@@ -178,6 +201,13 @@ Every realtor should hear this within the first 30 seconds of a call.
 - Properties where seller insists on a pre-contract walkthrough (use the objection script below)
 - Multi-unit manufactured homes (limited buyer pool, financing issues — call Gayden)
 - Unique/custom-built homes, rural properties, commercial
+
+### Special Cases — Not Deal-Killers:
+- **Tear-down lots:** We're open to buying tear-down lots for land value, but NOT fix-and-flipping homes on those lots. Case-by-case — let Joe run the numbers before deciding.
+- **Mold houses:** Not a deal-killer for the right price.
+- **Termite houses:** Yes, we take them.
+- **Driveway issues:** Not a big factor.
+- **HOA townhomes:** HOA handles exterior, so cheaper rehab, but longer days on market for resale.
 
 ### Markets:
 - Nevada: Reno/Sparks metro, Las Vegas/Henderson metro
@@ -303,6 +333,28 @@ Don't send offers as gambles — talk to listing agent first. For agents who won
 
 ---
 
+### Lowball/"F-You" Offer Framing (Shit Sandwich Protocol)
+
+When submitting an offer you know is well below asking: acknowledge upfront that the offer might be too low, throw it out anyway with confidence, and let them know you'll be following up consistently. Frame yourself as a competent cash investor who can close quickly.
+
+**How to frame it:** Be straight up. Acknowledge the number might be aggressive, explain why it is what it is (comps, condition, repair costs), and position that you're a real buyer who will close. Tell them to keep you in mind. Follow up consistently — by CALL, not text.
+
+**Why it works:** You'd be surprised how often these come back around. The relationship building becomes organic when you're transparent. Banks and sellers often move once they realize no one else is stepping up. It takes time, but you need to plant the seed every time. (Joe, April 2026)
+
+---
+
+### "Allowance" in Contract Terms
+
+When a realtor uses the word "allowance" in a deal context, ask: **"Allowance towards what?"** It could mean repairs, interest, or — most commonly — it's the realtor's way of getting around not being allowed to explicitly mention buyer-side commission. Don't assume. Get them to spell it out. Realtors sometimes use jargon to test whether you're experienced. (Gayden, April 2026)
+
+---
+
+### Counter-Offer Transparency
+
+When you're close on a deal and the realtor counters slightly higher than your number, be transparent: tell them the highest you've been at and where you're at right now. Don't hide the ball. Honesty builds trust and often moves the deal forward. (Gayden, April 2026)
+
+---
+
 ## SECTION 4: COLD CALL OPENERS & FOLLOW-UP SCRIPTS
 
 [SOURCE: Curriculum KB + Call Analyzer KB]
@@ -344,6 +396,15 @@ Never write a contract without floating the verbal first. If they say no and won
 ### After Sending an Offer
 
 **"Hey [Name], just sent over the offer on [Address]. Text me when the contract's coming back and I (or my partner) will sign it same day."**
+
+### Post-Terms Follow-Up Cadence (CRITICAL)
+
+After sending terms/offer, follow up aggressively and consistently. Don't let terms sit without follow-up:
+- **~6 hours later:** Text follow-up
+- **~12 hours later:** Another text
+- **~18 hours later:** Phone call
+
+Use scheduled messages to stay on cadence. The goal is to keep momentum — terms that sit get cold. (Joe + Gayden, April 2026)
 
 ---
 
@@ -1115,7 +1176,7 @@ When an opportunity moves to Due Diligence, the agent must complete:
 - Signer: Gayden Rosales, Managing Member
 - E-signing email: contracts@goodresults.org
 - BCC: contracts@goodresults.org
-- Escrow: Aaron Krominga — Spartan Title (aaronk@spartantitle.com)
+- Escrow: Aaron Krominga — Spartan Title (aaronk@spartantitle.com) — Office: 5080 Spectrum Dr Suite 1010W, Addison, TX 75001
 - Standard terms: 7-day option period, cash, as-is, no repairs, option fee $1.00, EMD due at end of option period, seller can leave behind unwanted items
 - Texas-specific: Additional terms go into Paragraph 11 of the TREC contract
 
@@ -1295,6 +1356,8 @@ Never write a contract without floating the verbal first.
 ### Direct-to-Seller Offers
 
 We don't need a realtor for D2S deals. New agents should collaborate with Joe until comfortable handling solo. Same contract principles apply — float verbal first, then write contract.
+
+**D2S Contract E-Signing:** Agent writes up the contract (Texas: use TREC form with GR language). Joe or Gayden sets up e-sign through Google. Agents don't handle e-sign setup themselves yet — hand the completed contract to Joe or Gayden for the signing workflow. (April 2026)
 
 ---
 
@@ -1528,6 +1591,8 @@ For full, detailed comps: primarily leave to Joe. That's his domain. You verify 
 **CMAs (Comparative Market Analysis):** Irrelevant to investors. Price/sqft calculations don't apply. Radius searching doesn't stay in correct neighborhoods. Realtors using CMAs are usually rookies.
 
 **Comping Notes:** More detail doesn't hurt. Use ChatGPT for concise versions of verbose descriptions. Deals with very detailed renovation info may be coming from a wholesaler.
+
+**Realtor Comp Info in Notes:** If a realtor provides comp houses they used to determine ARV, include those comps in the opportunity notes. More information is always better — it helps Joe run more accurate numbers. (Joe, April 2026)
 
 ---
 
