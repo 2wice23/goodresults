@@ -21,12 +21,16 @@
 # CHANGE LOG
 
 ## Current Version
-**Version:** 2.5 — Weekly sync with Slack knowledge
-**Updated:** April 15, 2026 (Cycle 5)
+**Version:** 2.6 — Weekly sync with Slack knowledge
+**Updated:** April 17, 2026 (Cycle 6)
 **Source of truth for:** All training modules. When modules and this KB conflict, this KB wins.
 **How to update:** Tell Claude what changed and ask it to update this file. Claude rebuilds modules from here.
 
-## What Changed This Cycle (2026-04-15)
+## What Changed This Cycle (2026-04-17)
+- **BBA Policy — Deal-Specific Only:** Only sign deal-specific BBAs. Never sign blanket/zipcode-wide BBAs. (Joe, April 16)
+- Fixed footer version (was stuck at v2.4 / April 7)
+
+## What Changed Last Cycle (2026-04-15)
 - **Tear-Down Properties:** We're open to tear-down lots (buying for land value), but NOT fix-and-flipping homes on those lots. Case-by-case — let Joe run numbers. Don't auto-reject.
 - **Lowball/"F-You" Offer Framing (Shit Sandwich):** Acknowledge the offer is aggressive, throw it out with confidence, follow up consistently by CALL (not text). These offers come back around when framed right. (Joe, April 9)
 - **Post-Terms Follow-Up Cadence:** After sending terms — text at ~6h, text at ~12h, phone call at ~18h. Use scheduled messages. Don't let terms sit. (Joe + Gayden, April 14)
@@ -480,6 +484,7 @@ Before writing anything, verbally float the offer number to the realtor.
 - **Cash offer:** No financing contingency, no appraisal contingency
 - **As-is:** No repair requests from seller
 - Send to **contracts@goodresults.org** after signing
+- **BBA (Buyer Broker Agreement):** Only ever sign deal-specific BBAs. If a realtor sends a blanket BBA covering an entire zipcode, do NOT sign it. Only sign BBAs tied to a specific property. (Joe, April 2026)
 
 ### Step 5: Text the Realtor After Sending
 > "Hey [Name], just sent over that offer on [Address]. Text me when you get the contract back and I (or my partner) will sign it same day."
@@ -1449,4 +1454,4 @@ A: Typically $3,000–$5,000 EMD (1% of purchase price) depending on the deal.
 
 ---
 
-*Last updated: April 7, 2026. Version 2.4. Added Knowledge Drop items: POF protocol, wholesaling objection, Nevada radius, Close contact merging, Instagram pipeline, $30K-apart negotiation, carrier-level call block diagnostic. This is the authoritative version.*
+*Last updated: April 17, 2026. Version 2.6. Added BBA deal-specific policy. Fixed footer version. This is the authoritative version.*

@@ -1,4 +1,6 @@
-WHAT CHANGED THIS CYCLE (2026-04-15 — Cycle 7): Added tear-down lot policy — we're open to tear-down lots (land value), but NOT fix-and-flipping homes on those lots; case-by-case, route to Joe. Added driveway issues not a deal-killer. Fixed footer date.
+WHAT CHANGED THIS CYCLE (2026-04-17 — Cycle 8): Added BBA handling — we only sign deal-specific BBAs, never blanket/zipcode-wide. Added to Quick Reference table.
+
+WHAT CHANGED LAST CYCLE (2026-04-15 — Cycle 7): Added tear-down lot policy — we're open to tear-down lots (land value), but NOT fix-and-flipping homes on those lots; case-by-case, route to Joe. Added driveway issues not a deal-killer. Fixed footer date.
 
 WHAT CHANGED LAST CYCLE (2026-04-07 — Cycle 6): Added Proof of Funds handler — never send POF upfront, offer it once a specific property fits the buy box and a formal offer is being prepared, then pivot to quick-close/all-cash. Added "they know we're wholesaling" objection — lean into credentials, don't fold, don't play dumb: "We buy properties, close fast, and pay cash. How we exit the deal on the back end doesn't change the terms for your seller." Added Nevada market radius — core: Reno, Sparks, Carson City, Dayton, Minden, South Lake; stretch (only after consistent deal flow in the core): Lovelock, Yerington.
 
@@ -371,6 +373,7 @@ Then transfer. Don't do a warm handoff if it's a transfer skill — just complet
 | "How do I know you're legit?" | "Fair question. We close in 10–21 days, all cash, no lender involved. Call Gayden at \[number\] if you want to verify." |  
 | "Can you beat that other offer?" | "Depends on the numbers. What's the property?" (Then dig in) |  
 | "I don't want to waste my time" | "I get it — and I'm not here to waste yours either. Here's how we work: \[explain process\]" |
+| Realtor asks you to sign a BBA | "We do sign BBAs — but only deal-specific ones tied to a particular property. If you've got something in mind, send it over and we'll take a look." |
 
 \---
 

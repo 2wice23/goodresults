@@ -1,6 +1,6 @@
-# GOOD RESULTS — MASTER KNOWLEDGE BASE v2.5
+# GOOD RESULTS — MASTER KNOWLEDGE BASE v2.6
 
-**Version:** 2.5 — Weekly sync consolidation (April 15, 2026)
+**Version:** 2.6 — Weekly sync consolidation (April 17, 2026)
 **Purpose:** Single source of truth. Weekly consolidation of changes from all 4 projects. Sliced into 4 native-format KBs for deployment. See also: close-kb.md (Close CRM platform reference — not part of weekly sync, updated manually when platform config changes).
 **Status:** COMPLETE & TESTED
 **All Conflicts:** RESOLVED
@@ -9,6 +9,19 @@
 ---
 
 ## CHANGE LOG
+
+### Week of April 17, 2026 (v2.6)
+
+**ADDED (from #questions-and-answers scrape, April 15–17):**
+
+- **BBA Policy — Deal-Specific Only:** We only ever sign deal-specific BBAs (Buyer Broker Agreements). If a realtor sends a blanket BBA covering an entire zipcode, do not sign it. Only sign BBAs tied to a specific property. (Joe Kruse, April 16)
+
+**DISCREPANCIES FOUND:** 3 minor — all fixed this cycle:
+- Master KB footer said "END OF MASTER KB v2.3" — updated to v2.6
+- Modules KB footer said "Last updated: April 7, 2026. Version 2.4" — updated to April 17, v2.6
+- SMS KB footer said "END OF SMS KB — v2.4" — updated to v2.6
+
+---
 
 ### Week of April 15, 2026 (v2.5)
 
@@ -352,6 +365,12 @@ When a realtor uses the word "allowance" in a deal context, ask: **"Allowance to
 ### Counter-Offer Transparency
 
 When you're close on a deal and the realtor counters slightly higher than your number, be transparent: tell them the highest you've been at and where you're at right now. Don't hide the ball. Honesty builds trust and often moves the deal forward. (Gayden, April 2026)
+
+---
+
+### BBA Policy — Deal-Specific Only
+
+We only ever sign deal-specific BBAs (Buyer Broker Agreements). If a realtor sends a blanket BBA covering an entire zipcode or broad area, do not sign it. Only sign BBAs tied to a specific property we're actively pursuing. This protects us from being locked into representation agreements on deals we haven't vetted. (Joe Kruse, April 2026)
 
 ---
 
@@ -2043,7 +2062,7 @@ Before deploying the 4 sliced KBs, Claude performs:
 
 ---
 
-**END OF MASTER KB v2.3**
+**END OF MASTER KB v2.6**
 
 **READY FOR DEPLOYMENT & WEEKLY CONSOLIDATION PROCESS**
 
